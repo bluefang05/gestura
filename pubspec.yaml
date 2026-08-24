@@ -1,0 +1,36 @@
+name: gestura
+description: "Gestura - Aplicación educativa para el aprendizaje y entrenamiento de comunicación no verbal (neurotípica y profesional)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.5.3
+  flutter_tts: ^4.2.2
+  audioplayers: ^6.1.1
+  google_mobile_ads: ^9.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/audio/
+    - assets/images/branding/
+    - assets/images/expressions/
+    - assets/images/postures/
+    - assets/images/paralinguistics/
+    - assets/images/proxemics/
+    - assets/images/digital/
+    - assets/images/environment/
+    - assets/images/scenarios/
