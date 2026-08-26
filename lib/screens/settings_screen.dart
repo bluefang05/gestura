@@ -3,6 +3,7 @@ import '../state/settings_provider.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/section_header.dart';
 import '../widgets/illustrations/conove_logo_painter.dart';
+import '../core/constants/app_constants.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
@@ -427,7 +428,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const GesturaLogoWidget(size: 40),
                         const SizedBox(height: 8),
                         const Text(
-                          'Gestura v1.0.0',
+                          '${AppConstants.appName} v${AppConstants.appVersion}',
                           style: TextStyle(
                               fontWeight: FontWeight.w800, fontSize: 14),
                         ),

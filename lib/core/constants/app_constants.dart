@@ -1,8 +1,9 @@
 class AppConstants {
   static const String appName = 'Gestura';
   static const String appTagline = 'Descifrando la Comunicación No Verbal';
-  static const String appSubtitle = 'Guía visual y táctica de lenguaje corporal y microexpresiones';
-  static const String appVersion = '1.0.0';
+  static const String appSubtitle =
+      'Guía visual y táctica de lenguaje corporal y microexpresiones';
+  static const String appVersion = '1.0.2';
 
   // Storage Keys
   static const String keyThemeMode = 'gestura_theme_mode';
