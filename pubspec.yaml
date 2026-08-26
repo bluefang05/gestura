@@ -1,7 +1,7 @@
 name: gestura
 description: "Gestura - Aplicación educativa para el aprendizaje y entrenamiento de comunicación no verbal (neurotípica y profesional)."
 publish_to: 'none'
-version: 1.0.2+3
+version: 1.0.2+4
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
