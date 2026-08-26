@@ -8,12 +8,13 @@ import 'environment_painter.dart';
 import 'scenario_painter.dart';
 import 'conove_logo_painter.dart';
 
-class ConoVeIllustration extends StatelessWidget {
+class ConoVeIllustration extends StatefulWidget {
   final String illustrationKey;
   final double width;
   final double height;
   final bool highlightAnatomy;
   final BorderRadius? borderRadius;
+  final bool enableHoldPreview;
 
   const ConoVeIllustration({
     super.key,
@@ -22,7 +23,15 @@ class ConoVeIllustration extends StatelessWidget {
     this.height = 120,
     this.highlightAnatomy = false,
     this.borderRadius,
+    this.enableHoldPreview = true,
   });
+
+  @override
+  State<ConoVeIllustration> createState() => _ConoVeIllustrationState();
+}
+
+class _ConoVeIllustrationState extends State<ConoVeIllustration> {
+  OverlayEntry? _previewOverlay;
 
   String? _resolveAssetPath(String key, bool isLarge) {
     final clean = key.toLowerCase().trim();
@@ -166,27 +175,32 @@ class ConoVeIllustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final isHighContrast = Theme.of(context).scaffoldBackgroundColor == Colors.black;
+    final isHighContrast =
+        Theme.of(context).scaffoldBackgroundColor == Colors.black;
 
-    final isLarge = width >= 160 || height >= 160;
-    final assetPath = _resolveAssetPath(illustrationKey, isLarge);
+    final isLarge = widget.width >= 160 || widget.height >= 160;
+    final assetPath = _resolveAssetPath(widget.illustrationKey, isLarge);
     if (assetPath != null && !isHighContrast) {
-      return Semantics(
-        label: 'Ilustración visual de comunicación no verbal: ${illustrationKey.replaceAll('_', ' ')}',
-        image: true,
-        child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.circular(16),
-          child: Container(
-            width: width,
-            height: height,
-            color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
-            padding: const EdgeInsets.all(4),
-            child: Image.asset(
-              assetPath,
-              width: width,
-              height: height,
-              fit: BoxFit.contain,
-              errorBuilder: (_, __, ___) => _buildFallbackPainter(isDark, isHighContrast),
+      return _withHoldPreview(
+        Semantics(
+          label:
+              'Ilustración visual de comunicación no verbal: ${widget.illustrationKey.replaceAll('_', ' ')}',
+          image: true,
+          child: ClipRRect(
+            borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
+            child: Container(
+              width: widget.width,
+              height: widget.height,
+              color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+              padding: const EdgeInsets.all(4),
+              child: Image.asset(
+                assetPath,
+                width: widget.width,
+                height: widget.height,
+                fit: BoxFit.contain,
+                errorBuilder: (_, __, ___) =>
+                    _buildFallbackPainter(isDark, isHighContrast),
+              ),
             ),
           ),
         ),
@@ -195,35 +209,118 @@ class ConoVeIllustration extends StatelessWidget {
 
     final child = _buildFallbackPainter(isDark, isHighContrast);
 
-    return Semantics(
-      label: 'Ilustración visual de comunicación no verbal: ${illustrationKey.replaceAll('_', ' ')}',
-      image: true,
-      child: ClipRRect(
-        borderRadius: borderRadius ?? BorderRadius.circular(16),
-        child: SizedBox(
-          width: width,
-          height: height,
-          child: child,
+    return _withHoldPreview(
+      Semantics(
+        label:
+            'Ilustración visual de comunicación no verbal: ${widget.illustrationKey.replaceAll('_', ' ')}',
+        image: true,
+        child: ClipRRect(
+          borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
+          child: SizedBox(
+            width: widget.width,
+            height: widget.height,
+            child: child,
+          ),
         ),
       ),
     );
   }
 
+  Widget _withHoldPreview(Widget child) {
+    if (!widget.enableHoldPreview || widget.width < 56 || widget.height < 56) {
+      return child;
+    }
+
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onLongPressStart: (_) => _showPreview(),
+      onLongPressEnd: (_) => _hidePreview(),
+      onLongPressCancel: _hidePreview,
+      child: child,
+    );
+  }
+
+  void _showPreview() {
+    if (_previewOverlay != null) return;
+
+    _previewOverlay = OverlayEntry(
+      builder: (context) {
+        final screenSize = MediaQuery.sizeOf(context);
+        final previewSize =
+            (screenSize.shortestSide * 0.84).clamp(260.0, 560.0);
+
+        return IgnorePointer(
+          child: Material(
+            color: Colors.black.withValues(alpha: 0.72),
+            child: Center(
+              child: Container(
+                width: previewSize,
+                height: previewSize,
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardTheme.color,
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black45,
+                      blurRadius: 30,
+                      offset: Offset(0, 18),
+                    ),
+                  ],
+                ),
+                child: ConoVeIllustration(
+                  illustrationKey: widget.illustrationKey,
+                  width: double.infinity,
+                  height: double.infinity,
+                  highlightAnatomy: widget.highlightAnatomy,
+                  borderRadius: BorderRadius.circular(14),
+                  enableHoldPreview: false,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+
+    Overlay.of(context).insert(_previewOverlay!);
+  }
+
+  void _hidePreview() {
+    _previewOverlay?.remove();
+    _previewOverlay = null;
+  }
+
+  @override
+  void dispose() {
+    _hidePreview();
+    super.dispose();
+  }
+
   Widget _buildFallbackPainter(bool isDark, bool isHighContrast) {
-    if (illustrationKey == 'logo' || illustrationKey == 'conove_logo' || illustrationKey == 'gestura_logo') {
+    final illustrationKey = widget.illustrationKey;
+
+    if (illustrationKey == 'logo' ||
+        illustrationKey == 'conove_logo' ||
+        illustrationKey == 'gestura_logo') {
       return CustomPaint(
-        painter: GesturaLogoPainter(isDark: isDark, isHighContrast: isHighContrast),
-        size: Size(width, height),
+        painter:
+            GesturaLogoPainter(isDark: isDark, isHighContrast: isHighContrast),
+        size: Size(widget.width, widget.height),
       );
-    } else if (illustrationKey.startsWith('proxemics_') || illustrationKey.contains('proxemica') || illustrationKey == 'espacio') {
-      final zone = illustrationKey.replaceAll('proxemics_', '').replaceAll('proxemica_', '');
+    } else if (illustrationKey.startsWith('proxemics_') ||
+        illustrationKey.contains('proxemica') ||
+        illustrationKey == 'espacio') {
+      final zone = illustrationKey
+          .replaceAll('proxemics_', '')
+          .replaceAll('proxemica_', '');
       return CustomPaint(
         painter: ProxemicsPainter(
           activeZone: zone.isEmpty ? 'all' : zone,
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else if (illustrationKey.startsWith('voice_') ||
         illustrationKey.startsWith('paralinguistics_') ||
@@ -234,14 +331,16 @@ class ConoVeIllustration extends StatelessWidget {
         illustrationKey.contains('voz') ||
         illustrationKey.contains('pausa') ||
         illustrationKey.contains('sarcastico')) {
-      final cleanKey = illustrationKey.replaceAll('voice_', '').replaceAll('paralinguistics_', '');
+      final cleanKey = illustrationKey
+          .replaceAll('voice_', '')
+          .replaceAll('paralinguistics_', '');
       return CustomPaint(
         painter: ParalinguisticsPainter(
           soundKey: cleanKey,
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else if (illustrationKey.startsWith('env_') ||
         illustrationKey.startsWith('dress_') ||
@@ -260,7 +359,7 @@ class ConoVeIllustration extends StatelessWidget {
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else if (illustrationKey.startsWith('digital_') ||
         illustrationKey.contains('mayusculas') ||
@@ -276,7 +375,7 @@ class ConoVeIllustration extends StatelessWidget {
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else if (illustrationKey.startsWith('posture_') ||
         illustrationKey.contains('postura') ||
@@ -305,7 +404,7 @@ class ConoVeIllustration extends StatelessWidget {
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else if (illustrationKey.startsWith('scenario_') ||
         illustrationKey.contains('ventas') ||
@@ -319,7 +418,7 @@ class ConoVeIllustration extends StatelessWidget {
           isDark: isDark,
           isHighContrast: isHighContrast,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     } else {
       return CustomPaint(
@@ -327,13 +426,12 @@ class ConoVeIllustration extends StatelessWidget {
           expressionKey: illustrationKey,
           isDark: isDark,
           isHighContrast: isHighContrast,
-          highlightAnatomy: highlightAnatomy,
+          highlightAnatomy: widget.highlightAnatomy,
         ),
-        size: Size(width, height),
+        size: Size(widget.width, widget.height),
       );
     }
   }
 }
 
 typedef GesturaIllustration = ConoVeIllustration;
-

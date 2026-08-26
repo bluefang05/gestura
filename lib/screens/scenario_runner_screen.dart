@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/scenario.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
@@ -99,7 +100,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
       });
 
       if (StorageService.getAutoNarration()) {
-        TtsService.speak('¡Entrenamiento superado! Has completado exitosamente ${widget.scenario.title}. Ganaste 50 puntos de maestría.');
+        TtsService.speak(
+            '¡Entrenamiento superado! Has completado exitosamente ${widget.scenario.title}. Ganaste 50 puntos de maestría.');
       }
     }
   }
@@ -128,7 +130,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
           ),
         ],
       ),
-
+      bottomNavigationBar: const AdBottomBar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         children: [
@@ -138,7 +140,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+              color:
+                  isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
             ),
           ),
           const SizedBox(height: 4),
@@ -169,11 +172,13 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.visibility_rounded, size: 18, color: AppColors.primary),
+                    Icon(Icons.visibility_rounded,
+                        size: 18, color: AppColors.primary),
                     SizedBox(width: 6),
                     Text(
                       'Lo que sucede en la sala:',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                     ),
                   ],
                 ),
@@ -215,7 +220,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                 padding: const EdgeInsets.all(14),
                 borderSide: _selectedChoice == choice
                     ? BorderSide(
-                        color: choice.isBestAction ? AppColors.success : AppColors.error,
+                        color: choice.isBestAction
+                            ? AppColors.success
+                            : AppColors.error,
                         width: 2.0,
                       )
                     : null,
@@ -224,7 +231,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                         ? AppColors.successContainer.withValues(alpha: 0.3)
                         : AppColors.errorContainer.withValues(alpha: 0.3))
                     : null,
-                onTap: _selectedChoice == null ? () => _onSelectChoice(choice) : null,
+                onTap: _selectedChoice == null
+                    ? () => _onSelectChoice(choice)
+                    : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -249,7 +258,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                           ),
                           child: _selectedChoice == choice
                               ? Icon(
-                                  choice.isBestAction ? Icons.check : Icons.close,
+                                  choice.isBestAction
+                                      ? Icons.check
+                                      : Icons.close,
                                   size: 14,
                                   color: Colors.white,
                                 )
@@ -259,7 +270,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                         Expanded(
                           child: Text(
                             choice.text,
-                            style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600),
+                            style: const TextStyle(
+                                fontSize: 13.5, fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
@@ -276,7 +288,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                               style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
-                                color: choice.isBestAction ? const Color(0xFF065F46) : const Color(0xFF991B1B),
+                                color: choice.isBestAction
+                                    ? const Color(0xFF065F46)
+                                    : const Color(0xFF991B1B),
                               ),
                             ),
                           ),
@@ -301,7 +315,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                         choice.analysis,
                         style: TextStyle(
                           fontSize: 12.5,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
                           height: 1.35,
                         ),
                       ),
@@ -321,7 +337,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                 _onNextStep();
               },
               child: Text(
-                _selectedChoice!.nextStepIndex != null ? 'Siguiente Momento' : 'Concluir Escenario',
+                _selectedChoice!.nextStepIndex != null
+                    ? 'Siguiente Momento'
+                    : 'Concluir Escenario',
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -341,6 +359,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
         title: const Text('Escenario Completado'),
         automaticallyImplyLeading: false,
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -357,7 +376,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                     color: AppColors.successContainer,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.verified_rounded, color: AppColors.success, size: 54),
+                  child: const Icon(Icons.verified_rounded,
+                      color: AppColors.success, size: 54),
                 ),
               ),
               const SizedBox(height: 20),
@@ -372,24 +392,32 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.5,
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                 ),
               ),
               const SizedBox(height: 24),
-
               AppCard(
-                color: isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
+                color: isDark
+                    ? const Color(0xFF134E4A)
+                    : AppColors.primaryContainer,
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    const Text('Recompensa', style: TextStyle(fontSize: 12, color: AppColors.primaryDark)),
+                    const Text('Recompensa',
+                        style: TextStyle(
+                            fontSize: 12, color: AppColors.primaryDark)),
                     const SizedBox(height: 4),
-                    const Text('+50 Puntos de Maestría', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: AppColors.primaryDark)),
+                    const Text('+50 Puntos de Maestría',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.primaryDark)),
                   ],
                 ),
               ),
               const Spacer(),
-
               ElevatedButton(
                 onPressed: () {
                   FeedbackService.lightClick();

@@ -27,7 +27,8 @@ class AppLocalizations {
   static final Map<String, Map<String, String>> _values = {
     'es': {
       'appName': 'Gestura',
-      'appSubtitle': 'Decodificador de Lenguaje Corporal y Comunicación No Verbal',
+      'appSubtitle':
+          'Decodificador de Lenguaje Corporal y Comunicación No Verbal',
       'home': 'Inicio',
       'manual': 'Manual',
       'practice': 'Práctica',
@@ -37,19 +38,24 @@ class AppLocalizations {
       'searchHint': 'Buscar señal, microgesto o palabra clave...',
       'all': 'Todos',
       'quickDecoder': 'Decodificador Rápido',
-      'quickDecoderDesc': 'Filtra por parte del cuerpo (ojos, boca, brazos, silencios) y descifra la intención oculta en segundos.',
-      'openDecoder': 'Abrir Decodificador en Vivo',
+      'quickDecoderDesc':
+          'Filtra por parte del cuerpo (ojos, boca, brazos, silencios) y descifra la intención oculta en segundos.',
+      'openDecoder': 'Abrir Diccionario de Gestos',
       'dailyQuiz': 'Quiz Visual del Día',
-      'dailyQuizDesc': 'Pon a prueba tu capacidad de reconocimiento de microexpresiones y posturas.',
+      'dailyQuizDesc':
+          'Pon a prueba tu capacidad de reconocimiento de microexpresiones y posturas.',
       'startQuiz': 'Comenzar Práctica Diaria',
       'socialTree': 'Árbol de Decisión Social',
-      'socialTreeDesc': '¿Ves un gesto difícil? Sigue el árbol: Si veo X ➔ Significa Y ➔ Hago Z.',
+      'socialTreeDesc':
+          '¿Ves un gesto difícil? Sigue el árbol: Si veo X ➔ Significa Y ➔ Hago Z.',
       'openTree': 'Abrir Árbol de Diagnóstico',
       'compareAB': 'Comparador Visual A/B',
-      'compareABDesc': 'Contrasta pares de gestos confusos lado a lado con tabla de diferencias anatómicas.',
+      'compareABDesc':
+          'Contrasta pares de gestos confusos lado a lado con tabla de diferencias anatómicas.',
       'openCompare': 'Abrir Comparador',
       'cheatSheet': 'Guía de Bolsillo (Cheat Sheet)',
-      'cheatSheetDesc': '20 señales no verbales críticas para negociaciones, entrevistas y ventas.',
+      'cheatSheetDesc':
+          '20 señales no verbales críticas para negociaciones, entrevistas y ventas.',
       'openCheatSheet': 'Ver Guía de Bolsillo',
       'exploredSignals': 'Señales Exploradas',
       'totalScore': 'Puntos de Maestría',
@@ -99,19 +105,24 @@ class AppLocalizations {
       'searchHint': 'Search gesture, microexpression or keyword...',
       'all': 'All',
       'quickDecoder': 'Quick Decoder',
-      'quickDecoderDesc': 'Filter by body part (eyes, mouth, arms, pauses) and decode hidden intention in seconds.',
+      'quickDecoderDesc':
+          'Filter by body part (eyes, mouth, arms, pauses) and decode hidden intention in seconds.',
       'openDecoder': 'Open Live Decoder',
       'dailyQuiz': 'Daily Visual Quiz',
-      'dailyQuizDesc': 'Test your recognition of microexpressions and body postures.',
+      'dailyQuizDesc':
+          'Test your recognition of microexpressions and body postures.',
       'startQuiz': 'Start Daily Practice',
       'socialTree': 'Social Decision Tree',
-      'socialTreeDesc': 'See a confusing gesture? Follow the tree: If I see X ➔ Means Y ➔ I do Z.',
+      'socialTreeDesc':
+          'See a confusing gesture? Follow the tree: If I see X ➔ Means Y ➔ I do Z.',
       'openTree': 'Open Diagnostic Tree',
       'compareAB': 'Visual A/B Comparator',
-      'compareABDesc': 'Contrast easily confused gesture pairs side-by-side with anatomical diff table.',
+      'compareABDesc':
+          'Contrast easily confused gesture pairs side-by-side with anatomical diff table.',
       'openCompare': 'Open Comparator',
       'cheatSheet': 'Pocket Cheat Sheet',
-      'cheatSheetDesc': '20 critical nonverbal signals for negotiations, interviews, and sales.',
+      'cheatSheetDesc':
+          '20 critical nonverbal signals for negotiations, interviews, and sales.',
       'openCheatSheet': 'View Cheat Sheet',
       'exploredSignals': 'Explored Signals',
       'totalScore': 'Mastery Points',
@@ -151,7 +162,8 @@ class AppLocalizations {
     },
     'fr': {
       'appName': 'Gestura',
-      'appSubtitle': 'Décodeur de Langage Corporel et Communication Non Verbale',
+      'appSubtitle':
+          'Décodeur de Langage Corporel et Communication Non Verbale',
       'home': 'Accueil',
       'manual': 'Manuel',
       'practice': 'Pratique',
@@ -161,19 +173,24 @@ class AppLocalizations {
       'searchHint': 'Rechercher un geste, micro-expression ou mot-clé...',
       'all': 'Tous',
       'quickDecoder': 'Décodeur Rapide',
-      'quickDecoderDesc': 'Filtrez par partie du corps (yeux, bouche, bras, silences) et décodez l\'intention cachée en quelques secondes.',
+      'quickDecoderDesc':
+          'Filtrez par partie du corps (yeux, bouche, bras, silences) et décodez l\'intention cachée en quelques secondes.',
       'openDecoder': 'Ouvrir le Décodeur',
       'dailyQuiz': 'Quiz Visuel du Jour',
-      'dailyQuizDesc': 'Testez votre reconnaissance des micro-expressions et des postures.',
+      'dailyQuizDesc':
+          'Testez votre reconnaissance des micro-expressions et des postures.',
       'startQuiz': 'Commencer la Pratique',
       'socialTree': 'Arbre de Décision Sociale',
-      'socialTreeDesc': 'Vous voyez un geste difficile ? Suivez l\'arbre : Si je vois X ➔ Signifie Y ➔ Je fais Z.',
+      'socialTreeDesc':
+          'Vous voyez un geste difficile ? Suivez l\'arbre : Si je vois X ➔ Signifie Y ➔ Je fais Z.',
       'openTree': 'Ouvrir l\'Arbre de Diagnostic',
       'compareAB': 'Comparateur Visuel A/B',
-      'compareABDesc': 'Comparez côte à côte des paires de gestes facilement confondus avec tableau anatomique.',
+      'compareABDesc':
+          'Comparez côte à côte des paires de gestes facilement confondus avec tableau anatomique.',
       'openCompare': 'Ouvrir le Comparateur',
       'cheatSheet': 'Fiche Mémo de Poche',
-      'cheatSheetDesc': '20 signaux non verbaux essentiels pour les négociations, entretiens et ventes.',
+      'cheatSheetDesc':
+          '20 signaux non verbaux essentiels pour les négociations, entretiens et ventes.',
       'openCheatSheet': 'Voir la Fiche Mémo',
       'exploredSignals': 'Signaux Explorés',
       'totalScore': 'Points de Maîtrise',
@@ -206,14 +223,16 @@ class AppLocalizations {
       'haptics': 'Retour Haptique (Vibration)',
       'ttsVoice': 'Lecture Vocale (TTS)',
       'resetProgress': 'Réinitialiser la Progression',
-      'resetConfirm': 'Êtes-vous sûr de vouloir réinitialiser votre progression ?',
+      'resetConfirm':
+          'Êtes-vous sûr de vouloir réinitialiser votre progression ?',
       'about': 'À propos de Gestura',
       'version': 'Version',
       'offlineFirst': '100% Hors Ligne et Privé • Sans connexion requise',
     },
     'pt': {
       'appName': 'Gestura',
-      'appSubtitle': 'Decodificador de Linguagem Corporal e Comunicação Não Verbal',
+      'appSubtitle':
+          'Decodificador de Linguagem Corporal e Comunicação Não Verbal',
       'home': 'Início',
       'manual': 'Manual',
       'practice': 'Prática',
@@ -223,19 +242,24 @@ class AppLocalizations {
       'searchHint': 'Buscar gesto, microexpressão ou palavra-chave...',
       'all': 'Todos',
       'quickDecoder': 'Decodificador Rápido',
-      'quickDecoderDesc': 'Filtre por parte do corpo (olhos, boca, braços, silêncios) e decifre a intenção oculta em segundos.',
+      'quickDecoderDesc':
+          'Filtre por parte do corpo (olhos, boca, braços, silêncios) e decifre a intenção oculta em segundos.',
       'openDecoder': 'Abrir Decodificador',
       'dailyQuiz': 'Quiz Visual Diário',
-      'dailyQuizDesc': 'Teste seu reconhecimento de microexpressões e posturas corporais.',
+      'dailyQuizDesc':
+          'Teste seu reconhecimento de microexpressões e posturas corporais.',
       'startQuiz': 'Começar Prática Diária',
       'socialTree': 'Árvore de Decisão Social',
-      'socialTreeDesc': 'Viu um gesto confuso? Siga a árvore: Se vejo X ➔ Significa Y ➔ Faço Z.',
+      'socialTreeDesc':
+          'Viu um gesto confuso? Siga a árvore: Se vejo X ➔ Significa Y ➔ Faço Z.',
       'openTree': 'Abrir Árvore Diagnóstica',
       'compareAB': 'Comparador Visual A/B',
-      'compareABDesc': 'Contraste pares de gestos lado a lado com tabela de diferenças anatômicas.',
+      'compareABDesc':
+          'Contraste pares de gestos lado a lado com tabela de diferenças anatômicas.',
       'openCompare': 'Abrir Comparador',
       'cheatSheet': 'Guia de Bolso (Cheat Sheet)',
-      'cheatSheetDesc': '20 sinais não verbais críticos para negociações, entrevistas e vendas.',
+      'cheatSheetDesc':
+          '20 sinais não verbais críticos para negociações, entrevistas e vendas.',
       'openCheatSheet': 'Ver Guia de Bolso',
       'exploredSignals': 'Sinais Explorados',
       'totalScore': 'Pontos de Maestria',
@@ -285,19 +309,24 @@ class AppLocalizations {
       'searchHint': 'Geste, Mikromimik oder Stichwort suchen...',
       'all': 'Alle',
       'quickDecoder': 'Schnell-Decoder',
-      'quickDecoderDesc': 'Nach Körperteil filtern (Augen, Mund, Arme, Stille) und verborgene Absichten in Sekunden entschlüsseln.',
+      'quickDecoderDesc':
+          'Nach Körperteil filtern (Augen, Mund, Arme, Stille) und verborgene Absichten in Sekunden entschlüsseln.',
       'openDecoder': 'Live-Decoder öffnen',
       'dailyQuiz': 'Tägliches Bild-Quiz',
-      'dailyQuizDesc': 'Testen Sie Ihre Erkennung von Mikroausdrücken und Körperhaltungen.',
+      'dailyQuizDesc':
+          'Testen Sie Ihre Erkennung von Mikroausdrücken und Körperhaltungen.',
       'startQuiz': 'Tägliche Übung starten',
       'socialTree': 'Sozialer Entscheidungsbaum',
-      'socialTreeDesc': 'Schwierige Geste? Folgen Sie dem Baum: Sehe ich X ➔ Bedeutet Y ➔ Tue ich Z.',
+      'socialTreeDesc':
+          'Schwierige Geste? Folgen Sie dem Baum: Sehe ich X ➔ Bedeutet Y ➔ Tue ich Z.',
       'openTree': 'Diagnosebaum öffnen',
       'compareAB': 'Visueller A/B-Vergleich',
-      'compareABDesc': 'Vergleichen Sie verwirrende Gestenpaare nebeneinander mit anatomischer Tabelle.',
+      'compareABDesc':
+          'Vergleichen Sie verwirrende Gestenpaare nebeneinander mit anatomischer Tabelle.',
       'openCompare': 'Vergleich öffnen',
       'cheatSheet': 'Taschen-Spickzettel (Cheat Sheet)',
-      'cheatSheetDesc': '20 entscheidende nonverbale Signale für Verhandlungen, Vorstellungsgespräche und Vertrieb.',
+      'cheatSheetDesc':
+          '20 entscheidende nonverbale Signale für Verhandlungen, Vorstellungsgespräche und Vertrieb.',
       'openCheatSheet': 'Spickzettel anzeigen',
       'exploredSignals': 'Erforschte Signale',
       'totalScore': 'Meisterschaftspunkte',
@@ -330,7 +359,8 @@ class AppLocalizations {
       'haptics': 'Haptisches Feedback (Vibration)',
       'ttsVoice': 'Sprachausgabe (TTS)',
       'resetProgress': 'Fortschritt zurücksetzen',
-      'resetConfirm': 'Möchten Sie Ihren gesamten Fortschritt wirklich zurücksetzen?',
+      'resetConfirm':
+          'Möchten Sie Ihren gesamten Fortschritt wirklich zurücksetzen?',
       'about': 'Über Gestura',
       'version': 'Version',
       'offlineFirst': '100% Offline & Privat • Kein Internet erforderlich',

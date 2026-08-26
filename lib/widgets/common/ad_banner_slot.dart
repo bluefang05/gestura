@@ -17,6 +17,7 @@ class AdBannerSlot extends StatefulWidget {
 class _AdBannerSlotState extends State<AdBannerSlot> {
   BannerAd? _bannerAd;
   bool _isAdLoaded = false;
+  bool _isLoadingAd = false;
 
   // Real AdMob Banner ID provided by user
   static const String _realBannerId = 'ca-app-pub-3322493998376707/2486589736';
@@ -32,6 +33,12 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
   }
 
   void _loadBannerAd() {
+    if (_bannerAd != null || _isLoadingAd) {
+      return;
+    }
+
+    _isLoadingAd = true;
+
     try {
       _bannerAd = BannerAd(
         adUnitId: _adUnitId,
@@ -42,11 +49,19 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
             if (mounted) {
               setState(() {
                 _isAdLoaded = true;
+                _isLoadingAd = false;
               });
             }
           },
           onAdFailedToLoad: (ad, error) {
             ad.dispose();
+            if (mounted) {
+              setState(() {
+                _bannerAd = null;
+                _isAdLoaded = false;
+                _isLoadingAd = false;
+              });
+            }
             if (kDebugMode) {
               print('AdMob Banner failed to load: $error');
             }
@@ -54,6 +69,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
         ),
       )..load();
     } catch (e) {
+      _isLoadingAd = false;
       if (kDebugMode) {
         print('AdMob initialization error: $e');
       }
@@ -69,25 +85,53 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDark ? const Color(0xFF0F172A) : Colors.white;
+    final borderColor = isDark ? Colors.white12 : Colors.black12;
 
-    if (_isAdLoaded && _bannerAd != null) {
-      return Container(
-        width: _bannerAd!.size.width.toDouble(),
-        height: _bannerAd!.size.height.toDouble(),
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        alignment: Alignment.center,
-        child: AdWidget(ad: _bannerAd!),
-      );
-    }
-
-    // Reserved placeholder while loading or if offline (zero layout shift)
     return Container(
       width: double.infinity,
       height: widget.height,
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        border: Border(top: BorderSide(color: borderColor, width: 0.8)),
+      ),
+      alignment: Alignment.center,
+      child: _isAdLoaded && _bannerAd != null
+          ? SizedBox(
+              width: _bannerAd!.size.width.toDouble(),
+              height: _bannerAd!.size.height.toDouble(),
+              child: AdWidget(ad: _bannerAd!),
+            )
+          : _AdPlaceholder(
+              height: widget.height,
+              isDark: isDark,
+            ),
+    );
+  }
+}
+
+class _AdPlaceholder extends StatelessWidget {
+  final double height;
+  final bool isDark;
+
+  const _AdPlaceholder({
+    required this.height,
+    required this.isDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final badgeBackground =
+        isDark ? const Color(0xFFCBD5E1) : const Color(0xFF334155);
+    final badgeText = isDark ? const Color(0xFF0F172A) : Colors.white;
+    final labelColor =
+        isDark ? const Color(0xFFE2E8F0) : const Color(0xFF334155);
+
+    return Container(
+      width: double.infinity,
+      height: height,
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
-        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isDark ? Colors.white12 : Colors.black12,
           width: 0.8,
@@ -100,7 +144,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
               decoration: BoxDecoration(
-                color: isDark ? Colors.white24 : Colors.black12,
+                color: badgeBackground,
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -108,7 +152,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w900,
-                  color: isDark ? Colors.white70 : Colors.black54,
+                  color: badgeText,
                 ),
               ),
             ),
@@ -119,7 +163,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: isDark ? Colors.white38 : Colors.black38,
+                  color: labelColor,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

@@ -3,6 +3,7 @@ import '../models/quiz_question.dart';
 import '../widgets/quiz/image_option_card.dart';
 import '../widgets/quiz/quiz_feedback_sheet.dart';
 import '../widgets/illustrations/illustration_widget.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
@@ -68,7 +69,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   void _onSubmitAnswer() {
     if (_selectedOptionId == null || _isEvaluated) return;
 
-    final selected = _currentQuestion.options.firstWhere((opt) => opt.id == _selectedOptionId);
+    final selected = _currentQuestion.options
+        .firstWhere((opt) => opt.id == _selectedOptionId);
     final isCorrect = selected.isCorrect;
 
     setState(() {
@@ -122,7 +124,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
     } else {
       // Finished quiz
       FeedbackService.complete();
-      final scorePercentage = ((_correctCount / widget.questions.length) * 100).round();
+      final scorePercentage =
+          ((_correctCount / widget.questions.length) * 100).round();
       final progress = StorageService.loadProgress();
       final updated = progress.recordQuizResult(widget.title, scorePercentage);
       StorageService.saveProgress(updated);
@@ -132,7 +135,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       });
 
       if (StorageService.getAutoNarration()) {
-        TtsService.speak('¡Entrenamiento completado! Tu puntuación final es de $scorePercentage por ciento.');
+        TtsService.speak(
+            '¡Entrenamiento completado! Tu puntuación final es de $scorePercentage por ciento.');
       }
     }
   }
@@ -166,13 +170,14 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
           preferredSize: const Size.fromHeight(6),
           child: LinearProgressIndicator(
             value: progressVal,
-            backgroundColor: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+            backgroundColor:
+                isDark ? AppColors.darkBorder : AppColors.lightBorder,
             color: AppColors.primary,
             minHeight: 5,
           ),
         ),
       ),
-
+      bottomNavigationBar: const AdBottomBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
@@ -185,7 +190,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 style: TextStyle(
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
-                  color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                  color: isDark
+                      ? AppColors.textMutedDark
+                      : AppColors.textMutedLight,
                 ),
               ),
               const SizedBox(height: 6),
@@ -206,7 +213,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   question.scenarioText!,
                   style: TextStyle(
                     fontSize: 13,
-                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
                   ),
                 ),
               ],
@@ -229,7 +238,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               Expanded(
                 child: isGrid
                     ? GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 12,
                           crossAxisSpacing: 12,
@@ -266,10 +276,23 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedOptionId != null ? AppColors.primary : Colors.grey,
+                    backgroundColor: _selectedOptionId != null
+                        ? AppColors.primary
+                        : (isDark
+                            ? AppColors.darkSurfaceAlt
+                            : AppColors.lightBorder),
+                    disabledBackgroundColor: isDark
+                        ? AppColors.darkSurfaceAlt
+                        : AppColors.lightBorder,
+                    disabledForegroundColor: isDark
+                        ? AppColors.textMutedDark
+                        : AppColors.textMutedLight,
                   ),
-                  onPressed: _selectedOptionId != null && !_isEvaluated ? _onSubmitAnswer : null,
-                  child: const Text('Comprobar Respuesta', style: TextStyle(fontWeight: FontWeight.bold)),
+                  onPressed: _selectedOptionId != null && !_isEvaluated
+                      ? _onSubmitAnswer
+                      : null,
+                  child: const Text('Comprobar Respuesta',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],
@@ -287,6 +310,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         title: const Text('Resultados del Quiz'),
         automaticallyImplyLeading: false,
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -300,11 +324,15 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   width: 100,
                   height: 100,
                   decoration: BoxDecoration(
-                    color: score >= 70 ? AppColors.successContainer : AppColors.warningContainer,
+                    color: score >= 70
+                        ? AppColors.successContainer
+                        : AppColors.warningContainer,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
-                    score >= 70 ? Icons.emoji_events_rounded : Icons.psychology_rounded,
+                    score >= 70
+                        ? Icons.emoji_events_rounded
+                        : Icons.psychology_rounded,
                     color: score >= 70 ? AppColors.success : AppColors.warning,
                     size: 54,
                   ),
@@ -314,7 +342,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               Text(
                 score >= 70 ? '¡Excelente Percepción!' : '¡Buen Entrenamiento!',
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                style:
+                    const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 8),
               Text(
@@ -322,11 +351,12 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                 ),
               ),
               const SizedBox(height: 24),
-
               AppCard(
                 padding: const EdgeInsets.all(16),
                 child: Row(
@@ -334,23 +364,46 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   children: [
                     Column(
                       children: [
-                        const Text('Aciertos', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text(
+                          'Aciertos',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark
+                                ? AppColors.textMutedDark
+                                : AppColors.textMutedLight,
+                          ),
+                        ),
                         const SizedBox(height: 4),
-                        Text('$_correctCount', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.success)),
+                        Text('$_correctCount',
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.success)),
                       ],
                     ),
                     Column(
                       children: [
-                        const Text('Puntos Ganados', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        Text(
+                          'Puntos Ganados',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: isDark
+                                ? AppColors.textMutedDark
+                                : AppColors.textMutedLight,
+                          ),
+                        ),
                         const SizedBox(height: 4),
-                        Text('+${score * 2} pts', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AppColors.accent)),
+                        Text('+${score * 2} pts',
+                            style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.accent)),
                       ],
                     ),
                   ],
                 ),
               ),
               const Spacer(),
-
               ElevatedButton(
                 onPressed: () {
                   FeedbackService.lightClick();

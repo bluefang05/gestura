@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/constants/app_colors.dart';
 import '../widgets/common/app_card.dart';
-import '../widgets/common/badge_pill.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/section_header.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/tts_service.dart';
@@ -34,7 +34,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Inclinación frontal hacia la mesa',
       score: 3,
       category: 'green',
-      takeaway: 'Indica alto compromiso, interés genuino y deseo de acercamiento.',
+      takeaway:
+          'Indica alto compromiso, interés genuino y deseo de acercamiento.',
       icon: Icons.airline_seat_recline_normal_rounded,
     ),
     BuyerSignal(
@@ -66,7 +67,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Manos en ojiva / campanario',
       score: 2,
       category: 'green',
-      takeaway: 'Confianza y autoridad en la decisión que está a punto de tomar.',
+      takeaway:
+          'Confianza y autoridad en la decisión que está a punto de tomar.',
       icon: Icons.change_history_rounded,
     ),
 
@@ -76,7 +78,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Mano en la barbilla (pensando)',
       score: 0,
       category: 'yellow',
-      takeaway: 'Procesamiento analítico. Está sopesando el balance costo/beneficio.',
+      takeaway:
+          'Procesamiento analítico. Está sopesando el balance costo/beneficio.',
       icon: Icons.psychology_rounded,
     ),
     BuyerSignal(
@@ -84,7 +87,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Inclinación lateral de la cabeza',
       score: 1,
       category: 'yellow',
-      takeaway: 'Curiosidad y escucha atenta, esperando un dato que lo convenza.',
+      takeaway:
+          'Curiosidad y escucha atenta, esperando un dato que lo convenza.',
       icon: Icons.hearing_rounded,
     ),
     BuyerSignal(
@@ -102,7 +106,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Brazos cruzados en el pecho',
       score: -3,
       category: 'red',
-      takeaway: 'Barrera física de autoprotección o desacuerdo con el precio/plazo.',
+      takeaway:
+          'Barrera física de autoprotección o desacuerdo con el precio/plazo.',
       icon: Icons.cancel_rounded,
     ),
     BuyerSignal(
@@ -110,7 +115,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Labios apretados en línea fina',
       score: -2,
       category: 'red',
-      takeaway: 'Contención de una objeción o desacuerdo que no quiere verbalizar aún.',
+      takeaway:
+          'Contención de una objeción o desacuerdo que no quiere verbalizar aún.',
       icon: Icons.remove_circle_outline_rounded,
     ),
     BuyerSignal(
@@ -118,7 +124,8 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Mano tocando o frotando la nuca',
       score: -2,
       category: 'red',
-      takeaway: 'Estrés, inseguridad o incomodidad con las condiciones planteadas.',
+      takeaway:
+          'Estrés, inseguridad o incomodidad con las condiciones planteadas.',
       icon: Icons.pan_tool_alt_rounded,
     ),
     BuyerSignal(
@@ -232,20 +239,21 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
             tooltip: 'Escuchar Diagnóstico',
             onPressed: () {
               FeedbackService.lightClick();
-              TtsService.speak('Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice');
+              TtsService.speak(
+                  'Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice');
             },
           ),
         ],
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final isTablet = constraints.maxWidth >= 640;
-
           return Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1050),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   // Gauge / Meter Banner
                   AppCard(
@@ -256,7 +264,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.thermostat_rounded, size: 28, color: _verdictColor),
+                            Icon(Icons.thermostat_rounded,
+                                size: 28, color: _verdictColor),
                             const SizedBox(width: 10),
                             Expanded(
                               child: Column(
@@ -274,14 +283,17 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                                     '${_selectedSignalIds.length} señales observadas',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                      color: isDark
+                                          ? AppColors.textMutedDark
+                                          : AppColors.textMutedLight,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
                                 color: _verdictColor.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(12),
@@ -305,8 +317,11 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                           child: LinearProgressIndicator(
                             value: pct,
                             minHeight: 12,
-                            backgroundColor: isDark ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0),
-                            valueColor: AlwaysStoppedAnimation<Color>(_verdictColor),
+                            backgroundColor: isDark
+                                ? const Color(0xFF0F172A)
+                                : const Color(0xFFE2E8F0),
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(_verdictColor),
                           ),
                         ),
                         const SizedBox(height: 14),
@@ -316,17 +331,22 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                            color: isDark
+                                ? const Color(0xFF0F172A)
+                                : const Color(0xFFF8FAFC),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                              color: isDark
+                                  ? AppColors.darkBorder
+                                  : AppColors.lightBorder,
                               width: 1.0,
                             ),
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.bolt_rounded, size: 20, color: AppColors.accent),
+                              const Icon(Icons.bolt_rounded,
+                                  size: 20, color: AppColors.accent),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
@@ -334,7 +354,9 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                                   style: TextStyle(
                                     fontSize: 13,
                                     height: 1.4,
-                                    color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                                    color: isDark
+                                        ? AppColors.textPrimaryDark
+                                        : AppColors.textPrimaryLight,
                                   ),
                                 ),
                               ),
@@ -351,21 +373,33 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                     title: '🟢 Señales de Compra y Apertura',
                     subtitle: 'Suma puntos de receptividad y luz verde',
                   ),
-                  _buildSignalGroup(BuyerTemperatureScreen.signals.where((s) => s.category == 'green').toList(), isDark),
+                  _buildSignalGroup(
+                      BuyerTemperatureScreen.signals
+                          .where((s) => s.category == 'green')
+                          .toList(),
+                      isDark),
                   const SizedBox(height: 16),
 
                   const SectionHeader(
                     title: '🟡 Señales de Evaluación y Duda',
                     subtitle: 'El cliente está procesando la información',
                   ),
-                  _buildSignalGroup(BuyerTemperatureScreen.signals.where((s) => s.category == 'yellow').toList(), isDark),
+                  _buildSignalGroup(
+                      BuyerTemperatureScreen.signals
+                          .where((s) => s.category == 'yellow')
+                          .toList(),
+                      isDark),
                   const SizedBox(height: 16),
 
                   const SectionHeader(
                     title: '🔴 Señales de Barrera y Objeción',
                     subtitle: 'Indican resistencia, molestia o incomodidad',
                   ),
-                  _buildSignalGroup(BuyerTemperatureScreen.signals.where((s) => s.category == 'red').toList(), isDark),
+                  _buildSignalGroup(
+                      BuyerTemperatureScreen.signals
+                          .where((s) => s.category == 'red')
+                          .toList(),
+                      isDark),
                   const SizedBox(height: 24),
                 ],
               ),
@@ -382,7 +416,9 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
         final isSelected = _selectedSignalIds.contains(s.id);
         final color = s.category == 'green'
             ? const Color(0xFF059669)
-            : (s.category == 'yellow' ? const Color(0xFFD97706) : const Color(0xFFDC2626));
+            : (s.category == 'yellow'
+                ? const Color(0xFFD97706)
+                : const Color(0xFFDC2626));
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
@@ -391,7 +427,9 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                 ? color.withValues(alpha: isDark ? 0.25 : 0.12)
                 : (isDark ? const Color(0xFF1E293B) : Colors.white),
             borderSide: BorderSide(
-              color: isSelected ? color : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
+              color: isSelected
+                  ? color
+                  : (isDark ? AppColors.darkBorder : AppColors.lightBorder),
               width: isSelected ? 1.8 : 1.0,
             ),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -399,8 +437,14 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
             child: Row(
               children: [
                 Icon(
-                  isSelected ? Icons.check_box_rounded : Icons.check_box_outline_blank_rounded,
-                  color: isSelected ? color : (isDark ? AppColors.textMutedDark : AppColors.textMutedLight),
+                  isSelected
+                      ? Icons.check_box_rounded
+                      : Icons.check_box_outline_blank_rounded,
+                  color: isSelected
+                      ? color
+                      : (isDark
+                          ? AppColors.textMutedDark
+                          : AppColors.textMutedLight),
                   size: 22,
                 ),
                 const SizedBox(width: 10),
@@ -412,8 +456,11 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         s.label,
                         style: TextStyle(
                           fontSize: 13.5,
-                          fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w600,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -421,14 +468,17 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         s.takeaway,
                         style: TextStyle(
                           fontSize: 12,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: color.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),

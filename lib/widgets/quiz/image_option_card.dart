@@ -28,11 +28,13 @@ class ImageOptionCard extends StatelessWidget {
       if (option.isCorrect) {
         borderColor = AppColors.success;
         backgroundColor = AppColors.successContainer.withValues(alpha: 0.35);
-        stateBadge = const Icon(Icons.check_circle_rounded, color: AppColors.success, size: 22);
+        stateBadge = const Icon(Icons.check_circle_rounded,
+            color: AppColors.success, size: 22);
       } else if (isSelected && !option.isCorrect) {
         borderColor = AppColors.error;
         backgroundColor = AppColors.errorContainer.withValues(alpha: 0.35);
-        stateBadge = const Icon(Icons.cancel_rounded, color: AppColors.error, size: 22);
+        stateBadge =
+            const Icon(Icons.cancel_rounded, color: AppColors.error, size: 22);
       }
     } else if (isSelected) {
       borderColor = AppColors.primary;
@@ -56,8 +58,11 @@ class ImageOptionCard extends StatelessWidget {
             color: backgroundColor ?? Theme.of(context).cardTheme.color,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isDark && borderColor == AppColors.lightBorder ? AppColors.darkBorder : borderColor,
-              width: isSelected || (isEvaluated && option.isCorrect) ? 2.5 : 1.2,
+              color: isDark && borderColor == AppColors.lightBorder
+                  ? AppColors.darkBorder
+                  : borderColor,
+              width:
+                  isSelected || (isEvaluated && option.isCorrect) ? 2.5 : 1.2,
             ),
           ),
           padding: const EdgeInsets.all(10),
@@ -87,14 +92,18 @@ class ImageOptionCard extends StatelessWidget {
                     height: 22,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: isSelected ? AppColors.primary : Colors.transparent,
+                      color:
+                          isSelected ? AppColors.primary : Colors.transparent,
                       border: Border.all(
-                        color: isSelected ? AppColors.primary : AppColors.textMutedLight,
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.textMutedLight,
                         width: 1.8,
                       ),
                     ),
                     child: isSelected
-                        ? const Icon(Icons.circle, size: 10, color: Colors.white)
+                        ? const Icon(Icons.circle,
+                            size: 10, color: Colors.white)
                         : null,
                   ),
                   const SizedBox(width: 8),
@@ -118,7 +127,11 @@ class ImageOptionCard extends StatelessWidget {
                             option.subtext!,
                             style: TextStyle(
                               fontSize: 11,
-                              color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.75),
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.color
+                                  ?.withValues(alpha: 0.75),
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,

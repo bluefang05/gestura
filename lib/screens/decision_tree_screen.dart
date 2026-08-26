@@ -4,6 +4,7 @@ import '../core/services/feedback_service.dart';
 import '../data/gesture_database.dart';
 import '../models/gesture_item.dart';
 import '../widgets/common/app_card.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/section_header.dart';
 import '../widgets/illustrations/illustration_widget.dart';
@@ -34,42 +35,92 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       'label': 'Ojos y Mirada',
       'icon': Icons.visibility_rounded,
       'color': AppColors.primary,
-      'clues': ['duchenne_smile', 'narrowed_eyes', 'closed_eyelids', 'averted_gaze', 'pupil_dilation', 'winking_face', 'flash_cejas'],
+      'clues': [
+        'duchenne_smile',
+        'narrowed_eyes',
+        'closed_eyelids',
+        'averted_gaze',
+        'pupil_dilation',
+        'winking_face',
+        'flash_cejas'
+      ],
     },
     {
       'id': 'Boca',
       'label': 'Boca y Labios',
       'icon': Icons.sentiment_satisfied_alt_rounded,
       'color': AppColors.coral,
-      'clues': ['sonrisa_social', 'tight_lips', 'smirk_contempt', 'jaw_clenching', 'morder_labio', 'tristeza', 'sorpresa'],
+      'clues': [
+        'sonrisa_social',
+        'tight_lips',
+        'smirk_contempt',
+        'jaw_clenching',
+        'morder_labio',
+        'tristeza',
+        'sorpresa'
+      ],
     },
     {
       'id': 'Brazos',
       'label': 'Brazos y Postura',
       'icon': Icons.accessibility_new_rounded,
       'color': AppColors.accent,
-      'clues': ['postura_abierta', 'postura_cerrada', 'manos_ojiva', 'manos_caderas', 'tocarse_cuello', 'hands_behind_head', 'hands_behind_back', 'frotar_manos', 'tamborileo_dedos', 'inclinacion_adelante', 'inclinacion_atras'],
+      'clues': [
+        'postura_abierta',
+        'postura_cerrada',
+        'manos_ojiva',
+        'manos_caderas',
+        'tocarse_cuello',
+        'hands_behind_head',
+        'hands_behind_back',
+        'frotar_manos',
+        'tamborileo_dedos',
+        'inclinacion_adelante',
+        'inclinacion_atras'
+      ],
     },
     {
       'id': 'Voz',
       'label': 'Voz y Silencios',
       'icon': Icons.record_voice_over_rounded,
       'color': AppColors.purple,
-      'clues': ['sarcastic_inflection', 'assertive_voice', 'silence_tense', 'silence_reflective', 'voice_volume_high', 'voice_volume_low', 'voice_speed_fast', 'voice_monotone'],
+      'clues': [
+        'sarcastic_inflection',
+        'assertive_voice',
+        'silence_tense',
+        'silence_reflective',
+        'voice_volume_high',
+        'voice_volume_low',
+        'voice_speed_fast',
+        'voice_monotone'
+      ],
     },
     {
       'id': 'Espacio',
       'label': 'Espacio y Mesa',
       'icon': Icons.meeting_room_rounded,
       'color': AppColors.info,
-      'clues': ['espacio_intimo', 'espacio_personal', 'espacio_social', 'round_table', 'desk_barrier', 'seating_angle'],
+      'clues': [
+        'espacio_intimo',
+        'espacio_personal',
+        'espacio_social',
+        'round_table',
+        'desk_barrier',
+        'seating_angle'
+      ],
     },
     {
       'id': 'Digital',
       'label': 'Mensajería y Chat',
       'icon': Icons.chat_rounded,
       'color': AppColors.primaryLight,
-      'clues': ['digital_mayusculas', 'digital_ok_seco', 'digital_ghosting', 'digital_emojis', 'digital_audio'],
+      'clues': [
+        'digital_mayusculas',
+        'digital_ok_seco',
+        'digital_ghosting',
+        'digital_emojis',
+        'digital_audio'
+      ],
     },
   ];
 
@@ -81,6 +132,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       appBar: AppBar(
         title: const Text('Árbol de Decisión Social'),
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth >= 640;
@@ -90,15 +142,19 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1050),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   // Header Banner
                   AppCard(
-                    color: isDark ? const Color(0xFF064E3B) : const Color(0xFFD1FAE5),
+                    color: isDark
+                        ? const Color(0xFF064E3B)
+                        : const Color(0xFFD1FAE5),
                     padding: const EdgeInsets.all(16),
                     child: Row(
                       children: [
-                        const Icon(Icons.account_tree_rounded, color: AppColors.success, size: 36),
+                        const Icon(Icons.account_tree_rounded,
+                            color: AppColors.success, size: 36),
                         const SizedBox(width: 14),
                         Expanded(
                           child: Column(
@@ -109,13 +165,19 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w800,
-                                  color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                                  color: isDark
+                                      ? Colors.white
+                                      : AppColors.textPrimaryLight,
                                 ),
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 'Descifra qué hacer en 3 toques sin memorizar teoría.',
-                                style: TextStyle(fontSize: 12, color: isDark ? Colors.white70 : AppColors.textSecondaryLight),
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight),
                               ),
                             ],
                           ),
@@ -136,12 +198,21 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                     children: zones.map((z) {
                       final isSelected = _selectedZone == z['id'];
                       return ChoiceChip(
-                        avatar: Icon(z['icon'] as IconData, size: 16, color: isSelected ? Colors.white : z['color'] as Color),
+                        avatar: Icon(z['icon'] as IconData,
+                            size: 16,
+                            color: isSelected
+                                ? Colors.white
+                                : z['color'] as Color),
                         label: Text(z['label'] as String),
                         selected: isSelected,
-                        selectedColor: (z['color'] as Color).withValues(alpha: 0.85),
+                        selectedColor:
+                            (z['color'] as Color).withValues(alpha: 0.85),
                         labelStyle: TextStyle(
-                          color: isSelected ? Colors.white : (isDark ? Colors.white : Colors.black87),
+                          color: isSelected
+                              ? Colors.white
+                              : (isDark
+                                  ? AppColors.textPrimaryDark
+                                  : AppColors.textPrimaryLight),
                           fontWeight: FontWeight.w700,
                           fontSize: 13,
                         ),
@@ -161,7 +232,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   if (_selectedZone != null) ...[
                     const SectionHeader(
                       title: 'Paso 2: ¿Qué patrón específico viste?',
-                      subtitle: 'Selecciona la señal que mejor describe lo ocurrido',
+                      subtitle:
+                          'Selecciona la señal que mejor describe lo ocurrido',
                     ),
                     _buildGestureOptionsList(isDark, isTablet, isWide),
                     const SizedBox(height: 24),
@@ -188,7 +260,10 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
   Widget _buildGestureOptionsList(bool isDark, bool isTablet, bool isWide) {
     final zoneData = zones.firstWhere((z) => z['id'] == _selectedZone);
     final clueIds = zoneData['clues'] as List<String>;
-    final items = GestureDatabase.items.where((g) => clueIds.contains(g.id) || clueIds.contains(g.illustrationKey)).toList();
+    final items = GestureDatabase.items
+        .where((g) =>
+            clueIds.contains(g.id) || clueIds.contains(g.illustrationKey))
+        .toList();
 
     if (isTablet) {
       final columns = isWide ? 3 : 2;
@@ -206,8 +281,11 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           final gesture = items[index];
           final isSelected = _selectedGesture?.id == gesture.id;
           return AppCard(
-            color: isSelected ? AppColors.primary.withValues(alpha: 0.12) : null,
-            borderSide: isSelected ? const BorderSide(color: AppColors.primary, width: 2) : null,
+            color:
+                isSelected ? AppColors.primary.withValues(alpha: 0.12) : null,
+            borderSide: isSelected
+                ? const BorderSide(color: AppColors.primary, width: 2)
+                : null,
             onTap: () {
               FeedbackService.lightClick();
               setState(() => _selectedGesture = gesture);
@@ -229,7 +307,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                     children: [
                       Text(
                         gesture.name,
-                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 13),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -238,7 +317,12 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                         gesture.summary,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 11.5, color: Colors.grey.shade600),
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
                       ),
                     ],
                   ),
@@ -261,13 +345,17 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: AppCard(
-            color: isSelected ? AppColors.primary.withValues(alpha: 0.12) : null,
-            borderSide: isSelected ? const BorderSide(color: AppColors.primary, width: 2) : null,
+            color:
+                isSelected ? AppColors.primary.withValues(alpha: 0.12) : null,
+            borderSide: isSelected
+                ? const BorderSide(color: AppColors.primary, width: 2)
+                : null,
             onTap: () {
               FeedbackService.lightClick();
               setState(() => _selectedGesture = gesture);
               if (StorageService.getAutoNarration()) {
-                final textToSpeak = '${gesture.name}. Semáforo ${gesture.signalType.label}. Significado: ${gesture.probableMeaning}. Qué debes hacer: ${gesture.whatToDo}. En ventas: ${gesture.salesTip}';
+                final textToSpeak =
+                    '${gesture.name}. Semáforo ${gesture.signalType.label}. Significado: ${gesture.probableMeaning}. Qué debes hacer: ${gesture.whatToDo}. En ventas: ${gesture.salesTip}';
                 TtsService.speak(textToSpeak, gestureId: gesture.id);
               }
             },
@@ -287,14 +375,20 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                     children: [
                       Text(
                         gesture.name,
-                        style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13.5),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w800, fontSize: 13.5),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         gesture.summary,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
                       ),
                     ],
                   ),
@@ -344,14 +438,21 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                             final isSpeaking = speakingId == g.id;
                             return IconButton(
                               icon: Icon(
-                                isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
-                                color: isSpeaking ? AppColors.accent : AppColors.primary,
+                                isSpeaking
+                                    ? Icons.stop_circle_rounded
+                                    : Icons.volume_up_rounded,
+                                color: isSpeaking
+                                    ? AppColors.accent
+                                    : AppColors.primary,
                                 size: 22,
                               ),
-                              tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar en voz alta',
+                              tooltip: isSpeaking
+                                  ? 'Detener lectura'
+                                  : 'Escuchar en voz alta',
                               onPressed: () {
                                 FeedbackService.lightClick();
-                                final textToSpeak = '${g.name}. Significado: ${g.probableMeaning}. Qué debes hacer: ${g.whatToDo}. En ventas: ${g.salesTip}';
+                                final textToSpeak =
+                                    '${g.name}. Significado: ${g.probableMeaning}. Qué debes hacer: ${g.whatToDo}. En ventas: ${g.salesTip}';
                                 TtsService.speak(textToSpeak, gestureId: g.id);
                               },
                             );
@@ -362,7 +463,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                     const SizedBox(height: 6),
                     Text(
                       g.name,
-                      style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w900, fontSize: 16),
                     ),
                   ],
                 ),
@@ -408,7 +510,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                 FeedbackService.lightClick();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => GestureDetailScreen(gestureId: g.id)),
+                  MaterialPageRoute(
+                      builder: (_) => GestureDetailScreen(gestureId: g.id)),
                 );
               },
             ),
@@ -435,7 +538,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
               ),
               const SizedBox(height: 3),
               Text(

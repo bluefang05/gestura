@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/constants/app_colors.dart';
+
 class SectionHeader extends StatelessWidget {
   final String title;
   final String? subtitle;
@@ -14,6 +16,8 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -37,7 +41,9 @@ class SectionHeader extends StatelessWidget {
                     subtitle!,
                     style: TextStyle(
                       fontSize: 13,
-                      color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.75),
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
                     ),
                   ),
                 ],

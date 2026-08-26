@@ -4,6 +4,7 @@ import '../core/services/feedback_service.dart';
 import '../data/gesture_database.dart';
 import '../models/category.dart';
 import '../widgets/common/app_card.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/section_header.dart';
 import '../widgets/illustrations/illustration_widget.dart';
@@ -44,37 +45,43 @@ class _CompareScreenState extends State<CompareScreen> {
       title: 'Sonrisa Genuina vs. Sonrisa Social',
       gestureIdA: 'duchenne_smile',
       gestureIdB: 'sonrisa_social',
-      coreDifference: 'En la sonrisa genuina se contraen los ojos ("patas de gallo"); en la social los ojos quedan inmóviles.',
+      coreDifference:
+          'En la sonrisa genuina se contraen los ojos ("patas de gallo"); en la social los ojos quedan inmóviles.',
     ),
     ComparePair(
       title: 'Postura Abierta vs. Brazos Cruzados',
       gestureIdA: 'postura_abierta',
       gestureIdB: 'postura_cerrada',
-      coreDifference: 'La postura abierta despeja el torso y denota receptividad; los brazos cruzados crean una barrera física defensiva.',
+      coreDifference:
+          'La postura abierta despeja el torso y denota receptividad; los brazos cruzados crean una barrera física defensiva.',
     ),
     ComparePair(
       title: 'Inclinación Adelante vs. Inclinación Atrás',
       gestureIdA: 'inclinacion_adelante',
       gestureIdB: 'inclinacion_atras',
-      coreDifference: 'Inclinarse hacia adelante reduce la distancia y muestra alto interés; recostarse atrás marca distancia o escepticismo.',
+      coreDifference:
+          'Inclinarse hacia adelante reduce la distancia y muestra alto interés; recostarse atrás marca distancia o escepticismo.',
     ),
     ComparePair(
       title: 'Manos en Ojiva vs. Frotarse las Manos',
       gestureIdA: 'manos_ojiva',
       gestureIdB: 'frotar_manos',
-      coreDifference: 'La ojiva transmite máxima autoridad y convicción intelectual; frotarse las manos denota expectativa o nerviosismo.',
+      coreDifference:
+          'La ojiva transmite máxima autoridad y convicción intelectual; frotarse las manos denota expectativa o nerviosismo.',
     ),
     ComparePair(
       title: 'Tono Asertivo vs. Inflexión Sarcástica',
       gestureIdA: 'tono_asertivo',
       gestureIdB: 'tono_sarcastico',
-      coreDifference: 'El tono asertivo mantiene cadencia estable y transparente; el sarcasmo modula con caída irónica que contradice las palabras.',
+      coreDifference:
+          'El tono asertivo mantiene cadencia estable y transparente; el sarcasmo modula con caída irónica que contradice las palabras.',
     ),
     ComparePair(
       title: 'Mesa Redonda vs. Escritorio Barrera',
       gestureIdA: 'mesa_redonda',
       gestureIdB: 'mesa_barrera',
-      coreDifference: 'La mesa redonda distribuye el poder de forma igualitaria; el escritorio frontal actúa como escudo de dominancia jerárquica.',
+      coreDifference:
+          'La mesa redonda distribuye el poder de forma igualitaria; el escritorio frontal actúa como escudo de dominancia jerárquica.',
     ),
   ];
 
@@ -98,7 +105,8 @@ class _CompareScreenState extends State<CompareScreen> {
       final itemA = GestureDatabase.getById(pair.gestureIdA);
       final itemB = GestureDatabase.getById(pair.gestureIdB);
       if (itemA != null && itemB != null) {
-        TtsService.speak('Comparando ${itemA.name} con ${itemB.name}. Diferencia central: ${pair.coreDifference}');
+        TtsService.speak(
+            'Comparando ${itemA.name} con ${itemB.name}. Diferencia central: ${pair.coreDifference}');
       }
     }
   }
@@ -106,8 +114,10 @@ class _CompareScreenState extends State<CompareScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final itemA = GestureDatabase.getById(_selectedIdA) ?? GestureDatabase.items.first;
-    final itemB = GestureDatabase.getById(_selectedIdB) ?? GestureDatabase.items[1];
+    final itemA =
+        GestureDatabase.getById(_selectedIdA) ?? GestureDatabase.items.first;
+    final itemB =
+        GestureDatabase.getById(_selectedIdB) ?? GestureDatabase.items[1];
 
     final catA = CategoryInfo.getInfo(itemA.category);
     final catB = CategoryInfo.getInfo(itemB.category);
@@ -121,11 +131,13 @@ class _CompareScreenState extends State<CompareScreen> {
             tooltip: 'Escuchar Comparación',
             onPressed: () {
               FeedbackService.lightClick();
-              TtsService.speak('Comparando ${itemA.name} contra ${itemB.name}. Diferencias clave: En ${itemA.name}, ${itemA.physiologicalDetails}. Su significado es: ${itemA.probableMeaning}. En ${itemB.name}, ${itemB.physiologicalDetails}. Su significado es: ${itemB.probableMeaning}.');
+              TtsService.speak(
+                  'Comparando ${itemA.name} contra ${itemB.name}. Diferencias clave: En ${itemA.name}, ${itemA.physiologicalDetails}. Su significado es: ${itemA.probableMeaning}. En ${itemB.name}, ${itemB.physiologicalDetails}. Su significado es: ${itemB.probableMeaning}.');
             },
           ),
         ],
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth >= 640;
@@ -135,11 +147,13 @@ class _CompareScreenState extends State<CompareScreen> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1000),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   const SectionHeader(
                     title: 'Pares Clásicos de Alto Contraste',
-                    subtitle: 'Selecciona una pareja de gestos para comparar sus diferencias físicas',
+                    subtitle:
+                        'Selecciona una pareja de gestos para comparar sus diferencias físicas',
                   ),
                   SizedBox(
                     height: 46,
@@ -149,28 +163,38 @@ class _CompareScreenState extends State<CompareScreen> {
                       separatorBuilder: (_, __) => const SizedBox(width: 8),
                       itemBuilder: (context, i) {
                         final pair = presetPairs[i];
-                        final isSelected = _selectedIdA == pair.gestureIdA && _selectedIdB == pair.gestureIdB;
+                        final isSelected = _selectedIdA == pair.gestureIdA &&
+                            _selectedIdB == pair.gestureIdB;
                         return ChoiceChip(
                           label: Text(
                             pair.title,
                             style: TextStyle(
                               fontSize: 13,
-                              fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                              fontWeight: isSelected
+                                  ? FontWeight.w800
+                                  : FontWeight.w600,
                               color: isSelected
                                   ? Colors.white
-                                  : (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
+                                  : (isDark
+                                      ? AppColors.textPrimaryDark
+                                      : AppColors.textPrimaryLight),
                             ),
                           ),
                           selected: isSelected,
                           selectedColor: AppColors.primary,
-                          backgroundColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                          backgroundColor: isDark
+                              ? const Color(0xFF1E293B)
+                              : const Color(0xFFF1F5F9),
                           side: BorderSide(
                             color: isSelected
                                 ? AppColors.primary
-                                : (isDark ? const Color(0xFF475569) : const Color(0xFFCBD5E1)),
+                                : (isDark
+                                    ? const Color(0xFF475569)
+                                    : const Color(0xFFCBD5E1)),
                             width: isSelected ? 1.5 : 1.2,
                           ),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
                           onSelected: (_) => _applyPreset(pair),
                         );
                       },
@@ -188,7 +212,8 @@ class _CompareScreenState extends State<CompareScreen> {
                           padding: EdgeInsets.all(isTablet ? 18 : 12),
                           child: Column(
                             children: [
-                              BadgePill(text: 'Señal A', color: catA.primaryColor),
+                              BadgePill(
+                                  text: 'Señal A', color: catA.primaryColor),
                               const SizedBox(height: 8),
                               ConoVeIllustration(
                                 illustrationKey: itemA.illustrationKey,
@@ -199,7 +224,9 @@ class _CompareScreenState extends State<CompareScreen> {
                               const SizedBox(height: 10),
                               Text(
                                 itemA.name,
-                                style: TextStyle(fontWeight: FontWeight.w800, fontSize: isTablet ? 16 : 14),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: isTablet ? 16 : 14),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -218,12 +245,17 @@ class _CompareScreenState extends State<CompareScreen> {
                       Padding(
                         padding: EdgeInsets.only(top: isTablet ? 80 : 60),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
-                            color: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
+                            color: isDark
+                                ? const Color(0xFF334155)
+                                : const Color(0xFFE2E8F0),
                             shape: BoxShape.circle,
                           ),
-                          child: const Text('VS', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 12)),
+                          child: const Text('VS',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 12)),
                         ),
                       ),
                       SizedBox(width: isTablet ? 16 : 10),
@@ -233,7 +265,8 @@ class _CompareScreenState extends State<CompareScreen> {
                           padding: EdgeInsets.all(isTablet ? 18 : 12),
                           child: Column(
                             children: [
-                              BadgePill(text: 'Señal B', color: catB.primaryColor),
+                              BadgePill(
+                                  text: 'Señal B', color: catB.primaryColor),
                               const SizedBox(height: 8),
                               ConoVeIllustration(
                                 illustrationKey: itemB.illustrationKey,
@@ -244,7 +277,9 @@ class _CompareScreenState extends State<CompareScreen> {
                               const SizedBox(height: 10),
                               Text(
                                 itemB.name,
-                                style: TextStyle(fontWeight: FontWeight.w800, fontSize: isTablet ? 16 : 14),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: isTablet ? 16 : 14),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -327,7 +362,10 @@ class _CompareScreenState extends State<CompareScreen> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13, color: AppColors.primary),
+          style: const TextStyle(
+              fontWeight: FontWeight.w800,
+              fontSize: 13,
+              color: AppColors.primary),
         ),
         const SizedBox(height: 8),
         Row(
@@ -340,7 +378,8 @@ class _CompareScreenState extends State<CompareScreen> {
                   color: colorA.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(textA, style: const TextStyle(fontSize: 12.5, height: 1.35)),
+                child: Text(textA,
+                    style: const TextStyle(fontSize: 12.5, height: 1.35)),
               ),
             ),
             const SizedBox(width: 8),
@@ -351,7 +390,8 @@ class _CompareScreenState extends State<CompareScreen> {
                   color: colorB.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(textB, style: const TextStyle(fontSize: 12.5, height: 1.35)),
+                child: Text(textB,
+                    style: const TextStyle(fontSize: 12.5, height: 1.35)),
               ),
             ),
           ],

@@ -4,6 +4,7 @@ import '../core/services/feedback_service.dart';
 import '../data/gesture_database.dart';
 import '../models/gesture_item.dart';
 import '../widgets/common/app_card.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import 'gesture_detail_screen.dart';
@@ -59,6 +60,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
       appBar: AppBar(
         title: const Text('Guía de Bolsillo (Cheat Sheet)'),
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth >= 640;
@@ -69,22 +71,27 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1100),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   // Header Banner
                   AppCard(
-                    color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                    color: isDark
+                        ? const Color(0xFF1E293B)
+                        : const Color(0xFFF1F5F9),
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Row(
                           children: [
-                            Icon(Icons.bolt_rounded, color: AppColors.accent, size: 24),
+                            Icon(Icons.bolt_rounded,
+                                color: AppColors.accent, size: 24),
                             SizedBox(width: 8),
                             Text(
                               'Referencia Rápida de Campo',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900),
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w900),
                             ),
                           ],
                         ),
@@ -93,7 +100,9 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                           '20 señales corporales de mayor impacto en ventas, entrevistas y negociaciones para consultar en 30 segundos.',
                           style: TextStyle(
                             fontSize: 12.5,
-                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
                           ),
                         ),
                       ],
@@ -116,35 +125,41 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
-                          avatar: const Icon(Icons.circle, color: AppColors.success, size: 14),
+                          avatar: const Icon(Icons.circle,
+                              color: AppColors.success, size: 14),
                           label: const Text('Verde (Avanzar)'),
                           selected: _filterLight == SignalTrafficLight.green,
                           selectedColor: AppColors.successContainer,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(() => _filterLight = SignalTrafficLight.green);
+                            setState(
+                                () => _filterLight = SignalTrafficLight.green);
                           },
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
-                          avatar: const Icon(Icons.circle, color: AppColors.warning, size: 14),
+                          avatar: const Icon(Icons.circle,
+                              color: AppColors.warning, size: 14),
                           label: const Text('Amarillo (Precaución)'),
                           selected: _filterLight == SignalTrafficLight.yellow,
                           selectedColor: AppColors.warningContainer,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(() => _filterLight = SignalTrafficLight.yellow);
+                            setState(
+                                () => _filterLight = SignalTrafficLight.yellow);
                           },
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
-                          avatar: const Icon(Icons.circle, color: AppColors.error, size: 14),
+                          avatar: const Icon(Icons.circle,
+                              color: AppColors.error, size: 14),
                           label: const Text('Rojo (Peligro)'),
                           selected: _filterLight == SignalTrafficLight.red,
                           selectedColor: const Color(0xFFFFE4E6),
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(() => _filterLight = SignalTrafficLight.red);
+                            setState(
+                                () => _filterLight = SignalTrafficLight.red);
                           },
                         ),
                       ],
@@ -171,7 +186,9 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => GestureDetailScreen(gestureId: item.id)),
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      GestureDetailScreen(gestureId: item.id)),
                             );
                           },
                           padding: const EdgeInsets.all(12),
@@ -192,26 +209,34 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                     Row(
                                       children: [
                                         BadgePill(
-                                          text: item.signalType.label.split(' ').first,
+                                          text: item.signalType.label
+                                              .split(' ')
+                                              .first,
                                           color: item.signalType.color,
                                         ),
                                         const SizedBox(width: 6),
                                         Expanded(
                                           child: Text(
                                             item.name,
-                                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13.5),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 13.5),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(Icons.volume_up_rounded, size: 18, color: AppColors.primary),
+                                          icon: const Icon(
+                                              Icons.volume_up_rounded,
+                                              size: 18,
+                                              color: AppColors.primary),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
                                           tooltip: 'Escuchar en voz alta',
                                           onPressed: () {
                                             FeedbackService.lightClick();
-                                            TtsService.speak('${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
+                                            TtsService.speak(
+                                                '${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
                                           },
                                         ),
                                       ],
@@ -221,11 +246,16 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                       text: TextSpan(
                                         style: TextStyle(
                                           fontSize: 11.5,
-                                          color: isDark ? Colors.white70 : Colors.black87,
+                                          color: isDark
+                                              ? AppColors.textSecondaryDark
+                                              : AppColors.textPrimaryLight,
                                           height: 1.3,
                                         ),
                                         children: [
-                                          const TextSpan(text: 'Significado: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                          const TextSpan(
+                                              text: 'Significado: ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.probableMeaning),
                                         ],
                                       ),
@@ -241,7 +271,10 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           height: 1.3,
                                         ),
                                         children: [
-                                          const TextSpan(text: 'Acción: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                          const TextSpan(
+                                              text: 'Acción: ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.whatToDo),
                                         ],
                                       ),
@@ -265,7 +298,9 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => GestureDetailScreen(gestureId: item.id)),
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      GestureDetailScreen(gestureId: item.id)),
                             );
                           },
                           padding: const EdgeInsets.all(12),
@@ -286,26 +321,34 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                     Row(
                                       children: [
                                         BadgePill(
-                                          text: item.signalType.label.split(' ').first,
+                                          text: item.signalType.label
+                                              .split(' ')
+                                              .first,
                                           color: item.signalType.color,
                                         ),
                                         const SizedBox(width: 6),
                                         Expanded(
                                           child: Text(
                                             item.name,
-                                            style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w800,
+                                                fontSize: 14),
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(Icons.volume_up_rounded, size: 18, color: AppColors.primary),
+                                          icon: const Icon(
+                                              Icons.volume_up_rounded,
+                                              size: 18,
+                                              color: AppColors.primary),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
                                           tooltip: 'Escuchar en voz alta',
                                           onPressed: () {
                                             FeedbackService.lightClick();
-                                            TtsService.speak('${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
+                                            TtsService.speak(
+                                                '${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
                                           },
                                         ),
                                       ],
@@ -315,11 +358,16 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                       text: TextSpan(
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: isDark ? Colors.white70 : Colors.black87,
+                                          color: isDark
+                                              ? AppColors.textSecondaryDark
+                                              : AppColors.textPrimaryLight,
                                           height: 1.3,
                                         ),
                                         children: [
-                                          const TextSpan(text: 'Significado: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                          const TextSpan(
+                                              text: 'Significado: ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.probableMeaning),
                                         ],
                                       ),
@@ -335,7 +383,10 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           height: 1.3,
                                         ),
                                         children: [
-                                          const TextSpan(text: 'Acción: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                                          const TextSpan(
+                                              text: 'Acción: ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.whatToDo),
                                         ],
                                       ),

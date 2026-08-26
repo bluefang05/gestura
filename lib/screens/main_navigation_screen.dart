@@ -4,6 +4,7 @@ import 'dictionary_screen.dart';
 import 'quiz_hub_screen.dart';
 import 'scenarios_screen.dart';
 import 'settings_screen.dart';
+import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/localization/app_localizations.dart';
 import '../widgets/common/ad_banner_slot.dart';
@@ -77,7 +78,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                             ),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(Icons.remove_red_eye_rounded, color: Colors.white, size: 24),
+                          child: const Icon(Icons.remove_red_eye_rounded,
+                              color: Colors.white, size: 24),
                         ),
                         const SizedBox(height: 6),
                         Text(
@@ -86,7 +88,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                             fontSize: 12,
                             fontWeight: FontWeight.w900,
                             letterSpacing: 0.5,
-                            color: isDark ? Colors.white70 : const Color(0xFF0F766E),
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : const Color(0xFF0F766E),
                           ),
                         ),
                       ],
@@ -130,7 +134,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                           children: screens,
                         ),
                       ),
-                      const AdBannerSlot(),
+                      if (_currentIndex != 4) const AdBannerSlot(),
                     ],
                   ),
                 ),
@@ -149,7 +153,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   children: screens,
                 ),
               ),
-              const AdBannerSlot(),
+              if (_currentIndex != 4) const AdBannerSlot(),
             ],
           ),
           bottomNavigationBar: NavigationBar(

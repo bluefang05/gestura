@@ -6,6 +6,7 @@ import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
 import '../data/quiz_database.dart';
 import '../models/quiz_question.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
@@ -18,7 +19,8 @@ class FlashQuizScreen extends StatefulWidget {
   State<FlashQuizScreen> createState() => _FlashQuizScreenState();
 }
 
-class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProviderStateMixin {
+class _FlashQuizScreenState extends State<FlashQuizScreen>
+    with SingleTickerProviderStateMixin {
   late List<QuizQuestion> _questions;
   int _currentIndex = 0;
   int _score = 0;
@@ -35,8 +37,12 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    final allVisual = QuizDatabase.questions.where((q) => q.questionIllustrationKey != null || q.isImageOptionGrid).toList();
-    _questions = (allVisual.isNotEmpty ? allVisual : QuizDatabase.questions).toList()..shuffle();
+    final allVisual = QuizDatabase.questions
+        .where((q) => q.questionIllustrationKey != null || q.isImageOptionGrid)
+        .toList();
+    _questions = (allVisual.isNotEmpty ? allVisual : QuizDatabase.questions)
+        .toList()
+      ..shuffle();
     if (_questions.length > 8) {
       _questions = _questions.sublist(0, 8);
     }
@@ -157,11 +163,16 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.flash_on_rounded, color: AppColors.accent, size: 48),
+            const Icon(Icons.flash_on_rounded,
+                color: AppColors.accent, size: 48),
             const SizedBox(height: 12),
-            Text('Aciertos: $_correctCount de ${_questions.length}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text('Aciertos: $_correctCount de ${_questions.length}',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 4),
-            Text('Puntos ganados: +$_score XP', style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+            Text('Puntos ganados: +$_score XP',
+                style: const TextStyle(
+                    color: AppColors.primary, fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
@@ -191,7 +202,9 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
     final currentQ = _questions[_currentIndex];
 
     // Determine the key illustration to show
-    String illustrationToShow = currentQ.questionIllustrationKey ?? currentQ.options.firstWhere((o) => o.isCorrect).illustrationKey ?? 'duchenne_smile';
+    String illustrationToShow = currentQ.questionIllustrationKey ??
+        currentQ.options.firstWhere((o) => o.isCorrect).illustrationKey ??
+        'duchenne_smile';
 
     return Scaffold(
       appBar: AppBar(
@@ -220,13 +233,16 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
                 value: 1.0 - _timerController.value,
                 backgroundColor: isDark ? Colors.black38 : Colors.grey.shade300,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  _timerController.value > 0.7 ? AppColors.error : AppColors.accent,
+                  _timerController.value > 0.7
+                      ? AppColors.error
+                      : AppColors.accent,
                 ),
               );
             },
           ),
         ),
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         children: [
@@ -270,23 +286,32 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
                       )
                     : Container(
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+                          color: isDark
+                              ? const Color(0xFF1E293B)
+                              : const Color(0xFFE2E8F0),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: const Column(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.timer_off_rounded, size: 48, color: AppColors.accent),
-                            SizedBox(height: 8),
-                            Text(
+                            const Icon(Icons.timer_off_rounded,
+                                size: 48, color: AppColors.accent),
+                            const SizedBox(height: 8),
+                            const Text(
                               '¡Tiempo de visualización agotado!',
-                              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w800, fontSize: 12),
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               'Elige la opción correcta por memoria',
-                              style: TextStyle(fontSize: 11, color: Colors.grey),
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -306,12 +331,19 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
                 child: AppCard(
                   onTap: _isAnswered ? null : () => _submitAnswer(option),
                   color: isSelected
-                      ? (option.isCorrect ? AppColors.success.withValues(alpha: 0.15) : AppColors.error.withValues(alpha: 0.15))
+                      ? (option.isCorrect
+                          ? AppColors.success.withValues(alpha: 0.15)
+                          : AppColors.error.withValues(alpha: 0.15))
                       : null,
                   borderSide: isSelected
-                      ? BorderSide(color: option.isCorrect ? AppColors.success : AppColors.error, width: 2)
+                      ? BorderSide(
+                          color: option.isCorrect
+                              ? AppColors.success
+                              : AppColors.error,
+                          width: 2)
                       : null,
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                   child: Row(
                     children: [
                       Expanded(
@@ -320,13 +352,19 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
                           children: [
                             Text(
                               option.text,
-                              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13.5),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 13.5),
                             ),
                             if (option.subtext != null) ...[
                               const SizedBox(height: 2),
                               Text(
                                 option.subtext!,
-                                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: isDark
+                                      ? AppColors.textMutedDark
+                                      : AppColors.textMutedLight,
+                                ),
                               ),
                             ],
                           ],
@@ -334,8 +372,12 @@ class _FlashQuizScreenState extends State<FlashQuizScreen> with SingleTickerProv
                       ),
                       if (isSelected)
                         Icon(
-                          option.isCorrect ? Icons.check_circle_rounded : Icons.cancel_rounded,
-                          color: option.isCorrect ? AppColors.success : AppColors.error,
+                          option.isCorrect
+                              ? Icons.check_circle_rounded
+                              : Icons.cancel_rounded,
+                          color: option.isCorrect
+                              ? AppColors.success
+                              : AppColors.error,
                         ),
                     ],
                   ),

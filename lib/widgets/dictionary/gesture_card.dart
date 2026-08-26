@@ -25,6 +25,9 @@ class GestureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catInfo = CategoryInfo.getInfo(item.category);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final mutedColor =
+        isDark ? AppColors.textMutedDark : AppColors.textMutedLight;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
@@ -73,14 +76,19 @@ class GestureCard extends StatelessWidget {
                           final isSpeaking = speakingId == item.id;
                           return IconButton(
                             icon: Icon(
-                              isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
-                              color: isSpeaking ? AppColors.accent : Colors.grey,
+                              isSpeaking
+                                  ? Icons.volume_up_rounded
+                                  : Icons.volume_up_outlined,
+                              color: isSpeaking ? AppColors.accent : mutedColor,
                               size: 22,
                             ),
-                            tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar en voz alta',
+                            tooltip: isSpeaking
+                                ? 'Detener lectura'
+                                : 'Escuchar en voz alta',
                             onPressed: () {
                               FeedbackService.lightClick();
-                              final textToRead = '${item.name}. ${item.summary}. Pista física: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
+                              final textToRead =
+                                  '${item.name}. ${item.summary}. Pista física: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
                               TtsService.speak(textToRead, gestureId: item.id);
                             },
                           );
@@ -88,15 +96,20 @@ class GestureCard extends StatelessWidget {
                       ),
                       IconButton(
                         icon: Icon(
-                          isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
-                          color: isBookmarked ? catInfo.primaryColor : Colors.grey,
+                          isBookmarked
+                              ? Icons.bookmark_rounded
+                              : Icons.bookmark_outline_rounded,
+                          color:
+                              isBookmarked ? catInfo.primaryColor : mutedColor,
                           size: 22,
                         ),
                         onPressed: () {
                           FeedbackService.bookmark();
                           onBookmarkToggle();
                         },
-                        tooltip: isBookmarked ? 'Guardado en favoritos' : 'Guardar gesto',
+                        tooltip: isBookmarked
+                            ? 'Guardado en favoritos'
+                            : 'Guardar gesto',
                       ),
                     ],
                   ),
@@ -116,7 +129,9 @@ class GestureCard extends StatelessWidget {
                     item.summary,
                     style: TextStyle(
                       fontSize: 12.5,
-                      color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.8),
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
                       height: 1.3,
                     ),
                     maxLines: 2,

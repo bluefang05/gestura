@@ -88,14 +88,17 @@ class CompetenceRadarPainter extends CustomPainter {
           fontWeight: FontWeight.w700,
           color: isHighContrast
               ? AppColors.hcYellow
-              : (isDark ? Colors.white70 : const Color(0xFF334155)),
+              : (isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondaryLight),
           height: 1.1,
         ),
       );
       textPainter.layout();
       textPainter.paint(
         canvas,
-        Offset(labelPos.dx - textPainter.width / 2, labelPos.dy - textPainter.height / 2),
+        Offset(labelPos.dx - textPainter.width / 2,
+            labelPos.dy - textPainter.height / 2),
       );
     }
 

@@ -45,14 +45,17 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     loc.appName,
-                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w900),
+                    style: const TextStyle(
+                        fontSize: 19, fontWeight: FontWeight.w900),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     loc.appSubtitle,
                     style: TextStyle(
                       fontSize: 10,
-                      color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                      color: isDark
+                          ? AppColors.textMutedDark
+                          : AppColors.textMutedLight,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -80,18 +83,24 @@ class HomeScreen extends StatelessWidget {
           final isTablet = constraints.maxWidth >= 640;
           final isWide = constraints.maxWidth >= 960;
           final categoryColumns = isWide ? 4 : (isTablet ? 3 : 2);
+          final bottomFillSpacing = constraints.maxHeight >= 700 ? 72.0 : 24.0;
 
           return Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1100),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   // Hero Card: Decodificador Rápido
                   AppCard(
-                    color: isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
+                    color: isDark
+                        ? const Color(0xFF134E4A)
+                        : AppColors.primaryContainer,
                     borderSide: BorderSide(
-                      color: isDark ? AppColors.primaryLight.withValues(alpha: 0.5) : AppColors.primaryLight,
+                      color: isDark
+                          ? AppColors.primaryLight.withValues(alpha: 0.5)
+                          : AppColors.primaryLight,
                       width: 1.5,
                     ),
                     padding: const EdgeInsets.all(18),
@@ -103,10 +112,12 @@ class HomeScreen extends StatelessWidget {
                             BadgePill(
                               text: 'Buscador de campo',
                               color: AppColors.primaryDark,
-                              backgroundColor: Colors.white.withValues(alpha: 0.8),
+                              backgroundColor:
+                                  Colors.white.withValues(alpha: 0.8),
                             ),
                             const Spacer(),
-                            const Icon(Icons.troubleshoot_rounded, color: AppColors.primaryDark),
+                            const Icon(Icons.troubleshoot_rounded,
+                                color: AppColors.primaryDark),
                           ],
                         ),
                         const SizedBox(height: 12),
@@ -115,7 +126,9 @@ class HomeScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w800,
-                            color: isDark ? Colors.white : AppColors.textPrimaryLight,
+                            color: isDark
+                                ? Colors.white
+                                : AppColors.textPrimaryLight,
                             letterSpacing: -0.3,
                           ),
                         ),
@@ -124,7 +137,9 @@ class HomeScreen extends StatelessWidget {
                           'Selecciona la parte del cuerpo o describe lo que observas para obtener una hipótesis científica en segundos.',
                           style: TextStyle(
                             fontSize: 13,
-                            color: isDark ? Colors.white70 : AppColors.textSecondaryLight,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
                             height: 1.35,
                           ),
                         ),
@@ -134,15 +149,17 @@ class HomeScreen extends StatelessWidget {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const DecoderScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const DecoderScreen()),
                             );
                           },
                           icon: const Icon(Icons.search_rounded, size: 18),
-                          label: const Text('Abrir Decodificador en Vivo'),
+                          label: const Text('Abrir Diccionario de Gestos'),
                           style: FilledButton.styleFrom(
                             backgroundColor: AppColors.primary,
                             foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
                           ),
                         ),
                       ],
@@ -153,9 +170,13 @@ class HomeScreen extends StatelessWidget {
                   // Daily Featured Gesture Card with Audio Narration
                   Builder(
                     builder: (context) {
-                      final dayOfYear = DateTime.now().difference(DateTime(DateTime.now().year, 1, 1)).inDays;
-                      final dailyGesture = GestureDatabase.items[dayOfYear % GestureDatabase.items.length];
-                      final catInfo = CategoryInfo.getInfo(dailyGesture.category);
+                      final dayOfYear = DateTime.now()
+                          .difference(DateTime(DateTime.now().year, 1, 1))
+                          .inDays;
+                      final dailyGesture = GestureDatabase
+                          .items[dayOfYear % GestureDatabase.items.length];
+                      final catInfo =
+                          CategoryInfo.getInfo(dailyGesture.category);
 
                       return AppCard(
                         padding: const EdgeInsets.all(16),
@@ -165,14 +186,17 @@ class HomeScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 4),
                                   decoration: BoxDecoration(
-                                    color: AppColors.accent.withValues(alpha: 0.15),
+                                    color: AppColors.accent
+                                        .withValues(alpha: 0.15),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: const Row(
                                     children: [
-                                      Icon(Icons.auto_awesome_rounded, color: AppColors.accent, size: 14),
+                                      Icon(Icons.auto_awesome_rounded,
+                                          color: AppColors.accent, size: 14),
                                       SizedBox(width: 4),
                                       Text(
                                         'Gesto del Día',
@@ -187,20 +211,31 @@ class HomeScreen extends StatelessWidget {
                                 ),
                                 const Spacer(),
                                 ValueListenableBuilder<String?>(
-                                  valueListenable: TtsService.currentSpeakingIdNotifier,
+                                  valueListenable:
+                                      TtsService.currentSpeakingIdNotifier,
                                   builder: (context, speakingId, _) {
-                                    final isSpeaking = speakingId == 'daily_${dailyGesture.id}';
+                                    final isSpeaking = speakingId ==
+                                        'daily_${dailyGesture.id}';
                                     return IconButton(
                                       icon: Icon(
-                                        isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
-                                        color: isSpeaking ? AppColors.accent : AppColors.primary,
+                                        isSpeaking
+                                            ? Icons.stop_circle_rounded
+                                            : Icons.volume_up_rounded,
+                                        color: isSpeaking
+                                            ? AppColors.accent
+                                            : AppColors.primary,
                                         size: 22,
                                       ),
-                                      tooltip: isSpeaking ? 'Detener audio' : 'Escuchar Gesto del Día',
+                                      tooltip: isSpeaking
+                                          ? 'Detener audio'
+                                          : 'Escuchar Gesto del Día',
                                       onPressed: () {
                                         FeedbackService.lightClick();
-                                        final speech = 'Gesto del día: ${dailyGesture.name}. ${dailyGesture.summary}. Pistas físicas: ${dailyGesture.physiologicalDetails}. Significado: ${dailyGesture.probableMeaning}. En ventas: ${dailyGesture.salesTip}';
-                                        TtsService.speak(speech, gestureId: 'daily_${dailyGesture.id}');
+                                        final speech =
+                                            'Gesto del día: ${dailyGesture.name}. ${dailyGesture.summary}. Pistas físicas: ${dailyGesture.physiologicalDetails}. Significado: ${dailyGesture.probableMeaning}. En ventas: ${dailyGesture.salesTip}';
+                                        TtsService.speak(speech,
+                                            gestureId:
+                                                'daily_${dailyGesture.id}');
                                       },
                                     );
                                   },
@@ -219,18 +254,23 @@ class HomeScreen extends StatelessWidget {
                                 const SizedBox(width: 14),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         dailyGesture.name,
-                                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w900),
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w900),
                                       ),
                                       const SizedBox(height: 3),
                                       Text(
                                         dailyGesture.summary,
                                         style: TextStyle(
                                           fontSize: 12.5,
-                                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                          color: isDark
+                                              ? AppColors.textSecondaryDark
+                                              : AppColors.textSecondaryLight,
                                           height: 1.3,
                                         ),
                                         maxLines: 2,
@@ -248,9 +288,13 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               alignment: WrapAlignment.spaceBetween,
                               children: [
-                                BadgePill(text: dailyGesture.bodyPart, color: catInfo.primaryColor),
                                 BadgePill(
-                                  text: dailyGesture.signalType.label.split(' ').first,
+                                    text: dailyGesture.bodyPart,
+                                    color: catInfo.primaryColor),
+                                BadgePill(
+                                  text: dailyGesture.signalType.label
+                                      .split(' ')
+                                      .first,
                                   color: dailyGesture.signalType.color,
                                 ),
                                 TextButton.icon(
@@ -259,11 +303,13 @@ class HomeScreen extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (_) => GestureDetailScreen(gestureId: dailyGesture.id),
+                                        builder: (_) => GestureDetailScreen(
+                                            gestureId: dailyGesture.id),
                                       ),
                                     );
                                   },
-                                  icon: const Icon(Icons.arrow_forward_rounded, size: 16),
+                                  icon: const Icon(Icons.arrow_forward_rounded,
+                                      size: 16),
                                   label: const Text('Ver Detalle'),
                                 ),
                               ],
@@ -287,17 +333,22 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         // Tool 1: Visual Quiz
                         AppCard(
-                          color: isDark ? const Color(0xFF451A03) : const Color(0xFFFEF3C7),
+                          color: isDark
+                              ? const Color(0xFF451A03)
+                              : const Color(0xFFFEF3C7),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
-                            final imageQuestions = QuizDatabase.getImageCardQuestions();
+                            final imageQuestions =
+                                QuizDatabase.getImageCardQuestions();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => QuizRunnerScreen(
                                   title: 'Test Visual de Microexpresiones',
-                                  questions: imageQuestions.isNotEmpty ? imageQuestions : QuizDatabase.questions,
+                                  questions: imageQuestions.isNotEmpty
+                                      ? imageQuestions
+                                      : QuizDatabase.questions,
                                 ),
                               ),
                             );
@@ -308,10 +359,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: AppColors.accent.withValues(alpha: 0.2),
+                                  color:
+                                      AppColors.accent.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.psychology_rounded, color: AppColors.accent, size: 26),
+                                child: const Icon(Icons.psychology_rounded,
+                                    color: AppColors.accent, size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -321,33 +374,41 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Entrenamiento Visual',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       'Diferencia microexpresiones.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.play_circle_fill_rounded, color: AppColors.accent, size: 28),
+                              const Icon(Icons.play_circle_fill_rounded,
+                                  color: AppColors.accent, size: 28),
                             ],
                           ),
                         ),
 
                         // Tool 2: Comparador A/B
                         AppCard(
-                          color: isDark ? const Color(0xFF1E1B4B) : const Color(0xFFEEF2FF),
+                          color: isDark
+                              ? const Color(0xFF1E1B4B)
+                              : const Color(0xFFEEF2FF),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const CompareScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const CompareScreen()),
                             );
                           },
                           child: Row(
@@ -356,10 +417,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: AppColors.purple.withValues(alpha: 0.2),
+                                  color:
+                                      AppColors.purple.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.compare_arrows_rounded, color: AppColors.purple, size: 26),
+                                child: const Icon(Icons.compare_arrows_rounded,
+                                    color: AppColors.purple, size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -369,33 +432,41 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Comparador Visual A/B',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       'Compara gestos similares.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.chevron_right_rounded, color: AppColors.purple),
+                              const Icon(Icons.chevron_right_rounded,
+                                  color: AppColors.purple),
                             ],
                           ),
                         ),
 
                         // Tool 3: Árbol de Decisión
                         AppCard(
-                          color: isDark ? const Color(0xFF064E3B) : const Color(0xFFD1FAE5),
+                          color: isDark
+                              ? const Color(0xFF064E3B)
+                              : const Color(0xFFD1FAE5),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const DecisionTreeScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const DecisionTreeScreen()),
                             );
                           },
                           child: Row(
@@ -404,10 +475,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: AppColors.success.withValues(alpha: 0.2),
+                                  color:
+                                      AppColors.success.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.account_tree_rounded, color: AppColors.success, size: 26),
+                                child: const Icon(Icons.account_tree_rounded,
+                                    color: AppColors.success, size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -417,33 +490,41 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Árbol de Decisión Social',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       'Regla: Veo X ➔ Hago Z.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.chevron_right_rounded, color: AppColors.success),
+                              const Icon(Icons.chevron_right_rounded,
+                                  color: AppColors.success),
                             ],
                           ),
                         ),
 
                         // Tool 4: Cheat Sheet
                         AppCard(
-                          color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                          color: isDark
+                              ? const Color(0xFF1E293B)
+                              : const Color(0xFFF1F5F9),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const CheatSheetScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const CheatSheetScreen()),
                             );
                           },
                           child: Row(
@@ -452,10 +533,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: AppColors.primary.withValues(alpha: 0.2),
+                                  color:
+                                      AppColors.primary.withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.bolt_rounded, color: AppColors.primary, size: 26),
+                                child: const Icon(Icons.bolt_rounded,
+                                    color: AppColors.primary, size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -465,33 +548,42 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Guía de Bolsillo',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       '20 señales críticas de venta.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.chevron_right_rounded, color: AppColors.primary),
+                              const Icon(Icons.chevron_right_rounded,
+                                  color: AppColors.primary),
                             ],
                           ),
                         ),
 
                         // Tool 5: Detector de Incongruencias (Autismo/Social)
                         AppCard(
-                          color: isDark ? const Color(0xFF312E81).withValues(alpha: 0.35) : const Color(0xFFEEF2FF),
+                          color: isDark
+                              ? const Color(0xFF312E81).withValues(alpha: 0.35)
+                              : const Color(0xFFEEF2FF),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const IncongruenceDetectorScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      const IncongruenceDetectorScreen()),
                             );
                           },
                           child: Row(
@@ -500,10 +592,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFF6366F1).withValues(alpha: 0.2),
+                                  color: const Color(0xFF6366F1)
+                                      .withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.psychology_alt_rounded, color: Color(0xFF6366F1), size: 26),
+                                child: const Icon(Icons.psychology_alt_rounded,
+                                    color: Color(0xFF6366F1), size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -513,33 +607,42 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Detector de Incongruencias',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       'Palabras vs señales reales.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.chevron_right_rounded, color: Color(0xFF6366F1)),
+                              const Icon(Icons.chevron_right_rounded,
+                                  color: Color(0xFF6366F1)),
                             ],
                           ),
                         ),
 
                         // Tool 6: Termómetro de Negociación (Ventas)
                         AppCard(
-                          color: isDark ? const Color(0xFF451A03).withValues(alpha: 0.35) : const Color(0xFFFFFBEB),
+                          color: isDark
+                              ? const Color(0xFF451A03).withValues(alpha: 0.35)
+                              : const Color(0xFFFFFBEB),
                           padding: const EdgeInsets.all(16),
                           onTap: () {
                             FeedbackService.lightClick();
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const BuyerTemperatureScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      const BuyerTemperatureScreen()),
                             );
                           },
                           child: Row(
@@ -548,10 +651,12 @@ class HomeScreen extends StatelessWidget {
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: const Color(0xFFD97706).withValues(alpha: 0.2),
+                                  color: const Color(0xFFD97706)
+                                      .withValues(alpha: 0.2),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Icon(Icons.thermostat_rounded, color: Color(0xFFD97706), size: 26),
+                                child: const Icon(Icons.thermostat_rounded,
+                                    color: Color(0xFFD97706), size: 26),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -561,20 +666,25 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     const Text(
                                       'Termómetro de Ventas',
-                                      style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                          fontSize: 14.5,
+                                          fontWeight: FontWeight.w800),
                                     ),
                                     const SizedBox(height: 2),
                                     Text(
                                       'Calibra la receptividad de compra.',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const Icon(Icons.chevron_right_rounded, color: Color(0xFFD97706)),
+                              const Icon(Icons.chevron_right_rounded,
+                                  color: Color(0xFFD97706)),
                             ],
                           ),
                         ),
@@ -583,7 +693,9 @@ class HomeScreen extends StatelessWidget {
                   else ...[
                     // Mobile Stack
                     AppCard(
-                      color: isDark ? const Color(0xFF451A03) : const Color(0xFFFEF3C7),
+                      color: isDark
+                          ? const Color(0xFF451A03)
+                          : const Color(0xFFFEF3C7),
                       padding: const EdgeInsets.all(16),
                       child: Row(
                         children: [
@@ -594,7 +706,8 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.accent.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.psychology_rounded, color: AppColors.accent, size: 28),
+                            child: const Icon(Icons.psychology_rounded,
+                                color: AppColors.accent, size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -603,31 +716,40 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Entrenamiento Visual Rápido',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Aprende a diferenciar microexpresiones con imágenes.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
                           IconButton.filled(
-                            style: IconButton.styleFrom(backgroundColor: AppColors.accent),
-                            icon: const Icon(Icons.play_arrow_rounded, color: Colors.white),
+                            style: IconButton.styleFrom(
+                                backgroundColor: AppColors.accent),
+                            icon: const Icon(Icons.play_arrow_rounded,
+                                color: Colors.white),
                             onPressed: () {
                               FeedbackService.lightClick();
-                              final imageQuestions = QuizDatabase.getImageCardQuestions();
+                              final imageQuestions =
+                                  QuizDatabase.getImageCardQuestions();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => QuizRunnerScreen(
                                     title: 'Test Visual de Microexpresiones',
-                                    questions: imageQuestions.isNotEmpty ? imageQuestions : QuizDatabase.questions,
+                                    questions: imageQuestions.isNotEmpty
+                                        ? imageQuestions
+                                        : QuizDatabase.questions,
                                   ),
                                 ),
                               );
@@ -638,13 +760,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     AppCard(
-                      color: isDark ? const Color(0xFF312E81).withValues(alpha: 0.35) : const Color(0xFFEEF2FF),
+                      color: isDark
+                          ? const Color(0xFF312E81).withValues(alpha: 0.35)
+                          : const Color(0xFFEEF2FF),
                       padding: const EdgeInsets.all(16),
                       onTap: () {
                         FeedbackService.lightClick();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const IncongruenceDetectorScreen()),
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const IncongruenceDetectorScreen()),
                         );
                       },
                       child: Row(
@@ -653,10 +779,12 @@ class HomeScreen extends StatelessWidget {
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF6366F1).withValues(alpha: 0.2),
+                              color: const Color(0xFF6366F1)
+                                  .withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.psychology_alt_rounded, color: Color(0xFF6366F1), size: 28),
+                            child: const Icon(Icons.psychology_alt_rounded,
+                                color: Color(0xFF6366F1), size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -665,32 +793,40 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Detector de Incongruencias',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   '¿Dice una cosa pero su cuerpo dice otra? Descifra la verdad.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right_rounded, color: Color(0xFF6366F1)),
+                          const Icon(Icons.chevron_right_rounded,
+                              color: Color(0xFF6366F1)),
                         ],
                       ),
                     ),
                     const SizedBox(height: 12),
                     AppCard(
-                      color: isDark ? const Color(0xFF451A03).withValues(alpha: 0.35) : const Color(0xFFFFFBEB),
+                      color: isDark
+                          ? const Color(0xFF451A03).withValues(alpha: 0.35)
+                          : const Color(0xFFFFFBEB),
                       padding: const EdgeInsets.all(16),
                       onTap: () {
                         FeedbackService.lightClick();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const BuyerTemperatureScreen()),
+                          MaterialPageRoute(
+                              builder: (_) => const BuyerTemperatureScreen()),
                         );
                       },
                       child: Row(
@@ -699,10 +835,12 @@ class HomeScreen extends StatelessWidget {
                             width: 48,
                             height: 48,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFD97706).withValues(alpha: 0.2),
+                              color: const Color(0xFFD97706)
+                                  .withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.thermostat_rounded, color: Color(0xFFD97706), size: 28),
+                            child: const Icon(Icons.thermostat_rounded,
+                                color: Color(0xFFD97706), size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -711,32 +849,40 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Termómetro de Negociación',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Mide la temperatura del cliente y detecta el momento exacto de cierre.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right_rounded, color: Color(0xFFD97706)),
+                          const Icon(Icons.chevron_right_rounded,
+                              color: Color(0xFFD97706)),
                         ],
                       ),
                     ),
                     const SizedBox(height: 12),
                     AppCard(
-                      color: isDark ? const Color(0xFF1E1B4B) : const Color(0xFFEEF2FF),
+                      color: isDark
+                          ? const Color(0xFF1E1B4B)
+                          : const Color(0xFFEEF2FF),
                       padding: const EdgeInsets.all(16),
                       onTap: () {
                         FeedbackService.lightClick();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const CompareScreen()),
+                          MaterialPageRoute(
+                              builder: (_) => const CompareScreen()),
                         );
                       },
                       child: Row(
@@ -748,7 +894,8 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.purple.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.compare_arrows_rounded, color: AppColors.purple, size: 28),
+                            child: const Icon(Icons.compare_arrows_rounded,
+                                color: AppColors.purple, size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -757,32 +904,40 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Comparador Visual A/B',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Compara cara a cara gestos que se confunden fácilmente.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right_rounded, color: AppColors.purple),
+                          const Icon(Icons.chevron_right_rounded,
+                              color: AppColors.purple),
                         ],
                       ),
                     ),
                     const SizedBox(height: 12),
                     AppCard(
-                      color: isDark ? const Color(0xFF064E3B) : const Color(0xFFD1FAE5),
+                      color: isDark
+                          ? const Color(0xFF064E3B)
+                          : const Color(0xFFD1FAE5),
                       padding: const EdgeInsets.all(16),
                       onTap: () {
                         FeedbackService.lightClick();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const DecisionTreeScreen()),
+                          MaterialPageRoute(
+                              builder: (_) => const DecisionTreeScreen()),
                         );
                       },
                       child: Row(
@@ -794,7 +949,8 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.success.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.account_tree_rounded, color: AppColors.success, size: 28),
+                            child: const Icon(Icons.account_tree_rounded,
+                                color: AppColors.success, size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -803,32 +959,40 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Árbol de Decisión Social',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   'Regla: Si veo X ➔ Significa Y ➔ Hago Z en 3 clics.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right_rounded, color: AppColors.success),
+                          const Icon(Icons.chevron_right_rounded,
+                              color: AppColors.success),
                         ],
                       ),
                     ),
                     const SizedBox(height: 12),
                     AppCard(
-                      color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                      color: isDark
+                          ? const Color(0xFF1E293B)
+                          : const Color(0xFFF1F5F9),
                       padding: const EdgeInsets.all(16),
                       onTap: () {
                         FeedbackService.lightClick();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const CheatSheetScreen()),
+                          MaterialPageRoute(
+                              builder: (_) => const CheatSheetScreen()),
                         );
                       },
                       child: Row(
@@ -840,7 +1004,8 @@ class HomeScreen extends StatelessWidget {
                               color: AppColors.primary.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            child: const Icon(Icons.bolt_rounded, color: AppColors.primary, size: 28),
+                            child: const Icon(Icons.bolt_rounded,
+                                color: AppColors.primary, size: 28),
                           ),
                           const SizedBox(width: 14),
                           Expanded(
@@ -849,20 +1014,25 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 const Text(
                                   'Guía de Bolsillo (Cheat Sheet)',
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800),
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
                                   '20 señales críticas de venta y cierre para consultar en 30s.',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          const Icon(Icons.chevron_right_rounded, color: AppColors.primary),
+                          const Icon(Icons.chevron_right_rounded,
+                              color: AppColors.primary),
                         ],
                       ),
                     ),
@@ -892,7 +1062,8 @@ class HomeScreen extends StatelessWidget {
                     itemCount: CategoryInfo.allCategories.length,
                     itemBuilder: (context, index) {
                       final cat = CategoryInfo.allCategories[index];
-                      final count = GestureDatabase.getByCategory(cat.type).length;
+                      final count =
+                          GestureDatabase.getByCategory(cat.type).length;
 
                       return AppCard(
                         padding: const EdgeInsets.all(14),
@@ -909,7 +1080,8 @@ class HomeScreen extends StatelessWidget {
                                 color: cat.primaryColor.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(cat.icon, color: cat.primaryColor, size: 22),
+                              child: Icon(cat.icon,
+                                  color: cat.primaryColor, size: 22),
                             ),
                             const Spacer(),
                             Text(
@@ -927,7 +1099,9 @@ class HomeScreen extends StatelessWidget {
                               '$count señales explicadas',
                               style: TextStyle(
                                 fontSize: 11.5,
-                                color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
                               ),
                             ),
                           ],
@@ -935,11 +1109,13 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: bottomFillSpacing),
 
                   // Sales & Negotiation Spotlight
                   AppCard(
-                    color: isDark ? const Color(0xFF1E1B4B) : const Color(0xFFEEF2FF),
+                    color: isDark
+                        ? const Color(0xFF1E1B4B)
+                        : const Color(0xFFEEF2FF),
                     padding: const EdgeInsets.all(16),
                     child: Row(
                       children: [
@@ -949,7 +1125,8 @@ class HomeScreen extends StatelessWidget {
                             color: AppColors.indigo.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(Icons.handshake_rounded, color: AppColors.indigo, size: 26),
+                          child: const Icon(Icons.handshake_rounded,
+                              color: AppColors.indigo, size: 26),
                         ),
                         const SizedBox(width: 14),
                         Expanded(
@@ -958,21 +1135,26 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               const Text(
                                 'Simulador de Ventas y Negociación',
-                                style: TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+                                style: TextStyle(
+                                    fontSize: 14.5,
+                                    fontWeight: FontWeight.w800),
                               ),
                               const SizedBox(height: 2),
                               Text(
                                 'Aprende a leer al cliente y cerrar acuerdos.',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                  color: isDark
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondaryLight,
                                 ),
                               ),
                             ],
                           ),
                         ),
                         TextButton(
-                          onPressed: () => onNavigateToTab(3), // Nav to Scenarios
+                          onPressed: () =>
+                              onNavigateToTab(3), // Nav to Scenarios
                           child: const Text('Entrenar'),
                         ),
                       ],

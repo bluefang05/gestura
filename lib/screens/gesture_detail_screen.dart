@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/category.dart';
 import '../data/gesture_database.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
@@ -51,7 +52,8 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
   }
 
   void _toggleTts(GestureItem item) {
-    final speech = '${item.name}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
+    final speech =
+        '${item.name}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
     TtsService.speak(speech, gestureId: item.id);
   }
 
@@ -61,6 +63,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
     if (item == null) {
       return Scaffold(
         appBar: AppBar(),
+        bottomNavigationBar: const AdBottomBar(),
         body: const Center(child: Text('Señal no encontrada')),
       );
     }
@@ -78,11 +81,14 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
               final isSpeaking = speakingId == item.id;
               return IconButton(
                 icon: Icon(
-                  isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                  isSpeaking
+                      ? Icons.stop_circle_rounded
+                      : Icons.volume_up_rounded,
                   color: isSpeaking ? AppColors.accent : null,
                   size: 24,
                 ),
-                tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar en voz alta',
+                tooltip:
+                    isSpeaking ? 'Detener lectura' : 'Escuchar en voz alta',
                 onPressed: () {
                   FeedbackService.lightClick();
                   _toggleTts(item);
@@ -92,7 +98,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
           ),
           IconButton(
             icon: Icon(
-              _isBookmarked ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
+              _isBookmarked
+                  ? Icons.bookmark_rounded
+                  : Icons.bookmark_outline_rounded,
               color: _isBookmarked ? catInfo.primaryColor : null,
             ),
             tooltip: 'Guardar para repaso',
@@ -100,6 +108,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth >= 720;
@@ -118,14 +127,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.visibility_rounded, size: 20, color: isDark ? AppColors.primaryLight : AppColors.primary),
+                      Icon(Icons.visibility_rounded,
+                          size: 20,
+                          color: isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary),
                       const SizedBox(width: 8),
                       Text(
                         'Pistas Anatómicas Físicas (Qué ver)',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
                         ),
                       ),
                     ],
@@ -136,7 +151,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.4,
-                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
                     ),
                   ),
                 ],
@@ -146,9 +163,13 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
             // Card 2: Significado Principal NT (Green)
             AppCard(
-              color: isDark ? const Color(0xFF064E3B).withValues(alpha: 0.35) : AppColors.successContainer,
+              color: isDark
+                  ? const Color(0xFF064E3B).withValues(alpha: 0.35)
+                  : AppColors.successContainer,
               borderSide: BorderSide(
-                color: isDark ? const Color(0xFF059669).withValues(alpha: 0.5) : const Color(0xFFA7F3D0),
+                color: isDark
+                    ? const Color(0xFF059669).withValues(alpha: 0.5)
+                    : const Color(0xFFA7F3D0),
                 width: 1.2,
               ),
               padding: const EdgeInsets.all(16),
@@ -157,14 +178,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.lightbulb_rounded, size: 20, color: isDark ? const Color(0xFF34D399) : AppColors.success),
+                      Icon(Icons.lightbulb_rounded,
+                          size: 20,
+                          color: isDark
+                              ? const Color(0xFF34D399)
+                              : AppColors.success),
                       const SizedBox(width: 8),
                       Text(
                         'Significado Más Probable (en Neurotípicos)',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? const Color(0xFF6EE7B7) : const Color(0xFF065F46),
+                          color: isDark
+                              ? const Color(0xFF6EE7B7)
+                              : const Color(0xFF065F46),
                         ),
                       ),
                     ],
@@ -175,7 +202,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.4,
-                      color: isDark ? const Color(0xFFECFDF5) : const Color(0xFF064E3B),
+                      color: isDark
+                          ? const Color(0xFFECFDF5)
+                          : const Color(0xFF064E3B),
                     ),
                   ),
                 ],
@@ -185,9 +214,13 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
             // Card 3: Trampas y Significados Alternativos (Amber)
             AppCard(
-              color: isDark ? const Color(0xFF78350F).withValues(alpha: 0.35) : AppColors.warningContainer,
+              color: isDark
+                  ? const Color(0xFF78350F).withValues(alpha: 0.35)
+                  : AppColors.warningContainer,
               borderSide: BorderSide(
-                color: isDark ? const Color(0xFFD97706).withValues(alpha: 0.5) : const Color(0xFFFDE68A),
+                color: isDark
+                    ? const Color(0xFFD97706).withValues(alpha: 0.5)
+                    : const Color(0xFFFDE68A),
                 width: 1.2,
               ),
               padding: const EdgeInsets.all(16),
@@ -196,14 +229,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.warning_amber_rounded, size: 20, color: isDark ? const Color(0xFFFBBF24) : AppColors.warning),
+                      Icon(Icons.warning_amber_rounded,
+                          size: 20,
+                          color: isDark
+                              ? const Color(0xFFFBBF24)
+                              : AppColors.warning),
                       const SizedBox(width: 8),
                       Text(
                         'Trampas y Otras Posibles Razones',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? const Color(0xFFFDE68A) : const Color(0xFF92400E),
+                          color: isDark
+                              ? const Color(0xFFFDE68A)
+                              : const Color(0xFF92400E),
                         ),
                       ),
                     ],
@@ -219,7 +258,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                             '• ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: isDark ? const Color(0xFFFBBF24) : const Color(0xFF92400E),
+                              color: isDark
+                                  ? const Color(0xFFFBBF24)
+                                  : const Color(0xFF92400E),
                             ),
                           ),
                           Expanded(
@@ -227,7 +268,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               alt,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: isDark ? const Color(0xFFFFFBEB) : const Color(0xFF78350F),
+                                color: isDark
+                                    ? const Color(0xFFFFFBEB)
+                                    : const Color(0xFF78350F),
                                 height: 1.3,
                               ),
                             ),
@@ -253,14 +296,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.map_rounded, size: 20, color: isDark ? const Color(0xFF818CF8) : AppColors.indigo),
+                      Icon(Icons.map_rounded,
+                          size: 20,
+                          color: isDark
+                              ? const Color(0xFF818CF8)
+                              : AppColors.indigo),
                       const SizedBox(width: 8),
                       Text(
                         'Guía según el Contexto',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
                         ),
                       ),
                     ],
@@ -271,7 +320,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.4,
-                      color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
                     ),
                   ),
                 ],
@@ -281,9 +332,13 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
             // Card 5: ¿Qué Hacer o Responder? (Indigo)
             AppCard(
-              color: isDark ? const Color(0xFF312E81).withValues(alpha: 0.35) : const Color(0xFFE0E7FF),
+              color: isDark
+                  ? const Color(0xFF312E81).withValues(alpha: 0.35)
+                  : const Color(0xFFE0E7FF),
               borderSide: BorderSide(
-                color: isDark ? const Color(0xFF6366F1).withValues(alpha: 0.5) : const Color(0xFFC7D2FE),
+                color: isDark
+                    ? const Color(0xFF6366F1).withValues(alpha: 0.5)
+                    : const Color(0xFFC7D2FE),
                 width: 1.2,
               ),
               padding: const EdgeInsets.all(16),
@@ -292,14 +347,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.chat_rounded, size: 20, color: isDark ? const Color(0xFF818CF8) : AppColors.indigo),
+                      Icon(Icons.chat_rounded,
+                          size: 20,
+                          color: isDark
+                              ? const Color(0xFF818CF8)
+                              : AppColors.indigo),
                       const SizedBox(width: 8),
                       Text(
                         '¿Cómo Responder o Reaccionar?',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? const Color(0xFFC7D2FE) : const Color(0xFF3730A3),
+                          color: isDark
+                              ? const Color(0xFFC7D2FE)
+                              : const Color(0xFF3730A3),
                         ),
                       ),
                     ],
@@ -310,7 +371,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.4,
-                      color: isDark ? const Color(0xFFEEF2FF) : const Color(0xFF312E81),
+                      color: isDark
+                          ? const Color(0xFFEEF2FF)
+                          : const Color(0xFF312E81),
                     ),
                   ),
                 ],
@@ -320,9 +383,13 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
             // Card 6: Consejo de Ventas & Negociación (Purple)
             AppCard(
-              color: isDark ? const Color(0xFF581C87).withValues(alpha: 0.35) : const Color(0xFFF3E8FF),
+              color: isDark
+                  ? const Color(0xFF581C87).withValues(alpha: 0.35)
+                  : const Color(0xFFF3E8FF),
               borderSide: BorderSide(
-                color: isDark ? const Color(0xFFA855F7).withValues(alpha: 0.5) : const Color(0xFFE9D5FF),
+                color: isDark
+                    ? const Color(0xFFA855F7).withValues(alpha: 0.5)
+                    : const Color(0xFFE9D5FF),
                 width: 1.2,
               ),
               padding: const EdgeInsets.all(16),
@@ -331,14 +398,20 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.business_center_rounded, size: 20, color: isDark ? const Color(0xFFC084FC) : AppColors.purple),
+                      Icon(Icons.business_center_rounded,
+                          size: 20,
+                          color: isDark
+                              ? const Color(0xFFC084FC)
+                              : AppColors.purple),
                       const SizedBox(width: 8),
                       Text(
                         'Consejo para Ventas y Negociación',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
-                          color: isDark ? const Color(0xFFE9D5FF) : const Color(0xFF6B21A8),
+                          color: isDark
+                              ? const Color(0xFFE9D5FF)
+                              : const Color(0xFF6B21A8),
                         ),
                       ),
                     ],
@@ -349,7 +422,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.4,
-                      color: isDark ? const Color(0xFFFAF5FF) : const Color(0xFF581C87),
+                      color: isDark
+                          ? const Color(0xFFFAF5FF)
+                          : const Color(0xFF581C87),
                     ),
                   ),
                 ],
@@ -389,14 +464,21 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                             children: [
                               FilterChip(
                                 avatar: Icon(
-                                  _highlightAnatomy ? Icons.remove_red_eye_rounded : Icons.remove_red_eye_outlined,
+                                  _highlightAnatomy
+                                      ? Icons.remove_red_eye_rounded
+                                      : Icons.remove_red_eye_outlined,
                                   size: 16,
-                                  color: _highlightAnatomy ? Colors.white : AppColors.primary,
+                                  color: _highlightAnatomy
+                                      ? Colors.white
+                                      : AppColors.primary,
                                 ),
-                                label: Text(_highlightAnatomy ? 'Pistas On' : 'Pistas Off'),
+                                label: Text(_highlightAnatomy
+                                    ? 'Pistas On'
+                                    : 'Pistas Off'),
                                 selected: _highlightAnatomy,
                                 selectedColor: AppColors.primary,
-                                backgroundColor: Theme.of(context).cardTheme.color,
+                                backgroundColor:
+                                    Theme.of(context).cardTheme.color,
                                 onSelected: (val) {
                                   FeedbackService.lightClick();
                                   setState(() => _highlightAnatomy = val);
@@ -404,20 +486,32 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               ),
                               const SizedBox(width: 8),
                               ValueListenableBuilder<String?>(
-                                valueListenable: TtsService.currentSpeakingIdNotifier,
+                                valueListenable:
+                                    TtsService.currentSpeakingIdNotifier,
                                 builder: (context, speakingId, _) {
                                   final isSpeaking = speakingId == item.id;
                                   return ActionChip(
                                     avatar: Icon(
-                                      isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                                      isSpeaking
+                                          ? Icons.stop_circle_rounded
+                                          : Icons.volume_up_rounded,
                                       size: 16,
-                                      color: isSpeaking ? Colors.white : AppColors.accent,
+                                      color: isSpeaking
+                                          ? Colors.white
+                                          : AppColors.accent,
                                     ),
                                     label: Text(
-                                      isSpeaking ? 'Detener Audio' : 'Escuchar Ficha',
-                                      style: TextStyle(color: isSpeaking ? Colors.white : null, fontWeight: FontWeight.bold),
+                                      isSpeaking
+                                          ? 'Detener Audio'
+                                          : 'Escuchar Ficha',
+                                      style: TextStyle(
+                                          color:
+                                              isSpeaking ? Colors.white : null,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    backgroundColor: isSpeaking ? AppColors.accent : Theme.of(context).cardTheme.color,
+                                    backgroundColor: isSpeaking
+                                        ? AppColors.accent
+                                        : Theme.of(context).cardTheme.color,
                                     onPressed: () {
                                       FeedbackService.lightClick();
                                       _toggleTts(item);
@@ -432,22 +526,33 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                             spacing: 8,
                             runSpacing: 6,
                             children: [
-                              BadgePill(text: item.bodyPart, color: catInfo.primaryColor),
-                              BadgePill(text: item.signalType.label, color: item.signalType.color),
-                              BadgePill(text: catInfo.chapterReference, color: AppColors.textMutedLight),
+                              BadgePill(
+                                  text: item.bodyPart,
+                                  color: catInfo.primaryColor),
+                              BadgePill(
+                                  text: item.signalType.label,
+                                  color: item.signalType.color),
+                              BadgePill(
+                                  text: catInfo.chapterReference,
+                                  color: AppColors.textMutedLight),
                             ],
                           ),
                           const SizedBox(height: 10),
                           Text(
                             item.name,
-                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, letterSpacing: -0.4),
+                            style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: -0.4),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             item.summary,
                             style: TextStyle(
                               fontSize: 14,
-                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
                               height: 1.35,
                             ),
                           ),
@@ -490,9 +595,12 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   FilterChip(
                     avatar: Icon(
-                      _highlightAnatomy ? Icons.remove_red_eye_rounded : Icons.remove_red_eye_outlined,
+                      _highlightAnatomy
+                          ? Icons.remove_red_eye_rounded
+                          : Icons.remove_red_eye_outlined,
                       size: 16,
-                      color: _highlightAnatomy ? Colors.white : AppColors.primary,
+                      color:
+                          _highlightAnatomy ? Colors.white : AppColors.primary,
                     ),
                     label: Text(_highlightAnatomy ? 'Pistas On' : 'Pistas Off'),
                     selected: _highlightAnatomy,
@@ -510,15 +618,21 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       final isSpeaking = speakingId == item.id;
                       return ActionChip(
                         avatar: Icon(
-                          isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
                           size: 16,
                           color: isSpeaking ? Colors.white : AppColors.accent,
                         ),
                         label: Text(
                           isSpeaking ? 'Detener Audio' : 'Escuchar Ficha',
-                          style: TextStyle(color: isSpeaking ? Colors.white : null, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              color: isSpeaking ? Colors.white : null,
+                              fontWeight: FontWeight.bold),
                         ),
-                        backgroundColor: isSpeaking ? AppColors.accent : Theme.of(context).cardTheme.color,
+                        backgroundColor: isSpeaking
+                            ? AppColors.accent
+                            : Theme.of(context).cardTheme.color,
                         onPressed: () {
                           FeedbackService.lightClick();
                           _toggleTts(item);
@@ -535,21 +649,30 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   BadgePill(text: item.bodyPart, color: catInfo.primaryColor),
-                  BadgePill(text: item.signalType.label, color: item.signalType.color),
-                  BadgePill(text: catInfo.chapterReference, color: AppColors.textMutedLight),
+                  BadgePill(
+                      text: item.signalType.label,
+                      color: item.signalType.color),
+                  BadgePill(
+                      text: catInfo.chapterReference,
+                      color: AppColors.textMutedLight),
                 ],
               ),
               const SizedBox(height: 8),
               Text(
                 item.name,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, letterSpacing: -0.4),
+                style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.4),
               ),
               const SizedBox(height: 6),
               Text(
                 item.summary,
                 style: TextStyle(
                   fontSize: 14.5,
-                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                   height: 1.35,
                 ),
               ),

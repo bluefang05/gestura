@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/gesture_database.dart';
+import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/dictionary/gesture_card.dart';
 import '../widgets/dictionary/body_part_filter.dart';
 import '../core/constants/app_colors.dart';
@@ -26,11 +27,13 @@ class _DecoderScreenState extends State<DecoderScreen> {
   @override
   Widget build(BuildContext context) {
     final gestures = GestureDatabase.getByBodyPart(_selectedBodyPart);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Decodificador en Vivo'),
+        title: const Text('Diccionario de Gestos'),
       ),
+      bottomNavigationBar: const AdBottomBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,15 +41,26 @@ class _DecoderScreenState extends State<DecoderScreen> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
-            color: AppColors.primaryContainer.withValues(alpha: 0.35),
+            color: isDark
+                ? AppColors.primaryContainerDark
+                : AppColors.primaryContainer,
             child: Row(
               children: [
-                const Icon(Icons.touch_app_rounded, color: AppColors.primary, size: 22),
+                Icon(
+                  Icons.touch_app_rounded,
+                  color: isDark ? AppColors.primaryLight : AppColors.primary,
+                  size: 22,
+                ),
                 const SizedBox(width: 10),
-                const Expanded(
+                Expanded(
                   child: Text(
                     'Selecciona la zona donde observaste el gesto para ver su significado inmediato.',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimaryLight),
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight),
                   ),
                 ),
               ],
@@ -110,11 +124,13 @@ class _DecoderScreenState extends State<DecoderScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => GestureDetailScreen(gestureId: item.id),
+                                  builder: (_) =>
+                                      GestureDetailScreen(gestureId: item.id),
                                 ),
                               ).then((_) {
                                 setState(() {
-                                  _bookmarkedIds = StorageService.getBookmarks();
+                                  _bookmarkedIds =
+                                      StorageService.getBookmarks();
                                 });
                               });
                             },
@@ -146,7 +162,8 @@ class _DecoderScreenState extends State<DecoderScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => GestureDetailScreen(gestureId: item.id),
+                            builder: (_) =>
+                                GestureDetailScreen(gestureId: item.id),
                           ),
                         ).then((_) {
                           setState(() {
