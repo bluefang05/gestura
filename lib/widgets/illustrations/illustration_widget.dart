@@ -33,6 +33,27 @@ class ConoVeIllustration extends StatefulWidget {
 class _ConoVeIllustrationState extends State<ConoVeIllustration> {
   OverlayEntry? _previewOverlay;
 
+  static const Map<String, String> _semanticDescriptions = {
+    'sensory_overload_supermarket':
+        'Niño en un supermercado protegiendo sus oídos mientras el entorno está concurrido.',
+    'ambiguous_ok_message':
+        'Dos personas en un intercambio de mensajes donde una respuesta breve puede tener varios significados.',
+    'social_fatigue':
+        'Persona en una reunión social que podría necesitar una pausa o más espacio.',
+    'pause_before_reply':
+        'Persona haciendo una pausa para procesar una pregunta antes de responder.',
+    'emoji_support':
+        'Persona recibe un emoji como señal breve de acompañamiento o confirmación.',
+    'abrupt_topic_change':
+        'Grupo conversando mientras una persona introduce con entusiasmo un tema distinto.',
+    'reflective_vs_tense_silence':
+        'Comparación entre una pausa reflexiva y una situación con tensión corporal y ambiental.',
+  };
+
+  String get _semanticDescription =>
+      _semanticDescriptions[widget.illustrationKey] ??
+      'Ilustración visual de comunicación: ${widget.illustrationKey.replaceAll('_', ' ')}';
+
   String? _resolveAssetPath(String key, bool isLarge) {
     final clean = key.toLowerCase().trim();
     final suffix = isLarge ? '_large.png' : '.png';
@@ -156,6 +177,15 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'scenario_friend_coffee': 'scenarios',
       'scenario_negotiation': 'scenarios',
 
+      // Contenido neuroafirmativo
+      'sensory_overload_supermarket': 'neuroaffirmative',
+      'ambiguous_ok_message': 'neuroaffirmative',
+      'social_fatigue': 'neuroaffirmative',
+      'pause_before_reply': 'neuroaffirmative',
+      'emoji_support': 'neuroaffirmative',
+      'abrupt_topic_change': 'neuroaffirmative',
+      'reflective_vs_tense_silence': 'neuroaffirmative',
+
       // Branding
       'logo': 'branding',
       'gestura_logo': 'branding',
@@ -164,6 +194,10 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
 
     if (categoryMap.containsKey(clean)) {
       final folder = categoryMap[clean]!;
+      if (folder == 'neuroaffirmative') {
+        final suffix = isLarge ? '_large.png' : '.png';
+        return 'assets/images/$folder/$clean$suffix';
+      }
       var fileKey = clean;
       if (clean == 'logo' || clean == 'conove_logo') fileKey = 'gestura_logo';
       if (clean == 'espacio') fileKey = 'proxemica';
@@ -183,8 +217,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     if (assetPath != null && !isHighContrast) {
       return _withHoldPreview(
         Semantics(
-          label:
-              'Ilustración visual de comunicación no verbal: ${widget.illustrationKey.replaceAll('_', ' ')}',
+          label: _semanticDescription,
           image: true,
           child: ClipRRect(
             borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
@@ -211,8 +244,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
 
     return _withHoldPreview(
       Semantics(
-        label:
-            'Ilustración visual de comunicación no verbal: ${widget.illustrationKey.replaceAll('_', ' ')}',
+        label: _semanticDescription,
         image: true,
         child: ClipRRect(
           borderRadius: widget.borderRadius ?? BorderRadius.circular(16),

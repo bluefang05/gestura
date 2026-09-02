@@ -48,7 +48,7 @@ class _IncongruenceDetectorScreenState
     });
 
     TtsService.speak(
-      '${isCorrect ? "¡Correcto!" : "¡Observa bien!"}. ${item.isCongruent ? "El mensaje es sincero." : "Existe una incongruencia entre las palabras y el cuerpo."} Emoción real: ${item.realEmotion}. ${item.explanation}',
+      '${isCorrect ? "¡Correcto!" : "¡Observa bien!"}. ${item.isCongruent ? "Las señales son compatibles entre sí en este ejemplo." : "Hay una diferencia entre los canales que merece contexto."} Posibles interpretaciones: ${item.possibleInterpretations}. ${item.explanation}',
     );
   }
 
@@ -567,7 +567,7 @@ class _IncongruenceDetectorScreenState
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
-                                      'Emoción o Intención Real: ${item.realEmotion}',
+                                      'Posibles interpretaciones: ${item.possibleInterpretations}',
                                       style: const TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold),

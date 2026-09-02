@@ -40,17 +40,47 @@ void main() {
     expect(GestureDatabase.items.isNotEmpty, isTrue);
     for (final cat in CategoryInfo.allCategories) {
       final items = GestureDatabase.getByCategory(cat.type);
-      expect(items.isNotEmpty, isTrue, reason: 'Category ${cat.title} should have signals');
+      expect(items.isNotEmpty, isTrue,
+          reason: 'Category ${cat.title} should have signals');
+    }
+  });
+
+  test('Content data uses unique identifiers and complete scenario choices',
+      () {
+    final gestureIds = GestureDatabase.items.map((item) => item.id).toList();
+    final quizIds = QuizDatabase.questions.map((item) => item.id).toList();
+    final scenarioIds =
+        ScenarioDatabase.scenarios.map((item) => item.id).toList();
+    final incongruenceIds =
+        IncongruenceDatabase.items.map((item) => item.id).toList();
+
+    expect(gestureIds.toSet().length, equals(gestureIds.length));
+    expect(quizIds.toSet().length, equals(quizIds.length));
+    expect(scenarioIds.toSet().length, equals(scenarioIds.length));
+    expect(incongruenceIds.toSet().length, equals(incongruenceIds.length));
+
+    for (final scenario in ScenarioDatabase.scenarios) {
+      for (final step in scenario.steps) {
+        expect(step.choices, isNotEmpty,
+            reason: '${scenario.id}/${step.id} needs choices');
+        expect(
+          step.choices.any((choice) => choice.isBestAction),
+          isTrue,
+          reason: '${scenario.id}/${step.id} needs a supportive best action',
+        );
+      }
     }
   });
 
   test('QuizDatabase contains image-card grid questions and valid answers', () {
     expect(QuizDatabase.questions.isNotEmpty, isTrue);
     final imageQuestions = QuizDatabase.getImageCardQuestions();
-    expect(imageQuestions.isNotEmpty, isTrue, reason: 'Must have questions with visual image cards');
+    expect(imageQuestions.isNotEmpty, isTrue,
+        reason: 'Must have questions with visual image cards');
 
     for (final q in QuizDatabase.questions) {
-      expect(q.options.any((o) => o.isCorrect), isTrue, reason: 'Question ${q.id} must have at least one correct answer');
+      expect(q.options.any((o) => o.isCorrect), isTrue,
+          reason: 'Question ${q.id} must have at least one correct answer');
       expect(q.explanation.isNotEmpty, isTrue);
       expect(q.keyVisualClue.isNotEmpty, isTrue);
     }
@@ -61,13 +91,16 @@ void main() {
     final salesScenario = ScenarioDatabase.getById('scenario_sales_closing');
     expect(salesScenario, isNotNull);
     expect(salesScenario!.steps.isNotEmpty, isTrue);
-    expect(salesScenario.steps.first.choices.any((c) => c.isBestAction), isTrue);
+    expect(
+        salesScenario.steps.first.choices.any((c) => c.isBestAction), isTrue);
 
-    final salaryScenario = ScenarioDatabase.getById('scenario_salary_negotiation');
+    final salaryScenario =
+        ScenarioDatabase.getById('scenario_salary_negotiation');
     expect(salaryScenario, isNotNull);
     expect(salaryScenario!.steps.length, equals(2));
 
-    final clientScenario = ScenarioDatabase.getById('scenario_skeptical_client');
+    final clientScenario =
+        ScenarioDatabase.getById('scenario_skeptical_client');
     expect(clientScenario, isNotNull);
     expect(clientScenario!.domain, equals('Ventas B2B'));
   });
@@ -94,14 +127,20 @@ void main() {
     }
   });
 
-  test('BuyerTemperature signals contain green, yellow, and red categories', () {
-    final greenSignals = BuyerTemperatureScreen.signals.where((s) => s.category == 'green').toList();
-    final redSignals = BuyerTemperatureScreen.signals.where((s) => s.category == 'red').toList();
+  test('BuyerTemperature signals contain green, yellow, and red categories',
+      () {
+    final greenSignals = BuyerTemperatureScreen.signals
+        .where((s) => s.category == 'green')
+        .toList();
+    final redSignals = BuyerTemperatureScreen.signals
+        .where((s) => s.category == 'red')
+        .toList();
     expect(greenSignals.isNotEmpty, isTrue);
     expect(redSignals.isNotEmpty, isTrue);
   });
 
-  test('StorageService persists bookmarks and user progress correctly', () async {
+  test('StorageService persists bookmarks and user progress correctly',
+      () async {
     expect(StorageService.isBookmarked('duchenne_smile'), isFalse);
     await StorageService.toggleBookmark('duchenne_smile');
     expect(StorageService.isBookmarked('duchenne_smile'), isTrue);
@@ -115,7 +154,9 @@ void main() {
     expect(reloaded.totalPoints, greaterThan(0));
   });
 
-  testWidgets('GesturaApp launches and renders main navigation bar and new tools', (WidgetTester tester) async {
+  testWidgets(
+      'GesturaApp launches and renders main navigation bar and new tools',
+      (WidgetTester tester) async {
     final settings = SettingsProvider();
     await settings.setLanguageCode('es');
     await tester.pumpWidget(const GesturaApp());
@@ -137,7 +178,9 @@ void main() {
     expect(find.textContaining('Guía de Bolsillo'), findsWidgets);
   });
 
-  testWidgets('SettingsProvider toggles theme, high contrast and motion dynamically', (WidgetTester tester) async {
+  testWidgets(
+      'SettingsProvider toggles theme, high contrast and motion dynamically',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const GesturaApp());
     await tester.pumpAndSettle();
 
@@ -186,7 +229,9 @@ void main() {
     expect(find.text('Start'), findsWidgets);
   });
 
-  testWidgets('Adaptive layout renders NavigationRail on wide screens and NavigationBar on mobile', (WidgetTester tester) async {
+  testWidgets(
+      'Adaptive layout renders NavigationRail on wide screens and NavigationBar on mobile',
+      (WidgetTester tester) async {
     // 1. Tablet / Wide screen test (800x600 dp)
     tester.view.physicalSize = const Size(800, 600);
     tester.view.devicePixelRatio = 1.0;

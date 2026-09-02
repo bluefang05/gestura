@@ -1,4 +1,4 @@
-﻿import '../models/incongruence_item.dart';
+import '../models/incongruence_item.dart';
 
 class IncongruenceDatabase {
   static const List<IncongruenceItem> items = [
@@ -6,7 +6,8 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_sales_price',
       speakerRole: 'Director de Compras en reunión comercial',
-      spokenPhrase: 'El precio me parece bastante razonable y está dentro de nuestro rango...',
+      spokenPhrase:
+          'El precio me parece bastante razonable y está dentro de nuestro rango...',
       illustrationKey: 'closed_posture',
       physicalSignals: [
         'Brazos fuertemente cruzados formando una barrera',
@@ -15,8 +16,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: false,
       realEmotion: 'Objeción silenciosa sobre el presupuesto o el valor',
-      explanation: 'Las palabras dicen que el precio es razonable, pero los brazos cruzados y labios apretados revelan resistencia inconsciente y contención de una queja.',
-      recommendedAction: 'No asumas que el precio está cerrado. Haz una pausa y pregunta: "Noto que estás evaluando el impacto, ¿cómo se compara esta inversión con el presupuesto asignado para esta área?"',
+      explanation:
+          'Las palabras dicen que el precio es razonable, pero los brazos cruzados y labios apretados revelan resistencia inconsciente y contención de una queja.',
+      recommendedAction:
+          'No asumas que el precio está cerrado. Haz una pausa y pregunta: "Noto que estás evaluando el impacto, ¿cómo se compara esta inversión con el presupuesto asignado para esta área?"',
       targetAudience: 'sales_focus',
     ),
 
@@ -24,7 +27,8 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_social_impatience',
       speakerRole: 'Compañero de trabajo durante una conversación',
-      spokenPhrase: 'No te preocupes, tómate todo el tiempo que necesites para explicarlo...',
+      spokenPhrase:
+          'No te preocupes, tómate todo el tiempo que necesites para explicarlo...',
       illustrationKey: 'finger_tapping',
       physicalSignals: [
         'Tamborileo rítmico e insistente de los dedos en la mesa',
@@ -33,8 +37,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: false,
       realEmotion: 'Impaciencia, sobrecarga o prisa por terminar',
-      explanation: 'El mensaje verbal da permiso cordial de continuar, pero el tamborileo y la orientación hacia la salida indican que su nivel de atención está agotado.',
-      recommendedAction: 'Resume tu idea principal en 1 frase y concluye: "En resumen, ese es el punto clave. Si quieres lo revisamos con calma más tarde cuando estés libre".',
+      explanation:
+          'El mensaje verbal da permiso cordial de continuar, pero el tamborileo y la orientación hacia la salida indican que su nivel de atención está agotado.',
+      recommendedAction:
+          'Resume tu idea principal en 1 frase y concluye: "En resumen, ese es el punto clave. Si quieres lo revisamos con calma más tarde cuando estés libre".',
       targetAudience: 'autism_focus',
     ),
 
@@ -51,8 +57,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: true,
       realEmotion: 'Aprobación genuina, entusiasmo y receptividad de compra',
-      explanation: 'Tanto las palabras como la inclinación corporal y la sonrisa de Duchenne concuerdan plenamente. Es una luz verde transparente.',
-      recommendedAction: 'Avanza inmediatamente a la propuesta de cierre: "¿Te gustaría que agendemos el inicio de la instalación para este lunes?"',
+      explanation:
+          'Tanto las palabras como la inclinación corporal y la sonrisa de Duchenne concuerdan plenamente. Es una luz verde transparente.',
+      recommendedAction:
+          'Avanza inmediatamente a la propuesta de cierre: "¿Te gustaría que agendemos el inicio de la instalación para este lunes?"',
       targetAudience: 'sales_focus',
     ),
 
@@ -60,7 +68,8 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_social_contempt',
       speakerRole: 'Conocido en un grupo social tras tu comentario',
-      spokenPhrase: '¡Vaya, qué brillante tu opinión! Nunca se me hubiera ocurrido...',
+      spokenPhrase:
+          '¡Vaya, qué brillante tu opinión! Nunca se me hubiera ocurrido...',
       illustrationKey: 'smirk_contempt',
       physicalSignals: [
         'Elevación unilateral de una sola comisura de los labios (sonrisa torcida)',
@@ -69,8 +78,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: false,
       realEmotion: 'Sarcasmo, desdén o sensación de superioridad',
-      explanation: 'La sonrisa asimétrica unilateral es la microexpresión universal de desdén. Las palabras de elogio son irónicas y dicen lo contrario del mensaje real.',
-      recommendedAction: 'No reacciones con enfado ni busques su aprobación. Responde de forma neutra y tranquila: "Es una perspectiva más. Sigamos con el tema central".',
+      explanation:
+          'La sonrisa asimétrica unilateral es la microexpresión universal de desdén. Las palabras de elogio son irónicas y dicen lo contrario del mensaje real.',
+      recommendedAction:
+          'No reacciones con enfado ni busques su aprobación. Responde de forma neutra y tranquila: "Es una perspectiva más. Sigamos con el tema central".',
       targetAudience: 'autism_focus',
     ),
 
@@ -78,7 +89,8 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_sales_supplier_doubt',
       speakerRole: 'Gerente General que evalúa alternativas',
-      spokenPhrase: 'Ya tenemos un proveedor actual y la verdad estamos perfectamente con ellos.',
+      spokenPhrase:
+          'Ya tenemos un proveedor actual y la verdad estamos perfectamente con ellos.',
       illustrationKey: 'touching_neck',
       physicalSignals: [
         'Mano tocando y frotando la parte posterior del cuello',
@@ -86,9 +98,12 @@ class IncongruenceDatabase {
         'Hombros asimétricos con tensión visible',
       ],
       isCongruent: false,
-      realEmotion: 'Incomodidad, estrés o frustración no confesada con su proveedor',
-      explanation: 'Tocarse el cuello es un gesto apaciguador que denota estrés e inseguridad. Aunque dice que todo está bien, su cuerpo revela que hay un punto de dolor no resuelto.',
-      recommendedAction: 'Abre la brecha con una pregunta no amenazante: "Entiendo perfectamente. Si hubiera una sola cosa que tu proveedor actual pudiera mejorar en los tiempos de entrega, ¿cuál sería?"',
+      realEmotion:
+          'Incomodidad, estrés o frustración no confesada con su proveedor',
+      explanation:
+          'Tocarse el cuello es un gesto apaciguador que denota estrés e inseguridad. Aunque dice que todo está bien, su cuerpo revela que hay un punto de dolor no resuelto.',
+      recommendedAction:
+          'Abre la brecha con una pregunta no amenazante: "Entiendo perfectamente. Si hubiera una sola cosa que tu proveedor actual pudiera mejorar en los tiempos de entrega, ¿cuál sería?"',
       targetAudience: 'sales_focus',
     ),
 
@@ -105,8 +120,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: true,
       realEmotion: 'Alegría sincera, afecto y bienvenida auténtica',
-      explanation: 'El flash de cejas dura un tercio de segundo y es una señal biológica involuntaria de reconocimiento positivo y afecto genuino.',
-      recommendedAction: 'Sonríe con calidez y responde con entusiasmo: "¡Muchas gracias por invitarme! Tenía muchas ganas de verte".',
+      explanation:
+          'El flash de cejas dura un tercio de segundo y es una señal biológica involuntaria de reconocimiento positivo y afecto genuino.',
+      recommendedAction:
+          'Sonríe con calidez y responde con entusiasmo: "¡Muchas gracias por invitarme! Tenía muchas ganas de verte".',
       targetAudience: 'autism_focus',
     ),
 
@@ -123,8 +140,10 @@ class IncongruenceDatabase {
       ],
       isCongruent: true,
       realEmotion: 'Máxima seguridad, confianza y autoridad en la decisión',
-      explanation: 'Las manos en campanario u ojiva son el reflejo físico de convicción y dominio técnico. El interlocutor tiene el poder y sabe lo que quiere.',
-      recommendedAction: 'Mantén una postura asertiva y formal, sin titubear ni sobreexplicar: "Quedo a su disposición para coordinar los contratos hoy mismo".',
+      explanation:
+          'Las manos en campanario u ojiva son el reflejo físico de convicción y dominio técnico. El interlocutor tiene el poder y sabe lo que quiere.',
+      recommendedAction:
+          'Mantén una postura asertiva y formal, sin titubear ni sobreexplicar: "Quedo a su disposición para coordinar los contratos hoy mismo".',
       targetAudience: 'sales_focus',
     ),
 
@@ -132,7 +151,8 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_social_hidden_sadness',
       speakerRole: 'Familiar o amigo cercano',
-      spokenPhrase: 'No te preocupes por mí, estoy totalmente bien, todo en orden...',
+      spokenPhrase:
+          'No te preocupes por mí, estoy totalmente bien, todo en orden...',
       illustrationKey: 'turned_down_lips',
       physicalSignals: [
         'Comisuras labiales ligeramente caídas',
@@ -141,14 +161,56 @@ class IncongruenceDatabase {
       ],
       isCongruent: false,
       realEmotion: 'Tristeza, desánimo o necesidad de apoyo emocional',
-      explanation: 'Las palabras intentan no ser una carga, pero la caída de comisuras y la voz apagada indican vulnerabilidad y dolor emocional.',
-      recommendedAction: 'No tomes el "estoy bien" de forma literal. Acércate con calidez y di: "Noto que algo te preocupa. Aquí estoy si te apetece charlar o simplemente estar acompañados".',
+      explanation:
+          'Las palabras intentan no ser una carga, pero la caída de comisuras y la voz apagada indican vulnerabilidad y dolor emocional.',
+      recommendedAction:
+          'No tomes el "estoy bien" de forma literal. Acércate con calidez y di: "Noto que algo te preocupa. Aquí estoy si te apetece charlar o simplemente estar acompañados".',
+      targetAudience: 'autism_focus',
+    ),
+    IncongruenceItem(
+      id: 'inc_forced_cooperation_regulation',
+      speakerRole: 'Compañero durante una reunión larga',
+      spokenPhrase: 'Sí, claro, sigamos. Estoy bien.',
+      illustrationKey: 'social_fatigue',
+      physicalSignals: [
+        'Manipula repetidamente un objeto pequeño entre las manos',
+        'Sonrisa social breve con poca energía',
+        'Cuerpo orientado hacia la salida',
+      ],
+      isCongruent: false,
+      realEmotion: 'Posible fatiga social, sobrecarga o necesidad de una pausa',
+      explanation:
+          'Los movimientos repetitivos pueden ser una forma de autorregulación; no prueban ansiedad ni deshonestidad por sí solos. Al combinarse con cansancio visible y orientación de salida, invitan a comprobar si una pausa ayudaría.',
+      recommendedAction:
+          'Ofrece una opción concreta y sin presión: “Podemos cerrar aquí, tomar cinco minutos o enviarte el resumen para que lo revises después. ¿Qué te viene mejor?”.',
+      targetAudience: 'autism_focus',
+    ),
+    IncongruenceItem(
+      id: 'inc_social_fatigue_participation',
+      speakerRole: 'Amistad en una reunión social',
+      spokenPhrase: 'La estoy pasando bien, podemos quedarnos un poco más.',
+      illustrationKey: 'social_fatigue',
+      physicalSignals: [
+        'Manos entrelazadas con tensión',
+        'Miradas frecuentes hacia la puerta',
+        'Postura lista para salir mientras mantiene una sonrisa educada',
+      ],
+      isCongruent: false,
+      realEmotion:
+          'Posible cansancio, necesidad de espacio o deseo de terminar la interacción',
+      explanation:
+          'La sonrisa y las palabras de cortesía pueden coexistir con cansancio social. No se debe diagnosticar ni forzar una explicación; es útil abrir una salida respetuosa.',
+      recommendedAction:
+          'Di: “Gracias por venir. Si quieres irnos o tomar aire, me parece perfecto; no tienes que quedarte por mí”.',
       targetAudience: 'autism_focus',
     ),
   ];
 
   static List<IncongruenceItem> getByAudience(String audience) {
     if (audience == 'all') return items;
-    return items.where((i) => i.targetAudience == audience || i.targetAudience == 'general').toList();
+    return items
+        .where((i) =>
+            i.targetAudience == audience || i.targetAudience == 'general')
+        .toList();
   }
 }

@@ -10,6 +10,10 @@ class IncongruenceItem {
   final String recommendedAction;
   final String targetAudience; // 'general', 'autism_focus', 'sales_focus'
 
+  /// Nombre compatible para contenido que se presenta como una hipótesis,
+  /// nunca como acceso directo al estado interno de otra persona.
+  String get possibleInterpretations => realEmotion;
+
   const IncongruenceItem({
     required this.id,
     required this.spokenPhrase,
