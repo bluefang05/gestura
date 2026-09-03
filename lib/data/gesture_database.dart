@@ -1247,6 +1247,82 @@ class GestureDatabase {
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
+    GestureItem(
+      id: 'prosodia_variable',
+      name: 'Variación de Tono y Entonación',
+      category: CategoryType.factoresParalinguisticos,
+      bodyPart: 'Voz',
+      summary:
+          'La voz sube y baja de forma natural para marcar énfasis, preguntas o partes importantes de una idea.',
+      physiologicalDetails:
+          'Cambios de altura, duración y acento en una misma frase sin que necesariamente cambie el volumen.',
+      probableMeaning:
+          'Puede ayudar a organizar el mensaje, expresar estilo personal o facilitar la comprensión. No permite deducir una emoción específica.',
+      alternativeMeanings: [
+        'Costumbre regional o familiar',
+        'Adaptación a una audiencia',
+        'Preferencia comunicativa personal'
+      ],
+      contextGuidance:
+          'Observa qué palabras se enfatizan y pregunta si el significado importa; la entonación se interpreta distinto entre comunidades.',
+      whatToDo:
+          'Si no entiendes el tono, pide una aclaración concreta: “¿Quieres decirlo como una pregunta, una propuesta o una broma?”.',
+      salesTip:
+          'Usa una entonación clara sin teatralizar. Confirma por escrito los puntos importantes en vez de confiar solo en el tono.',
+      illustrationKey: 'voice_prosody',
+      difficulty: 2,
+    ),
+    GestureItem(
+      id: 'voz_temorosa',
+      name: 'Voz Temblorosa o Inestable',
+      category: CategoryType.factoresParalinguisticos,
+      bodyPart: 'Voz',
+      summary:
+          'La voz presenta pequeñas variaciones involuntarias de estabilidad, volumen o respiración.',
+      physiologicalDetails:
+          'Oscilaciones en el flujo de aire y la vibración de las cuerdas vocales durante el habla.',
+      probableMeaning:
+          'Puede aparecer por emoción, cansancio, frío, esfuerzo vocal, una condición física o variación individual. No identifica por sí sola una causa.',
+      alternativeMeanings: [
+        'Recuperación de voz',
+        'Ambiente frío',
+        'Forma habitual de hablar'
+      ],
+      contextGuidance:
+          'Evita completar la historia de la otra persona. Ofrece tiempo, agua o un formato alternativo solo si le resulta útil.',
+      whatToDo:
+          'Responde al contenido, no a una supuesta emoción: “Podemos ir más despacio o continuar por escrito si te sirve”.',
+      salesTip:
+          'No la conviertas en una táctica de negociación. Mantén un ritmo cómodo y confirma las decisiones explícitamente.',
+      illustrationKey: 'voice_tremor',
+      difficulty: 2,
+      signalType: SignalTrafficLight.yellow,
+    ),
+    GestureItem(
+      id: 'turnos_conversacion',
+      name: 'Turnos, Solapamientos e Interrupciones',
+      category: CategoryType.factoresParalinguisticos,
+      bodyPart: 'Conversación',
+      summary:
+          'Dos o más voces comienzan a hablar a la vez, o una persona entra antes de que otra termine.',
+      physiologicalDetails:
+          'Solapamiento temporal de turnos, cambios rápidos de ritmo y señales corporales para pedir o ceder la palabra.',
+      probableMeaning:
+          'Puede expresar entusiasmo, estilos culturales distintos, una idea urgente, dificultad para calcular turnos o necesidad de aclarar. No equivale automáticamente a falta de respeto.',
+      alternativeMeanings: [
+        'Conversación animada entre personas cercanas',
+        'Entorno con retraso de audio',
+        'Necesidad de participar antes de olvidar una idea'
+      ],
+      contextGuidance:
+          'Si el solapamiento dificulta entenderse, acuerden una estructura sencilla en vez de atribuir intención a quien habló primero.',
+      whatToDo:
+          'Puedes decir: “Quiero escuchar ambas ideas. ¿Terminamos una y luego vamos con la otra?”.',
+      salesTip:
+          'En reuniones, registra los puntos y ofrece turnos claros. La decisión debe basarse en lo expresado, no en quién ocupa más tiempo de voz.',
+      illustrationKey: 'turn_taking',
+      difficulty: 2,
+    ),
 
     // --- ENTORNO, ESPACIO Y APARIENCIA ---
     GestureItem(

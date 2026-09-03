@@ -151,6 +151,9 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'silencio_incomodo': 'paralinguistics',
       'silence_reflective': 'paralinguistics',
       'silencio_reflexivo': 'paralinguistics',
+      'voice_prosody': 'paralinguistics',
+      'voice_tremor': 'paralinguistics',
+      'turn_taking': 'paralinguistics',
 
       // Proxémica
       'proxemics_intima': 'proxemics',
