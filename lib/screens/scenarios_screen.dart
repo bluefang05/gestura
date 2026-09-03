@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/scenario.dart';
 import '../data/scenario_database.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
@@ -16,6 +17,7 @@ class ScenariosScreen extends StatefulWidget {
 
 class _ScenariosScreenState extends State<ScenariosScreen> {
   List<String> _completedIds = [];
+  String _selectedCategory = 'all';
 
   @override
   void initState() {
@@ -29,9 +31,28 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
     });
   }
 
+  List<Scenario> get _filteredScenarios {
+    if (_selectedCategory == 'work_sales') {
+      return ScenarioDatabase.scenarios.where((s) =>
+          s.domain == 'Ámbito Laboral' || s.domain == 'Ventas & Negociación'
+      ).toList();
+    } else if (_selectedCategory == 'daily_social') {
+      return ScenarioDatabase.scenarios.where((s) =>
+          s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales'
+      ).toList();
+    }
+    return ScenarioDatabase.scenarios;
+  }
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final allScenarios = ScenarioDatabase.scenarios;
+    final workCount = allScenarios.where((s) =>
+        s.domain == 'Ámbito Laboral' || s.domain == 'Ventas & Negociación').length;
+    final socialCount = allScenarios.where((s) =>
+        s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales').length;
+    final filtered = _filteredScenarios;
 
     return Scaffold(
       appBar: AppBar(
@@ -76,6 +97,71 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 14),
+
+                  // Filtros temáticos
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ChoiceChip(
+                          label: Text('Todos (${allScenarios.length})'),
+                          selected: _selectedCategory == 'all',
+                          selectedColor: AppColors.primary,
+                          labelStyle: TextStyle(
+                            color: _selectedCategory == 'all'
+                                ? Colors.white
+                                : (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onSelected: (_) {
+                            FeedbackService.lightClick();
+                            setState(() => _selectedCategory = 'all');
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        ChoiceChip(
+                          avatar: const Icon(Icons.business_center_rounded, size: 18),
+                          label: Text('Laboral y Ventas ($workCount)'),
+                          selected: _selectedCategory == 'work_sales',
+                          selectedColor: AppColors.primary,
+                          labelStyle: TextStyle(
+                            color: _selectedCategory == 'work_sales'
+                                ? Colors.white
+                                : (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onSelected: (_) {
+                            FeedbackService.lightClick();
+                            setState(() => _selectedCategory = 'work_sales');
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        ChoiceChip(
+                          avatar: const Icon(Icons.people_alt_rounded, size: 18),
+                          label: Text('Vida Diaria y Social ($socialCount)'),
+                          selected: _selectedCategory == 'daily_social',
+                          selectedColor: AppColors.primary,
+                          labelStyle: TextStyle(
+                            color: _selectedCategory == 'daily_social'
+                                ? Colors.white
+                                : (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onSelected: (_) {
+                            FeedbackService.lightClick();
+                            setState(() => _selectedCategory = 'daily_social');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 16),
 
                   if (isTablet)
@@ -88,9 +174,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                         crossAxisSpacing: 14,
                         childAspectRatio: 1.65,
                       ),
-                      itemCount: ScenarioDatabase.scenarios.length,
+                      itemCount: filtered.length,
                       itemBuilder: (context, index) {
-                        final scenario = ScenarioDatabase.scenarios[index];
+                        final scenario = filtered[index];
                         return AppCard(
                           padding: const EdgeInsets.all(16),
                           onTap: () {
@@ -184,7 +270,7 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                     )
                   else
                     // Mobile Stack
-                    for (final scenario in ScenarioDatabase.scenarios) ...[
+                    for (final scenario in filtered) ...[
                       Padding(
                         padding: const EdgeInsets.only(bottom: 14.0),
                         child: AppCard(

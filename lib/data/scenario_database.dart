@@ -704,6 +704,358 @@ class ScenarioDatabase {
         ),
       ],
     ),
+
+    // --- ESCENARIO 10: ESTRATEGIA DE SALIDA ---
+    Scenario(
+      id: 'scenario_exit_strategy',
+      title: 'Cómo Terminar una Conversación sin Ser Brusco',
+      domain: 'Vida Diaria',
+      description:
+          'Aprende a reconocer cuándo la otra persona necesita marcharse y cómo cerrar la charla con elegancia y cordialidad.',
+      contextOverview:
+          'Estás conversando con un conocido en el pasillo del trabajo sobre tus pasatiempos favoritos.',
+      iconName: 'exit_to_app',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Llevan 5 minutos hablando. Mientras explicas con detalle un proyecto personal, notas que tu interlocutor orienta uno de sus pies hacia la salida, da un par de asentimientos rápidos con la cabeza y echa una mirada veloz a su reloj de pulsera.',
+          characterAction:
+              'Pies orientados hacia la salida, asentimiento acelerado y vistazo discreto al reloj.',
+          illustrationKey: 'foot_orientation',
+          visibleSignals: [
+            'Orientación podal de fuga (el cuerpo se prepara para caminar)',
+            'Asentimiento acelerado (deseo de avanzar el ritmo)',
+            'Vistazo fugaz al reloj o smartphone (conciencia del tiempo)'
+          ],
+          learningTakeaway:
+              'Cuando los pies de una persona apuntan hacia la puerta aunque su torso aún te mire, su mente ya se está marchando. No significa que le caigas mal: simplemente tiene una tarea pendiente. Cerrar tú la conversación primero transmite alta madurez social.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Agradecer el momento y cerrar con calidez: "Bueno, no te quito más tiempo para que sigas con tus pendientes. ¡Me encantó platicar, que tengas buen día!"',
+              analysis:
+                  'Respuesta ideal: Decodificaste la señal a tiempo, evitaste que la otra persona se sienta atrapada y dejaste la interacción con una sensación positiva y respetuosa.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'La persona sonríe aliviada, te agradece la charla con entusiasmo genuino y se marcha sin fricción. ¡Vínculo reforzado!',
+            ),
+            ScenarioChoice(
+              text:
+                  'Ignorar los pies y el reloj y continuar explicando los siguientes 10 minutos de tu anécdota.',
+              analysis:
+                  'Error de lectura de salida: Forzar la conversación cuando hay señales claras de partida genera incomodidad y hace que la persona intente evitarte en futuros encuentros.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu compañero empieza a tamborilear los dedos, se muestra tenso y finalmente te tiene que cortar de golpe: "Disculpa, tengo una llamada urgente, me tengo que ir ya".',
+            ),
+            ScenarioChoice(
+              text:
+                  'Detenerte de golpe en seco, ofenderte y marcharte sin despedirte.',
+              analysis:
+                  'Reacción desproporcionada: Interpretar la prisa ajena como rechazo personal deteriora el ambiente de confianza.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Queda un silencio extraño y la otra persona no comprende por qué cambió tu humor tan abruptamente.',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 11: INTERRUMPIR A UN COMPAÑERO OCUPADO ---
+    Scenario(
+      id: 'scenario_interrupt_busy_colleague',
+      title: 'Pedir Ayuda a un Compañero Ocupado en la Oficina',
+      domain: 'Ámbito Laboral',
+      description:
+          'Domina la proxémica y los tiempos para consultar dudas sin generar sobresaltos ni molestar a colegas en foco profundo.',
+      contextOverview:
+          'Necesitas con urgencia una clave de acceso que solo tiene tu compañero de mesa para terminar una entrega hoy.',
+      iconName: 'headset',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Te acercas a la mesa de tu compañero. Tiene auriculares grandes puestos, su cuerpo está inclinado hacia el monitor y sus manos teclean rápidamente sin parar.',
+          characterAction:
+              'Auriculares colocados, torso encorvado hacia la pantalla y tecleo rítmico continuo.',
+          illustrationKey: 'desk_barrier',
+          visibleSignals: [
+            'Auriculares (barrera acústica voluntaria contra interrupciones)',
+            'Inclinación focalizada (modo concentración o foco profundo)',
+            'Ritmo de tecleo ininterrumpido (flujo mental activo)'
+          ],
+          learningTakeaway:
+              'Los auriculares en una oficina moderna son un semáforo rojo no verbal. Una interrupción física brusca (tocar el hombro o hablar fuerte por detrás) activa un sobresalto defensivo que bloquea la colaboración.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Colocarte en su campo de visión lateral a distancia prudencial (1.5 m) y hacer un leve gesto con la mano, o enviarle un chat: "¿Tienes 1 min para una clave urgente o te consulto en un rato?"',
+              analysis:
+                  'Excelente calibración: Respetas su espacio auditivo y le permites a su cerebro guardar su progreso mental antes de responder.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu compañero termina de teclear su línea, levanta la vista con calma, se retira un auricular y sonríe con disposición.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Llegar por detrás silenciosamente y tocarle el hombro con firmeza para llamar su atención.',
+              analysis:
+                  'Invasión física por sorpresa: Tocar a alguien concentrado activa un reflejo de sobresalto y descarga de adrenalina.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu compañero salta del asiento asustado, se le cae el bolígrafo y te mira visiblemente molesto.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Pararte inmóvil a 40 cm de él esperando en silencio a que se dé cuenta por sí mismo.',
+              analysis:
+                  'Proxémica invasiva: La presencia inmóvil tan cerca en la visión periférica genera sensación de vigilancia y acoso.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Al voltear y verte tan pegado se incomoda: "¿Cuánto tiempo llevas ahí parado mirando mi pantalla?".',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Tu compañero se retira un auricular, gira la silla hacia ti y te dice: "Dime, ¿qué pasó?". Notas que mantiene la mano sobre el teclado como queriendo retomar pronto su trabajo.',
+          characterAction:
+              'Auricular retirado, mano descansando en el teclado, mirada directa y atenta.',
+          illustrationKey: 'open_posture',
+          visibleSignals: [
+            'Canal auditivo abierto (disponibilidad concedida)',
+            'Mano en reposo sobre el teclado (ventana de tiempo breve)'
+          ],
+          learningTakeaway:
+              'Cuando alguien hace una pausa en su trabajo para atenderte, ve directo al grano en menos de 20 segundos sin rodeos innecesarios.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Ir al punto con precisión quirúrgica: "Solo necesito la contraseña del servidor de desarrollo para subir la entrega de hoy, ¿me la pasas por Slack?".',
+              analysis:
+                  'Precisión ejecutiva: Resuelves la necesidad en 10 segundos, no desgastas su energía mental y facilitas que vuelva a su ritmo.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu compañero te la envía al instante por chat y dice: "¡Listo, cualquier cosa me avisas!". Misión cumplida con alta eficiencia.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Aprovechar que te miró para quejarte del jefe, del clima y contarle lo difícil que fue tu fin de semana antes de pedir la clave.',
+              analysis:
+                  'Falta de empatía con el tiempo ajeno: Dilatar una pausa laboral con charla trivial cuando el otro está en entregas genera resentimiento.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu compañero suspira pesadamente, mira la pantalla con ansiedad y te corta: "¿Pero qué era lo urgente?".',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 12: INTEGRARSE A UN GRUPO SOCIAL ---
+    Scenario(
+      id: 'scenario_group_conversation_entry',
+      title: 'Cómo Unirse a un Grupo que ya está Hablando (Círculo Abierto)',
+      domain: 'Vida Diaria',
+      description:
+          'Descubre cómo entrar con naturalidad a círculos de conversación en eventos, pausas de café o reuniones sociales.',
+      contextOverview:
+          'Llegas a una reunión de networking o descanso de trabajo y ves a tres colegas conversando de pie.',
+      iconName: 'groups',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Miras al grupo de tres personas. Dos de ellos están frente a frente, pero sus cuerpos forman un ángulo hacia afuera en forma de "herradura" o "U", dejando un espacio abierto hacia el pasillo.',
+          characterAction:
+              'Formación corporal en herradura (ángulo abierto hacia el exterior).',
+          illustrationKey: 'proxemics_social',
+          visibleSignals: [
+            'Disposición en forma de U (Círculo abierto)',
+            'Pies apuntando parcialmente hacia afuera',
+            'Miradas periódicas hacia el salón (Receptividad social)'
+          ],
+          learningTakeaway:
+              'Un grupo cuyos cuerpos forman una "U" abierta invita subconscientemente a que otros se acerquen. Por el contrario, un grupo cerrado en "O" (hombro con hombro, completamente enfrentados) está en una conversación íntima o confidencial donde no se debe entrar.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Aproximarte con paso tranquilo al espacio abierto de la "U", colocarte a distancia social (1.5 m) y hacer un leve contacto visual con una sonrisa tranquila.',
+              analysis:
+                  'Entrada impecable: Te colocas en el espacio visible de invitación sin invadir bruscamente el círculo íntimo.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Una de las personas te mira, sonríe amablemente y da un paso atrás para ampliar el espacio de la U hacia ti.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Caminar a toda prisa, meterte en medio de dos personas y cortar al que habla para contar un chiste propio.',
+              analysis:
+                  'Ruptura violenta del espacio personal y del turno conversacional.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Todos guardan silencio con rostros desconcertados y la atmósfera se enfría de golpe.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Quedarte a 5 metros de espaldas con los brazos cruzados pensando que nadie quiere hablar contigo.',
+              analysis:
+                  'Lectura errónea de rechazo: El grupo tenía el círculo abierto esperando interacción.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Permaneces aislado toda la pausa sin conectar con nadie.',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Una de las integrantes del grupo hace un breve flash de cejas al verte llegar y te dice: "¡Hola! Estábamos comentando justo la nueva política de trabajo remoto".',
+          characterAction:
+              'Flash de cejas (elevación rápida) y orientación del pecho hacia ti.',
+          illustrationKey: 'eyebrow_flash',
+          visibleSignals: [
+            'Flash de cejas (Reconocimiento social y bienvenida instantánea)',
+            'Resumen contextual del tema (Facilitación de inclusión)'
+          ],
+          learningTakeaway:
+              'Cuando te integran a un grupo, escucha primero un par de intervenciones para sintonizar el tono emocional (¿están quejándose, celebrando o bromeando?) antes de emitir un juicio definitivo.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Saludar, agradecer la bienvenida y escuchar la siguiente intervención para captar la opinión general antes de aportar tu punto.',
+              analysis:
+                  'Sintonía empática: Permite acoplarte al ritmo del grupo y responder con aportes que sumen valor.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'La conversación fluye con risas compartidas y quedas completamente integrado en el grupo con alta simpatía.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Interrumpir y decir enérgicamente: "¡El trabajo remoto no sirve para nada y están todos equivocados!".',
+              analysis:
+                  'Polarización agresiva: Genera un choque frontal inmediato y rompe la armonía del grupo recién formado.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Los miembros se miran entre sí con incomodidad y el grupo se disuelve en menos de 2 minutos.',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 13: EL CLIENTE QUE DICE "DÉJAMELO PENSAR" ---
+    Scenario(
+      id: 'scenario_delay_objection_sales',
+      title: 'El Cliente que Dice: "Déjamelo pensar, yo te aviso"',
+      domain: 'Ventas & Negociación',
+      description:
+          'Aprende a decodificar la objeción de aplazamiento más común y cómo desarmarla con empatía consultiva sin presionar.',
+      contextOverview:
+          'Llegas al final de una reunión con un cliente potencial tras presentarle una solución para su negocio.',
+      iconName: 'psychology',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Terminas tu presentación. El cliente se reclina lentamente hacia atrás en el respaldo, baja la mirada hacia su libreta, junta las manos sobre la mesa y te dice con tono educado pero plano: "Muchas gracias, está muy interesante. Déjamelo pensar y yo te aviso la próxima semana".',
+          characterAction:
+              'Reclinación hacia atrás, mirada hacia la mesa y frase de aplazamiento cortés.',
+          illustrationKey: 'leaning_back',
+          visibleSignals: [
+            'Reclinación del torso hacia atrás (Distanciamiento físico de la decisión)',
+            'Evitación de contacto visual directo durante la frase de aplazamiento',
+            'Tono plano y protocolar (Cierre cortés para evitar confrontación)'
+          ],
+          learningTakeaway:
+              '"Déjamelo pensar" casi nunca significa que van a reflexionar sobre la propuesta; suele ser una salida elegante para terminar la reunión sin decir "no". Presionar agresivamente arruina la venta, pero marcharse sin explorar la duda oculta garantiza que no vuelvan a contestarte.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Desarmar la presión con empatía y formular una pregunta consultiva: "Por supuesto, es una decisión importante. Con total sinceridad, cuando alguien me pide pensarlo suele ser o por el presupuesto o porque falta resolver algún detalle operativo. ¿En cuál de los dos casos estamos?"',
+              analysis:
+                  'Técnica de aislamiento de objeciones consultiva: Quitas la presión de compra inmediata y das permiso seguro para que confiese su verdadero obstáculo.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'El cliente suspira aliviado por tu franqueza, relaja la postura y se abre a compartir el obstáculo real.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Presionar agresivamente: "¡Pero si lo firmas hoy te hago un 10% de descuento adicional, no hay nada que pensar!".',
+              analysis:
+                  'Empuje desesperado: Confirma la sospecha del cliente de que solo buscas tu comisión y aumenta sus defensas corporales.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'El cliente cruza los brazos firmemente y dice con frialdad: "Dije que lo voy a pensar. Buen día".',
+            ),
+            ScenarioChoice(
+              text:
+                  'Aceptar la frase literalmente: "¡Perfecto, te llamo el lunes sin falta para saber qué decidieron!" y marcharte.',
+              analysis:
+                  'Error de literalidad: Asumir que la frase era una promesa real. El 90% de estos clientes no atienden el teléfono el lunes.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'El lunes llamas tres veces y no te contestan ni responden tus correos.',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Al darle permiso de ser honesto, el cliente apoya los codos en la mesa, baja la guardia y confiesa: "Siendo sincero, el producto nos encanta, pero nuestro equipo técnico está saturado con otra migración y tememos que implementar esto ahora nos colapse el mes".',
+          characterAction:
+              'Codos en la mesa, hombros relajados y tono de voz confidencial.',
+          illustrationKey: 'open_posture',
+          visibleSignals: [
+            'Acercamiento corporal hacia la mesa (Reconexión de interés)',
+            'Revelación de la objeción raíz (Problema de tiempos/capacidad, no de precio)'
+          ],
+          learningTakeaway:
+              'Una vez descubierta la verdadera objeción (tiempos del equipo, no desinterés), tu labor no es vender más, sino resolver el miedo específico que bloqueaba el avance.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Presentar una solución a su miedo específico: "Te entiendo al 100%. Justo por eso nuestro propio equipo técnico hace la configuración inicial en fines de semana sin tocar a tu personal. Si nos encargamos de esa carga, ¿tendría sentido avanzar?"',
+              analysis:
+                  'Resolución de fricción de alto nivel: Atacas el dolor real del cliente con una alternativa que le da tranquilidad absoluta.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El cliente se ilumina: "¡Si ustedes se encargan de eso, cerremos de una vez!". ¡Acuerdo firmado y relación sólida ganada!',
+            ),
+            ScenarioChoice(
+              text:
+                  'Insistir en bajar el precio a la mitad.',
+              analysis:
+                  'Desconexión total: La objeción era de tiempo y saturación operativa, no de dinero.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El cliente ve que no escuchaste su preocupación y ratifica que no contratará.',
+            ),
+          ],
+        ),
+      ],
+    ),
   ];
 
   static Scenario? getById(String id) {

@@ -204,6 +204,89 @@ class IncongruenceDatabase {
           'Di: “Gracias por venir. Si quieres irnos o tomar aire, me parece perfecto; no tienes que quedarte por mí”.',
       targetAudience: 'autism_focus',
     ),
+
+    // --- CASO 11 (Social/Pareja/Familia): Supresión Emocional ("Estoy bien") ---
+    IncongruenceItem(
+      id: 'inc_social_im_fine',
+      speakerRole: 'Amigo, pareja o compañero tras un momento tenso',
+      spokenPhrase: 'No me pasa absolutamente nada. Estoy bien.',
+      illustrationKey: 'jaw_clenching',
+      physicalSignals: [
+        'Mandíbula fuertemente apretada con músculos maseteros marcados',
+        'Suspiro hondo y prolongado con la mirada clavada en el suelo',
+        'Hombros rígidos y elevados hacia las orejas',
+      ],
+      isCongruent: false,
+      realEmotion: 'Molestia, contención emocional o sobrecarga de frustración',
+      explanation:
+          'La frase afirma bienestar absoluto, pero la mandíbula apretada, el suspiro pesado y la rigidez de hombros revelan tensión activa y contención de emociones difíciles.',
+      recommendedAction:
+          'No insistas diciendo "sé que estás enojado" ni interrogues. Di con tono suave y calmado: "Entiendo. Si en algún momento quieres que lo hablemos con calma o si prefieres espacio y silencio, aquí estoy".',
+      targetAudience: 'autism_focus',
+    ),
+
+    // --- CASO 12 (Social/Tecnología): Atención Secuestrada por el Teléfono ---
+    IncongruenceItem(
+      id: 'inc_social_phone_distraction',
+      speakerRole: 'Colega o conocido mientras le cuentas una historia',
+      spokenPhrase: 'Sí, sí, continúa, te estoy escuchando con toda atención...',
+      illustrationKey: 'narrowed_eyes',
+      physicalSignals: [
+        'Ojos fijos en la pantalla iluminada del smartphone',
+        'Pulgares tecleando activamente a gran velocidad',
+        'Asentimiento mecánico de cabeza sin modular la mirada',
+      ],
+      isCongruent: false,
+      realEmotion: 'Atención secuestrada por el dispositivo digital',
+      explanation:
+          'El cerebro humano no puede redactar mensajes complejos y a la vez procesar una narración profunda. Las palabras prometen atención plena, pero el canal visual y motor están absorbidos por la pantalla.',
+      recommendedAction:
+          'Haz una pausa natural en tu relato con una sonrisa y di amablemente: "Parece que te entró un mensaje urgente; respóndelo tranquilo y en cuanto termines te sigo contando". Evitas frustrarte y le permites desocuparse.',
+      targetAudience: 'autism_focus',
+    ),
+
+    // --- CASO 13 (Ventas): El Escudo Presupuestario con Interés Real ---
+    IncongruenceItem(
+      id: 'inc_sales_budget_shield',
+      speakerRole: 'Gerente de Operaciones durante una propuesta comercial',
+      spokenPhrase:
+          'La verdad es que no tenemos nada de presupuesto para este trimestre.',
+      illustrationKey: 'leaning_forward',
+      physicalSignals: [
+        'Torso inclinado hacia adelante con las palmas abiertas sobre la mesa',
+        'Toma notas activas en su libreta sobre las características de tu servicio',
+        'Preguntas continuas sobre plazos de entrega, soporte y garantías',
+      ],
+      isCongruent: false,
+      realEmotion:
+          'Alto interés y deseo de compra oculto tras un escudo presupuestario',
+      explanation:
+          'Las palabras verbales levantan la típica barrera defensiva del presupuesto, pero el cuerpo inclinado, las notas manuscritas y el interés por los detalles operativos revelan que la solución le resulta sumamente atractiva.',
+      recommendedAction:
+          'No te desanimes ni bajes el precio en pánico. Valida su interés: "Entiendo que el flujo de caja trimestral sea estricto. Veo que las funciones operativas te encajan muy bien; ¿si estructuramos los pagos en fases o para el siguiente mes, tendría sentido avanzar?".',
+      targetAudience: 'sales_focus',
+    ),
+
+    // --- CASO 14 (Laboral/Liderazgo): Puertas Abiertas con Cuerpo Inaccesible ---
+    IncongruenceItem(
+      id: 'inc_work_open_door_closed_body',
+      speakerRole: 'Líder de área en su despacho',
+      spokenPhrase:
+          'Mi puerta siempre está 100% abierta para cualquier duda que tengan.',
+      illustrationKey: 'desk_barrier',
+      physicalSignals: [
+        'Escritorio amplio de madera usado como barrera frontal completa',
+        'Mirada fija en la pantalla del ordenador sin girar el rostro hacia ti',
+        'Vistazo impaciente al reloj de pared al verte entrar',
+      ],
+      isCongruent: false,
+      realEmotion: 'Saturación de agenda, prisa o inaccesibilidad momentánea',
+      explanation:
+          'El discurso corporativo predica accesibilidad total, pero el lenguaje corporal (barrera del mueble, falta de contacto visual y mirada al reloj) comunica que este no es el momento propicio para una conversación reflexiva.',
+      recommendedAction:
+          'Reconoce la situación sin juzgar: "Veo que estás con el tiempo muy justo cerrando pendientes. ¿Te parece si te robo 10 minutos mañana a primera hora con un café para revisarlo con calma?". Te ganas su agradecimiento.',
+      targetAudience: 'sales_focus',
+    ),
   ];
 
   static List<IncongruenceItem> getByAudience(String audience) {
