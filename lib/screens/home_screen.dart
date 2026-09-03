@@ -21,6 +21,7 @@ import 'gesture_detail_screen.dart';
 import 'unwritten_rules_screen.dart';
 import 'cluster_baseline_screen.dart';
 import 'emergency_mode_screen.dart';
+import '../widgets/home/mastery_progress_card.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../core/services/tts_service.dart';
 
@@ -171,7 +172,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // 2. Señal del Día (Tarjeta Limpia y Sobria)
+                  // 2. Indicador Motivacional de Dominio y Porcentaje Global
+                  const MasteryProgressCard(),
+                  const SizedBox(height: 16),
+
+                  // 3. Señal del Día (Tarjeta Limpia y Sobria)
                   Builder(
                     builder: (context) {
                       final dayOfYear = DateTime.now()

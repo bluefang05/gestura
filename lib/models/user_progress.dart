@@ -106,6 +106,40 @@ class UserProgress {
     return total / quizScores.length;
   }
 
+  int get totalExploredGestures => exploredGestureIds.length;
+  int get totalCompletedScenarios => completedScenarioIds.length;
+  int get totalCompletedQuizzes => completedQuizIds.length;
+
+  int get totalMilestonesCompleted =>
+      totalExploredGestures + totalCompletedScenarios + totalCompletedQuizzes;
+
+  static const int totalPossibleMilestones = 66 + 13 + 45; // 124 hitos totales
+
+  double get masteryRatio =>
+      (totalMilestonesCompleted / totalPossibleMilestones).clamp(0.0, 1.0);
+
+  int get masteryPercentage => (masteryRatio * 100).toInt();
+
+  String get masteryLevelTitle {
+    final pct = masteryPercentage;
+    if (pct >= 100) return 'Maestro Decodificador';
+    if (pct >= 75) return 'Negociador Avanzado';
+    if (pct >= 50) return 'Analista de Campo';
+    if (pct >= 25) return 'Calibrador Activo';
+    if (pct >= 10) return 'Observador Social';
+    return 'Iniciando Calibración';
+  }
+
+  String get motivationalMessage {
+    final pct = masteryPercentage;
+    if (pct >= 100) return '¡Felicidades! Has completado el 100% de Gestura.';
+    if (pct >= 75) return '¡Casi lo logras! Estás a pocos pasos de la maestría total.';
+    if (pct >= 50) return '¡Más de la mitad! Tu intuición social es cada día más precisa.';
+    if (pct >= 25) return '¡Excelente avance! Ya notas patrones que otros pasan por alto.';
+    if (pct >= 10) return '¡Buen despegue! Sigue practicando cada día para consolidar el hábito.';
+    return '¡Bienvenido! Explora tu primera señal corporal para empezar.';
+  }
+
   UserProgress copyWith({
     int? currentStreak,
     int? bestStreak,

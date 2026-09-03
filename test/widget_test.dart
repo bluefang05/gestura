@@ -12,6 +12,7 @@ import 'package:gestura/screens/unwritten_rules_screen.dart';
 import 'package:gestura/screens/cluster_baseline_screen.dart';
 import 'package:gestura/screens/emergency_mode_screen.dart';
 import 'package:gestura/models/category.dart';
+import 'package:gestura/models/user_progress.dart';
 import 'package:gestura/state/settings_provider.dart';
 import 'package:gestura/core/localization/app_localizations.dart';
 
@@ -141,6 +142,28 @@ void main() {
         .toList();
     expect(greenSignals.isNotEmpty, isTrue);
     expect(redSignals.isNotEmpty, isTrue);
+  });
+
+  test('UserProgress calculates mastery percentage and motivational levels accurately', () {
+    final initialProgress = UserProgress.initial();
+    expect(initialProgress.masteryPercentage, equals(0));
+    expect(initialProgress.masteryLevelTitle, equals('Iniciando Calibración'));
+
+    final halfwayProgress = initialProgress.copyWith(
+      exploredGestureIds: List.generate(33, (i) => 'g_$i'),
+      completedScenarioIds: List.generate(7, (i) => 's_$i'),
+      completedQuizIds: List.generate(22, (i) => 'q_$i'),
+    );
+    expect(halfwayProgress.masteryPercentage, greaterThanOrEqualTo(50));
+    expect(halfwayProgress.masteryLevelTitle, equals('Analista de Campo'));
+
+    final completedProgress = initialProgress.copyWith(
+      exploredGestureIds: List.generate(66, (i) => 'g_$i'),
+      completedScenarioIds: List.generate(13, (i) => 's_$i'),
+      completedQuizIds: List.generate(45, (i) => 'q_$i'),
+    );
+    expect(completedProgress.masteryPercentage, equals(100));
+    expect(completedProgress.masteryLevelTitle, equals('Maestro Decodificador'));
   });
 
   test('StorageService persists bookmarks and user progress correctly',

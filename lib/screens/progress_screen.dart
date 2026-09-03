@@ -127,15 +127,63 @@ class _ProgressScreenState extends State<ProgressScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            '${_progress.totalPoints} puntos acumulados',
+                            '${_progress.totalPoints} pts • ${_progress.motivationalMessage}',
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize: 12,
                               color: isDark
                                   ? AppColors.textSecondaryDark
                                   : AppColors.textSecondaryLight,
                             ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 6),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: LinearProgressIndicator(
+                              value: _progress.masteryRatio == 0.0
+                                  ? 0.02
+                                  : _progress.masteryRatio,
+                              minHeight: 6,
+                              backgroundColor: isDark
+                                  ? const Color(0xFF334155)
+                                  : const Color(0xFFE2E8F0),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                isDark
+                                    ? AppColors.accentLight
+                                    : AppColors.primary,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${_progress.totalMilestonesCompleted} de ${UserProgress.totalPossibleMilestones} hitos completados (${_progress.masteryPercentage}%)',
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.primaryDark,
+                            ),
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        '${_progress.masteryPercentage}%',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   ],
