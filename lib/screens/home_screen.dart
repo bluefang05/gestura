@@ -18,6 +18,9 @@ import 'cheat_sheet_screen.dart';
 import 'incongruence_detector_screen.dart';
 import 'buyer_temperature_screen.dart';
 import 'gesture_detail_screen.dart';
+import 'unwritten_rules_screen.dart';
+import 'cluster_baseline_screen.dart';
+import 'emergency_mode_screen.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../core/services/tts_service.dart';
 
@@ -463,6 +466,59 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => const CheatSheetScreen()),
+                          );
+                        },
+                      ),
+
+                      // Herramienta 7: Reglas No Escritas
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.auto_stories_rounded,
+                        accentColor: isDark
+                            ? AppColors.accentLight
+                            : AppColors.accent,
+                        title: 'Reglas No Escritas',
+                        description: 'Manual de lo no dicho',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const UnwrittenRulesScreen()),
+                          );
+                        },
+                      ),
+
+                      // Herramienta 8: Conglomerados y Línea Base
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.hub_rounded,
+                        accentColor: AppColors.indigo,
+                        title: 'Clusters & Línea Base',
+                        description: 'Regla de las 3 señales',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const ClusterBaselineScreen()),
+                          );
+                        },
+                      ),
+
+                      // Herramienta 9: Modo Emergencia / Campo
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.flash_on_rounded,
+                        accentColor: AppColors.coral,
+                        title: 'Modo Emergencia',
+                        description: 'Checklists en 30s de campo',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const EmergencyModeScreen()),
                           );
                         },
                       ),

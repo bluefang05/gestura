@@ -8,6 +8,9 @@ import 'package:gestura/data/quiz_database.dart';
 import 'package:gestura/data/scenario_database.dart';
 import 'package:gestura/data/incongruence_database.dart';
 import 'package:gestura/screens/buyer_temperature_screen.dart';
+import 'package:gestura/screens/unwritten_rules_screen.dart';
+import 'package:gestura/screens/cluster_baseline_screen.dart';
+import 'package:gestura/screens/emergency_mode_screen.dart';
 import 'package:gestura/models/category.dart';
 import 'package:gestura/state/settings_provider.dart';
 import 'package:gestura/core/localization/app_localizations.dart';
@@ -74,6 +77,7 @@ void main() {
 
   test('QuizDatabase contains image-card grid questions and valid answers', () {
     expect(QuizDatabase.questions.isNotEmpty, isTrue);
+    expect(QuizDatabase.questions.length, greaterThanOrEqualTo(45));
     final imageQuestions = QuizDatabase.getImageCardQuestions();
     expect(imageQuestions.isNotEmpty, isTrue,
         reason: 'Must have questions with visual image cards');
@@ -271,5 +275,47 @@ void main() {
 
     expect(find.text('Postura Abierta y Receptiva'), findsOneWidget);
     expect(find.text('Sonrisa Genuina (Duchenne)'), findsNothing);
+  });
+
+  testWidgets('UnwrittenRulesScreen renders tabs and indirect decoder',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const MaterialApp(home: UnwrittenRulesScreen()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('El Manual de lo No Dicho'), findsOneWidget);
+    expect(find.text('El Mito del Small Talk'), findsOneWidget);
+    expect(find.text('Decodificador de Indirectas'), findsOneWidget);
+  });
+
+  testWidgets('ClusterBaselineScreen renders 3-signal rule and tabs',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const MaterialApp(home: ClusterBaselineScreen()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Conglomerados y Línea Base'), findsOneWidget);
+    expect(find.text('Regla de las 3 Señales'), findsOneWidget);
+    expect(find.text('Calibrar la Línea Base'), findsOneWidget);
+  });
+
+  testWidgets('EmergencyModeScreen renders checklists and protocols',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const MaterialApp(home: EmergencyModeScreen()));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Modo Emergencia / Campo'), findsOneWidget);
+    expect(find.text('Entrevista / Ventas'), findsOneWidget);
+    expect(find.text('Evento Social / Fiesta'), findsOneWidget);
   });
 }

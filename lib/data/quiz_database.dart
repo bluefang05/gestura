@@ -733,6 +733,762 @@ class QuizDatabase {
       explanation:
           'En vez de interpretar una señal aislada como una verdad, ofrece una opción de apoyo y respeta la respuesta de la persona.',
     ),
+    QuizQuestion(
+      id: 'q_zoom_camera_off',
+      category: CategoryType.comunicacionDigital,
+      prompt:
+          'En una videollamada comercial de Zoom, el cliente apaga repentinamente su cámara justo después de que muestras la diapositiva de precios. ¿Qué significa y qué deberías hacer?',
+      scenarioText: 'La llamada continuó solo con su micrófono activo.',
+      options: [
+        QuizOption(
+          id: 'opt_zoom_ignore',
+          text: 'Ignorarlo y seguir hablando 15 minutos más hasta el final.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_zoom_probe',
+          text:
+              'Pausa estratégica y chequeo amable: "Veo que pausaste la cámara, ¿se sigue viendo bien la pantalla o prefieres que revisemos este número en detalle?".',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_zoom_angry',
+          text: 'Exigirle que encienda la cámara por respeto profesional.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Apagar la cámara tras un estímulo de alto impacto suele ocultar una reacción facial negativa o consulta privada con un colega.',
+      explanation:
+          'El apagado súbito de cámara en Zoom es el equivalente digital a retirarse hacia atrás. Hacer una pausa respetuosa permite averiguar si hubo un problema técnico o un impacto presupuestario.',
+    ),
+    QuizQuestion(
+      id: 'q_chat_dry_period',
+      category: CategoryType.comunicacionDigital,
+      prompt:
+          'Envías una propuesta detallada por Slack y tu colega responde únicamente: "Ok." con punto final seco. ¿Cómo debes interpretarlo?',
+      scenarioText: 'En chats informales, el punto final aislado suele generar ambigüedad.',
+      options: [
+        QuizOption(
+          id: 'opt_dry_hate',
+          text: 'Asumir con certeza que está furioso contigo y dejar de hablarle.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_dry_context',
+          text:
+              'No asumir hostilidad inmediata: muchas personas usan el punto por hábito ortográfico o responden desde el móvil con prisa. Si hay dudas, pregunta en persona o por llamada breve.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_dry_revenge',
+          text: 'Responderle con otro "Ok." para competir en frialdad.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'La brevedad digital carece de tono de voz; atribuir malicia sin confirmar es un sesgo común.',
+      explanation:
+          'La comunicación por texto tiene un sesgo de negatividad inherente. Una respuesta corta puede ser simple eficiencia de tiempo, no desagrado.',
+    ),
+    QuizQuestion(
+      id: 'q_elevator_small_talk_weather',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'En el ascensor, un directivo te dice: "Parece que va a llover fuerte hoy". ¿Cuál es el propósito real de su comentario?',
+      scenarioText: 'No es una consulta meteorológica técnica.',
+      options: [
+        QuizOption(
+          id: 'opt_weather_ping',
+          text:
+              'Es un "ping de red no verbal": busca abrir el canal social en son de paz y reconocer tu presencia sin invadir tu intimidad.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_weather_stats',
+          text: 'Espera que le des un informe meteorológico detallado de milímetros de agua.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_weather_trap',
+          text: 'Es una pregunta trampa para evaluar tus conocimientos científicos.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El contenido literal es intrascendente; la función biológica es la sincronización y cordialidad.',
+      explanation:
+          'El small talk funciona como un apretón de manos sónico. Basta responder con una frase ligera y una sonrisa para completar el ritual.',
+    ),
+    QuizQuestion(
+      id: 'q_indirect_yo_me_encargo',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'Tu compañero suspira brevemente con los hombros caídos y dice: "No te preocupes, yo me encargo de terminarlo...". ¿Qué está comunicando en realidad?',
+      scenarioText: 'Su postura es de sobrecarga y cansancio.',
+      options: [
+        QuizOption(
+          id: 'opt_encargo_happy',
+          text: 'Que tiene tiempo de sobra y disfruta haciendo todo el trabajo solo.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_encargo_help',
+          text:
+              'Siente sobrecarga o molestia; la cortesía neurotípica le impide pedir ayuda de forma directa y espera que insistas en colaborar.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_encargo_leave',
+          text: 'Que debes irte de inmediato de la sala sin decir nada.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Suspiro + hombros caídos contradicen el texto amable de la frase.',
+      explanation:
+          'Insistir amablemente una vez: "De verdad, permíteme ayudarte con una parte para que salgamos a tiempo" desactiva el resentimiento y construye compañerismo.',
+    ),
+    QuizQuestion(
+      id: 'q_cluster_cold_vs_defense',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'En una oficina a 17 °C con aire acondicionado directo, alguien cruza los brazos, se frota los bíceps y encoge el cuello. ¿Cómo se interpreta?',
+      scenarioText: 'Aplica la regla de los conglomerados con contexto ambiental.',
+      options: [
+        QuizOption(
+          id: 'opt_cold_temp',
+          text:
+              'Frío ambiental. El frotamiento de brazos y encogimiento buscan conservar el calor corporal.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_cold_hate',
+          text: 'Actitud de cerrazón psicológica y hostilidad hacia las personas de la sala.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_cold_bored',
+          text: 'Desinterés absoluto en la reunión.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El frotamiento activo de bíceps es incompatible con la postura de barrera desafiante.',
+      explanation:
+          'Nunca leas un gesto sin considerar el entorno. El frotamiento de extremidades busca generar fricción térmica, no defensa psicológica.',
+    ),
+    QuizQuestion(
+      id: 'q_baseline_calm_vs_lying',
+      category: CategoryType.expresionesFaciales,
+      prompt:
+          'Un candidato habla bajito y parpadea con alta frecuencia desde que entró y saludó en la entrevista. Al preguntarle por sus estudios, mantiene exactamente el mismo patrón. ¿Es señal de engaño?',
+      scenarioText: 'Compara su respuesta con su Línea Base observada desde el minuto 1.',
+      options: [
+        QuizOption(
+          id: 'opt_base_liar',
+          text: 'Sí, porque el parpadeo rápido siempre indica mentira.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_base_norm',
+          text:
+              'No. Es su Línea Base habitual de timidez o nerviosismo general; no hubo ninguna desviación súbita.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_base_guilty',
+          text: 'Significa que cometió un fraude en su título universitario.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'La ausencia de cambio respecto al inicio descarta una reacción específica a la pregunta.',
+      explanation:
+          'Las pistas no verbales de estrés solo son reveladoras si representan una alteración notable respecto a la conducta basal normal del individuo.',
+    ),
+    QuizQuestion(
+      id: 'q_sales_leaning_back_objection',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'Tras mencionar el precio de tu servicio, el cliente recuesta el torso hacia atrás en su silla, aprieta los labios y baja la mirada. ¿Qué deberías hacer?',
+      scenarioText: 'Apareció un conglomerado de 3 señales de distanciamiento.',
+      options: [
+        QuizOption(
+          id: 'opt_lean_push',
+          text: 'Acelerar el discurso y presionar para que firme el contrato de inmediato.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_lean_pause',
+          text:
+              'Frenar la presentación y validar con empatía: "Noto que este punto te genera dudas, ¿cómo lo ves respecto a lo que tenían presupuestado?".',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_lean_leave',
+          text: 'Levantarte y dar por perdida la venta sin preguntar.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Reclinación hacia atrás + labios apretados = freno mental y distanciamiento.',
+      explanation:
+          'El distanciamiento corporal indica que la mente del cliente se desconectó de la compra. Seguir vendiendo sin resolver la duda genera rechazo total.',
+    ),
+    QuizQuestion(
+      id: 'q_group_horseshoe_u_entry',
+      category: CategoryType.proxemica,
+      prompt:
+          'En un evento de networking, ves a tres personas de pie cuyos cuerpos forman un ángulo hacia afuera en forma de "herradura" o "U". ¿Qué significa?',
+      scenarioText: 'Observa la apertura geométrica del grupo.',
+      options: [
+        QuizOption(
+          id: 'opt_u_open',
+          text:
+              'Círculo abierto: la disposición geométrica del grupo invita subconscientemente a que otros se unan a la conversación.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_u_closed',
+          text: 'Están en una reunión secreta y confidencial donde está prohibido acercarse.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_u_leaving',
+          text: 'Significa que todos se van a marchar en 5 segundos.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El espacio libre en la herradura deja una puerta de entrada social visible.',
+      explanation:
+          'Los grupos abiertos en "U" son los más accesibles para integrarse. Acércate a distancia social (1.5 m) con contacto visual cordial.',
+    ),
+    QuizQuestion(
+      id: 'q_interview_hands_pocket',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          '¿Por qué los expertos en comunicación recomiendan no mantener las manos dentro de los bolsillos durante una entrevista de trabajo?',
+      scenarioText: 'Evolución psicológica y señales de apertura.',
+      options: [
+        QuizOption(
+          id: 'opt_hands_evol',
+          text:
+              'El cerebro humano primitivo interpreta las manos ocultas como una posible amenaza o reserva de información; las manos visibles generan confianza instintiva.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_hands_dirty',
+          text: 'Porque se ensucia la ropa del pantalón.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_hands_illegal',
+          text: 'Porque está penalizado legalmente en contratos laborales.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Las manos a la vista comunican transparencia, honestidad y calma.',
+      explanation:
+          'Tener las manos visibles sobre la mesa o reposabrazos aumenta la percepción de honestidad y reduce el nivel de alerta del interlocutor.',
+    ),
+    QuizQuestion(
+      id: 'q_nervous_laughter_mistake',
+      category: CategoryType.expresionesFaciales,
+      prompt:
+          'Expones un dato erróneo en una reunión y tu compañero se ríe mostrando los dientes pero con el cuello rígido y mirando al suelo. ¿Qué tipo de risa es?',
+      scenarioText: 'Diferenciación entre diversión y alivio de tensión.',
+      options: [
+        QuizOption(
+          id: 'opt_laugh_nervous',
+          text:
+              'Risa nerviosa o de apaciguamiento: su cerebro intenta suavizar el momento incómodo sin herir la armonía social.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_laugh_mocking',
+          text: 'Una burla malintencionada porque disfruta de tus errores.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_laugh_duchenne',
+          text: 'Una risa de felicidad plena y alegría compartida.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'La ausencia de arrugas perioculares y la tensión del cuello delatan incomodidad.',
+      explanation:
+          'La risa pacífica es muy común en situaciones embarazosas. No la tomes como ofensa personal; corrige el dato con serenidad y continúa.',
+    ),
+    QuizQuestion(
+      id: 'q_poker_face_sarcasm',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'Un colega dice con cara seria e inexpresiva: "Sí, seguro que el servidor se arregla solo mágicamente...". ¿Qué elemento confirma el sarcasmo?',
+      scenarioText: 'La expresión facial es neutra (deadpan).',
+      options: [
+        QuizOption(
+          id: 'opt_sarcasm_para',
+          text:
+              'La entonación vocal y el contenido absurdo de la afirmación, a pesar de la ausencia de muecas en su rostro.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_sarcasm_literal',
+          text: 'Cree literalmente en magia tecnológica porque no sonrió.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_sarcasm_anger',
+          text: 'Está experimentando un ataque de pánico silencioso.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El sarcasmo en adultos suele expresarse con cara plana y modulación paralingüística.',
+      explanation:
+          'No esperes que la gente sonría con malicia cuando es irónica. En adultos, el tono y la lógica interna de la frase son la clave.',
+    ),
+    QuizQuestion(
+      id: 'q_blank_mind_power_pause',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'En plena entrevista de trabajo te quedas en blanco al explicar un proyecto. ¿Cuál es la mejor respuesta física e inmediata?',
+      scenarioText: 'Bloqueo cognitivo momentáneo.',
+      options: [
+        QuizOption(
+          id: 'opt_blank_pause',
+          text:
+              'Hacer una "Pausa de Poder": inhalar hondo con calma, asentir lentamente 2 segundos y ordenar la idea sin decir muletillas de pánico ("ehhh...").',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_blank_panic',
+          text: 'Gritar que lo sientes mucho y taparte la cara con las dos manos.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_blank_invent',
+          text: 'Inventar palabras rápidamente sin sentido para no dejar ni 1 segundo de silencio.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Una pausa ejecutada con compostura se percibe como reflexión profunda, no como error.',
+      explanation:
+          'Los evaluadores respetan a quienes controlan el silencio con seguridad. Un respiro profundo de 2 segundos te devuelve el control mental.',
+    ),
+    QuizQuestion(
+      id: 'q_sensory_overload_escape',
+      category: CategoryType.entornoApariencia,
+      prompt:
+          'Estás en una cena concurrida y sientes que las luces, música y conversaciones cruzadas están colapsando tu batería sensorial. ¿Cómo retirarte con dignidad?',
+      scenarioText: 'Necesidad de autorregulación y autocuidado.',
+      options: [
+        QuizOption(
+          id: 'opt_escape_grace',
+          text:
+              'Usar una fórmula breve y amable: "Con permiso, voy a tomar un poco de aire fresco afuera / beber agua" o despedirte agradeciendo la velada para ir a descansar.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_escape_rude',
+          text: 'Salir corriendo sin decir nada a nadie y bloquear a todos en el móvil.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_escape_endure',
+          text: 'Aguantar el dolor sensorial hasta tener una crisis pública para complacer a los demás.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Cuidar tus límites no requiere disculpas excesivas ni confrontación.',
+      explanation:
+          'Tu salud mental es prioritaria. Una frase sencilla y cordial te permite retirarte con elegancia y sin culpa.',
+    ),
+    QuizQuestion(
+      id: 'q_meeting_head_of_table',
+      category: CategoryType.entornoApariencia,
+      prompt:
+          'Llegas temprano a una junta corporativa donde tu rol es técnico y de apoyo. La cabecera de la mesa está libre. ¿Dónde te conviene sentarte?',
+      scenarioText: 'Proxémica y jerarquía espacial en oficinas.',
+      options: [
+        QuizOption(
+          id: 'opt_table_side',
+          text:
+              'En un lateral intermedio: permite buena visibilidad de la pantalla y de los participantes sin asumir un rol jerárquico no asignado.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_table_head',
+          text: 'En la cabecera principal para demostrar poder supremo al jefe.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_table_floor',
+          text: 'En el suelo en una esquina para no ocupar muebles.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'La cabecera comunica conducción de la reunión; los laterales equilibran participación.',
+      explanation:
+          'Respetar la proxémica de liderazgo en salas de juntas evita fricciones políticas innecesarias y te posiciona como colaborador confiable.',
+    ),
+    QuizQuestion(
+      id: 'q_audio_voice_drawl_confidence',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          '¿Cómo afecta hablar con un tono excesivamente agudo y a velocidad acelerada al presentar los precios de tu servicio?',
+      scenarioText: 'Fisiología vocal y percepción de autoridad.',
+      options: [
+        QuizOption(
+          id: 'opt_voice_insecure',
+          text:
+              'Comunica inseguridad o miedo al rechazo; la voz tiende a agudizarse cuando las cuerdas vocales se tensan por estrés.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_voice_pro',
+          text: 'Genera máxima confianza y parece una oferta irresistible.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_voice_fun',
+          text: 'Hace que el cliente se sienta en una fiesta de cumpleaños.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El descenso a un tono de voz grave y pausado proyecta solidez y certeza en el valor ofertado.',
+      explanation:
+          'Modular la voz hacia el registro grave y hacer una pausa firme tras decir el precio transmite confianza absoluta en el valor de tu trabajo.',
+    ),
+    QuizQuestion(
+      id: 'q_feet_towards_door_exit',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'Llevas 5 minutos hablando con un colega en el pasillo y notas que uno de sus pies apunta perpendicularmente hacia la puerta de salida. ¿Qué significa?',
+      questionIllustrationKey: 'foot_orientation',
+      scenarioText: 'Su torso aún te mira, pero sus pies apuntan al pasillo.',
+      options: [
+        QuizOption(
+          id: 'opt_feet_leave',
+          text:
+              'Orientación podal de fuga: su cuerpo ya se prepara para marcharse porque tiene un pendiente urgente.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_feet_dance',
+          text: 'Está practicando pasos de baile discretamente.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_feet_deaf',
+          text: 'Tiene problemas de equilibrio físico.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Los pies son la parte más sincera del cuerpo porque están más lejos del cerebro consciente.',
+      explanation:
+          'Cerrar tú la conversación primero ("No te quito más tiempo, seguimos luego") transmite madurez social y alivia a la otra persona.',
+    ),
+    QuizQuestion(
+      id: 'q_phone_screen_barrier',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'Hablas con alguien y te dice: "Te escucho, te escucho", pero mantiene los ojos fijos en la pantalla del teléfono tecleando. ¿Qué sucede con su escucha activa?',
+      scenarioText: 'Atención secuestrada por el dispositivo digital.',
+      options: [
+        QuizOption(
+          id: 'opt_phone_divided',
+          text:
+              'Su atención cognitiva está fragmentada; su asentimiento es un automatismo social para no interrumpir su uso del teléfono.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_phone_genius',
+          text: 'Tiene capacidad cerebral sobrehumana y procesa todo al 100% sin esfuerzo.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_phone_blind',
+          text: 'Está ciego y usa el teléfono con ecolocalización.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Sin contacto visual ni orientación del torso, la escucha profunda es inexistente.',
+      explanation:
+          'Hacer una pausa en silencio amable sin enfadarte logra que la persona levante la mirada y decida conscientemente si atenderte o pedir un minuto.',
+    ),
+    QuizQuestion(
+      id: 'q_boss_open_door_closed_desk',
+      category: CategoryType.entornoApariencia,
+      prompt:
+          'Un jefe dice promover una "política de puertas abiertas", pero en su oficina mantiene un escritorio macizo de 2 metros interpuesto entre él y los visitantes. ¿Qué efecto tiene?',
+      questionIllustrationKey: 'desk_barrier',
+      scenarioText: 'Barrera física en el entorno laboral.',
+      options: [
+        QuizOption(
+          id: 'opt_desk_barrier',
+          text:
+              'Crea una barrera psicológica de poder y distancia que desmiente en los hechos la supuesta apertura verbal.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_desk_inviting',
+          text: 'Invita a que los empleados se sienten en su regazo.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_desk_no_effect',
+          text: 'El mobiliario nunca influye en la psicología de las personas.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Los objetos voluminosos intermedios actúan como escudos de territorio y estatus.',
+      explanation:
+          'Los líderes accesibles suelen salir de detrás del escritorio y sentarse en una mesa redonda o sillones a la misma altura.',
+    ),
+    QuizQuestion(
+      id: 'q_backchannel_micro_nod',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'Pides un artículo en una tienda y la dependiente hace dos micro-asentimientos rápidos hacia abajo con la cabeza mientras teclea en su sistema sin hablar. ¿Qué significa?',
+      scenarioText: 'Interacción en servicios comerciales rápidos.',
+      options: [
+        QuizOption(
+          id: 'opt_nod_ack',
+          text:
+              'Confirmación no verbal de recepción (Backchanneling): "Te escuché y lo estoy registrando en el sistema", sin necesidad de hablar.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_nod_ignore',
+          text: 'Te está ignorando deliberadamente y debes gritarle la orden de nuevo.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_nod_sleep',
+          text: 'Tiene sueño y se está quedando dormida de pie.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El micro-asentimiento sustituye a la palabra en entornos de trabajo continuo.',
+      explanation:
+          'Esperar tranquilamente unos segundos demuestra calibración social y evita generar tensiones innecesarias con el personal de servicio.',
+    ),
+    QuizQuestion(
+      id: 'q_touch_neck_supraspinal',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'En medio de una negociación, la contraparte lleva su mano hacia la fosa del cuello (el hoyuelo sobre la clavícula) y presiona suavemente. ¿Qué proceso fisiológico ocurre?',
+      scenarioText: 'Gesto de pacificación neurovegetativa.',
+      options: [
+        QuizOption(
+          id: 'opt_neck_pacify',
+          text:
+              'Es un gesto pacificador: al presionar el nervio vago y los bulbos carotídeos en el cuello, el cuerpo busca bajar el ritmo cardíaco ante un pico de estrés.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_neck_fashion',
+          text: 'Solo está acomodando una joya o corbata imaginaria sin ningún motivo.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_neck_attack',
+          text: 'Se prepara para lanzar un golpe físico.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Tocar o cubrir la fosa del cuello es uno de los pacificadores más potentes del cuerpo humano.',
+      explanation:
+          'Indica vulnerabilidad o preocupación aguda. Si ves este gesto, suaviza el tono y pregunta qué aspecto le genera incomodidad.',
+    ),
+    QuizQuestion(
+      id: 'q_open_palms_truth',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          '¿Por qué mostrar las palmas abiertas hacia arriba a la altura de la cintura se asocia universalmente con sinceridad y cooperación?',
+      scenarioText: 'Historia evolutiva de los gestos manuales.',
+      options: [
+        QuizOption(
+          id: 'opt_palms_evol',
+          text:
+              'Comunica que no hay armas ocultas ni secretos; expone zonas vulnerables de la mano transmitiendo transparencia total.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_palms_rain',
+          text: 'Sirve para comprobar si está lloviendo dentro de la habitación.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_palms_beg',
+          text: 'Es una señal exclusiva para pedir limosna o dinero.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Las palmas abiertas invitan a la colaboración y bajan la resistencia del interlocutor.',
+      explanation:
+          'Usar palmas abiertas en presentaciones y acuerdos fomenta acuerdos más rápidos y reduce la hostilidad de la contraparte.',
+    ),
+    QuizQuestion(
+      id: 'q_cluster_dating_interest',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'En una conversación casual, la persona se inclina hacia adelante, acomoda su cabello dejando el cuello al descubierto y sonríe con arrugas alrededor de los ojos. ¿Qué indica este conglomerado?',
+      scenarioText: 'Tres señales coincidentes de apertura y comodidad.',
+      options: [
+        QuizOption(
+          id: 'opt_date_interest',
+          text:
+              'Alto interés, comodidad y atracción en la interacción; las tres señales apuntan a apertura e involucramiento emocional.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_date_boredom',
+          text: 'Aburrimiento profundo y deseo de terminar el encuentro.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_date_hostile',
+          text: 'Preparación para una discusión agresiva.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Inclinación frontal + exposición de zonas vulnerables + sonrisa Duchenne.',
+      explanation:
+          'El conglomerado confirma una actitud receptiva y conectada. Es un momento propicio para profundizar la charla.',
+    ),
+    QuizQuestion(
+      id: 'q_interview_foot_kick',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'Un candidato en entrevista comienza a sacudir o balancear rápidamente un pie en el aire justo cuando le preguntas por qué renunció a su empleo anterior. ¿Qué indica?',
+      scenarioText: 'Desviación fisiológica en las extremidades inferiores.',
+      options: [
+        QuizOption(
+          id: 'opt_foot_stress',
+          text:
+              'Pico de ansiedad o tensión reprimida: el movimiento repetitivo del pie disipa el cortisol activado por la pregunta difícil.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_foot_calm',
+          text: 'Tranquilidad absoluta y satisfacción plena.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_foot_nap',
+          text: 'Deseo de dormir una siesta.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El movimiento rítmico de pies y piernas es un pacificador inconsciente de estrés.',
+      explanation:
+          'Las extremidades inferiores filtran la ansiedad que el rostro intenta ocultar. Mantén la calma y escucha su explicación sin juzgar de golpe.',
+    ),
+    QuizQuestion(
+      id: 'q_sales_mirroring_empathy',
+      category: CategoryType.lenguajeCorporal,
+      prompt:
+          'En una reunión de negocios, notas que cuando apoyas el antebrazo sobre la mesa, tu cliente adopta una postura similar tras unos segundos. ¿Qué fenómeno ocurre?',
+      scenarioText: 'Sincronía postural inconsciente (Rapport).',
+      options: [
+        QuizOption(
+          id: 'opt_mirror_rapport',
+          text:
+              'Efecto camaleón o reflejo especular (Mirroring): el cerebro activa neuronas espejo para sincronizarse cuando hay empatía y acuerdo.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_mirror_mock',
+          text: 'El cliente se está burlando de ti como un mimo profesional.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_mirror_sleep',
+          text: 'Ambos tienen una contractura muscular idéntica por mala suerte.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'El espejo postural espontáneo es un indicador biológico de sintonía interpersonal.',
+      explanation:
+          'El mimetismo postural confirma que la comunicación fluye con confianza y menor resistencia cognitiva.',
+    ),
+    QuizQuestion(
+      id: 'q_audio_monotone_burnout',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'Un integrante del equipo responde a todas las preguntas con voz completamente plana, sin altibajos, tono apagado y hombros caídos. ¿Qué sugiere?',
+      scenarioText: 'Pérdida de modulación y vitalidad paralingüística.',
+      options: [
+        QuizOption(
+          id: 'opt_burnout_fatigue',
+          text:
+              'Fatiga crónica, sobrecarga mental o desmotivación (burnout); la depresión o agotamiento apagan la melodía vocal natural.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_burnout_joy',
+          text: 'Alegría desbordante por las nuevas tareas asignadas.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_burnout_prank',
+          text: 'Una broma pesada para asustar al jefe.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'La voz monótona y el ritmo ralentizado son marcas paralingüísticas de agotamiento.',
+      explanation:
+          'La melodía vocal refleja el estado de ánimo. Un tono plano sostenido amerita un chequeo de apoyo o ajuste de carga de trabajo.',
+    ),
+    QuizQuestion(
+      id: 'q_digital_caps_urgency',
+      category: CategoryType.comunicacionDigital,
+      prompt:
+          'Un cliente envía por WhatsApp: "HOLA, ¿TIENEN RESPUESTA DE MI PEDIDO?!". ¿Cómo debes calibrar tu respuesta?',
+      scenarioText: 'Canal digital: mayúsculas sostenidas y signos combinados.',
+      options: [
+        QuizOption(
+          id: 'opt_caps_calm',
+          text:
+              'Responder con rapidez, tono calmado y datos concretos sin responder en mayúsculas; las mayúsculas denotan urgencia o frustración que requiere contención rápida.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_caps_shout',
+          text: 'Gritarle de vuelta con MAYÚSCULAS para imponer autoridad.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_caps_block',
+          text: 'Bloquear su número de inmediato sin contestar.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'En el código digital, las mayúsculas equivalen al volumen alzado de voz.',
+      explanation:
+          'Desescalar la urgencia con una respuesta ágil, serena y estructurada neutraliza la ansiedad del cliente de forma inmediata.',
+    ),
   ];
 
   static List<QuizQuestion> getByCategory(CategoryType category) {
