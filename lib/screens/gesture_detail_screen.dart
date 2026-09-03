@@ -9,6 +9,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 import '../models/gesture_item.dart';
 
 class GestureDetailScreen extends StatefulWidget {
@@ -75,26 +76,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
       appBar: AppBar(
         title: Text(catInfo.shortTitle),
         actions: [
-          ValueListenableBuilder<String?>(
-            valueListenable: TtsService.currentSpeakingIdNotifier,
-            builder: (context, speakingId, _) {
-              final isSpeaking = speakingId == item.id;
-              return IconButton(
-                icon: Icon(
-                  isSpeaking
-                      ? Icons.stop_circle_rounded
-                      : Icons.volume_up_rounded,
-                  color: isSpeaking ? AppColors.accent : null,
-                  size: 24,
-                ),
-                tooltip:
-                    isSpeaking ? 'Detener lectura' : 'Escuchar en voz alta',
-                onPressed: () {
-                  FeedbackService.lightClick();
-                  _toggleTts(item);
-                },
-              );
-            },
+          TtsAppBarControl(
+            onPlay: () => _toggleTts(item),
+            onStop: () => TtsService.stop(),
           ),
           IconButton(
             icon: Icon(
@@ -150,6 +134,57 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     item.physiologicalDetails,
                     style: TextStyle(
                       fontSize: 13.5,
+                      height: 1.4,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 14),
+
+            // Card 1.5: Variabilidad Humana en el Mundo Real (Anti-estereotipo)
+            AppCard(
+              color: isDark
+                  ? const Color(0xFF0F172A)
+                  : const Color(0xFFF1F5F9),
+              borderSide: BorderSide(
+                color: isDark
+                    ? const Color(0xFF334155)
+                    : const Color(0xFFCBD5E1),
+                width: 1.2,
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.people_alt_rounded,
+                          size: 20,
+                          color: isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Variabilidad en la Vida Real',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w800,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'En la vida diaria, las personas reales no son caricaturas ni adoptan siempre la misma postura fija. Observa el conjunto corporal completo y el entorno: la intensidad de la señal varía según la persona, su complexión física, su cansancio y sus hábitos individuales.',
+                    style: TextStyle(
+                      fontSize: 13,
                       height: 1.4,
                       color: isDark
                           ? AppColors.textSecondaryDark
@@ -467,7 +502,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                   _highlightAnatomy
                                       ? Icons.remove_red_eye_rounded
                                       : Icons.remove_red_eye_outlined,
-                                  size: 16,
+                                  size: 18,
                                   color: _highlightAnatomy
                                       ? Colors.white
                                       : AppColors.primary,
@@ -495,7 +530,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                       isSpeaking
                                           ? Icons.stop_circle_rounded
                                           : Icons.volume_up_rounded,
-                                      size: 16,
+                                      size: 18,
                                       color: isSpeaking
                                           ? Colors.white
                                           : AppColors.accent,
@@ -534,7 +569,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                   color: item.signalType.color),
                               BadgePill(
                                   text: catInfo.chapterReference,
-                                  color: AppColors.textMutedLight),
+                                  color: isDark
+                                      ? AppColors.textMutedDark
+                                      : AppColors.textMutedLight),
                             ],
                           ),
                           const SizedBox(height: 10),
@@ -598,7 +635,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       _highlightAnatomy
                           ? Icons.remove_red_eye_rounded
                           : Icons.remove_red_eye_outlined,
-                      size: 16,
+                      size: 18,
                       color:
                           _highlightAnatomy ? Colors.white : AppColors.primary,
                     ),
@@ -621,7 +658,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                           isSpeaking
                               ? Icons.stop_circle_rounded
                               : Icons.volume_up_rounded,
-                          size: 16,
+                          size: 18,
                           color: isSpeaking ? Colors.white : AppColors.accent,
                         ),
                         label: Text(
@@ -654,7 +691,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       color: item.signalType.color),
                   BadgePill(
                       text: catInfo.chapterReference,
-                      color: AppColors.textMutedLight),
+                      color: isDark
+                          ? AppColors.textMutedDark
+                          : AppColors.textMutedLight),
                 ],
               ),
               const SizedBox(height: 8),

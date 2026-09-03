@@ -9,6 +9,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 
 class QuizRunnerScreen extends StatefulWidget {
   final String title;
@@ -89,6 +90,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         keyVisualClue: _currentQuestion.keyVisualClue,
         explanation: _currentQuestion.explanation,
       );
+    } else {
+      TtsService.stop();
     }
 
     showModalBottomSheet(
@@ -110,6 +113,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   }
 
   void _onNextStep() {
+    TtsService.stop();
     if (_currentIndex + 1 < widget.questions.length) {
       setState(() {
         _currentIndex++;
@@ -157,13 +161,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up_rounded),
-            tooltip: 'Escuchar pregunta y opciones',
-            onPressed: () {
-              FeedbackService.lightClick();
-              _speakCurrentQuestion();
-            },
+          TtsAppBarControl(
+            onPlay: _speakCurrentQuestion,
           ),
         ],
         bottom: PreferredSize(
@@ -184,55 +183,77 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Question Progress Tag
-              Text(
-                'Pregunta ${_currentIndex + 1} de ${widget.questions.length}',
-                style: TextStyle(
-                  fontSize: 12.5,
-                  fontWeight: FontWeight.w700,
-                  color: isDark
-                      ? AppColors.textMutedDark
-                      : AppColors.textMutedLight,
-                ),
-              ),
-              const SizedBox(height: 6),
-
-              // Prompt Title
-              Text(
-                question.prompt,
-                style: const TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.3,
-                ),
-              ),
-
-              if (question.scenarioText != null) ...[
-                const SizedBox(height: 4),
-                Text(
-                  question.scenarioText!,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: isDark
-                        ? AppColors.textSecondaryDark
-                        : AppColors.textSecondaryLight,
+              // Question Progress Tag & Prompt Container
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.darkSurface : Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                    width: 1,
                   ),
                 ),
-              ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          decoration: BoxDecoration(
+                            color: AppColors.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            'Pregunta ${_currentIndex + 1} de ${widget.questions.length}',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w700,
+                              color: isDark ? AppColors.primaryLight : AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      question.prompt,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        height: 1.3,
+                        letterSpacing: -0.2,
+                      ),
+                    ),
+                    if (question.scenarioText != null && question.scenarioText!.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        question.scenarioText!,
+                        style: TextStyle(
+                          fontSize: 12.5,
+                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          height: 1.35,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
 
-              // Header Illustration if available
+              // Header Illustration if available (single question illustration)
               if (question.questionIllustrationKey != null) ...[
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
                 Center(
                   child: ConoVeIllustration(
                     illustrationKey: question.questionIllustrationKey!,
-                    width: 140,
-                    height: 140,
+                    width: 130,
+                    height: 130,
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
               ],
-              const SizedBox(height: 14),
+              const SizedBox(height: 12),
 
               // Options: Grid if images, List if text
               Expanded(
@@ -241,9 +262,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 12,
-                          crossAxisSpacing: 12,
-                          childAspectRatio: 0.95,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 0.88,
                         ),
                         itemCount: question.options.length,
                         itemBuilder: (context, index) {
@@ -274,25 +295,31 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               // Confirm/Submit Button
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _selectedOptionId != null
-                        ? AppColors.primary
-                        : (isDark
-                            ? AppColors.darkSurfaceAlt
-                            : AppColors.lightBorder),
-                    disabledBackgroundColor: isDark
-                        ? AppColors.darkSurfaceAlt
-                        : AppColors.lightBorder,
-                    disabledForegroundColor: isDark
-                        ? AppColors.textMutedDark
-                        : AppColors.textMutedLight,
+                child: SizedBox(
+                  height: 48,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectedOptionId != null
+                          ? AppColors.primary
+                          : (isDark
+                              ? AppColors.darkSurfaceAlt
+                              : AppColors.lightBorder),
+                      foregroundColor: _selectedOptionId != null
+                          ? Colors.white
+                          : (isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight),
+                      elevation: _selectedOptionId != null ? 1 : 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                    ),
+                    onPressed: _selectedOptionId != null && !_isEvaluated
+                        ? _onSubmitAnswer
+                        : null,
+                    child: const Text('Comprobar Respuesta',
+                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
-                  onPressed: _selectedOptionId != null && !_isEvaluated
-                      ? _onSubmitAnswer
-                      : null,
-                  child: const Text('Comprobar Respuesta',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
               ),
             ],

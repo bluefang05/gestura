@@ -200,16 +200,68 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'conove_logo': 'branding',
     };
 
-    if (categoryMap.containsKey(clean)) {
-      final folder = categoryMap[clean]!;
-      if (folder == 'neuroaffirmative') {
-        final suffix = isLarge ? '_large.png' : '.png';
-        return 'assets/images/$folder/$clean$suffix';
-      }
-      var fileKey = clean;
-      if (clean == 'logo' || clean == 'conove_logo') fileKey = 'gestura_logo';
-      if (clean == 'espacio') fileKey = 'proxemica';
-      return 'assets/images/$folder/$fileKey$suffix';
+    const aliasMap = {
+      // Expresiones
+      'flash_cejas': 'eyebrow_flash',
+      'ceno_fruncido': 'frowning_brow',
+      'mandibula_apretada': 'jaw_clenching',
+      'mirada_esquiva': 'averted_gaze',
+      'morder_labio': 'lip_biting',
+      'nostril_flaring': 'aleteo_nasal',
+      'ojos_entrecerrados': 'narrowed_eyes',
+      'parpados_cerrados': 'closed_eyelids',
+      'pupilas_dilatadas': 'pupil_dilation',
+      'desden': 'smirk_contempt',
+      'sonrisa_falsa': 'polite_smile',
+      'sonrisa_genuina': 'duchenne_smile',
+      'sorpresa': 'surprised_look',
+      'labios_apretados': 'tight_lips',
+      'tristeza': 'turned_down_lips',
+      'guino': 'winking_face',
+
+      // Paralingüística
+      'silencio_incomodo': 'silence_tense',
+      'silencio_reflexivo': 'silence_reflective',
+      'tono_asertivo': 'assertive_voice',
+      'tono_sarcastico': 'sarcastic_inflection',
+      'tono_monotono': 'voice_monotone',
+      'velocidad_rapida': 'voice_speed_fast',
+      'volumen_alto': 'voice_volume_high',
+      'volumen_bajo': 'voice_volume_low',
+
+      // Posturas
+      'brazos_cruzados': 'closed_posture',
+      'apreton_manos': 'handshake_firm',
+      'brazos_espalda': 'hands_behind_back',
+      'frotar_manos': 'hand_wringing',
+      'cabeza_inclinada': 'head_tilt',
+      'inclinacion_atras': 'leaning_back',
+      'inclinacion_adelante': 'leaning_forward',
+      'manos_bolsillos': 'hands_in_pockets',
+      'manos_caderas': 'hands_on_hips',
+      'manos_nuca': 'hands_behind_head',
+      'piernas_cruzadas': 'legs_crossed',
+      'postura_abierta': 'open_posture',
+      'encogerse_hombros': 'shrug',
+      'manos_ojiva': 'steepling_hands',
+      'tamborilear_dedos': 'finger_tapping',
+      'tocarse_cuello': 'touching_neck',
+      'pensador': 'hand_on_chin',
+
+      // Proxémica
+      'espacio': 'proxemica',
+      'proxemics_all': 'proxemica',
+      'proxemics_social': 'proxemica',
+
+      // Branding
+      'logo': 'gestura_logo',
+      'conove_logo': 'gestura_logo',
+    };
+
+    final canonicalKey = aliasMap[clean] ?? clean;
+    if (categoryMap.containsKey(canonicalKey)) {
+      final folder = categoryMap[canonicalKey]!;
+      return 'assets/images/$folder/$canonicalKey$suffix';
     }
     return null;
   }

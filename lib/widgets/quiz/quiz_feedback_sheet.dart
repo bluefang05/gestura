@@ -74,15 +74,31 @@ class QuizFeedbackSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.volume_up_rounded,
-                    color: titleColor,
-                  ),
-                  tooltip: 'Escuchar explicación',
-                  onPressed: () {
-                    FeedbackService.lightClick();
-                    TtsService.speak('${isCorrect ? "¡Excelente observación!" : "¡Buen intento!"}. Pista anatómica: $keyVisualClue. Explicación: $explanation');
+                ValueListenableBuilder<bool>(
+                  valueListenable: TtsService.isSpeakingNotifier,
+                  builder: (context, isSpeaking, _) {
+                    return IconButton(
+                      icon: Icon(
+                        isSpeaking
+                            ? Icons.stop_circle_rounded
+                            : Icons.volume_up_rounded,
+                        color: isSpeaking
+                            ? (isDark ? const Color(0xFFFCA5A5) : const Color(0xFFDC2626))
+                            : titleColor,
+                      ),
+                      tooltip: isSpeaking
+                          ? 'Detener lectura'
+                          : 'Escuchar explicación',
+                      onPressed: () {
+                        FeedbackService.lightClick();
+                        if (isSpeaking) {
+                          TtsService.stop();
+                        } else {
+                          TtsService.speak(
+                              '${isCorrect ? "¡Excelente observación!" : "¡Buen intento!"}. Pista clave: $keyVisualClue. Explicación: $explanation');
+                        }
+                      },
+                    );
                   },
                 ),
               ],

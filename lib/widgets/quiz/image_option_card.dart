@@ -88,8 +88,8 @@ class ImageOptionCard extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: 22,
-                    height: 22,
+                    width: 26,
+                    height: 26,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color:
@@ -98,12 +98,12 @@ class ImageOptionCard extends StatelessWidget {
                         color: isSelected
                             ? AppColors.primary
                             : AppColors.textMutedLight,
-                        width: 1.8,
+                        width: 2.0,
                       ),
                     ),
                     child: isSelected
-                        ? const Icon(Icons.circle,
-                            size: 10, color: Colors.white)
+                        ? const Icon(Icons.check_rounded,
+                            size: 18, color: Colors.white)
                         : null,
                   ),
                   const SizedBox(width: 8),

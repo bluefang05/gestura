@@ -121,18 +121,18 @@ class GestureDatabase {
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Boca y Ojos',
       summary:
-          'Elevación asimétrica de una sola comisura labial (media sonrisa burlona).',
+          'Elevación asimétrica de una sola comisura labial (media sonrisa sutil).',
       physiologicalDetails:
-          'Activación unilateral del músculo buccinador y elevador del labio superior, a veces con cabeza ligeramente inclinada hacia atrás.',
+          'Activación unilateral del músculo buccinador y elevador del labio superior. En caricaturas suele exagerarse, pero en humanos reales puede ser un microgesto apenas visible o una asimetría facial natural.',
       probableMeaning:
-          'Sensación de superioridad moral o intelectual, desprecio, sarcasmo o descalificación.',
-      alternativeMeanings: ['Asimetría facial natural al sonreír (raro)'],
+          'Sensación de superioridad o descalificación. (Nota: en la vida real, el sarcasmo cotidiano casi nunca usa esta cara, sino rostro neutro o serio con tono de voz incongruente).',
+      alternativeMeanings: ['Asimetría facial natural al hablar o sonreír'],
       contextGuidance:
-          'En discusiones puede coexistir con humor, tensión, incomodidad o una asimetría habitual; no permite concluir qué piensa la persona.',
+          'En discusiones puede coexistir con humor, tensión, timidez o asimetría habitual; no permite asegurar por sí sola qué piensa la persona.',
       whatToDo:
-          'Mantén la calma y el tono neutro. No te enganches emocionalmente; pide argumentos racionales.',
+          'Mantén la calma y el tono neutro. No supongas mala intención de inmediato; pide aclaraciones con tranquilidad.',
       salesTip:
-          'Alerta roja: el cliente siente que le estás faltando al respeto o subestimando su inteligencia. Reencauza con humildad.',
+          'Alerta de incomodidad: la persona puede sentirse incomprendida o en desacuerdo. Pide su opinión con humildad.',
       illustrationKey: 'smirk_contempt',
       difficulty: 2,
     ),
@@ -413,18 +413,18 @@ class GestureDatabase {
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
-          'Entonación donde las palabras literales dicen lo opuesto al mensaje real.',
+          'Incongruencia entre palabras aparentemente positivas y un tono plano o descendente, habitualmente con rostro neutro.',
       physiologicalDetails:
-          'Énfasis alargado en ciertas sílabas, modulación descendente final y timbre ligeramente burlón.',
+          'En la vida cotidiana, la persona suele mantener cara inexpresiva o neutra (poker face). La señal clave está en la voz: alargamiento exagerado de sílabas ("Quéee bueeeno..."), caída tonal al final y contradicción con el contexto.',
       probableMeaning:
-          'Crítica disfrazada de broma, desaprobación humorística o frustración con el interlocutor.',
-      alternativeMeanings: ['Humor seco entre amigos muy cercanos.'],
+          'Ironía o desacuerdo velado. La persona comunica lo opuesto al sentido literal de las palabras.',
+      alternativeMeanings: ['Humor seco habitual entre personas de mucha confianza.'],
       contextGuidance:
-          '"¡Qué gran idea!" con tono sarcástico significa exactamente: "Es una pésima idea".',
+          'Si alguien dice "¡Qué gran idea!" con cara seria y tono arrastrado tras un problema, significa: "Es una mala idea".',
       whatToDo:
-          'No tomes las palabras al pie de la letra. Pregunta: "¿Hay algo que prefieras hacer de otra manera?"',
+          'No te quedes con las palabras literales ni esperes ver una cara burlona. Pregunta de forma directa y calmada: "¿Prefieres que busquemos otra opción?"',
       salesTip:
-          'Si el cliente usa sarcasmo, no lo contradigas; reconoce el punto débil con honestidad.',
+          'Si notas sarcasmo en un cliente, aclara los puntos dudosos de forma transparente y sin ironía.',
       illustrationKey: 'sarcastic_inflection',
       difficulty: 2,
     ),

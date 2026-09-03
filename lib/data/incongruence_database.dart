@@ -72,14 +72,14 @@ class IncongruenceDatabase {
           '¡Vaya, qué brillante tu opinión! Nunca se me hubiera ocurrido...',
       illustrationKey: 'smirk_contempt',
       physicalSignals: [
-        'Elevación unilateral de una sola comisura de los labios (sonrisa torcida)',
-        'Cabeza ligeramente inclinada hacia atrás con mirada de reojo',
-        'Tono descendente y prolongado',
+        'Tono de voz alargado y descendente, en contradicción con las palabras',
+        'Rostro neutro o serio (cara de póker), o a veces una ligera asimetría labial',
+        'Cabeza ligeramente ladeada o mirada de reojo',
       ],
       isCongruent: false,
-      realEmotion: 'Sarcasmo, desdén o sensación de superioridad',
+      realEmotion: 'Sarcasmo, ironía o desacuerdo velado',
       explanation:
-          'La sonrisa asimétrica unilateral es la microexpresión universal de desdén. Las palabras de elogio son irónicas y dicen lo contrario del mensaje real.',
+          'El sarcasmo cotidiano suele presentarse con rostro neutro o serio ("cara de póker"); la clave no está en buscar una mueca evidente, sino en la entonación alargada o burlona que contradice el sentido literal de la frase.',
       recommendedAction:
           'No reacciones con enfado ni busques su aprobación. Responde de forma neutra y tranquila: "Es una perspectiva más. Sigamos con el tema central".',
       targetAudience: 'autism_focus',

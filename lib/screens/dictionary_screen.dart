@@ -216,17 +216,26 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.search_off_rounded, size: 54, color: AppColors.textMutedLight),
+                          Icon(Icons.search_off_rounded,
+                              size: 54,
+                              color: isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight),
                           const SizedBox(height: 12),
                           const Text(
                             'No se encontraron señales',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Intenta con otra palabra clave o selecciona "Todos" en los filtros.',
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 13, color: AppColors.textMutedLight),
+                            style: TextStyle(
+                                fontSize: 13,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight),
                           ),
                         ],
                       ),

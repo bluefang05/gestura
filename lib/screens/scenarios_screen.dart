@@ -57,7 +57,11 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                     ),
                     child: Row(
                       children: [
-                        const Icon(Icons.theater_comedy_rounded, color: AppColors.primary, size: 28),
+                        Icon(Icons.theater_comedy_rounded,
+                            color: isDark
+                                ? AppColors.primaryLight
+                                : AppColors.primary,
+                            size: 28),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -141,19 +145,36 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                               const SizedBox(height: 8),
                               Row(
                                 children: [
-                                  Icon(Icons.format_list_numbered_rounded, size: 16, color: AppColors.textMutedLight),
-                                  const SizedBox(width: 4),
+                                  Icon(Icons.format_list_numbered_rounded,
+                                      size: 18,
+                                      color: isDark
+                                          ? AppColors.textMutedDark
+                                          : AppColors.textMutedLight),
+                                  const SizedBox(width: 5),
                                   Text(
                                     '${scenario.steps.length} momentos de decisión',
-                                    style: TextStyle(fontSize: 12, color: AppColors.textMutedLight),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: isDark
+                                            ? AppColors.textMutedDark
+                                            : AppColors.textMutedLight),
                                   ),
                                   const Spacer(),
-                                  const Text(
+                                  Text(
                                     'Comenzar',
-                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.primary),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: isDark
+                                            ? AppColors.primaryLight
+                                            : AppColors.primary),
                                   ),
                                   const SizedBox(width: 4),
-                                  const Icon(Icons.arrow_forward_rounded, size: 14, color: AppColors.primary),
+                                  Icon(Icons.arrow_forward_rounded,
+                                      size: 18,
+                                      color: isDark
+                                          ? AppColors.primaryLight
+                                          : AppColors.primary),
                                 ],
                               ),
                             ],
@@ -216,19 +237,36 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                               const SizedBox(height: 12),
                               Row(
                                 children: [
-                                  Icon(Icons.format_list_numbered_rounded, size: 16, color: AppColors.textMutedLight),
-                                  const SizedBox(width: 4),
+                                  Icon(Icons.format_list_numbered_rounded,
+                                      size: 18,
+                                      color: isDark
+                                          ? AppColors.textMutedDark
+                                          : AppColors.textMutedLight),
+                                  const SizedBox(width: 5),
                                   Text(
                                     '${scenario.steps.length} momentos de decisión',
-                                    style: TextStyle(fontSize: 12, color: AppColors.textMutedLight),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        color: isDark
+                                            ? AppColors.textMutedDark
+                                            : AppColors.textMutedLight),
                                   ),
                                   const Spacer(),
-                                  const Text(
+                                  Text(
                                     'Comenzar',
-                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.primary),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold,
+                                        color: isDark
+                                            ? AppColors.primaryLight
+                                            : AppColors.primary),
                                   ),
                                   const SizedBox(width: 4),
-                                  const Icon(Icons.arrow_forward_rounded, size: 14, color: AppColors.primary),
+                                  Icon(Icons.arrow_forward_rounded,
+                                      size: 18,
+                                      color: isDark
+                                          ? AppColors.primaryLight
+                                          : AppColors.primary),
                                 ],
                               ),
                             ],

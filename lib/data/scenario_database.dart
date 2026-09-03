@@ -556,6 +556,154 @@ class ScenarioDatabase {
         ),
       ],
     ),
+
+    // --- ESCENARIO 8: VIDA COTIDIANA Y COMPRAS ---
+    Scenario(
+      id: 'scenario_shopping_backchannel',
+      title: 'En el Mostrador de la Tienda: El Micro-asentimiento',
+      domain: 'Vida Diaria',
+      description:
+          'Aprende a reconocer cuándo un cajero o dependiente te está escuchando con micro-gestos aunque no hable.',
+      contextOverview:
+          'Llegas a la caja de una farmacia o comercio a pedir dos productos específicos.',
+      iconName: 'shopping_bag',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Le pides al dependiente: "Buenos días, busco ibuprofeno de 400 y gasas". El dependiente no contesta con palabras, pero mientras mira la pantalla hace dos pequeños movimientos de cabeza hacia abajo (micro-asentimientos) y empieza a teclear.',
+          characterAction:
+              'Micro-asentimiento repetido de cabeza hacia abajo mientras la mirada está en el sistema.',
+          illustrationKey: 'head_tilt',
+          visibleSignals: [
+            'Micro-asentimiento rítmico (Confirmación de escucha)',
+            'Atención dividida hacia la pantalla de cobro',
+            'Silencio funcional de trabajo'
+          ],
+          learningTakeaway:
+              'En interacciones de servicio rápido, los neurotípicos suelen asentir levemente para confirmar "te escuché y lo estoy registrando" sin necesidad de interrumpir su tarea con una frase hablada.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Esperar tranquilamente unos segundos sin repetir la orden, entendiendo que el asentimiento confirmó la recepción.',
+              analysis:
+                  'Respuesta ideal: Decodificaste correctamente la confirmación corporal y mantienes la interacción fluida y relajada.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El dependiente se gira de inmediato, te entrega los productos y te dice el precio.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Pensar que te ignoró porque no dijo nada en voz alta y repetir la frase en tono más fuerte y molesto.',
+              analysis:
+                  'Error común de literalidad: Confundir el silencio con falta de atención. Interrumpir mientras teclea genera tensión innecesaria.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El dependiente se desconcierta y dice: "Sí, señor, ya lo estaba buscando".',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 9: DÓNDE SENTARSE EN LA REUNIÓN ---
+    Scenario(
+      id: 'scenario_meeting_seating',
+      title: 'La Sala de Juntas: Dónde Sentarse y Posición Social',
+      domain: 'Ámbito Laboral',
+      description:
+          'Descubre las reglas no escritas de la proxémica de oficina: jerarquía, visibilidad y comodidad en la mesa.',
+      contextOverview:
+          'Llegas a una reunión de proyecto con el Director del área y 6 colegas en una mesa rectangular grande.',
+      iconName: 'table_restaurant',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Entras a la sala 3 minutos antes. La mesa es rectangular. La cabecera está vacía. El facilitador de la reunión suele sentarse en un extremo. Tu rol en esta reunión es participar como técnico colaborador, no como líder.',
+          characterAction:
+              'Mesa rectangular con cabecera libre y sillas en los laterales intermedios.',
+          illustrationKey: 'round_table',
+          visibleSignals: [
+            'Cabecera libre (Espacio de moderación/liderazgo)',
+            'Laterales intermedios (Espacio de participación equilibrada)',
+            'Extremos opuestos (Distancia comunicativa)'
+          ],
+          learningTakeaway:
+              'En mesas rectangulares de trabajo, la cabecera comunica conducción de la reunión. Los puestos laterales intermedios ofrecen excelente contacto visual con todos sin asumir un rol jerárquico no asignado.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Sentarte en la cabecera principal de la mesa.',
+              analysis:
+                  'Error de posición social: Ocupar la cabecera cuando no diriges la reunión puede percibirse como prepotencia o desconocimiento de la dinámica del equipo.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Cuando llega el líder de la reunión, se produce un silencio incómodo para pedirte que te muevas.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Elegir un asiento en el lateral intermedio, con buena visibilidad de la pantalla y de los demás.',
+              analysis:
+                  'La elección perfecta: Facilita escuchar, ver la presentación y participar de forma natural sin sobreexponerte ni aislarte.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Te ubicas cómodamente y la reunión inicia con naturalidad.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Sentarte en una silla pegada a la pared al fondo, fuera de la mesa.',
+              analysis:
+                  'Autoexclusión: Sentarse fuera de la mesa cuando hay sillas disponibles transmite inseguridad o que no deseas formar parte del equipo.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Un compañero te tiene que decir: "Ven a la mesa, hay lugar".',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Durante la reunión, notas que el moderador mira con frecuencia hacia el centro de la mesa al hacer preguntas abiertas.',
+          characterAction:
+              'Mirada triangular barriendo los asientos intermedios.',
+          illustrationKey: 'proxemics_social',
+          visibleSignals: [
+            'Contacto visual incluyente hacia los laterales',
+            'Invitación no verbal a intervenir'
+          ],
+          learningTakeaway:
+              'Estar en el lateral intermedio te coloca en el campo de visión natural del moderador para aportar cuando sea oportuno.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Hacer un leve contacto visual y levantar ligeramente el bolígrafo o la mano cuando quieras aportar.',
+              analysis:
+                  'Excelente señalización de turno conversacional: Te permite pedir la palabra con elegancia y sin interrumpir bruscamente.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El moderador te cede la palabra: "Adelante, cuéntanos tu perspectiva". ¡Participación impecable!',
+            ),
+            ScenarioChoice(
+              text:
+                  'Comenzar a hablar de golpe encima de la voz del compañero que estaba exponiendo.',
+              analysis:
+                  'Rompe los turnos conversacionales y genera frustración.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El moderador te pide esperar: "Un segundo, dejemos que termine primero".',
+            ),
+          ],
+        ),
+      ],
+    ),
   ];
 
   static Scenario? getById(String id) {

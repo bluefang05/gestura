@@ -35,49 +35,44 @@ class QuizHubScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
-                  // Mode 1: Visual Image-Grid Quiz (Featured!)
+                  // Modo Destacado: Test Visual de Microexpresiones
                   AppCard(
-                    color: isDark
-                        ? const Color(0xFF134E4A)
-                        : AppColors.primaryContainer,
+                    padding: const EdgeInsets.all(16),
                     borderSide: BorderSide(
-                      color:
-                          isDark ? AppColors.primaryLight : AppColors.primary,
-                      width: 1.8,
+                      color: isDark ? AppColors.primaryLight : AppColors.primary,
+                      width: 1.5,
                     ),
-                    padding: const EdgeInsets.all(18),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             BadgePill(
-                              text: 'Modo Destacado',
+                              text: 'Entrenamiento Principal',
                               icon: Icons.auto_awesome_rounded,
-                              color: AppColors.primaryDark,
-                              backgroundColor:
-                                  Colors.white.withValues(alpha: 0.8),
+                              color: isDark
+                                  ? AppColors.primaryLight
+                                  : AppColors.primary,
                             ),
                             const Spacer(),
-                            const Icon(Icons.grid_view_rounded,
-                                color: AppColors.primaryDark),
+                            Icon(Icons.grid_view_rounded,
+                                color: isDark
+                                    ? AppColors.primaryLight
+                                    : AppColors.primary),
                           ],
                         ),
                         const SizedBox(height: 12),
-                        Text(
-                          'Test de Reconocimiento Visual (Con Imágenes)',
+                        const Text(
+                          'Test de Reconocimiento Visual',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 17,
                             fontWeight: FontWeight.w900,
-                            color: isDark
-                                ? Colors.white
-                                : AppColors.textPrimaryLight,
                             letterSpacing: -0.3,
                           ),
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 5),
                         Text(
-                          'Elige la tarjeta visual correcta entre 4 opciones con ilustraciones de microexpresiones, posturas y proxémica.',
+                          'Diferencia microexpresiones, posturas y señales corporales reales entre 4 opciones visuales.',
                           style: TextStyle(
                             fontSize: 13,
                             color: isDark
@@ -86,687 +81,298 @@ class QuizHubScreen extends StatelessWidget {
                             height: 1.35,
                           ),
                         ),
-                        const SizedBox(height: 16),
-                        ElevatedButton.icon(
-                          icon: const Icon(Icons.play_circle_filled_rounded),
-                          label: const Text('Iniciar Test Visual'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                          ),
-                          onPressed: () {
-                            FeedbackService.lightClick();
-                            final imageQuestions =
-                                QuizDatabase.getImageCardQuestions();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                  title: 'Test Visual de Microexpresiones',
-                                  questions: imageQuestions.isNotEmpty
-                                      ? imageQuestions
-                                      : QuizDatabase.questions,
-                                ),
+                        const SizedBox(height: 14),
+                        SizedBox(
+                          height: 44,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.play_arrow_rounded, size: 22),
+                            label: const Text('Iniciar Test Visual',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primary,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                            );
-                          },
+                            ),
+                            onPressed: () {
+                              FeedbackService.lightClick();
+                              final imageQuestions =
+                                  QuizDatabase.getImageCardQuestions();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => QuizRunnerScreen(
+                                    title: 'Test Visual de Microexpresiones',
+                                    questions: imageQuestions.isNotEmpty
+                                        ? imageQuestions
+                                        : QuizDatabase.questions,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 18),
 
-                  // Practice Modes Grid on Tablet
-                  if (isTablet)
-                    GridView.count(
-                      crossAxisCount: 2,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 2.1,
-                      children: [
-                        // Mode: Incongruence Detector (Autism / Calibration Focus)
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF312E81).withValues(alpha: 0.35)
-                              : const Color(0xFFEEF2FF),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      const IncongruenceDetectorScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF6366F1)
-                                      .withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.psychology_alt_rounded,
-                                    color: Color(0xFF6366F1), size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Detector de Incongruencias',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      '¿Palabras vs cuerpo? Descifra la verdad.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: Color(0xFF6366F1)),
-                            ],
-                          ),
-                        ),
-
-                        // Mode: Buyer Temperature (Sales Focus)
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF451A03).withValues(alpha: 0.35)
-                              : const Color(0xFFFFFBEB),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      const BuyerTemperatureScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFD97706)
-                                      .withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.thermostat_rounded,
-                                    color: Color(0xFFD97706), size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Termómetro de Ventas',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Mide la receptividad y detecta el cierre.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: Color(0xFFD97706)),
-                            ],
-                          ),
-                        ),
-
-                        // Mode: Flash Contrarreloj
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF451A03)
-                              : const Color(0xFFFEF3C7),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const FlashQuizScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.accent.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.flash_on_rounded,
-                                    color: AppColors.accent, size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          'Modo Flash',
-                                          style: TextStyle(
-                                              fontSize: 14.5,
-                                              fontWeight: FontWeight.w800),
-                                        ),
-                                        const SizedBox(width: 6),
-                                        BadgePill(
-                                            text: '3 seg',
-                                            color: AppColors.accent),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Entrena reflejos en 3s.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: AppColors.accent),
-                            ],
-                          ),
-                        ),
-
-                        // Mode: Sales & Workplace Quiz
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF1E1B4B)
-                              : const Color(0xFFEEF2FF),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                  title: 'Ventas y Negociación',
-                                  questions: QuizDatabase.questions,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.indigo.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.business_center_rounded,
-                                    color: AppColors.indigo, size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Ventas y Negociación',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Preguntas de cierre y objeciones.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: AppColors.indigo),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  else ...[
-                    // Mobile Stack
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF312E81).withValues(alpha: 0.35)
-                          : const Color(0xFFEEF2FF),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) =>
-                                  const IncongruenceDetectorScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF6366F1)
-                                  .withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Icon(Icons.psychology_alt_rounded,
-                                color: Color(0xFF6366F1), size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Detector de Incongruencias',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Aprende a detectar cuándo las palabras ocultan una emoción o molestia.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: Color(0xFF6366F1)),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF451A03).withValues(alpha: 0.35)
-                          : const Color(0xFFFFFBEB),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const BuyerTemperatureScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFD97706)
-                                  .withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Icon(Icons.thermostat_rounded,
-                                color: Color(0xFFD97706), size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Termómetro de Negociación',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Calibra la temperatura de compra y conoce la táctica de cierre óptima.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: Color(0xFFD97706)),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF451A03)
-                          : const Color(0xFFFEF3C7),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const FlashQuizScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: AppColors.accent.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Icon(Icons.flash_on_rounded,
-                                color: AppColors.accent, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Text(
-                                      'Modo Flash Contrarreloj',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    BadgePill(
-                                        text: '3 seg', color: AppColors.accent),
-                                  ],
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'La imagen desaparece en 3s: entrena tus reflejos para captar microexpresiones fugaces en vivo.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: AppColors.accent),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF1E1B4B)
-                          : const Color(0xFFEEF2FF),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => QuizRunnerScreen(
-                              title: 'Ventas y Negociación',
-                              questions: QuizDatabase.questions,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: AppColors.indigo.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(14),
-                            ),
-                            child: const Icon(Icons.business_center_rounded,
-                                color: AppColors.indigo, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Test para Ventas y Negociación',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 3),
-                                Text(
-                                  'Preguntas prácticas para detectar objeciones y señales de compra.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: AppColors.indigo),
-                        ],
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 24),
-
-                  // Categorías Específicas
+                  // Modos Especializados
                   const SectionHeader(
-                    title: 'Quizzes por Categoría',
-                    subtitle: 'Entrena un área específica a tu propio ritmo',
+                    title: 'Entrenamientos Especializados',
+                    subtitle: 'Habilidades de calibración social y respuesta rápida',
                   ),
                   const SizedBox(height: 8),
 
-                  if (isTablet)
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: catColumns,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12,
-                        childAspectRatio: isWide ? 2.6 : 2.3,
+                  GridView.count(
+                    crossAxisCount: isTablet ? 2 : 1,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: isTablet ? 2.3 : 2.7,
+                    children: [
+                      // Modo: Detector de Incongruencias
+                      _buildPracticeModeCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.psychology_alt_rounded,
+                        accentColor: AppColors.indigo,
+                        title: 'Detector de Incongruencias',
+                        description: 'Aprende cuándo las palabras dicen una cosa pero el cuerpo otra.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const IncongruenceDetectorScreen(),
+                            ),
+                          );
+                        },
                       ),
-                      itemCount: CategoryInfo.allCategories.length,
-                      itemBuilder: (context, index) {
-                        final cat = CategoryInfo.allCategories[index];
-                        return AppCard(
-                          padding: const EdgeInsets.all(14),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            final qList = QuizDatabase.getByCategory(cat.type);
-                            final questions = qList.isNotEmpty
-                                ? qList
-                                : QuizDatabase.questions;
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                  title: cat.title,
-                                  questions: questions,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color:
-                                      cat.primaryColor.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(cat.icon,
-                                    color: cat.primaryColor, size: 22),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      cat.title,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      cat.chapterReference,
-                                      style: TextStyle(
-                                        fontSize: 11.5,
-                                        color: isDark
-                                            ? AppColors.textMutedDark
-                                            : AppColors.textMutedLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color: isDark
-                                    ? AppColors.textMutedDark
-                                    : AppColors.textMutedLight,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                  else
-                    for (final cat in CategoryInfo.allCategories) ...[
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: AppCard(
-                          padding: const EdgeInsets.all(14),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            final qList = QuizDatabase.getByCategory(cat.type);
-                            final questions = qList.isNotEmpty
-                                ? qList
-                                : QuizDatabase.questions;
+                      // Modo: Termómetro de Receptividad
+                      _buildPracticeModeCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.thermostat_rounded,
+                        accentColor: AppColors.coral,
+                        title: 'Termómetro de Receptividad',
+                        description: 'Mide el nivel de apertura y detecta el momento de acuerdo.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const BuyerTemperatureScreen(),
+                            ),
+                          );
+                        },
+                      ),
 
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                  title: cat.title,
-                                  questions: questions,
-                                ),
+                      // Modo: Flash Contrarreloj
+                      _buildPracticeModeCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.flash_on_rounded,
+                        accentColor: AppColors.accent,
+                        title: 'Modo Flash Contrarreloj',
+                        description: 'Entrena reflejos rápidos: la imagen desaparece en 3 segundos.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const FlashQuizScreen(),
+                            ),
+                          );
+                        },
+                      ),
+
+                      // Modo: Ventas y Negociación
+                      _buildPracticeModeCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.business_center_rounded,
+                        accentColor: AppColors.primary,
+                        title: 'Ventas y Trabajo',
+                        description: 'Preguntas prácticas para reuniones de trabajo y objeciones.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => QuizRunnerScreen(
+                                title: 'Ventas y Negociación',
+                                questions: QuizDatabase.questions,
                               ),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color:
-                                      cat.primaryColor.withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Icon(cat.icon,
-                                    color: cat.primaryColor, size: 22),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      cat.title,
-                                      style: const TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      cat.chapterReference,
-                                      style: TextStyle(
-                                        fontSize: 11.5,
-                                        color: isDark
-                                            ? AppColors.textMutedDark
-                                            : AppColors.textMutedLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Icon(
-                                Icons.chevron_right_rounded,
-                                color: isDark
-                                    ? AppColors.textMutedDark
-                                    : AppColors.textMutedLight,
-                              ),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Quizzes por Categoría
+                  const SectionHeader(
+                    title: 'Quizzes por Canal',
+                    subtitle: 'Entrena un área anatómica específica',
+                  ),
+                  const SizedBox(height: 8),
+
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: catColumns,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: isTablet ? 2.6 : 2.5,
+                    ),
+                    itemCount: CategoryInfo.allCategories.length,
+                    itemBuilder: (context, index) {
+                      final cat = CategoryInfo.allCategories[index];
+                      return AppCard(
+                        padding: const EdgeInsets.all(12),
+                        onTap: () {
+                          FeedbackService.lightClick();
+                          final qList = QuizDatabase.getByCategory(cat.type);
+                          final questions = qList.isNotEmpty
+                              ? qList
+                              : QuizDatabase.questions;
+
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => QuizRunnerScreen(
+                                title: cat.title,
+                                questions: questions,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: cat.primaryColor.withValues(alpha: 0.14),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(cat.icon,
+                                  color: cat.primaryColor, size: 20),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    cat.title,
+                                    style: const TextStyle(
+                                        fontSize: 13.5,
+                                        fontWeight: FontWeight.w700),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    cat.chapterReference,
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: isDark
+                                          ? AppColors.textMutedDark
+                                          : AppColors.textMutedLight,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.chevron_right_rounded,
+                              size: 20,
+                              color: isDark
+                                  ? AppColors.textMutedDark
+                                  : AppColors.textMutedLight,
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  static Widget _buildPracticeModeCard({
+    required BuildContext context,
+    required bool isDark,
+    required IconData icon,
+    required Color accentColor,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return AppCard(
+      padding: const EdgeInsets.all(12),
+      onTap: () {
+        FeedbackService.lightClick();
+        onTap();
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: accentColor.withValues(alpha: isDark ? 0.2 : 0.12),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(icon, color: accentColor, size: 22),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.chevron_right_rounded,
+            size: 20,
+            color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
+          ),
+        ],
       ),
     );
   }

@@ -4,6 +4,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 import '../data/quiz_database.dart';
 import '../models/quiz_question.dart';
 import '../widgets/common/ad_bottom_bar.dart';
@@ -113,6 +114,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
         keyVisualClue: currentQ.keyVisualClue,
         explanation: currentQ.explanation,
       );
+    } else {
+      TtsService.stop();
     }
 
     showModalBottomSheet(
@@ -136,6 +139,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   }
 
   void _nextQuestion() {
+    TtsService.stop();
     if (_currentIndex < _questions.length - 1) {
       setState(() {
         _currentIndex++;
@@ -155,6 +159,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   }
 
   void _showSummaryDialog() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -163,16 +168,18 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.flash_on_rounded,
-                color: AppColors.accent, size: 48),
+            Icon(Icons.flash_on_rounded,
+                color: isDark ? AppColors.accentLight : AppColors.accent,
+                size: 48),
             const SizedBox(height: 12),
             Text('Aciertos: $_correctCount de ${_questions.length}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 4),
             Text('Puntos ganados: +$_score XP',
-                style: const TextStyle(
-                    color: AppColors.primary, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: isDark ? AppColors.primaryLight : AppColors.primary,
+                    fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
@@ -210,11 +217,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       appBar: AppBar(
         title: const Text('Modo Flash Contrarreloj'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up_rounded),
-            tooltip: 'Escuchar pregunta y opciones',
-            onPressed: () {
-              FeedbackService.lightClick();
+          TtsAppBarControl(
+            onPlay: () {
               TtsService.speakQuizQuestion(
                 question: currentQ.prompt,
                 visualClue: currentQ.keyVisualClue,
@@ -235,7 +239,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                 valueColor: AlwaysStoppedAnimation<Color>(
                   _timerController.value > 0.7
                       ? AppColors.error
-                      : AppColors.accent,
+                      : (isDark ? AppColors.accentLight : AppColors.accent),
                 ),
               );
             },
@@ -252,11 +256,11 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
             children: [
               BadgePill(
                 text: 'Pregunta ${_currentIndex + 1} de ${_questions.length}',
-                color: AppColors.primary,
+                color: isDark ? AppColors.primaryLight : AppColors.primary,
               ),
               BadgePill(
                 text: '$_score XP',
-                color: AppColors.accent,
+                color: isDark ? AppColors.accentLight : AppColors.accent,
                 icon: Icons.bolt_rounded,
               ),
             ],
@@ -294,8 +298,11 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.timer_off_rounded,
-                                size: 48, color: AppColors.accent),
+                            Icon(Icons.timer_off_rounded,
+                                size: 48,
+                                color: isDark
+                                    ? AppColors.accentLight
+                                    : AppColors.accent),
                             const SizedBox(height: 8),
                             const Text(
                               '¡Tiempo de visualización agotado!',

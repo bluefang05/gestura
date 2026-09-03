@@ -83,12 +83,15 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Icon(Icons.bolt_rounded,
-                                color: AppColors.accent, size: 24),
-                            SizedBox(width: 8),
-                            Text(
+                                color: isDark
+                                    ? AppColors.accentLight
+                                    : AppColors.accent,
+                                size: 24),
+                            const SizedBox(width: 8),
+                            const Text(
                               'Referencia Rápida de Campo',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w900),
@@ -126,7 +129,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.success, size: 14),
+                              color: AppColors.success, size: 18),
                           label: const Text('Verde (Avanzar)'),
                           selected: _filterLight == SignalTrafficLight.green,
                           selectedColor: AppColors.successContainer,
@@ -139,7 +142,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.warning, size: 14),
+                              color: AppColors.warning, size: 18),
                           label: const Text('Amarillo (Precaución)'),
                           selected: _filterLight == SignalTrafficLight.yellow,
                           selectedColor: AppColors.warningContainer,
@@ -152,7 +155,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.error, size: 14),
+                              color: AppColors.error, size: 18),
                           label: const Text('Rojo (Peligro)'),
                           selected: _filterLight == SignalTrafficLight.red,
                           selectedColor: const Color(0xFFFFE4E6),
@@ -226,10 +229,12 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(
+                                          icon: Icon(
                                               Icons.volume_up_rounded,
                                               size: 18,
-                                              color: AppColors.primary),
+                                              color: isDark
+                                                  ? AppColors.primaryLight
+                                                  : AppColors.primary),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
                                           tooltip: 'Escuchar en voz alta',
@@ -338,10 +343,12 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           ),
                                         ),
                                         IconButton(
-                                          icon: const Icon(
+                                          icon: Icon(
                                               Icons.volume_up_rounded,
                                               size: 18,
-                                              color: AppColors.primary),
+                                              color: isDark
+                                                  ? AppColors.primaryLight
+                                                  : AppColors.primary),
                                           padding: EdgeInsets.zero,
                                           constraints: const BoxConstraints(),
                                           tooltip: 'Escuchar en voz alta',

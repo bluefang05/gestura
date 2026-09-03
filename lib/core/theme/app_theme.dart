@@ -60,6 +60,14 @@ class AppTheme {
           );
         }),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.primary,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
@@ -155,6 +163,12 @@ class AppTheme {
         backgroundColor: AppColors.darkSurface,
         elevation: 2,
         indicatorColor: AppColors.primaryDark,
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.primaryLight, size: 24);
+          }
+          return const IconThemeData(color: AppColors.textMutedDark, size: 24);
+        }),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return const TextStyle(
@@ -169,6 +183,14 @@ class AppTheme {
             color: AppColors.textMutedDark,
           );
         }),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.primaryLight,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -201,9 +223,9 @@ class AppTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: const Color(0xFF1E293B),
-        selectedColor: AppColors.primary,
+        selectedColor: AppColors.primaryLight,
         disabledColor: const Color(0xFF334155),
-        secondarySelectedColor: AppColors.primary,
+        secondarySelectedColor: AppColors.primaryLight,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         labelStyle: const TextStyle(
           fontSize: 13,
@@ -213,7 +235,7 @@ class AppTheme {
         secondaryLabelStyle: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w800,
-          color: Colors.white,
+          color: AppColors.darkBg,
         ),
         side: const BorderSide(color: AppColors.darkBorder, width: 1.2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -256,6 +278,14 @@ class AppTheme {
           fontWeight: FontWeight.w900,
         ),
         iconTheme: IconThemeData(color: AppColors.hcYellow),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.hcYellow,
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

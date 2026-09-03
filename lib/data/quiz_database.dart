@@ -27,10 +27,10 @@ class QuizDatabase {
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_smirk',
-          text: 'Sonrisa C',
-          subtext: 'Una sola comisura elevada',
-          illustrationKey: 'smirk_contempt',
+          id: 'opt_averted',
+          text: 'Expresión C',
+          subtext: 'Mirada esquiva evitando conexión visual',
+          illustrationKey: 'averted_gaze',
           isCorrect: false,
         ),
         QuizOption(
@@ -50,85 +50,85 @@ class QuizDatabase {
       id: 'q_visual_posture_open',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          '¿Cuál de estas figuras muestra una Postura Abierta y Receptiva para negociar?',
+          '¿Cuál de estas siluetas muestra una Postura Corporal Receptiva (Relajada y sin barreras)?',
       scenarioText:
-          'En ventas y liderazgo, la apertura corporal genera confianza y disminuye la resistencia.',
+          'Observa la posición de los brazos respecto al pecho y torso.',
       options: [
         QuizOption(
           id: 'opt_closed',
-          text: 'Figura A',
-          subtext: 'Brazos cruzados en el pecho',
+          text: 'Silueta A',
+          subtext: 'Brazos cruzados frente al pecho',
           illustrationKey: 'closed_posture',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_open',
-          text: 'Figura B',
-          subtext: 'Brazos relajados, pecho despejado',
+          text: 'Silueta B',
+          subtext: 'Brazos relajados a los lados, pecho despejado',
           illustrationKey: 'open_posture',
           isCorrect: true,
         ),
         QuizOption(
-          id: 'opt_leanback',
-          text: 'Figura C',
-          subtext: 'Cuerpo inclinado hacia atrás',
-          illustrationKey: 'leaning_back',
+          id: 'opt_self_hold',
+          text: 'Silueta C',
+          subtext: 'Sujeción de antebrazo (barrera defensiva parcial)',
+          illustrationKey: 'self_hold_arm',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_shrug',
-          text: 'Figura D',
+          text: 'Silueta D',
           subtext: 'Hombros elevados con palmas arriba',
           illustrationKey: 'shrug',
           isCorrect: false,
         ),
       ],
       keyVisualClue:
-          'Pecho despejado sin barreras de brazos y postura erguida pero relajada.',
+          'Brazos sueltos a los lados y torso despejado sin cruces ni bloqueos.',
       explanation:
-          'La Figura B representa la postura abierta: los brazos están a los lados, el pecho no está bloqueado por barreras y la orientación es frontal y directa.',
+          'La Silueta B representa una postura abierta y receptiva: los brazos descansan a los costados sin bloquear el pecho, lo que en interacción cotidiana suele señalar disposición cómoda a conversar.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_steeple',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          '¿Cuál de las siguientes imágenes muestra la postura de "Manos en Ojiva / Campanario" (Alta confianza y autoridad)?',
+          '¿Cuál de las siguientes imágenes muestra el gesto de "Manos en Ojiva o Pirámide"?',
       scenarioText:
-          'Muy utilizada en negociaciones por expertos al plantear conclusiones definitivas.',
+          'Observa la forma y contacto de las manos.',
       options: [
         QuizOption(
           id: 'opt_steeple',
-          text: 'Figura 1',
-          subtext: 'Yemas tocándose en pirámide',
+          text: 'Opción 1',
+          subtext: 'Yemas de los dedos en pirámide',
           illustrationKey: 'steepling_hands',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_wring',
-          text: 'Figura 2',
-          subtext: 'Fricción de palmas',
+          text: 'Opción 2',
+          subtext: 'Fricción o frotamiento de palmas',
           illustrationKey: 'hand_wringing',
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_hips',
-          text: 'Figura 3',
-          subtext: 'Manos en jarra/caderas',
-          illustrationKey: 'hands_on_hips',
+          id: 'opt_chin',
+          text: 'Opción 3',
+          subtext: 'Mano en barbilla (evaluación crítica)',
+          illustrationKey: 'hand_on_chin',
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_neck',
-          text: 'Figura 4',
-          subtext: 'Mano cubriendo la garganta',
-          illustrationKey: 'touching_neck',
+          id: 'opt_tapping',
+          text: 'Opción 4',
+          subtext: 'Tamborileo de dedos en la mesa',
+          illustrationKey: 'finger_tapping',
           isCorrect: false,
         ),
       ],
       keyVisualClue:
-          'Puntas de los dedos opuestos en contacto formando una carpa o pirámide simétrica.',
+          'Puntas de los dedos opuestos en contacto formando una carpa o pirámide.',
       explanation:
-          'La Ojiva (Figura 1) es el gesto clásico de autoconfianza y solvencia intelectual. A diferencia del frotarse las manos (ansiedad o expectativa) o tocarse el cuello (estrés), la ojiva transmite control y convicción absoluta.',
+          'La postura de Ojiva o Pirámide (Opción 1) une exclusivamente las yemas de los dedos. A menudo acompaña momentos de calma, reflexión tranquila o precisión técnica al explicar una idea.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_pacifying',
@@ -139,10 +139,10 @@ class QuizDatabase {
           'Los gestos pacificadores ocurren cuando el sistema nervioso busca reducir el ritmo cardíaco.',
       options: [
         QuizOption(
-          id: 'opt_headtilt',
+          id: 'opt_weight_shift',
           text: 'Figura A',
-          subtext: 'Cabeza ladeada con sonrisa',
-          illustrationKey: 'head_tilt',
+          subtext: 'Cambio de peso alternado entre ambos pies',
+          illustrationKey: 'weight_shift',
           isCorrect: false,
         ),
         QuizOption(
@@ -187,10 +187,10 @@ class QuizDatabase {
           isCorrect: true,
         ),
         QuizOption(
-          id: 'opt_hips_incorrect',
+          id: 'opt_mirroring',
           text: 'Opción 2',
-          subtext: 'Manos en jarras con codos abiertos',
-          illustrationKey: 'hands_on_hips',
+          subtext: 'Sincronía postural en espejo',
+          illustrationKey: 'postural_mirroring',
           isCorrect: false,
         ),
         QuizOption(
@@ -201,10 +201,10 @@ class QuizDatabase {
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_leanback_incorrect',
+          id: 'opt_feet_exit',
           text: 'Opción 4',
-          subtext: 'Cuerpo recostado hacia atrás',
-          illustrationKey: 'leaning_back',
+          subtext: 'Pies orientados en dirección a la salida',
+          illustrationKey: 'foot_orientation',
           isCorrect: false,
         ),
       ],
@@ -237,17 +237,17 @@ class QuizDatabase {
           isCorrect: true,
         ),
         QuizOption(
-          id: 'opt_surprise',
+          id: 'opt_narrowed',
           text: 'Expresión 3',
-          subtext: 'Ojos redondos y cejas altas',
-          illustrationKey: 'surprised_look',
+          subtext: 'Ojos entrecerrados con sospecha',
+          illustrationKey: 'narrowed_eyes',
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_wink',
+          id: 'opt_lip_biting',
           text: 'Expresión 4',
-          subtext: 'Guiño de complicidad',
-          illustrationKey: 'winking_face',
+          subtext: 'Mordida de labio inferior (contención)',
+          illustrationKey: 'lip_biting',
           isCorrect: false,
         ),
       ],
@@ -363,10 +363,10 @@ class QuizDatabase {
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_seating_l',
+          id: 'opt_lighting_env',
           text: 'Opción C',
-          subtext: 'Ubicación en esquina 90°',
-          illustrationKey: 'seating_angle',
+          subtext: 'Iluminación y calidez ambiental',
+          illustrationKey: 'lighting_atmosphere',
           isCorrect: false,
         ),
         QuizOption(
@@ -398,23 +398,23 @@ class QuizDatabase {
           isCorrect: true,
         ),
         QuizOption(
-          id: 'opt_barrier_desk_img',
+          id: 'opt_hands_table',
           text: 'Disposición 2',
-          subtext: 'Escritorio frontal macizo',
-          illustrationKey: 'desk_barrier',
+          subtext: 'Manos entrelazadas en reposo sobre la mesa',
+          illustrationKey: 'hands_clasped_front',
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_circle_table_img',
+          id: 'opt_handshake_stand',
           text: 'Disposición 3',
-          subtext: 'Mesa circular amplia',
-          illustrationKey: 'round_table',
+          subtext: 'Saludo formal de pie con apretón firme',
+          illustrationKey: 'handshake_firm',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_casual_dress_img',
           text: 'Disposición 4',
-          subtext: 'Vestimenta casual',
+          subtext: 'Vestimenta informal y relajada',
           illustrationKey: 'dress_casual',
           isCorrect: false,
         ),
@@ -440,10 +440,10 @@ class QuizDatabase {
           isCorrect: true,
         ),
         QuizOption(
-          id: 'opt_duchenne_img',
+          id: 'opt_nostril_img',
           text: 'Expresión B',
-          subtext: 'Sonrisa genuina con patas de gallo',
-          illustrationKey: 'duchenne_smile',
+          subtext: 'Aleteo nasal de irritación',
+          illustrationKey: 'nostril_flaring',
           isCorrect: false,
         ),
         QuizOption(
@@ -454,10 +454,10 @@ class QuizDatabase {
           isCorrect: false,
         ),
         QuizOption(
-          id: 'opt_wink_img',
+          id: 'opt_eyelids_img',
           text: 'Expresión D',
-          subtext: 'Guiño de complicidad',
-          illustrationKey: 'winking_face',
+          subtext: 'Párpados cerrados prolongados de rechazo',
+          illustrationKey: 'closed_eyelids',
           isCorrect: false,
         ),
       ],
@@ -552,7 +552,7 @@ class QuizDatabase {
       category: CategoryType.factoresParalinguisticos,
       prompt:
           'Tu compañero te dice "¡Qué maravillosa idea!" arrastrando las palabras y con tono plano. ¿Cómo interpretarlo?',
-      questionIllustrationKey: 'narrowed_eyes',
+      questionIllustrationKey: 'sarcastic_inflection',
       scenarioText:
           'Propusiste trabajar el sábado por la tarde para terminar un informe.',
       options: [
@@ -564,7 +564,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_sarcastico',
           text:
-              'Es un tono sarcástico: en realidad piensa que es una mala idea.',
+              'Es sarcasmo: el tono plano e incongruente indica que piensa que es mala idea.',
           isCorrect: true,
         ),
         QuizOption(
@@ -574,9 +574,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Incongruencia entre la palabra positiva ("maravillosa") y el tono descendente/arrastrado.',
+          'Incongruencia entre la palabra positiva ("maravillosa") y el tono descendente/arrastrado, con rostro habitualmente neutro.',
       explanation:
-          'Cuando tono y palabras parecen no coincidir, conviene preguntar o buscar más contexto. Ninguna pista —ni el tono— tiene prioridad universal sobre lo que la persona quiso comunicar.',
+          'En la vida cotidiana, las personas que usan sarcasmo no suelen hacer muecas exageradas ni sonreír; suelen mantener el rostro neutro (poker face). La contradicción está entre la palabra positiva y la melodía arrastrada o plana de la voz.',
     ),
     QuizQuestion(
       id: 'q_digital_caps',

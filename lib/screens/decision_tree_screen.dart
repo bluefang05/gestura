@@ -199,7 +199,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                       final isSelected = _selectedZone == z['id'];
                       return ChoiceChip(
                         avatar: Icon(z['icon'] as IconData,
-                            size: 16,
+                            size: 18,
                             color: isSelected
                                 ? Colors.white
                                 : z['color'] as Color),
@@ -435,15 +435,15 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                         ValueListenableBuilder<String?>(
                           valueListenable: TtsService.currentSpeakingIdNotifier,
                           builder: (context, speakingId, _) {
-                            final isSpeaking = speakingId == g.id;
+                            final isSpeaking = speakingId == 'tree_${g.id}';
                             return IconButton(
                               icon: Icon(
                                 isSpeaking
                                     ? Icons.stop_circle_rounded
                                     : Icons.volume_up_rounded,
                                 color: isSpeaking
-                                    ? AppColors.accent
-                                    : AppColors.primary,
+                                    ? (isDark ? AppColors.accentLight : AppColors.accent)
+                                    : (isDark ? AppColors.primaryLight : AppColors.primary),
                                 size: 22,
                               ),
                               tooltip: isSpeaking
@@ -453,7 +453,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                                 FeedbackService.lightClick();
                                 final textToSpeak =
                                     '${g.name}. Significado: ${g.probableMeaning}. Qué debes hacer: ${g.whatToDo}. En ventas: ${g.salesTip}';
-                                TtsService.speak(textToSpeak, gestureId: g.id);
+                                TtsService.speak(textToSpeak, gestureId: 'tree_${g.id}');
                               },
                             );
                           },
@@ -476,7 +476,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           // Significado
           _buildActionItem(
             icon: Icons.psychology_rounded,
-            iconColor: AppColors.purple,
+            iconColor: isDark ? const Color(0xFFA78BFA) : AppColors.purple,
             title: '¿Qué significa realmente?',
             description: g.probableMeaning,
           ),
@@ -485,7 +485,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           // Acción Recomendada
           _buildActionItem(
             icon: Icons.check_circle_outline_rounded,
-            iconColor: AppColors.success,
+            iconColor: isDark ? const Color(0xFF34D399) : AppColors.success,
             title: '¿Qué debes hacer / decir tú?',
             description: g.whatToDo,
           ),
@@ -494,7 +494,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           // Tip de Ventas / Negociación
           _buildActionItem(
             icon: Icons.trending_up_rounded,
-            iconColor: AppColors.accent,
+            iconColor: isDark ? AppColors.accentLight : AppColors.accent,
             title: 'Táctica de Ventas y Negociación',
             description: g.salesTip,
           ),
@@ -504,7 +504,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
-              icon: const Icon(Icons.menu_book_rounded, size: 16),
+              icon: const Icon(Icons.menu_book_rounded, size: 18),
               label: const Text('Ver Ficha Completa en el Manual'),
               onPressed: () {
                 FeedbackService.lightClick();

@@ -57,9 +57,96 @@ class GestureCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Top: Title, Audio and Bookmark
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          item.name,
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: -0.2,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      ValueListenableBuilder<String?>(
+                        valueListenable: TtsService.currentSpeakingIdNotifier,
+                        builder: (context, speakingId, _) {
+                          final isSpeaking = speakingId == item.id;
+                          return IconButton(
+                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                            padding: EdgeInsets.zero,
+                            iconSize: 22,
+                            icon: Icon(
+                              isSpeaking
+                                  ? Icons.stop_circle_rounded
+                                  : Icons.volume_up_rounded,
+                              color: isSpeaking
+                                  ? (isDark
+                                      ? const Color(0xFFF87171)
+                                      : const Color(0xFFDC2626))
+                                  : mutedColor,
+                            ),
+                            tooltip: isSpeaking
+                                ? 'Detener lectura'
+                                : 'Escuchar en voz alta',
+                            onPressed: () {
+                              FeedbackService.lightClick();
+                              if (isSpeaking) {
+                                TtsService.stop();
+                              } else {
+                                final textToRead =
+                                    '${item.name}. ${item.summary}. Pistas físicas: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
+                                TtsService.speak(textToRead, gestureId: item.id);
+                              }
+                            },
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 4),
+                      IconButton(
+                        constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                        padding: EdgeInsets.zero,
+                        iconSize: 22,
+                        icon: Icon(
+                          isBookmarked
+                              ? Icons.bookmark_rounded
+                              : Icons.bookmark_outline_rounded,
+                          color: isBookmarked ? catInfo.primaryColor : mutedColor,
+                        ),
+                        onPressed: () {
+                          FeedbackService.bookmark();
+                          onBookmarkToggle();
+                        },
+                        tooltip: isBookmarked
+                            ? 'Guardado en favoritos'
+                            : 'Guardar señal',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+
+                  // Middle: Clear Summary
+                  Text(
+                    item.summary,
+                    style: TextStyle(
+                      fontSize: 12.5,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                      height: 1.35,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Bottom: Single badge + Signal Icon (Wrap protects from any overflow)
                   Wrap(
-                    spacing: 6,
-                    runSpacing: 2,
+                    spacing: 8,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       BadgePill(
@@ -68,75 +155,10 @@ class GestureCard extends StatelessWidget {
                       ),
                       Icon(
                         item.signalType.icon,
-                        size: 14,
+                        size: 18,
                         color: item.signalType.color,
                       ),
-                      ValueListenableBuilder<String?>(
-                        valueListenable: TtsService.currentSpeakingIdNotifier,
-                        builder: (context, speakingId, _) {
-                          final isSpeaking = speakingId == item.id;
-                          return IconButton(
-                            icon: Icon(
-                              isSpeaking
-                                  ? Icons.volume_up_rounded
-                                  : Icons.volume_up_outlined,
-                              color: isSpeaking ? AppColors.accent : mutedColor,
-                              size: 22,
-                            ),
-                            tooltip: isSpeaking
-                                ? 'Detener lectura'
-                                : 'Escuchar en voz alta',
-                            onPressed: () {
-                              FeedbackService.lightClick();
-                              final textToRead =
-                                  '${item.name}. ${item.summary}. Pista física: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
-                              TtsService.speak(textToRead, gestureId: item.id);
-                            },
-                          );
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          isBookmarked
-                              ? Icons.bookmark_rounded
-                              : Icons.bookmark_outline_rounded,
-                          color:
-                              isBookmarked ? catInfo.primaryColor : mutedColor,
-                          size: 22,
-                        ),
-                        onPressed: () {
-                          FeedbackService.bookmark();
-                          onBookmarkToggle();
-                        },
-                        tooltip: isBookmarked
-                            ? 'Guardado en favoritos'
-                            : 'Guardar gesto',
-                      ),
                     ],
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    item.name,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: -0.2,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 3),
-                  Text(
-                    item.summary,
-                    style: TextStyle(
-                      fontSize: 12.5,
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
-                      height: 1.3,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

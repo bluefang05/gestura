@@ -244,7 +244,7 @@ class _IncongruenceDetectorScreenState
                           const SizedBox(width: 8),
                           ChoiceChip(
                             avatar:
-                                const Icon(Icons.psychology_rounded, size: 16),
+                                const Icon(Icons.psychology_rounded, size: 18),
                             label: const Text('Ruta Social / Neurodiversidad'),
                             selected: _selectedAudience == 'autism_focus',
                             selectedColor: AppColors.primary,
@@ -267,7 +267,7 @@ class _IncongruenceDetectorScreenState
                           const SizedBox(width: 8),
                           ChoiceChip(
                             avatar: const Icon(Icons.business_center_rounded,
-                                size: 16),
+                                size: 18),
                             label: const Text('Ruta Ventas y Negociación'),
                             selected: _selectedAudience == 'sales_focus',
                             selectedColor: AppColors.primary,
@@ -365,8 +365,11 @@ class _IncongruenceDetectorScreenState
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Icon(Icons.format_quote_rounded,
-                                    size: 24, color: AppColors.accent),
+                                Icon(Icons.format_quote_rounded,
+                                    size: 24,
+                                    color: isDark
+                                        ? AppColors.accentLight
+                                        : AppColors.accent),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
@@ -421,10 +424,12 @@ class _IncongruenceDetectorScreenState
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Icon(
+                                              Icon(
                                                   Icons.remove_red_eye_rounded,
-                                                  size: 16,
-                                                  color: AppColors.accent),
+                                                  size: 18,
+                                                  color: isDark
+                                                      ? AppColors.accentLight
+                                                      : AppColors.accent),
                                               const SizedBox(width: 6),
                                               Expanded(
                                                 child: Text(
@@ -476,8 +481,11 @@ class _IncongruenceDetectorScreenState
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Icon(Icons.remove_red_eye_rounded,
-                                            size: 16, color: AppColors.accent),
+                                        Icon(Icons.remove_red_eye_rounded,
+                                            size: 18,
+                                            color: isDark
+                                                ? AppColors.accentLight
+                                                : AppColors.accent),
                                         const SizedBox(width: 6),
                                         Expanded(
                                           child: Text(
@@ -562,8 +570,11 @@ class _IncongruenceDetectorScreenState
                               ),
                               child: Row(
                                 children: [
-                                  const Icon(Icons.psychology_rounded,
-                                      size: 18, color: AppColors.accent),
+                                  Icon(Icons.psychology_rounded,
+                                      size: 18,
+                                      color: isDark
+                                          ? AppColors.accentLight
+                                          : AppColors.accent),
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
@@ -614,7 +625,7 @@ class _IncongruenceDetectorScreenState
                                     children: [
                                       const Icon(
                                           Icons.lightbulb_outline_rounded,
-                                          size: 16,
+                                          size: 18,
                                           color: AppColors.indigo),
                                       const SizedBox(width: 6),
                                       Text(

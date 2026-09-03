@@ -357,15 +357,16 @@ class _CompareScreenState extends State<CompareScreen> {
     required Color colorA,
     required Color colorB,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 13,
-              color: AppColors.primary),
+              color: isDark ? AppColors.primaryLight : AppColors.primary),
         ),
         const SizedBox(height: 8),
         Row(

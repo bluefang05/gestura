@@ -8,6 +8,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 
 class ScenarioRunnerScreen extends StatefulWidget {
   final Scenario scenario;
@@ -70,10 +71,13 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
         resultTitle: choice.consequenceSummary,
         explanation: choice.analysis,
       );
+    } else {
+      TtsService.stop();
     }
   }
 
   void _onNextStep() {
+    TtsService.stop();
     if (_selectedChoice == null) return;
 
     if (_selectedChoice!.nextStepIndex != null &&
@@ -120,13 +124,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
       appBar: AppBar(
         title: Text(widget.scenario.domain),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up_rounded),
-            tooltip: 'Escuchar Situación y Opciones',
-            onPressed: () {
-              FeedbackService.lightClick();
-              _speakCurrentStep();
-            },
+          TtsAppBarControl(
+            onPlay: _speakCurrentStep,
           ),
         ],
       ),
@@ -156,12 +155,12 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
             Center(
               child: ConoVeIllustration(
                 illustrationKey: step.illustrationKey!,
-                width: 170,
-                height: 170,
-                borderRadius: BorderRadius.circular(20),
+                width: 135,
+                height: 135,
+                borderRadius: BorderRadius.circular(16),
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 12),
           ],
 
           // Narrative Card
@@ -242,8 +241,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                       children: [
                         Container(
                           margin: const EdgeInsets.only(top: 2),
-                          width: 22,
-                          height: 22,
+                          width: 26,
+                          height: 26,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _selectedChoice == choice
@@ -253,7 +252,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                               color: _selectedChoice == choice
                                   ? _choiceColor(choice)
                                   : AppColors.textMutedLight,
-                              width: 1.8,
+                              width: 2.0,
                             ),
                           ),
                           child: _selectedChoice == choice
@@ -261,7 +260,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                                   choice.isBestAction
                                       ? Icons.check
                                       : Icons.close,
-                                  size: 14,
+                                  size: 18,
                                   color: Colors.white,
                                 )
                               : null,
@@ -294,17 +293,36 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                               ),
                             ),
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.volume_up_rounded, size: 20),
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                            tooltip: 'Escuchar análisis psicológico',
-                            onPressed: () {
-                              FeedbackService.lightClick();
-                              TtsService.speakScenarioOutcome(
-                                isBestAction: choice.isBestAction,
-                                resultTitle: choice.consequenceSummary,
-                                explanation: choice.analysis,
+                          ValueListenableBuilder<bool>(
+                            valueListenable: TtsService.isSpeakingNotifier,
+                            builder: (context, isSpeaking, _) {
+                              return IconButton(
+                                icon: Icon(
+                                  isSpeaking
+                                      ? Icons.stop_circle_rounded
+                                      : Icons.volume_up_rounded,
+                                  size: 20,
+                                  color: isSpeaking
+                                      ? (isDark ? const Color(0xFFFCA5A5) : const Color(0xFFDC2626))
+                                      : null,
+                                ),
+                                padding: EdgeInsets.zero,
+                                constraints: const BoxConstraints(),
+                                tooltip: isSpeaking
+                                    ? 'Detener lectura'
+                                    : 'Escuchar análisis',
+                                onPressed: () {
+                                  FeedbackService.lightClick();
+                                  if (isSpeaking) {
+                                    TtsService.stop();
+                                  } else {
+                                    TtsService.speakScenarioOutcome(
+                                      isBestAction: choice.isBestAction,
+                                      resultTitle: choice.consequenceSummary,
+                                      explanation: choice.analysis,
+                                    );
+                                  }
+                                },
                               );
                             },
                           ),
@@ -405,15 +423,21 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    const Text('Recompensa',
+                    Text('Recompensa',
                         style: TextStyle(
-                            fontSize: 12, color: AppColors.primaryDark)),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: isDark
+                                ? AppColors.primaryLight
+                                : AppColors.primaryDark)),
                     const SizedBox(height: 4),
-                    const Text('+50 Puntos de Maestría',
+                    Text('+50 Puntos de Maestría',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
-                            color: AppColors.primaryDark)),
+                            color: isDark
+                                ? Colors.white
+                                : AppColors.primaryDark)),
                   ],
                 ),
               ),

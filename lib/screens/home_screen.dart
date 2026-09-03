@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const GesturaLogoWidget(size: 36),
+            const GesturaLogoWidget(size: 34),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -51,13 +51,13 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     loc.appName,
                     style: const TextStyle(
-                        fontSize: 19, fontWeight: FontWeight.w900),
+                        fontSize: 18, fontWeight: FontWeight.w900),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     loc.appSubtitle,
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 10.5,
                       color: isDark
                           ? AppColors.textMutedDark
                           : AppColors.textMutedLight,
@@ -88,91 +88,87 @@ class HomeScreen extends StatelessWidget {
           final isTablet = constraints.maxWidth >= 640;
           final isWide = constraints.maxWidth >= 960;
           final categoryColumns = isWide ? 4 : (isTablet ? 3 : 2);
-          final bottomFillSpacing = constraints.maxHeight >= 700 ? 72.0 : 24.0;
+          final toolColumns = isTablet ? 3 : 2;
 
           return Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1100),
+              constraints: const BoxConstraints(maxWidth: 1050),
               child: ListView(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 children: [
-                  // Hero Card: Decodificador Rápido
-                  AppCard(
-                    color: isDark
-                        ? const Color(0xFF134E4A)
-                        : AppColors.primaryContainer,
-                    borderSide: BorderSide(
-                      color: isDark
-                          ? AppColors.primaryLight.withValues(alpha: 0.5)
-                          : AppColors.primaryLight,
-                      width: 1.5,
-                    ),
-                    padding: const EdgeInsets.all(18),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            BadgePill(
-                              text: 'Buscador de campo',
-                              color: AppColors.primaryDark,
-                              backgroundColor:
-                                  Colors.white.withValues(alpha: 0.8),
+                  // 1. Buscador Rápido y Limpio (Sustituye la tarjeta gigante saturada)
+                  InkWell(
+                    onTap: () {
+                      FeedbackService.lightClick();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const DecoderScreen()),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: isDark ? AppColors.darkSurface : Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: isDark
+                              ? AppColors.darkBorder
+                              : AppColors.lightBorder,
+                          width: 1.2,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.search_rounded,
+                              color: isDark
+                                  ? AppColors.primaryLight
+                                  : AppColors.primary,
+                              size: 22),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              '¿Qué señal o gesto observas? Buscar...',
+                              style: TextStyle(
+                                fontSize: 13.5,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                            const Spacer(),
-                            const Icon(Icons.troubleshoot_rounded,
-                                color: AppColors.primaryDark),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          '¿Viste un gesto y no sabes qué significa?',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w800,
-                            color: isDark
-                                ? Colors.white
-                                : AppColors.textPrimaryLight,
-                            letterSpacing: -0.3,
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'Selecciona la parte del cuerpo o describe lo que observas para obtener una hipótesis científica en segundos.',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: isDark
-                                ? AppColors.textSecondaryDark
-                                : AppColors.textSecondaryLight,
-                            height: 1.35,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 9, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: isDark
+                                  ? AppColors.primary.withValues(alpha: 0.2)
+                                  : AppColors.primaryContainer
+                                      .withValues(alpha: 0.35),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              'Decodificar',
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: isDark
+                                    ? AppColors.primaryLight
+                                    : AppColors.primaryDark,
+                              ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 14),
-                        FilledButton.icon(
-                          onPressed: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const DecoderScreen()),
-                            );
-                          },
-                          icon: const Icon(Icons.search_rounded, size: 18),
-                          label: const Text('Abrir Diccionario de Gestos'),
-                          style: FilledButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12)),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
 
-                  // Daily Featured Gesture Card with Audio Narration
+                  // 2. Señal del Día (Tarjeta Limpia y Sobria)
                   Builder(
                     builder: (context) {
                       final dayOfYear = DateTime.now()
@@ -184,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                           CategoryInfo.getInfo(dailyGesture.category);
 
                       return AppCard(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(14),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -192,23 +188,31 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 4),
+                                      horizontal: 9, vertical: 3),
                                   decoration: BoxDecoration(
-                                    color: AppColors.accent
+                                    color: (isDark
+                                            ? AppColors.accentLight
+                                            : AppColors.accent)
                                         .withValues(alpha: 0.15),
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(16),
                                   ),
-                                  child: const Row(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(Icons.auto_awesome_rounded,
-                                          color: AppColors.accent, size: 14),
-                                      SizedBox(width: 4),
+                                          color: isDark
+                                              ? AppColors.accentLight
+                                              : AppColors.accent,
+                                          size: 18),
+                                      const SizedBox(width: 6),
                                       Text(
                                         'Gesto del Día',
                                         style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 12.5,
                                           fontWeight: FontWeight.w800,
-                                          color: AppColors.accent,
+                                          color: isDark
+                                              ? AppColors.accentLight
+                                              : AppColors.accent,
                                         ),
                                       ),
                                     ],
@@ -222,38 +226,50 @@ class HomeScreen extends StatelessWidget {
                                     final isSpeaking = speakingId ==
                                         'daily_${dailyGesture.id}';
                                     return IconButton(
+                                      constraints: const BoxConstraints(
+                                          minWidth: 32, minHeight: 32),
+                                      padding: EdgeInsets.zero,
+                                      iconSize: 20,
                                       icon: Icon(
                                         isSpeaking
                                             ? Icons.stop_circle_rounded
-                                            : Icons.volume_up_rounded,
+                                            : Icons.volume_up_outlined,
                                         color: isSpeaking
-                                            ? AppColors.accent
-                                            : AppColors.primary,
-                                        size: 22,
+                                            ? (isDark
+                                                ? const Color(0xFFFCA5A5)
+                                                : const Color(0xFFDC2626))
+                                            : (isDark
+                                                ? AppColors.textMutedDark
+                                                : AppColors.textMutedLight),
                                       ),
                                       tooltip: isSpeaking
                                           ? 'Detener audio'
-                                          : 'Escuchar Gesto del Día',
+                                          : 'Escuchar Señal del Día',
                                       onPressed: () {
                                         FeedbackService.lightClick();
-                                        final speech =
-                                            'Gesto del día: ${dailyGesture.name}. ${dailyGesture.summary}. Pistas físicas: ${dailyGesture.physiologicalDetails}. Significado: ${dailyGesture.probableMeaning}. En ventas: ${dailyGesture.salesTip}';
-                                        TtsService.speak(speech,
-                                            gestureId:
-                                                'daily_${dailyGesture.id}');
+                                        if (isSpeaking) {
+                                          TtsService.stop();
+                                        } else {
+                                          final speech =
+                                              'Señal del día: ${dailyGesture.name}. ${dailyGesture.summary}. Pistas físicas: ${dailyGesture.physiologicalDetails}.';
+                                          TtsService.speak(speech,
+                                              gestureId:
+                                                  'daily_${dailyGesture.id}');
+                                        }
                                       },
                                     );
                                   },
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ConoVeIllustration(
                                   illustrationKey: dailyGesture.illustrationKey,
-                                  width: 64,
-                                  height: 64,
+                                  width: 68,
+                                  height: 68,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 const SizedBox(width: 14),
@@ -266,7 +282,8 @@ class HomeScreen extends StatelessWidget {
                                         dailyGesture.name,
                                         style: const TextStyle(
                                             fontSize: 15,
-                                            fontWeight: FontWeight.w900),
+                                            fontWeight: FontWeight.w800,
+                                            letterSpacing: -0.2),
                                       ),
                                       const SizedBox(height: 3),
                                       Text(
@@ -276,7 +293,7 @@ class HomeScreen extends StatelessWidget {
                                           color: isDark
                                               ? AppColors.textSecondaryDark
                                               : AppColors.textSecondaryLight,
-                                          height: 1.3,
+                                          height: 1.35,
                                         ),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -286,7 +303,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
                             Wrap(
                               spacing: 8,
                               runSpacing: 4,
@@ -294,13 +311,8 @@ class HomeScreen extends StatelessWidget {
                               alignment: WrapAlignment.spaceBetween,
                               children: [
                                 BadgePill(
-                                    text: dailyGesture.bodyPart,
-                                    color: catInfo.primaryColor),
-                                BadgePill(
-                                  text: dailyGesture.signalType.label
-                                      .split(' ')
-                                      .first,
-                                  color: dailyGesture.signalType.color,
+                                  text: dailyGesture.bodyPart,
+                                  color: catInfo.primaryColor,
                                 ),
                                 TextButton.icon(
                                   onPressed: () {
@@ -314,7 +326,7 @@ class HomeScreen extends StatelessWidget {
                                     );
                                   },
                                   icon: const Icon(Icons.arrow_forward_rounded,
-                                      size: 16),
+                                      size: 18),
                                   label: const Text('Ver Detalle'),
                                 ),
                               ],
@@ -326,743 +338,157 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
 
-                  // Tools Grid on Tablet / Stack on Mobile
-                  if (isTablet)
-                    GridView.count(
-                      crossAxisCount: 2,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 2.3,
-                      children: [
-                        // Tool 1: Visual Quiz
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF451A03)
-                              : const Color(0xFFFEF3C7),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            final imageQuestions =
-                                QuizDatabase.getImageCardQuestions();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                  title: 'Test Visual de Microexpresiones',
-                                  questions: imageQuestions.isNotEmpty
-                                      ? imageQuestions
-                                      : QuizDatabase.questions,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.accent.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.psychology_rounded,
-                                    color: AppColors.accent, size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Entrenamiento Visual',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Diferencia microexpresiones.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.play_circle_fill_rounded,
-                                  color: AppColors.accent, size: 28),
-                            ],
-                          ),
-                        ),
+                  // 3. Herramientas Prácticas (En Grid ordenado y calmado, sin arcoíris chillón)
+                  const SectionHeader(
+                    title: 'Herramientas Prácticas',
+                    subtitle: 'Observación y toma de decisiones paso a paso',
+                  ),
+                  const SizedBox(height: 8),
 
-                        // Tool 2: Comparador A/B
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF1E1B4B)
-                              : const Color(0xFFEEF2FF),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const CompareScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.purple.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.compare_arrows_rounded,
-                                    color: AppColors.purple, size: 26),
+                  GridView.count(
+                    crossAxisCount: toolColumns,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: isTablet ? 2.4 : 1.95,
+                    children: [
+                      // Herramienta 1: Test Visual
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.psychology_rounded,
+                        accentColor: AppColors.primary,
+                        title: 'Test Visual',
+                        description: 'Diferencia microexpresiones',
+                        onTap: () {
+                          final imageQuestions =
+                              QuizDatabase.getImageCardQuestions();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => QuizRunnerScreen(
+                                title: 'Test Visual',
+                                questions: imageQuestions.isNotEmpty
+                                    ? imageQuestions
+                                    : QuizDatabase.questions,
                               ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Comparador Visual A/B',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Compara gestos similares.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: AppColors.purple),
-                            ],
-                          ),
-                        ),
+                            ),
+                          );
+                        },
+                      ),
 
-                        // Tool 3: Árbol de Decisión
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF064E3B)
-                              : const Color(0xFFD1FAE5),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const DecisionTreeScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.success.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.account_tree_rounded,
-                                    color: AppColors.success, size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Árbol de Decisión Social',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Regla: Veo X ➔ Hago Z.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: AppColors.success),
-                            ],
-                          ),
-                        ),
+                      // Herramienta 2: Detector de Incongruencias
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.psychology_alt_rounded,
+                        accentColor: AppColors.indigo,
+                        title: 'Incongruencias',
+                        description: 'Palabras vs cuerpo real',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    const IncongruenceDetectorScreen()),
+                          );
+                        },
+                      ),
 
-                        // Tool 4: Cheat Sheet
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF1E293B)
-                              : const Color(0xFFF1F5F9),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => const CheatSheetScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color:
-                                      AppColors.primary.withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.bolt_rounded,
-                                    color: AppColors.primary, size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Guía de Bolsillo',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      '20 señales críticas de venta.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: AppColors.primary),
-                            ],
-                          ),
-                        ),
+                      // Herramienta 3: Árbol de Decisión
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.account_tree_rounded,
+                        accentColor: AppColors.success,
+                        title: 'Árbol de Decisión',
+                        description: 'Regla: Veo X ➔ Hago Z',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const DecisionTreeScreen()),
+                          );
+                        },
+                      ),
 
-                        // Tool 5: Detector de Incongruencias (Autismo/Social)
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF312E81).withValues(alpha: 0.35)
-                              : const Color(0xFFEEF2FF),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      const IncongruenceDetectorScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF6366F1)
-                                      .withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.psychology_alt_rounded,
-                                    color: Color(0xFF6366F1), size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Detector de Incongruencias',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Palabras vs señales reales.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: Color(0xFF6366F1)),
-                            ],
-                          ),
-                        ),
+                      // Herramienta 4: Termómetro de Receptividad
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.thermostat_rounded,
+                        accentColor: AppColors.coral,
+                        title: 'Termómetro',
+                        description: 'Calibra receptividad social',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    const BuyerTemperatureScreen()),
+                          );
+                        },
+                      ),
 
-                        // Tool 6: Termómetro de Negociación (Ventas)
-                        AppCard(
-                          color: isDark
-                              ? const Color(0xFF451A03).withValues(alpha: 0.35)
-                              : const Color(0xFFFFFBEB),
-                          padding: const EdgeInsets.all(16),
-                          onTap: () {
-                            FeedbackService.lightClick();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      const BuyerTemperatureScreen()),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 44,
-                                height: 44,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFD97706)
-                                      .withValues(alpha: 0.2),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: const Icon(Icons.thermostat_rounded,
-                                    color: Color(0xFFD97706), size: 26),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Termómetro de Ventas',
-                                      style: TextStyle(
-                                          fontSize: 14.5,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      'Calibra la receptividad de compra.',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Icon(Icons.chevron_right_rounded,
-                                  color: Color(0xFFD97706)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  else ...[
-                    // Mobile Stack
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF451A03)
-                          : const Color(0xFFFEF3C7),
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: AppColors.accent.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.psychology_rounded,
-                                color: AppColors.accent, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Entrenamiento Visual Rápido',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Aprende a diferenciar microexpresiones con imágenes.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          IconButton.filled(
-                            style: IconButton.styleFrom(
-                                backgroundColor: AppColors.accent),
-                            icon: const Icon(Icons.play_arrow_rounded,
-                                color: Colors.white),
-                            onPressed: () {
-                              FeedbackService.lightClick();
-                              final imageQuestions =
-                                  QuizDatabase.getImageCardQuestions();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => QuizRunnerScreen(
-                                    title: 'Test Visual de Microexpresiones',
-                                    questions: imageQuestions.isNotEmpty
-                                        ? imageQuestions
-                                        : QuizDatabase.questions,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                      // Herramienta 5: Comparador Visual A/B
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.compare_arrows_rounded,
+                        accentColor: AppColors.purple,
+                        title: 'Comparador Visual A/B',
+                        description: 'Contrasta gestos parecidos',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const CompareScreen()),
+                          );
+                        },
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF312E81).withValues(alpha: 0.35)
-                          : const Color(0xFFEEF2FF),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) =>
-                                  const IncongruenceDetectorScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF6366F1)
-                                  .withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.psychology_alt_rounded,
-                                color: Color(0xFF6366F1), size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Detector de Incongruencias',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  '¿Dice una cosa pero su cuerpo dice otra? Descifra la verdad.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: Color(0xFF6366F1)),
-                        ],
+
+                      // Herramienta 6: Guía Rápida de Bolsillo
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.bolt_rounded,
+                        accentColor: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                        title: 'Guía de Bolsillo',
+                        description: '20 señales clave en 30s',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const CheatSheetScreen()),
+                          );
+                        },
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF451A03).withValues(alpha: 0.35)
-                          : const Color(0xFFFFFBEB),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const BuyerTemperatureScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFD97706)
-                                  .withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.thermostat_rounded,
-                                color: Color(0xFFD97706), size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Termómetro de Negociación',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Mide la temperatura del cliente y detecta el momento exacto de cierre.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: Color(0xFFD97706)),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF1E1B4B)
-                          : const Color(0xFFEEF2FF),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const CompareScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: AppColors.purple.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.compare_arrows_rounded,
-                                color: AppColors.purple, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Comparador Visual A/B',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Compara cara a cara gestos que se confunden fácilmente.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: AppColors.purple),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF064E3B)
-                          : const Color(0xFFD1FAE5),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const DecisionTreeScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: AppColors.success.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.account_tree_rounded,
-                                color: AppColors.success, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Árbol de Decisión Social',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  'Regla: Si veo X ➔ Significa Y ➔ Hago Z en 3 clics.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: AppColors.success),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    AppCard(
-                      color: isDark
-                          ? const Color(0xFF1E293B)
-                          : const Color(0xFFF1F5F9),
-                      padding: const EdgeInsets.all(16),
-                      onTap: () {
-                        FeedbackService.lightClick();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const CheatSheetScreen()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 48,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.bolt_rounded,
-                                color: AppColors.primary, size: 28),
-                          ),
-                          const SizedBox(width: 14),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Guía de Bolsillo (Cheat Sheet)',
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  '20 señales críticas de venta y cierre para consultar en 30s.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: isDark
-                                        ? AppColors.textSecondaryDark
-                                        : AppColors.textSecondaryLight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.chevron_right_rounded,
-                              color: AppColors.primary),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                   const SizedBox(height: 20),
 
-                  // Categorías del Manual
+                  // 4. Explorar por Categoría
                   SectionHeader(
-                    title: 'Explorar por Categoría',
-                    subtitle: 'Basado en "Descifrando a los neurotípicos"',
+                    title: 'Manual de Canales',
+                    subtitle: 'Clasificación anatómica y contextual',
                     trailing: TextButton(
                       onPressed: () => onNavigateToTab(1),
                       child: const Text('Ver Todo'),
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 8),
 
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: categoryColumns,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: isTablet ? 1.3 : 1.15,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: isTablet ? 1.4 : 1.25,
                     ),
                     itemCount: CategoryInfo.allCategories.length,
                     itemBuilder: (context, index) {
@@ -1071,7 +497,7 @@ class HomeScreen extends StatelessWidget {
                           GestureDatabase.getByCategory(cat.type).length;
 
                       return AppCard(
-                        padding: const EdgeInsets.all(14),
+                        padding: const EdgeInsets.all(12),
                         onTap: () {
                           FeedbackService.lightClick();
                           onOpenCategory(cat.type);
@@ -1080,30 +506,30 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(8),
+                              padding: const EdgeInsets.all(7),
                               decoration: BoxDecoration(
-                                color: cat.primaryColor.withValues(alpha: 0.15),
+                                color: cat.primaryColor.withValues(alpha: 0.14),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(cat.icon,
-                                  color: cat.primaryColor, size: 22),
+                                  color: cat.primaryColor, size: 20),
                             ),
                             const Spacer(),
                             Text(
                               cat.title,
                               style: const TextStyle(
-                                fontSize: 13.5,
+                                fontSize: 13,
                                 fontWeight: FontWeight.w700,
                                 height: 1.2,
                               ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 3),
                             Text(
-                              '$count señales explicadas',
+                              '$count señales',
                               style: TextStyle(
-                                fontSize: 11.5,
+                                fontSize: 11,
                                 color: isDark
                                     ? AppColors.textMutedDark
                                     : AppColors.textMutedLight,
@@ -1114,63 +540,74 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(height: bottomFillSpacing),
-
-                  // Sales & Negotiation Spotlight
-                  AppCard(
-                    color: isDark
-                        ? const Color(0xFF1E1B4B)
-                        : const Color(0xFFEEF2FF),
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: AppColors.indigo.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Icon(Icons.handshake_rounded,
-                              color: AppColors.indigo, size: 26),
-                        ),
-                        const SizedBox(width: 14),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Simulador de Ventas y Negociación',
-                                style: TextStyle(
-                                    fontSize: 14.5,
-                                    fontWeight: FontWeight.w800),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                'Aprende a leer al cliente y cerrar acuerdos.',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: isDark
-                                      ? AppColors.textSecondaryDark
-                                      : AppColors.textSecondaryLight,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () =>
-                              onNavigateToTab(3), // Nav to Scenarios
-                          child: const Text('Entrenar'),
-                        ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 24),
                 ],
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  /// Tarjeta de herramienta neutral y descansada para la vista
+  static Widget _buildToolCard({
+    required BuildContext context,
+    required bool isDark,
+    required IconData icon,
+    required Color accentColor,
+    required String title,
+    required String description,
+    required VoidCallback onTap,
+  }) {
+    return AppCard(
+      padding: const EdgeInsets.all(12),
+      onTap: () {
+        FeedbackService.lightClick();
+        onTap();
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: accentColor.withValues(alpha: isDark ? 0.2 : 0.12),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, color: accentColor, size: 22),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w800,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

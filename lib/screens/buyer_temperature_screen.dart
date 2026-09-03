@@ -345,8 +345,11 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Icon(Icons.bolt_rounded,
-                                  size: 20, color: AppColors.accent),
+                              Icon(Icons.bolt_rounded,
+                                  size: 20,
+                                  color: isDark
+                                      ? AppColors.accentLight
+                                      : AppColors.accent),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
