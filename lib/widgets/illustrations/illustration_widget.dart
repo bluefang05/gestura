@@ -184,6 +184,12 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'scenario_job_interview': 'scenarios',
       'scenario_friend_coffee': 'scenarios',
       'scenario_negotiation': 'scenarios',
+      'scenario_shopping_backchannel': 'scenarios',
+      'scenario_meeting_seating': 'scenarios',
+      'scenario_exit_strategy': 'scenarios',
+      'scenario_interrupt_busy_colleague': 'scenarios',
+      'scenario_group_conversation_entry': 'scenarios',
+      'scenario_delay_objection_sales': 'scenarios',
 
       // Contenido neuroafirmativo
       'sensory_overload_supermarket': 'neuroaffirmative',

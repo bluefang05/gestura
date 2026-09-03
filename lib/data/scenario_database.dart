@@ -574,7 +574,7 @@ class ScenarioDatabase {
               'Le pides al dependiente: "Buenos días, busco ibuprofeno de 400 y gasas". El dependiente no contesta con palabras, pero mientras mira la pantalla hace dos pequeños movimientos de cabeza hacia abajo (micro-asentimientos) y empieza a teclear.',
           characterAction:
               'Micro-asentimiento repetido de cabeza hacia abajo mientras la mirada está en el sistema.',
-          illustrationKey: 'head_tilt',
+          illustrationKey: 'scenario_shopping_backchannel',
           visibleSignals: [
             'Micro-asentimiento rítmico (Confirmación de escucha)',
             'Atención dividida hacia la pantalla de cobro',
@@ -625,7 +625,7 @@ class ScenarioDatabase {
               'Entras a la sala 3 minutos antes. La mesa es rectangular. La cabecera está vacía. El facilitador de la reunión suele sentarse en un extremo. Tu rol en esta reunión es participar como técnico colaborador, no como líder.',
           characterAction:
               'Mesa rectangular con cabecera libre y sillas en los laterales intermedios.',
-          illustrationKey: 'round_table',
+          illustrationKey: 'scenario_meeting_seating',
           visibleSignals: [
             'Cabecera libre (Espacio de moderación/liderazgo)',
             'Laterales intermedios (Espacio de participación equilibrada)',
@@ -722,7 +722,7 @@ class ScenarioDatabase {
               'Llevan 5 minutos hablando. Mientras explicas con detalle un proyecto personal, notas que tu interlocutor orienta uno de sus pies hacia la salida, da un par de asentimientos rápidos con la cabeza y echa una mirada veloz a su reloj de pulsera.',
           characterAction:
               'Pies orientados hacia la salida, asentimiento acelerado y vistazo discreto al reloj.',
-          illustrationKey: 'foot_orientation',
+          illustrationKey: 'scenario_exit_strategy',
           visibleSignals: [
             'Orientación podal de fuga (el cuerpo se prepara para caminar)',
             'Asentimiento acelerado (deseo de avanzar el ritmo)',
@@ -783,7 +783,7 @@ class ScenarioDatabase {
               'Te acercas a la mesa de tu compañero. Tiene auriculares grandes puestos, su cuerpo está inclinado hacia el monitor y sus manos teclean rápidamente sin parar.',
           characterAction:
               'Auriculares colocados, torso encorvado hacia la pantalla y tecleo rítmico continuo.',
-          illustrationKey: 'desk_barrier',
+          illustrationKey: 'scenario_interrupt_busy_colleague',
           visibleSignals: [
             'Auriculares (barrera acústica voluntaria contra interrupciones)',
             'Inclinación focalizada (modo concentración o foco profundo)',
@@ -880,7 +880,7 @@ class ScenarioDatabase {
               'Miras al grupo de tres personas. Dos de ellos están frente a frente, pero sus cuerpos forman un ángulo hacia afuera en forma de "herradura" o "U", dejando un espacio abierto hacia el pasillo.',
           characterAction:
               'Formación corporal en herradura (ángulo abierto hacia el exterior).',
-          illustrationKey: 'proxemics_social',
+          illustrationKey: 'scenario_group_conversation_entry',
           visibleSignals: [
             'Disposición en forma de U (Círculo abierto)',
             'Pies apuntando parcialmente hacia afuera',
@@ -977,7 +977,7 @@ class ScenarioDatabase {
               'Terminas tu presentación. El cliente se reclina lentamente hacia atrás en el respaldo, baja la mirada hacia su libreta, junta las manos sobre la mesa y te dice con tono educado pero plano: "Muchas gracias, está muy interesante. Déjamelo pensar y yo te aviso la próxima semana".',
           characterAction:
               'Reclinación hacia atrás, mirada hacia la mesa y frase de aplazamiento cortés.',
-          illustrationKey: 'leaning_back',
+          illustrationKey: 'scenario_delay_objection_sales',
           visibleSignals: [
             'Reclinación del torso hacia atrás (Distanciamiento físico de la decisión)',
             'Evitación de contacto visual directo durante la frase de aplazamiento',
