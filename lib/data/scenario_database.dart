@@ -73,7 +73,7 @@ class ScenarioDatabase {
             'Contacto visual directo'
           ],
           learningTakeaway:
-              'Inclinarse hacia adelante con sonrisa genuina es una luz verde indiscutible de compra.',
+              'Inclinarse hacia adelante y sonreír puede acompañar atención o comodidad; confirma el interés con una pregunta en vez de asumir intención de compra.',
           choices: [
             ScenarioChoice(
               text:
@@ -169,7 +169,7 @@ class ScenarioDatabase {
             'Tamborileo (Impaciencia con el tiempo)'
           ],
           learningTakeaway:
-              'El tamborileo + ojos cerrados indica que tu respuesta es demasiado larga y necesita un resumen inmediato.',
+              'El tamborileo y los ojos cerrados pueden coincidir con cansancio, ritmo personal, concentración o necesidad de una pausa. Comprueba si un resumen ayudaría.',
           choices: [
             ScenarioChoice(
               text:
@@ -269,7 +269,7 @@ class ScenarioDatabase {
             'Silencio tenso'
           ],
           learningTakeaway:
-              'La mandíbula tensa + silencio indica que la cifra generó resistencia inicial. No te apresures a bajar la cifra por miedo al silencio.',
+              'La mandíbula tensa y el silencio pueden aparecer mientras alguien procesa una cifra o regula su respuesta. Deja espacio y pregunta si desea revisar algún aspecto.',
           choices: [
             ScenarioChoice(
               text:
@@ -305,7 +305,7 @@ class ScenarioDatabase {
             'Asentimiento (Disposición al acuerdo)'
           ],
           learningTakeaway:
-              'La mano en barbilla con asentimiento indica que está buscando internamente la justificación para concederte la petición.',
+              'Una mano en la barbilla y un asentimiento pueden coincidir con reflexión, escucha o un hábito. Pide confirmación clara antes de interpretar una decisión.',
           choices: [
             ScenarioChoice(
               text:

@@ -161,7 +161,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
             ),
             const SizedBox(height: 14),
 
-            // Card 2: Significado Principal NT (Green)
+            // Card 2: Contextual readings (Green)
             AppCard(
               color: isDark
                   ? const Color(0xFF064E3B).withValues(alpha: 0.35)
@@ -185,7 +185,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               : AppColors.success),
                       const SizedBox(width: 8),
                       Text(
-                        'Significado Más Probable (en Neurotípicos)',
+                        'Lecturas posibles según el contexto',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
@@ -212,7 +212,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
             ),
             const SizedBox(height: 14),
 
-            // Card 3: Trampas y Significados Alternativos (Amber)
+            // Card 3: Alternative explanations (Amber)
             AppCard(
               color: isDark
                   ? const Color(0xFF78350F).withValues(alpha: 0.35)
@@ -236,7 +236,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               : AppColors.warning),
                       const SizedBox(width: 8),
                       Text(
-                        'Trampas y Otras Posibles Razones',
+                        'Otras explicaciones a considerar',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,

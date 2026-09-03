@@ -251,4 +251,25 @@ void main() {
     expect(find.byType(NavigationBar), findsOneWidget);
     expect(find.byType(NavigationRail), findsNothing);
   });
+
+  testWidgets('Posturas category card opens the filtered manual',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const GesturaApp());
+    await tester.pumpAndSettle();
+
+    final postureCard = find.text('Posturas y Lenguaje Corporal');
+    final scrollable =
+        tester.state<ScrollableState>(find.byType(Scrollable).first);
+    scrollable.position.jumpTo(1400);
+    await tester.pumpAndSettle();
+    await tester.tap(postureCard);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Postura Abierta y Receptiva'), findsOneWidget);
+    expect(find.text('Sonrisa Genuina (Duchenne)'), findsNothing);
+  });
 }

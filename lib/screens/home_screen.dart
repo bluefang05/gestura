@@ -23,8 +23,13 @@ import '../core/services/tts_service.dart';
 
 class HomeScreen extends StatelessWidget {
   final ValueChanged<int> onNavigateToTab;
+  final ValueChanged<CategoryType> onOpenCategory;
 
-  const HomeScreen({super.key, required this.onNavigateToTab});
+  const HomeScreen({
+    super.key,
+    required this.onNavigateToTab,
+    required this.onOpenCategory,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1069,7 +1074,7 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(14),
                         onTap: () {
                           FeedbackService.lightClick();
-                          onNavigateToTab(1); // Nav to dictionary
+                          onOpenCategory(cat.type);
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

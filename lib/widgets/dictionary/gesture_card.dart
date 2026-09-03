@@ -59,9 +59,15 @@ class GestureCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      BadgePill(
-                        text: item.bodyPart,
-                        color: catInfo.primaryColor,
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: BadgePill(
+                            text: item.bodyPart,
+                            color: catInfo.primaryColor,
+                          ),
+                        ),
                       ),
                       const SizedBox(width: 6),
                       Icon(

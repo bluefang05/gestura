@@ -576,7 +576,7 @@ class QuizDatabase {
       keyVisualClue:
           'Incongruencia entre la palabra positiva ("maravillosa") y el tono descendente/arrastrado.',
       explanation:
-          'En la comunicación neurotípica, cuando el tono de voz contradice el significado literal de las palabras, el TONO SIEMPRE TIENE LA PRIORIDAD de significado. Aquí el mensaje real es rechazo.',
+          'Cuando tono y palabras parecen no coincidir, conviene preguntar o buscar más contexto. Ninguna pista —ni el tono— tiene prioridad universal sobre lo que la persona quiso comunicar.',
     ),
     QuizQuestion(
       id: 'q_digital_caps',

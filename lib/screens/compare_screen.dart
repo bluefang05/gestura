@@ -53,21 +53,21 @@ class _CompareScreenState extends State<CompareScreen> {
       gestureIdA: 'postura_abierta',
       gestureIdB: 'postura_cerrada',
       coreDifference:
-          'La postura abierta despeja el torso y denota receptividad; los brazos cruzados crean una barrera física defensiva.',
+          'La postura abierta deja el torso sin barreras; los brazos cruzados colocan los antebrazos delante del torso. Ambas configuraciones necesitan contexto antes de interpretarse.',
     ),
     ComparePair(
       title: 'Inclinación Adelante vs. Inclinación Atrás',
       gestureIdA: 'inclinacion_adelante',
       gestureIdB: 'inclinacion_atras',
       coreDifference:
-          'Inclinarse hacia adelante reduce la distancia y muestra alto interés; recostarse atrás marca distancia o escepticismo.',
+          'Inclinarse hacia adelante reduce la distancia corporal; recostarse atrás la aumenta. Puede responder a atención, comodidad, audición, mobiliario o ritmo de la conversación.',
     ),
     ComparePair(
       title: 'Manos en Ojiva vs. Frotarse las Manos',
       gestureIdA: 'manos_ojiva',
       gestureIdB: 'frotar_manos',
       coreDifference:
-          'La ojiva transmite máxima autoridad y convicción intelectual; frotarse las manos denota expectativa o nerviosismo.',
+          'La ojiva une las yemas de los dedos; frotarse las manos produce fricción repetida. Son diferencias físicas observables, no pruebas de autoridad, expectativa o nerviosismo.',
     ),
     ComparePair(
       title: 'Tono Asertivo vs. Inflexión Sarcástica',
@@ -81,7 +81,7 @@ class _CompareScreenState extends State<CompareScreen> {
       gestureIdA: 'mesa_redonda',
       gestureIdB: 'mesa_barrera',
       coreDifference:
-          'La mesa redonda distribuye el poder de forma igualitaria; el escritorio frontal actúa como escudo de dominancia jerárquica.',
+          'La mesa redonda distribuye las sillas alrededor de un centro; el escritorio frontal deja un mueble entre dos personas. La distribución puede afectar la interacción, pero no determina el poder ni la intención.',
     ),
   ];
 

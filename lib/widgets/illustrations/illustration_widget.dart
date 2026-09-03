@@ -128,6 +128,11 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'apreton_manos': 'postures',
       'hand_on_chin': 'postures',
       'pensador': 'postures',
+      'hands_clasped_front': 'postures',
+      'weight_shift': 'postures',
+      'foot_orientation': 'postures',
+      'self_hold_arm': 'postures',
+      'postural_mirroring': 'postures',
 
       // Paralingüística
       'voice_volume_high': 'paralinguistics',

@@ -828,6 +828,152 @@ class GestureDatabase {
       illustrationKey: 'handshake_firm',
       difficulty: 1,
     ),
+    GestureItem(
+      id: 'manos_entrelazadas_frente',
+      name: 'Manos Entrelazadas al Frente',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Manos y Torso',
+      summary:
+          'Manos unidas de forma suave delante del abdomen, con los codos relajados.',
+      physiologicalDetails:
+          'Dedos entrelazados o una mano contenida dentro de la otra, sin bloquear el pecho.',
+      probableMeaning:
+          'Puede acompañar espera, escucha, formalidad o una manera cómoda de colocar las manos.',
+      alternativeMeanings: [
+        'Frío en las manos',
+        'Hábito postural',
+        'Necesidad de mantener las manos ocupadas',
+      ],
+      contextGuidance:
+          'Léela junto con el tono, el contexto y los cambios respecto a la postura habitual de la persona.',
+      whatToDo:
+          'No fuerces una interpretación. Si necesitas claridad, deja espacio para que la persona responda a su ritmo.',
+      salesTip:
+          'Úsala como señal de pausa: verifica comprensión con una pregunta abierta antes de avanzar.',
+      illustrationKey: 'hands_clasped_front',
+      difficulty: 1,
+    ),
+    GestureItem(
+      id: 'mano_menton',
+      name: 'Mano en el Mentón',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Manos y Cabeza',
+      summary:
+          'Una mano sostiene el mentón o descansa junto a la mejilla mientras la persona permanece sentada.',
+      physiologicalDetails:
+          'Índice sobre la mejilla, pulgar debajo de la mandíbula y apoyo parcial de la cabeza.',
+      probableMeaning:
+          'Puede coincidir con reflexión, comodidad, cansancio físico o un hábito al escuchar.',
+      alternativeMeanings: [
+        'Apoyo por fatiga',
+        'Molestia mandibular',
+        'Postura habitual'
+      ],
+      contextGuidance:
+          'No equivale por sí sola a acuerdo, desacuerdo ni interés; observa qué ocurre antes y después.',
+      whatToDo:
+          'Ofrece tiempo de procesamiento y una pregunta concreta, sin interpretar el gesto como una respuesta.',
+      salesTip:
+          'Presenta un dato a la vez y pregunta qué información adicional ayudaría a evaluar la propuesta.',
+      illustrationKey: 'hand_on_chin',
+      difficulty: 1,
+    ),
+    GestureItem(
+      id: 'cambio_peso',
+      name: 'Cambio de Peso al Estar de Pie',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Piernas y Torso',
+      summary:
+          'El peso descansa principalmente en una pierna y una cadera se desplaza hacia un lado.',
+      physiologicalDetails:
+          'Una rodilla queda más relajada, mientras la otra pierna sostiene la mayor parte del cuerpo.',
+      probableMeaning:
+          'Puede ser una forma de descanso, ajuste de comodidad, dolor corporal o preparación para moverse.',
+      alternativeMeanings: ['Calzado incómodo', 'Cansancio', 'Hábito postural'],
+      contextGuidance:
+          'Es más útil observar cambios repetidos o movimientos hacia una salida que una postura aislada.',
+      whatToDo:
+          'Facilita una pausa, una silla o una salida clara si el contexto sugiere que la persona la necesita.',
+      salesTip:
+          'Haz un resumen breve y pregunta si es buen momento para continuar, sin suponer impaciencia.',
+      illustrationKey: 'weight_shift',
+      difficulty: 2,
+    ),
+    GestureItem(
+      id: 'orientacion_pies',
+      name: 'Orientación de los Pies',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Piernas y Pies',
+      summary:
+          'Pies y rodillas se orientan juntos hacia un lado mientras el torso puede seguir mirando al frente.',
+      physiologicalDetails:
+          'Rotación de tobillos, rodillas o caderas que modifica la dirección de la base corporal.',
+      probableMeaning:
+          'Puede responder a comodidad, distribución del espacio, preparación para caminar o atención hacia otra zona.',
+      alternativeMeanings: [
+        'Distribución de muebles',
+        'Lesión o rigidez',
+        'Costumbre de sentarse de lado'
+      ],
+      contextGuidance:
+          'Comprueba si se repite y contrástala con palabras, mirada y posibilidad real de moverse.',
+      whatToDo:
+          'No la conviertas en una lectura de intención. Ofrece opciones claras: continuar, pausar o cambiar de lugar.',
+      salesTip:
+          'Si la conversación se alarga, pregunta si la persona dispone de unos minutos más antes de abrir un tema nuevo.',
+      illustrationKey: 'foot_orientation',
+      difficulty: 2,
+    ),
+    GestureItem(
+      id: 'autocontacto_brazo',
+      name: 'Sujetar el Propio Brazo',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Brazos y Torso',
+      summary:
+          'Una mano sostiene suavemente el brazo opuesto mientras los brazos quedan cerca del torso.',
+      physiologicalDetails:
+          'Contacto de la palma o dedos sobre el bíceps o antebrazo contrario, sin presión visible.',
+      probableMeaning:
+          'Puede ser una postura de comodidad, regulación, frío o una preferencia personal.',
+      alternativeMeanings: [
+        'Temperatura baja',
+        'Dolor de hombro',
+        'Hábito al esperar'
+      ],
+      contextGuidance:
+          'Evita etiquetarla como “defensiva”. Una sola postura no explica el estado interno de alguien.',
+      whatToDo:
+          'Baja la exigencia social y ofrece alternativas concretas si la conversación parece intensa o larga.',
+      salesTip:
+          'Reduce el ritmo, explica el siguiente paso y permite que la persona decida si desea continuar.',
+      illustrationKey: 'self_hold_arm',
+      difficulty: 2,
+    ),
+    GestureItem(
+      id: 'sincronia_postural',
+      name: 'Sincronía Postural',
+      category: CategoryType.lenguajeCorporal,
+      bodyPart: 'Cuerpo y Espacio',
+      summary:
+          'Dos personas adoptan configuraciones corporales parecidas durante una interacción.',
+      physiologicalDetails:
+          'Coincidencia temporal de inclinación, apoyo de brazos o orientación, sin que necesariamente sea exacta.',
+      probableMeaning:
+          'Puede aparecer por comodidad compartida, imitación espontánea, mobiliario similar o ritmo de conversación.',
+      alternativeMeanings: [
+        'Sillas iguales',
+        'Indicaciones del entorno',
+        'Casualidad'
+      ],
+      contextGuidance:
+          'La sincronía no demuestra afinidad ni acuerdo; importa si aparece junto con comunicación clara y consentimiento.',
+      whatToDo:
+          'Úsala sólo como invitación a seguir observando el contexto, no como prueba de conexión.',
+      salesTip:
+          'Prioriza confirmar objetivos y objeciones con palabras en vez de interpretar la postura compartida.',
+      illustrationKey: 'postural_mirroring',
+      difficulty: 3,
+    ),
 
     // --- PROXÉMICA Y ESPACIO ---
     GestureItem(

@@ -54,7 +54,7 @@ class _DecoderScreenState extends State<DecoderScreen> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    'Selecciona la zona donde observaste el gesto para ver su significado inmediato.',
+                    'Selecciona la zona donde observaste el gesto para explorar pistas y posibles lecturas según el contexto.',
                     style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,

@@ -7,6 +7,7 @@ import 'settings_screen.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/localization/app_localizations.dart';
+import '../models/category.dart';
 import '../widgets/common/ad_banner_slot.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -20,6 +21,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   late int _currentIndex;
+  CategoryType? _dictionaryCategory;
 
   @override
   void initState() {
@@ -44,8 +46,18 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         onNavigateToTab: (index) {
           _onTabTapped(index);
         },
+        onOpenCategory: (category) {
+          setState(() {
+            _dictionaryCategory = category;
+            _currentIndex = 1;
+          });
+          FeedbackService.tabPop();
+        },
       ),
-      const DictionaryScreen(),
+      DictionaryScreen(
+        key: ValueKey(_dictionaryCategory),
+        initialCategory: _dictionaryCategory,
+      ),
       const QuizHubScreen(),
       const ScenariosScreen(),
       const SettingsScreen(),
