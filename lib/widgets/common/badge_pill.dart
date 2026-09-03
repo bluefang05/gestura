@@ -28,7 +28,7 @@ class BadgePill extends StatelessWidget {
             : Color.lerp(color, Colors.black, 0.35)!);
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
@@ -47,7 +47,7 @@ class BadgePill extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: FontWeight.w700,
               color: fg,
               letterSpacing: 0.1,

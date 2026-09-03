@@ -164,7 +164,12 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                       FeedbackService.tabPop();
                       setState(() => _selectedCategory = null);
                     },
-                    selectedColor: AppColors.primaryContainer,
+                    selectedColor: AppColors.primary,
+                    labelStyle: TextStyle(
+                      color: isSelected ? Colors.white : null,
+                      fontWeight:
+                          isSelected ? FontWeight.w800 : FontWeight.w600,
+                    ),
                     showCheckmark: false,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   );
@@ -174,13 +179,20 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                 final isSelected = _selectedCategory == cat.type;
 
                 return FilterChip(
-                  label: Text(cat.shortTitle),
+                  label: Text(
+                    cat.shortTitle,
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : null,
+                      fontWeight:
+                          isSelected ? FontWeight.w800 : FontWeight.w600,
+                    ),
+                  ),
                   selected: isSelected,
                   onSelected: (_) {
                     FeedbackService.tabPop();
                     setState(() => _selectedCategory = isSelected ? null : cat.type);
                   },
-                  selectedColor: cat.containerColor,
+                  selectedColor: AppColors.primary,
                   showCheckmark: false,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 );

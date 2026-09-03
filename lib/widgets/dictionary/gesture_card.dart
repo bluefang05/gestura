@@ -57,25 +57,20 @@ class GestureCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 2,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      Flexible(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.centerLeft,
-                          child: BadgePill(
-                            text: item.bodyPart,
-                            color: catInfo.primaryColor,
-                          ),
-                        ),
+                      BadgePill(
+                        text: item.bodyPart,
+                        color: catInfo.primaryColor,
                       ),
-                      const SizedBox(width: 6),
                       Icon(
                         item.signalType.icon,
                         size: 14,
                         color: item.signalType.color,
                       ),
-                      const Spacer(),
                       ValueListenableBuilder<String?>(
                         valueListenable: TtsService.currentSpeakingIdNotifier,
                         builder: (context, speakingId, _) {
