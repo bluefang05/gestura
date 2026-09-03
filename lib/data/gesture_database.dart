@@ -14,14 +14,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Contracción del músculo cigomático mayor (eleva comisuras labiales) y del músculo orbicular de los ojos (eleva mejillas y forma arrugas tipo "patas de gallo" alrededor de los ojos).',
       probableMeaning:
-          'Alegría sincera, calidez, conexión real y bienestar en el momento.',
-      alternativeMeanings: ['Rara vez fingible de forma perfecta.'],
+          'Puede acompañar alegría, cortesía, comodidad o una respuesta aprendida para la situación.',
+      alternativeMeanings: ['Hábito expresivo personal', 'Sonreír mientras se procesa información'],
       contextGuidance:
-          'En el trabajo indica agrado genuino y confianza. Con amigos/pareja es señal de comodidad absoluta.',
+          'La activación alrededor de los ojos no confirma una emoción concreta. Observa el intercambio completo y, si importa, pregúntalo.',
       whatToDo:
-          'Puedes relajarte y confiar en que la interacción es positiva. Corresponde con una actitud abierta.',
+          'Corresponde con calidez, sin asumir acuerdo ni bienestar; deja espacio para que la persona matice con palabras.',
       salesTip:
-          'Señal de compra o conexión lograda. Momento ideal para profundizar la propuesta.',
+          'No la uses como señal de compra. Confirma necesidades, dudas y próximos pasos de forma explícita.',
       illustrationKey: 'duchenne_smile',
       difficulty: 1,
     ),
@@ -35,14 +35,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Los labios se estiran hacia los lados, pero el músculo orbicular de los ojos no se activa. No hay arrugas en los ojos ni elevación de mejillas.',
       probableMeaning:
-          'Cortesía social obligada, amabilidad superficial, cumplimiento de etiqueta o incomodidad enmascarada.',
-      alternativeMeanings: ['Nerviosismo leve', 'Deseo de no crear tensión'],
+          'Puede ser cortesía, amabilidad, nerviosismo, concentración o la forma habitual de sonreír.',
+      alternativeMeanings: ['Deseo de no crear tensión', 'Una sonrisa breve o contenida'],
       contextGuidance:
           'Muy común en atención al cliente, recepciones o cuando alguien no quiere parecer descortés.',
       whatToDo:
-          'No asumas que la persona está feliz o de acuerdo; simplemente está siendo educada.',
+          'No uses la sonrisa para decidir si hay acuerdo. Si necesitas saberlo, formula una pregunta clara y opcional.',
       salesTip:
-          'El cliente está siendo diplomático pero aún no está convencido. Haz preguntas abiertas para descubrir objeciones.',
+          'Una sonrisa no sustituye la confirmación. Ofrece una pregunta abierta y permite que la respuesta sea “aún no lo sé”.',
       illustrationKey: 'polite_smile',
       difficulty: 2,
     ),
@@ -63,11 +63,11 @@ class GestureDatabase {
         'Dolor de cabeza'
       ],
       contextGuidance:
-          'En un aula/reunión suele significar duda o análisis crítico. En una discusión indica desacuerdo.',
+          'Puede aparecer al pensar, hacer esfuerzo visual, sentir dolor o reaccionar a un tema. No distingue por sí solo entre duda y desacuerdo.',
       whatToDo:
           'Pregunta con calma: "¿Tiene sentido lo que acabo de explicar o hay alguna duda?"',
       salesTip:
-          'El prospecto encontró un punto confuso o una discrepancia en el precio/condiciones. Detente y aclara.',
+          'Úsalo solo como invitación a comprobar comprensión: pausa y pregunta si quieres aclarar algo.',
       illustrationKey: 'frowning_brow',
       difficulty: 1,
     ),
@@ -81,14 +81,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Ligera contracción del párpado inferior y músculo orbicular sin sonreír.',
       probableMeaning:
-          'Sospecha, evaluación crítica minuciosa, duda de la veracidad o escepticismo.',
+          'Puede acompañar enfoque visual, cansancio ocular, luz intensa, dolor de cabeza o evaluación de la información.',
       alternativeMeanings: ['Esfuerzo visual', 'Cansancio ocular'],
       contextGuidance:
-          'Típico en negociaciones cuando se escucha una cifra o una promesa difícil de creer.',
+          'El entorno, la iluminación y la salud visual importan tanto como el contenido de la conversación.',
       whatToDo:
           'Aporta datos concretos, ejemplos verificables o pregunta qué aspecto genera dudas.',
       salesTip:
-          'Tu afirmación sonó exagerada o dudosa. Ofrece garantías, referencias o demostraciones tangibles.',
+          'No supongas escepticismo. Pregunta qué información sería útil y ofrece evidencia si la persona la solicita.',
       illustrationKey: 'narrowed_eyes',
       difficulty: 2,
     ),
@@ -128,7 +128,7 @@ class GestureDatabase {
           'Sensación de superioridad moral o intelectual, desprecio, sarcasmo o descalificación.',
       alternativeMeanings: ['Asimetría facial natural al sonreír (raro)'],
       contextGuidance:
-          'En discusiones indica que la otra persona considera absurdo lo que dices.',
+          'En discusiones puede coexistir con humor, tensión, incomodidad o una asimetría habitual; no permite concluir qué piensa la persona.',
       whatToDo:
           'Mantén la calma y el tono neutro. No te enganches emocionalmente; pide argumentos racionales.',
       salesTip:
@@ -164,11 +164,13 @@ class GestureDatabase {
       summary: 'Cejas elevadas, ojos muy abiertos y boca ligeramente abierta.',
       physiologicalDetails:
           'Contracción del músculo frontal (eleva cejas), apertura amplia de párpados y relajación mandibular.',
-      probableMeaning: 'Asombro, revelación inesperada o shock.',
+      probableMeaning:
+          'Puede acompañar sorpresa, atención intensa, esfuerzo visual, una reacción aprendida o una condición del entorno.',
       alternativeMeanings: [
         'Si dura más de 2 segundos puede ser sorpresa fingida.'
       ],
-      contextGuidance: 'En noticias o revelaciones imprevistas.',
+      contextGuidance:
+          'Una expresión breve no confirma el impacto emocional. Da tiempo y pregunta qué necesita la persona.',
       whatToDo:
           'Espera a que la persona asimile la información antes de continuar con más datos.',
       salesTip:
@@ -293,13 +295,13 @@ class GestureDatabase {
       physiologicalDetails:
           'Respuesta del sistema nervioso simpático ante estímulos atractivos.',
       probableMeaning:
-          'Alto interés, atracción, entusiasmo o concentración profunda.',
-      alternativeMeanings: ['Baja iluminación de la habitación o medicación.'],
-      contextGuidance: 'En citas románticas o al ver un producto que fascina.',
+          'Cambio fisiológico sensible a la luz y a múltiples factores; no es una medida fiable de interés, atracción o intención.',
+      alternativeMeanings: ['Baja iluminación', 'Medicación', 'Fatiga o variación individual'],
+      contextGuidance: 'Sin condiciones de iluminación y salud controladas, no se debe interpretar socialmente.',
       whatToDo:
-          'Es una señal inequívoca de deseo o entusiasmo; mantén el hilo conductor.',
+          'No atribuyas significado interpersonal a las pupilas. Confirma interés, límites o preferencias con palabras.',
       salesTip:
-          'Señal biológica de compra. Presenta el cierre de la oferta inmediatamente.',
+          'Nunca la trates como señal de compra. Un cierre debe basarse en una decisión expresada con claridad.',
       illustrationKey: 'pupil_dilation',
       difficulty: 3,
     ),
@@ -502,14 +504,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Hombros relajados, pecho descubierto sin barreras de objetos o brazos cruzados, pies orientados hacia ti.',
       probableMeaning:
-          'Disposición a escuchar, amabilidad, comodidad y confianza.',
-      alternativeMeanings: ['Postura de descanso.'],
+          'Puede ser una posición cómoda, una preferencia de movimiento, disposición a conversar o simple ausencia de apoyo cercano.',
+      alternativeMeanings: ['Postura de descanso', 'Normas culturales o del entorno'],
       contextGuidance:
-          'Excelente para iniciar conversaciones, negociar o hacer nuevos amigos.',
+          'Una postura abierta no confirma comodidad, confianza ni acuerdo. Úsala solo como parte de un contexto más amplio.',
       whatToDo:
-          'Aprovecha la receptividad para compartir tus ideas y construir raport.',
+          'Comparte tus ideas sin aumentar la presión y comprueba con palabras si la persona quiere continuar.',
       salesTip:
-          'Luz verde total. El cliente está cómodo contigo y tu propuesta.',
+          'No es una luz verde de compra. Confirma prioridades y consentimiento antes de avanzar.',
       illustrationKey: 'open_posture',
       difficulty: 1,
     ),
@@ -523,7 +525,7 @@ class GestureDatabase {
       physiologicalDetails:
           'Creación de una barrera física entre el pecho/corazón y el interlocutor.',
       probableMeaning:
-          'Defensa, reserva, desacuerdo o incomodidad con la situación.',
+          'Puede ser comodidad, temperatura, apoyo físico, hábito, reserva o una reacción a la situación.',
       alternativeMeanings: [
         'Frío ambiental en la habitación',
         'Hábito de comodidad al sentarse'
@@ -531,9 +533,9 @@ class GestureDatabase {
       contextGuidance:
           'Verifica la temperatura antes de asumir que está molesto.',
       whatToDo:
-          'Pásale un objeto (un folleto, un café, una pluma) para forzar suavemente a que descruce los brazos.',
+          'No intentes cambiar la postura de la persona. Ofrece opciones, ajusta el entorno si hace frío y pregunta si necesita una pausa.',
       salesTip:
-          'El cliente levantó una barrera. Hazle preguntas para que hable y se abra.',
+          'No interpretes una barrera. Haz preguntas abiertas sin exigir respuesta y respeta la comodidad corporal de la persona.',
       illustrationKey: 'closed_posture',
       difficulty: 1,
     ),
@@ -547,14 +549,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Flexión de cadera y espina acercando el plano corporal al centro de la mesa o conversación.',
       probableMeaning:
-          'Alto interés, atención activa, curiosidad y deseo de profundizar.',
+          'Puede facilitar la escucha, acompañar interés, compensar una dificultad auditiva o responder a la distribución del espacio.',
       alternativeMeanings: ['Problemas auditivos (desea oír mejor).'],
       contextGuidance:
-          'Señal clásica de que tu historia o propuesta captó el 100% de su atención.',
+          'No mide atención ni acuerdo. Observa el contenido de la conversación y ofrece una oportunidad de confirmar.',
       whatToDo:
-          'Mantén el dinamismo y entrega la información clave con entusiasmo.',
+          'Ofrece la información a un ritmo acordado y pregunta si la persona quiere seguir o necesita que repitas algo.',
       salesTip:
-          'Tu mensaje está resonando fuertemente. Es momento de plantear el cierre.',
+          'No aceleres hacia un cierre por la postura. Pregunta qué le resulta útil y si desea revisar opciones.',
       illustrationKey: 'leaning_forward',
       difficulty: 1,
     ),
@@ -567,14 +569,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Extensión de columna contra el respaldo de la silla, aumentando la distancia física.',
       probableMeaning:
-          'Distancia emocional, evaluación escéptica, relajación informal o desinterés.',
+          'Puede ser comodidad, cansancio, necesidad de espacio, una forma de pensar o evaluación de la situación.',
       alternativeMeanings: ['Comodidad tras comer', 'Fatiga física.'],
       contextGuidance:
-          'Si ocurre justo después de que dices algo, indica que el otro retrocedió emocionalmente.',
+          'Un cambio de posición puede responder al asiento, cansancio, dolor o reflexión; su momento no confirma una reacción emocional.',
       whatToDo:
           'Pregunta: "¿Qué te parece hasta aquí? ¿Hay algo que no termine de cuadrar?"',
       salesTip:
-          'El cliente se distanció. No sigas empujando; averigua qué causó la desconexión.',
+          'No asumas distanciamiento. Ofrece una pausa y pregunta si hay algo que aclarar o ajustar.',
       illustrationKey: 'leaning_back',
       difficulty: 2,
     ),
@@ -586,13 +588,13 @@ class GestureDatabase {
       summary: 'Frotar palma contra palma con velocidad variable.',
       physiologicalDetails: 'Fricción manual rápida o lenta.',
       probableMeaning:
-          'Rápido: entusiasmo y expectativa positiva de beneficio. Lento: nerviosismo o cálculo interesado.',
+          'Puede aportar calor, regular tensión, acompañar anticipación o ser un movimiento habitual de las manos.',
       alternativeMeanings: ['Manos frías.'],
       contextGuidance: 'En negocios o comidas antes de un buen platillo.',
       whatToDo:
-          'Alinea la expectativa si es rápida; sé precavido si el ritmo es lento y calculador.',
+          'Evita atribuir intención según la velocidad. Pregunta directamente si hay alguna expectativa, duda o necesidad.',
       salesTip:
-          'Si el cliente se frota las manos rápidamente, ya se está imaginando usando tu producto con éxito.',
+          'No lo uses como indicador de intención de compra. Prioriza lo que la persona expresa y el tiempo que solicita.',
       illustrationKey: 'hand_wringing',
       difficulty: 2,
     ),
@@ -606,13 +608,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Movimiento sucesivo repetitivo del meñique al índice contra una superficie.',
       probableMeaning:
-          'Impaciencia, aburrimiento, urgencia de tiempo o ansiedad.',
+          'Puede regular energía, acompañar una melodía interna, ser un hábito motor o expresar prisa, tensión o espera.',
       alternativeMeanings: ['Seguir el ritmo de una canción en la cabeza.'],
       contextGuidance:
           'Común cuando alguien tiene prisa o siente que se está perdiendo el tiempo.',
-      whatToDo: 'Acelera el ritmo de tu conversación y ve al desenlace.',
+      whatToDo:
+          'No cambies el ritmo solo por este gesto. Puedes preguntar si el tiempo disponible sigue siendo adecuado.',
       salesTip:
-          'Estás perdiendo la atención del cliente. Cambia de formato o pregunta: "¿Sé que tu tiempo es valioso, vamos al resumen?"',
+          'No concluyas que se perdió la atención. Puedes ofrecer un resumen o una pausa sin presionar una respuesta.',
       illustrationKey: 'finger_tapping',
       difficulty: 1,
     ),
@@ -626,14 +629,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Contracción del trapecio superior con supinación de antebrazos.',
       probableMeaning:
-          'Falta de conocimiento ("no sé"), desinterés ("me da igual") o sumisión.',
+          'Suele acompañar incertidumbre o la comunicación de “no lo sé”, pero también puede ser humor, hábito o una respuesta corporal breve.',
       alternativeMeanings: ['Indecisión sincera.'],
       contextGuidance:
-          'Acompañado de ceño levantado suele ser desconocimiento inocente.',
+          'La combinación de gestos tampoco resuelve la ambigüedad; el contenido y el contexto siguen siendo necesarios.',
       whatToDo:
           'Si es falta de conocimiento, brinda opciones claras para elegir en lugar de preguntas abiertas.',
       salesTip:
-          'El cliente no tiene claro qué necesita. Ayúdale guiándolo con 2 alternativas simples.',
+          'Puedes ofrecer opciones simples, dejando claro que la persona también puede pedir más información o no decidir ahora.',
       illustrationKey: 'shrug',
       difficulty: 1,
     ),
@@ -647,14 +650,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Extensión lateral de los codos aumentando el espacio visual ocupado por el torso.',
       probableMeaning:
-          'Disposición para actuar, firmeza, territorialidad, autoridad o reto.',
+          'Puede ser una forma de descansar, ocupar espacio, prepararse para actuar o un hábito corporal.',
       alternativeMeanings: ['Descanso lumbar tras caminar mucho.'],
       contextGuidance:
-          'En jefes o en discusiones indica que la persona está lista para tomar el control o confrontar.',
+          'Puede ser una forma de descansar, ocupar espacio o prepararse para actuar; no confirma autoridad ni confrontación.',
       whatToDo:
-          'No adoptes la misma postura de inmediato para no escalar a competencia territorial. Mantén una postura abierta y serena.',
+          'Mantén una postura que te resulte cómoda y no supongas una competencia. Regula el ritmo con comunicación clara.',
       salesTip:
-          'El cliente está en modo evaluador exigente. Presenta argumentos contundentes y estructurados.',
+          'No infieras exigencia. Pregunta qué criterios o información ayudarían a evaluar la propuesta.',
       illustrationKey: 'hands_on_hips',
       difficulty: 2,
     ),
@@ -668,13 +671,13 @@ class GestureDatabase {
       physiologicalDetails:
           'Apertura máxima del pecho y elevación de brazos mientras se ocupa el respaldo.',
       probableMeaning:
-          'Seguridad extrema, superioridad, dominancia territorial o relajación arrogante.',
+          'Puede ser estiramiento, alivio para la espalda, comodidad en el asiento o una manera habitual de escuchar.',
       alternativeMeanings: ['Estiramiento muscular por rigidez en la espalda.'],
       contextGuidance: 'Típica en figuras de poder en su propio despacho.',
       whatToDo:
           'No te sientas intimidado. Mantén contacto visual equilibrado y presenta tu propuesta con profesionalismo.',
       salesTip:
-          'El prospecto siente que tiene la sartén por el mango. Haz preguntas que lo hagan reflexionar sobre sus puntos ciegos.',
+          'No deduzcas jerarquía ni intención. Presenta la información con claridad y pregunta qué desea explorar.',
       illustrationKey: 'hands_behind_head',
       difficulty: 2,
     ),
@@ -688,14 +691,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Alineación simétrica de las puntas de los dedos sin entrelazar las palmas.',
       probableMeaning:
-          'Alta confianza intelectual, maestría en el tema, autoridad serena y certeza en lo que se dice.',
+          'Puede ser hábito, una forma de concentrarse, un gesto aprendido al exponer o comodidad manual.',
       alternativeMeanings: ['Hábito de concentración en oradores.'],
       contextGuidance:
           'Muy utilizada por expertos, jueces y negociadores experimentados.',
       whatToDo:
           'Puedes emplear este gesto al exponer tus puntos clave para proyectar solvencia técnica.',
       salesTip:
-          'Si el cliente hace la ojiva mientras hablas, está evaluando con criterio técnico y alto interés.',
+          'No supone interés técnico. Invita a compartir preguntas o criterios de evaluación, sin presuponerlos.',
       illustrationKey: 'steepling_hands',
       difficulty: 2,
     ),
@@ -709,14 +712,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Inclinación lateral del cuello (músculo esternocleidomastoideo) dejando al descubierto la arteria carótida.',
       probableMeaning:
-          'Escucha empática, interés genuino, sintonía emocional y señal no amenazante.',
+          'Puede acompañar escucha, curiosidad, una mejor audición por un lado, comodidad cervical o hábito postural.',
       alternativeMeanings: ['Esfuerzo por escuchar con un oído mejor.'],
       contextGuidance:
-          'Excelente señal en citas, charlas con amigos y negociaciones colaborativas.',
+          'El significado depende de la conversación, la relación, la audición y la comodidad física; no identifica por sí solo afinidad.',
       whatToDo:
-          'Es una luz verde para continuar compartiendo detalles; la persona está conectada contigo.',
+          'No la tomes como luz verde. Antes de entrar en más detalle, pregunta si la persona quiere continuar o necesita una pausa.',
       salesTip:
-          'El cliente siente afinidad y empatía. Continúa construyendo relación.',
+          'No infieras afinidad. Construye confianza mediante opciones claras, escucha y acuerdos explícitos.',
       illustrationKey: 'head_tilt',
       difficulty: 1,
     ),
@@ -1066,14 +1069,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Uso exclusivo de caracteres mayúsculos en mensajería digital.',
       probableMeaning:
-          'Grito, indignación, urgencia extrema o enojo en la cultura digital.',
-      alternativeMeanings: ['Adultos mayores que no ven bien la pantalla.'],
+          'Puede percibirse como énfasis, urgencia o intensidad, según la comunidad y la relación.',
+      alternativeMeanings: ['Accesibilidad visual', 'Preferencia de formato', 'Convención interna del equipo'],
       contextGuidance:
-          'En chats laborales o redes sociales se percibe como una agresión verbal.',
+          'No siempre se percibe como agresión. Considera las normas compartidas y el contenido del mensaje.',
       whatToDo:
           'Evita escribir en mayúsculas sostenidas salvo siglas o alertas indispensables.',
       salesTip:
-          'Nunca uses mayúsculas en correos a clientes; denota desesperación o prepotencia.',
+          'Reserva las mayúsculas sostenidas para alertas necesarias y adapta el estilo al canal acordado.',
       illustrationKey: 'digital_mayusculas',
       difficulty: 1,
     ),
@@ -1086,12 +1089,13 @@ class GestureDatabase {
       physiologicalDetails:
           'Respuesta monosilábica con punto final sin emojis ni explicaciones.',
       probableMeaning:
-          'En personas neurotípicas a menudo denota molestia, frialdad, desinterés o falta de tiempo.',
+          'Puede significar recepción, brevedad, falta de tiempo, un estilo directo o el deseo de responder más tarde.',
       alternativeMeanings: [
-        'En personas directas/autistas simplemente significa "mensaje recibido".'
+        'Preferencia por respuestas concisas',
+        'Necesidad de procesar antes de ampliar la respuesta'
       ],
       contextGuidance:
-          'Si la persona siempre usa emojis y de repente responde "Ok.", hay conflicto latente.',
+          'Un cambio de estilo puede tener muchas causas. Si la claridad importa, pregunta sin atribuir conflicto.',
       whatToDo:
           'Si deseas sonar cálido, añade un emoji o un signo: "¡Ok, perfecto!" o "Entendido 👍".',
       salesTip:
@@ -1109,7 +1113,7 @@ class GestureDatabase {
       physiologicalDetails:
           'Confirmación de lectura (doble check azul) sin respuesta durante días o semanas.',
       probableMeaning:
-          'Evitación de conflicto, desinterés en continuar el vínculo o falta de asertividad.',
+          'Puede reflejar prioridades, saturación, olvido, una emergencia, límites personales o falta de interés; el motivo no se conoce sin comunicación.',
       alternativeMeanings: [
         'Saturación de tareas, olvido involuntario o emergencia.'
       ],
@@ -1117,7 +1121,7 @@ class GestureDatabase {
       whatToDo:
           'No insistas repetidamente. Envía un solo mensaje de cierre cordial.',
       salesTip:
-          'Aplica la regla de los 3 toques con valor añadido; si no hay respuesta, archiva la oportunidad.',
+          'Acordar una cadencia de seguimiento y un cierre respetuoso evita presión. La ausencia de respuesta no revela por sí sola el motivo.',
       illustrationKey: 'digital_ghosting',
       difficulty: 2,
     ),
@@ -1130,13 +1134,14 @@ class GestureDatabase {
           'Incluir emoticonos para suavizar el tono o aclarar la intención emocional.',
       physiologicalDetails:
           'Símbolos gráficos que sustituyen la entonación y las microexpresiones faciales en texto.',
-      probableMeaning: 'Calidez, empatía, humor o intención amistosa.',
+      probableMeaning:
+          'Puede añadir tono, matizar una intención o reducir el esfuerzo de escribir; el significado cambia según el emoji y la relación.',
       alternativeMeanings: [
         'Uso excesivo puede restar formalidad en ciertos contratos.'
       ],
       contextGuidance: 'En mensajería instantánea profesional y personal.',
       whatToDo:
-          'Iguala el número de emojis que usa tu interlocutor para calibrar el nivel de formalidad.',
+          'No es necesario imitar el uso de emojis. Pregunta o observa las normas del canal y usa el estilo que resulte claro y cómodo.',
       salesTip:
           'Un emoji cordial (👍 o 😊) al inicio o final humaniza el mensaje comercial sin perder seriedad.',
       illustrationKey: 'digital_emojis',
@@ -1152,16 +1157,16 @@ class GestureDatabase {
       physiologicalDetails:
           'Grabación de audio asíncrona que transmite tono, volumen y ritmo paralingüístico.',
       probableMeaning:
-          'Cercanía y practicidad (breves) vs invasión de tiempo del destinatario (muy largos).',
+          'Puede ser una elección de accesibilidad, contexto, costumbre o disponibilidad; la duración por sí sola no define cercanía ni consideración.',
       alternativeMeanings: [
         'Imposibilidad de escribir por estar conduciendo o caminando.'
       ],
       contextGuidance:
           'En entornos de trabajo, pregunta primero: "¿Te viene bien una nota de voz corta?".',
       whatToDo:
-          'Limita los audios a menos de 60 segundos con las ideas principales sintetizadas.',
+          'Pregunta si un audio resulta conveniente y ofrece una alternativa escrita o un resumen cuando sea útil.',
       salesTip:
-          'Una nota de voz cálida de 30 segundos tras enviar una cotización genera 3x más respuestas que un email plano.',
+          'No presupongas que el audio es preferible. Ofrece el formato que la persona haya indicado como más accesible.',
       illustrationKey: 'digital_audio',
       difficulty: 1,
     ),

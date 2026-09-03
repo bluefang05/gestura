@@ -28,14 +28,14 @@ class BuyerTemperatureScreen extends StatefulWidget {
   const BuyerTemperatureScreen({super.key});
 
   static const List<BuyerSignal> signals = [
-    // --- LUZ VERDE (SEÑALES DE COMPRA) ---
+    // --- PISTAS QUE PUEDEN ACOMPAÑAR APERTURA ---
     BuyerSignal(
       id: 'lean_forward',
       label: 'Inclinación frontal hacia la mesa',
       score: 3,
       category: 'green',
       takeaway:
-          'Indica alto compromiso, interés genuino y deseo de acercamiento.',
+          'Puede facilitar la escucha, responder al espacio o ser una postura cómoda; no confirma interés.',
       icon: Icons.airline_seat_recline_normal_rounded,
     ),
     BuyerSignal(
@@ -43,7 +43,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Sonrisa genuina (ojos achinados)',
       score: 2,
       category: 'green',
-      takeaway: 'Comodidad real y aprobación emocional de la propuesta.',
+      takeaway: 'Puede acompañar alegría, cortesía o un estilo expresivo. No confirma aprobación.',
       icon: Icons.sentiment_very_satisfied_rounded,
     ),
     BuyerSignal(
@@ -51,7 +51,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Palmas abiertas y visibles',
       score: 3,
       category: 'green',
-      takeaway: 'Transparencia, receptividad y ausencia de agendas ocultas.',
+      takeaway: 'Puede ser comodidad, una manera de gesticular o una invitación a conversar; no revela intención.',
       icon: Icons.pan_tool_rounded,
     ),
     BuyerSignal(
@@ -59,7 +59,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Asentimiento de cabeza rítmico y lento',
       score: 2,
       category: 'green',
-      takeaway: 'Validación activa de los argumentos que estás exponiendo.',
+      takeaway: 'Puede marcar seguimiento, ritmo conversacional o acuerdo parcial. Confirma lo que entendió.',
       icon: Icons.check_circle_outline_rounded,
     ),
     BuyerSignal(
@@ -68,7 +68,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: 2,
       category: 'green',
       takeaway:
-          'Confianza y autoridad en la decisión que está a punto de tomar.',
+          'Puede ser hábito, concentración o una manera de colocar las manos; no anticipa una decisión.',
       icon: Icons.change_history_rounded,
     ),
 
@@ -79,7 +79,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: 0,
       category: 'yellow',
       takeaway:
-          'Procesamiento analítico. Está sopesando el balance costo/beneficio.',
+          'Puede acompañar reflexión, comodidad o hábito. Pregunta qué información sería útil.',
       icon: Icons.psychology_rounded,
     ),
     BuyerSignal(
@@ -88,7 +88,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: 1,
       category: 'yellow',
       takeaway:
-          'Curiosidad y escucha atenta, esperando un dato que lo convenza.',
+          'Puede relacionarse con escucha, audición, comodidad cervical o curiosidad; no confirma intención.',
       icon: Icons.hearing_rounded,
     ),
     BuyerSignal(
@@ -96,18 +96,18 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Mirar por encima de lentes / frotar puente',
       score: -1,
       category: 'yellow',
-      takeaway: 'Escrutinio crítico o sobrecarga momentánea de datos.',
+      takeaway: 'Puede responder a la visión, cansancio o concentración. Ofrece una pausa o claridad si hace falta.',
       icon: Icons.remove_red_eye_outlined,
     ),
 
-    // --- LUZ ROJA (BARRERA / OBJECIÓN) ---
+    // --- PISTAS QUE PUEDEN JUSTIFICAR UNA PAUSA ---
     BuyerSignal(
       id: 'crossed_arms',
       label: 'Brazos cruzados en el pecho',
       score: -3,
       category: 'red',
       takeaway:
-          'Barrera física de autoprotección o desacuerdo con el precio/plazo.',
+          'Puede deberse a temperatura, comodidad, hábito o reserva. No identifica una objeción.',
       icon: Icons.cancel_rounded,
     ),
     BuyerSignal(
@@ -116,7 +116,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: -2,
       category: 'red',
       takeaway:
-          'Contención de una objeción o desacuerdo que no quiere verbalizar aún.',
+          'Puede acompañar concentración, dolor o emoción. No revela una objeción sin preguntarla.',
       icon: Icons.remove_circle_outline_rounded,
     ),
     BuyerSignal(
@@ -125,7 +125,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: -2,
       category: 'red',
       takeaway:
-          'Estrés, inseguridad o incomodidad con las condiciones planteadas.',
+          'Puede ser alivio físico, hábito o regulación. Ofrece espacio sin asumir el motivo.',
       icon: Icons.pan_tool_alt_rounded,
     ),
     BuyerSignal(
@@ -133,7 +133,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Tamborileo de dedos en la mesa',
       score: -2,
       category: 'red',
-      takeaway: 'Impaciencia. Siente que la reunión es demasiado larga.',
+      takeaway: 'Puede ser un hábito motor, regulación o prisa. Puedes comprobar si el ritmo sigue siendo adecuado.',
       icon: Icons.touch_app_outlined,
     ),
     BuyerSignal(
@@ -141,7 +141,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       label: 'Reclinarse hacia atrás con distancia',
       score: -3,
       category: 'red',
-      takeaway: 'Retracción y desconexión psicológica de la propuesta.',
+      takeaway: 'Puede responder al asiento, cansancio o necesidad de espacio; no confirma desconexión.',
       icon: Icons.airline_seat_flat_rounded,
     ),
   ];
@@ -174,24 +174,24 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
 
   String get _temperatureVerdict {
     final pct = _temperaturePercent;
-    if (_selectedSignalIds.isEmpty) return 'Selecciona señales para calibrar';
-    if (pct >= 0.70) return '🔥 Luz Verde: Momento Óptimo de Cierre';
-    if (pct >= 0.40) return '⚡ Luz Amarilla: En Evaluación / Aclarar Dudas';
-    return '🧊 Luz Roja: Barrera Activa / No Empujes Cierre';
+    if (_selectedSignalIds.isEmpty) return 'Observa sin convertirlo en diagnóstico';
+    if (pct >= 0.70) return '🟢 Patrón de apertura posible: confirmar con palabras';
+    if (pct >= 0.40) return '🟡 Patrón ambiguo: pregunta y deja tiempo';
+    return '🔴 Patrón que invita a bajar presión y comprobar necesidades';
   }
 
   String get _tacticalAdvice {
     final pct = _temperaturePercent;
     if (_selectedSignalIds.isEmpty) {
-      return 'Toca las señales corporales que estás observando en tu cliente para recibir la táctica recomendada.';
+      return 'Marca las pistas observables para explorar opciones de conversación. Ninguna combinación determina una intención o una decisión de compra.';
     }
     if (pct >= 0.70) {
-      return 'El cliente ha mostrado múltiples señales de compra. DEJA DE EXPLICAR características técnicas. Haz el llamado a la acción directo: "¿Te parece bien si enviamos el contrato hoy para iniciar el lunes?"';
+      return 'Estas pistas no confirman una compra. Puedes preguntar: “¿Qué necesitarías para decidir si esto te sirve?” y respetar una respuesta, una pausa o un no.';
     }
     if (pct >= 0.40) {
-      return 'El cliente tiene interés pero aún no está convencido. Haz preguntas abiertas de validación: "¿Qué aspecto de la propuesta consideras más prioritario resolver primero?" y escucha sin interrumpir.';
+      return 'El patrón sigue siendo ambiguo. Haz una pregunta abierta: “¿Qué aspecto te gustaría explorar o aclarar primero?” y escucha sin interrumpir.';
     }
-    return 'El cliente tiene una objeción no resuelta. Si intentas cerrar ahora, recibirás un rechazo definitivo. Haz una pausa, descruza tus manos y pregunta amablemente: "Noto cierta duda en este punto, ¿hay algún detalle del presupuesto o cronograma que debamos ajustar?"';
+    return 'No supongas una objeción. Baja la presión y ofrece una opción: “Podemos pausar, revisar un punto concreto o retomarlo otro día; ¿qué te vendría mejor?”.';
   }
 
   Color get _verdictColor {
@@ -370,8 +370,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
 
                   // Signals Selection Sections
                   const SectionHeader(
-                    title: '🟢 Señales de Compra y Apertura',
-                    subtitle: 'Suma puntos de receptividad y luz verde',
+                    title: '🟢 Pistas que pueden acompañar apertura',
+                    subtitle: 'No confirman interés ni decisión',
                   ),
                   _buildSignalGroup(
                       BuyerTemperatureScreen.signals
@@ -381,8 +381,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                   const SizedBox(height: 16),
 
                   const SectionHeader(
-                    title: '🟡 Señales de Evaluación y Duda',
-                    subtitle: 'El cliente está procesando la información',
+                    title: '🟡 Pistas ambiguas para observar con contexto',
+                    subtitle: 'Pregunta antes de concluir qué ocurre',
                   ),
                   _buildSignalGroup(
                       BuyerTemperatureScreen.signals
@@ -392,8 +392,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                   const SizedBox(height: 16),
 
                   const SectionHeader(
-                    title: '🔴 Señales de Barrera y Objeción',
-                    subtitle: 'Indican resistencia, molestia o incomodidad',
+                    title: '🔴 Pistas que pueden justificar una pausa',
+                    subtitle: 'Ofrece opciones sin atribuir resistencia o molestia',
                   ),
                   _buildSignalGroup(
                       BuyerTemperatureScreen.signals
