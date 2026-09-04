@@ -252,17 +252,17 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       tooltip: isSpeaking
                                           ? 'Detener audio'
-                                          : 'Escuchar Señal del Día',
+                                          : 'Escuchar síntesis express (10s)',
                                       onPressed: () {
                                         FeedbackService.lightClick();
                                         if (isSpeaking) {
                                           TtsService.stop();
                                         } else {
-                                          final speech =
-                                              'Señal del día: ${dailyGesture.name}. ${dailyGesture.summary}. Pistas físicas: ${dailyGesture.physiologicalDetails}.';
-                                          TtsService.speak(speech,
-                                              gestureId:
-                                                  'daily_${dailyGesture.id}');
+                                          TtsService.speak(
+                                            dailyGesture.expressAudioSummary,
+                                            gestureId:
+                                                'daily_${dailyGesture.id}',
+                                          );
                                         }
                                       },
                                     );
@@ -293,18 +293,53 @@ class HomeScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w800,
                                             letterSpacing: -0.2),
                                       ),
-                                      const SizedBox(height: 3),
-                                      Text(
-                                        dailyGesture.summary,
-                                        style: TextStyle(
-                                          fontSize: 12.5,
-                                          color: isDark
-                                              ? AppColors.textSecondaryDark
-                                              : AppColors.textSecondaryLight,
-                                          height: 1.35,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
+                                      const SizedBox(height: 4),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('💡 ',
+                                              style: TextStyle(fontSize: 11)),
+                                          Expanded(
+                                            child: Text(
+                                              dailyGesture.quickMeaning,
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: isDark
+                                                    ? AppColors.textPrimaryDark
+                                                    : AppColors
+                                                        .textPrimaryLight,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 2),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Text('👁️ ',
+                                              style: TextStyle(fontSize: 11)),
+                                          Expanded(
+                                            child: Text(
+                                              dailyGesture.quickVisualClue,
+                                              style: TextStyle(
+                                                fontSize: 11.5,
+                                                color: isDark
+                                                    ? AppColors
+                                                        .textSecondaryDark
+                                                    : AppColors
+                                                        .textSecondaryLight,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
@@ -318,9 +353,52 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               alignment: WrapAlignment.spaceBetween,
                               children: [
-                                BadgePill(
-                                  text: dailyGesture.bodyPart,
-                                  color: catInfo.primaryColor,
+                                Wrap(
+                                  spacing: 6,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 7, vertical: 2.5),
+                                      decoration: BoxDecoration(
+                                        color: dailyGesture.signalType.color
+                                            .withValues(
+                                                alpha: isDark ? 0.2 : 0.12),
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: dailyGesture.signalType.color
+                                              .withValues(
+                                                  alpha: isDark ? 0.45 : 0.3),
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            dailyGesture.signalType.icon,
+                                            size: 13,
+                                            color:
+                                                dailyGesture.signalType.color,
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            dailyGesture.signalType.shortState,
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w800,
+                                              color: dailyGesture
+                                                  .signalType.color,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    BadgePill(
+                                      text: dailyGesture.bodyPart,
+                                      color: catInfo.primaryColor,
+                                    ),
+                                  ],
                                 ),
                                 TextButton.icon(
                                   onPressed: () {

@@ -24,6 +24,7 @@ class GestureDetailScreen extends StatefulWidget {
 
 class _GestureDetailScreenState extends State<GestureDetailScreen> {
   bool _highlightAnatomy = false;
+  bool _showDeepDive = false;
   late bool _isBookmarked;
 
   @override
@@ -55,6 +56,11 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
     final speech =
         '${item.name}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
     TtsService.speak(speech, gestureId: item.id);
+  }
+
+  void _toggleExpressTts(GestureItem item) {
+    FeedbackService.lightClick();
+    TtsService.speak(item.expressAudioSummary, gestureId: 'express_${item.id}');
   }
 
   @override
@@ -461,8 +467,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 ],
               ),
             ),
-            const SizedBox(height: 28),
-          ];
+                      ];
 
           if (isTablet) {
             return Center(
@@ -471,9 +476,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Left Column (Illustration & Header)
+                    // Left Column (Illustration & Express Audio & Header)
                     SizedBox(
-                      width: 360,
+                      width: 380,
                       child: ListView(
                         padding: const EdgeInsets.all(16),
                         children: [
@@ -490,8 +495,10 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                             ),
                           ),
                           const SizedBox(height: 14),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 8,
+                            runSpacing: 6,
                             children: [
                               FilterChip(
                                 avatar: Icon(
@@ -515,7 +522,6 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                   setState(() => _highlightAnatomy = val);
                                 },
                               ),
-                              const SizedBox(width: 8),
                               ValueListenableBuilder<String?>(
                                 valueListenable:
                                     TtsService.currentSpeakingIdNotifier,
@@ -533,8 +539,8 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                     ),
                                     label: Text(
                                       isSpeaking
-                                          ? 'Detener Audio'
-                                          : 'Escuchar Ficha',
+                                          ? 'Detener'
+                                          : 'Audio Completo',
                                       style: TextStyle(
                                           color:
                                               isSpeaking ? Colors.white : null,
@@ -552,7 +558,12 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 14),
+
+                          // Botón Hero "Escuchar sin leer" (10s)
+                          _buildExpressAudioHero(item, isDark),
                           const SizedBox(height: 16),
+
                           Wrap(
                             spacing: 8,
                             runSpacing: 6,
@@ -593,11 +604,15 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       ),
                     ),
                     const VerticalDivider(width: 1, thickness: 1),
-                    // Right Column (Details)
+                    // Right Column (At-A-Glance Card & Deep Dive)
                     Expanded(
                       child: ListView(
                         padding: const EdgeInsets.all(16),
-                        children: detailCards,
+                        children: [
+                          _buildAtAGlanceCard(item, isDark),
+                          const SizedBox(height: 16),
+                          _buildDeepDiveSection(detailCards, isDark),
+                        ],
                       ),
                     ),
                   ],
@@ -623,8 +638,10 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8,
+                runSpacing: 6,
                 children: [
                   FilterChip(
                     avatar: Icon(
@@ -644,7 +661,6 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       setState(() => _highlightAnatomy = val);
                     },
                   ),
-                  const SizedBox(width: 8),
                   ValueListenableBuilder<String?>(
                     valueListenable: TtsService.currentSpeakingIdNotifier,
                     builder: (context, speakingId, _) {
@@ -658,7 +674,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                           color: isSpeaking ? Colors.white : AppColors.accent,
                         ),
                         label: Text(
-                          isSpeaking ? 'Detener Audio' : 'Escuchar Ficha',
+                          isSpeaking ? 'Detener' : 'Audio Completo',
                           style: TextStyle(
                               color: isSpeaking ? Colors.white : null,
                               fontWeight: FontWeight.bold),
@@ -675,7 +691,12 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 14),
+
+              // Botón Hero "Escuchar sin leer" (10s)
+              _buildExpressAudioHero(item, isDark),
               const SizedBox(height: 16),
+
               Wrap(
                 spacing: 8,
                 runSpacing: 6,
@@ -711,12 +732,385 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                   height: 1.35,
                 ),
               ),
-              const SizedBox(height: 20),
-              ...detailCards,
+              const SizedBox(height: 16),
+
+              // Tarjeta Resumen 3 Segundos (Visual-First)
+              _buildAtAGlanceCard(item, isDark),
+              const SizedBox(height: 16),
+
+              // Desglose profundo opcional
+              _buildDeepDiveSection(detailCards, isDark),
+              const SizedBox(height: 24),
             ],
           );
         },
       ),
     );
   }
+
+  Widget _buildAtAGlanceCard(GestureItem item, bool isDark) {
+    final lightColor = item.signalType.color;
+    final lightBg = isDark
+        ? lightColor.withValues(alpha: 0.16)
+        : lightColor.withValues(alpha: 0.08);
+    final lightBorder = lightColor.withValues(alpha: 0.45);
+
+    return AppCard(
+      color: lightBg,
+      borderSide: BorderSide(color: lightBorder, width: 1.6),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Semáforo Header Bar
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: lightColor.withValues(alpha: 0.22),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(item.signalType.icon, color: lightColor, size: 24),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.signalType.label.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                        color: lightColor,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      item.signalType.actionAdvice,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? Colors.white12
+                      : Colors.black.withValues(alpha: 0.06),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.bolt_rounded, size: 14, color: lightColor),
+                    const SizedBox(width: 3),
+                    Text(
+                      '3 Segundos',
+                      style: TextStyle(
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w800,
+                        color: isDark ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          Divider(
+            height: 1,
+            thickness: 0.8,
+            color: lightColor.withValues(alpha: 0.25),
+          ),
+          const SizedBox(height: 12),
+
+          // 3 Micro-píldoras visuales
+          _buildGlanceRow(
+            icon: Icons.visibility_rounded,
+            iconColor:
+                isDark ? const Color(0xFF60A5FA) : const Color(0xFF2563EB),
+            title: 'Qué mirar:',
+            content: item.quickVisualClue,
+            isDark: isDark,
+          ),
+          const SizedBox(height: 10),
+          _buildGlanceRow(
+            icon: Icons.lightbulb_rounded,
+            iconColor:
+                isDark ? const Color(0xFFFBBF24) : const Color(0xFFD97706),
+            title: 'Significado:',
+            content: item.quickMeaning,
+            isDark: isDark,
+          ),
+          const SizedBox(height: 10),
+          _buildGlanceRow(
+            icon: Icons.play_arrow_rounded,
+            iconColor:
+                isDark ? const Color(0xFF34D399) : const Color(0xFF059669),
+            title: 'Acción táctica:',
+            content: item.quickAction,
+            isDark: isDark,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGlanceRow({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String content,
+    required bool isDark,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 2),
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: iconColor.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Icon(icon, size: 14, color: iconColor),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text.rich(
+            TextSpan(
+              style: TextStyle(
+                fontSize: 13.5,
+                height: 1.35,
+                color: isDark
+                    ? AppColors.textPrimaryDark
+                    : AppColors.textPrimaryLight,
+              ),
+              children: [
+                TextSpan(
+                  text: '$title ',
+                  style: const TextStyle(fontWeight: FontWeight.w800),
+                ),
+                TextSpan(
+                  text: content,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildExpressAudioHero(GestureItem item, bool isDark) {
+    return ValueListenableBuilder<String?>(
+      valueListenable: TtsService.currentSpeakingIdNotifier,
+      builder: (context, speakingId, _) {
+        final isSpeaking = speakingId == 'express_${item.id}';
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16),
+            onTap: () => _toggleExpressTts(item),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              decoration: BoxDecoration(
+                color: isSpeaking
+                    ? (isDark
+                        ? const Color(0xFF7F1D1D)
+                        : const Color(0xFFFEE2E2))
+                    : (isDark
+                        ? const Color(0xFF1E293B)
+                        : const Color(0xFFEEF2FF)),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: isSpeaking
+                      ? (isDark ? Colors.redAccent : Colors.red)
+                      : (isDark
+                          ? AppColors.primary.withValues(alpha: 0.5)
+                          : const Color(0xFFC7D2FE)),
+                  width: 1.5,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(9),
+                    decoration: BoxDecoration(
+                      color: isSpeaking
+                          ? (isDark
+                              ? Colors.red.withValues(alpha: 0.3)
+                              : Colors.red.withValues(alpha: 0.2))
+                          : (isDark
+                              ? AppColors.primary.withValues(alpha: 0.25)
+                              : AppColors.primary.withValues(alpha: 0.15)),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      isSpeaking
+                          ? Icons.stop_circle_rounded
+                          : Icons.headphones_rounded,
+                      color: isSpeaking
+                          ? (isDark ? Colors.white : Colors.red)
+                          : (isDark
+                              ? AppColors.primaryLight
+                              : AppColors.primary),
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          isSpeaking
+                              ? 'Reproduciendo síntesis express...'
+                              : '🎧 Escuchar sin leer (10s)',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            color: isSpeaking
+                                ? (isDark ? Colors.white : const Color(0xFF991B1B))
+                                : (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          isSpeaking
+                              ? 'Toca para pausar la lectura'
+                              : 'Qué mirar, significado y respuesta táctica al instante',
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            color: isSpeaking
+                                ? (isDark ? Colors.white70 : const Color(0xFFB91C1C))
+                                : (isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textMutedLight),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    isSpeaking
+                        ? Icons.graphic_eq_rounded
+                        : Icons.play_arrow_rounded,
+                    color: isSpeaking
+                        ? (isDark ? Colors.white : Colors.red)
+                        : (isDark
+                            ? AppColors.primaryLight
+                            : AppColors.primary),
+                    size: 24,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildDeepDiveSection(List<Widget> detailCards, bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: () {
+            FeedbackService.lightClick();
+            setState(() {
+              _showDeepDive = !_showDeepDive;
+            });
+          },
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(
+                color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                width: 1.2,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  _showDeepDive
+                      ? Icons.menu_book_rounded
+                      : Icons.menu_book_outlined,
+                  size: 20,
+                  color: isDark ? AppColors.primaryLight : AppColors.primary,
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _showDeepDive
+                            ? 'Ocultar análisis detallado'
+                            : '📖 Ver análisis profundo y contexto (Opcional)',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                      Text(
+                        'Anatomía completa, variabilidad humana, venta y contexto',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(
+                  _showDeepDive
+                      ? Icons.expand_less_rounded
+                      : Icons.expand_more_rounded,
+                  color: isDark
+                      ? AppColors.textMutedDark
+                      : AppColors.textMutedLight,
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (_showDeepDive) ...[
+          const SizedBox(height: 14),
+          ...detailCards,
+        ],
+      ],
+    );
+  }
 }
+

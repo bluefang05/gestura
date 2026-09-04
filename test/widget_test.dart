@@ -30,6 +30,8 @@ import 'package:gestura/widgets/home/mastery_progress_card.dart';
 import 'package:gestura/screens/progress_screen.dart';
 import 'package:gestura/screens/scenarios_screen.dart';
 import 'package:gestura/screens/incongruence_detector_screen.dart';
+import 'package:gestura/screens/gesture_detail_screen.dart';
+import 'package:gestura/widgets/dictionary/gesture_card.dart';
 
 void main() {
   setUp(() async {
@@ -913,6 +915,61 @@ void main() {
 
     expect(find.text('Siguiente Caso'), findsOneWidget);
     expect(find.text('Hipótesis e interpretaciones posibles:'), findsOneWidget);
+  });
+
+  test('GestureItem provides valid visual-first clues, actions, and express audio', () {
+    for (final item in GestureDatabase.items) {
+      expect(item.quickVisualClue.isNotEmpty, isTrue,
+          reason: '${item.id} should have non-empty quickVisualClue');
+      expect(item.quickMeaning.isNotEmpty, isTrue,
+          reason: '${item.id} should have non-empty quickMeaning');
+      expect(item.quickAction.isNotEmpty, isTrue,
+          reason: '${item.id} should have non-empty quickAction');
+      expect(item.expressAudioSummary.contains(item.name), isTrue,
+          reason: '${item.id} expressAudioSummary should contain gesture name');
+      expect(item.signalType.shortState.isNotEmpty, isTrue);
+      expect(item.signalType.actionAdvice.isNotEmpty, isTrue);
+    }
+  });
+
+  testWidgets('GestureDetailScreen renders 3-second card and express audio hero',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: GestureDetailScreen(gestureId: 'sonrisa_genuina'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('3 Segundos'), findsOneWidget);
+    expect(find.textContaining('Qué mirar:'), findsOneWidget);
+    expect(find.textContaining('Significado:'), findsOneWidget);
+    expect(find.textContaining('Acción táctica:'), findsOneWidget);
+    expect(find.text('🎧 Escuchar sin leer (10s)'), findsOneWidget);
+    expect(find.text('📖 Ver análisis profundo y contexto (Opcional)'),
+        findsOneWidget);
+  });
+
+  testWidgets('GestureCard displays traffic light pill and visual-first clues',
+      (tester) async {
+    final item = GestureDatabase.getById('sonrisa_genuina')!;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: GestureCard(
+            item: item,
+            isBookmarked: false,
+            onTap: () {},
+            onBookmarkToggle: () {},
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Receptivo'), findsOneWidget);
+    expect(find.textContaining('💡'), findsOneWidget);
+    expect(find.textContaining('👁️'), findsOneWidget);
   });
 }
 

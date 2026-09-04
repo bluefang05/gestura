@@ -75,7 +75,7 @@ class GestureCard extends StatelessWidget {
                       ValueListenableBuilder<String?>(
                         valueListenable: TtsService.currentSpeakingIdNotifier,
                         builder: (context, speakingId, _) {
-                          final isSpeaking = speakingId == item.id;
+                          final isSpeaking = speakingId == 'card_${item.id}';
                           return IconButton(
                             constraints: const BoxConstraints(
                                 minWidth: 36, minHeight: 36),
@@ -92,17 +92,17 @@ class GestureCard extends StatelessWidget {
                                   : mutedColor,
                             ),
                             tooltip: isSpeaking
-                                ? 'Detener lectura'
-                                : 'Escuchar en voz alta',
+                                ? 'Detener síntesis'
+                                : 'Escuchar síntesis express (10s)',
                             onPressed: () {
                               FeedbackService.lightClick();
                               if (isSpeaking) {
                                 TtsService.stop();
                               } else {
-                                final textToRead =
-                                    '${item.name}. ${item.summary}. Pistas físicas: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
-                                TtsService.speak(textToRead,
-                                    gestureId: item.id);
+                                TtsService.speak(
+                                  item.expressAudioSummary,
+                                  gestureId: 'card_${item.id}',
+                                );
                               }
                             },
                           );
@@ -133,34 +133,94 @@ class GestureCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
 
-                  // Middle: Clear Summary
-                  Text(
-                    item.summary,
-                    style: TextStyle(
-                      fontSize: 12.5,
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
-                      height: 1.35,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  // Middle: Visual-First Clues (No reading paragraphs required)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('💡 ', style: TextStyle(fontSize: 12)),
+                      Expanded(
+                        child: Text(
+                          item.quickMeaning,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w700,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
+                            height: 1.3,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('👁️ ', style: TextStyle(fontSize: 12)),
+                      Expanded(
+                        child: Text(
+                          item.quickVisualClue,
+                          style: TextStyle(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.w500,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
+                            height: 1.3,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
 
-                  // Bottom: Single badge + Signal Icon (Wrap protects from any overflow)
+                  // Bottom: Traffic Light Pill + Body Part Badge
                   Wrap(
-                    spacing: 8,
+                    spacing: 6,
+                    runSpacing: 4,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 2.5),
+                        decoration: BoxDecoration(
+                          color: item.signalType.color
+                              .withValues(alpha: isDark ? 0.2 : 0.12),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: item.signalType.color
+                                .withValues(alpha: isDark ? 0.45 : 0.3),
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              item.signalType.icon,
+                              size: 13,
+                              color: item.signalType.color,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              item.signalType.shortState,
+                              style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w800,
+                                color: item.signalType.color,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       BadgePill(
                         text: item.bodyPart,
                         color: catInfo.primaryColor,
-                      ),
-                      Icon(
-                        item.signalType.icon,
-                        size: 18,
-                        color: item.signalType.color,
                       ),
                     ],
                   ),
