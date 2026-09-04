@@ -56,4 +56,7 @@ app.*.map.json
 # Local tooling and reference assets
 .codex-tools/
 *.pdf
+*.aab
+*.apk
+
 
