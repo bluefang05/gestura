@@ -451,14 +451,14 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                                 size: 22,
                               ),
                               tooltip: isSpeaking
-                                  ? 'Detener lectura'
-                                  : 'Escuchar en voz alta',
+                                  ? 'Detener audio'
+                                  : 'Escuchar síntesis express (10s)',
                               onPressed: () {
                                 FeedbackService.lightClick();
-                                final textToSpeak =
-                                    '${g.name}. Significado: ${g.probableMeaning}. Qué debes hacer: ${g.whatToDo}. En ventas: ${g.salesTip}';
-                                TtsService.speak(textToSpeak,
-                                    gestureId: 'tree_${g.id}');
+                                TtsService.speak(
+                                  g.expressAudioSummary,
+                                  gestureId: 'tree_${g.id}',
+                                );
                               },
                             );
                           },
@@ -482,7 +482,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.psychology_rounded,
             iconColor: isDark ? const Color(0xFFA78BFA) : AppColors.purple,
-            title: '¿Qué significa realmente?',
+            title: '💡 Significado Clave',
+            highlight: g.quickMeaning,
             description: g.probableMeaning,
           ),
           const SizedBox(height: 14),
@@ -491,7 +492,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.check_circle_outline_rounded,
             iconColor: isDark ? const Color(0xFF34D399) : AppColors.success,
-            title: '¿Qué debes hacer / decir tú?',
+            title: '🎯 Acción Táctica Recomendada',
+            highlight: g.quickAction,
             description: g.whatToDo,
           ),
           const SizedBox(height: 14),
@@ -500,7 +502,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.trending_up_rounded,
             iconColor: isDark ? AppColors.accentLight : AppColors.accent,
-            title: 'Táctica de Ventas y Negociación',
+            title: '💼 Táctica en Negociación',
             description: g.salesTip,
           ),
           const SizedBox(height: 18),
@@ -530,6 +532,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
     required IconData icon,
     required Color iconColor,
     required String title,
+    String? highlight,
     required String description,
   }) {
     return Row(
@@ -546,10 +549,21 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                 style:
                     const TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
               ),
+              if (highlight != null) ...[
+                const SizedBox(height: 3),
+                Text(
+                  highlight,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    height: 1.3,
+                  ),
+                ),
+              ],
               const SizedBox(height: 3),
               Text(
                 description,
-                style: const TextStyle(fontSize: 13, height: 1.35),
+                style: const TextStyle(fontSize: 12, height: 1.35),
               ),
             ],
           ),
