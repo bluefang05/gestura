@@ -24,7 +24,8 @@ class EnvironmentPainter extends CustomPainter {
           : (isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9))
       ..style = PaintingStyle.fill;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, w, h), Radius.circular(w * 0.15)),
+      RRect.fromRectAndRadius(
+          Rect.fromLTWH(0, 0, w, h), Radius.circular(w * 0.15)),
       bgPaint,
     );
 
@@ -94,7 +95,8 @@ class EnvironmentPainter extends CustomPainter {
     }
   }
 
-  void _paintDressFormal(Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
+  void _paintDressFormal(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
     final w = size.width;
     final h = size.height;
 
@@ -126,10 +128,16 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawPath(tie, accent);
 
     // Tie knot
-    canvas.drawRect(Rect.fromCenter(center: Offset(w * 0.50, h * 0.34), width: w * 0.08, height: h * 0.06), line);
+    canvas.drawRect(
+        Rect.fromCenter(
+            center: Offset(w * 0.50, h * 0.34),
+            width: w * 0.08,
+            height: h * 0.06),
+        line);
   }
 
-  void _paintDressCasual(Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
+  void _paintDressCasual(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
     final w = size.width;
     final h = size.height;
 
@@ -148,17 +156,27 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawPath(shirt, line);
 
     // Open relaxed crew collar
-    canvas.drawArc(Rect.fromCenter(center: Offset(w * 0.50, h * 0.30), width: w * 0.24, height: h * 0.16), 0, 3.14, false, accent);
+    canvas.drawArc(
+        Rect.fromCenter(
+            center: Offset(w * 0.50, h * 0.30),
+            width: w * 0.24,
+            height: h * 0.16),
+        0,
+        3.14,
+        false,
+        accent);
   }
 
-  void _paintDeskBarrier(Canvas canvas, Size size, Paint line, Paint fill, Paint warn) {
+  void _paintDeskBarrier(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint warn) {
     final w = size.width;
     final h = size.height;
 
     // Boss seated behind desk
     canvas.drawCircle(Offset(w * 0.50, h * 0.25), w * 0.10, fill);
     canvas.drawCircle(Offset(w * 0.50, h * 0.25), w * 0.10, line);
-    canvas.drawLine(Offset(w * 0.35, h * 0.38), Offset(w * 0.65, h * 0.38), line);
+    canvas.drawLine(
+        Offset(w * 0.35, h * 0.38), Offset(w * 0.65, h * 0.38), line);
 
     // Massive thick desk barrier
     final desk = Rect.fromLTWH(w * 0.12, h * 0.48, w * 0.76, h * 0.20);
@@ -166,13 +184,15 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawRect(desk, warn);
 
     // Barrier cross indicator
-    canvas.drawLine(Offset(w * 0.15, h * 0.58), Offset(w * 0.85, h * 0.58), warn);
+    canvas.drawLine(
+        Offset(w * 0.15, h * 0.58), Offset(w * 0.85, h * 0.58), warn);
 
     // Visitor chair in front of desk
     canvas.drawCircle(Offset(w * 0.50, h * 0.84), w * 0.08, line);
   }
 
-  void _paintRoundTable(Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
+  void _paintRoundTable(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
     final w = size.width;
     final h = size.height;
 
@@ -190,7 +210,8 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawCircle(Offset(w * 0.50, h * 0.50), w * 0.08, accent);
   }
 
-  void _paintSeatingAngle(Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
+  void _paintSeatingAngle(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
     final w = size.width;
     final h = size.height;
 
@@ -213,13 +234,22 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawCircle(Offset(w * 0.92, h * 0.50), w * 0.07, line);
 
     // 90 degree cooperative connection arc
-    canvas.drawArc(Rect.fromCenter(center: Offset(w * 0.65, h * 0.40), width: w * 0.30, height: h * 0.30), -1.57, 1.57, false, accent);
+    canvas.drawArc(
+        Rect.fromCenter(
+            center: Offset(w * 0.65, h * 0.40),
+            width: w * 0.30,
+            height: h * 0.30),
+        -1.57,
+        1.57,
+        false,
+        accent);
 
     // Collaboration heart / check badge
     canvas.drawCircle(Offset(w * 0.65, h * 0.40), w * 0.04, accent);
   }
 
-  void _paintLighting(Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
+  void _paintLighting(
+      Canvas canvas, Size size, Paint line, Paint fill, Paint accent) {
     final w = size.width;
     final h = size.height;
 
@@ -236,14 +266,24 @@ class EnvironmentPainter extends CustomPainter {
     canvas.drawPath(filament, accent);
 
     // Bulb base & socket
-    canvas.drawRect(Rect.fromCenter(center: Offset(w * 0.50, h * 0.58), width: w * 0.12, height: h * 0.08), line);
+    canvas.drawRect(
+        Rect.fromCenter(
+            center: Offset(w * 0.50, h * 0.58),
+            width: w * 0.12,
+            height: h * 0.08),
+        line);
 
     // Radiant warmth light rays
-    canvas.drawLine(Offset(w * 0.50, h * 0.15), Offset(w * 0.50, h * 0.08), accent);
-    canvas.drawLine(Offset(w * 0.28, h * 0.22), Offset(w * 0.20, h * 0.15), accent);
-    canvas.drawLine(Offset(w * 0.72, h * 0.22), Offset(w * 0.80, h * 0.15), accent);
-    canvas.drawLine(Offset(w * 0.22, h * 0.38), Offset(w * 0.12, h * 0.38), accent);
-    canvas.drawLine(Offset(w * 0.78, h * 0.38), Offset(w * 0.88, h * 0.38), accent);
+    canvas.drawLine(
+        Offset(w * 0.50, h * 0.15), Offset(w * 0.50, h * 0.08), accent);
+    canvas.drawLine(
+        Offset(w * 0.28, h * 0.22), Offset(w * 0.20, h * 0.15), accent);
+    canvas.drawLine(
+        Offset(w * 0.72, h * 0.22), Offset(w * 0.80, h * 0.15), accent);
+    canvas.drawLine(
+        Offset(w * 0.22, h * 0.38), Offset(w * 0.12, h * 0.38), accent);
+    canvas.drawLine(
+        Offset(w * 0.78, h * 0.38), Offset(w * 0.88, h * 0.38), accent);
   }
 
   @override

@@ -15,7 +15,8 @@ class QuizOption {
     required this.isCorrect,
   });
 
-  bool get hasIllustration => illustrationKey != null && illustrationKey!.isNotEmpty;
+  bool get hasIllustration =>
+      illustrationKey != null && illustrationKey!.isNotEmpty;
 }
 
 class QuizQuestion {

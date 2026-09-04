@@ -77,7 +77,8 @@ class GestureCard extends StatelessWidget {
                         builder: (context, speakingId, _) {
                           final isSpeaking = speakingId == item.id;
                           return IconButton(
-                            constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                            constraints: const BoxConstraints(
+                                minWidth: 36, minHeight: 36),
                             padding: EdgeInsets.zero,
                             iconSize: 22,
                             icon: Icon(
@@ -100,7 +101,8 @@ class GestureCard extends StatelessWidget {
                               } else {
                                 final textToRead =
                                     '${item.name}. ${item.summary}. Pistas físicas: ${item.physiologicalDetails}. Significado: ${item.probableMeaning}';
-                                TtsService.speak(textToRead, gestureId: item.id);
+                                TtsService.speak(textToRead,
+                                    gestureId: item.id);
                               }
                             },
                           );
@@ -108,14 +110,16 @@ class GestureCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       IconButton(
-                        constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                        constraints:
+                            const BoxConstraints(minWidth: 36, minHeight: 36),
                         padding: EdgeInsets.zero,
                         iconSize: 22,
                         icon: Icon(
                           isBookmarked
                               ? Icons.bookmark_rounded
                               : Icons.bookmark_outline_rounded,
-                          color: isBookmarked ? catInfo.primaryColor : mutedColor,
+                          color:
+                              isBookmarked ? catInfo.primaryColor : mutedColor,
                         ),
                         onPressed: () {
                           FeedbackService.bookmark();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'core/localization/app_localizations.dart';
+import 'core/services/ads/ads_service.dart';
 import 'core/services/storage_service.dart';
 import 'core/theme/app_theme.dart';
 import 'state/settings_provider.dart';
@@ -28,14 +28,9 @@ void main() async {
 
   // Initialize Google Mobile Ads asynchronously in the background so it NEVER blocks UI startup
   Future.microtask(() async {
-    try {
-      await MobileAds.instance.initialize();
-    } catch (_) {
-      // Graceful fallback if offline or in testing
-    }
+    await AdsService.instance.initialize();
   });
 }
-
 
 class GesturaApp extends StatefulWidget {
   const GesturaApp({super.key});
@@ -76,7 +71,9 @@ class _GesturaAppState extends State<GesturaApp> {
           ],
           builder: (context, child) {
             Widget content = child ?? const SizedBox();
-            if (_settingsProvider.isWarmFilter) {
+            // High contrast strictly takes priority over warm filter for WCAG legibility
+            if (_settingsProvider.isWarmFilter &&
+                !_settingsProvider.isHighContrast) {
               content = ColorFiltered(
                 colorFilter: const ColorFilter.mode(
                   Color(0x15D97706),
@@ -85,9 +82,16 @@ class _GesturaAppState extends State<GesturaApp> {
                 child: content,
               );
             }
+            final systemScaler = MediaQuery.of(context).textScaler;
+            final systemScaleFactor = systemScaler.scale(100.0) / 100.0;
+            final combinedScaleFactor =
+                (systemScaleFactor * _settingsProvider.fontScale)
+                    .clamp(0.75, 2.8);
+            final effectiveScaler = TextScaler.linear(combinedScaleFactor);
+
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                textScaler: TextScaler.linear(_settingsProvider.fontScale),
+                textScaler: effectiveScaler,
                 disableAnimations: _settingsProvider.isReduceMotion,
               ),
               child: content,
@@ -99,4 +103,3 @@ class _GesturaAppState extends State<GesturaApp> {
     );
   }
 }
-

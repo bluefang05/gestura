@@ -44,7 +44,7 @@ class QuizDatabase {
       keyVisualClue:
           'Contracción del músculo orbicular (arrugas "patas de gallo" y ojos achinados).',
       explanation:
-          'La Sonrisa de Duchenne (Sonrisa A) involucra involuntariamente el músculo orbicular de los ojos, generando arrugas en los laterales de los ojos. En la Sonrisa Social (B), solo se activa la boca, lo cual denota cortesía o agrado fingido.',
+          'La Sonrisa de Duchenne (Sonrisa A) involucra el músculo orbicular de los ojos, generando arrugas en los laterales ("patas de gallo"). En la Sonrisa Social o de cortesía (B), suele activarse principalmente la boca como gesto habitual de bienvenida, amabilidad o cortesía contextual.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_open',
@@ -93,8 +93,7 @@ class QuizDatabase {
       category: CategoryType.lenguajeCorporal,
       prompt:
           '¿Cuál de las siguientes imágenes muestra el gesto de "Manos en Ojiva o Pirámide"?',
-      scenarioText:
-          'Observa la forma y contacto de las manos.',
+      scenarioText: 'Observa la forma y contacto de las manos.',
       options: [
         QuizOption(
           id: 'opt_steeple',
@@ -218,9 +217,9 @@ class QuizDatabase {
       id: 'q_visual_desden',
       category: CategoryType.expresionesFaciales,
       prompt:
-          'Identifica la expresión de Desdén o Desprecio (Superioridad / Sarcasmo):',
+          'Identifica la expresión comúnmente asociada a Desdén o Media Sonrisa Asimétrica:',
       scenarioText:
-          'Esta microexpresión es crítica en ventas: indica que el interlocutor descalifica la propuesta.',
+          'En el estudio de microexpresiones, la elevación unilateral de una comisura labial suele investigarse como señal de duda o escepticismo, debiendo siempre descartarse asimetrías faciales naturales o sonrisas tímidas.',
       options: [
         QuizOption(
           id: 'opt_frown',
@@ -254,7 +253,7 @@ class QuizDatabase {
       keyVisualClue:
           'Asimetría labial: una sola comisura de los labios se eleva hacia un lado.',
       explanation:
-          'El desprecio o desdén es la única emoción universalmente asimétrica en el rostro. Se reconoce porque solo un lado de la boca se curva hacia arriba, a menudo con una mirada altiva.',
+          'La elevación asimétrica unilateral activa el buccinador de un solo lado. Aunque clásicamente se vincula a escepticismo o desdén, siempre requiere calibrar el contexto y la línea base de la persona.',
     ),
     QuizQuestion(
       id: 'q_visual_proxemics',
@@ -430,7 +429,7 @@ class QuizDatabase {
       prompt:
           '¿Cuál de estas expresiones refleja Mandíbula Apretada (Ira contenida / Frustración)?',
       scenarioText:
-          'Un signo revelador de que la persona está soportando estrés o desacuerdo sin decirlo.',
+          'Señal que suele acompañar tensión muscular, contención o esfuerzo de autocontrol ante un momento de desacuerdo.',
       options: [
         QuizOption(
           id: 'opt_jaw_img',
@@ -767,11 +766,13 @@ class QuizDatabase {
       category: CategoryType.comunicacionDigital,
       prompt:
           'Envías una propuesta detallada por Slack y tu colega responde únicamente: "Ok." con punto final seco. ¿Cómo debes interpretarlo?',
-      scenarioText: 'En chats informales, el punto final aislado suele generar ambigüedad.',
+      scenarioText:
+          'En chats informales, el punto final aislado suele generar ambigüedad.',
       options: [
         QuizOption(
           id: 'opt_dry_hate',
-          text: 'Asumir con certeza que está furioso contigo y dejar de hablarle.',
+          text:
+              'Asumir con certeza que está furioso contigo y dejar de hablarle.',
           isCorrect: false,
         ),
         QuizOption(
@@ -806,12 +807,14 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_weather_stats',
-          text: 'Espera que le des un informe meteorológico detallado de milímetros de agua.',
+          text:
+              'Espera que le des un informe meteorológico detallado de milímetros de agua.',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_weather_trap',
-          text: 'Es una pregunta trampa para evaluar tus conocimientos científicos.',
+          text:
+              'Es una pregunta trampa para evaluar tus conocimientos científicos.',
           isCorrect: false,
         ),
       ],
@@ -829,7 +832,8 @@ class QuizDatabase {
       options: [
         QuizOption(
           id: 'opt_encargo_happy',
-          text: 'Que tiene tiempo de sobra y disfruta haciendo todo el trabajo solo.',
+          text:
+              'Que tiene tiempo de sobra y disfruta haciendo todo el trabajo solo.',
           isCorrect: false,
         ),
         QuizOption(
@@ -854,7 +858,8 @@ class QuizDatabase {
       category: CategoryType.lenguajeCorporal,
       prompt:
           'En una oficina a 17 °C con aire acondicionado directo, alguien cruza los brazos, se frota los bíceps y encoge el cuello. ¿Cómo se interpreta?',
-      scenarioText: 'Aplica la regla de los conglomerados con contexto ambiental.',
+      scenarioText:
+          'Aplica la regla de los conglomerados con contexto ambiental.',
       options: [
         QuizOption(
           id: 'opt_cold_temp',
@@ -864,7 +869,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_cold_hate',
-          text: 'Actitud de cerrazón psicológica y hostilidad hacia las personas de la sala.',
+          text:
+              'Actitud de cerrazón psicológica y hostilidad hacia las personas de la sala.',
           isCorrect: false,
         ),
         QuizOption(
@@ -883,7 +889,8 @@ class QuizDatabase {
       category: CategoryType.expresionesFaciales,
       prompt:
           'Un candidato habla bajito y parpadea con alta frecuencia desde que entró y saludó en la entrevista. Al preguntarle por sus estudios, mantiene exactamente el mismo patrón. ¿Es señal de engaño?',
-      scenarioText: 'Compara su respuesta con su Línea Base observada desde el minuto 1.',
+      scenarioText:
+          'Compara su respuesta con su Línea Base observada desde el minuto 1.',
       options: [
         QuizOption(
           id: 'opt_base_liar',
@@ -916,7 +923,8 @@ class QuizDatabase {
       options: [
         QuizOption(
           id: 'opt_lean_push',
-          text: 'Acelerar el discurso y presionar para que firme el contrato de inmediato.',
+          text:
+              'Acelerar el discurso y presionar para que firme el contrato de inmediato.',
           isCorrect: false,
         ),
         QuizOption(
@@ -951,7 +959,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_u_closed',
-          text: 'Están en una reunión secreta y confidencial donde está prohibido acercarse.',
+          text:
+              'Están en una reunión secreta y confidencial donde está prohibido acercarse.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1067,12 +1076,14 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_blank_panic',
-          text: 'Gritar que lo sientes mucho y taparte la cara con las dos manos.',
+          text:
+              'Gritar que lo sientes mucho y taparte la cara con las dos manos.',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_blank_invent',
-          text: 'Inventar palabras rápidamente sin sentido para no dejar ni 1 segundo de silencio.',
+          text:
+              'Inventar palabras rápidamente sin sentido para no dejar ni 1 segundo de silencio.',
           isCorrect: false,
         ),
       ],
@@ -1096,12 +1107,14 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_escape_rude',
-          text: 'Salir corriendo sin decir nada a nadie y bloquear a todos en el móvil.',
+          text:
+              'Salir corriendo sin decir nada a nadie y bloquear a todos en el móvil.',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_escape_endure',
-          text: 'Aguantar el dolor sensorial hasta tener una crisis pública para complacer a los demás.',
+          text:
+              'Aguantar el dolor sensorial hasta tener una crisis pública para complacer a los demás.',
           isCorrect: false,
         ),
       ],
@@ -1125,7 +1138,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_table_head',
-          text: 'En la cabecera principal para demostrar poder supremo al jefe.',
+          text:
+              'En la cabecera principal para demostrar poder supremo al jefe.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1213,7 +1227,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_phone_genius',
-          text: 'Tiene capacidad cerebral sobrehumana y procesa todo al 100% sin esfuerzo.',
+          text:
+              'Tiene capacidad cerebral sobrehumana y procesa todo al 100% sin esfuerzo.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1272,7 +1287,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_nod_ignore',
-          text: 'Te está ignorando deliberadamente y debes gritarle la orden de nuevo.',
+          text:
+              'Te está ignorando deliberadamente y debes gritarle la orden de nuevo.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1301,7 +1317,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_neck_fashion',
-          text: 'Solo está acomodando una joya o corbata imaginaria sin ningún motivo.',
+          text:
+              'Solo está acomodando una joya o corbata imaginaria sin ningún motivo.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1330,7 +1347,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_palms_rain',
-          text: 'Sirve para comprobar si está lloviendo dentro de la habitación.',
+          text:
+              'Sirve para comprobar si está lloviendo dentro de la habitación.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1422,7 +1440,8 @@ class QuizDatabase {
         ),
         QuizOption(
           id: 'opt_mirror_sleep',
-          text: 'Ambos tienen una contractura muscular idéntica por mala suerte.',
+          text:
+              'Ambos tienen una contractura muscular idéntica por mala suerte.',
           isCorrect: false,
         ),
       ],

@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/tts_app_bar_control.dart';
-
 import '../core/services/tts_service.dart';
+import '../models/social_script.dart';
+import '../data/social_scripts_database.dart';
+import '../data/boundary_framework_database.dart';
 
 class UnwrittenRulesScreen extends StatefulWidget {
-  const UnwrittenRulesScreen({super.key});
+  final int initialTab;
+  final int initialSubView;
+  final SocialScriptCategory? initialCategory;
+
+  const UnwrittenRulesScreen({
+    super.key,
+    this.initialTab = 0,
+    this.initialSubView = 0,
+    this.initialCategory,
+  });
 
   @override
   State<UnwrittenRulesScreen> createState() => _UnwrittenRulesScreenState();
 }
 
 class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
-  int _selectedTab = 0; // 0: Small Talk, 1: Indirectas, 2: Risa, 3: Sarcasmo
+  late int _selectedTab;
+  late int _boundarySubView;
+  late SocialScriptCategory? _selectedScriptCategory;
+  final Map<String, ScriptFirmness> _scriptFirmnessMap = {};
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedTab = widget.initialTab;
+    _boundarySubView = widget.initialSubView;
+    _selectedScriptCategory = widget.initialCategory;
+  }
 
   @override
   void dispose() {
@@ -34,9 +57,17 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
     } else if (_selectedTab == 2) {
       textToSpeak =
           'La risa incómoda versus la risa genuina. En el mundo neurotípico, la risa no siempre es felicidad; se usa con frecuencia como pacificación para desactivar momentos tensos.';
-    } else {
+    } else if (_selectedTab == 3) {
       textToSpeak =
           'Sarcasmo con cara de póker. La voz manda, la cara engaña. El sarcasmo se detecta por alargamiento de vocales, monotonía exagerada o una pausa asimétrica.';
+    } else {
+      if (_boundarySubView == 0) {
+        textToSpeak =
+            'La Ruta de los Límites y Consentimiento en cuatro fases. Fase uno: Entender los tuyos mediante el radar somático. Fase dos: Comunicarlos con la fórmula observable, impacto y acción. Fase tres: Sostenerlos ante insistencia y culpa. Fase cuatro: Decodificar el consentimiento real y el falso sí por desgaste.';
+      } else {
+        textToSpeak =
+            'Biblioteca de Guiones Asertivos y Consentimiento. Frases prefabricadas y lenguaje corporal para marcar límites y ofrecer puertas de escape airosas sin presionar.';
+      }
     }
     TtsService.speak(textToSpeak, gestureId: 'unwritten_rules_$_selectedTab');
   }
@@ -201,6 +232,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                             label: 'Sarcasmo con Cara de Póker',
                             icon: Icons.record_voice_over_rounded,
                             isDark: isDark),
+                        const SizedBox(width: 8),
+                        _buildNavChip(
+                            index: 4,
+                            label: 'Límites y Consentimiento',
+                            icon: Icons.shield_outlined,
+                            isDark: isDark),
                       ],
                     ),
                   ),
@@ -208,9 +245,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
 
                   // Contenido dinámico según pestaña
                   if (_selectedTab == 0) _buildSmallTalkContent(isDark),
-                  if (_selectedTab == 1) _buildIndirectsContent(isDark, isTablet),
+                  if (_selectedTab == 1)
+                    _buildIndirectsContent(isDark, isTablet),
                   if (_selectedTab == 2) _buildNervousLaughContent(isDark),
                   if (_selectedTab == 3) _buildPokerSarcasmContent(isDark),
+                  if (_selectedTab == 4)
+                    _buildSocialScriptsContent(isDark, isTablet),
 
                   const SizedBox(height: 32),
                 ],
@@ -241,9 +281,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       labelStyle: TextStyle(
         color: isSelected
             ? Colors.white
-            : (isDark
-                ? AppColors.textPrimaryDark
-                : AppColors.textPrimaryLight),
+            : (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
         fontWeight: FontWeight.w700,
         fontSize: 13,
       ),
@@ -268,12 +306,14 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 children: [
                   Icon(Icons.wifi_tethering_rounded,
                       size: 22,
-                      color: isDark ? AppColors.primaryLight : AppColors.primary),
+                      color:
+                          isDark ? AppColors.primaryLight : AppColors.primary),
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
                       '¿Por qué existe el "Small Talk"?',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -430,7 +470,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           ),
                           children: [
                             const TextSpan(
-                              text: 'Lo que realmente significa: ',
+                              text: 'Subtexto o intención habitual: ',
                               style: TextStyle(fontWeight: FontWeight.w800),
                             ),
                             TextSpan(text: item['realMeaning'] as String),
@@ -448,9 +488,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   children: [
                     Icon(Icons.remove_red_eye_rounded,
                         size: 18,
-                        color: isDark
-                            ? AppColors.accentLight
-                            : AppColors.accent),
+                        color:
+                            isDark ? AppColors.accentLight : AppColors.accent),
                     const SizedBox(width: 6),
                     Expanded(
                       child: RichText(
@@ -539,7 +578,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   const Expanded(
                     child: Text(
                       'La Risa como Alivio de Tensión Social',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -673,7 +713,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   const Expanded(
                     child: Text(
                       'Sarcasmo Real: La Voz Manda, la Cara Engaña',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -690,13 +731,11 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 ),
               ),
               const SizedBox(height: 14),
-
               const Text(
                 'Las 3 Claves Auditivas para Detectar Sarcasmo:',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
-
               _buildAuditoryClue(
                 icon: Icons.graphic_eq_rounded,
                 title: 'Alargamiento de Vocales (Drawling)',
@@ -721,7 +760,6 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 isDark: isDark,
               ),
               const SizedBox(height: 16),
-
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -831,8 +869,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon,
-            size: 20,
-            color: isDark ? AppColors.accentLight : AppColors.accent),
+            size: 20, color: isDark ? AppColors.accentLight : AppColors.accent),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
@@ -858,6 +895,903 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  // ===========================================================================
+  // PESTAÑA 4: LÍMITES Y DECIR "NO" (GUIONES SOCIALES Y ASERTIVIDAD)
+  // ===========================================================================
+  Widget _buildSocialScriptsContent(bool isDark, bool isTablet) {
+    final allScripts = SocialScriptsDatabase.scripts;
+    final filteredScripts = _selectedScriptCategory == null
+        ? allScripts
+        : SocialScriptsDatabase.getByCategory(_selectedScriptCategory!);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Banner introductorio
+        AppCard(
+          color: isDark ? const Color(0xFF1E293B) : Colors.white,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Icon(Icons.shield_rounded,
+                        color: AppColors.primary, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Límites y Consentimiento Real',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          'Aprende a marcar tus propios límites sin culpa y a decodificar cuándo el otro cede por presión.',
+                          style: TextStyle(fontSize: 12.5),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF0F172A)
+                      : const Color(0xFFF8FAFC),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.lightbulb_outline_rounded,
+                        size: 18,
+                        color: isDark
+                            ? AppColors.accentLight
+                            : AppColors.accent),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Regla de oro: Si tuviste que insistir para que dijeran que sí, te dijeron que no antes. El consentimiento debe ser libre y espontáneo; la insistencia genera complacencia forzada.',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                          height: 1.3,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Selector de Modo: La Ruta en 3 Fases vs Biblioteca de Guiones
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF0F172A) : const Color(0xFFE2E8F0),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            children: [
+              Expanded(
+                child: _buildSubTabButton(
+                  title: 'La Ruta en 3 Fases',
+                  icon: Icons.alt_route_rounded,
+                  isSelected: _boundarySubView == 0,
+                  isDark: isDark,
+                  onTap: () {
+                    FeedbackService.lightClick();
+                    setState(() => _boundarySubView = 0);
+                  },
+                ),
+              ),
+              const SizedBox(width: 4),
+              Expanded(
+                child: _buildSubTabButton(
+                  title: 'Biblioteca de Guiones (${allScripts.length})',
+                  icon: Icons.menu_book_rounded,
+                  isSelected: _boundarySubView == 1,
+                  isDark: isDark,
+                  onTap: () {
+                    FeedbackService.lightClick();
+                    setState(() => _boundarySubView = 1);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        if (_boundarySubView == 0)
+          _buildBoundaryFrameworkContent(isDark, isTablet)
+        else
+          _buildScriptsLibraryContent(
+              filteredScripts, allScripts.length, isDark, isTablet),
+      ],
+    );
+  }
+
+  Widget _buildSubTabButton({
+    required String title,
+    required IconData icon,
+    required bool isSelected,
+    required bool isDark,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? (isDark ? AppColors.primary : Colors.white)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.08),
+                    blurRadius: 4,
+                    offset: const Offset(0, 1),
+                  )
+                ]
+              : null,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 17,
+              color: isSelected
+                  ? (isDark ? Colors.white : AppColors.primary)
+                  : (isDark
+                      ? AppColors.textMutedDark
+                      : AppColors.textMutedLight),
+            ),
+            const SizedBox(width: 6),
+            Flexible(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: isSelected ? FontWeight.w800 : FontWeight.w600,
+                  color: isSelected
+                      ? (isDark ? Colors.white : AppColors.primaryDark)
+                      : (isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight),
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ===========================================================================
+  // SUB-VISTA: LA RUTA EN 3 FASES (ENTENDERLOS, HACERLOS, SOSTENERLOS)
+  // ===========================================================================
+  Widget _buildBoundaryFrameworkContent(bool isDark, bool isTablet) {
+    final phases = BoundaryFrameworkDatabase.phases;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final phase in phases) ...[
+          AppCard(
+            color: isDark ? const Color(0xFF1E293B) : Colors.white,
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Cabecera: Fase y Título
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(phase.icon,
+                          size: 22, color: AppColors.primary),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'FASE ${phase.phaseNumber}',
+                            style: const TextStyle(
+                              fontSize: 11.5,
+                              fontWeight: FontWeight.w900,
+                              color: AppColors.primary,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            phase.title,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: -0.2,
+                            ),
+                          ),
+                          const SizedBox(height: 3),
+                          Text(
+                            phase.subtitle,
+                            style: TextStyle(
+                              fontSize: 12.5,
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Principio Rector
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? const Color(0xFF0F172A)
+                        : const Color(0xFFF1F5F9),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: isDark
+                          ? AppColors.darkBorder
+                          : AppColors.lightBorder,
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.format_quote_rounded,
+                          size: 20,
+                          color: isDark
+                              ? AppColors.accentLight
+                              : AppColors.accent),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          phase.corePrinciple,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontStyle: FontStyle.italic,
+                            height: 1.35,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 14),
+
+                // Conceptos Clave
+                const Text(
+                  'Claves y Mecanismos de la Fase:',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                ),
+                const SizedBox(height: 8),
+                for (final item in phase.conceptItems) ...[
+                  Container(
+                    width: double.infinity,
+                    margin: const EdgeInsets.only(bottom: 8),
+                    padding: const EdgeInsets.all(11),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? const Color(0xFF132035)
+                          : const Color(0xFFF8FAFC),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: isDark
+                            ? AppColors.darkBorder
+                            : AppColors.lightBorder,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(item.icon,
+                                size: 16, color: AppColors.primary),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                item.title,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            if (item.badge != null)
+                              BadgePill(
+                                text: item.badge!,
+                                color: AppColors.primary,
+                              ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          item.description,
+                          style: TextStyle(
+                            fontSize: 12,
+                            height: 1.35,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+                const SizedBox(height: 8),
+
+                // Protocolo Práctico / Regla de Oro
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? const Color(0xFF1E2638)
+                        : const Color(0xFFEFF6FF),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.35),
+                    ),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.check_circle_outline_rounded,
+                          size: 18, color: AppColors.primary),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          phase.practicalProtocol,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            height: 1.35,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.primaryDark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                // Botón de Escucha TTS para la Fase
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 6),
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () {
+                      FeedbackService.lightClick();
+                      TtsService.speak(
+                        '${phase.title}. ${phase.subtitle}. Principio rector: ${phase.corePrinciple}. Protocolo práctico: ${phase.practicalProtocol}',
+                        gestureId: 'boundary_phase_${phase.phaseNumber}',
+                      );
+                    },
+                    icon: const Icon(Icons.volume_up_rounded, size: 16),
+                    label: const Text('Escuchar Fase',
+                        style: TextStyle(fontSize: 11.5)),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 14),
+        ],
+
+        // Tarjeta de Transición a la Biblioteca
+        AppCard(
+          color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              const Text(
+                '¿Listo para poner en práctica la teoría?',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Consulta los 14 guiones reales clasificados con selector de firmeza.',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 10),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isDark
+                      ? AppColors.primary
+                      : AppColors.primaryDark,
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  minimumSize: Size.zero,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {
+                  FeedbackService.lightClick();
+                  setState(() => _boundarySubView = 1);
+                },
+                icon: const Icon(Icons.menu_book_rounded, size: 16),
+                label: const Text('Abrir Biblioteca de Guiones',
+                    style: TextStyle(fontSize: 12)),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ===========================================================================
+  // SUB-VISTA: BIBLIOTECA DE GUIONES SOCIALES
+  // ===========================================================================
+  Widget _buildScriptsLibraryContent(List<SocialScript> filteredScripts,
+      int totalScriptsCount, bool isDark, bool isTablet) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Filtros de categoría de guiones
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              _buildCategoryChip(
+                label: 'Todos ($totalScriptsCount)',
+                icon: Icons.all_inclusive_rounded,
+                isSelected: _selectedScriptCategory == null,
+                isDark: isDark,
+                onSelected: () {
+                  FeedbackService.lightClick();
+                  setState(() => _selectedScriptCategory = null);
+                },
+              ),
+              const SizedBox(width: 8),
+              for (final cat in SocialScriptCategory.values) ...[
+                _buildCategoryChip(
+                  label:
+                      '${cat.label} (${SocialScriptsDatabase.getByCategory(cat).length})',
+                  icon: cat.icon,
+                  isSelected: _selectedScriptCategory == cat,
+                  isDark: isDark,
+                  onSelected: () {
+                    FeedbackService.lightClick();
+                    setState(() => _selectedScriptCategory = cat);
+                  },
+                ),
+                const SizedBox(width: 8),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Lista de tarjetas de guiones
+        for (final script in filteredScripts) ...[
+          _buildScriptCard(script: script, isDark: isDark, isTablet: isTablet),
+          const SizedBox(height: 16),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildCategoryChip({
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required bool isDark,
+    required VoidCallback onSelected,
+  }) {
+    return ChoiceChip(
+      avatar: Icon(icon,
+          size: 16,
+          color: isSelected
+              ? Colors.white
+              : (isDark ? AppColors.accentLight : AppColors.accent)),
+      label: Text(label),
+      selected: isSelected,
+      selectedColor: AppColors.primary,
+      labelStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+        color: isSelected
+            ? Colors.white
+            : (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
+      ),
+      onSelected: (_) => onSelected(),
+    );
+  }
+
+  Widget _buildScriptCard({
+    required SocialScript script,
+    required bool isDark,
+    required bool isTablet,
+  }) {
+    final currentFirmness =
+        _scriptFirmnessMap[script.id] ?? ScriptFirmness.assertive;
+    final currentPhrase = script.getPhraseByFirmness(currentFirmness);
+
+    return AppCard(
+      color: isDark ? const Color(0xFF1E293B) : Colors.white,
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Cabecera: Título y Categoría
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(script.category.icon,
+                    size: 18, color: AppColors.primary),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      script.title,
+                      style: const TextStyle(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.2,
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    BadgePill(
+                      text: script.category.label,
+                      color: AppColors.primary,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+
+          // Contexto / Cuándo ocurre
+          Text(
+            script.contextDescription,
+            style: TextStyle(
+              fontSize: 12.5,
+              height: 1.35,
+              color: isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondaryLight,
+            ),
+          ),
+          const SizedBox(height: 14),
+
+          // Selector de Nivel de Firmeza
+          const Text(
+            'Nivel de Firmeza:',
+            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: [
+              for (final f in ScriptFirmness.values)
+                ChoiceChip(
+                  avatar: Icon(f.icon,
+                      size: 14,
+                      color: currentFirmness == f
+                          ? Colors.white
+                          : (isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight)),
+                  label: Text(f.label),
+                  selected: currentFirmness == f,
+                  selectedColor: f == ScriptFirmness.firm
+                      ? AppColors.coral
+                      : (f == ScriptFirmness.assertive
+                          ? AppColors.primary
+                          : AppColors.indigo),
+                  labelStyle: TextStyle(
+                    fontSize: 11.5,
+                    fontWeight: currentFirmness == f
+                        ? FontWeight.w700
+                        : FontWeight.w500,
+                    color: currentFirmness == f
+                        ? Colors.white
+                        : (isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight),
+                  ),
+                  onSelected: (selected) {
+                    if (selected) {
+                      FeedbackService.lightClick();
+                      setState(() {
+                        _scriptFirmnessMap[script.id] = f;
+                      });
+                    }
+                  },
+                ),
+            ],
+          ),
+          const SizedBox(height: 12),
+
+          // Caja de la Frase Activa
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? const Color(0xFF0F172A)
+                  : const Color(0xFFF1F5F9),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: currentFirmness == ScriptFirmness.firm
+                    ? AppColors.coral.withValues(alpha: 0.5)
+                    : (currentFirmness == ScriptFirmness.assertive
+                        ? AppColors.primary.withValues(alpha: 0.5)
+                        : (isDark
+                            ? AppColors.darkBorder
+                            : AppColors.lightBorder)),
+                width: 1.5,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.format_quote_rounded,
+                        size: 20,
+                        color: isDark
+                            ? AppColors.accentLight
+                            : AppColors.accent),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        currentPhrase,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          height: 1.4,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Acciones de Frase: TTS y Copiar
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    OutlinedButton.icon(
+                      style: OutlinedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: () {
+                        FeedbackService.lightClick();
+                        TtsService.speak(currentPhrase,
+                            gestureId: 'script_${script.id}');
+                      },
+                      icon: const Icon(Icons.volume_up_rounded, size: 16),
+                      label: const Text('Escuchar',
+                          style: TextStyle(fontSize: 11.5)),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        backgroundColor: isDark
+                            ? AppColors.primary
+                            : AppColors.primaryDark,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () {
+                        FeedbackService.lightClick();
+                        Clipboard.setData(ClipboardData(text: currentPhrase));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Row(
+                              children: [
+                                const Icon(Icons.check_circle_rounded,
+                                    color: Colors.white, size: 18),
+                                const SizedBox(width: 8),
+                                const Expanded(
+                                  child: Text('Frase copiada al portapapeles'),
+                                ),
+                              ],
+                            ),
+                            duration: const Duration(seconds: 2),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.copy_rounded, size: 16),
+                      label: const Text('Copiar',
+                          style: TextStyle(fontSize: 11.5)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          // Pauta de Lenguaje Corporal
+          Container(
+            padding: const EdgeInsets.all(11),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? const Color(0xFF132035)
+                  : const Color(0xFFEFF6FF),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: AppColors.primary.withValues(alpha: 0.25),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.accessibility_new_rounded,
+                    size: 18, color: AppColors.primary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Lenguaje Corporal Recomendado:',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        script.bodyLanguage,
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1.35,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 8),
+
+          // Trampa a Evitar (Qué NO debes hacer)
+          Container(
+            padding: const EdgeInsets.all(11),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? const Color(0xFF2D1F1A)
+                  : const Color(0xFFFFF7ED),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(
+                color: AppColors.warning.withValues(alpha: 0.35),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Icon(Icons.warning_amber_rounded,
+                    size: 18, color: AppColors.warning),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Qué NO debes hacer (Trampa común):',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.warning,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        script.whatNotToDo,
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1.35,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

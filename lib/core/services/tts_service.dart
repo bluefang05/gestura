@@ -1,24 +1,51 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'storage_service.dart';
 
 class TtsService {
   static final FlutterTts _tts = FlutterTts();
   static bool _isInitialized = false;
-  static final ValueNotifier<bool> isSpeakingNotifier = ValueNotifier<bool>(false);
+  static final ValueNotifier<bool> isSpeakingNotifier =
+      ValueNotifier<bool>(false);
   static String? _currentSpeakingId;
 
-  static ValueNotifier<String?> currentSpeakingIdNotifier = ValueNotifier<String?>(null);
+  static ValueNotifier<String?> currentSpeakingIdNotifier =
+      ValueNotifier<String?>(null);
 
   static String _currentLanguage = 'es-ES';
+  static double _currentRate = 0.48;
 
-  static Future<void> init({String? langCode}) async {
-    if (langCode != null) {
-      _setLanguageTag(langCode);
+  static String get currentLanguage => _currentLanguage;
+  static double get currentRate => _currentRate;
+
+  static Future<void> init({String? langCode, double? speechRate}) async {
+    // 1. Language: prioritize explicit parameter, then persisted preference, fallback to es
+    final effectiveLang = langCode ?? StorageService.getLanguage();
+    if (effectiveLang != null) {
+      _setLanguageTag(effectiveLang);
+    } else {
+      _setLanguageTag('es');
     }
-    if (_isInitialized) return;
+
+    // 2. Speech Rate: prioritize explicit parameter, then persisted preference with clamp
+    final rawRate = speechRate ?? StorageService.getSpeechRate();
+    _currentRate = rawRate.clamp(0.25, 1.0);
+
+    if (_isInitialized) {
+      try {
+        await _tts.setLanguage(_currentLanguage);
+        await _tts.setSpeechRate(_currentRate);
+      } catch (_) {}
+      return;
+    }
     try {
+      final isAvail = await _tts.isLanguageAvailable(_currentLanguage);
+      if (isAvail != 1 && isAvail != true) {
+        _currentLanguage = 'es-ES';
+      }
+
       await _tts.setLanguage(_currentLanguage);
-      await _tts.setSpeechRate(0.48); // Natural, clear cadence for accessibility
+      await _tts.setSpeechRate(_currentRate);
       await _tts.setVolume(1.0);
       await _tts.setPitch(1.0);
 
@@ -59,7 +86,9 @@ class TtsService {
     await init();
     try {
       // If currently speaking this exact gesture, stop it (toggle)
-      if (isSpeakingNotifier.value && _currentSpeakingId == gestureId && gestureId != null) {
+      if (isSpeakingNotifier.value &&
+          _currentSpeakingId == gestureId &&
+          gestureId != null) {
         await stop();
         return;
       }
@@ -109,10 +138,9 @@ class TtsService {
     }
   }
 
-  static double _currentRate = 0.48;
-
   static Future<void> setSpeechRate(double rate) async {
     _currentRate = rate.clamp(0.25, 1.0);
+    await StorageService.setSpeechRate(_currentRate);
     try {
       await _tts.setSpeechRate(_currentRate);
     } catch (_) {}
@@ -152,7 +180,8 @@ class TtsService {
     required String explanation,
   }) async {
     final status = isCorrect ? '¡Respuesta correcta!' : 'Respuesta incorrecta.';
-    final text = '$status Pista clave: $keyVisualClue. Explicación: $explanation';
+    final text =
+        '$status Pista clave: $keyVisualClue. Explicación: $explanation';
     await speak(text, gestureId: 'quiz_feedback');
   }
 
@@ -182,7 +211,9 @@ class TtsService {
     required String resultTitle,
     required String explanation,
   }) async {
-    final quality = isBestAction ? 'Excelente decisión táctica.' : 'Acción con áreas de oportunidad.';
+    final quality = isBestAction
+        ? 'Excelente decisión táctica.'
+        : 'Acción con áreas de oportunidad.';
     final text = '$quality $resultTitle. Explicación psicológica: $explanation';
     await speak(text, gestureId: 'scenario_outcome');
   }
@@ -198,4 +229,3 @@ class TtsService {
     await speak(text, gestureId: 'tactical_tip_$name');
   }
 }
-

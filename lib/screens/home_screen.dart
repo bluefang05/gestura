@@ -6,7 +6,7 @@ import '../data/quiz_database.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/section_header.dart';
-import '../widgets/illustrations/conove_logo_painter.dart';
+import '../widgets/illustrations/gestura_logo_painter.dart';
 import '../core/services/feedback_service.dart';
 import '../core/localization/app_localizations.dart';
 import 'decoder_screen.dart';
@@ -421,20 +421,19 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
 
-                      // Herramienta 4: Termómetro de Receptividad
+                      // Herramienta 4: Ruta de Ventas y Negociación
                       _buildToolCard(
                         context: context,
                         isDark: isDark,
-                        icon: Icons.thermostat_rounded,
+                        icon: Icons.handshake_rounded,
                         accentColor: AppColors.coral,
-                        title: 'Termómetro',
-                        description: 'Calibra receptividad social',
+                        title: 'Ruta de Ventas',
+                        description: 'Pipeline, termómetro y objeciones',
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) =>
-                                    const BuyerTemperatureScreen()),
+                                builder: (_) => const BuyerTemperatureScreen()),
                           );
                         },
                       ),
@@ -480,9 +479,8 @@ class HomeScreen extends StatelessWidget {
                         context: context,
                         isDark: isDark,
                         icon: Icons.auto_stories_rounded,
-                        accentColor: isDark
-                            ? AppColors.accentLight
-                            : AppColors.accent,
+                        accentColor:
+                            isDark ? AppColors.accentLight : AppColors.accent,
                         title: 'Reglas No Escritas',
                         description: 'Manual de lo no dicho',
                         onTap: () {
@@ -524,6 +522,26 @@ class HomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => const EmergencyModeScreen()),
+                          );
+                        },
+                      ),
+
+                      // Herramienta 10: Límites y Consentimiento
+                      _buildToolCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.shield_rounded,
+                        accentColor: AppColors.coral,
+                        title: 'Límites & Consentimiento',
+                        description: 'Asertividad, falso sí y guiones',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const UnwrittenRulesScreen(
+                                initialTab: 4,
+                              ),
+                            ),
                           );
                         },
                       ),

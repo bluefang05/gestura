@@ -31,7 +31,8 @@ class AppCard extends StatelessWidget {
       side: cardBorder,
     );
 
-    final cardColor = color ?? theme.cardTheme.color ?? theme.colorScheme.surface;
+    final cardColor =
+        color ?? theme.cardTheme.color ?? theme.colorScheme.surface;
 
     if (onTap != null) {
       return Material(
@@ -59,4 +60,3 @@ class AppCard extends StatelessWidget {
     );
   }
 }
-

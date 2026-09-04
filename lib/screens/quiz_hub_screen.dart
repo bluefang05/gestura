@@ -39,7 +39,8 @@ class QuizHubScreen extends StatelessWidget {
                   AppCard(
                     padding: const EdgeInsets.all(16),
                     borderSide: BorderSide(
-                      color: isDark ? AppColors.primaryLight : AppColors.primary,
+                      color:
+                          isDark ? AppColors.primaryLight : AppColors.primary,
                       width: 1.5,
                     ),
                     child: Column(
@@ -85,7 +86,8 @@ class QuizHubScreen extends StatelessWidget {
                         SizedBox(
                           height: 44,
                           child: ElevatedButton.icon(
-                            icon: const Icon(Icons.play_arrow_rounded, size: 22),
+                            icon:
+                                const Icon(Icons.play_arrow_rounded, size: 22),
                             label: const Text('Iniciar Test Visual',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             style: ElevatedButton.styleFrom(
@@ -121,7 +123,8 @@ class QuizHubScreen extends StatelessWidget {
                   // Modos Especializados
                   const SectionHeader(
                     title: 'Entrenamientos Especializados',
-                    subtitle: 'Habilidades de calibración social y respuesta rápida',
+                    subtitle:
+                        'Habilidades de calibración social y respuesta rápida',
                   ),
                   const SizedBox(height: 8),
 
@@ -140,12 +143,14 @@ class QuizHubScreen extends StatelessWidget {
                         icon: Icons.psychology_alt_rounded,
                         accentColor: AppColors.indigo,
                         title: 'Detector de Incongruencias',
-                        description: 'Aprende cuándo las palabras dicen una cosa pero el cuerpo otra.',
+                        description:
+                            'Aprende cuándo las palabras dicen una cosa pero el cuerpo otra.',
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const IncongruenceDetectorScreen(),
+                              builder: (_) =>
+                                  const IncongruenceDetectorScreen(),
                             ),
                           );
                         },
@@ -158,7 +163,8 @@ class QuizHubScreen extends StatelessWidget {
                         icon: Icons.thermostat_rounded,
                         accentColor: AppColors.coral,
                         title: 'Termómetro de Receptividad',
-                        description: 'Mide el nivel de apertura y detecta el momento de acuerdo.',
+                        description:
+                            'Mide el nivel de apertura y detecta el momento de acuerdo.',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -176,7 +182,8 @@ class QuizHubScreen extends StatelessWidget {
                         icon: Icons.flash_on_rounded,
                         accentColor: AppColors.accent,
                         title: 'Modo Flash Contrarreloj',
-                        description: 'Entrena reflejos rápidos: la imagen desaparece en 3 segundos.',
+                        description:
+                            'Entrena reflejos rápidos: la imagen desaparece en 3 segundos.',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -194,7 +201,8 @@ class QuizHubScreen extends StatelessWidget {
                         icon: Icons.business_center_rounded,
                         accentColor: AppColors.primary,
                         title: 'Ventas y Trabajo',
-                        description: 'Preguntas prácticas para reuniones de trabajo y objeciones.',
+                        description:
+                            'Preguntas prácticas para reuniones de trabajo y objeciones.',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -235,9 +243,8 @@ class QuizHubScreen extends StatelessWidget {
                         onTap: () {
                           FeedbackService.lightClick();
                           final qList = QuizDatabase.getByCategory(cat.type);
-                          final questions = qList.isNotEmpty
-                              ? qList
-                              : QuizDatabase.questions;
+                          final questions =
+                              qList.isNotEmpty ? qList : QuizDatabase.questions;
 
                           Navigator.push(
                             context,

@@ -25,7 +25,8 @@ class ProxemicsPainter extends CustomPainter {
           : (isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC))
       ..style = PaintingStyle.fill;
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, w, h), Radius.circular(w * 0.12)),
+      RRect.fromRectAndRadius(
+          Rect.fromLTWH(0, 0, w, h), Radius.circular(w * 0.12)),
       bgPaint,
     );
 
@@ -85,9 +86,11 @@ class ProxemicsPainter extends CustomPainter {
     canvas.drawCircle(center, w * 0.05, avatarPaint);
   }
 
-  void _drawRing(Canvas canvas, Offset center, double radius, String label, Color color, bool isActive) {
+  void _drawRing(Canvas canvas, Offset center, double radius, String label,
+      Color color, bool isActive) {
     final fillPaint = Paint()
-      ..color = color.withValues(alpha: isActive ? (isDark ? 0.25 : 0.18) : 0.04)
+      ..color =
+          color.withValues(alpha: isActive ? (isDark ? 0.25 : 0.18) : 0.04)
       ..style = PaintingStyle.fill;
 
     final strokePaint = Paint()

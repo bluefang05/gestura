@@ -79,7 +79,7 @@ class ScenarioDatabase {
               text:
                   'Pedir el cierre: "¿Te parece si empezamos la implementación el próximo lunes para asegurar el cronograma?"',
               analysis:
-                  'Perfecto: Identificaste la señal de compra y avanzaste al llamado a la acción en el momento de mayor convicción.',
+                  'Acierto: Notaste las señales de apertura y sintonía, y propusiste avanzar de forma estructurada con una pregunta de confirmación.',
               isBestAction: true,
               nextStepIndex: null, // Fin con éxito
               consequenceSummary:
@@ -635,8 +635,7 @@ class ScenarioDatabase {
               'En mesas rectangulares de trabajo, la cabecera comunica conducción de la reunión. Los puestos laterales intermedios ofrecen excelente contacto visual con todos sin asumir un rol jerárquico no asignado.',
           choices: [
             ScenarioChoice(
-              text:
-                  'Sentarte en la cabecera principal de la mesa.',
+              text: 'Sentarte en la cabecera principal de la mesa.',
               analysis:
                   'Error de posición social: Ocupar la cabecera cuando no diriges la reunión puede percibirse como prepotencia o desconocimiento de la dinámica del equipo.',
               isBestAction: false,
@@ -1043,14 +1042,229 @@ class ScenarioDatabase {
                   'El cliente se ilumina: "¡Si ustedes se encargan de eso, cerremos de una vez!". ¡Acuerdo firmado y relación sólida ganada!',
             ),
             ScenarioChoice(
-              text:
-                  'Insistir en bajar el precio a la mitad.',
+              text: 'Insistir en bajar el precio a la mitad.',
               analysis:
                   'Desconexión total: La objeción era de tiempo y saturación operativa, no de dinero.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary:
                   'El cliente ve que no escuchaste su preocupación y ratifica que no contratará.',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 14: LÍMITES ASERTIVOS EN EL TRABAJO ---
+    Scenario(
+      id: 'scenario_assertive_boundaries_work',
+      title: 'Límites Asertivos: La Presión del Colega en el Trabajo',
+      domain: 'Límites & Asertividad',
+      description:
+          'Aprende a decir que no con la Fórmula E-I-A y sostener tu límite con el disco rayado sin sonreír por culpa.',
+      contextOverview:
+          'Es viernes a las 5:00 PM. Un colega encantador se acerca a tu escritorio con una carpeta y te pide que le hagas su informe porque él quiere salir temprano.',
+      iconName: 'shield',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Tu colega se apoya en tu mesa, invade tu espacio personal a menos de 40 cm y te dice con tono adulador: "¡Hola! Oye, sé que eres un crack con los datos y a mí me cuesta horrores. ¿Podrías hacerme este análisis para el lunes? Me harías el favor de la vida". Notas que tu estómago se aprieta y tu primer impulso involuntario es sonreír tímidamente.',
+          characterAction:
+              'Invasión de espacio personal, sonrisa de demanda social y postura inclinada hacia adelante.',
+          illustrationKey: 'scenario_assertive_boundaries_work',
+          visibleSignals: [
+            'Espacio personal invadido (< 45 cm)',
+            'Sonrisa de demanda social',
+            'Postura envolvente sobre tu mesa'
+          ],
+          learningTakeaway:
+              'Ante una invasión de límites, sonreír o dar excusas circunstanciales ("es que tengo una cita") invita a negociar. El límite debe basarse en tu propia capacidad y rol profesional.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Sonreír con nerviosismo y decir: "Eh... bueno, es que tengo un poco de prisa hoy, pero déjamelo a ver si me da tiempo".',
+              analysis:
+                  'Error de apaciguamiento: Tu sonrisa y ambigüedad le dan a entender que sí lo harás. Te quedarás trabajando hasta tarde con resentimiento.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu colega te deja la carpeta con una palmadita y dice: "¡Sabía que podía contar contigo!". Quedas atrapado.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Mantener expresión serena, dar un paso atrás y aplicar la Fórmula E-I-A: "No me es posible asumir este informe. Mi jornada termina a las 6 y mi capacidad está asignada a mis propios cierres; tendrás que gestionarlo tú".',
+              analysis:
+                  'Excelente ejecución asertiva: Hecho observable + Impacto + Acción declarada sin justificaciones ni disculpas vacías.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu colega se sorprende por tu firmeza y se endereza, pero intenta una segunda maniobra de presión emocional.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Gritarle con agresividad: "¡Siempre te aprovechas de la gente, lárgate de mi mesa!".',
+              analysis:
+                  'Respuesta desregulada: Pasar de la sumisión al ataque agresivo genera conflicto innecesario y desvía el foco del límite.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'La oficina se queda en silencio incómodo y tu colega se victimiza ante los demás.',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Tu colega frunce el ceño, cambia a tono de víctima y dice: "¡Vaya, qué frío! Pensé que éramos un equipo. Si no me ayudas me van a llamar la atención el lunes. ¿De verdad me vas a dejar tirado?".',
+          characterAction:
+              'Brazos cruzados, cabeza ladeada con expresión de decepción fingida (pushback emocional).',
+          illustrationKey: 'frown_eyebrows',
+          visibleSignals: [
+            'Manipulación por culpabilización',
+            'Postura de reproche',
+            'Mirada fija esperando que cedas por culpa'
+          ],
+          learningTakeaway:
+              'El pushback emocional busca que la culpa te haga ceder. La Técnica del Disco Rayado desactiva el debate sin agresividad: repites la misma decisión con calma neutra.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Aplicar la Técnica del Disco Rayado con voz neutra y monocorde: "Entiendo que estés preocupado por el lunes, pero como te mencioné, no voy a asumir este informe. Mucho éxito con tu entrega".',
+              analysis:
+                  'Maestría en límites: No muerdes el anzuelo de la culpa ni te justificas. El disco rayado cierra el debate limpiamente.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu colega comprende que tu decisión es innegociable, toma su carpeta y se marcha a hacer su trabajo. ¡Has protegido tu salud mental y tu tiempo!',
+            ),
+            ScenarioChoice(
+              text:
+                  'Empezar a explicarle detalladamente todos tus proyectos para intentar convencerlo de que no eres una mala persona.',
+              analysis:
+                  'Trampa de justificación: Al dar explicaciones prolongadas, le das material para que contra-argumente: "Pero si eso lo haces rápido...".',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'El debate se extiende 20 minutos más y terminas agotado cediendo a una parte del informe.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Ceder por culpa: "Bueno, está bien, déjamelo y me quedo hasta las 8 haciéndolo".',
+              analysis:
+                  'Colapso del límite: Enseñas al entorno que insistir con culpa funciona contigo y repetirán la conducta en el futuro.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Pierdes tu tarde de viernes, acumulas resentimiento y alimentas el ciclo de complacencia.',
+            ),
+          ],
+        ),
+      ],
+    ),
+
+    // --- ESCENARIO 15: CONSENTIMIENTO REAL VS FALSO SÍ ---
+    Scenario(
+      id: 'scenario_consent_decoding_fawning',
+      title: 'Consentimiento Real: Decodificar el Falso Sí del Amigo',
+      domain: 'Límites & Consentimiento',
+      description:
+          'Aprende a leer el apaciguamiento (fawning) y a ofrecer siempre una puerta de escape airosa sin presionar por insistencia.',
+      contextOverview:
+          'Estás planeando una salida con un amigo y le propones ir a un festival gastronómico concurrido y ruidoso.',
+      iconName: 'handshake',
+      steps: [
+        ScenarioStep(
+          id: 'step_1',
+          narrative:
+              'Le dices a tu amigo con mucho entusiasmo: "¿Vamos al festival del centro esta tarde? ¡Habrá muchísima gente y música en vivo!". Notas que tu amigo suspira hondo, baja los hombros, sonríe solo con la boca (sus ojos no se arrugan) y sus pies apuntan hacia las escaleras de salida. Dice en tono pausado: "Eh... sí, bueno, supongo que podemos ir un rato...".',
+          characterAction:
+              'Suspiro imperceptible, sonrisa tensa solo con los labios, cuerpo ladeado hacia la salida.',
+          illustrationKey: 'scenario_consent_decoding_fawning',
+          visibleSignals: [
+            'Sonrisa social sin ojos (Duchenne ausente)',
+            'Suspiro de resignación',
+            'Pies orientados a la fuga'
+          ],
+          learningTakeaway:
+              'Si las palabras dicen "sí" pero el cuerpo muestra señales de huida y resignación, estás ante un "falso sí" por apaciguamiento (fawning). Insistir en este punto no es obtener consentimiento, es coaccionar por desgaste social.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Festejar y decir: "¡Genial! ¡Sabía que te gustaría! Vamos a estar hasta las 11 de la noche recorriendo puestos".',
+              analysis:
+                  'Ceguera de consentimiento: Tomas las palabras al pie de la letra ignorando 3 señales corporales claras de saturación y rechazo.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu amigo se apaga internamente. La salida se vuelve tensa e incómoda para ambos.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Abrir la Puerta de Escape Airosa: "Oye, noto que quizás tuviste una semana pesada y prefieres descansar. No te preocupes en lo más mínimo: si no te viene bien hoy, lo dejamos para otro momento y no pasa nada".',
+              analysis:
+                  'Inteligencia social y consentimiento real: Le quitas la presión de complacerte y normalizas que su descanso es prioritario.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu amigo cambia por completo su expresión corporal y suelta el aire con alivio.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Enojarte y reprocharle: "¿Por qué pones esa cara aburrida si me acabas de decir que sí?".',
+              analysis:
+                  'Castigar la incomodidad ajena: Forzar a alguien a aparentar entusiasmo genera culpa y destruye la seguridad psicológica.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu amigo se encierra en sí mismo y se disculpa sintiéndose avergonzado.',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_2',
+          narrative:
+              'Tu amigo suelta el aire, su postura se relaja visiblemente, te mira a los ojos con una sonrisa genuina y te dice: "¡Uff, gracias por entenderlo! De verdad estoy exhausto y me daba mucha vergüenza decirte que no después de tu entusiasmo".',
+          characterAction:
+              'Hombros relajados, sonrisa sincera y postura frontal abierta.',
+          illustrationKey: 'duchenne_smile',
+          visibleSignals: [
+            'Sonrisa genuina (Duchenne con ojos activos)',
+            'Alivio somático visible',
+            'Conexión de confianza restaurada'
+          ],
+          learningTakeaway:
+              'Brindar salidas airosas sin culpa fortalece los vínculos seguros: la otra persona sabe que contigo no necesita enmascarar ni ceder por compromiso.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Validar su decisión con calidez: "¡Totalmente comprensible! Descansa mucho hoy y cuando recarguemos baterías coordinamos algo tranquilo".',
+              analysis:
+                  'Cierre relacional impecable: Creas un espacio donde decir que no es seguro, aumentando la confianza mutua a largo plazo.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu amigo te agradece de corazón. ¡Has practicado el consentimiento real y protegido el bienestar de tu amigo!',
+            ),
+            ScenarioChoice(
+              text:
+                  'Decirle: "Bueno, pero la próxima semana me debes una y tienes que venir obligado".',
+              analysis:
+                  'Contabilidad afectiva tóxica: Tratar el consentimiento como una deuda destruye la libertad del vínculo.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu amigo vuelve a tensarse sintiendo que acumuló una obligación impuesta.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Quedarte en silencio con mala cara para que note tu desilusión.',
+              analysis:
+                  'Manipulación pasivo-agresiva: Castigar el límite del otro con silencio daña la relación.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu amigo se siente culpable y se aísla emocionalmente.',
             ),
           ],
         ),

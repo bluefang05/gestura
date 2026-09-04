@@ -13,7 +13,8 @@ class EmergencyModeScreen extends StatefulWidget {
 }
 
 class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
-  int _selectedTab = 0; // 0: Entrevista/Ventas, 1: Social/Fiesta, 2: Bloqueo Mental, 3: Sobrecarga Sensorial
+  int _selectedTab =
+      0; // 0: Entrevista/Ventas, 1: Social/Fiesta, 2: Bloqueo Mental, 3: Sobrecarga Sensorial
 
   final Set<String> _checkedItems = {};
 
@@ -34,9 +35,12 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
     } else if (_selectedTab == 2) {
       textToSpeak =
           'Salvavidas si te quedas en blanco. Haz una pausa de poder respirando hondo. Aplica el rebote con una pregunta abierta. O parafrasea las últimas palabras de la otra persona con tono reflexivo.';
-    } else {
+    } else if (_selectedTab == 3) {
       textToSpeak =
           'Salida digna por sobrecarga sensorial. Para una pausa breve di: voy por un vaso de agua, con permiso. Para retirarte di: tuve un día largo y me retiro para descansar, que disfruten mucho la velada.';
+    } else {
+      textToSpeak =
+          'La Neurobiología del Bloqueo. Cuando experimentas sobrecarga, la amígdala secuestra al cerebro antes de que la corteza prefrontal pueda pensar. Esto desconecta temporalmente la memoria de trabajo. Tu cuerpo tarda de 15 a 20 minutos en metabolizar la adrenalina. No intentes forzarte a razonar en medio del secuestro: la prioridad biológica es el enfriamiento somático.';
     }
     TtsService.speak(textToSpeak, gestureId: 'emergency_mode_$_selectedTab');
   }
@@ -139,6 +143,12 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                             label: 'Escape por Sobrecarga',
                             icon: Icons.logout_rounded,
                             isDark: isDark),
+                        const SizedBox(width: 8),
+                        _buildNavChip(
+                            index: 4,
+                            label: 'Neurobiología del Bloqueo',
+                            icon: Icons.biotech_rounded,
+                            isDark: isDark),
                       ],
                     ),
                   ),
@@ -148,6 +158,7 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                   if (_selectedTab == 1) _buildSocialChecklist(isDark),
                   if (_selectedTab == 2) _buildBlankMindRescue(isDark),
                   if (_selectedTab == 3) _buildSensoryEscape(isDark),
+                  if (_selectedTab == 4) _buildNeurobiologySection(isDark),
 
                   const SizedBox(height: 32),
                 ],
@@ -178,9 +189,7 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
       labelStyle: TextStyle(
         color: isSelected
             ? Colors.white
-            : (isDark
-                ? AppColors.textPrimaryDark
-                : AppColors.textPrimaryLight),
+            : (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
         fontWeight: FontWeight.w700,
         fontSize: 13,
       ),
@@ -304,7 +313,8 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                   const Expanded(
                     child: Text(
                       '1. La Pausa de Poder (Silence Framing)',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -337,7 +347,8 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                   const Expanded(
                     child: Text(
                       '2. El Rebote de Pregunta Abierta',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -370,7 +381,8 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                   const Expanded(
                     child: Text(
                       '3. El Espejo de las Últimas 3 Palabras',
-                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -413,7 +425,6 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
           ),
         ),
         const SizedBox(height: 14),
-
         _buildEscapeScript(
           title: 'Pausa Táctica de 5 Minutos (Para Recomponerte)',
           script:
@@ -495,8 +506,7 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w800,
-                      decoration:
-                          isChecked ? TextDecoration.lineThrough : null,
+                      decoration: isChecked ? TextDecoration.lineThrough : null,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -532,8 +542,7 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
         children: [
           Text(
             title,
-            style: const TextStyle(
-                fontSize: 14.5, fontWeight: FontWeight.w800),
+            style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Container(
@@ -579,4 +588,324 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
       ),
     );
   }
+
+  // --- SECCIÓN 5: NEUROBIOLOGÍA DEL BLOQUEO (GOLEMAN / LEDOUX) ---
+  Widget _buildNeurobiologySection(bool isDark) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Neurobiología del Secuestro Emocional y Bloqueo',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Comprender la base fisiológica elimina la culpa: quedarse en blanco no es torpeza personal ni falta de voluntad, sino una respuesta biológica de protección.',
+          style: TextStyle(
+            fontSize: 13,
+            color: isDark
+                ? AppColors.textSecondaryDark
+                : AppColors.textSecondaryLight,
+          ),
+        ),
+        const SizedBox(height: 14),
+
+        // Tarjeta 1: Atajo Tálamo-Amígdala
+        AppCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.coral.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.flash_on_rounded,
+                        size: 22, color: AppColors.coral),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      '1. El Atajo Tálamo-Amígdala (12 ms)',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'El neurocientífico Joseph LeDoux descubrió que la señal sensorial viaja del tálamo a la amígdala en aproximadamente 12 milisegundos, mientras que a la corteza pensante le toma el doble de tiempo o más. En situaciones de sobrecarga o tensión, tu sistema de alarma cerebral reacciona y dispara una respuesta neuroquímica antes de que tu mente consciente haya tenido tiempo de evaluar la situación.',
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.4,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF0F172A)
+                      : const Color(0xFFF1F5F9),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.verified_user_rounded,
+                        size: 18, color: AppColors.primary),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Pauta neuroafirmativa: El sobresalto o aceleración inicial es un reflejo biológico no consciente. No intentes reprimirlo con autoexigencia.',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Tarjeta 2: Secuestro de la Memoria de Trabajo
+        AppCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.indigo.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.psychology_rounded,
+                        size: 22, color: AppColors.indigo),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      '2. El Secuestro de la Memoria de Trabajo',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Cuando la amígdala detecta alarma o saturación sensorial, libera catecolaminas (adrenalina y noradrenalina) que desvían el flujo cerebral. Esto inhibe temporalmente la corteza prefrontal, el área encargada de la memoria de trabajo, la flexibilidad cognitiva y la selección de palabras. Quedarse en blanco es una consecuencia electroquímica directa: tu cerebro está priorizando la protección y no la retórica social.',
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.4,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Tarjeta 3: Ventana de Enfriamiento de 20 Minutos
+        AppCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.warning.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.timer_outlined,
+                        size: 22, color: AppColors.warning),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      '3. La Regla de los 20 Minutos (Dolf Zillmann)',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Las investigaciones fisiológicas demuestran que el cuerpo humano necesita entre 15 y 20 minutos de enfriamiento somático para metabolizar la adrenalina y permitir que el ritmo cardíaco vuelva a niveles basales. Intentar resolver un conflicto social o forzarte a hablar durante esos minutos es biológicamente ineficaz.',
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.4,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? const Color(0xFF0F172A)
+                      : const Color(0xFFF1F5F9),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.shield_outlined,
+                        size: 18, color: AppColors.warning),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Estrategia: En lugar de perseverar en la conversación, retírate 20 minutos con una excusa funcional ("necesito ir al baño / tomar aire fresco").',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Tarjeta 4: Protocolo Semáforo / SOCS
+        AppCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.emerald.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.traffic_rounded,
+                        size: 22, color: AppColors.emerald),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Text(
+                      '4. Protocolo SOCS / Semáforo de Regulación',
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+
+              // Luz Roja
+              _buildTrafficStep(
+                color: AppColors.coral,
+                step: 'ROJO: Alto Somático (Stop)',
+                detail:
+                    'Monitorea pulso y mandíbula. Si hay tensión alta o bloqueo, detén la interacción y pide tiempo fuera.',
+                isDark: isDark,
+              ),
+              const SizedBox(height: 10),
+
+              // Luz Amarilla
+              _buildTrafficStep(
+                color: AppColors.warning,
+                step: 'AMARILLO: Contextualizar y Alternativas (Think)',
+                detail:
+                    'Desactiva la lectura mental de hostilidad. Plantea 2 hipótesis alternativas objetivas antes de juzgar la intención de la otra persona.',
+                isDark: isDark,
+              ),
+              const SizedBox(height: 10),
+
+              // Luz Verde
+              _buildTrafficStep(
+                color: AppColors.success,
+                step: 'VERDE: Acción Calibrada (Go)',
+                detail:
+                    'Con pulso sereno, comunica tu posición de forma asertiva, breve y sin necesidad de sobreexplicarte.',
+                isDark: isDark,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTrafficStep({
+    required Color color,
+    required String step,
+    required String detail,
+    required bool isDark,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          margin: const EdgeInsets.only(top: 3, right: 10),
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                step,
+                style: const TextStyle(
+                  fontSize: 13.5,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                detail,
+                style: TextStyle(
+                  fontSize: 12.5,
+                  height: 1.35,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 }
+

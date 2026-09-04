@@ -36,7 +36,8 @@ class CategoryInfo {
       type: CategoryType.expresionesFaciales,
       title: 'Expresiones y Señales Faciales',
       shortTitle: 'Facial',
-      description: 'Sonrisas Duchenne vs cortesía, ceño, mirada de desdén, ojos entrecerrados y microgestos.',
+      description:
+          'Sonrisas Duchenne vs cortesía, ceño, mirada de desdén, ojos entrecerrados y microgestos.',
       icon: Icons.face_rounded,
       primaryColor: AppColors.primary,
       containerColor: AppColors.primaryContainer,
@@ -46,7 +47,8 @@ class CategoryInfo {
       type: CategoryType.factoresParalinguisticos,
       title: 'Factores Paralingüísticos',
       shortTitle: 'Voz y Tono',
-      description: 'El tono, ritmo, volumen, timbre de la voz y los silencios con sus significados.',
+      description:
+          'El tono, ritmo, volumen, timbre de la voz y los silencios con sus significados.',
       icon: Icons.record_voice_over_rounded,
       primaryColor: AppColors.purple,
       containerColor: Color(0xFFEDE9FE),
@@ -56,7 +58,8 @@ class CategoryInfo {
       type: CategoryType.lenguajeCorporal,
       title: 'Posturas y Lenguaje Corporal',
       shortTitle: 'Posturas',
-      description: 'Posturas abiertas vs cerradas, orientación del cuerpo, inclinación frontal y manos.',
+      description:
+          'Posturas abiertas vs cerradas, orientación del cuerpo, inclinación frontal y manos.',
       icon: Icons.accessibility_new_rounded,
       primaryColor: AppColors.accent,
       containerColor: AppColors.accentLight,
@@ -66,7 +69,8 @@ class CategoryInfo {
       type: CategoryType.proxemica,
       title: 'Proximidad y Espacio Personal',
       shortTitle: 'Proxémica',
-      description: 'Las 4 burbujas invisibles: Espacio Íntimo, Personal, Social y Público.',
+      description:
+          'Las 4 burbujas invisibles: Espacio Íntimo, Personal, Social y Público.',
       icon: Icons.radar_rounded,
       primaryColor: AppColors.indigo,
       containerColor: Color(0xFFE0E7FF),
@@ -76,7 +80,8 @@ class CategoryInfo {
       type: CategoryType.entornoApariencia,
       title: 'Entorno, Espacio y Apariencia',
       shortTitle: 'Entorno',
-      description: 'Muebles, iluminación, vestimenta formal/casual, accesorios e higiene.',
+      description:
+          'Muebles, iluminación, vestimenta formal/casual, accesorios e higiene.',
       icon: Icons.chair_rounded,
       primaryColor: AppColors.emerald,
       containerColor: AppColors.successContainer,
@@ -86,7 +91,8 @@ class CategoryInfo {
       type: CategoryType.comunicacionDigital,
       title: 'Comunicación No Verbal Digital',
       shortTitle: 'Digital',
-      description: 'Emojis, mayúsculas, respuestas secas ("ok"), visto y tiempos de respuesta.',
+      description:
+          'Emojis, mayúsculas, respuestas secas ("ok"), visto y tiempos de respuesta.',
       icon: Icons.chat_bubble_outline_rounded,
       primaryColor: AppColors.coral,
       containerColor: Color(0xFFFFE4E6),

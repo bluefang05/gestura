@@ -33,13 +33,22 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
 
   List<Scenario> get _filteredScenarios {
     if (_selectedCategory == 'work_sales') {
-      return ScenarioDatabase.scenarios.where((s) =>
-          s.domain == 'Ámbito Laboral' || s.domain == 'Ventas & Negociación'
-      ).toList();
+      return ScenarioDatabase.scenarios
+          .where((s) =>
+              s.domain == 'Ámbito Laboral' ||
+              s.domain == 'Ventas & Negociación')
+          .toList();
     } else if (_selectedCategory == 'daily_social') {
-      return ScenarioDatabase.scenarios.where((s) =>
-          s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales'
-      ).toList();
+      return ScenarioDatabase.scenarios
+          .where((s) =>
+              s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales')
+          .toList();
+    } else if (_selectedCategory == 'boundaries') {
+      return ScenarioDatabase.scenarios
+          .where((s) =>
+              s.domain == 'Límites & Asertividad' ||
+              s.domain == 'Límites & Consentimiento')
+          .toList();
     }
     return ScenarioDatabase.scenarios;
   }
@@ -48,10 +57,19 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final allScenarios = ScenarioDatabase.scenarios;
-    final workCount = allScenarios.where((s) =>
-        s.domain == 'Ámbito Laboral' || s.domain == 'Ventas & Negociación').length;
-    final socialCount = allScenarios.where((s) =>
-        s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales').length;
+    final workCount = allScenarios
+        .where((s) =>
+            s.domain == 'Ámbito Laboral' || s.domain == 'Ventas & Negociación')
+        .length;
+    final socialCount = allScenarios
+        .where((s) =>
+            s.domain == 'Vida Diaria' || s.domain == 'Relaciones Sociales')
+        .length;
+    final boundaryCount = allScenarios
+        .where((s) =>
+            s.domain == 'Límites & Asertividad' ||
+            s.domain == 'Límites & Consentimiento')
+        .length;
     final filtered = _filteredScenarios;
 
     return Scaffold(
@@ -67,13 +85,16 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1050),
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
                   // Banner intro
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+                      color: isDark
+                          ? const Color(0xFF1E293B)
+                          : const Color(0xFFF1F5F9),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Row(
@@ -89,7 +110,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                             'Entrena en situaciones reales de ventas, entrevistas y vida social. Toma decisiones y observa las consecuencias.',
                             style: TextStyle(
                               fontSize: 13,
-                              color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
                               height: 1.35,
                             ),
                           ),
@@ -123,7 +146,8 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                         ),
                         const SizedBox(width: 8),
                         ChoiceChip(
-                          avatar: const Icon(Icons.business_center_rounded, size: 18),
+                          avatar: const Icon(Icons.business_center_rounded,
+                              size: 18),
                           label: Text('Laboral y Ventas ($workCount)'),
                           selected: _selectedCategory == 'work_sales',
                           selectedColor: AppColors.primary,
@@ -142,7 +166,8 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                         ),
                         const SizedBox(width: 8),
                         ChoiceChip(
-                          avatar: const Icon(Icons.people_alt_rounded, size: 18),
+                          avatar:
+                              const Icon(Icons.people_alt_rounded, size: 18),
                           label: Text('Vida Diaria y Social ($socialCount)'),
                           selected: _selectedCategory == 'daily_social',
                           selectedColor: AppColors.primary,
@@ -157,6 +182,26 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                           onSelected: (_) {
                             FeedbackService.lightClick();
                             setState(() => _selectedCategory = 'daily_social');
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        ChoiceChip(
+                          avatar: const Icon(Icons.shield_outlined, size: 18),
+                          label:
+                              Text('Límites y Consentimiento ($boundaryCount)'),
+                          selected: _selectedCategory == 'boundaries',
+                          selectedColor: AppColors.primary,
+                          labelStyle: TextStyle(
+                            color: _selectedCategory == 'boundaries'
+                                ? Colors.white
+                                : (isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          onSelected: (_) {
+                            FeedbackService.lightClick();
+                            setState(() => _selectedCategory = 'boundaries');
                           },
                         ),
                       ],
@@ -184,7 +229,8 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => ScenarioRunnerScreen(scenario: scenario),
+                                builder: (_) =>
+                                    ScenarioRunnerScreen(scenario: scenario),
                               ),
                             ).then((_) => _loadProgress());
                           },
@@ -195,7 +241,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                 children: [
                                   BadgePill(
                                     text: scenario.domain,
-                                    color: AppColors.indigo,
+                                    color: scenario.domain.contains('Límites')
+                                        ? AppColors.coral
+                                        : AppColors.indigo,
                                   ),
                                   const Spacer(),
                                   if (_completedIds.contains(scenario.id))
@@ -221,7 +269,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                   scenario.description,
                                   style: TextStyle(
                                     fontSize: 12.5,
-                                    color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                    color: isDark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondaryLight,
                                     height: 1.3,
                                   ),
                                   maxLines: 3,
@@ -280,7 +330,8 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => ScenarioRunnerScreen(scenario: scenario),
+                                builder: (_) =>
+                                    ScenarioRunnerScreen(scenario: scenario),
                               ),
                             ).then((_) => _loadProgress());
                           },
@@ -291,7 +342,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                 children: [
                                   BadgePill(
                                     text: scenario.domain,
-                                    color: AppColors.indigo,
+                                    color: scenario.domain.contains('Límites')
+                                        ? AppColors.coral
+                                        : AppColors.indigo,
                                   ),
                                   const Spacer(),
                                   if (_completedIds.contains(scenario.id))
@@ -316,7 +369,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                 scenario.description,
                                 style: TextStyle(
                                   fontSize: 13,
-                                  color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                                  color: isDark
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondaryLight,
                                   height: 1.3,
                                 ),
                               ),

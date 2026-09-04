@@ -5,7 +5,7 @@ import '../widgets/dictionary/gesture_card.dart';
 import '../widgets/dictionary/body_part_filter.dart';
 import '../core/constants/app_colors.dart';
 import 'gesture_detail_screen.dart';
-import '../core/services/storage_service.dart';
+import '../state/progress_provider.dart';
 
 class DecoderScreen extends StatefulWidget {
   const DecoderScreen({super.key});
@@ -21,7 +21,7 @@ class _DecoderScreenState extends State<DecoderScreen> {
   @override
   void initState() {
     super.initState();
-    _bookmarkedIds = StorageService.getBookmarks();
+    _bookmarkedIds = ProgressProvider().bookmarks;
   }
 
   @override
@@ -130,14 +130,14 @@ class _DecoderScreenState extends State<DecoderScreen> {
                               ).then((_) {
                                 setState(() {
                                   _bookmarkedIds =
-                                      StorageService.getBookmarks();
+                                      ProgressProvider().bookmarks;
                                 });
                               });
                             },
                             onBookmarkToggle: () async {
-                              await StorageService.toggleBookmark(item.id);
+                              await ProgressProvider().toggleBookmark(item.id);
                               setState(() {
-                                _bookmarkedIds = StorageService.getBookmarks();
+                                _bookmarkedIds = ProgressProvider().bookmarks;
                               });
                             },
                           );
@@ -167,14 +167,14 @@ class _DecoderScreenState extends State<DecoderScreen> {
                           ),
                         ).then((_) {
                           setState(() {
-                            _bookmarkedIds = StorageService.getBookmarks();
+                            _bookmarkedIds = ProgressProvider().bookmarks;
                           });
                         });
                       },
                       onBookmarkToggle: () async {
-                        await StorageService.toggleBookmark(item.id);
+                        await ProgressProvider().toggleBookmark(item.id);
                         setState(() {
-                          _bookmarkedIds = StorageService.getBookmarks();
+                          _bookmarkedIds = ProgressProvider().bookmarks;
                         });
                       },
                     );

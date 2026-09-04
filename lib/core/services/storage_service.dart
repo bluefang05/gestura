@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/app_constants.dart';
 import '../../models/user_progress.dart';
@@ -6,11 +7,17 @@ import '../../models/user_progress.dart';
 class StorageService {
   static SharedPreferences? _prefs;
 
+  static void _logError(String op, Object e) {
+    if (kDebugMode) {
+      debugPrint('[StorageService] Error during $op: $e');
+    }
+  }
+
   static Future<void> init() async {
     try {
       _prefs ??= await SharedPreferences.getInstance();
-    } catch (_) {
-      // Graceful fallback if SharedPreferences fails to open
+    } catch (e) {
+      _logError('init', e);
     }
   }
 
@@ -20,7 +27,13 @@ class StorageService {
   }
 
   static Future<bool> setThemeMode(String mode) async {
-    return (await _prefs?.setString(AppConstants.keyThemeMode, mode)) ?? false;
+    try {
+      return (await _prefs?.setString(AppConstants.keyThemeMode, mode)) ??
+          false;
+    } catch (e) {
+      _logError('setThemeMode', e);
+      return false;
+    }
   }
 
   static bool getHighContrast() {
@@ -28,7 +41,13 @@ class StorageService {
   }
 
   static Future<bool> setHighContrast(bool value) async {
-    return (await _prefs?.setBool(AppConstants.keyHighContrast, value)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keyHighContrast, value)) ??
+          false;
+    } catch (e) {
+      _logError('setHighContrast', e);
+      return false;
+    }
   }
 
   static double getTextScale() {
@@ -36,7 +55,13 @@ class StorageService {
   }
 
   static Future<bool> setTextScale(double scale) async {
-    return (await _prefs?.setDouble(AppConstants.keyTextScale, scale)) ?? false;
+    try {
+      return (await _prefs?.setDouble(AppConstants.keyTextScale, scale)) ??
+          false;
+    } catch (e) {
+      _logError('setTextScale', e);
+      return false;
+    }
   }
 
   static bool getHapticsEnabled() {
@@ -44,74 +69,121 @@ class StorageService {
   }
 
   static Future<bool> setHapticsEnabled(bool enabled) async {
-    return (await _prefs?.setBool(AppConstants.keyHapticsEnabled, enabled)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keyHapticsEnabled, enabled)) ??
+          false;
+    } catch (e) {
+      _logError('setHapticsEnabled', e);
+      return false;
+    }
   }
 
   static bool getSoundEffectsEnabled() {
-    return _prefs?.getBool('gestura_sound_effects') ?? true;
+    return _prefs?.getBool(AppConstants.keySoundEffects) ?? true;
   }
 
   static Future<bool> setSoundEffectsEnabled(bool enabled) async {
-    return (await _prefs?.setBool('gestura_sound_effects', enabled)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keySoundEffects, enabled)) ??
+          false;
+    } catch (e) {
+      _logError('setSoundEffectsEnabled', e);
+      return false;
+    }
   }
 
   static bool getReduceMotion() {
-    return _prefs?.getBool('gestura_reduce_motion') ?? false;
+    return _prefs?.getBool(AppConstants.keyReduceMotion) ?? false;
   }
 
   static Future<bool> setReduceMotion(bool value) async {
-    return (await _prefs?.setBool('gestura_reduce_motion', value)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keyReduceMotion, value)) ??
+          false;
+    } catch (e) {
+      _logError('setReduceMotion', e);
+      return false;
+    }
   }
 
   static bool getWarmFilter() {
-    return _prefs?.getBool('gestura_warm_filter') ?? false;
+    return _prefs?.getBool(AppConstants.keyWarmFilter) ?? false;
   }
 
   static Future<bool> setWarmFilter(bool value) async {
-    return (await _prefs?.setBool('gestura_warm_filter', value)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keyWarmFilter, value)) ??
+          false;
+    } catch (e) {
+      _logError('setWarmFilter', e);
+      return false;
+    }
   }
 
   static bool getAutoNarration() {
-    return _prefs?.getBool('gestura_auto_narration') ?? false;
+    return _prefs?.getBool(AppConstants.keyAutoNarration) ?? false;
   }
 
   static Future<bool> setAutoNarration(bool value) async {
-    return (await _prefs?.setBool('gestura_auto_narration', value)) ?? false;
+    try {
+      return (await _prefs?.setBool(AppConstants.keyAutoNarration, value)) ??
+          false;
+    } catch (e) {
+      _logError('setAutoNarration', e);
+      return false;
+    }
   }
 
   static double getSpeechRate() {
-    return _prefs?.getDouble('gestura_speech_rate') ?? 0.48;
+    return _prefs?.getDouble(AppConstants.keySpeechRate) ?? 0.48;
   }
 
   static Future<bool> setSpeechRate(double rate) async {
-    return (await _prefs?.setDouble('gestura_speech_rate', rate)) ?? false;
+    try {
+      return (await _prefs?.setDouble(AppConstants.keySpeechRate, rate)) ??
+          false;
+    } catch (e) {
+      _logError('setSpeechRate', e);
+      return false;
+    }
   }
 
   static String? getLanguage() {
-    return _prefs?.getString('gestura_language');
+    return _prefs?.getString(AppConstants.keyLanguage);
   }
 
   static Future<bool> setLanguage(String? langCode) async {
-    if (langCode == null) {
-      return (await _prefs?.remove('gestura_language')) ?? false;
+    try {
+      if (langCode == null) {
+        return (await _prefs?.remove(AppConstants.keyLanguage)) ?? false;
+      }
+      return (await _prefs?.setString(AppConstants.keyLanguage, langCode)) ??
+          false;
+    } catch (e) {
+      _logError('setLanguage', e);
+      return false;
     }
-    return (await _prefs?.setString('gestura_language', langCode)) ?? false;
   }
 
   // Bookmarks (Gestures saved by user)
-
   static List<String> getBookmarks() {
     return _prefs?.getStringList(AppConstants.keyBookmarks) ?? [];
   }
 
   static Future<bool> toggleBookmark(String gestureId) async {
-    final list = getBookmarks().toList();
-    if (list.contains(gestureId)) {
-      list.remove(gestureId);
-    } else {
-      list.add(gestureId);
+    try {
+      final list = getBookmarks().toList();
+      if (list.contains(gestureId)) {
+        list.remove(gestureId);
+      } else {
+        list.add(gestureId);
+      }
+      return (await _prefs?.setStringList(AppConstants.keyBookmarks, list)) ??
+          false;
+    } catch (e) {
+      _logError('toggleBookmark', e);
+      return false;
     }
-    return (await _prefs?.setStringList(AppConstants.keyBookmarks, list)) ?? false;
   }
 
   static bool isBookmarked(String gestureId) {
@@ -127,18 +199,48 @@ class StorageService {
     try {
       final json = jsonDecode(raw) as Map<String, dynamic>;
       return UserProgress.fromJson(json);
-    } catch (_) {
+    } catch (e) {
+      _logError('loadProgress', e);
       return UserProgress.initial();
     }
   }
 
   static Future<bool> saveProgress(UserProgress progress) async {
-    final raw = jsonEncode(progress.toJson());
-    return (await _prefs?.setString(AppConstants.keyUserProgress, raw)) ?? false;
+    try {
+      final raw = jsonEncode(progress.toJson());
+      return (await _prefs?.setString(AppConstants.keyUserProgress, raw)) ??
+          false;
+    } catch (e) {
+      _logError('saveProgress', e);
+      return false;
+    }
   }
 
-  static Future<bool> clearAll() async {
-    return (await _prefs?.clear()) ?? false;
+  /// Clears only user training progress while strictly preserving bookmarks,
+  /// theme, language, accessibility, TTS, and other user preferences.
+  static Future<bool> clearProgress() async {
+    try {
+      final r1 = await _prefs?.remove(AppConstants.keyUserProgress) ?? true;
+      final r2 = await _prefs?.remove(AppConstants.keyCompletedQuizzes) ?? true;
+      final r3 =
+          await _prefs?.remove(AppConstants.keyCompletedScenarios) ?? true;
+      return r1 && r2 && r3;
+    } catch (e) {
+      _logError('clearProgress', e);
+      return false;
+    }
   }
+
+  /// Resets all application data and preferences completely to defaults.
+  static Future<bool> resetApplicationData() async {
+    try {
+      return (await _prefs?.clear()) ?? false;
+    } catch (e) {
+      _logError('resetApplicationData', e);
+      return false;
+    }
+  }
+
+  /// @deprecated Use [resetApplicationData] instead. Kept for backward compatibility.
+  static Future<bool> clearAll() => resetApplicationData();
 }
-

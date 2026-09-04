@@ -52,3 +52,8 @@ app.*.map.json
 *.keystore.*
 **/android/key.properties
 **/android/app/key.properties
+
+# Local tooling and reference assets
+.codex-tools/
+*.pdf
+

@@ -38,22 +38,27 @@ class QuizFeedbackSheet extends StatelessWidget {
         ? const Color(0xFF0F172A).withValues(alpha: 0.8)
         : Colors.white.withValues(alpha: 0.9);
 
-    final clueTextColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final clueTextColor =
+        isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
 
     final explanationColor = isDark
         ? (isCorrect ? const Color(0xFFECFDF5) : const Color(0xFFFEF2F2))
         : const Color(0xFF1F2937);
 
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: containerBg,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Semantics(
+      liveRegion: true,
+      label:
+          '${isCorrect ? "Respuesta correcta." : "Respuesta incorrecta."} Clave visual: $keyVisualClue. Explicación: $explanation',
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: containerBg,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Status Header with TTS
             Row(
@@ -66,7 +71,9 @@ class QuizFeedbackSheet extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    isCorrect ? '¡Excelente observación!' : '¡Buen intento! Aprende el detalle:',
+                    isCorrect
+                        ? '¡Excelente observación!'
+                        : '¡Buen intento! Aprende el detalle:',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w800,
@@ -83,7 +90,9 @@ class QuizFeedbackSheet extends StatelessWidget {
                             ? Icons.stop_circle_rounded
                             : Icons.volume_up_rounded,
                         color: isSpeaking
-                            ? (isDark ? const Color(0xFFFCA5A5) : const Color(0xFFDC2626))
+                            ? (isDark
+                                ? const Color(0xFFFCA5A5)
+                                : const Color(0xFFDC2626))
                             : titleColor,
                       ),
                       tooltip: isSpeaking
@@ -113,7 +122,9 @@ class QuizFeedbackSheet extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.visibility_rounded, size: 18, color: isDark ? AppColors.accentLight : AppColors.accent),
+                  Icon(Icons.visibility_rounded,
+                      size: 18,
+                      color: isDark ? AppColors.accentLight : AppColors.accent),
                   const SizedBox(width: 8),
                   Expanded(
                     child: RichText(
@@ -148,19 +159,24 @@ class QuizFeedbackSheet extends StatelessWidget {
             // Continue button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: isCorrect ? const Color(0xFF059669) : const Color(0xFFDC2626),
+                backgroundColor: isCorrect
+                    ? const Color(0xFF059669)
+                    : const Color(0xFFDC2626),
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
               ),
               onPressed: () {
                 FeedbackService.lightClick();
                 onContinue();
               },
-              child: const Text('Continuar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              child: const Text('Continuar',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             ),
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

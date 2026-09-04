@@ -6,7 +6,8 @@ import 'digital_signals_painter.dart';
 import 'paralinguistics_painter.dart';
 import 'environment_painter.dart';
 import 'scenario_painter.dart';
-import 'conove_logo_painter.dart';
+import 'gestura_logo_painter.dart';
+import '../../core/services/feedback_service.dart';
 
 class ConoVeIllustration extends StatefulWidget {
   final String illustrationKey;
@@ -48,15 +49,18 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
         'Grupo conversando mientras una persona introduce con entusiasmo un tema distinto.',
     'reflective_vs_tense_silence':
         'Comparación entre una pausa reflexiva y una situación con tensión corporal y ambiental.',
+    'scenario_assertive_boundaries_work':
+        'Colega apoyado en el escritorio pidiendo un favor de último momento mientras la persona mantiene una postura asertiva y serena.',
+    'scenario_consent_decoding_fawning':
+        'Dos amigos conversando en un café; uno invita con entusiasmo mientras la otra persona muestra apaciguamiento con sonrisa forzada y orientación corporal de escape.',
   };
 
   String get _semanticDescription =>
       _semanticDescriptions[widget.illustrationKey] ??
       'Ilustración visual de comunicación: ${widget.illustrationKey.replaceAll('_', ' ')}';
 
-  String? _resolveAssetPath(String key, bool isLarge) {
+  String? _resolveAssetPath(String key, [bool isLarge = false]) {
     final clean = key.toLowerCase().trim();
-    final suffix = isLarge ? '_large.png' : '.png';
 
     const categoryMap = {
       // Expresiones
@@ -190,6 +194,8 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'scenario_interrupt_busy_colleague': 'scenarios',
       'scenario_group_conversation_entry': 'scenarios',
       'scenario_delay_objection_sales': 'scenarios',
+      'scenario_assertive_boundaries_work': 'scenarios',
+      'scenario_consent_decoding_fawning': 'scenarios',
 
       // Contenido neuroafirmativo
       'sensory_overload_supermarket': 'neuroaffirmative',
@@ -267,7 +273,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     final canonicalKey = aliasMap[clean] ?? clean;
     if (categoryMap.containsKey(canonicalKey)) {
       final folder = categoryMap[canonicalKey]!;
-      return 'assets/images/$folder/$canonicalKey$suffix';
+      return 'assets/images/$folder/$canonicalKey.png';
     }
     return null;
   }
@@ -281,9 +287,18 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     final isLarge = widget.width >= 160 || widget.height >= 160;
     final assetPath = _resolveAssetPath(widget.illustrationKey, isLarge);
     if (assetPath != null && !isHighContrast) {
+      final dpr = MediaQuery.devicePixelRatioOf(context);
+      final targetWidth = widget.width.isFinite ? widget.width : 512.0;
+      final targetHeight = widget.height.isFinite ? widget.height : 512.0;
+      final cacheW = (targetWidth * dpr).round().clamp(100, 1024);
+      final cacheH = (targetHeight * dpr).round().clamp(100, 1024);
+
       return _withHoldPreview(
         Semantics(
           label: _semanticDescription,
+          hint: widget.enableHoldPreview
+              ? 'Mantén presionado para ampliar en pantalla completa'
+              : null,
           image: true,
           child: ClipRRect(
             borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
@@ -297,6 +312,8 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
                 width: widget.width,
                 height: widget.height,
                 fit: BoxFit.contain,
+                cacheWidth: cacheW,
+                cacheHeight: cacheH,
                 errorBuilder: (_, __, ___) =>
                     _buildFallbackPainter(isDark, isHighContrast),
               ),
@@ -311,6 +328,9 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     return _withHoldPreview(
       Semantics(
         label: _semanticDescription,
+        hint: widget.enableHoldPreview
+            ? 'Mantén presionado para ampliar en pantalla completa'
+            : null,
         image: true,
         child: ClipRRect(
           borderRadius: widget.borderRadius ?? BorderRadius.circular(16),
@@ -329,12 +349,50 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       return child;
     }
 
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onLongPressStart: (_) => _showPreview(),
-      onLongPressEnd: (_) => _hidePreview(),
-      onLongPressCancel: _hidePreview,
-      child: child,
+    final hasAffordance = widget.width >= 90 && widget.height >= 90;
+
+    final content = hasAffordance
+        ? Stack(
+            clipBehavior: Clip.none,
+            children: [
+              child,
+              Positioned(
+                bottom: 6,
+                right: 6,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.52),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.35),
+                      width: 0.8,
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.zoom_in_rounded,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          )
+        : child;
+
+    return Tooltip(
+      message: 'Mantén presionado para ampliar',
+      waitDuration: const Duration(milliseconds: 600),
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onLongPressStart: (_) {
+          FeedbackService.lightClick();
+          _showPreview();
+        },
+        onLongPressEnd: (_) => _hidePreview(),
+        onLongPressCancel: _hidePreview,
+        child: content,
+      ),
     );
   }
 
@@ -351,29 +409,60 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
           child: Material(
             color: Colors.black.withValues(alpha: 0.72),
             child: Center(
-              child: Container(
-                width: previewSize,
-                height: previewSize,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardTheme.color,
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black45,
-                      blurRadius: 30,
-                      offset: Offset(0, 18),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: previewSize,
+                    height: previewSize,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardTheme.color,
+                      borderRadius: BorderRadius.circular(18),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black45,
+                          blurRadius: 30,
+                          offset: Offset(0, 18),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: ConoVeIllustration(
-                  illustrationKey: widget.illustrationKey,
-                  width: double.infinity,
-                  height: double.infinity,
-                  highlightAnatomy: widget.highlightAnatomy,
-                  borderRadius: BorderRadius.circular(14),
-                  enableHoldPreview: false,
-                ),
+                    child: ConoVeIllustration(
+                      illustrationKey: widget.illustrationKey,
+                      width: double.infinity,
+                      height: double.infinity,
+                      highlightAnatomy: widget.highlightAnatomy,
+                      borderRadius: BorderRadius.circular(14),
+                      enableHoldPreview: false,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.65),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white24),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.touch_app_rounded,
+                            size: 16, color: Colors.white),
+                        SizedBox(width: 8),
+                        Text(
+                          'Mantén presionado para observar • Suelta para cerrar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

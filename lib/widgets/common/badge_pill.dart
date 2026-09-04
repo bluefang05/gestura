@@ -20,7 +20,9 @@ class BadgePill extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = backgroundColor ??
-        (isDark ? color.withValues(alpha: 0.22) : color.withValues(alpha: 0.12));
+        (isDark
+            ? color.withValues(alpha: 0.22)
+            : color.withValues(alpha: 0.12));
 
     // Guarantee WCAG AAA (7:1+) contrast by evaluating actual background luminance
     final double bgLuminance = bg.computeLuminance();
@@ -40,8 +42,12 @@ class BadgePill extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isBgLight
-              ? (isDark ? color.withValues(alpha: 0.6) : color.withValues(alpha: 0.4))
-              : (isDark ? color.withValues(alpha: 0.55) : color.withValues(alpha: 0.35)),
+              ? (isDark
+                  ? color.withValues(alpha: 0.6)
+                  : color.withValues(alpha: 0.4))
+              : (isDark
+                  ? color.withValues(alpha: 0.55)
+                  : color.withValues(alpha: 0.35)),
           width: 1.2,
         ),
       ),

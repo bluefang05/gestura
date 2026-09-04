@@ -14,12 +14,17 @@ class IncongruenceDatabase {
         'Labios comprimidos en una línea delgada',
         'Cuerpo reclinado ligeramente hacia atrás',
       ],
-      isCongruent: false,
-      realEmotion: 'Objeción silenciosa sobre el presupuesto o el valor',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Reserva o duda sobre el retorno real de la inversión',
+        'Cálculo mental y procesamiento reflexivo del presupuesto',
+        'Cautela negociadora habitual para no mostrar entusiasmo',
+        'Frío en la sala de juntas o postura física habitual',
+      ],
       explanation:
-          'Las palabras dicen que el precio es razonable, pero los brazos cruzados y labios apretados revelan resistencia inconsciente y contención de una queja.',
+          'Las palabras expresan acuerdo inicial, pero los brazos cruzados y labios apretados sugieren reserva interna, necesidad de procesar la cifra o simple cautela antes de comprometer fondos.',
       recommendedAction:
-          'No asumas que el precio está cerrado. Haz una pausa y pregunta: "Noto que estás evaluando el impacto, ¿cómo se compara esta inversión con el presupuesto asignado para esta área?"',
+          'No asumas que el precio está cerrado ni presiones. Haz una pausa y pregunta: "Noto que estás evaluando el impacto, ¿cómo se compara esta inversión con el presupuesto asignado para esta área?"',
       targetAudience: 'sales_focus',
     ),
 
@@ -35,16 +40,20 @@ class IncongruenceDatabase {
         'Pestañeo acelerado y mirada frecuente hacia la puerta',
         'Cuerpo orientado hacia la salida',
       ],
-      isCongruent: false,
-      realEmotion: 'Impaciencia, sobrecarga o prisa por terminar',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Prisa por un compromiso o reunión pendiente',
+        'Sobrecarga sensorial o fatiga atencional acumulada',
+        'Inquietud motora involuntaria o hábito de autorregulación (stimming)',
+      ],
       explanation:
-          'El mensaje verbal da permiso cordial de continuar, pero el tamborileo y la orientación hacia la salida indican que su nivel de atención está agotado.',
+          'El mensaje verbal otorga permiso cordial para continuar, pero el tamborileo y la orientación física hacia la salida sugieren que su capacidad de escucha está al límite o tiene un apremio temporal.',
       recommendedAction:
-          'Resume tu idea principal en 1 frase y concluye: "En resumen, ese es el punto clave. Si quieres lo revisamos con calma más tarde cuando estés libre".',
+          'Sintetiza tu mensaje en una frase y ofrece una salida airosa: "En resumen, ese es el punto clave. Si quieres lo revisamos con calma más tarde cuando tengas tiempo".',
       targetAudience: 'autism_focus',
     ),
 
-    // --- CASO 3 (Ventas): Interés genuino y señal de compra (CONGRUENTE) ---
+    // --- CASO 3 (Ventas): Alta receptividad y alineación positiva (ALINEADO) ---
     IncongruenceItem(
       id: 'inc_sales_buying_signal',
       speakerRole: 'Cliente potencial tras ver la demostración',
@@ -55,12 +64,16 @@ class IncongruenceDatabase {
         'Sonrisa de Duchenne (mejillas elevadas y arrugas en los ojos)',
         'Palmas de las manos abiertas y visibles',
       ],
-      isCongruent: true,
-      realEmotion: 'Aprobación genuina, entusiasmo y receptividad de compra',
+      relationship: SignalRelationship.aligned,
+      possibleInterpretations: [
+        'Sintonía positiva y alta receptividad con la solución planteada',
+        'Entusiasmo genuino por solucionar una dificultad operativa inmediata',
+        'Comodidad y apertura en la relación comercial',
+      ],
       explanation:
-          'Tanto las palabras como la inclinación corporal y la sonrisa de Duchenne concuerdan plenamente. Es una luz verde transparente.',
+          'Tanto el mensaje verbal como la inclinación corporal abierta y la sonrisa sincera convergen en mostrar comodidad y buena disposición hacia la propuesta.',
       recommendedAction:
-          'Avanza inmediatamente a la propuesta de cierre: "¿Te gustaría que agendemos el inicio de la instalación para este lunes?"',
+          'Aprovecha la receptividad para proponer el paso siguiente con naturalidad: "¿Te gustaría que coordinemos el cronograma de implementación?"',
       targetAudience: 'sales_focus',
     ),
 
@@ -76,12 +89,16 @@ class IncongruenceDatabase {
         'Rostro neutro o serio (cara de póker), o a veces una ligera asimetría labial',
         'Cabeza ligeramente ladeada o mirada de reojo',
       ],
-      isCongruent: false,
-      realEmotion: 'Sarcasmo, ironía o desacuerdo velado',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Sarcasmo o ironía social como forma de descarte sutil',
+        'Desacuerdo velado transmitido mediante entonación prosódica',
+        'Broma seca o estilo de humor peculiar sin intención lesiva',
+      ],
       explanation:
-          'El sarcasmo cotidiano suele presentarse con rostro neutro o serio ("cara de póker"); la clave no está en buscar una mueca evidente, sino en la entonación alargada o burlona que contradice el sentido literal de la frase.',
+          'El sarcasmo cotidiano suele presentarse con rostro inexpresivo ("cara de póker"); la discrepancia no radica en una mueca evidente, sino en la entonación alargada o burlona que contradice el sentido literal de la frase.',
       recommendedAction:
-          'No reacciones con enfado ni busques su aprobación. Responde de forma neutra y tranquila: "Es una perspectiva más. Sigamos con el tema central".',
+          'No busques su aprobación ni reacciones con enfado. Responde con calma y tono neutro: "Es una perspectiva más. Sigamos con el tema central".',
       targetAudience: 'autism_focus',
     ),
 
@@ -97,17 +114,20 @@ class IncongruenceDatabase {
         'Mirada baja esquivando el contacto visual directo',
         'Hombros asimétricos con tensión visible',
       ],
-      isCongruent: false,
-      realEmotion:
-          'Incomodidad, estrés o frustración no confesada con su proveedor',
+      relationship: SignalRelationship.contextDependent,
+      possibleInterpretations: [
+        'Incomodidad o fricción no resuelta con el proveedor actual',
+        'Molestia o dolor cervical puramente físico',
+        'Presión o incomodidad por tener que justificar una decisión ante terceros',
+      ],
       explanation:
-          'Tocarse el cuello es un gesto apaciguador que denota estrés e inseguridad. Aunque dice que todo está bien, su cuerpo revela que hay un punto de dolor no resuelto.',
+          'Tocarse el cuello suele funcionar como gesto pacificador ante estrés o como alivio de tensión muscular física. Aunque exprese conformidad verbal, la combinación sugiere que pueden existir consideraciones no compartidas.',
       recommendedAction:
-          'Abre la brecha con una pregunta no amenazante: "Entiendo perfectamente. Si hubiera una sola cosa que tu proveedor actual pudiera mejorar en los tiempos de entrega, ¿cuál sería?"',
+          'Abre la conversación con una pregunta empática y sin presión: "Entiendo perfectamente. Si hubiera un aspecto puntual que te gustaría optimizar en los tiempos de entrega, ¿cuál sería?"',
       targetAudience: 'sales_focus',
     ),
 
-    // --- CASO 6 (Autismo/Social): Alegría sincera de bienvenida (CONGRUENTE) ---
+    // --- CASO 6 (Autismo/Social): Alegría sincera de bienvenida (ALINEADO) ---
     IncongruenceItem(
       id: 'inc_social_sincere_welcome',
       speakerRole: 'Amigo que te recibe en su casa',
@@ -118,16 +138,20 @@ class IncongruenceDatabase {
         'Sonrisa amplia mostrando dientes con ojos achinados',
         'Brazos abiertos listos para el saludo',
       ],
-      isCongruent: true,
-      realEmotion: 'Alegría sincera, afecto y bienvenida auténtica',
+      relationship: SignalRelationship.aligned,
+      possibleInterpretations: [
+        'Alegría genuina, afecto y bienvenida auténtica',
+        'Reconocimiento positivo espontáneo en un entorno de confianza',
+        'Alivio y satisfacción por compartir el momento',
+      ],
       explanation:
-          'El flash de cejas dura un tercio de segundo y es una señal biológica involuntaria de reconocimiento positivo y afecto genuino.',
+          'El flash de cejas dura un tercio de segundo y actúa universalmente como señal de reconocimiento positivo y afecto en relaciones de confianza.',
       recommendedAction:
-          'Sonríe con calidez y responde con entusiasmo: "¡Muchas gracias por invitarme! Tenía muchas ganas de verte".',
+          'Sonríe con calidez y responde con naturalidad: "¡Muchas gracias por invitarme! Tenía muchas ganas de verte".',
       targetAudience: 'autism_focus',
     ),
 
-    // --- CASO 7 (Ventas): Autoridad y poder de decisión (CONGRUENTE) ---
+    // --- CASO 7 (Ventas): Autoridad y poder de decisión (ALINEADO) ---
     IncongruenceItem(
       id: 'inc_sales_authority_steepling',
       speakerRole: 'Director Ejecutivo al escuchar tu propuesta',
@@ -138,12 +162,16 @@ class IncongruenceDatabase {
         'Contacto visual sereno y sostenido',
         'Respiración pausada y postura erguida',
       ],
-      isCongruent: true,
-      realEmotion: 'Máxima seguridad, confianza y autoridad en la decisión',
+      relationship: SignalRelationship.aligned,
+      possibleInterpretations: [
+        'Deliberación reflexiva y confianza en los criterios propios',
+        'Concentración profunda en la toma de decisión',
+        'Hábito postural consolidado en entornos de dirección',
+      ],
       explanation:
-          'Las manos en campanario u ojiva son el reflejo físico de convicción y dominio técnico. El interlocutor tiene el poder y sabe lo que quiere.',
+          'Las manos en ojiva y la postura erguida acompañan habitualmente momentos de concentración, deliberación reflexiva y seguridad en el propio criterio.',
       recommendedAction:
-          'Mantén una postura asertiva y formal, sin titubear ni sobreexplicar: "Quedo a su disposición para coordinar los contratos hoy mismo".',
+          'Mantén una postura formal y asertiva, sin sobreexplicar: "Quedo a su disposición para coordinar los contratos hoy mismo".',
       targetAudience: 'sales_focus',
     ),
 
@@ -159,14 +187,20 @@ class IncongruenceDatabase {
         'Voz monótona, baja y con pausas prolongadas',
         'Hombros encorvados hacia adelante y mirada fija en el piso',
       ],
-      isCongruent: false,
-      realEmotion: 'Tristeza, desánimo o necesidad de apoyo emocional',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Desánimo, tristeza o deseo de no ser una carga para los demás',
+        'Agotamiento físico extremo o somnolencia',
+        'Preocupación personal que prefiere no ventilar en ese momento',
+      ],
       explanation:
-          'Las palabras intentan no ser una carga, pero la caída de comisuras y la voz apagada indican vulnerabilidad y dolor emocional.',
+          'Las palabras intentan protegerte o restar importancia a la situación, pero la caída de comisuras y la voz apagada sugieren vulnerabilidad o necesidad de apoyo.',
       recommendedAction:
-          'No tomes el "estoy bien" de forma literal. Acércate con calidez y di: "Noto que algo te preocupa. Aquí estoy si te apetece charlar o simplemente estar acompañados".',
+          'No tomes el "estoy bien" de forma literal. Acércate con suavidad: "Noto que algo te preocupa. Aquí estoy si te apetece charlar o simplemente estar acompañados".',
       targetAudience: 'autism_focus',
     ),
+
+    // --- CASO 9 (Social/Reunión Larga): Cooperación forzada vs autorregulación ---
     IncongruenceItem(
       id: 'inc_forced_cooperation_regulation',
       speakerRole: 'Compañero durante una reunión larga',
@@ -177,14 +211,20 @@ class IncongruenceDatabase {
         'Sonrisa social breve con poca energía',
         'Cuerpo orientado hacia la salida',
       ],
-      isCongruent: false,
-      realEmotion: 'Posible fatiga social, sobrecarga o necesidad de una pausa',
+      relationship: SignalRelationship.contextDependent,
+      possibleInterpretations: [
+        'Fatiga cognitiva o necesidad de una pausa tras reunión prolongada',
+        'Autorregulación motora natural mediante manipulación de objetos (fidgeting)',
+        'Deseo genuino de colaborar a pesar del agotamiento',
+      ],
       explanation:
-          'Los movimientos repetitivos pueden ser una forma de autorregulación; no prueban ansiedad ni deshonestidad por sí solos. Al combinarse con cansancio visible y orientación de salida, invitan a comprobar si una pausa ayudaría.',
+          'Los movimientos repetitivos suelen ser estrategias neurodivergentes de autorregulación; no prueban ansiedad ni deshonestidad por sí solos. Al combinarse con cansancio visible y orientación de salida, sugieren que una pausa resultaría muy beneficiosa.',
       recommendedAction:
-          'Ofrece una opción concreta y sin presión: “Podemos cerrar aquí, tomar cinco minutos o enviarte el resumen para que lo revises después. ¿Qué te viene mejor?”.',
+          'Ofrece una opción concreta y sin presión: "Podemos cerrar aquí, tomar cinco minutos o enviarte el resumen para que lo revises después. ¿Qué te viene mejor?".',
       targetAudience: 'autism_focus',
     ),
+
+    // --- CASO 10 (Social/Amistad): Batería social al límite ---
     IncongruenceItem(
       id: 'inc_social_fatigue_participation',
       speakerRole: 'Amistad en una reunión social',
@@ -195,13 +235,16 @@ class IncongruenceDatabase {
         'Miradas frecuentes hacia la puerta',
         'Postura lista para salir mientras mantiene una sonrisa educada',
       ],
-      isCongruent: false,
-      realEmotion:
-          'Posible cansancio, necesidad de espacio o deseo de terminar la interacción',
+      relationship: SignalRelationship.contextDependent,
+      possibleInterpretations: [
+        'Batería social agotada y deseo de finalizar la interacción',
+        'Esfuerzo de cortesía para complacer al grupo (fawning)',
+        'Preocupación logística por el transporte o la hora de regreso',
+      ],
       explanation:
-          'La sonrisa y las palabras de cortesía pueden coexistir con cansancio social. No se debe diagnosticar ni forzar una explicación; es útil abrir una salida respetuosa.',
+          'La sonrisa y las palabras de cortesía pueden coexistir con cansancio social profundo. No se debe diagnosticar ni exigir una explicación; lo más constructivo es abrir una salida respetuosa y airosa.',
       recommendedAction:
-          'Di: “Gracias por venir. Si quieres irnos o tomar aire, me parece perfecto; no tienes que quedarte por mí”.',
+          'Di con empatía: "Gracias por venir. Si quieres que nos vayamos o prefieres descansar, me parece estupendo; no tienes que quedarte por mí".',
       targetAudience: 'autism_focus',
     ),
 
@@ -216,12 +259,16 @@ class IncongruenceDatabase {
         'Suspiro hondo y prolongado con la mirada clavada en el suelo',
         'Hombros rígidos y elevados hacia las orejas',
       ],
-      isCongruent: false,
-      realEmotion: 'Molestia, contención emocional o sobrecarga de frustración',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Molestia o frustración que prefiere procesar en silencio',
+        'Tensión física real, bruxismo o cefalea',
+        'Deseo de calmarse antes de iniciar una conversación',
+      ],
       explanation:
-          'La frase afirma bienestar absoluto, pero la mandíbula apretada, el suspiro pesado y la rigidez de hombros revelan tensión activa y contención de emociones difíciles.',
+          'La frase declara bienestar absoluto, pero la mandíbula tensa, el suspiro pesado y la rigidez de hombros sugieren una contención activa de tensión que no se ha disipado.',
       recommendedAction:
-          'No insistas diciendo "sé que estás enojado" ni interrogues. Di con tono suave y calmado: "Entiendo. Si en algún momento quieres que lo hablemos con calma o si prefieres espacio y silencio, aquí estoy".',
+          'No interrogues ni presiones. Responde con tono calmo: "Entiendo. Si en algún momento quieres que lo hablemos con calma o si prefieres espacio y silencio, aquí estoy".',
       targetAudience: 'autism_focus',
     ),
 
@@ -229,19 +276,24 @@ class IncongruenceDatabase {
     IncongruenceItem(
       id: 'inc_social_phone_distraction',
       speakerRole: 'Colega o conocido mientras le cuentas una historia',
-      spokenPhrase: 'Sí, sí, continúa, te estoy escuchando con toda atención...',
+      spokenPhrase:
+          'Sí, sí, continúa, te estoy escuchando con toda atención...',
       illustrationKey: 'narrowed_eyes',
       physicalSignals: [
         'Ojos fijos en la pantalla iluminada del smartphone',
         'Pulgares tecleando activamente a gran velocidad',
         'Asentimiento mecánico de cabeza sin modular la mirada',
       ],
-      isCongruent: false,
-      realEmotion: 'Atención secuestrada por el dispositivo digital',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Atención visual y motora absorbida por el dispositivo',
+        'Urgencia laboral o imprevisto que debe resolver en el acto',
+        'Dificultad de multitarea atencional involuntaria',
+      ],
       explanation:
-          'El cerebro humano no puede redactar mensajes complejos y a la vez procesar una narración profunda. Las palabras prometen atención plena, pero el canal visual y motor están absorbidos por la pantalla.',
+          'El cerebro humano no puede redactar mensajes y procesar a fondo una narración compleja al mismo tiempo. Las palabras prometen escucha plena, pero los canales visual y motor están ocupados.',
       recommendedAction:
-          'Haz una pausa natural en tu relato con una sonrisa y di amablemente: "Parece que te entró un mensaje urgente; respóndelo tranquilo y en cuanto termines te sigo contando". Evitas frustrarte y le permites desocuparse.',
+          'Haz una pausa natural con amabilidad: "Parece que te entró un mensaje urgente; respóndelo tranquilo y en cuanto termines te sigo contando".',
       targetAudience: 'autism_focus',
     ),
 
@@ -257,13 +309,16 @@ class IncongruenceDatabase {
         'Toma notas activas en su libreta sobre las características de tu servicio',
         'Preguntas continuas sobre plazos de entrega, soporte y garantías',
       ],
-      isCongruent: false,
-      realEmotion:
-          'Alto interés y deseo de compra oculto tras un escudo presupuestario',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Interés técnico real condicionado por un protocolo presupuestario estricto',
+        'Exploración previa de viabilidad para presupuestos del siguiente ejercicio',
+        'Estrategia negociadora habitual para comprobar la flexibilidad comercial',
+      ],
       explanation:
-          'Las palabras verbales levantan la típica barrera defensiva del presupuesto, pero el cuerpo inclinado, las notas manuscritas y el interés por los detalles operativos revelan que la solución le resulta sumamente atractiva.',
+          'Las palabras levantan la habitual barrera presupuestaria, pero la inclinación del cuerpo, las anotaciones y el interés por el soporte sugieren que la solución le resulta atractiva y viable en el fondo.',
       recommendedAction:
-          'No te desanimes ni bajes el precio en pánico. Valida su interés: "Entiendo que el flujo de caja trimestral sea estricto. Veo que las funciones operativas te encajan muy bien; ¿si estructuramos los pagos en fases o para el siguiente mes, tendría sentido avanzar?".',
+          'No bajes el precio en pánico. Valida su interés: "Entiendo que el flujo trimestral sea estricto. Veo que las funciones operativas te encajan muy bien; ¿si estructuramos pagos por hitos tendría sentido avanzar?".',
       targetAudience: 'sales_focus',
     ),
 
@@ -279,12 +334,16 @@ class IncongruenceDatabase {
         'Mirada fija en la pantalla del ordenador sin girar el rostro hacia ti',
         'Vistazo impaciente al reloj de pared al verte entrar',
       ],
-      isCongruent: false,
-      realEmotion: 'Saturación de agenda, prisa o inaccesibilidad momentánea',
+      relationship: SignalRelationship.mixed,
+      possibleInterpretations: [
+        'Saturación de agenda o fecha límite inmediata de entrega',
+        'Disposición teórica de liderazgo que choca con falta de tiempo real',
+        'Hábito ergonómico de no desviar la vista de la pantalla',
+      ],
       explanation:
-          'El discurso corporativo predica accesibilidad total, pero el lenguaje corporal (barrera del mueble, falta de contacto visual y mirada al reloj) comunica que este no es el momento propicio para una conversación reflexiva.',
+          'El discurso formal predica disponibilidad total, pero las señales físicas (barrera del mueble, ausencia de contacto visual y consulta del reloj) sugieren que este no es el momento propicio para una charla profunda.',
       recommendedAction:
-          'Reconoce la situación sin juzgar: "Veo que estás con el tiempo muy justo cerrando pendientes. ¿Te parece si te robo 10 minutos mañana a primera hora con un café para revisarlo con calma?". Te ganas su agradecimiento.',
+          'Reconoce la situación con tacto: "Veo que estás con el tiempo muy justo cerrando tareas. ¿Te parece si te robo 10 minutos mañana a primera hora para revisarlo con calma?".',
       targetAudience: 'sales_focus',
     ),
   ];

@@ -5,7 +5,7 @@ import '../widgets/dictionary/gesture_card.dart';
 import '../widgets/dictionary/body_part_filter.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
-import '../core/services/storage_service.dart';
+import '../state/progress_provider.dart';
 import 'gesture_detail_screen.dart';
 import 'compare_screen.dart';
 
@@ -33,12 +33,12 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
   void _loadBookmarks() {
     setState(() {
-      _bookmarkedIds = StorageService.getBookmarks();
+      _bookmarkedIds = ProgressProvider().bookmarks;
     });
   }
 
   void _toggleBookmark(String gestureId) async {
-    await StorageService.toggleBookmark(gestureId);
+    await ProgressProvider().toggleBookmark(gestureId);
     _loadBookmarks();
   }
 
@@ -54,11 +54,16 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
     var filteredList = GestureDatabase.search(query);
 
     if (_selectedCategory != null) {
-      filteredList = filteredList.where((g) => g.category == _selectedCategory).toList();
+      filteredList =
+          filteredList.where((g) => g.category == _selectedCategory).toList();
     }
 
     if (_selectedBodyPart.isNotEmpty) {
-      filteredList = filteredList.where((g) => g.bodyPart.toLowerCase().contains(_selectedBodyPart.toLowerCase())).toList();
+      filteredList = filteredList
+          .where((g) => g.bodyPart
+              .toLowerCase()
+              .contains(_selectedBodyPart.toLowerCase()))
+          .toList();
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -119,15 +124,23 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                           )
                         : null,
                     filled: true,
-                    fillColor: isDark ? AppColors.darkSurface : AppColors.lightSurface,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    fillColor:
+                        isDark ? AppColors.darkSurface : AppColors.lightSurface,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                      borderSide: BorderSide(
+                          color: isDark
+                              ? AppColors.darkBorder
+                              : AppColors.lightBorder),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(color: isDark ? AppColors.darkBorder : AppColors.lightBorder),
+                      borderSide: BorderSide(
+                          color: isDark
+                              ? AppColors.darkBorder
+                              : AppColors.lightBorder),
                     ),
                   ),
                 ),
@@ -171,7 +184,8 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                           isSelected ? FontWeight.w800 : FontWeight.w600,
                     ),
                     showCheckmark: false,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
                   );
                 }
 
@@ -190,11 +204,13 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                   selected: isSelected,
                   onSelected: (_) {
                     FeedbackService.tabPop();
-                    setState(() => _selectedCategory = isSelected ? null : cat.type);
+                    setState(
+                        () => _selectedCategory = isSelected ? null : cat.type);
                   },
                   selectedColor: AppColors.primary,
                   showCheckmark: false,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                 );
               },
             ),
@@ -267,7 +283,8 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => GestureDetailScreen(gestureId: item.id),
+                                  builder: (_) =>
+                                      GestureDetailScreen(gestureId: item.id),
                                 ),
                               ).then((_) => _loadBookmarks());
                             },
@@ -294,7 +311,8 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => GestureDetailScreen(gestureId: item.id),
+                            builder: (_) =>
+                                GestureDetailScreen(gestureId: item.id),
                           ),
                         ).then((_) => _loadBookmarks());
                       },

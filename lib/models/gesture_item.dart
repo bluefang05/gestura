@@ -3,8 +3,10 @@ import '../core/constants/app_colors.dart';
 import 'category.dart';
 
 enum SignalTrafficLight {
-  green('Luz Verde (Receptividad)', AppColors.success, Icons.check_circle_rounded),
-  yellow('Luz Amarilla (Precaución / Duda)', AppColors.warning, Icons.warning_rounded),
+  green('Luz Verde (Receptividad)', AppColors.success,
+      Icons.check_circle_rounded),
+  yellow('Luz Amarilla (Precaución / Duda)', AppColors.warning,
+      Icons.warning_rounded),
   red('Luz Roja (Objeción / Barrera)', AppColors.error, Icons.cancel_rounded);
 
   final String label;
@@ -18,7 +20,8 @@ class GestureItem {
   final String id;
   final String name;
   final CategoryType category;
-  final String bodyPart; // Ojos, Boca, Cejas, Voz, Brazos, Torso, Espacio, Digital
+  final String
+      bodyPart; // Ojos, Boca, Cejas, Voz, Brazos, Torso, Espacio, Digital
   final String summary;
   final String physiologicalDetails;
   final String probableMeaning;

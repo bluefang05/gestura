@@ -442,8 +442,12 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                                     ? Icons.stop_circle_rounded
                                     : Icons.volume_up_rounded,
                                 color: isSpeaking
-                                    ? (isDark ? AppColors.accentLight : AppColors.accent)
-                                    : (isDark ? AppColors.primaryLight : AppColors.primary),
+                                    ? (isDark
+                                        ? AppColors.accentLight
+                                        : AppColors.accent)
+                                    : (isDark
+                                        ? AppColors.primaryLight
+                                        : AppColors.primary),
                                 size: 22,
                               ),
                               tooltip: isSpeaking
@@ -453,7 +457,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                                 FeedbackService.lightClick();
                                 final textToSpeak =
                                     '${g.name}. Significado: ${g.probableMeaning}. Qué debes hacer: ${g.whatToDo}. En ventas: ${g.salesTip}';
-                                TtsService.speak(textToSpeak, gestureId: 'tree_${g.id}');
+                                TtsService.speak(textToSpeak,
+                                    gestureId: 'tree_${g.id}');
                               },
                             );
                           },

@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../../core/services/ads/ads_service.dart';
+
 class AdBannerSlot extends StatefulWidget {
   final double height;
 
@@ -19,13 +21,6 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
   bool _isAdLoaded = false;
   bool _isLoadingAd = false;
 
-  // Real AdMob Banner ID provided by user
-  static const String _realBannerId = 'ca-app-pub-3322493998376707/2486589736';
-  // Official Google Test Banner ID for safe debugging
-  static const String _testBannerId = 'ca-app-pub-3940256099942544/6300978111';
-
-  String get _adUnitId => kDebugMode ? _testBannerId : _realBannerId;
-
   @override
   void initState() {
     super.initState();
@@ -40,38 +35,33 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
     _isLoadingAd = true;
 
     try {
-      _bannerAd = BannerAd(
-        adUnitId: _adUnitId,
-        size: AdSize.banner,
-        request: const AdRequest(),
-        listener: BannerAdListener(
-          onAdLoaded: (ad) {
-            if (mounted) {
-              setState(() {
-                _isAdLoaded = true;
-                _isLoadingAd = false;
-              });
-            }
-          },
-          onAdFailedToLoad: (ad, error) {
-            ad.dispose();
-            if (mounted) {
-              setState(() {
-                _bannerAd = null;
-                _isAdLoaded = false;
-                _isLoadingAd = false;
-              });
-            }
-            if (kDebugMode) {
-              print('AdMob Banner failed to load: $error');
-            }
-          },
-        ),
+      _bannerAd = AdsService.instance.createBannerAd(
+        onAdLoaded: (ad) {
+          if (mounted) {
+            setState(() {
+              _isAdLoaded = true;
+              _isLoadingAd = false;
+            });
+          }
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          if (mounted) {
+            setState(() {
+              _bannerAd = null;
+              _isAdLoaded = false;
+              _isLoadingAd = false;
+            });
+          }
+          if (kDebugMode) {
+            debugPrint('[AdBannerSlot] AdMob Banner failed to load: $error');
+          }
+        },
       )..load();
     } catch (e) {
       _isLoadingAd = false;
       if (kDebugMode) {
-        print('AdMob initialization error: $e');
+        debugPrint('[AdBannerSlot] AdMob initialization error: $e');
       }
     }
   }

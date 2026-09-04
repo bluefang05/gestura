@@ -8,6 +8,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../state/progress_provider.dart';
 import '../widgets/common/tts_app_bar_control.dart';
 
 class ScenarioRunnerScreen extends StatefulWidget {
@@ -95,9 +96,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
     } else {
       // Completed scenario
       FeedbackService.complete();
-      final progress = StorageService.loadProgress();
-      final updated = progress.markScenarioCompleted(widget.scenario.id);
-      StorageService.saveProgress(updated);
+      ProgressProvider().markScenarioCompleted(widget.scenario.id);
 
       setState(() {
         _isCompleted = true;
@@ -303,7 +302,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                                       : Icons.volume_up_rounded,
                                   size: 20,
                                   color: isSpeaking
-                                      ? (isDark ? const Color(0xFFFCA5A5) : const Color(0xFFDC2626))
+                                      ? (isDark
+                                          ? const Color(0xFFFCA5A5)
+                                          : const Color(0xFFDC2626))
                                       : null,
                                 ),
                                 padding: EdgeInsets.zero,
@@ -435,9 +436,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
-                            color: isDark
-                                ? Colors.white
-                                : AppColors.primaryDark)),
+                            color:
+                                isDark ? Colors.white : AppColors.primaryDark)),
                   ],
                 ),
               ),

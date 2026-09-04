@@ -14,7 +14,8 @@ class ClusterBaselineScreen extends StatefulWidget {
 }
 
 class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
-  int _selectedTab = 0; // 0: Regla de los Clusters, 1: Línea Base, 2: Casos Prácticos
+  int _selectedTab =
+      0; // 0: Regla de los Clusters, 1: Línea Base, 2: Casos Prácticos
   int? _selectedCaseAnswer;
   int _currentCaseIndex = 0;
   bool _showFeedback = false;
@@ -71,8 +72,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
       ],
       'question':
           'Al preguntarle sobre su experiencia previa, responde con esas mismas señales. ¿Está mintiendo?',
-      'options':
-          [
+      'options': [
         'Sí, la falta de contacto visual es prueba definitiva de engaño.',
         'No necesariamente. Esas señales son su Línea Base natural desde el minuto 1; indican timidez o introversión, no mentira.',
         'Significa que no tiene interés en el puesto.',
@@ -90,8 +90,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
         'Aprieta los labios formando una línea delgada y tensa',
         'Baja la cabeza y mira de reojo hacia la puerta',
       ],
-      'question':
-          '¿Cómo debes interpretar este cambio repentino de 3 señales?',
+      'question': '¿Cómo debes interpretar este cambio repentino de 3 señales?',
       'options': [
         'Es solo casualidad, sigue presentando las siguientes 10 diapositivas.',
         'Un Conglomerado Crítico de Resistencia: 3 señales de rechazo que se desvían de su línea base inmediatamente tras el estímulo del precio.',
@@ -225,9 +224,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
       labelStyle: TextStyle(
         color: isSelected
             ? Colors.white
-            : (isDark
-                ? AppColors.textPrimaryDark
-                : AppColors.textPrimaryLight),
+            : (isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight),
         fontWeight: FontWeight.w700,
         fontSize: 13,
       ),
@@ -256,7 +253,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                   const Expanded(
                     child: Text(
                       'Por Qué un Gesto Aislado es una Trampa',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -326,7 +324,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                   const Expanded(
                     child: Text(
                       'La Técnica de los Primeros 2 Minutos',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                 ],
@@ -343,13 +342,11 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-
               const Text(
                 'Los 4 Canales Basales a Calibrar:',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
-
               _buildBaselineChannel(
                 icon: Icons.remove_red_eye_rounded,
                 title: '1. Mirada y Pestañeo',
@@ -382,7 +379,6 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 isDark: isDark,
               ),
               const SizedBox(height: 16),
-
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
@@ -435,7 +431,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
         Row(
           children: [
             BadgePill(
-              text: 'Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}',
+              text:
+                  'Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}',
               color: AppColors.primary,
             ),
             const Spacer(),
@@ -468,7 +465,6 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
           ],
         ),
         const SizedBox(height: 10),
-
         AppCard(
           padding: const EdgeInsets.all(18),
           child: Column(
@@ -476,8 +472,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
             children: [
               Text(
                 item['title'] as String,
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w800),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               Text(
@@ -500,9 +496,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                       : const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isDark
-                        ? AppColors.darkBorder
-                        : AppColors.lightBorder,
+                    color:
+                        isDark ? AppColors.darkBorder : AppColors.lightBorder,
                   ),
                 ),
                 child: Column(
@@ -539,8 +534,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
 
               Text(
                 item['question'] as String,
-                style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.w800),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
 
@@ -740,8 +735,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(icon,
-            size: 20,
-            color: isDark ? AppColors.indigo : AppColors.indigo),
+            size: 20, color: isDark ? AppColors.indigo : AppColors.indigo),
         const SizedBox(width: 10),
         Expanded(
           child: Column(

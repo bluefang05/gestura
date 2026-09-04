@@ -3,6 +3,13 @@ import '../models/user_progress.dart';
 import '../core/services/storage_service.dart';
 
 class ProgressProvider extends ChangeNotifier {
+  static final ProgressProvider _instance = ProgressProvider._internal();
+  factory ProgressProvider() => _instance;
+
+  ProgressProvider._internal() {
+    loadProgress();
+  }
+
   UserProgress _progress = UserProgress.initial();
   List<String> _bookmarks = [];
 
@@ -13,6 +20,13 @@ class ProgressProvider extends ChangeNotifier {
     _progress = StorageService.loadProgress().registerActiveDay();
     _bookmarks = StorageService.getBookmarks();
     StorageService.saveProgress(_progress);
+    notifyListeners();
+  }
+
+  Future<void> resetProgress() async {
+    await StorageService.clearProgress();
+    _progress = UserProgress.initial();
+    _bookmarks = StorageService.getBookmarks();
     notifyListeners();
   }
 

@@ -42,21 +42,30 @@ class ImageOptionCard extends StatelessWidget {
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final semanticLabel = '${option.text}. ${option.subtext ?? ""}. '
+        '${isSelected ? "Opción seleccionada. " : ""}'
+        '${isEvaluated && option.isCorrect ? "Respuesta correcta. " : ""}'
+        '${isEvaluated && isSelected && !option.isCorrect ? "Respuesta incorrecta seleccionada. " : ""}';
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: isEvaluated
-            ? null
-            : () {
-                FeedbackService.lightClick();
-                onSelect();
-              },
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: backgroundColor ?? Theme.of(context).cardTheme.color,
-            borderRadius: BorderRadius.circular(16),
+    return Semantics(
+      label: semanticLabel,
+      selected: isSelected,
+      button: true,
+      enabled: !isEvaluated,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: isEvaluated
+              ? null
+              : () {
+                  FeedbackService.lightClick();
+                  onSelect();
+                },
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: backgroundColor ?? Theme.of(context).cardTheme.color,
+              borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isDark && borderColor == AppColors.lightBorder
                   ? AppColors.darkBorder
@@ -147,6 +156,7 @@ class ImageOptionCard extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }

@@ -39,7 +39,8 @@ class UserProgress {
       return this;
     }
 
-    final yesterdayStr = _formatDate(DateTime.now().subtract(const Duration(days: 1)));
+    final yesterdayStr =
+        _formatDate(DateTime.now().subtract(const Duration(days: 1)));
     int newStreak = currentStreak;
 
     if (lastActiveDate.isEmpty) {
@@ -113,7 +114,7 @@ class UserProgress {
   int get totalMilestonesCompleted =>
       totalExploredGestures + totalCompletedScenarios + totalCompletedQuizzes;
 
-  static const int totalPossibleMilestones = 66 + 13 + 45; // 124 hitos totales
+  static const int totalPossibleMilestones = 66 + 15 + 45; // 126 hitos totales
 
   double get masteryRatio =>
       (totalMilestonesCompleted / totalPossibleMilestones).clamp(0.0, 1.0);
@@ -132,11 +133,21 @@ class UserProgress {
 
   String get motivationalMessage {
     final pct = masteryPercentage;
-    if (pct >= 100) return '¡Felicidades! Has completado el 100% de Gestura.';
-    if (pct >= 75) return '¡Casi lo logras! Estás a pocos pasos de la maestría total.';
-    if (pct >= 50) return '¡Más de la mitad! Tu intuición social es cada día más precisa.';
-    if (pct >= 25) return '¡Excelente avance! Ya notas patrones que otros pasan por alto.';
-    if (pct >= 10) return '¡Buen despegue! Sigue practicando cada día para consolidar el hábito.';
+    if (pct >= 100) {
+      return '¡Felicidades! Has completado el 100% de Gestura.';
+    }
+    if (pct >= 75) {
+      return '¡Casi lo logras! Estás a pocos pasos de la maestría total.';
+    }
+    if (pct >= 50) {
+      return '¡Más de la mitad! Tu intuición social es cada día más precisa.';
+    }
+    if (pct >= 25) {
+      return '¡Excelente avance! Ya notas patrones que otros pasan por alto.';
+    }
+    if (pct >= 10) {
+      return '¡Buen despegue! Sigue practicando cada día para consolidar el hábito.';
+    }
     return '¡Bienvenido! Explora tu primera señal corporal para empezar.';
   }
 
@@ -177,10 +188,21 @@ class UserProgress {
       currentStreak: json['currentStreak'] as int? ?? 1,
       bestStreak: json['bestStreak'] as int? ?? 1,
       lastActiveDate: json['lastActiveDate'] as String? ?? '',
-      exploredGestureIds: (json['exploredGestureIds'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-      completedQuizIds: (json['completedQuizIds'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
-      quizScores: (json['quizScores'] as Map<String, dynamic>?)?.map((k, v) => MapEntry(k, v as int)) ?? {},
-      completedScenarioIds: (json['completedScenarioIds'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [],
+      exploredGestureIds: (json['exploredGestureIds'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      completedQuizIds: (json['completedQuizIds'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
+      quizScores: (json['quizScores'] as Map<String, dynamic>?)
+              ?.map((k, v) => MapEntry(k, v as int)) ??
+          {},
+      completedScenarioIds: (json['completedScenarioIds'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
     );
   }
 }

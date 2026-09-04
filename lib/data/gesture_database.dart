@@ -15,7 +15,10 @@ class GestureDatabase {
           'Contracción del músculo cigomático mayor (eleva comisuras labiales) y del músculo orbicular de los ojos (eleva mejillas y forma arrugas tipo "patas de gallo" alrededor de los ojos).',
       probableMeaning:
           'Puede acompañar alegría, cortesía, comodidad o una respuesta aprendida para la situación.',
-      alternativeMeanings: ['Hábito expresivo personal', 'Sonreír mientras se procesa información'],
+      alternativeMeanings: [
+        'Hábito expresivo personal',
+        'Sonreír mientras se procesa información'
+      ],
       contextGuidance:
           'La activación alrededor de los ojos no confirma una emoción concreta. Observa el intercambio completo y, si importa, pregúntalo.',
       whatToDo:
@@ -36,7 +39,10 @@ class GestureDatabase {
           'Los labios se estiran hacia los lados, pero el músculo orbicular de los ojos no se activa. No hay arrugas en los ojos ni elevación de mejillas.',
       probableMeaning:
           'Puede ser cortesía, amabilidad, nerviosismo, concentración o la forma habitual de sonreír.',
-      alternativeMeanings: ['Deseo de no crear tensión', 'Una sonrisa breve o contenida'],
+      alternativeMeanings: [
+        'Deseo de no crear tensión',
+        'Una sonrisa breve o contenida'
+      ],
       contextGuidance:
           'Muy común en atención al cliente, recepciones o cuando alguien no quiere parecer descortés.',
       whatToDo:
@@ -152,7 +158,7 @@ class GestureDatabase {
       whatToDo:
           'Da espacio: "Me gustaría conocer tu opinión sincera antes de continuar."',
       salesTip:
-          'Objeción oculta no dicha. Si sigues hablando sin preguntar, perderás la venta.',
+          'Puede sugerir reserva, duda no expresada o necesidad de procesar. Haz una pausa amable y pregunta: "¿Hay algún aspecto sobre esto que quieras que revisemos en detalle?".',
       illustrationKey: 'tight_lips',
       difficulty: 2,
     ),
@@ -167,7 +173,7 @@ class GestureDatabase {
       probableMeaning:
           'Puede acompañar sorpresa, atención intensa, esfuerzo visual, una reacción aprendida o una condición del entorno.',
       alternativeMeanings: [
-        'Si dura más de 2 segundos puede ser sorpresa fingida.'
+        'Pausa de asimilación, sobreestimulación lumínica o procesamiento de datos'
       ],
       contextGuidance:
           'Una expresión breve no confirma el impacto emocional. Da tiempo y pregunta qué necesita la persona.',
@@ -213,14 +219,14 @@ class GestureDatabase {
       probableMeaning:
           'Desconexión emocional momentánea, fatiga mental, frustración ("no puedo con esto") o intento de autocontrol.',
       alternativeMeanings: [
-        'Concentración interna para visualizar algo',
-        'Meditación'
+        'Concentración interna para visualizar algo mentalmente.',
+        'Meditación, descanso ocular o fatiga.',
       ],
       contextGuidance:
-          'Muy común en jefes o interlocutores saturados de explicaciones largas.',
-      whatToDo: 'Resume de inmediato tu punto en una sola frase directa.',
+          'Puede acompañar reflexión profunda, saturación cognitiva o necesidad de procesar lo escuchado.',
+      whatToDo: 'Permite un momento de silencio o resume tu punto con claridad.',
       salesTip:
-          'Tu discurso está siendo demasiado largo o aburrido. Ve directo al grano.',
+          'Pausa tu explicación. Permite que la persona asimile el argumento antes de continuar.',
       illustrationKey: 'closed_eyelids',
       difficulty: 3,
     ),
@@ -235,13 +241,17 @@ class GestureDatabase {
           'Contracción isométrica del músculo masetero y temporal.',
       probableMeaning:
           'Ira contenida, frustración reprimida, estrés agudo o determinación obstinada.',
-      alternativeMeanings: ['Bruxismo por fatiga dental.'],
+      alternativeMeanings: [
+        'Bruxismo por fatiga dental o tensión muscular involuntaria.',
+        'Esfuerzo físico o concentración motriz intensa.',
+        'Reacción pasajera a un estímulo o tensión corporal general.',
+      ],
       contextGuidance:
           'Común cuando se escucha una crítica injusta o se recibe una mala noticia.',
       whatToDo:
           'Haz una pausa. Permite que la persona se exprese antes de continuar argumentando.',
       salesTip:
-          'El cliente está molesto por una objeción no resuelta. Pregunta directamente qué le preocupa.',
+          'El cliente podría tener una objeción o tensión acumulada. Pregunta con calma qué aspecto le preocupa.',
       illustrationKey: 'jaw_clenching',
       difficulty: 2,
     ),
@@ -255,8 +265,12 @@ class GestureDatabase {
       physiologicalDetails:
           'Presión dental sobre el labio inferior con mirada fija o vacilante.',
       probableMeaning:
-          'Inseguridad, duda, contención emocional, nerviosismo o atracción.',
-      alternativeMeanings: ['Labios resecos.'],
+          'Inseguridad, duda, contención emocional, nerviosismo o concentración.',
+      alternativeMeanings: [
+        'Labios resecos o búsqueda de humectación.',
+        'Hábito oral de concentración motriz.',
+        'Inseguridad o duda momentánea.',
+      ],
       contextGuidance:
           'Frecuente en situaciones de toma de decisiones arriesgadas.',
       whatToDo:
@@ -276,7 +290,10 @@ class GestureDatabase {
       physiologicalDetails: 'Micromovimiento del músculo frontal occipital.',
       probableMeaning:
           'Saludo universal inconsciente, agrado, reconocimiento y apertura social.',
-      alternativeMeanings: ['Sorpresa fugaz.'],
+      alternativeMeanings: [
+        'Sorpresa fugaz ante un estímulo repentino.',
+        'Ajuste de visión o iluminación ambiental.',
+      ],
       contextGuidance:
           'La señal neurotípica más común al encontrarse con amigos o conocidos.',
       whatToDo: 'Devuelve una sonrisa y un saludo cálido.',
@@ -293,15 +310,20 @@ class GestureDatabase {
       summary:
           'Aumento del tamaño de las pupilas sin cambio en la iluminación ambiental.',
       physiologicalDetails:
-          'Respuesta del sistema nervioso simpático ante estímulos atractivos.',
+          'Respuesta del sistema simpático (midriasis) por interés cognitivo o emocional.',
       probableMeaning:
-          'Cambio fisiológico sensible a la luz y a múltiples factores; no es una medida fiable de interés, atracción o intención.',
-      alternativeMeanings: ['Baja iluminación', 'Medicación', 'Fatiga o variación individual'],
-      contextGuidance: 'Sin condiciones de iluminación y salud controladas, no se debe interpretar socialmente.',
+          'Interés elevado, atracción, sobrecarga cognitiva o agrado genuino.',
+      alternativeMeanings: [
+        'Efecto de medicamentos o gotas oftálmicas.',
+        'Adaptación a sombras o cambio de luz.',
+        'Sobrecarga en el procesamiento de información.',
+      ],
+      contextGuidance:
+          'Requiere comparar con la iluminación base y el estado previo de la persona.',
       whatToDo:
-          'No atribuyas significado interpersonal a las pupilas. Confirma interés, límites o preferencias con palabras.',
+          'Aprovecha el momento de alto interés para profundizar en el tema.',
       salesTip:
-          'Nunca la trates como señal de compra. Un cierre debe basarse en una decisión expresada con claridad.',
+          'Señal de alto involucramiento mental. Presenta tu propuesta más atractiva.',
       illustrationKey: 'pupil_dilation',
       difficulty: 3,
     ),
@@ -315,9 +337,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Contracción de los músculos alares de la nariz para aumentar la entrada de oxígeno.',
       probableMeaning:
-          'Preparación para la acción física, indignación, enojo intenso o agitación.',
-      alternativeMeanings: ['Falta de aire o esfuerzo físico.'],
-      contextGuidance: 'Precede a confrontaciones acaloradas.',
+          'Preparación para la acción física, indignación, agitación o necesidad de aire.',
+      alternativeMeanings: [
+        'Falta de aire, congestión nasal o esfuerzo físico previo.',
+        'Respiración profunda voluntaria para oxigenarse o relajarse.',
+        'Reacción a olores o alérgenos en el ambiente.',
+      ],
+      contextGuidance:
+          'Puede acompañar emociones intensas o respuestas fisiológicas respiratorias.',
       whatToDo:
           'Mantén un tono de voz bajo y pausado para desacelerar la agitación del otro.',
       salesTip: 'No presiones más en este momento. Desescala la tensión.',
@@ -336,8 +363,12 @@ class GestureDatabase {
       physiologicalDetails:
           'Mayor presión del aire pulmonar a través de las cuerdas vocales.',
       probableMeaning:
-          'Dominancia, entusiasmo desbordante, búsqueda de atención o agresividad según el tono.',
-      alternativeMeanings: ['Problemas auditivos o entornos muy ruidosos.'],
+          'Dominancia, entusiasmo desbordante, búsqueda de atención o intensidad emocional.',
+      alternativeMeanings: [
+        'Dificultades de audición (hipoacusia) o ruido de fondo elevado.',
+        'Hábito cultural o familiar de conversación enérgica.',
+        'Entusiasmo genuino por el tema tratado.',
+      ],
       contextGuidance:
           'En oficinas abiertas puede resultar invasivo o abrumador.',
       whatToDo:
@@ -356,8 +387,12 @@ class GestureDatabase {
           'Hablar con decibeles muy tenues que requieren acercarse para escuchar.',
       physiologicalDetails: 'Baja presión subglótica y escape de aire suave.',
       probableMeaning:
-          'Timidez, sumisión, tristeza, confidencialidad o secreto.',
-      alternativeMeanings: ['Afonía o dolor de garganta.'],
+          'Timidez, confidencialidad, reserva o necesidad de discreción.',
+      alternativeMeanings: [
+        'Afonía, fatiga vocal o molestia en la garganta.',
+        'Respeto a normas de silencio del entorno.',
+        'Preferencia por un canal de comunicación suave.',
+      ],
       contextGuidance: 'En confidencias o cuando se tocan temas íntimos.',
       whatToDo:
           'Acércate ligeramente y responde con suavidad respetando su espacio.',
@@ -376,7 +411,11 @@ class GestureDatabase {
           'Hiperactivación adrenérgica con respiración superficial rápida.',
       probableMeaning:
           'Ansiedad, urgencia, nerviosismo, o pasión desbordante por el tema.',
-      alternativeMeanings: ['Hábito cultural de ciertas regiones.'],
+      alternativeMeanings: [
+        'Hábito cultural o dialecto de ritmo ágil.',
+        'Entusiasmo y sobreflujo de ideas (info-dumping común en neurodivergencia).',
+        'Urgencia temporal real o temor a ser interrumpido.',
+      ],
       contextGuidance: 'Común en personas que temen ser interrumpidas.',
       whatToDo:
           'Haz pausas conscientes para ayudar al interlocutor a calmar su ritmo respiratorio.',
@@ -394,16 +433,18 @@ class GestureDatabase {
       physiologicalDetails:
           'Carencia de modulación prosódica en las cuerdas vocales.',
       probableMeaning:
-          'Desinterés, aburrimiento, agotamiento extremo o estilo de comunicación directo.',
+          'Estilo de comunicación directo, agotamiento extremo o baja expresividad emocional.',
       alternativeMeanings: [
-        'Común en personas neurodivergentes o con depresión.'
+        'Prosodia natural en personas autistas o neurodivergentes (no implica desinterés).',
+        'Agotamiento físico, estrés crónico o fatiga extrema.',
+        'Foco analítico riguroso en datos objetivos sin florituras.',
       ],
       contextGuidance:
-          'En conferencias y exposiciones suele provocar desconexión del público.',
+          'En personas neurodivergentes o técnicas, el tono plano acompaña a menudo un compromiso profundo con la precisión.',
       whatToDo:
-          'Introduce cambios de ritmo, preguntas interactivas y modular la entonación para despertar atención.',
+          'No asumas desinterés: juzga por el contenido de sus ideas y facilita la conversación.',
       salesTip:
-          'La monotonía mata la venta. Transmite energía con modulaciones vocales dinámicas.',
+          'Si un cliente habla en tono monótono, mantente objetivo y enfócate en datos claros y comprobables.',
       illustrationKey: 'voice_monotone',
       difficulty: 1,
     ),
@@ -418,7 +459,9 @@ class GestureDatabase {
           'En la vida cotidiana, la persona suele mantener cara inexpresiva o neutra (poker face). La señal clave está en la voz: alargamiento exagerado de sílabas ("Quéee bueeeno..."), caída tonal al final y contradicción con el contexto.',
       probableMeaning:
           'Ironía o desacuerdo velado. La persona comunica lo opuesto al sentido literal de las palabras.',
-      alternativeMeanings: ['Humor seco habitual entre personas de mucha confianza.'],
+      alternativeMeanings: [
+        'Humor seco habitual entre personas de mucha confianza.'
+      ],
       contextGuidance:
           'Si alguien dice "¡Qué gran idea!" con cara seria y tono arrastrado tras un problema, significa: "Es una mala idea".',
       whatToDo:
@@ -505,7 +548,10 @@ class GestureDatabase {
           'Hombros relajados, pecho descubierto sin barreras de objetos o brazos cruzados, pies orientados hacia ti.',
       probableMeaning:
           'Puede ser una posición cómoda, una preferencia de movimiento, disposición a conversar o simple ausencia de apoyo cercano.',
-      alternativeMeanings: ['Postura de descanso', 'Normas culturales o del entorno'],
+      alternativeMeanings: [
+        'Postura de descanso',
+        'Normas culturales o del entorno'
+      ],
       contextGuidance:
           'Una postura abierta no confirma comodidad, confianza ni acuerdo. Úsala solo como parte de un contexto más amplio.',
       whatToDo:
@@ -550,7 +596,11 @@ class GestureDatabase {
           'Flexión de cadera y espina acercando el plano corporal al centro de la mesa o conversación.',
       probableMeaning:
           'Puede facilitar la escucha, acompañar interés, compensar una dificultad auditiva o responder a la distribución del espacio.',
-      alternativeMeanings: ['Problemas auditivos (desea oír mejor).'],
+      alternativeMeanings: [
+        'Problemas auditivos o deseo de oír mejor.',
+        'Ajuste ergonómico para ver una pantalla o documento.',
+        'Interés genuino o cercanía en la conversación.',
+      ],
       contextGuidance:
           'No mide atención ni acuerdo. Observa el contenido de la conversación y ofrece una oportunidad de confirmar.',
       whatToDo:
@@ -570,7 +620,11 @@ class GestureDatabase {
           'Extensión de columna contra el respaldo de la silla, aumentando la distancia física.',
       probableMeaning:
           'Puede ser comodidad, cansancio, necesidad de espacio, una forma de pensar o evaluación de la situación.',
-      alternativeMeanings: ['Comodidad tras comer', 'Fatiga física.'],
+      alternativeMeanings: [
+        'Comodidad ergonómica o descanso tras comer.',
+        'Fatiga física o necesidad de estirar la espalda.',
+        'Pausa reflexiva para procesar mentalmente la información.',
+      ],
       contextGuidance:
           'Un cambio de posición puede responder al asiento, cansancio, dolor o reflexión; su momento no confirma una reacción emocional.',
       whatToDo:
@@ -589,7 +643,11 @@ class GestureDatabase {
       physiologicalDetails: 'Fricción manual rápida o lenta.',
       probableMeaning:
           'Puede aportar calor, regular tensión, acompañar anticipación o ser un movimiento habitual de las manos.',
-      alternativeMeanings: ['Manos frías.'],
+      alternativeMeanings: [
+        'Manos frías o baja temperatura ambiental.',
+        'Gesto motor de autorregulación sensorial o stimming.',
+        'Anticipación positiva o entusiasmo por una actividad.',
+      ],
       contextGuidance: 'En negocios o comidas antes de un buen platillo.',
       whatToDo:
           'Evita atribuir intención según la velocidad. Pregunta directamente si hay alguna expectativa, duda o necesidad.',
@@ -609,7 +667,11 @@ class GestureDatabase {
           'Movimiento sucesivo repetitivo del meñique al índice contra una superficie.',
       probableMeaning:
           'Puede regular energía, acompañar una melodía interna, ser un hábito motor o expresar prisa, tensión o espera.',
-      alternativeMeanings: ['Seguir el ritmo de una canción en la cabeza.'],
+      alternativeMeanings: [
+        'Seguir un compás o melodía musical en la mente.',
+        'Stimming o descarga motriz para sostener la concentración.',
+        'Inquietud temporal o necesidad de respetar un horario límite.',
+      ],
       contextGuidance:
           'Común cuando alguien tiene prisa o siente que se está perdiendo el tiempo.',
       whatToDo:
@@ -627,10 +689,14 @@ class GestureDatabase {
       summary:
           'Elevar ambos hombros hacia las orejas, a menudo mostrando palmas hacia arriba.',
       physiologicalDetails:
-          'Contracción del trapecio superior con supinación de antebrazos.',
+          'Contracción del trapecio superior con supanación de antebrazos.',
       probableMeaning:
           'Suele acompañar incertidumbre o la comunicación de “no lo sé”, pero también puede ser humor, hábito o una respuesta corporal breve.',
-      alternativeMeanings: ['Indecisión sincera.'],
+      alternativeMeanings: [
+        'Indecisión o falta de información sincera.',
+        'Gesto casual de modestia o humor.',
+        'Reajuste muscular por frío o incomodidad en el cuello.',
+      ],
       contextGuidance:
           'La combinación de gestos tampoco resuelve la ambigüedad; el contenido y el contexto siguen siendo necesarios.',
       whatToDo:
@@ -651,7 +717,11 @@ class GestureDatabase {
           'Extensión lateral de los codos aumentando el espacio visual ocupado por el torso.',
       probableMeaning:
           'Puede ser una forma de descansar, ocupar espacio, prepararse para actuar o un hábito corporal.',
-      alternativeMeanings: ['Descanso lumbar tras caminar mucho.'],
+      alternativeMeanings: [
+        'Descanso lumbar tras caminar o estar de pie mucho rato.',
+        'Comodidad postural de descanso biomecánico.',
+        'Disposición activa para emprender una tarea física o mental.',
+      ],
       contextGuidance:
           'Puede ser una forma de descansar, ocupar espacio o prepararse para actuar; no confirma autoridad ni confrontación.',
       whatToDo:
@@ -672,8 +742,12 @@ class GestureDatabase {
           'Apertura máxima del pecho y elevación de brazos mientras se ocupa el respaldo.',
       probableMeaning:
           'Puede ser estiramiento, alivio para la espalda, comodidad en el asiento o una manera habitual de escuchar.',
-      alternativeMeanings: ['Estiramiento muscular por rigidez en la espalda.'],
-      contextGuidance: 'Típica en figuras de poder en su propio despacho.',
+      alternativeMeanings: [
+        'Estiramiento muscular por rigidez o tensión lumbar.',
+        'Cambio ergonómico de postura en sillas de trabajo.',
+        'Sensación de relax y familiaridad con el entorno.',
+      ],
+      contextGuidance: 'Común en personas que buscan comodidad física en su espacio.',
       whatToDo:
           'No te sientas intimidado. Mantén contacto visual equilibrado y presenta tu propuesta con profesionalismo.',
       salesTip:
@@ -692,9 +766,13 @@ class GestureDatabase {
           'Alineación simétrica de las puntas de los dedos sin entrelazar las palmas.',
       probableMeaning:
           'Puede ser hábito, una forma de concentrarse, un gesto aprendido al exponer o comodidad manual.',
-      alternativeMeanings: ['Hábito de concentración en oradores.'],
+      alternativeMeanings: [
+        'Hábito motor de concentración en oradores y analistas.',
+        'Posición de reposo simétrica y cómoda para los dedos.',
+        'Recurso aprendido en talleres de oratoria o debate.',
+      ],
       contextGuidance:
-          'Muy utilizada por expertos, jueces y negociadores experimentados.',
+          'Frecuente en personas dedicadas al análisis técnico o la docencia.',
       whatToDo:
           'Puedes emplear este gesto al exponer tus puntos clave para proyectar solvencia técnica.',
       salesTip:
@@ -713,7 +791,11 @@ class GestureDatabase {
           'Inclinación lateral del cuello (músculo esternocleidomastoideo) dejando al descubierto la arteria carótida.',
       probableMeaning:
           'Puede acompañar escucha, curiosidad, una mejor audición por un lado, comodidad cervical o hábito postural.',
-      alternativeMeanings: ['Esfuerzo por escuchar con un oído mejor.'],
+      alternativeMeanings: [
+        'Esfuerzo por enfocar la audición con un oído específico.',
+        'Alivio de fatiga cervical o apoyo de cuello.',
+        'Disposición atenta y curiosa hacia el mensaje.',
+      ],
       contextGuidance:
           'El significado depende de la conversación, la relación, la audición y la comodidad física; no identifica por sí solo afinidad.',
       whatToDo:
@@ -733,14 +815,18 @@ class GestureDatabase {
       physiologicalDetails:
           'Gesto de pacificación neurovegetativo para estimular nervios que reducen el ritmo cardíaco bajo estrés.',
       probableMeaning:
-          'Estrés repentino, incomodidad, vulnerabilidad, duda o necesidad de calmarse.',
-      alternativeMeanings: ['Molestia o dolor cervical real.'],
+          'Puede ser autorregulación ante estrés, incomodidad momentánea, duda, necesidad de calmarse o alivio físico.',
+      alternativeMeanings: [
+        'Molestia muscular o dolor cervical real.',
+        'Ajuste por temperatura, calor o prenda ajustada.',
+        'Hábito motor de concentración o autorregulación sensorial.',
+      ],
       contextGuidance:
-          'Ocurre cuando se hace una pregunta difícil o se menciona un tema delicado.',
+          'Puede presentarse ante preguntas complejas o temas delicados, pero también por tensión muscular, frío/calor o costumbre corporal.',
       whatToDo:
-          'Baja la presión de la conversación y formula preguntas suaves para devolver la tranquilidad.',
+          'Baja la presión de la conversación y formula preguntas suaves para devolver la tranquilidad, o simplemente permite una pausa natural.',
       salesTip:
-          'Acabas de tocar un punto de dolor o una objeción financiera. Pausa y ayuda a desmenuzar el problema.',
+          'Podría indicar que surgió una duda o punto de fricción (presupuesto, condiciones). Pausa con amabilidad y pregunta qué aspecto le gustaría revisar juntos.',
       illustrationKey: 'touching_neck',
       difficulty: 2,
     ),
@@ -756,14 +842,16 @@ class GestureDatabase {
       probableMeaning:
           'Autoridad, confianza, observación tranquila o autocontrol.',
       alternativeMeanings: [
-        'Si una mano sujeta fuertemente la muñeca/brazo detrás, indica contención de frustración.'
+        'Contención de tensión si una mano sujeta fuertemente la muñeca contraria.',
+        'Postura cómoda para descansar los brazos caminando.',
+        'Hábito ergonómico para mantener la espalda erguida.',
       ],
       contextGuidance:
-          'Común en profesores, supervisores o líderes inspeccionando un área.',
+          'Común en profesores, supervisores o personas en paseos reflexivos.',
       whatToDo:
           'Muestra respeto por su rol y responde con claridad cuando se dirija a ti.',
       salesTip:
-          'Postura de líder observador. Permítele evaluar sin presionarlo con verborrea.',
+          'Postura de evaluador observador. Permítele examinar las opciones sin atosigarlo.',
       illustrationKey: 'hands_behind_back',
       difficulty: 2,
     ),
@@ -777,10 +865,14 @@ class GestureDatabase {
       physiologicalDetails:
           'Retracción de las extremidades superiores y ocultamiento de las palmas.',
       probableMeaning:
-          'Reserva, timidez, deseo de pasar desapercibido o distanciamiento informal.',
-      alternativeMeanings: ['Frío en las manos.'],
+          'Reserva, timidez, búsqueda de comodidad informal o descanso postural.',
+      alternativeMeanings: [
+        'Sensación térmica de frío en las manos.',
+        'Búsqueda de confort postural casual.',
+        'Prendas holgadas o costumbre corporal al estar de pie.',
+      ],
       contextGuidance:
-          'En reuniones formales puede transmitir desinterés o falta de compromiso.',
+          'En ambientes informales es común y relajado; en reuniones muy formales puede leerse erróneamente como desinterés.',
       whatToDo:
           'Invita a la persona a participar haciéndole una pregunta sencilla para que se integre.',
       salesTip:
@@ -1070,7 +1162,11 @@ class GestureDatabase {
           'Uso exclusivo de caracteres mayúsculos en mensajería digital.',
       probableMeaning:
           'Puede percibirse como énfasis, urgencia o intensidad, según la comunidad y la relación.',
-      alternativeMeanings: ['Accesibilidad visual', 'Preferencia de formato', 'Convención interna del equipo'],
+      alternativeMeanings: [
+        'Accesibilidad visual',
+        'Preferencia de formato',
+        'Convención interna del equipo'
+      ],
       contextGuidance:
           'No siempre se percibe como agresión. Considera las normas compartidas y el contenido del mensaje.',
       whatToDo:
@@ -1463,9 +1559,10 @@ class GestureDatabase {
   }
 
   static List<GestureItem> getByBodyPart(String bodyPart) {
+    final clean = bodyPart.trim().toLowerCase();
+    if (clean.isEmpty || clean == 'todos' || clean == 'all') return items;
     return items
-        .where((item) =>
-            item.bodyPart.toLowerCase().contains(bodyPart.toLowerCase()))
+        .where((item) => item.bodyPart.toLowerCase().contains(clean))
         .toList();
   }
 

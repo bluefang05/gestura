@@ -9,6 +9,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../state/progress_provider.dart';
 import '../widgets/common/tts_app_bar_control.dart';
 import '../models/gesture_item.dart';
 
@@ -39,13 +40,11 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
   }
 
   void _registerExplored() {
-    final progress = StorageService.loadProgress();
-    final updated = progress.markGestureExplored(widget.gestureId);
-    StorageService.saveProgress(updated);
+    ProgressProvider().markGestureExplored(widget.gestureId);
   }
 
   void _toggleBookmark() async {
-    await StorageService.toggleBookmark(widget.gestureId);
+    await ProgressProvider().toggleBookmark(widget.gestureId);
     setState(() {
       _isBookmarked = !_isBookmarked;
     });
@@ -147,13 +146,10 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
             // Card 1.5: Variabilidad Humana en el Mundo Real (Anti-estereotipo)
             AppCard(
-              color: isDark
-                  ? const Color(0xFF0F172A)
-                  : const Color(0xFFF1F5F9),
+              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
               borderSide: BorderSide(
-                color: isDark
-                    ? const Color(0xFF334155)
-                    : const Color(0xFFCBD5E1),
+                color:
+                    isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1),
                 width: 1.2,
               ),
               padding: const EdgeInsets.all(16),

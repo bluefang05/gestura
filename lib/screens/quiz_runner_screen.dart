@@ -9,6 +9,7 @@ import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
+import '../state/progress_provider.dart';
 import '../widgets/common/tts_app_bar_control.dart';
 
 class QuizRunnerScreen extends StatefulWidget {
@@ -130,9 +131,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       FeedbackService.complete();
       final scorePercentage =
           ((_correctCount / widget.questions.length) * 100).round();
-      final progress = StorageService.loadProgress();
-      final updated = progress.recordQuizResult(widget.title, scorePercentage);
-      StorageService.saveProgress(updated);
+      ProgressProvider().recordQuizResult(widget.title, scorePercentage);
 
       setState(() {
         _isFinished = true;
@@ -185,12 +184,14 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
             children: [
               // Question Progress Tag & Prompt Container
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
                   color: isDark ? AppColors.darkSurface : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                    color:
+                        isDark ? AppColors.darkBorder : AppColors.lightBorder,
                     width: 1,
                   ),
                 ),
@@ -200,9 +201,11 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                     Row(
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 3),
                           decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: isDark ? 0.2 : 0.1),
+                            color: AppColors.primary
+                                .withValues(alpha: isDark ? 0.2 : 0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
@@ -210,7 +213,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                             style: TextStyle(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w700,
-                              color: isDark ? AppColors.primaryLight : AppColors.primary,
+                              color: isDark
+                                  ? AppColors.primaryLight
+                                  : AppColors.primary,
                             ),
                           ),
                         ),
@@ -226,13 +231,16 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                         letterSpacing: -0.2,
                       ),
                     ),
-                    if (question.scenarioText != null && question.scenarioText!.isNotEmpty) ...[
+                    if (question.scenarioText != null &&
+                        question.scenarioText!.isNotEmpty) ...[
                       const SizedBox(height: 6),
                       Text(
                         question.scenarioText!,
                         style: TextStyle(
                           fontSize: 12.5,
-                          color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
                           height: 1.35,
                         ),
                       ),
@@ -318,7 +326,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                         ? _onSubmitAnswer
                         : null,
                     child: const Text('Comprobar Respuesta',
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ),

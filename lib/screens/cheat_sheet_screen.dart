@@ -229,8 +229,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           ),
                                         ),
                                         IconButton(
-                                          icon: Icon(
-                                              Icons.volume_up_rounded,
+                                          icon: Icon(Icons.volume_up_rounded,
                                               size: 18,
                                               color: isDark
                                                   ? AppColors.primaryLight
@@ -343,8 +342,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           ),
                                         ),
                                         IconButton(
-                                          icon: Icon(
-                                              Icons.volume_up_rounded,
+                                          icon: Icon(Icons.volume_up_rounded,
                                               size: 18,
                                               color: isDark
                                                   ? AppColors.primaryLight

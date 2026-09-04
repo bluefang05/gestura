@@ -10,7 +10,8 @@ import '../core/services/feedback_service.dart';
 import '../core/services/tts_service.dart';
 
 class IncongruenceDetectorScreen extends StatefulWidget {
-  const IncongruenceDetectorScreen({super.key});
+  final String initialAudience;
+  const IncongruenceDetectorScreen({super.key, this.initialAudience = 'all'});
 
   @override
   State<IncongruenceDetectorScreen> createState() =>
@@ -19,10 +20,16 @@ class IncongruenceDetectorScreen extends StatefulWidget {
 
 class _IncongruenceDetectorScreenState
     extends State<IncongruenceDetectorScreen> {
-  String _selectedAudience = 'all';
+  late String _selectedAudience;
   int _currentIndex = 0;
   bool? _userAnswer; // true: congruent, false: incongruent
   bool _showFeedback = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedAudience = widget.initialAudience;
+  }
   int _score = 0;
   int _totalAnswered = 0;
 
@@ -32,7 +39,7 @@ class _IncongruenceDetectorScreenState
   void _onAnswer(bool answer) {
     if (_showFeedback) return;
     final item = _items[_currentIndex];
-    final isCorrect = answer == item.isCongruent;
+    final isCorrect = answer == item.isAligned;
 
     if (isCorrect) {
       FeedbackService.success();
@@ -47,8 +54,9 @@ class _IncongruenceDetectorScreenState
       _showFeedback = true;
     });
 
+    final interpretationsText = item.possibleInterpretations.join('. ');
     TtsService.speak(
-      '${isCorrect ? "¡Correcto!" : "¡Observa bien!"}. ${item.isCongruent ? "Las señales son compatibles entre sí en este ejemplo." : "Hay una diferencia entre los canales que merece contexto."} Posibles interpretaciones: ${item.possibleInterpretations}. ${item.explanation}',
+      '${isCorrect ? "¡Observación calibrada!" : "¡Buen intento!"}. ${item.isAligned ? "Las señales corporales y el mensaje verbal están alineados." : "Existen señales mixtas que invitan a calibrar el contexto."} Hipótesis posibles: $interpretationsText. ${item.explanation}',
     );
   }
 
@@ -112,9 +120,9 @@ class _IncongruenceDetectorScreenState
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '¿Las palabras coinciden con lo que dice su cuerpo?',
+                          '¿Cómo se relacionan las palabras con las señales corporales?',
                           style: TextStyle(
-                            fontSize: 14.5,
+                            fontSize: 14,
                             fontWeight: FontWeight.w900,
                             color: isDark
                                 ? AppColors.textPrimaryDark
@@ -138,10 +146,10 @@ class _IncongruenceDetectorScreenState
                                 ),
                                 icon: const Icon(Icons.check_circle_rounded),
                                 label: const Text(
-                                  'Es Sincero',
+                                  'Señales Alineadas',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
-                                    fontSize: 13.5,
+                                    fontSize: 13,
                                   ),
                                 ),
                                 onPressed: () => _onAnswer(true),
@@ -151,7 +159,7 @@ class _IncongruenceDetectorScreenState
                             Expanded(
                               child: ElevatedButton.icon(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFDC2626),
+                                  backgroundColor: const Color(0xFFD97706),
                                   foregroundColor: Colors.white,
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 13),
@@ -159,12 +167,12 @@ class _IncongruenceDetectorScreenState
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                icon: const Icon(Icons.warning_amber_rounded),
+                                icon: const Icon(Icons.call_split_rounded),
                                 label: const Text(
-                                  'Contradicción',
+                                  'Señales Mixtas',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
-                                    fontSize: 13.5,
+                                    fontSize: 13,
                                   ),
                                 ),
                                 onPressed: () => _onAnswer(false),
@@ -424,8 +432,7 @@ class _IncongruenceDetectorScreenState
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Icon(
-                                                  Icons.remove_red_eye_rounded,
+                                              Icon(Icons.remove_red_eye_rounded,
                                                   size: 18,
                                                   color: isDark
                                                       ? AppColors.accentLight
@@ -515,7 +522,7 @@ class _IncongruenceDetectorScreenState
                       AppCard(
                         color: isDark ? const Color(0xFF1E293B) : Colors.white,
                         borderSide: BorderSide(
-                          color: _userAnswer == item.isCongruent
+                          color: _userAnswer == item.isAligned
                               ? AppColors.success
                               : AppColors.error,
                           width: 2.0,
@@ -527,10 +534,10 @@ class _IncongruenceDetectorScreenState
                             Row(
                               children: [
                                 Icon(
-                                  _userAnswer == item.isCongruent
+                                  _userAnswer == item.isAligned
                                       ? Icons.check_circle_rounded
                                       : Icons.info_rounded,
-                                  color: _userAnswer == item.isCongruent
+                                  color: _userAnswer == item.isAligned
                                       ? AppColors.success
                                       : AppColors.error,
                                   size: 24,
@@ -538,13 +545,13 @@ class _IncongruenceDetectorScreenState
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
-                                    _userAnswer == item.isCongruent
-                                        ? '¡Diagnóstico Correcto!'
-                                        : '¡Detalle Importante!',
+                                    _userAnswer == item.isAligned
+                                        ? '¡Observación Calibrada!'
+                                        : '¡Calibración en Proceso!',
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w900,
-                                      color: _userAnswer == item.isCongruent
+                                      color: _userAnswer == item.isAligned
                                           ? (isDark
                                               ? const Color(0xFF6EE7B7)
                                               : const Color(0xFF065F46))
@@ -558,32 +565,74 @@ class _IncongruenceDetectorScreenState
                             ),
                             const SizedBox(height: 12),
 
-                            // Real Emotion
+                            // Multi-Hypothesis Interpretation Card
                             Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 color: isDark
                                     ? const Color(0xFF0F172A)
                                     : const Color(0xFFF8FAFC),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: isDark
+                                      ? Colors.white12
+                                      : Colors.black12,
+                                ),
                               ),
-                              child: Row(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.psychology_rounded,
-                                      size: 18,
-                                      color: isDark
-                                          ? AppColors.accentLight
-                                          : AppColors.accent),
-                                  const SizedBox(width: 6),
-                                  Expanded(
-                                    child: Text(
-                                      'Posibles interpretaciones: ${item.possibleInterpretations}',
-                                      style: const TextStyle(
+                                  Row(
+                                    children: [
+                                      Icon(Icons.psychology_rounded,
+                                          size: 18,
+                                          color: isDark
+                                              ? AppColors.accentLight
+                                              : AppColors.accent),
+                                      const SizedBox(width: 6),
+                                      const Text(
+                                        'Hipótesis e interpretaciones posibles:',
+                                        style: TextStyle(
                                           fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  const SizedBox(height: 8),
+                                  for (final hyp in item.possibleInterpretations)
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 4.0),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '• ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isDark
+                                                  ? AppColors.accentLight
+                                                  : AppColors.accent,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              hyp,
+                                              style: TextStyle(
+                                                fontSize: 12.5,
+                                                color: isDark
+                                                    ? AppColors.textPrimaryDark
+                                                    : AppColors.textPrimaryLight,
+                                                height: 1.3,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                 ],
                               ),
                             ),
