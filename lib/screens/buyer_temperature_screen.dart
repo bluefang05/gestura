@@ -627,6 +627,45 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final id = 'sales_phase_${phase.phaseNumber}';
+                      final isSpeaking = speakingId == id;
+                      return OutlinedButton.icon(
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            final signals = phase.clientSignalsToWatch.join('. ');
+                            final posture = phase.yourBodyLanguage.join('. ');
+                            final speech =
+                                'Fase ${phase.phaseNumber}: ${phase.title}. Momento: ${phase.timing}. Objetivo: ${phase.objective}. Pistas del cliente a calibrar: $signals. Tu lenguaje corporal recomendado: $posture. Regla de oro: ${phase.keyRule}';
+                            TtsService.speak(speech, gestureId: id);
+                          }
+                        },
+                        icon: Icon(
+                          isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                          size: 15,
+                          color: isSpeaking ? AppColors.coral : null,
+                        ),
+                        label: Text(
+                          isSpeaking ? 'Detener' : 'Escuchar Fase',
+                          style: const TextStyle(fontSize: 11.5),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -1008,7 +1047,15 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                       ),
                       onPressed: () {
                         FeedbackService.lightClick();
-                        TtsService.speak(currentResponse,
+                        final firmnessLabel = switch (currentFirmness) {
+                          'soft' => 'Suave',
+                          'assertive' => 'Asertivo',
+                          'firm' => 'Firme',
+                          _ => 'Asertivo',
+                        };
+                        final text =
+                            '${obj.title}. Objeción planteada: "${obj.objectionPhrase}". Contexto: ${obj.context}. Tu respuesta en nivel $firmnessLabel: $currentResponse. Tu lenguaje corporal recomendado: ${obj.bodyLanguage}. Error a evitar: ${obj.whatNotToDo}';
+                        TtsService.speak(text,
                             gestureId: 'obj_${obj.id}');
                       },
                       icon: const Icon(Icons.volume_up_rounded, size: 15),

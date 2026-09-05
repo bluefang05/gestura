@@ -470,10 +470,44 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                item['title'] as String,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      item['title'] as String,
+                      style:
+                          const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final id = 'case_${item['title']}';
+                      final isSpeaking = speakingId == id;
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark ? AppColors.accentLight : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar caso interactivo',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            final signals = (item['signals'] as List<String>).join('. ');
+                            final speech =
+                                '${item['title']}. Contexto: ${item['context']}. Señales observadas en el conglomerado: $signals. Pregunta: ${item['question']}';
+                            TtsService.speak(speech, gestureId: id);
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               Text(
@@ -549,10 +583,15 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                         ? null
                         : () {
                             FeedbackService.lightClick();
+                            final isCorrect = i == item['correctOption'];
                             setState(() {
                               _selectedCaseAnswer = i;
                               _showFeedback = true;
                             });
+                            TtsService.speak(
+                              '${isCorrect ? "¡Correcto!" : "Opción incorrecta."} ${item['explanation']}',
+                              gestureId: 'case_fb_${item['title']}',
+                            );
                           },
                     child: Container(
                       padding: const EdgeInsets.all(12),

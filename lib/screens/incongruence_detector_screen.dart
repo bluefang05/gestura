@@ -56,7 +56,7 @@ class _IncongruenceDetectorScreenState
 
     final interpretationsText = item.possibleInterpretations.join('. ');
     TtsService.speak(
-      '${isCorrect ? "¡Observación calibrada!" : "¡Buen intento!"}. ${item.isAligned ? "Las señales corporales y el mensaje verbal están alineados." : "Existen señales mixtas que invitan a calibrar el contexto."} Hipótesis posibles: $interpretationsText. ${item.explanation}',
+      '${isCorrect ? "¡Observación calibrada!" : "¡Buen intento!"}. ${item.isAligned ? "Las señales corporales y el mensaje verbal están alineados." : "Existen señales mixtas que invitan a calibrar el contexto."} Hipótesis posibles: $interpretationsText. ${item.explanation}. Acción táctica recomendada: ${item.recommendedAction}',
     );
   }
 
@@ -205,7 +205,7 @@ class _IncongruenceDetectorScreenState
             onPressed: () {
               FeedbackService.lightClick();
               TtsService.speak(
-                  'Frase del interlocutor: ${item.spokenPhrase}. Señales corporales observadas: ${item.physicalSignals.join(", ")}.');
+                  'Interlocutor (${item.speakerRole}): "${item.spokenPhrase}". Señales corporales observadas: ${item.physicalSignals.join(", ")}.');
             },
           ),
         ],

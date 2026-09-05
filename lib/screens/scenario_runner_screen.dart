@@ -47,6 +47,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
     final step = _currentStep;
     TtsService.speakScenarioStep(
       narrative: step.narrative,
+      characterAction: step.characterAction,
       signals: step.visibleSignals,
       choices: step.choices.map((c) => c.text).toList(),
       tag: 'scenario_${widget.scenario.id}_$_currentStepIndex',
@@ -71,6 +72,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
         isBestAction: choice.isBestAction,
         resultTitle: choice.consequenceSummary,
         explanation: choice.analysis,
+        learningTakeaway: _currentStep.learningTakeaway,
       );
     } else {
       TtsService.stop();
@@ -185,6 +187,28 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                   step.narrative,
                   style: const TextStyle(fontSize: 14, height: 1.4),
                 ),
+                if (step.characterAction.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.directions_walk_rounded,
+                          size: 16,
+                          color: isDark ? AppColors.accentLight : AppColors.accent),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          'Acción visible: ${step.characterAction}',
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            fontStyle: FontStyle.italic,
+                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
                 const SizedBox(height: 12),
 
                 // Signals list
@@ -321,6 +345,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                                       isBestAction: choice.isBestAction,
                                       resultTitle: choice.consequenceSummary,
                                       explanation: choice.analysis,
+                                      learningTakeaway: step.learningTakeaway,
                                     );
                                   }
                                 },
@@ -347,6 +372,69 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
             ),
           ],
           const SizedBox(height: 16),
+
+          // Tarjeta de Lección Teórica Clave
+          if (_selectedChoice != null) ...[
+            AppCard(
+              color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+              borderSide: BorderSide(
+                color: isDark
+                    ? AppColors.accentLight.withValues(alpha: 0.4)
+                    : AppColors.accent.withValues(alpha: 0.4),
+                width: 1.2,
+              ),
+              padding: const EdgeInsets.all(14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.lightbulb_rounded,
+                          size: 18,
+                          color: isDark ? AppColors.accentLight : AppColors.accent),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Lección Teórica Clave',
+                        style: TextStyle(
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w800,
+                          color: isDark
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight,
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.volume_up_rounded, size: 18),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        tooltip: 'Escuchar lección clave',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          TtsService.speak(
+                            'Lección clave teórica: ${step.learningTakeaway}',
+                            gestureId: 'takeaway_${step.id}',
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    step.learningTakeaway,
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.4,
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
 
           // Next Step Button
           if (_selectedChoice != null)

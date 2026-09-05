@@ -222,6 +222,10 @@ class GestureCard extends StatelessWidget {
                         text: item.bodyPart,
                         color: catInfo.primaryColor,
                       ),
+                      BadgePill(
+                        text: item.difficultyLabel,
+                        color: item.difficultyColor,
+                      ),
                     ],
                   ),
                 ],

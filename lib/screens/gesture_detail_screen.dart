@@ -54,7 +54,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
   void _toggleTts(GestureItem item) {
     final speech =
-        '${item.name}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
+        '${item.name}. ${item.difficultyLabel}. ${item.signalType.label}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Otras explicaciones a considerar: ${item.alternativeMeanings.join(", ")}. Guía según el contexto: ${item.contextGuidance}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
     TtsService.speak(speech, gestureId: item.id);
   }
 
@@ -575,6 +575,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                   text: item.signalType.label,
                                   color: item.signalType.color),
                               BadgePill(
+                                  text: item.difficultyLabel,
+                                  color: item.difficultyColor),
+                              BadgePill(
                                   text: catInfo.chapterReference,
                                   color: isDark
                                       ? AppColors.textMutedDark
@@ -706,6 +709,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                   BadgePill(
                       text: item.signalType.label,
                       color: item.signalType.color),
+                  BadgePill(
+                      text: item.difficultyLabel,
+                      color: item.difficultyColor),
                   BadgePill(
                       text: catInfo.chapterReference,
                       color: isDark

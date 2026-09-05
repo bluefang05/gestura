@@ -53,10 +53,18 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
 
   void _speakCurrentQuestion() {
     final q = _currentQuestion;
+    final optionsFormatted = q.options.map((opt) {
+      if (opt.subtext != null && opt.subtext!.trim().isNotEmpty) {
+        return '${opt.text}. Pista anatómica: ${opt.subtext}';
+      }
+      return opt.text;
+    }).toList();
+
     TtsService.speakQuizQuestion(
       question: q.prompt,
+      scenarioText: q.scenarioText,
       visualClue: q.keyVisualClue,
-      options: q.options.map((opt) => opt.text).toList(),
+      options: optionsFormatted,
       tag: 'quiz_${q.id}',
     );
   }

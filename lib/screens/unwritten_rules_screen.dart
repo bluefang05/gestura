@@ -52,8 +52,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       textToSpeak =
           'El Mito del Small Talk. El Small Talk es un ping de red no verbal. No importa el clima: es un apretón de manos sónico que comunica que el canal está en paz. Regla uno: responde en menos de 30 segundos. Regla dos: haz preguntas abiertas de baja presión. Regla tres: cierra la charla en un minuto.';
     } else if (_selectedTab == 1) {
-      textToSpeak =
-          'Decodificador de indirectas cotidianas. Primera: no te preocupes yo me encargo, significa que están abrumados y esperan que insistas en ayudar. Segunda: haz lo que te parezca mejor, significa que tienen una preferencia clara y prefieren que preguntes. Tercera: a ver si nos vemos pronto para un café, suele ser cortesía de despedida.';
+      final buffer = StringBuffer('Decodificador de indirectas cotidianas. ');
+      for (final item in _indirectPhrases) {
+        buffer.write(
+            'Frase: "${item['phrase']}". Literalmente: "${item['literal']}". En realidad: "${item['realMeaning']}". Pista corporal: "${item['signal']}". Respuesta: "${item['response']}". ');
+      }
+      textToSpeak = buffer.toString();
     } else if (_selectedTab == 2) {
       textToSpeak =
           'La risa incómoda versus la risa genuina. En el mundo neurotípico, la risa no siempre es felicidad; se usa con frecuencia como pacificación para desactivar momentos tensos.';
@@ -432,11 +436,41 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       color: AppColors.primary,
                     ),
                     const Spacer(),
-                    Icon(Icons.g_translate_rounded,
-                        size: 18,
-                        color: isDark
-                            ? AppColors.textMutedDark
-                            : AppColors.textMutedLight),
+                    ValueListenableBuilder<String?>(
+                      valueListenable: TtsService.currentSpeakingIdNotifier,
+                      builder: (context, speakingId, _) {
+                        final id = 'indirect_${item['phrase']}';
+                        final isSpeaking = speakingId == id;
+                        return IconButton(
+                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                          padding: EdgeInsets.zero,
+                          icon: Icon(
+                            isSpeaking
+                                ? Icons.stop_circle_rounded
+                                : Icons.volume_up_rounded,
+                            size: 20,
+                            color: isSpeaking
+                                ? AppColors.coral
+                                : (isDark
+                                    ? AppColors.primaryLight
+                                    : AppColors.primary),
+                          ),
+                          tooltip: isSpeaking
+                              ? 'Detener lectura'
+                              : 'Escuchar decodificación completa',
+                          onPressed: () {
+                            FeedbackService.lightClick();
+                            if (isSpeaking) {
+                              TtsService.stop();
+                            } else {
+                              final text =
+                                  'Frase indirecta: "${item['phrase']}". Lo que las palabras dicen literalmente: ${item['literal']}. Lo que en realidad significa: ${item['realMeaning']}. Pista corporal observable: ${item['signal']}. Respuesta asertiva recomendada: ${item['response']}.';
+                              TtsService.speak(text, gestureId: id);
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -447,7 +481,61 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       fontWeight: FontWeight.w800,
                       fontStyle: FontStyle.italic),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 8),
+
+                // Significado literal (lo que se dice)
+                if (item['literal'] != null) ...[
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? const Color(0xFF0F172A)
+                          : const Color(0xFFF1F5F9),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                        width: 0.8,
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.format_quote_rounded,
+                            size: 15,
+                            color: isDark
+                                ? AppColors.textMutedDark
+                                : AppColors.textMutedLight),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text.rich(
+                            TextSpan(
+                              style: TextStyle(
+                                fontSize: 12,
+                                height: 1.35,
+                                color: isDark
+                                    ? AppColors.textMutedDark
+                                    : AppColors.textSecondaryLight,
+                              ),
+                              children: [
+                                const TextSpan(
+                                  text: 'Literalmente: ',
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
+                                TextSpan(
+                                  text: item['literal'] as String,
+                                  style: const TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                ],
+
                 const Divider(height: 1),
                 const SizedBox(height: 10),
 
@@ -1323,8 +1411,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                     ),
                     onPressed: () {
                       FeedbackService.lightClick();
+                      final conceptsBuffer = StringBuffer();
+                      for (final concept in phase.conceptItems) {
+                        conceptsBuffer.write('${concept.title}: ${concept.description}. ');
+                      }
                       TtsService.speak(
-                        '${phase.title}. ${phase.subtitle}. Principio rector: ${phase.corePrinciple}. Protocolo práctico: ${phase.practicalProtocol}',
+                        '${phase.title}. ${phase.subtitle}. Principio rector: ${phase.corePrinciple}. Claves y mecanismos: $conceptsBuffer Protocolo práctico: ${phase.practicalProtocol}',
                         gestureId: 'boundary_phase_${phase.phaseNumber}',
                       );
                     },
@@ -1644,7 +1736,9 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       ),
                       onPressed: () {
                         FeedbackService.lightClick();
-                        TtsService.speak(currentPhrase,
+                        final text =
+                            '${script.title}. Situación: ${script.contextDescription}. Frase en nivel ${currentFirmness.label}: $currentPhrase. Lenguaje corporal recomendado: ${script.bodyLanguage}. Trampa o error a evitar: ${script.whatNotToDo}';
+                        TtsService.speak(text,
                             gestureId: 'script_${script.id}');
                       },
                       icon: const Icon(Icons.volume_up_rounded, size: 16),

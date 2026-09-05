@@ -32,6 +32,7 @@ import 'package:gestura/screens/scenarios_screen.dart';
 import 'package:gestura/screens/incongruence_detector_screen.dart';
 import 'package:gestura/screens/gesture_detail_screen.dart';
 import 'package:gestura/widgets/dictionary/gesture_card.dart';
+import 'package:gestura/screens/scenario_runner_screen.dart';
 
 void main() {
   setUp(() async {
@@ -970,6 +971,50 @@ void main() {
     expect(find.text('Receptivo'), findsOneWidget);
     expect(find.textContaining('💡'), findsOneWidget);
     expect(find.textContaining('👁️'), findsOneWidget);
+    expect(find.text(item.difficultyLabel), findsOneWidget);
+  });
+
+  test('GestureItem provides valid difficultyLabel and color', () {
+    for (final item in GestureDatabase.items) {
+      expect(item.difficultyLabel, isIn(['Nivel Básico', 'Nivel Intermedio', 'Nivel Sutil']));
+      expect(item.difficultyColor, isNotNull);
+    }
+  });
+
+  testWidgets(
+      'UnwrittenRulesScreen displays literal meaning and speaker buttons for indirect phrases',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: UnwrittenRulesScreen(initialTab: 1),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Literalmente:'), findsWidgets);
+    expect(find.byIcon(Icons.volume_up_rounded), findsWidgets);
+  });
+
+  testWidgets(
+      'ScenarioRunnerScreen displays characterAction and learningTakeaway upon choice selection',
+      (tester) async {
+    final scenario = ScenarioDatabase.scenarios.first;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ScenarioRunnerScreen(scenario: scenario),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('Acción visible:'), findsOneWidget);
+
+    // Tap first choice
+    final firstChoiceText = scenario.steps.first.choices.first.text;
+    await tester.tap(find.text(firstChoiceText));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Lección Teórica Clave'), findsOneWidget);
+    expect(find.text(scenario.steps.first.learningTakeaway), findsOneWidget);
   });
 }
 

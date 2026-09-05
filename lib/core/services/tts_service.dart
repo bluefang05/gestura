@@ -157,14 +157,18 @@ class TtsService {
 
   static Future<void> speakQuizQuestion({
     required String question,
+    String? scenarioText,
     String? visualClue,
     required List<String> options,
     String? tag,
   }) async {
     final buffer = StringBuffer();
+    if (scenarioText != null && scenarioText.trim().isNotEmpty) {
+      buffer.write('Contexto: ${scenarioText.trim()}. ');
+    }
     buffer.write('Pregunta: $question. ');
     if (visualClue != null && visualClue.isNotEmpty) {
-      buffer.write('Pista visual: $visualClue. ');
+      buffer.write('Pista clave observable: $visualClue. ');
     }
     buffer.write('Opciones: ');
     for (int i = 0; i < options.length; i++) {
@@ -187,12 +191,16 @@ class TtsService {
 
   static Future<void> speakScenarioStep({
     required String narrative,
+    String? characterAction,
     required List<String> signals,
     List<String>? choices,
     String? tag,
   }) async {
     final buffer = StringBuffer();
     buffer.write('Situación: $narrative. ');
+    if (characterAction != null && characterAction.trim().isNotEmpty) {
+      buffer.write('Acción corporal visible: ${characterAction.trim()}. ');
+    }
     if (signals.isNotEmpty) {
       buffer.write('Señales corporales detectadas: ${signals.join(", ")}. ');
     }
@@ -210,12 +218,17 @@ class TtsService {
     required bool isBestAction,
     required String resultTitle,
     required String explanation,
+    String? learningTakeaway,
   }) async {
     final quality = isBestAction
         ? 'Excelente decisión táctica.'
         : 'Acción con áreas de oportunidad.';
-    final text = '$quality $resultTitle. Explicación psicológica: $explanation';
-    await speak(text, gestureId: 'scenario_outcome');
+    final buffer = StringBuffer();
+    buffer.write('$quality $resultTitle. Explicación psicológica: $explanation. ');
+    if (learningTakeaway != null && learningTakeaway.trim().isNotEmpty) {
+      buffer.write('Lección clave teórica: ${learningTakeaway.trim()}');
+    }
+    await speak(buffer.toString(), gestureId: 'scenario_outcome');
   }
 
   static Future<void> speakTacticalTip({

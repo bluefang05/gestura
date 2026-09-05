@@ -128,4 +128,20 @@ class GestureItem {
     };
     return '$name. $lightName En lo físico: $quickVisualClue. Suele reflejar: $quickMeaning. Tu mejor jugada: $quickAction.';
   }
+
+  /// Etiqueta legible del nivel de dificultad / sutileza del gesto.
+  String get difficultyLabel => switch (difficulty) {
+        1 => 'Nivel Básico',
+        2 => 'Nivel Intermedio',
+        3 => 'Nivel Sutil',
+        _ => 'Nivel Básico',
+      };
+
+  /// Color semántico según la sutileza del gesto.
+  Color get difficultyColor => switch (difficulty) {
+        1 => AppColors.emerald,
+        2 => AppColors.warning,
+        3 => AppColors.purple,
+        _ => AppColors.primary,
+      };
 }
