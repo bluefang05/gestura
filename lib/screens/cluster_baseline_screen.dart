@@ -26,17 +26,40 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
     super.dispose();
   }
 
+  static const String _clustersTheorySpeech =
+      'Por Qué un Gesto Aislado es una Trampa. '
+      'El error más destructivo en la lectura no verbal es sacar conclusiones por un solo detalle: "tocó su nariz, seguro miente" o "cruzó los brazos, está cerrado". Las palabras son como palabras sueltas en una frase: una sola palabra no hace una oración completa. '
+      'Paso 1: 1 Señal Aislada es una Hipótesis Suelta. Puede deberse a picazón física, temperatura de la sala, cansancio o un hábito individual sin carga emocional. '
+      'Paso 2: 2 Señales Coincidentes son Motivo de Atención. Ejemplo: Toca su cuello y baja el volumen de su voz. Tu radar debe activarse, pero todavía no emitas un juicio definitivo. '
+      'Paso 3: 3 o Más Señales en la Misma Dirección forman un CONGLOMERADO. Ejemplo: Cuello tocado más cuerpo reclinado hacia atrás más labios comprimidos en línea delgada. El conjunto confirma con alta certeza tensión y desacuerdo.';
+
+  static const String _baselineTheorySpeech =
+      'La Técnica de los Primeros 2 Minutos. '
+      'La Línea Base es el comportamiento normal, relajado y habitual de una persona cuando no está bajo presión. Sin conocer la línea base, es imposible saber si un gesto es significativo o si la persona simplemente es así de forma natural. '
+      'Los 4 Canales Basales a Calibrar: '
+      'Canal 1: Mirada y Pestañeo. ¿Te mira fijamente o suele mirar a los lados mientras piensa? ¿Pestañea lento, unas 15 veces por minuto, o es naturalmente rápido, unas 30 veces por minuto? '
+      'Canal 2: Velocidad y Tono de Voz. ¿Habla a ritmo acelerado o pausado? ¿Su volumen habitual es alto o tímido y suave? '
+      'Canal 3: Gesticulación Manual. ¿Mueve mucho las manos al hablar o las mantiene quietas sobre la mesa? '
+      'Canal 4: Postura de Reposo. ¿Se sienta encorvado por costumbre anatómica o mantiene la espalda recta en su postura base? '
+      'Regla de Oro: Solo cuando una persona cambia súbitamente su comportamiento basal justo después de una pregunta o propuesta, tienes una señal con verdadero significado.';
+
   void _speakCurrentSection() {
     String textToSpeak = '';
     if (_selectedTab == 0) {
       textToSpeak =
-          'La regla de los conglomerados o clusters. Nunca juzgues un gesto aislado. Un solo gesto es una hipótesis suelta. Dos señales son motivo de atención. Tres señales concurrentes en la misma dirección confirman la actitud emocional de la persona.';
+          'El principio maestro del análisis no verbal: nunca juzgues un gesto aislado. Aprende a buscar grupos de 3 señales y a medir la línea base. $_clustersTheorySpeech';
     } else if (_selectedTab == 1) {
-      textToSpeak =
-          'Cómo calibrar la línea base. Durante los primeros dos minutos de conversación relajada, observa el pestañeo natural, el tono de voz y el movimiento de manos habitual. Solo cuando la persona se desvíe de esa norma frente a una pregunta difícil, tendrás una señal válida.';
+      textToSpeak = _baselineTheorySpeech;
     } else {
+      final item = _interactiveCases[_currentCaseIndex];
+      final signals = (item['signals'] as List<String>).join('. ');
+      final options = (item['options'] as List<String>)
+          .asMap()
+          .entries
+          .map((e) => 'Opción ${e.key + 1}: ${e.value}')
+          .join('. ');
       textToSpeak =
-          'Entrenador interactivo de conglomerados. Evalúa si el conjunto de señales representa un estado emocional real o si es un falso positivo.';
+          'Entrenador de conglomerados. Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}. ${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
     }
     TtsService.speak(textToSpeak, gestureId: 'cluster_baseline_$_selectedTab');
   }
@@ -257,6 +280,37 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'cluster_rule_3';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación completa',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(_clustersTheorySpeech,
+                                gestureId: 'cluster_rule_3');
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -327,6 +381,37 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'baseline_2min';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar técnica completa',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(_baselineTheorySpeech,
+                                gestureId: 'baseline_2min');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -499,8 +584,13 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                             TtsService.stop();
                           } else {
                             final signals = (item['signals'] as List<String>).join('. ');
+                            final options = (item['options'] as List<String>)
+                                .asMap()
+                                .entries
+                                .map((e) => 'Opción ${e.key + 1}: ${e.value}')
+                                .join('. ');
                             final speech =
-                                '${item['title']}. Contexto: ${item['context']}. Señales observadas en el conglomerado: $signals. Pregunta: ${item['question']}';
+                                '${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
                             TtsService.speak(speech, gestureId: id);
                           }
                         },

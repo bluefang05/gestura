@@ -251,17 +251,29 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
   void _speakCurrentTab() {
     FeedbackService.lightClick();
     if (_selectedSalesTab == 0) {
-      TtsService.speak(
-          'Pipeline de una reunión de ventas en cuatro fases. Fase uno: Entrada y Rapport. Fase dos: Presentación y calibración de interés. Fase tres: Precio y objeciones. Fase cuatro: Señales de cierre y silencio táctico.');
+      final buffer =
+          StringBuffer('Pipeline de una reunión de ventas en cuatro fases. ');
+      for (final p in SalesPipelineDatabase.phases) {
+        buffer.write(
+            'Fase ${p.phaseNumber}: ${p.title}. Momento: ${p.timing}. Objetivo: ${p.objective}. Pistas a vigilar: ${p.clientSignalsToWatch.join(", ")}. Tu lenguaje corporal: ${p.yourBodyLanguage.join(", ")}. Regla de oro: ${p.keyRule}. ');
+      }
+      TtsService.speak(buffer.toString(), gestureId: 'sales_tab_0');
     } else if (_selectedSalesTab == 1) {
       TtsService.speak(
-          'Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice');
+          'Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice',
+          gestureId: 'sales_tab_1');
     } else if (_selectedSalesTab == 2) {
-      TtsService.speak(
-          'Tácticas y Guiones de Objeciones. Estrategias verbales y lenguaje corporal para sostener el precio, responder al silencio y frenar descuentos.');
+      final buffer = StringBuffer(
+          'Tácticas y Guiones de Objeciones en Negociación. ');
+      for (final obj in SalesPipelineDatabase.objections) {
+        buffer.write(
+            '${obj.title}. Objeción del cliente: "${obj.objectionPhrase}". Contexto: ${obj.context}. Respuesta asertiva recomendada: "${obj.assertiveResponse}". Lenguaje corporal: ${obj.bodyLanguage}. Trampa a evitar: ${obj.whatNotToDo}. ');
+      }
+      TtsService.speak(buffer.toString(), gestureId: 'sales_tab_2');
     } else {
       TtsService.speak(
-          'Entrenamiento y Simulación de Negociación. Tres escenarios interactivos con consecuencias y seis casos de incongruencia comercial.');
+          'Entrenamiento y Simulación de Negociación. Explora los escenarios interactivos y casos de incongruencia comercial seleccionando cada tarjeta.',
+          gestureId: 'sales_tab_3');
     }
   }
 

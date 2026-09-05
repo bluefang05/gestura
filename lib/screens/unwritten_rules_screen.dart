@@ -46,11 +46,36 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
     super.dispose();
   }
 
+  static const String _smallTalkSpeech =
+      '¿Por qué existe el Small Talk? '
+      'Para muchas personas autistas o lógicas, hablar del clima, del tráfico o del fin de semana parece una pérdida de tiempo sin valor informativo. Sin embargo, en el cerebro neurotípico tiene una función biológica crucial: '
+      'El Small Talk es un ping de red no verbal. No importa el clima: es un apretón de manos sónico que comunica: "Te reconozco como humano, no soy una amenaza y el canal de comunicación está en paz". '
+      'Las 3 Reglas de Oro para Navegarlo sin Agotarte: '
+      'Regla 1: La Regla de los 30 Segundos. No des respuestas de enciclopedia ni conferencias técnicas. Si te preguntan "¿Qué tal el fin de semana?", responde en 1 o 2 frases simples y devuelve la pelota: "Tranquilo, descansando en casa. ¿Y tú, qué tal?". '
+      'Regla 2: Preguntas Abiertas de Baja Presión. Usa preguntas universales que no comprometan su intimidad: "¿Mucho movimiento en la oficina hoy?", "¿Qué tal estuvo el tráfico para llegar?", "¿Lograste descansar el fin de semana?". '
+      'Regla 3: El Cierre Amable de 1 Minuto. El small talk rara vez debe durar más de 60 a 90 segundos. Puedes cerrarlo de forma impecable diciendo: "Bueno, te dejo continuar para no quitarte tiempo. ¡Buen día!".';
+
+  static const String _nervousLaughSpeech =
+      'La Risa como Alivio de Tensión Social. '
+      'En el mundo neurotípico, la risa no siempre significa diversión o felicidad. Existe la llamada risa nerviosa o risa de pacificación, que se utiliza para desactivar situaciones incómodas o mitigar malas noticias. '
+      'Comparativa: '
+      'Risa Genuina: Ojos entrecerrados con patas de gallo activas por el músculo orbicular. Hombros y mandíbula relajados. Exhalación sonora espontánea. '
+      'Risa Nerviosa o Tensa: Boca abierta mostrando dientes pero ojos inmóviles. Cuello rígido con tendones marcados. Mirada que busca a terceros buscando auxilio social. '
+      'Cómo Reaccionar: Si cometes un error social y la otra persona se ríe nerviosamente, no te burles ni asumas que le divirtió. Normaliza el momento con tranquilidad: "Disculpa si sonó raro o fuera de lugar, lo que quería decir es..." y continúa sin dramatismo.';
+
+  static const String _pokerSarcasmSpeech =
+      'Sarcasmo Real: La Voz Manda, la Cara Engaña. '
+      'En los cómics y caricaturas, los personajes sonríen con malicia cuando son irónicos. En la vida real, los adultos suelen usar una cara de póker completamente seria mientras dicen una ironía. Por eso para personas literales o autistas resulta tan confuso. '
+      'Las 3 Claves Auditivas para Detectar Sarcasmo: '
+      'Clave 1: Alargamiento de Vocales o Drawling. Alargan deliberadamente las palabras clave: "Claaaaaro que sí...", "Qué graaaan idea...". El estiramiento de la sílaba comunica contradicción con el texto literal. '
+      'Clave 2: Monotonía Exagerada o Deadpan. La frase se pronuncia en una línea plana absoluta sin emoción alguna, como si estuvieran leyendo una receta. Esa falta artificial de calidez delata el sarcasmo. '
+      'Clave 3: La Pausa Asimétrica. Hay una micro-pausa de 1 segundo justo después de que dices algo, seguida de la respuesta. Esa demora indica que su cerebro evaluó si responder en serio o con una broma. '
+      'Regla de Supervivencia: Si dudas si alguien fue sarcástico o literal, no te enojes ni adivines. Pregunta con tono curioso y neutro: "¿Lo dices en broma o en serio?". El 95% de la gente aclarará su intención de inmediato sin ofenderse.';
+
   void _speakCurrentSection() {
     String textToSpeak = '';
     if (_selectedTab == 0) {
-      textToSpeak =
-          'El Mito del Small Talk. El Small Talk es un ping de red no verbal. No importa el clima: es un apretón de manos sónico que comunica que el canal está en paz. Regla uno: responde en menos de 30 segundos. Regla dos: haz preguntas abiertas de baja presión. Regla tres: cierra la charla en un minuto.';
+      textToSpeak = _smallTalkSpeech;
     } else if (_selectedTab == 1) {
       final buffer = StringBuffer('Decodificador de indirectas cotidianas. ');
       for (final item in _indirectPhrases) {
@@ -59,11 +84,9 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       }
       textToSpeak = buffer.toString();
     } else if (_selectedTab == 2) {
-      textToSpeak =
-          'La risa incómoda versus la risa genuina. En el mundo neurotípico, la risa no siempre es felicidad; se usa con frecuencia como pacificación para desactivar momentos tensos.';
+      textToSpeak = _nervousLaughSpeech;
     } else if (_selectedTab == 3) {
-      textToSpeak =
-          'Sarcasmo con cara de póker. La voz manda, la cara engaña. El sarcasmo se detecta por alargamiento de vocales, monotonía exagerada o una pausa asimétrica.';
+      textToSpeak = _pokerSarcasmSpeech;
     } else {
       if (_boundarySubView == 0) {
         textToSpeak =
@@ -319,6 +342,37 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rules_smalltalk';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación de Small Talk',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(_smallTalkSpeech,
+                                gestureId: 'rules_smalltalk');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -670,6 +724,37 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rules_nervous_laugh';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación de la risa',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(_nervousLaughSpeech,
+                                gestureId: 'rules_nervous_laugh');
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -804,6 +889,37 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rules_poker_sarcasm';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación de sarcasmo',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(_pokerSarcasmSpeech,
+                                gestureId: 'rules_poker_sarcasm');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

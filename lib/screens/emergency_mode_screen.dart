@@ -24,23 +24,50 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
     super.dispose();
   }
 
+  static const String _workChecklistSpeech =
+      'Checklist de 30 Segundos: Antes de Entrar por la Puerta. '
+      'Paso 1: Reseteo Físico y Diafragma. Inhala hondo por la nariz en 4 segundos y suelta en 6. Baja conscientemente los hombros que suelen estar tensos cerca de las orejas. '
+      'Paso 2: Manos a la Vista, generador de confianza. Saca las manos de los bolsillos del pantalón o abrigo. El cerebro humano primitivo desconfía de las manos ocultas. '
+      'Paso 3: La Regla de los 2 Segundos de Saludo. Al estrechar la mano o saludar, mantén la mirada fija en sus ojos durante exactamente 2 segundos acompañado de una leve sonrisa cálida. '
+      'Paso 4: Postura de Asiento Estable. Apoya la espalda en el respaldo y ambos pies planos en el suelo. Evita sentarte en la orilla de la silla, pues comunica deseo de huir.';
+
+  static const String _socialChecklistSpeech =
+      'Checklist de Entrada a una Reunión o Evento Social. '
+      'Paso 1: Escanear Círculos en U Abierta. Busca grupos donde los cuerpos formen un ángulo abierto hacia el salón. Nunca intentes entrar a un círculo cerrado en O, hombro con hombro. '
+      'Paso 2: No Usar el Teléfono como Escudo Defensivo. Mirar el smartphone continuamente comunica que no quieres que nadie te hable. Si tienes ansiedad en las manos, toma un vaso de agua o servilleta. '
+      'Paso 3: Vaso a la Altura de la Cintura. Sostén tu vaso o copa a la altura del ombligo, no pegado al pecho o al cuello como una barrera torácica defensiva. '
+      'Paso 4: Frase de Entrada de Baja Fricción. Aproxímate con una sonrisa cordial a metro y medio diciendo: Hola, con permiso, me pareció muy interesante lo que decían sobre...';
+
+  static const String _blankMindSpeech =
+      '3 Técnicas de Rescate si te Quedas en Blanco. '
+      'Técnica 1: La Pausa de Poder, Silence Framing. Si olvidas lo que ibas a decir, no digas ehhh ni te disculpes con pánico. Respira hondo, asiente con la cabeza y mantén la calma durante 2 segundos. La contraparte pensará que estás meditando una respuesta sabia y reflexiva. '
+      'Técnica 2: El Rebote de Pregunta Abierta. Si el flujo conversacional muere, devuelve el protagonismo a la otra persona: Oye, y en tu caso, ¿cómo sueles manejar tú ese tipo de situaciones? A la inmensa mayoría de las personas les encanta hablar de sus propias experiencias. '
+      'Técnica 3: El Espejo de las Últimas 3 Palabras. Toma las últimas 2 o 3 palabras que dijo la otra persona y repítelas en tono reflexivo o de suave pregunta. Esto hace que la otra persona amplíe la información automáticamente mientras tú recuperas el hilo.';
+
+  static const String _sensoryEscapeSpeech =
+      'Fórmulas de Salida Digna por Sobrecarga o Fatiga Social. No necesitas dar explicaciones íntimas ni pedir disculpas excesivas para cuidar tu batería social. '
+      'Pausa Táctica de 5 Minutos para Recomponerte. Frase: "Disculpen un momento, voy por un vaso de agua y a tomar un poco de aire fresco afuera, con permiso". Por qué funciona: Es una necesidad biológica universal que nadie cuestionará; te da tiempo para ir a regularte en silencio. '
+      'Retirada Definitiva de una Fiesta o Reunión. Frase: "Amigos, fue un placer enorme saludarlos. Tuve una semana bastante pesada y me retiro a descansar para arrancar temprano mañana. ¡Que sigan disfrutando mucho!". Por qué funciona: Enmarca la salida en tu descanso productivo, agradece el encuentro y se marcha sin dar lugar a insistencias pesadas. '
+      'Límite en la Oficina por Sobrecarga Sensorial. Frase: "Me pongo auriculares un par de horas porque necesito máxima concentración para cerrar una entrega urgente. Cualquier cosa urgente me dejan un mensaje por chat". Por qué funciona: Legitima el aislamiento acústico como productividad profesional, no como desdén social.';
+
+  static const String _neurobiologySpeech =
+      'Neurobiología del Secuestro Emocional y Bloqueo. Comprender la base fisiológica elimina la culpa: quedarse en blanco no es torpeza personal ni falta de voluntad, sino una respuesta biológica de protección. '
+      'Punto 1: El Atajo Tálamo-Amígdala de 12 milisegundos. El neurocientífico Joseph LeDoux descubrió que la señal sensorial viaja del tálamo a la amígdala en aproximadamente 12 milisegundos, mientras que a la corteza pensante le toma el doble de tiempo o más. En situaciones de sobrecarga o tensión, tu sistema de alarma cerebral reacciona y dispara una respuesta neuroquímica antes de que tu mente consciente haya evaluado la situación. Pauta neuroafirmativa: El sobresalto es un reflejo biológico no consciente; no intentes reprimirlo con autoexigencia. '
+      'Punto 2: El Secuestro de la Memoria de Trabajo. Cuando la amígdala detecta alarma o saturación sensorial, libera catecolaminas, adrenalina y noradrenalina, que desvían el flujo cerebral. Esto inhibe temporalmente la corteza prefrontal, el área encargada de la memoria de trabajo, la flexibilidad cognitiva y la selección de palabras. Quedarse en blanco es una consecuencia electroquímica directa: tu cerebro prioriza la protección y no la retórica social. '
+      'Punto 3: La Regla de los 20 Minutos de Dolf Zillmann. Las investigaciones fisiológicas demuestran que el cuerpo humano necesita entre 15 y 20 minutos de enfriamiento somático para metabolizar la adrenalina y permitir que el ritmo cardíaco vuelva a niveles basales. Intentar resolver un conflicto social o forzarte a hablar durante esos minutos es biológicamente ineficaz. La prioridad es el enfriamiento somático.';
+
   void _speakCurrentSection() {
     String textToSpeak = '';
     if (_selectedTab == 0) {
-      textToSpeak =
-          'Protocolo antes de entrar a una entrevista o negociación. Hombros abajo y columna erguida. Manos visibles fuera de los bolsillos. Contacto visual inicial de dos segundos con sonrisa tranquila. Pies planos sobre el suelo.';
+      textToSpeak = _workChecklistSpeech;
     } else if (_selectedTab == 1) {
-      textToSpeak =
-          'Protocolo al entrar a un evento social. Busca grupos en formación de herradura abierta. Mantén una distancia de metro y medio. No te escondas en el teléfono móvil. Sostén una bebida a la altura de la cintura.';
+      textToSpeak = _socialChecklistSpeech;
     } else if (_selectedTab == 2) {
-      textToSpeak =
-          'Salvavidas si te quedas en blanco. Haz una pausa de poder respirando hondo. Aplica el rebote con una pregunta abierta. O parafrasea las últimas palabras de la otra persona con tono reflexivo.';
+      textToSpeak = _blankMindSpeech;
     } else if (_selectedTab == 3) {
-      textToSpeak =
-          'Salida digna por sobrecarga sensorial. Para una pausa breve di: voy por un vaso de agua, con permiso. Para retirarte di: tuve un día largo y me retiro para descansar, que disfruten mucho la velada.';
+      textToSpeak = _sensoryEscapeSpeech;
     } else {
-      textToSpeak =
-          'La Neurobiología del Bloqueo. Cuando experimentas sobrecarga, la amígdala secuestra al cerebro antes de que la corteza prefrontal pueda pensar. Esto desconecta temporalmente la memoria de trabajo. Tu cuerpo tarda de 15 a 20 minutos en metabolizar la adrenalina. No intentes forzarte a razonar en medio del secuestro: la prioridad biológica es el enfriamiento somático.';
+      textToSpeak = _neurobiologySpeech;
     }
     TtsService.speak(textToSpeak, gestureId: 'emergency_mode_$_selectedTab');
   }
@@ -295,9 +322,43 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '3 Técnicas de Rescate si te Quedas en Blanco',
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+        Row(
+          children: [
+            const Expanded(
+              child: Text(
+                '3 Técnicas de Rescate si te Quedas en Blanco',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+              ),
+            ),
+            ValueListenableBuilder<String?>(
+              valueListenable: TtsService.currentSpeakingIdNotifier,
+              builder: (context, speakingId, _) {
+                final isSpeaking = speakingId == 'rescue_all';
+                return IconButton(
+                  icon: Icon(
+                    isSpeaking
+                        ? Icons.stop_circle_rounded
+                        : Icons.volume_up_rounded,
+                    size: 22,
+                    color: isSpeaking
+                        ? AppColors.coral
+                        : (isDark ? AppColors.accentLight : AppColors.accent),
+                  ),
+                  tooltip:
+                      isSpeaking ? 'Detener lectura' : 'Escuchar las 3 técnicas',
+                  onPressed: () {
+                    FeedbackService.lightClick();
+                    if (isSpeaking) {
+                      TtsService.stop();
+                    } else {
+                      TtsService.speak(_blankMindSpeech,
+                          gestureId: 'rescue_all');
+                    }
+                  },
+                );
+              },
+            ),
+          ],
         ),
         const SizedBox(height: 12),
         AppCard(
@@ -316,6 +377,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rescue_1';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar técnica',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'La Pausa de Poder. Silence Framing. Si olvidas lo que ibas a decir, no digas ehhh ni te disculpes con pánico. Respira hondo, asiente con la cabeza y mantén la calma durante 2 segundos. La contraparte pensará que estás meditando una respuesta sabia y reflexiva.',
+                                gestureId: 'rescue_1');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -351,6 +445,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rescue_2';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar técnica',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'El Rebote de Pregunta Abierta. Si el flujo conversacional muere, devuelve el protagonismo a la otra persona: "Oye, y en tu caso, ¿cómo sueles manejar tú ese tipo de situaciones?". A la inmensa mayoría de las personas les encanta hablar de sus propias experiencias.',
+                                gestureId: 'rescue_2');
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -384,6 +511,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rescue_3';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar técnica',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'El Espejo de las Últimas 3 Palabras. Toma las últimas 2 o 3 palabras que dijo la otra persona y repítelas en tono reflexivo o de suave pregunta. Esto hace que la otra persona amplíe la información automáticamente mientras tú recuperas el hilo.',
+                                gestureId: 'rescue_3');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -501,13 +661,53 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                      decoration: isChecked ? TextDecoration.lineThrough : null,
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w800,
+                            decoration:
+                                isChecked ? TextDecoration.lineThrough : null,
+                          ),
+                        ),
+                      ),
+                      ValueListenableBuilder<String?>(
+                        valueListenable: TtsService.currentSpeakingIdNotifier,
+                        builder: (context, speakingId, _) {
+                          final isSpeaking = speakingId == 'check_$id';
+                          return IconButton(
+                            icon: Icon(
+                              isSpeaking
+                                  ? Icons.stop_circle_rounded
+                                  : Icons.volume_up_rounded,
+                              size: 18,
+                              color: isSpeaking
+                                  ? AppColors.coral
+                                  : (isDark
+                                      ? AppColors.accentLight
+                                      : AppColors.accent),
+                            ),
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(
+                                minWidth: 28, minHeight: 28),
+                            tooltip:
+                                isSpeaking ? 'Detener lectura' : 'Escuchar pauta',
+                            onPressed: () {
+                              FeedbackService.lightClick();
+                              if (isSpeaking) {
+                                TtsService.stop();
+                              } else {
+                                TtsService.speak('$title. $description',
+                                    gestureId: 'check_$id');
+                              }
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -540,9 +740,48 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 14.5, fontWeight: FontWeight.w800),
+                ),
+              ),
+              ValueListenableBuilder<String?>(
+                valueListenable: TtsService.currentSpeakingIdNotifier,
+                builder: (context, speakingId, _) {
+                  final id = 'escape_${title.hashCode}';
+                  final isSpeaking = speakingId == id;
+                  return IconButton(
+                    icon: Icon(
+                      isSpeaking
+                          ? Icons.stop_circle_rounded
+                          : Icons.volume_up_rounded,
+                      size: 20,
+                      color: isSpeaking
+                          ? AppColors.coral
+                          : (isDark ? AppColors.accentLight : AppColors.accent),
+                    ),
+                    padding: EdgeInsets.zero,
+                    constraints:
+                        const BoxConstraints(minWidth: 28, minHeight: 28),
+                    tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar guion',
+                    onPressed: () {
+                      FeedbackService.lightClick();
+                      if (isSpeaking) {
+                        TtsService.stop();
+                      } else {
+                        TtsService.speak(
+                            '$title. Frase de salida: "$script". Por qué funciona: $whyItWorks',
+                            gestureId: id);
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
           ),
           const SizedBox(height: 8),
           Container(
@@ -594,9 +833,43 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Neurobiología del Secuestro Emocional y Bloqueo',
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+        Row(
+          children: [
+            const Expanded(
+              child: Text(
+                'Neurobiología del Secuestro Emocional y Bloqueo',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+              ),
+            ),
+            ValueListenableBuilder<String?>(
+              valueListenable: TtsService.currentSpeakingIdNotifier,
+              builder: (context, speakingId, _) {
+                final isSpeaking = speakingId == 'neuro_all';
+                return IconButton(
+                  icon: Icon(
+                    isSpeaking
+                        ? Icons.stop_circle_rounded
+                        : Icons.volume_up_rounded,
+                    size: 22,
+                    color: isSpeaking
+                        ? AppColors.coral
+                        : (isDark ? AppColors.accentLight : AppColors.accent),
+                  ),
+                  tooltip:
+                      isSpeaking ? 'Detener lectura' : 'Escuchar explicación completa',
+                  onPressed: () {
+                    FeedbackService.lightClick();
+                    if (isSpeaking) {
+                      TtsService.stop();
+                    } else {
+                      TtsService.speak(_neurobiologySpeech,
+                          gestureId: 'neuro_all');
+                    }
+                  },
+                );
+              },
+            ),
+          ],
         ),
         const SizedBox(height: 6),
         Text(
@@ -634,6 +907,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'neuro_1';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar punto 1',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'El Atajo Tálamo-Amígdala de 12 milisegundos. El neurocientífico Joseph LeDoux descubrió que la señal sensorial viaja del tálamo a la amígdala en aproximadamente 12 milisegundos, mientras que a la corteza pensante le toma el doble de tiempo o más. En situaciones de sobrecarga o tensión, tu sistema de alarma cerebral reacciona y dispara una respuesta neuroquímica antes de que tu mente consciente haya tenido tiempo de evaluar la situación. Pauta neuroafirmativa: El sobresalto o aceleración inicial es un reflejo biológico no consciente; no intentes reprimirlo con autoexigencia.',
+                                gestureId: 'neuro_1');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -707,6 +1013,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
                   ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'neuro_2';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar punto 2',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'El Secuestro de la Memoria de Trabajo. Cuando la amígdala detecta alarma o saturación sensorial, libera catecolaminas, adrenalina y noradrenalina, que desvían el flujo cerebral. Esto inhibe temporalmente la corteza prefrontal, el área encargada de la memoria de trabajo, la flexibilidad cognitiva y la selección de palabras. Quedarse en blanco es una consecuencia electroquímica directa: tu cerebro está priorizando la protección y no la retórica social.',
+                                gestureId: 'neuro_2');
+                          }
+                        },
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -749,6 +1088,39 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
                     ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'neuro_3';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 20,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        padding: EdgeInsets.zero,
+                        constraints:
+                            const BoxConstraints(minWidth: 28, minHeight: 28),
+                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar punto 3',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                'La Regla de los 20 Minutos de Dolf Zillmann. Las investigaciones fisiológicas demuestran que el cuerpo humano necesita entre 15 y 20 minutos de enfriamiento somático para metabolizar la adrenalina y permitir que el ritmo cardíaco vuelva a niveles basales. Intentar resolver un conflicto social o forzarte a hablar durante esos minutos es biológicamente ineficaz. La prioridad es el enfriamiento somático.',
+                                gestureId: 'neuro_3');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),

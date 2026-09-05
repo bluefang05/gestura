@@ -350,6 +350,44 @@ class _IncongruenceDetectorScreenState
                                   ),
                                 ),
                               ),
+                              ValueListenableBuilder<String?>(
+                                valueListenable:
+                                    TtsService.currentSpeakingIdNotifier,
+                                builder: (context, speakingId, _) {
+                                  final id = 'incongruence_${item.id}';
+                                  final isSpeaking = speakingId == id;
+                                  return IconButton(
+                                    icon: Icon(
+                                      isSpeaking
+                                          ? Icons.stop_circle_rounded
+                                          : Icons.volume_up_rounded,
+                                      size: 20,
+                                      color: isSpeaking
+                                          ? AppColors.coral
+                                          : (isDark
+                                              ? AppColors.accentLight
+                                              : AppColors.accent),
+                                    ),
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(
+                                        minWidth: 28, minHeight: 28),
+                                    tooltip: isSpeaking
+                                        ? 'Detener lectura'
+                                        : 'Escuchar caso y señales',
+                                    onPressed: () {
+                                      FeedbackService.lightClick();
+                                      if (isSpeaking) {
+                                        TtsService.stop();
+                                      } else {
+                                        TtsService.speak(
+                                          'Interlocutor: ${item.speakerRole}. Dice la frase: "${item.spokenPhrase}". Señales corporales observadas: ${item.physicalSignals.join(", ")}. Pregunta: ¿Las señales corporales están alineadas o contradicen lo que dice?',
+                                          gestureId: id,
+                                        );
+                                      }
+                                    },
+                                  );
+                                },
+                              ),
                             ],
                           ),
                           const SizedBox(height: 12),
