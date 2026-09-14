@@ -1066,8 +1066,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.7', () {
-    expect(AppConstants.appVersion, equals('1.0.7'));
+  test('AppConstants appVersion matches version 1.0.8', () {
+    expect(AppConstants.appVersion, equals('1.0.8'));
   });
 
   testWidgets('QuizRunnerScreen handles empty questions safely without crashing',
