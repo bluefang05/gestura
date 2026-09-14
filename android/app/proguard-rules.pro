@@ -33,3 +33,22 @@
 # Flutter Deferred Components / Play Core optional dependency
 -dontwarn com.google.android.play.core.**
 
+# AndroidX WorkManager (used by Google Mobile Ads SDK)
+-keep class androidx.work.** { *; }
+-keep class androidx.work.impl.** { *; }
+-keep class androidx.work.impl.model.** { *; }
+-keep class androidx.work.impl.WorkDatabase { *; }
+-keep class * extends androidx.work.impl.WorkDatabase { *; }
+-keep class * extends androidx.work.Worker { *; }
+-keep class * extends androidx.work.ListenableWorker { *; }
+-dontwarn androidx.work.**
+
+# AndroidX Room (required by WorkManager database)
+-keep class androidx.room.** { *; }
+-keep class * extends androidx.room.RoomDatabase { *; }
+-dontwarn androidx.room.**
+
+# AndroidX Startup / InitializationProvider
+-keep class androidx.startup.** { *; }
+-keep class * extends androidx.startup.Initializer { *; }
+-dontwarn androidx.startup.**
