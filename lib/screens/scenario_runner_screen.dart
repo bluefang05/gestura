@@ -84,6 +84,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
     if (_selectedChoice == null) return;
 
     if (_selectedChoice!.nextStepIndex != null &&
+        _selectedChoice!.nextStepIndex! >= 0 &&
         _selectedChoice!.nextStepIndex! < widget.scenario.steps.length) {
       setState(() {
         _currentStepIndex = _selectedChoice!.nextStepIndex!;
@@ -113,6 +114,16 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.scenario.steps.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.scenario.domain)),
+        bottomNavigationBar: const AdBottomBar(),
+        body: const Center(
+          child: Text('No hay pasos configurados en este escenario.'),
+        ),
+      );
+    }
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (_isCompleted) {

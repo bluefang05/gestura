@@ -154,6 +154,16 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text(widget.title)),
+        bottomNavigationBar: const AdBottomBar(),
+        body: const Center(
+          child: Text('No hay preguntas disponibles.'),
+        ),
+      );
+    }
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (_isFinished) {

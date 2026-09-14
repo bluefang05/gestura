@@ -33,6 +33,11 @@ import 'package:gestura/screens/incongruence_detector_screen.dart';
 import 'package:gestura/screens/gesture_detail_screen.dart';
 import 'package:gestura/widgets/dictionary/gesture_card.dart';
 import 'package:gestura/screens/scenario_runner_screen.dart';
+import 'package:gestura/screens/decision_tree_screen.dart';
+import 'package:gestura/screens/cheat_sheet_screen.dart';
+import 'package:gestura/screens/quiz_runner_screen.dart';
+import 'package:gestura/core/constants/app_constants.dart';
+import 'package:gestura/models/scenario.dart';
 
 void main() {
   setUp(() async {
@@ -1016,5 +1021,89 @@ void main() {
     expect(find.text('Lección Teórica Clave'), findsOneWidget);
     expect(find.text(scenario.steps.first.learningTakeaway), findsOneWidget);
   });
+
+  test('DecisionTreeScreen zones map contains only valid GestureDatabase IDs', () {
+    for (final zone in DecisionTreeScreen.zones) {
+      final clues = zone['clues'] as List<String>;
+      expect(clues, isNotEmpty, reason: 'Zone ${zone["id"]} should have clues');
+      for (final id in clues) {
+        final gesture = GestureDatabase.getById(id);
+        expect(gesture, isNotNull,
+            reason: 'Clue ID "$id" in zone "${zone["id"]}" must exist in GestureDatabase');
+      }
+    }
+  });
+
+  test('CheatSheetScreen priorityIds contains exactly 20 valid gestures', () {
+    expect(CheatSheetScreen.priorityIds.length, equals(20));
+    for (final id in CheatSheetScreen.priorityIds) {
+      final gesture = GestureDatabase.getById(id);
+      expect(gesture, isNotNull,
+          reason: 'Priority ID "$id" in CheatSheetScreen must exist in GestureDatabase');
+    }
+  });
+
+  test('UserProgress calculates streak safely across day transitions', () {
+    var progress = UserProgress.initial();
+    // Day 1
+    final day1 = DateTime(2026, 3, 28, 23, 30);
+    progress = progress.registerActiveDay(day1);
+    expect(progress.currentStreak, equals(1));
+
+    // Day 2 (even if crossing DST transition of 23 hours)
+    final day2 = DateTime(2026, 3, 29, 0, 30);
+    progress = progress.registerActiveDay(day2);
+    expect(progress.currentStreak, equals(2));
+
+    // Same day activity should maintain streak
+    progress = progress.registerActiveDay(day2.add(const Duration(hours: 5)));
+    expect(progress.currentStreak, equals(2));
+
+    // Gap of 2 days resets streak
+    final day5 = DateTime(2026, 4, 1, 10, 0);
+    progress = progress.registerActiveDay(day5);
+    expect(progress.currentStreak, equals(1));
+    expect(progress.bestStreak, equals(2));
+  });
+
+  test('AppConstants appVersion matches version 1.0.7', () {
+    expect(AppConstants.appVersion, equals('1.0.7'));
+  });
+
+  testWidgets('QuizRunnerScreen handles empty questions safely without crashing',
+      (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: QuizRunnerScreen(title: 'Empty Quiz', questions: []),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('No hay preguntas disponibles.'), findsOneWidget);
+  });
+
+  testWidgets('ScenarioRunnerScreen handles empty steps safely without crashing',
+      (tester) async {
+    const emptyScenario = Scenario(
+      id: 'empty_test',
+      title: 'Escenario Vacío',
+      domain: 'Test',
+      description: 'Test description',
+      contextOverview: 'Test overview',
+      iconName: 'theater_comedy',
+      steps: [],
+    );
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: ScenarioRunnerScreen(scenario: emptyScenario),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('No hay pasos configurados en este escenario.'),
+        findsOneWidget);
+  });
 }
+
 

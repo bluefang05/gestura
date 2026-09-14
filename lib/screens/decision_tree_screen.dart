@@ -15,6 +15,8 @@ import 'gesture_detail_screen.dart';
 class DecisionTreeScreen extends StatefulWidget {
   const DecisionTreeScreen({super.key});
 
+  static const List<Map<String, dynamic>> zones = _DecisionTreeScreenState.zones;
+
   @override
   State<DecisionTreeScreen> createState() => _DecisionTreeScreenState();
 }
@@ -36,13 +38,15 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       'icon': Icons.visibility_rounded,
       'color': AppColors.primary,
       'clues': [
-        'duchenne_smile',
-        'narrowed_eyes',
-        'closed_eyelids',
-        'averted_gaze',
-        'pupil_dilation',
-        'winking_face',
-        'flash_cejas'
+        'sonrisa_genuina',
+        'ceno_fruncido',
+        'ojos_entrecerrados',
+        'mirada_sorpresa',
+        'mirada_esquiva',
+        'parpados_cerrados',
+        'pupilas_dilatadas',
+        'guino',
+        'flash_cejas',
       ],
     },
     {
@@ -52,12 +56,11 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       'color': AppColors.coral,
       'clues': [
         'sonrisa_social',
-        'tight_lips',
-        'smirk_contempt',
-        'jaw_clenching',
+        'labios_apretados',
+        'mirada_desden',
+        'mandibula_apretada',
         'morder_labio',
-        'tristeza',
-        'sorpresa'
+        'aleteo_nasal',
       ],
     },
     {
@@ -71,12 +74,12 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
         'manos_ojiva',
         'manos_caderas',
         'tocarse_cuello',
-        'hands_behind_head',
-        'hands_behind_back',
+        'manos_nuca',
+        'brazos_espalda',
         'frotar_manos',
-        'tamborileo_dedos',
+        'tamborilear_dedos',
         'inclinacion_adelante',
-        'inclinacion_atras'
+        'inclinacion_atras',
       ],
     },
     {
@@ -85,14 +88,14 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       'icon': Icons.record_voice_over_rounded,
       'color': AppColors.purple,
       'clues': [
-        'sarcastic_inflection',
-        'assertive_voice',
-        'silence_tense',
-        'silence_reflective',
-        'voice_volume_high',
-        'voice_volume_low',
-        'voice_speed_fast',
-        'voice_monotone'
+        'volumen_alto',
+        'volumen_bajo',
+        'velocidad_rapida',
+        'tono_monotono',
+        'tono_sarcastico',
+        'tono_asertivo',
+        'silencio_incomodo',
+        'silencio_reflexivo',
       ],
     },
     {
@@ -104,9 +107,9 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
         'espacio_intimo',
         'espacio_personal',
         'espacio_social',
-        'round_table',
-        'desk_barrier',
-        'seating_angle'
+        'mesa_redonda',
+        'mesa_barrera',
+        'angulo_noventa',
       ],
     },
     {
@@ -119,7 +122,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
         'digital_ok_seco',
         'digital_ghosting',
         'digital_emojis',
-        'digital_audio'
+        'digital_audio',
       ],
     },
   ];

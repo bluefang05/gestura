@@ -33,14 +33,15 @@ class UserProgress {
     return '${dt.year}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')}';
   }
 
-  UserProgress registerActiveDay() {
-    final todayStr = _formatDate(DateTime.now());
+  UserProgress registerActiveDay([DateTime? currentTime]) {
+    final now = currentTime ?? DateTime.now();
+    final todayStr = _formatDate(now);
     if (lastActiveDate == todayStr) {
       return this;
     }
 
-    final yesterdayStr =
-        _formatDate(DateTime.now().subtract(const Duration(days: 1)));
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
+    final yesterdayStr = _formatDate(yesterday);
     int newStreak = currentStreak;
 
     if (lastActiveDate.isEmpty) {

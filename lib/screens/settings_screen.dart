@@ -26,6 +26,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _settings = SettingsProvider();
   }
 
+  @override
+  void dispose() {
+    TtsService.stop();
+    super.dispose();
+  }
+
   void _confirmResetProgress() {
     final loc = AppLocalizations.of(context);
     showDialog(

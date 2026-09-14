@@ -13,6 +13,8 @@ import '../core/services/tts_service.dart';
 class CheatSheetScreen extends StatefulWidget {
   const CheatSheetScreen({super.key});
 
+  static const List<String> priorityIds = _CheatSheetScreenState.priorityIds;
+
   @override
   State<CheatSheetScreen> createState() => _CheatSheetScreenState();
 }
@@ -21,7 +23,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
   SignalTrafficLight? _filterLight;
 
   static const List<String> priorityIds = [
-    'duchenne_smile',
+    'sonrisa_genuina',
     'sonrisa_social',
     'postura_abierta',
     'postura_cerrada',
@@ -31,17 +33,23 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
     'manos_caderas',
     'tocarse_cuello',
     'frotar_manos',
-    'tight_lips',
-    'smirk_contempt',
-    'jaw_clenching',
-    'pupil_dilation',
-    'sarcastic_inflection',
-    'assertive_voice',
+    'labios_apretados',
+    'mirada_desden',
+    'mandibula_apretada',
+    'pupilas_dilatadas',
+    'tono_sarcastico',
+    'tono_asertivo',
     'mesa_redonda',
     'mesa_barrera',
-    'seating_angle',
-    'digital_visto',
+    'angulo_noventa',
+    'digital_ok_seco',
   ];
+
+  @override
+  void dispose() {
+    TtsService.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

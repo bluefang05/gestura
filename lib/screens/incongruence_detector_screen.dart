@@ -30,6 +30,12 @@ class _IncongruenceDetectorScreenState
     super.initState();
     _selectedAudience = widget.initialAudience;
   }
+
+  @override
+  void dispose() {
+    TtsService.stop();
+    super.dispose();
+  }
   int _score = 0;
   int _totalAnswered = 0;
 
@@ -245,6 +251,7 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'all';
                                 _currentIndex = 0;
+                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },
@@ -268,6 +275,7 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'autism_focus';
                                 _currentIndex = 0;
+                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },
@@ -291,6 +299,7 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'sales_focus';
                                 _currentIndex = 0;
+                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },

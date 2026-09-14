@@ -183,7 +183,7 @@ class HomeScreen extends StatelessWidget {
                           .difference(DateTime(DateTime.now().year, 1, 1))
                           .inDays;
                       final dailyGesture = GestureDatabase
-                          .items[dayOfYear % GestureDatabase.items.length];
+                          .items[dayOfYear.abs() % GestureDatabase.items.length];
                       final catInfo =
                           CategoryInfo.getInfo(dailyGesture.category);
 

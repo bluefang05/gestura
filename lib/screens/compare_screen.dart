@@ -95,6 +95,12 @@ class _CompareScreenState extends State<CompareScreen> {
     _selectedIdB = widget.initialGestureIdB ?? presetPairs.first.gestureIdB;
   }
 
+  @override
+  void dispose() {
+    TtsService.stop();
+    super.dispose();
+  }
+
   void _applyPreset(ComparePair pair) {
     FeedbackService.lightClick();
     setState(() {
