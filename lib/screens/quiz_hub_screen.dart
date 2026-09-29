@@ -10,6 +10,7 @@ import 'quiz_runner_screen.dart';
 import 'flash_quiz_screen.dart';
 import 'incongruence_detector_screen.dart';
 import 'buyer_temperature_screen.dart';
+import 'communication_guide_screen.dart';
 import '../widgets/quiz/personal_practice_card.dart';
 
 class QuizHubScreen extends StatelessWidget {
@@ -22,6 +23,16 @@ class QuizHubScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Zona de Práctica'),
+        actions: [
+          IconButton(
+            tooltip: 'Cómo interpretar señales',
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const CommunicationGuideScreen())),
+          ),
+        ],
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {

@@ -8,6 +8,7 @@ import '../core/services/feedback_service.dart';
 import '../state/progress_provider.dart';
 import 'gesture_detail_screen.dart';
 import 'compare_screen.dart';
+import 'communication_guide_screen.dart';
 
 class DictionaryScreen extends StatefulWidget {
   final CategoryType? initialCategory;
@@ -86,6 +87,14 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
       appBar: AppBar(
         title: const Text('Manual de Señales'),
         actions: [
+          IconButton(
+            tooltip: 'Cómo interpretar señales',
+            icon: const Icon(Icons.help_outline_rounded),
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const CommunicationGuideScreen())),
+          ),
           IconButton(
             icon: const Icon(Icons.compare_arrows_rounded),
             tooltip: 'Comparador Visual A/B',

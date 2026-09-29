@@ -2,6 +2,12 @@
 
 ## Pendiente de publicación
 
+- Ampliado el catálogo a 90 señales, 93 preguntas y 27 escenarios.
+- Añadidos 12 guiones sociales con 36 frases en tres niveles de firmeza.
+- Incorporada una guía de ocho lecciones sobre interpretación, acuerdos y contexto.
+- Documentadas las fuentes y criterios editoriales del contenido nuevo.
+- El total de hitos de aprendizaje se calcula desde el catálogo disponible.
+
 - Corregido el filtro de favoritos y su actualización entre pantallas.
 - Añadida búsqueda sin tildes y por múltiples términos, contador de resultados,
   filtro de señales por explorar y acciones para limpiar filtros.

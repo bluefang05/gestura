@@ -115,7 +115,7 @@ void main() {
   });
 
   test('ScenarioDatabase contains sales and workplace simulations', () {
-    expect(ScenarioDatabase.scenarios.length, equals(15));
+    expect(ScenarioDatabase.scenarios.length, greaterThanOrEqualTo(27));
     final salesScenario = ScenarioDatabase.getById('scenario_sales_closing');
     expect(salesScenario, isNotNull);
     expect(salesScenario!.steps.isNotEmpty, isTrue);
@@ -137,8 +137,8 @@ void main() {
     expect(boundaryScenario, isNotNull);
     expect(boundaryScenario!.domain, equals('Límites & Asertividad'));
     expect(boundaryScenario.steps.length, equals(2));
-    expect(
-        boundaryScenario.steps.first.choices.any((c) => c.isBestAction), isTrue);
+    expect(boundaryScenario.steps.first.choices.any((c) => c.isBestAction),
+        isTrue);
 
     final consentScenario =
         ScenarioDatabase.getById('scenario_consent_decoding_fawning');
@@ -193,17 +193,27 @@ void main() {
     expect(initialProgress.masteryLevelTitle, equals('Iniciando Calibración'));
 
     final halfwayProgress = initialProgress.copyWith(
-      exploredGestureIds: List.generate(33, (i) => 'g_$i'),
-      completedScenarioIds: List.generate(8, (i) => 's_$i'),
-      completedQuizIds: List.generate(22, (i) => 'q_$i'),
+      exploredGestureIds: GestureDatabase.items
+          .take((GestureDatabase.items.length / 2).ceil())
+          .map((g) => g.id)
+          .toList(),
+      completedScenarioIds: ScenarioDatabase.scenarios
+          .take((ScenarioDatabase.scenarios.length / 2).ceil())
+          .map((s) => s.id)
+          .toList(),
+      completedQuizIds: QuizDatabase.questions
+          .take((QuizDatabase.questions.length / 2).ceil())
+          .map((q) => q.id)
+          .toList(),
     );
     expect(halfwayProgress.masteryPercentage, greaterThanOrEqualTo(50));
     expect(halfwayProgress.masteryLevelTitle, equals('Analista de Campo'));
 
     final completedProgress = initialProgress.copyWith(
-      exploredGestureIds: List.generate(66, (i) => 'g_$i'),
-      completedScenarioIds: List.generate(15, (i) => 's_$i'),
-      completedQuizIds: List.generate(45, (i) => 'q_$i'),
+      exploredGestureIds: GestureDatabase.items.map((g) => g.id).toList(),
+      completedScenarioIds:
+          ScenarioDatabase.scenarios.map((s) => s.id).toList(),
+      completedQuizIds: QuizDatabase.questions.map((q) => q.id).toList(),
     );
     expect(completedProgress.masteryPercentage, equals(100));
     expect(
@@ -395,10 +405,12 @@ void main() {
     expect(find.text('Neurobiología del Secuestro Emocional y Bloqueo'),
         findsOneWidget);
     expect(find.text('1. El Atajo Tálamo-Amígdala (12 ms)'), findsOneWidget);
-    expect(find.text('2. El Secuestro de la Memoria de Trabajo'), findsOneWidget);
+    expect(
+        find.text('2. El Secuestro de la Memoria de Trabajo'), findsOneWidget);
     expect(find.text('3. La Regla de los 20 Minutos (Dolf Zillmann)'),
         findsOneWidget);
-    expect(find.text('4. Protocolo SOCS / Semáforo de Regulación'), findsOneWidget);
+    expect(find.text('4. Protocolo SOCS / Semáforo de Regulación'),
+        findsOneWidget);
   });
 
   test('AppLocalizations maintains 100% key symmetry across all 5 languages',
@@ -583,7 +595,7 @@ void main() {
 
   test('SocialScriptsDatabase has complete scripts with 3 firmness levels', () {
     final scripts = SocialScriptsDatabase.scripts;
-    expect(scripts.length, equals(25));
+    expect(scripts.length, greaterThanOrEqualTo(37));
 
     final scriptIds = scripts.map((s) => s.id).toList();
     expect(scriptIds.toSet().length, equals(scriptIds.length),
@@ -661,7 +673,8 @@ void main() {
     }
   });
 
-  test('BoundaryFrameworkDatabase defines 4 methodological phases and protocols',
+  test(
+      'BoundaryFrameworkDatabase defines 4 methodological phases and protocols',
       () {
     final phases = BoundaryFrameworkDatabase.phases;
     expect(phases.length, equals(4));
@@ -742,7 +755,9 @@ void main() {
     expect(find.textContaining('señales observadas'), findsOneWidget);
   });
 
-  test('RoadmapDatabase defines complete 5-level curriculum with 11 steps and valid progression', () {
+  test(
+      'RoadmapDatabase defines complete 5-level curriculum with 11 steps and valid progression',
+      () {
     expect(RoadmapDatabase.levels.length, equals(5));
     final allSteps = RoadmapDatabase.levels.expand((l) => l.steps).toList();
     expect(allSteps.length, equals(11));
@@ -761,19 +776,26 @@ void main() {
     expect(activeLevel.levelNumber, equals(1));
 
     // Status checks
-    expect(activeStep.getStatus(freshProgress, true), equals(RoadmapStepStatus.current));
+    expect(activeStep.getStatus(freshProgress, true),
+        equals(RoadmapStepStatus.current));
     final step2 = allSteps[1];
-    expect(step2.getStatus(freshProgress, false), equals(RoadmapStepStatus.locked));
+    expect(step2.getStatus(freshProgress, false),
+        equals(RoadmapStepStatus.locked));
 
     // Simulated progress: user explored 1 gesture
-    final progressWith1Gesture = freshProgress.copyWith(exploredGestureIds: ['g_test_1']);
-    expect(activeStep.getStatus(progressWith1Gesture, true), equals(RoadmapStepStatus.completed));
-    final nextActive = RoadmapDatabase.getCurrentActiveStep(progressWith1Gesture);
+    final progressWith1Gesture =
+        freshProgress.copyWith(exploredGestureIds: ['g_test_1']);
+    expect(activeStep.getStatus(progressWith1Gesture, true),
+        equals(RoadmapStepStatus.completed));
+    final nextActive =
+        RoadmapDatabase.getCurrentActiveStep(progressWith1Gesture);
     expect(nextActive.id, equals('step_first_quiz'));
     expect(nextActive.stepNumber, equals(2));
   });
 
-  testWidgets('MasteryProgressCard renders How to Human mission card and navigates correctly', (tester) async {
+  testWidgets(
+      'MasteryProgressCard renders How to Human mission card and navigates correctly',
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
@@ -803,7 +825,9 @@ void main() {
     expect(find.text('Conglomerados y Línea Base'), findsOneWidget);
   });
 
-  testWidgets('ProgressScreen renders Roadmap How to Human and switches to Metrics/Radar tab', (tester) async {
+  testWidgets(
+      'ProgressScreen renders Roadmap How to Human and switches to Metrics/Radar tab',
+      (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
         home: ProgressScreen(),
@@ -835,7 +859,7 @@ void main() {
   });
 
   testWidgets(
-      'ScenariosScreen renders 15 scenarios and filters by Límites y Consentimiento',
+      'ScenariosScreen renders the catalog and filters by Límites y Consentimiento',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -846,22 +870,27 @@ void main() {
 
     // Verify Title and total count chip
     expect(find.text('Simulador de Escenarios'), findsOneWidget);
-    expect(find.text('Todos (15)'), findsOneWidget);
-    expect(find.textContaining('Límites y Consentimiento (2)'), findsOneWidget);
+    expect(find.text('Todos (${ScenarioDatabase.scenarios.length})'),
+        findsOneWidget);
+    final boundaryCount = ScenarioDatabase.scenarios
+        .where((s) =>
+            s.domain == 'Límites & Asertividad' ||
+            s.domain == 'Límites & Consentimiento')
+        .length;
+    expect(
+        find.text('Límites y Consentimiento ($boundaryCount)'), findsOneWidget);
 
     // Tap boundaries filter chip (ensuring visibility in horizontal scroll)
-    final boundaryChip = find.textContaining('Límites y Consentimiento (2)');
+    final boundaryChip = find.text('Límites y Consentimiento ($boundaryCount)');
     await tester.ensureVisible(boundaryChip);
     await tester.pumpAndSettle();
     await tester.tap(boundaryChip);
     await tester.pumpAndSettle();
 
     // Verify both boundary scenarios are displayed
-    expect(
-        find.textContaining('Límites Asertivos: La Presión del Colega'),
+    expect(find.textContaining('Límites Asertivos: La Presión del Colega'),
         findsOneWidget);
-    expect(
-        find.textContaining('Consentimiento Real: Decodificar el Falso Sí'),
+    expect(find.textContaining('Consentimiento Real: Decodificar el Falso Sí'),
         findsOneWidget);
   });
 
@@ -889,7 +918,9 @@ void main() {
     expect(find.text('Entenderlos: El Radar Somático'), findsOneWidget);
   });
 
-  test('ProgressProvider updates state and notifies listeners on progress changes', () async {
+  test(
+      'ProgressProvider updates state and notifies listeners on progress changes',
+      () async {
     final provider = ProgressProvider();
     bool notified = false;
     void listener() {
@@ -899,7 +930,8 @@ void main() {
     provider.addListener(listener);
     await provider.markGestureExplored('sonrisa_duchenne');
     expect(notified, isTrue);
-    expect(provider.progress.exploredGestureIds.contains('sonrisa_duchenne'), isTrue);
+    expect(provider.progress.exploredGestureIds.contains('sonrisa_duchenne'),
+        isTrue);
     provider.removeListener(listener);
   });
 
@@ -923,7 +955,9 @@ void main() {
     expect(find.text('Hipótesis e interpretaciones posibles:'), findsOneWidget);
   });
 
-  test('GestureItem provides valid visual-first clues, actions, and express audio', () {
+  test(
+      'GestureItem provides valid visual-first clues, actions, and express audio',
+      () {
     for (final item in GestureDatabase.items) {
       expect(item.quickVisualClue.isNotEmpty, isTrue,
           reason: '${item.id} should have non-empty quickVisualClue');
@@ -938,7 +972,8 @@ void main() {
     }
   });
 
-  testWidgets('GestureDetailScreen renders 3-second card and express audio hero',
+  testWidgets(
+      'GestureDetailScreen renders 3-second card and express audio hero',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -981,7 +1016,8 @@ void main() {
 
   test('GestureItem provides valid difficultyLabel and color', () {
     for (final item in GestureDatabase.items) {
-      expect(item.difficultyLabel, isIn(['Nivel Básico', 'Nivel Intermedio', 'Nivel Sutil']));
+      expect(item.difficultyLabel,
+          isIn(['Nivel Básico', 'Nivel Intermedio', 'Nivel Sutil']));
       expect(item.difficultyColor, isNotNull);
     }
   });
@@ -1022,14 +1058,16 @@ void main() {
     expect(find.text(scenario.steps.first.learningTakeaway), findsOneWidget);
   });
 
-  test('DecisionTreeScreen zones map contains only valid GestureDatabase IDs', () {
+  test('DecisionTreeScreen zones map contains only valid GestureDatabase IDs',
+      () {
     for (final zone in DecisionTreeScreen.zones) {
       final clues = zone['clues'] as List<String>;
       expect(clues, isNotEmpty, reason: 'Zone ${zone["id"]} should have clues');
       for (final id in clues) {
         final gesture = GestureDatabase.getById(id);
         expect(gesture, isNotNull,
-            reason: 'Clue ID "$id" in zone "${zone["id"]}" must exist in GestureDatabase');
+            reason:
+                'Clue ID "$id" in zone "${zone["id"]}" must exist in GestureDatabase');
       }
     }
   });
@@ -1039,7 +1077,8 @@ void main() {
     for (final id in CheatSheetScreen.priorityIds) {
       final gesture = GestureDatabase.getById(id);
       expect(gesture, isNotNull,
-          reason: 'Priority ID "$id" in CheatSheetScreen must exist in GestureDatabase');
+          reason:
+              'Priority ID "$id" in CheatSheetScreen must exist in GestureDatabase');
     }
   });
 
@@ -1070,7 +1109,8 @@ void main() {
     expect(AppConstants.appVersion, equals('1.0.8'));
   });
 
-  testWidgets('QuizRunnerScreen handles empty questions safely without crashing',
+  testWidgets(
+      'QuizRunnerScreen handles empty questions safely without crashing',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -1082,7 +1122,8 @@ void main() {
     expect(find.text('No hay preguntas disponibles.'), findsOneWidget);
   });
 
-  testWidgets('ScenarioRunnerScreen handles empty steps safely without crashing',
+  testWidgets(
+      'ScenarioRunnerScreen handles empty steps safely without crashing',
       (tester) async {
     const emptyScenario = Scenario(
       id: 'empty_test',
@@ -1105,5 +1146,3 @@ void main() {
         findsOneWidget);
   });
 }
-
-

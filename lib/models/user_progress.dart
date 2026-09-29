@@ -1,3 +1,7 @@
+import '../data/gesture_database.dart';
+import '../data/quiz_database.dart';
+import '../data/scenario_database.dart';
+
 class UserProgress {
   final int currentStreak;
   final int bestStreak;
@@ -116,7 +120,10 @@ class UserProgress {
   int get totalMilestonesCompleted =>
       totalExploredGestures + totalCompletedScenarios + totalCompletedQuizzes;
 
-  static const int totalPossibleMilestones = 66 + 15 + 45; // 126 hitos totales
+  static int get totalPossibleMilestones =>
+      GestureDatabase.items.length +
+      ScenarioDatabase.scenarios.length +
+      QuizDatabase.questions.length;
 
   double get masteryRatio =>
       (totalMilestonesCompleted / totalPossibleMilestones).clamp(0.0, 1.0);

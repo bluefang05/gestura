@@ -143,10 +143,12 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: DictionaryScreen()));
     await tester.tap(find.text('Por explorar'));
     await tester.pumpAndSettle();
-    expect(find.text('65 señales'), findsOneWidget);
+    expect(find.text('${GestureDatabase.items.length - 1} señales'),
+        findsOneWidget);
     await tester.tap(find.text('Limpiar filtros'));
     await tester.pumpAndSettle();
-    expect(find.text('66 señales'), findsOneWidget);
+    expect(
+        find.text('${GestureDatabase.items.length} señales'), findsOneWidget);
   });
 
   testWidgets('Personal practice targets mistakes and updates after correction',

@@ -1,3 +1,4 @@
+import 'scenario_expansion.dart';
 import '../models/scenario.dart';
 
 class ScenarioDatabase {
@@ -1270,6 +1271,7 @@ class ScenarioDatabase {
         ),
       ],
     ),
+    ...ScenarioExpansion.scenarios,
   ];
 
   static Scenario? getById(String id) {

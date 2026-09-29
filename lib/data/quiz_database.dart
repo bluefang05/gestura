@@ -1,3 +1,4 @@
+import 'quiz_expansion.dart';
 import '../models/quiz_question.dart';
 import '../models/category.dart';
 
@@ -1508,6 +1509,7 @@ class QuizDatabase {
       explanation:
           'Desescalar la urgencia con una respuesta ágil, serena y estructurada neutraliza la ansiedad del cliente de forma inmediata.',
     ),
+    ...QuizExpansion.questions,
   ];
 
   static List<QuizQuestion> getByCategory(CategoryType category) {

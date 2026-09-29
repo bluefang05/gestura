@@ -1,3 +1,4 @@
+import 'gesture_expansion.dart';
 import '../models/gesture_item.dart';
 import '../core/utils/search_utils.dart';
 import '../models/category.dart';
@@ -1547,6 +1548,7 @@ class GestureDatabase {
       illustrationKey: 'lighting_atmosphere',
       difficulty: 1,
     ),
+    ...GestureExpansion.items,
   ];
 
   static List<GestureItem> getByCategory(CategoryType category) {

@@ -1,3 +1,4 @@
+import 'social_scripts_expansion.dart';
 import '../models/social_script.dart';
 
 class SocialScriptsDatabase {
@@ -462,6 +463,7 @@ class SocialScriptsDatabase {
       whatNotToDo:
           'No te justifiques ni des detalles para intentar que "lo entiendan"; en dinámicas familiares invasivas, las justificaciones se usan como combustible para más debate.',
     ),
+    ...SocialScriptsExpansion.scripts,
   ];
 
   static List<SocialScript> getByCategory(SocialScriptCategory category) {

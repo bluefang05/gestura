@@ -1,7 +1,7 @@
 # Gestura
 
 Aplicación Flutter para explorar y practicar la comunicación no verbal. Incluye
-66 señales, 45 preguntas y 15 escenarios. El contenido educativo y el progreso
+90 señales, 93 preguntas y 27 escenarios. El contenido educativo y el progreso
 se consultan localmente; los anuncios y algunas voces pueden requerir conexión.
 
 ## Funciones
@@ -11,6 +11,8 @@ se consultan localmente; los anuncios y algunas voces pueden requerir conexión.
 - Práctica personal de hasta cinco preguntas, con prioridad para los errores
   pendientes y explicaciones tras cada respuesta.
 - Entrenamiento visual, modo rápido, escenarios y herramientas de consulta.
+- Guía de ocho lecciones, casos sobre contexto y accesibilidad, y guiones
+  con tres niveles de firmeza. Consulta los [criterios y fuentes](CONTENT_SOURCES.md).
 - Progreso por pregunta y métricas por categoría. Leer una señal, responder una
   pregunta o completar un escenario registra un día de actividad.
 - Temas claro, oscuro y de alto contraste; tamaño de texto, movimiento reducido,
@@ -49,3 +51,6 @@ conserva favoritos y preferencias. Los resultados nuevos se guardan por ID de
 pregunta; los registros antiguos por título se conservan, pero no permiten
 reconstruir qué preguntas se respondieron. El repaso personal usa los resultados
 por pregunta y se actualiza al corregir una respuesta.
+
+El porcentaje de maestría se calcula sobre el catálogo completo. Al ampliarlo,
+el porcentaje puede bajar aunque se conserven todas las actividades completadas.
