@@ -10,6 +10,7 @@ import 'quiz_runner_screen.dart';
 import 'flash_quiz_screen.dart';
 import 'incongruence_detector_screen.dart';
 import 'buyer_temperature_screen.dart';
+import '../widgets/quiz/personal_practice_card.dart';
 
 class QuizHubScreen extends StatelessWidget {
   const QuizHubScreen({super.key});
@@ -35,6 +36,7 @@ class QuizHubScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
+                  const PersonalPracticeCard(),
                   // Modo Destacado: Test Visual de Microexpresiones
                   AppCard(
                     padding: const EdgeInsets.all(16),

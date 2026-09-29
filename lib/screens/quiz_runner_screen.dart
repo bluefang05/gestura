@@ -52,6 +52,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   }
 
   void _speakCurrentQuestion() {
+    if (!mounted || widget.questions.isEmpty || _isFinished) return;
     final q = _currentQuestion;
     final optionsFormatted = q.options.map((opt) {
       if (opt.subtext != null && opt.subtext!.trim().isNotEmpty) {
@@ -82,6 +83,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
     final selected = _currentQuestion.options
         .firstWhere((opt) => opt.id == _selectedOptionId);
     final isCorrect = selected.isCorrect;
+    ProgressProvider()
+        .recordQuizResult(_currentQuestion.id, isCorrect ? 100 : 0);
 
     setState(() {
       _isEvaluated = true;
@@ -139,7 +142,6 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       FeedbackService.complete();
       final scorePercentage =
           ((_correctCount / widget.questions.length) * 100).round();
-      ProgressProvider().recordQuizResult(widget.title, scorePercentage);
 
       setState(() {
         _isFinished = true;

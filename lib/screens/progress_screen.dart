@@ -3,6 +3,7 @@ import '../models/user_progress.dart';
 import '../models/category.dart';
 import '../models/roadmap_step.dart';
 import '../data/gesture_database.dart';
+import '../data/quiz_database.dart';
 import '../data/roadmap_database.dart';
 import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
@@ -55,18 +56,20 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   Map<String, double> _calculateCategoryScores() {
     final explored = _progress.exploredGestureIds;
-    final totalQuizzes = _progress.totalQuizzesTaken;
-    final accuracy = _progress.averageQuizAccuracy / 100.0;
 
     double calcScore(CategoryType cat) {
       final totalInCat = GestureDatabase.getByCategory(cat).length;
-      if (totalInCat == 0) return 0.2;
+      if (totalInCat == 0) return 0;
       final exploredInCat = GestureDatabase.getByCategory(cat)
           .where((g) => explored.contains(g.id))
           .length;
       final exploreRatio = exploredInCat / totalInCat;
-      final quizBonus = totalQuizzes > 0 ? (accuracy * 0.4) : 0.1;
-      return (exploreRatio * 0.6 + quizBonus).clamp(0.15, 1.0);
+      final questions = QuizDatabase.getByCategory(cat);
+      final earned = questions.fold<int>(
+          0, (sum, q) => sum + (_progress.quizScores[q.id] ?? 0));
+      final quizRatio =
+          questions.isEmpty ? 0.0 : earned / (questions.length * 100);
+      return (exploreRatio * 0.6 + quizRatio * 0.4).clamp(0.0, 1.0);
     }
 
     return {
@@ -431,8 +434,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
     switch (status) {
       case RoadmapStepStatus.completed:
-        nodeColor =
-            isDark ? const Color(0xFF064E3B) : const Color(0xFFDCFCE7);
+        nodeColor = isDark ? const Color(0xFF064E3B) : const Color(0xFFDCFCE7);
         nodeBorderColor = AppColors.success;
         nodeIcon = Icons.check_rounded;
         nodeIconColor = AppColors.success;
@@ -455,8 +457,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             isDark ? const Color(0xFF5EEAD4) : const Color(0xFF0F766E);
         break;
       case RoadmapStepStatus.locked:
-        nodeColor =
-            isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9);
+        nodeColor = isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9);
         nodeBorderColor =
             isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1);
         nodeIcon = Icons.lock_outline_rounded;
@@ -675,10 +676,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
     return [
       // Rank Banner
       AppCard(
-        color:
-            isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
-        borderSide:
-            const BorderSide(color: AppColors.primary, width: 1.5),
+        color: isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
+        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
         padding: const EdgeInsets.all(18),
         onTap: () {
           FeedbackService.levelUp();
@@ -752,8 +751,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             ),
             const SizedBox(width: 10),
             Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 10, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(10),
@@ -869,8 +867,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('Señales y Gestos Explorados',
-                    style: TextStyle(
-                        fontSize: 14.5, fontWeight: FontWeight.w800)),
+                    style:
+                        TextStyle(fontSize: 14.5, fontWeight: FontWeight.w800)),
                 Text('$exploredCount de $totalGestures',
                     style: const TextStyle(
                         fontSize: 13,
@@ -884,9 +882,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
               child: LinearProgressIndicator(
                 value: exploredRatio,
                 minHeight: 8,
-                backgroundColor: isDark
-                    ? AppColors.darkBorder
-                    : AppColors.lightBorder,
+                backgroundColor:
+                    isDark ? AppColors.darkBorder : AppColors.lightBorder,
                 color: AppColors.primary,
               ),
             ),
@@ -898,8 +895,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       // Radar Chart: Radar de Competencias No Verbales
       const SectionHeader(
         title: 'Radar de Competencias No Verbales',
-        subtitle:
-            'Tu nivel de dominio en las 6 dimensiones de la comunicación',
+        subtitle: 'Tu nivel de dominio en las 6 dimensiones de la comunicación',
       ),
       AppCard(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
@@ -950,15 +946,14 @@ class _ProgressScreenState extends State<ProgressScreen> {
             return Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: AppCard(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 14, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 onTap: () {
                   FeedbackService.lightClick();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) =>
-                          GestureDetailScreen(gestureId: item.id),
+                      builder: (_) => GestureDetailScreen(gestureId: item.id),
                     ),
                   ).then((_) => _loadData());
                 },

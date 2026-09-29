@@ -23,15 +23,19 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   CategoryType? _selectedCategory;
   String _selectedBodyPart = '';
   List<String> _bookmarkedIds = [];
+  bool _onlyBookmarks = false;
+  bool _onlyUnexplored = false;
 
   @override
   void initState() {
     super.initState();
     _selectedCategory = widget.initialCategory;
     _loadBookmarks();
+    ProgressProvider().addListener(_loadBookmarks);
   }
 
   void _loadBookmarks() {
+    if (!mounted) return;
     setState(() {
       _bookmarkedIds = ProgressProvider().bookmarks;
     });
@@ -44,6 +48,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
   @override
   void dispose() {
+    ProgressProvider().removeListener(_loadBookmarks);
     _searchController.dispose();
     super.dispose();
   }
@@ -52,6 +57,15 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
   Widget build(BuildContext context) {
     final query = _searchController.text.trim();
     var filteredList = GestureDatabase.search(query);
+    if (_onlyBookmarks) {
+      filteredList =
+          filteredList.where((g) => _bookmarkedIds.contains(g.id)).toList();
+    }
+    if (_onlyUnexplored) {
+      final explored = ProgressProvider().progress.exploredGestureIds;
+      filteredList =
+          filteredList.where((g) => !explored.contains(g.id)).toList();
+    }
 
     if (_selectedCategory != null) {
       filteredList =
@@ -84,17 +98,15 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.bookmarks_rounded),
-            tooltip: 'Ver Guardados',
+            icon: Icon(_onlyBookmarks
+                ? Icons.bookmarks_rounded
+                : Icons.bookmarks_outlined),
+            isSelected: _onlyBookmarks,
+            tooltip: _onlyBookmarks ? 'Ver todas las señales' : 'Ver Guardados',
             onPressed: () {
               FeedbackService.lightClick();
-              // Filter to show only bookmarks
               setState(() {
-                if (_selectedBodyPart == 'Guardados') {
-                  _selectedBodyPart = '';
-                } else {
-                  _selectedBodyPart = 'Guardados';
-                }
+                _onlyBookmarks = !_onlyBookmarks;
               });
             },
           ),
@@ -109,6 +121,8 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
               children: [
                 // Search Field
                 TextField(
+                  textInputAction: TextInputAction.search,
+                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
                   controller: _searchController,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
@@ -116,6 +130,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                     prefixIcon: const Icon(Icons.search_rounded, size: 20),
                     suffixIcon: _searchController.text.isNotEmpty
                         ? IconButton(
+                            tooltip: 'Limpiar búsqueda',
                             icon: const Icon(Icons.clear_rounded, size: 18),
                             onPressed: () {
                               _searchController.clear();
@@ -161,7 +176,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
           // Categories horizontal list
           SizedBox(
-            height: 34,
+            height: 32 + MediaQuery.textScalerOf(context).scale(18),
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               scrollDirection: Axis.horizontal,
@@ -216,17 +231,45 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
             ),
           ),
           const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Wrap(
+              spacing: 12,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Text('${filteredList.length} señales',
+                    style: Theme.of(context).textTheme.labelLarge),
+                FilterChip(
+                  label: const Text('Por explorar'),
+                  selected: _onlyUnexplored,
+                  onSelected: (value) =>
+                      setState(() => _onlyUnexplored = value),
+                ),
+                if (_onlyBookmarks ||
+                    _onlyUnexplored ||
+                    query.isNotEmpty ||
+                    _selectedCategory != null ||
+                    _selectedBodyPart.isNotEmpty)
+                  TextButton.icon(
+                    onPressed: _clearFilters,
+                    icon: const Icon(Icons.filter_alt_off_outlined, size: 18),
+                    label: const Text('Limpiar filtros'),
+                  ),
+              ],
+            ),
+          ),
 
           // List of Gestures
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
-                final isTablet = constraints.maxWidth >= 640;
+                final isTablet = constraints.maxWidth >= 640 &&
+                    MediaQuery.textScalerOf(context).scale(16) <= 20;
                 final isWide = constraints.maxWidth >= 960;
                 final columns = isWide ? 3 : (isTablet ? 2 : 1);
 
                 if (filteredList.isEmpty) {
-                  return Center(
+                  return SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(32.0),
                       child: Column(
@@ -238,20 +281,29 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
                                   ? AppColors.textMutedDark
                                   : AppColors.textMutedLight),
                           const SizedBox(height: 12),
-                          const Text(
-                            'No se encontraron señales',
-                            style: TextStyle(
+                          Text(
+                            _onlyBookmarks && _bookmarkedIds.isEmpty
+                                ? 'Tus señales favoritas, a mano'
+                                : 'No se encontraron señales',
+                            style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Intenta con otra palabra clave o selecciona "Todos" en los filtros.',
+                            _onlyBookmarks && _bookmarkedIds.isEmpty
+                                ? 'Guarda una señal con el icono de marcador para consultarla aquí.'
+                                : 'Prueba otra búsqueda o limpia los filtros para seguir explorando.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 13,
                                 color: isDark
                                     ? AppColors.textMutedDark
                                     : AppColors.textMutedLight),
+                          ),
+                          const SizedBox(height: 16),
+                          FilledButton.tonal(
+                            onPressed: _clearFilters,
+                            child: const Text('Ver todas las señales'),
                           ),
                         ],
                       ),
@@ -298,6 +350,8 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
 
                 // Mobile 1-Column List
                 return ListView.builder(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
                   itemCount: filteredList.length,
                   itemBuilder: (context, index) {
@@ -326,5 +380,16 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
         ],
       ),
     );
+  }
+
+  void _clearFilters() {
+    setState(() {
+      _searchController.clear();
+      _selectedCategory = null;
+      _selectedBodyPart = '';
+      _onlyBookmarks = false;
+      _onlyUnexplored = false;
+    });
+    FocusScope.of(context).unfocus();
   }
 }

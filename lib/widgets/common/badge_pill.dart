@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/contrast_utils.dart';
 
 class BadgePill extends StatelessWidget {
   final String text;
@@ -19,21 +20,22 @@ class BadgePill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = backgroundColor ??
+    final tint = backgroundColor ??
         (isDark
             ? color.withValues(alpha: 0.22)
             : color.withValues(alpha: 0.12));
 
-    // Guarantee WCAG AAA (7:1+) contrast by evaluating actual background luminance
+    // Resolve transparency before measuring contrast, and render that same color.
+    final bg = Color.alphaBlend(tint, Theme.of(context).colorScheme.surface);
     final double bgLuminance = bg.computeLuminance();
     final bool isBgLight = bgLuminance > 0.45;
 
-    final Color fg = textColor ??
-        (isBgLight
-            ? (color.computeLuminance() < 0.22
-                ? color
-                : Color.lerp(color, Colors.black, 0.7)!)
-            : Color.lerp(color, Colors.white, 0.88)!);
+    final fallback = ContrastUtils.contrastRatio(Colors.black, bg) >=
+            ContrastUtils.contrastRatio(Colors.white, bg)
+        ? Colors.black
+        : Colors.white;
+    final Color fg =
+        textColor ?? (ContrastUtils.isWcagAa(color, bg) ? color : fallback);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
@@ -58,7 +60,8 @@ class BadgePill extends StatelessWidget {
             Icon(icon, size: 18, color: fg),
             const SizedBox(width: 5),
           ],
-          Text(
+          Flexible(
+              child: Text(
             text,
             style: TextStyle(
               fontSize: 13,
@@ -67,7 +70,8 @@ class BadgePill extends StatelessWidget {
               letterSpacing: 0.1,
             ),
             maxLines: 1,
-          ),
+            overflow: TextOverflow.ellipsis,
+          )),
         ],
       ),
     );

@@ -6,6 +6,7 @@ import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
 import '../widgets/common/tts_app_bar_control.dart';
 import '../data/quiz_database.dart';
+import '../state/progress_provider.dart';
 import '../models/quiz_question.dart';
 import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
@@ -107,6 +108,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
     });
 
     final currentQ = _questions[_currentIndex];
+    ProgressProvider()
+        .recordQuizResult(currentQ.id, option.isCorrect ? 100 : 0);
 
     if (StorageService.getAutoNarration()) {
       TtsService.speakQuizFeedback(
@@ -150,11 +153,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
     }
   }
 
-  void _saveProgressAndFinish() async {
+  void _saveProgressAndFinish() {
     FeedbackService.complete();
-    final progress = StorageService.loadProgress();
-    final updated = progress.recordQuizResult('Flash Contrarreloj', _score);
-    await StorageService.saveProgress(updated);
     _showSummaryDialog();
   }
 

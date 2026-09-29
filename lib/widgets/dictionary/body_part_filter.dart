@@ -60,7 +60,7 @@ class BodyPartFilterBar extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return SizedBox(
-      height: 40,
+      height: 30 + MediaQuery.textScalerOf(context).scale(18),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: parts.length,

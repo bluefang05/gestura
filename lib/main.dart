@@ -92,7 +92,8 @@ class _GesturaAppState extends State<GesturaApp> {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
                 textScaler: effectiveScaler,
-                disableAnimations: _settingsProvider.isReduceMotion,
+                disableAnimations: MediaQuery.of(context).disableAnimations ||
+                    _settingsProvider.isReduceMotion,
               ),
               child: content,
             );

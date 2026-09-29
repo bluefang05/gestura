@@ -19,8 +19,8 @@ class UserProgress {
 
   factory UserProgress.initial() {
     return const UserProgress(
-      currentStreak: 1,
-      bestStreak: 1,
+      currentStreak: 0,
+      bestStreak: 0,
       lastActiveDate: '',
       exploredGestureIds: [],
       completedQuizIds: [],
@@ -63,10 +63,10 @@ class UserProgress {
 
   UserProgress markGestureExplored(String gestureId) {
     if (exploredGestureIds.contains(gestureId)) {
-      return this;
+      return registerActiveDay();
     }
     final updated = List<String>.from(exploredGestureIds)..add(gestureId);
-    return copyWith(exploredGestureIds: updated);
+    return copyWith(exploredGestureIds: updated).registerActiveDay();
   }
 
   UserProgress recordQuizResult(String quizId, int score) {
@@ -74,7 +74,8 @@ class UserProgress {
     if (!updatedCompleted.contains(quizId)) {
       updatedCompleted.add(quizId);
     }
-    final updatedScores = Map<String, int>.from(quizScores)..[quizId] = score;
+    final updatedScores = Map<String, int>.from(quizScores)
+      ..[quizId] = score.clamp(0, 100);
 
     return copyWith(
       completedQuizIds: updatedCompleted,
@@ -185,25 +186,39 @@ class UserProgress {
   }
 
   factory UserProgress.fromJson(Map<String, dynamic> json) {
+    List<String> ids(String key) {
+      final value = json[key];
+      return value is List
+          ? value
+              .whereType<String>()
+              .where((id) => id.isNotEmpty)
+              .toSet()
+              .toList()
+          : [];
+    }
+
+    int nonNegativeInt(Object? value) =>
+        value is num && value.isFinite ? value.toInt().clamp(0, 1 << 30) : 0;
+    final rawScores = json['quizScores'];
+    final scores = <String, int>{};
+    if (rawScores is Map) {
+      for (final entry in rawScores.entries) {
+        final value = entry.value;
+        if (entry.key is String && value is num && value.isFinite) {
+          scores[entry.key as String] = value.round().clamp(0, 100);
+        }
+      }
+    }
     return UserProgress(
-      currentStreak: json['currentStreak'] as int? ?? 1,
-      bestStreak: json['bestStreak'] as int? ?? 1,
-      lastActiveDate: json['lastActiveDate'] as String? ?? '',
-      exploredGestureIds: (json['exploredGestureIds'] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
-      completedQuizIds: (json['completedQuizIds'] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
-      quizScores: (json['quizScores'] as Map<String, dynamic>?)
-              ?.map((k, v) => MapEntry(k, v as int)) ??
-          {},
-      completedScenarioIds: (json['completedScenarioIds'] as List<dynamic>?)
-              ?.map((e) => e.toString())
-              .toList() ??
-          [],
+      currentStreak: nonNegativeInt(json['currentStreak']),
+      bestStreak: nonNegativeInt(json['bestStreak']),
+      lastActiveDate: json['lastActiveDate'] is String
+          ? json['lastActiveDate'] as String
+          : '',
+      exploredGestureIds: ids('exploredGestureIds'),
+      completedQuizIds: {...ids('completedQuizIds'), ...scores.keys}.toList(),
+      quizScores: scores,
+      completedScenarioIds: ids('completedScenarioIds'),
     );
   }
 }

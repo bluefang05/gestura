@@ -1,4 +1,5 @@
 import '../models/gesture_item.dart';
+import '../core/utils/search_utils.dart';
 import '../models/category.dart';
 
 class GestureDatabase {
@@ -224,7 +225,8 @@ class GestureDatabase {
       ],
       contextGuidance:
           'Puede acompañar reflexión profunda, saturación cognitiva o necesidad de procesar lo escuchado.',
-      whatToDo: 'Permite un momento de silencio o resume tu punto con claridad.',
+      whatToDo:
+          'Permite un momento de silencio o resume tu punto con claridad.',
       salesTip:
           'Pausa tu explicación. Permite que la persona asimile el argumento antes de continuar.',
       illustrationKey: 'closed_eyelids',
@@ -747,7 +749,8 @@ class GestureDatabase {
         'Cambio ergonómico de postura en sillas de trabajo.',
         'Sensación de relax y familiaridad con el entorno.',
       ],
-      contextGuidance: 'Común en personas que buscan comodidad física en su espacio.',
+      contextGuidance:
+          'Común en personas que buscan comodidad física en su espacio.',
       whatToDo:
           'No te sientas intimidado. Mantén contacto visual equilibrado y presenta tu propuesta con profesionalismo.',
       salesTip:
@@ -1567,13 +1570,25 @@ class GestureDatabase {
   }
 
   static List<GestureItem> search(String query) {
-    final q = query.toLowerCase().trim();
+    final q = normalizeSearchText(query);
     if (q.isEmpty) return items;
+    final terms = q.split(' ');
     return items.where((item) {
-      return item.name.toLowerCase().contains(q) ||
-          item.summary.toLowerCase().contains(q) ||
-          item.probableMeaning.toLowerCase().contains(q) ||
-          item.bodyPart.toLowerCase().contains(q);
+      final text = _searchIndex[item.id]!;
+      return terms.every(text.contains);
     }).toList();
   }
+
+  static final Map<String, String> _searchIndex = {
+    for (final item in items)
+      item.id: normalizeSearchText([
+        item.name,
+        item.summary,
+        item.probableMeaning,
+        item.bodyPart,
+        item.contextGuidance,
+        item.whatToDo,
+        ...item.alternativeMeanings,
+      ].join(' ')),
+  };
 }

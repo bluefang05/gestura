@@ -15,7 +15,7 @@ class StorageService {
 
   static Future<void> init() async {
     try {
-      _prefs ??= await SharedPreferences.getInstance();
+      _prefs = await SharedPreferences.getInstance();
     } catch (e) {
       _logError('init', e);
     }

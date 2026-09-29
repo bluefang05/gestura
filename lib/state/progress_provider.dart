@@ -14,12 +14,11 @@ class ProgressProvider extends ChangeNotifier {
   List<String> _bookmarks = [];
 
   UserProgress get progress => _progress;
-  List<String> get bookmarks => _bookmarks;
+  List<String> get bookmarks => List.unmodifiable(_bookmarks);
 
   void loadProgress() {
-    _progress = StorageService.loadProgress().registerActiveDay();
+    _progress = StorageService.loadProgress();
     _bookmarks = StorageService.getBookmarks();
-    StorageService.saveProgress(_progress);
     notifyListeners();
   }
 
