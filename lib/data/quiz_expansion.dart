@@ -9,8 +9,8 @@ class QuizExpansion {
       category: CategoryType.expresionesFaciales,
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
-          "En una entrevista, la candidata mira su libreta mientras escucha una pregunta.",
-      questionIllustrationKey: "averted_gaze",
+          "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
+      questionIllustrationKey: "context_mirada_notas",
       options: [
         QuizOption(
             id: "q_context_mirada_notas_interpret_0",
@@ -23,7 +23,7 @@ class QuizExpansion {
             isCorrect: false),
         QuizOption(
             id: "q_context_mirada_notas_interpret_2",
-            text: "Ha perdido todo interés en el puesto.",
+            text: "Ha perdido todo interés en la conversación.",
             isCorrect: false),
       ],
       keyVisualClue:
@@ -37,8 +37,8 @@ class QuizExpansion {
       prompt:
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
-          "En una entrevista, la candidata mira su libreta mientras escucha una pregunta.",
-      questionIllustrationKey: "averted_gaze",
+          "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
+      questionIllustrationKey: "context_mirada_notas",
       options: [
         QuizOption(
             id: "q_context_mirada_notas_act_0",
@@ -119,7 +119,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "Durante una demostración, una clienta frunce el ceño al mirar una tabla pequeña.",
-      questionIllustrationKey: "frowning_brow",
+      questionIllustrationKey: "context_revisar_documento",
       options: [
         QuizOption(
             id: "q_context_ceno_lectura_interpret_0",
@@ -146,7 +146,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "Durante una demostración, una clienta frunce el ceño al mirar una tabla pequeña.",
-      questionIllustrationKey: "frowning_brow",
+      questionIllustrationKey: "context_revisar_documento",
       options: [
         QuizOption(
             id: "q_context_ceno_lectura_act_0",
@@ -227,7 +227,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "En una reunión bilingüe, un proveedor tarda en responder una pregunta nueva.",
-      questionIllustrationKey: "silence_reflective",
+      questionIllustrationKey: "context_pausa_conversacion",
       options: [
         QuizOption(
             id: "q_context_pausa_traduccion_interpret_0",
@@ -255,7 +255,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "En una reunión bilingüe, un proveedor tarda en responder una pregunta nueva.",
-      questionIllustrationKey: "silence_reflective",
+      questionIllustrationKey: "context_pausa_conversacion",
       options: [
         QuizOption(
             id: "q_context_pausa_traduccion_act_0",
@@ -281,7 +281,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "En una cafetería llena, una amiga eleva la voz para contar cómo le fue.",
-      questionIllustrationKey: "voice_volume_high",
+      questionIllustrationKey: "context_ruido_cafeteria",
       options: [
         QuizOption(
             id: "q_context_volumen_ruido_interpret_0",
@@ -308,7 +308,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "En una cafetería llena, una amiga eleva la voz para contar cómo le fue.",
-      questionIllustrationKey: "voice_volume_high",
+      questionIllustrationKey: "context_ruido_cafeteria",
       options: [
         QuizOption(
             id: "q_context_volumen_ruido_act_0",
@@ -442,7 +442,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "Una persona mueve los dedos durante una explicación y responde sobre el tema.",
-      questionIllustrationKey: "finger_tapping",
+      questionIllustrationKey: "context_movimiento_escucha",
       options: [
         QuizOption(
             id: "q_context_movimiento_escucha_interpret_0",
@@ -468,7 +468,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "Una persona mueve los dedos durante una explicación y responde sobre el tema.",
-      questionIllustrationKey: "finger_tapping",
+      questionIllustrationKey: "context_movimiento_escucha",
       options: [
         QuizOption(
             id: "q_context_movimiento_escucha_act_0",
@@ -601,7 +601,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "En una tutoría, el estudiante gira hacia la pantalla en vez de hacia ti.",
-      questionIllustrationKey: "leaning_forward",
+      questionIllustrationKey: "context_tarea_compartida",
       options: [
         QuizOption(
             id: "q_context_orientacion_material_interpret_0",
@@ -628,7 +628,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "En una tutoría, el estudiante gira hacia la pantalla en vez de hacia ti.",
-      questionIllustrationKey: "leaning_forward",
+      questionIllustrationKey: "context_tarea_compartida",
       options: [
         QuizOption(
             id: "q_context_orientacion_material_act_0",
@@ -918,7 +918,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "En un taller, una columna y varias sillas impiden que dos personas vean el material.",
-      questionIllustrationKey: "round_table",
+      questionIllustrationKey: "context_acceso_espacio",
       options: [
         QuizOption(
             id: "q_context_mesa_accesible_interpret_0",
@@ -945,7 +945,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "En un taller, una columna y varias sillas impiden que dos personas vean el material.",
-      questionIllustrationKey: "round_table",
+      questionIllustrationKey: "context_acceso_espacio",
       options: [
         QuizOption(
             id: "q_context_mesa_accesible_act_0",
@@ -1076,7 +1076,7 @@ class QuizExpansion {
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
           "En una reunión remota, alguien mantiene la cámara apagada y responde por audio.",
-      questionIllustrationKey: "digital_audio",
+      questionIllustrationKey: "context_chat_remoto",
       options: [
         QuizOption(
             id: "q_context_camara_apagada_interpret_0",
@@ -1104,7 +1104,7 @@ class QuizExpansion {
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
           "En una reunión remota, alguien mantiene la cámara apagada y responde por audio.",
-      questionIllustrationKey: "digital_audio",
+      questionIllustrationKey: "context_chat_remoto",
       options: [
         QuizOption(
             id: "q_context_camara_apagada_act_0",

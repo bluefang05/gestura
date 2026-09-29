@@ -35,6 +35,22 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
   OverlayEntry? _previewOverlay;
 
   static const Map<String, String> _semanticDescriptions = {
+    'context_mirada_notas':
+        'En una conversación en una cafetería, una persona consulta sus notas mientras la otra escucha; la imagen no permite deducir por qué mira el papel.',
+    'context_ruido_cafeteria':
+        'Dos amistades conversan en una cafetería concurrida; el ruido del lugar forma parte de la situación.',
+    'context_tarea_compartida':
+        'Dos colegas revisan juntas un material en una computadora y colaboran en la misma tarea.',
+    'context_chat_remoto':
+        'Una persona participa en una reunión remota escribiendo un mensaje mientras mantiene apagada la cámara.',
+    'context_pausa_conversacion':
+        'En una cafetería, una persona se toma un momento para mirar el menú mientras su acompañante espera.',
+    'context_revisar_documento':
+        'Dos colegas revisan un documento compartido; la atención se centra en el material de trabajo.',
+    'context_movimiento_escucha':
+        'Una persona usa las manos al participar en una conversación de trabajo; moverlas no impide escuchar.',
+    'context_acceso_espacio':
+        'Una persona en silla de ruedas conversa con otras en una mesa; la ilustración muestra participación cotidiana.',
     'sensory_overload_supermarket':
         'Niño en un supermercado protegiendo sus oídos mientras el entorno está concurrido.',
     'ambiguous_ok_message':
@@ -61,6 +77,10 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
 
   String? _resolveAssetPath(String key, [bool isLarge = false]) {
     final clean = key.toLowerCase().trim();
+
+    if (_expandedIllustrationPaths.containsKey(clean)) {
+      return _expandedIllustrationPaths[clean];
+    }
 
     const categoryMap = {
       // Expresiones
@@ -620,5 +640,23 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     }
   }
 }
+
+const Map<String, String> _expandedIllustrationPaths = {
+  'context_mirada_notas':
+      'assets/images/communication/context_mirada_notas.webp',
+  'context_ruido_cafeteria':
+      'assets/images/communication/context_ruido_cafeteria.webp',
+  'context_tarea_compartida':
+      'assets/images/communication/context_tarea_compartida.webp',
+  'context_chat_remoto': 'assets/images/communication/context_chat_remoto.webp',
+  'context_pausa_conversacion':
+      'assets/images/communication/context_pausa_conversacion.webp',
+  'context_revisar_documento':
+      'assets/images/communication/context_revisar_documento.webp',
+  'context_movimiento_escucha':
+      'assets/images/communication/context_movimiento_escucha.webp',
+  'context_acceso_espacio':
+      'assets/images/communication/context_acceso_espacio.webp',
+};
 
 typedef GesturaIllustration = ConoVeIllustration;

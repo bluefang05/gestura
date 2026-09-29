@@ -6,6 +6,8 @@
 - Añadidos 12 guiones sociales con 36 frases en tres niveles de firmeza.
 - Incorporada una guía de ocho lecciones sobre interpretación, acuerdos y contexto.
 - Documentadas las fuentes y criterios editoriales del contenido nuevo.
+- Creadas ocho ilustraciones originales integradas en lecciones, fichas,
+  preguntas y escenarios; comprimidas en WebP (unos 450 KB en total).
 - El total de hitos de aprendizaje se calcula desde el catálogo disponible.
 
 - Corregido el filtro de favoritos y su actualización entre pantallas.

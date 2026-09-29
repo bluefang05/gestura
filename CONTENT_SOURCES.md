@@ -9,6 +9,8 @@ Revisión: 29 de septiembre de 2026.
 - 12 escenarios ficticios con dos decisiones y consecuencias comentadas.
 - 12 guiones con versiones suave, asertiva y firme: 36 frases.
 - Ocho lecciones introductorias accesibles desde Manual y Práctica.
+- Ocho ilustraciones originales, en formato WebP optimizado (600 × 600),
+  integradas en lecciones, fichas, preguntas y simulaciones.
 
 Las escenas, preguntas y frases son ejercicios originales. Las referencias
 fundamentan principios generales; no validan cada ejemplo ni aportan una regla
@@ -51,3 +53,5 @@ alternativas antes de atribuir una dificultad a falta de interés.
 6. Rotar la posición de respuestas correctas y mantener identificadores estables.
 7. Reutilizar ilustraciones como apoyo orientativo: el texto define la situación.
 8. Validar opciones, rutas, categorías e identificadores en pruebas automáticas.
+9. Describir cada ilustración para tecnologías de apoyo y vincularla a su
+   situación, nunca como clave universal para interpretar emociones.

@@ -5,18 +5,18 @@ class ScenarioExpansion {
   static const List<Scenario> scenarios = [
     Scenario(
       id: "scenario_context_mirada_notas",
-      title: "Entrevista con espacio para pensar",
+      title: "Conversación con espacio para pensar",
       domain: "Ámbito Laboral",
       description:
           "La calidad de la respuesta aporta más información que mantener la mirada de forma continua.",
       contextOverview:
-          "En una entrevista, la candidata mira su libreta mientras escucha una pregunta.",
+          "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
       iconName: 'people',
       steps: [
         ScenarioStep(
           id: "mirada_notas_0",
           narrative:
-              "En una entrevista, la candidata mira su libreta mientras escucha una pregunta.",
+              "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
           characterAction:
               "La mirada pasa del interlocutor al papel; sigue tomando notas.",
           illustrationKey: "averted_gaze",
@@ -56,7 +56,7 @@ class ScenarioExpansion {
         ScenarioStep(
           id: "mirada_notas_1",
           narrative:
-              "La candidata explica que escribir le ayuda a ordenar sus ejemplos. Propone responder con un esquema breve.",
+              "La persona explica que escribir le ayuda a ordenar sus ideas. Propone responder con un esquema breve.",
           characterAction:
               "La persona expresa una necesidad o aclara el acuerdo con palabras.",
           illustrationKey: "averted_gaze",

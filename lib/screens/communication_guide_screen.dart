@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import '../widgets/illustrations/illustration_widget.dart';
 
 /// Short original lessons that introduce the catalog's interpretation method.
 class CommunicationGuideScreen extends StatelessWidget {
   const CommunicationGuideScreen({super.key});
 
-  static const lessons = <({String title, String body, String exercise})>[
+  static const lessons = <({
+    String title,
+    String body,
+    String exercise,
+    String illustration,
+  })>[
     (
       title: '1. Describe antes de interpretar',
       body:
@@ -14,6 +20,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'una impresión en un hecho sobre la persona.',
       exercise: 'Prueba: cambia «está enfadada» por una descripción concreta '
           'de lo que viste u oíste. Después escribe dos explicaciones posibles.',
+      illustration: 'context_mirada_notas',
     ),
     (
       title: '2. Busca información que falta',
@@ -23,6 +30,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'pueden orientar una pregunta, pero no convierten una sospecha en certeza.',
       exercise: 'Prueba: antes de interpretar una pausa, comprueba si la '
           'persona está leyendo, si hay retraso de audio o si necesita tiempo.',
+      illustration: 'context_revisar_documento',
     ),
     (
       title: '3. Comprueba con una pregunta abierta',
@@ -32,6 +40,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'persona corrija tu impresión, incluso si no coincide con lo que esperabas.',
       exercise: 'Prueba: sustituye «no te gusta mi idea» por «¿cómo ves esta '
           'opción y qué cambiarías?». Escucha antes de defender tu propuesta.',
+      illustration: 'context_pausa_conversacion',
     ),
     (
       title: '4. Escuchar, comprender y aceptar son distintos',
@@ -43,6 +52,7 @@ class CommunicationGuideScreen extends StatelessWidget {
       exercise:
           'Prueba: antes de reservar una fecha, pregunta cuál se confirma. '
           'Si no hay respuesta clara, deja la reserva pendiente de confirmación.',
+      illustration: 'context_ruido_cafeteria',
     ),
     (
       title: '5. Adapta el intercambio entre ambas partes',
@@ -52,6 +62,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'para escuchar una respuesta. Ajustar el intercambio es una tarea compartida.',
       exercise: 'Prueba: ofrece dos formatos concretos: «¿prefieres que '
           'lo conversemos ahora o que te envíe los pasos por escrito?».',
+      illustration: 'context_movimiento_escucha',
     ),
     (
       title: '6. Aclara las expectativas digitales',
@@ -61,6 +72,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'necesita un acuerdo de atención, no solo más signos de exclamación.',
       exercise: 'Prueba: escribe «¿puedes confirmar la opción A o B antes '
           'de las 15:00 de mañana?» en lugar de «¿lo viste?».',
+      illustration: 'context_chat_remoto',
     ),
     (
       title: '7. Repara una interpretación equivocada',
@@ -70,6 +82,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'No necesitas ganar una discusión sobre lo que su cara supuestamente reveló.',
       exercise: 'Prueba: completa «supuse…, ahora entiendo…, propongo…». '
           'Comprueba que tu propuesta también le sirva a la otra persona.',
+      illustration: 'context_acceso_espacio',
     ),
     (
       title: '8. Practica sin convertirlo en una prueba de personas',
@@ -80,6 +93,7 @@ class CommunicationGuideScreen extends StatelessWidget {
           'diagnosticar, detectar mentiras o clasificar a alguien por su apariencia.',
       exercise: 'Prueba: al terminar un escenario, explica qué dato cambiaría '
           'tu decisión. Eso muestra que puedes revisar tu interpretación.',
+      illustration: 'context_tarea_compartida',
     ),
   ];
 
@@ -126,6 +140,13 @@ class CommunicationGuideScreen extends StatelessWidget {
                     childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                     children: [
                       Text(lesson.body),
+                      const SizedBox(height: 14),
+                      ConoVeIllustration(
+                        illustrationKey: lesson.illustration,
+                        width: double.infinity,
+                        height: 220,
+                        enableHoldPreview: false,
+                      ),
                       const SizedBox(height: 12),
                       Text(lesson.exercise,
                           style: const TextStyle(fontWeight: FontWeight.w600)),

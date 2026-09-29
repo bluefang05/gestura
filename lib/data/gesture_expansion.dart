@@ -10,7 +10,7 @@ class GestureExpansion {
       category: CategoryType.expresionesFaciales,
       bodyPart: "Ojos",
       summary:
-          "En una entrevista, la candidata mira su libreta mientras escucha una pregunta.",
+          "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
       physiologicalDetails:
           "La mirada pasa del interlocutor al papel; sigue tomando notas.",
       probableMeaning:
@@ -25,7 +25,7 @@ class GestureExpansion {
           "Pregunta si necesita unos segundos y permite consultar sus notas.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La calidad de la respuesta aporta más información que mantener la mirada de forma continua.",
-      illustrationKey: "averted_gaze",
+      illustrationKey: "context_mirada_notas",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -73,7 +73,7 @@ class GestureExpansion {
       whatToDo: "Amplía la tabla y pregunta qué dato conviene aclarar.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
-      illustrationKey: "frowning_brow",
+      illustrationKey: "context_revisar_documento",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -123,7 +123,7 @@ class GestureExpansion {
       whatToDo: "Deja tiempo y ofrece reformular una sola idea por vez.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Una pausa no es un turno libre para decidir por otra persona.",
-      illustrationKey: "silence_reflective",
+      illustrationKey: "context_pausa_conversacion",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -147,7 +147,7 @@ class GestureExpansion {
           "Propón un sitio más tranquilo y comprueba si se escuchan mejor.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Compara la voz en distintos entornos antes de atribuirle una intención interpersonal.",
-      illustrationKey: "voice_volume_high",
+      illustrationKey: "context_ruido_cafeteria",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -219,7 +219,7 @@ class GestureExpansion {
           "Permite el movimiento y comprueba si el ritmo de la explicación le sirve.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Evalúa la comunicación por el intercambio y pregunta preferencias antes de corregir movimientos.",
-      illustrationKey: "finger_tapping",
+      illustrationKey: "context_movimiento_escucha",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -295,7 +295,7 @@ class GestureExpansion {
           "Ubica el material donde ambos puedan verlo y pregunta qué paso revisan.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. En tareas conjuntas, la atención puede dirigirse al mismo objeto y no al rostro.",
-      illustrationKey: "leaning_forward",
+      illustrationKey: "context_tarea_compartida",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -445,7 +445,7 @@ class GestureExpansion {
           "Pregunta si todos ven y redistribuye el material o los asientos con el grupo.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Revisar quién puede ver, oír y acceder al material forma parte de preparar la conversación.",
-      illustrationKey: "round_table",
+      illustrationKey: "context_acceso_espacio",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
@@ -520,7 +520,7 @@ class GestureExpansion {
           "Acuerden cómo participar y confirma si el audio o chat le funciona.",
       salesTip:
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La participación se puede comprobar por sus aportes y acuerdos, no por vigilar el entorno privado.",
-      illustrationKey: "digital_audio",
+      illustrationKey: "context_chat_remoto",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
     ),
