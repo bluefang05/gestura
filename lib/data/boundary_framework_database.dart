@@ -8,17 +8,17 @@ class BoundaryFrameworkDatabase {
     // ==========================================
     BoundaryPhase(
       phaseNumber: 1,
-      title: 'Entenderlos: El Radar Somático',
+      title: 'Reconocer tus límites',
       subtitle:
-          'Identifica la vulneración de tus límites en el cuerpo antes de que ocurra el colapso.',
+          'Observa cómo te sientes y qué necesitas. Las señales del cuerpo pueden ayudar, pero no siempre explican por sí solas lo que ocurre.',
       icon: Icons.psychology_rounded,
       corePrinciple:
-          'El resentimiento y la rabia sorda son el timbre de alarma de un límite que no pusiste a tiempo. Tu cuerpo siempre sabe que te estás traicionando antes de que tu mente busque justificaciones.',
+          'El enfado, el cansancio o la tensión pueden indicar que necesitas algo. También pueden tener otras causas. Tómate un momento para pensar qué te ayudaría.',
       conceptItems: [
         BoundaryConceptItem(
-          title: 'El Radar Somático (Señales Físicas)',
+          title: 'Señales de tu cuerpo',
           description:
-              'Tensión en la mandíbula, nudo en el estómago, hombros pegados a las orejas, respiración corta o ganas urgentes de huir. Son alertas neurobiológicas de invasión o sobrecarga.',
+              'La tensión, el cansancio o las ganas de alejarte pueden ser señales de incomodidad. No prueban por sí solas que alguien cruzó un límite.',
           icon: Icons.accessibility_new_rounded,
           badge: 'Cuerpo',
         ),
@@ -38,7 +38,7 @@ class BoundaryFrameworkDatabase {
         ),
       ],
       practicalProtocol:
-          'El Test del Resentimiento: Si al pensar en decir que "sí" sientes pesadez, amargura o la fantasía de que el plan se cancele por arte de magia, tu respuesta auténtica y necesaria es un "NO".',
+          'Si no sabes si quieres aceptar, puedes pedir tiempo para pensarlo. No tienes que responder de inmediato.',
     ),
 
     // ==========================================
@@ -48,10 +48,10 @@ class BoundaryFrameworkDatabase {
       phaseNumber: 2,
       title: 'Hacerlos: La Ejecución Asertiva',
       subtitle:
-          'La fórmula verbal exacta y el lenguaje corporal para marcar el límite sin agresión ni disculpas.',
+          'Formas sencillas de expresar un límite. Puedes usar las palabras y la postura que te resulten cómodas.',
       icon: Icons.record_voice_over_rounded,
       corePrinciple:
-          'Un límite claro no necesita gritos ni sermones. La serenidad del tono de voz y la brevedad de las palabras proyectan una solidez inquebrantable.',
+          'Puedes expresar un límite con una frase clara. No hay una postura, expresión facial o tono que todas las personas deban usar.',
       conceptItems: [
         BoundaryConceptItem(
           title: 'La Fórmula E-I-A (3 Pasos)',
@@ -63,20 +63,20 @@ class BoundaryFrameworkDatabase {
         BoundaryConceptItem(
           title: 'El Lenguaje Corporal de Firmeza',
           description:
-              'Ambos pies apoyados planos en el suelo (anclaje), hombros relajados hacia atrás, cabeza erguida y contacto visual directo de 2 a 3 segundos sin desviar los ojos al suelo.',
+              'No tienes que mirar a los ojos ni mantener una postura específica. Puedes decir el límite, escribirlo o pedir apoyo.',
           icon: Icons.pan_tool_rounded,
           badge: 'No Verbal',
         ),
         BoundaryConceptItem(
           title: 'Erradicar la Sonrisa de Disculpa',
           description:
-              'Sonreír nerviosamente al decir "no" es un reflejo de apaciguamiento. El cerebro ajeno lo interpreta como debilidad o margen de negociación. Mantén una expresión neutra y en paz.',
+              'Tu expresión facial no invalida lo que dices. Puedes sonreír, mirar a otro lado o mostrar poca emoción; tu límite sigue contando.',
           icon: Icons.sentiment_neutral_rounded,
           badge: 'Clave',
         ),
       ],
       practicalProtocol:
-          'La Regla de las 10 Palabras: Mantén la declaración de tu límite en menos de 10 palabras. Cada frase adicional que agregas después de tu negativa funciona como combustible para que el otro abra un debate.',
+          'Puedes decirlo en pocas palabras si eso te ayuda: "No puedo hacerlo hoy". También puedes dar más contexto si lo prefieres.',
     ),
 
     // ==========================================
@@ -101,14 +101,14 @@ class BoundaryFrameworkDatabase {
         BoundaryConceptItem(
           title: 'La Técnica del Disco Rayado',
           description:
-              'Repite exactamente la misma frase sin cambiar palabras ni añadir explicaciones: "Comprendo tu urgencia, pero hoy no estoy disponible". Repetir 3 veces con tono plano desactiva al 95% de los insistentes.',
+              'Si alguien insiste, puedes repetir tu respuesta: "Entiendo, pero hoy no puedo". No hay una frase que garantice cómo reaccionará la otra persona.',
           icon: Icons.replay_rounded,
           badge: 'Táctica',
         ),
         BoundaryConceptItem(
-          title: 'La Resaca de Culpa (Boundary Hangover)',
+          title: 'Cómo te puedes sentir después',
           description:
-              'La taquicardia o culpa que sientes tras marcar un límite no significa que hiciste daño a nadie. Es solo el síndrome de abstinencia de la complacencia aprendida. Respira y déjala pasar sin retractarte.',
+              'Después de decir que no, podrías sentir culpa o alivio. Esa sensación no demuestra por sí sola que hiciste algo malo. Si lo necesitas, habla con alguien de confianza.',
           icon: Icons.favorite_border_rounded,
           badge: 'Emoción',
         ),
@@ -124,10 +124,10 @@ class BoundaryFrameworkDatabase {
       phaseNumber: 4,
       title: 'Consentimiento Real: Decodificar el Límite Ajeno',
       subtitle:
-          'Aprende a leer cuándo el otro cede por desgaste o apaciguamiento, y cómo ofrecer salidas airosas.',
+          'Aprende a pedir permiso sin presionar y a respetar la respuesta.',
       icon: Icons.handshake_rounded,
       corePrinciple:
-          'Si tuviste que insistir varias veces para que alguien dijera que sí, la persona te dijo que NO antes. Un "sí" arrancado por cansancio o presión social es complacencia forzada (fawning), jamás consentimiento auténtico.',
+          'Un sí después de mucha insistencia puede no ser libre. Pregunta una vez, deja espacio para responder y acepta un no o una duda.',
       conceptItems: [
         BoundaryConceptItem(
           title: 'El "Falso Sí" y la Trampa de la Insistencia',
@@ -139,7 +139,7 @@ class BoundaryFrameworkDatabase {
         BoundaryConceptItem(
           title: 'Microseñales No Verbales del Rechazo Disimulado',
           description:
-              '• Pausa prolongada con suspiro sutil antes de responder.\n• Tono de voz resignado o apagado ("Supongo que sí...").\n• Sonrisa tensa sin arrugas en los ojos (sonrisa de compromiso social).\n• El torso o los pies retroceden físicamente mientras la boca dice "sí".',
+              'Una pausa, una sonrisa o un cambio de postura no confirman que alguien quiera algo. Si no está claro, pregunta y deja que responda con sus palabras.',
           icon: Icons.psychology_alt_rounded,
           badge: 'No Verbal',
         ),
@@ -152,7 +152,7 @@ class BoundaryFrameworkDatabase {
         ),
       ],
       practicalProtocol:
-          'La Regla del Consentimiento Entusiasta: Si la respuesta de la otra persona no es un sí claro, tranquilo y espontáneo, trátala inmediatamente como si fuera un NO y cambia de tema con amabilidad.',
+          'Si la respuesta no está clara, no avances. Pregunta sin presionar y espera una respuesta clara. La persona puede cambiar de opinión.',
     ),
   ];
 }

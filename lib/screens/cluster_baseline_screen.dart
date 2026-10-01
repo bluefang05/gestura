@@ -31,7 +31,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
       'El error más destructivo en la lectura no verbal es sacar conclusiones por un solo detalle: "tocó su nariz, seguro miente" o "cruzó los brazos, está cerrado". Las palabras son como palabras sueltas en una frase: una sola palabra no hace una oración completa. '
       'Paso 1: 1 Señal Aislada es una Hipótesis Suelta. Puede deberse a picazón física, temperatura de la sala, cansancio o un hábito individual sin carga emocional. '
       'Paso 2: 2 Señales Coincidentes son Motivo de Atención. Ejemplo: Toca su cuello y baja el volumen de su voz. Tu radar debe activarse, pero todavía no emitas un juicio definitivo. '
-      'Paso 3: 3 o Más Señales en la Misma Dirección forman un CONGLOMERADO. Ejemplo: Cuello tocado más cuerpo reclinado hacia atrás más labios comprimidos en línea delgada. El conjunto confirma con alta certeza tensión y desacuerdo.';
+      'Paso 3: Mira la situación completa. Varias señales pueden tener distintas causas y no confirman lo que alguien siente. Describe lo que observas y, si hace falta, pregunta con respeto.';
 
   static const String _baselineTheorySpeech =
       'La Técnica de los Primeros 2 Minutos. '
@@ -349,7 +349,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 number: '3',
                 title: '3 o Más Señales en la Misma Dirección = CONGLOMERADO',
                 description:
-                    'Ejemplo: Cuello tocado + cuerpo reclinado hacia atrás + labios comprimidos en línea delgada. El conjunto confirma con alta certeza tensión y desacuerdo.',
+                    'Por ejemplo, una persona puede tocarse el cuello y echarse hacia atrás. Eso describe lo que ves, pero no explica por qué. Considera el contexto y pregunta si necesitas saber más.',
                 color: AppColors.success,
                 isDark: isDark,
               ),

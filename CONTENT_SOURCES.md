@@ -66,13 +66,16 @@ o el costo de una persona concreta por sus gestos.
 
 ## Reglas editoriales
 
-1. Describir lo observable sin atribuir pensamientos ocultos.
-2. Ofrecer explicaciones alternativas y una pregunta o acción concreta.
-3. Tratar las respuestas recomendadas como decisiones sobre la situación escrita.
-4. No usar gestos como diagnóstico, detector de mentiras o autorización de compra.
-5. Respetar preferencias de espacio, contacto y participación.
-6. Rotar la posición de respuestas correctas y mantener identificadores estables.
-7. Reutilizar ilustraciones como apoyo orientativo: el texto define la situación.
-8. Validar opciones, rutas, categorías e identificadores en pruebas automáticas.
-9. Describir cada ilustración para tecnologías de apoyo y vincularla a su
+1. Escribir para cualquier persona, con frases cortas y palabras de uso común.
+2. Explicar los términos técnicos con un ejemplo sencillo.
+3. Describir lo que se ve u oye sin atribuir pensamientos ocultos.
+4. Ofrecer más de una explicación posible y una pregunta o acción concreta.
+5. Tratar las respuestas recomendadas como opciones para la situación escrita.
+6. No usar gestos como diagnóstico, detector de mentiras o prueba de intención.
+7. Respetar preferencias de espacio, contacto, tiempo y forma de participar.
+8. No exigir contacto visual, quietud, sonrisa ni que alguien explique su diagnóstico.
+9. Rotar la posición de respuestas correctas y mantener identificadores estables.
+10. Reutilizar ilustraciones como apoyo orientativo: el texto define la situación.
+11. Validar opciones, rutas, categorías e identificadores en pruebas automáticas.
+12. Describir cada ilustración para tecnologías de apoyo y vincularla a su
    situación, nunca como clave universal para interpretar emociones.

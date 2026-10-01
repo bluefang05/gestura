@@ -98,18 +98,16 @@ class CommunicationGuideScreen extends StatelessWidget {
     (
       title: '9. El camuflaje depende del contexto',
       body:
-          'Los subtítulos automáticos de un video de @aspierd organizan el debate '
-          'en cuatro «facciones». Una postura llamada pragmática combina '
-          '«camuflaje en el trabajo» con «autenticidad en casa» y nombra como costo '
-          'una «doble vida mental». Es el marco de ese video, no una categoría '
-          'clínica ni una experiencia universal. Una revisión de estudios también '
-          'encuentra motivos y efectos diversos. No deduzcas por una mirada si '
-          'alguien camufla, por qué lo hace ni qué efecto tiene. Reduce la presión, '
-          'ofrece opciones de comunicación y respeta si prefiere no hablar del tema.',
+          'Camuflarse es ocultar o cambiar algunas formas de actuar para encajar. '
+          'En un video, @aspierd habla de camuflarse en el trabajo y ser más uno '
+          'mismo en casa. El subtítulo automático llama a esto «doble vida mental». '
+          'Es la idea de ese video; no todas las personas lo viven igual. Los '
+          'estudios también muestran experiencias distintas. No puedes saber por '
+          'una mirada si alguien se camufla, por qué lo hace o cómo se siente. '
+          'Ofrece opciones para hablar y respeta si no quiere explicar su experiencia.',
       exercise:
-          'Prueba: en vez de pedir «mírame cuando te hablo», ofrece opciones: '
-          '«¿prefieres que te lo escriba, te dé tiempo para pensarlo o sigamos '
-          'hablando?». Acepta la elección sin pedir una explicación personal.',
+          'Prueba: en vez de pedir que te mire, pregunta: «¿prefieres que te lo '
+          'escriba, te dé tiempo o sigamos hablando?». Acepta su elección.',
       illustration: 'context_movimiento_escucha',
     ),
   ];

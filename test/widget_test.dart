@@ -718,7 +718,7 @@ void main() {
     expect(find.text('Límites y Consentimiento Real'), findsOneWidget);
     expect(find.text('La Ruta en 3 Fases'), findsOneWidget);
     expect(find.text('FASE 1'), findsOneWidget);
-    expect(find.text('Entenderlos: El Radar Somático'), findsOneWidget);
+    expect(find.text('Reconocer tus límites'), findsOneWidget);
 
     // Tap subview 1: Biblioteca de Guiones
     await tester.tap(find.textContaining('Biblioteca de Guiones').first);
@@ -915,7 +915,7 @@ void main() {
     // Expect navigation directly to Límites y Consentimiento Real tab in UnwrittenRulesScreen
     expect(find.text('Límites y Consentimiento Real'), findsOneWidget);
     expect(find.text('FASE 1'), findsOneWidget);
-    expect(find.text('Entenderlos: El Radar Somático'), findsOneWidget);
+    expect(find.text('Reconocer tus límites'), findsOneWidget);
   });
 
   test(

@@ -797,13 +797,13 @@ class QuizDatabase {
       id: 'q_elevator_small_talk_weather',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          'En el ascensor, un directivo te dice: "Parece que va a llover fuerte hoy". ¿Cuál es el propósito real de su comentario?',
-      scenarioText: 'No es una consulta meteorológica técnica.',
+          'En el ascensor, alguien dice: "Parece que va a llover fuerte hoy". Si quieres conversar, ¿qué podrías responder?',
+      scenarioText: 'Una charla breve puede empezar con un comentario cotidiano.',
       options: [
         QuizOption(
           id: 'opt_weather_ping',
           text:
-              'Es un "ping de red no verbal": busca abrir el canal social en son de paz y reconocer tu presencia sin invadir tu intimidad.',
+              'Puedes decir: "Sí, parece que va a llover". También puedes hacer una pregunta o seguir en silencio.',
           isCorrect: true,
         ),
         QuizOption(
@@ -820,15 +820,15 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'El contenido literal es intrascendente; la función biológica es la sincronización y cordialidad.',
+          'No podemos saber el motivo de un comentario solo por hablar del clima.',
       explanation:
-          'El small talk funciona como un apretón de manos sónico. Basta responder con una frase ligera y una sonrisa para completar el ritual.',
+          'Una respuesta breve puede iniciar una charla. No tienes que sonreír ni continuar si no quieres.',
     ),
     QuizQuestion(
       id: 'q_indirect_yo_me_encargo',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          'Tu compañero suspira brevemente con los hombros caídos y dice: "No te preocupes, yo me encargo de terminarlo...". ¿Qué está comunicando en realidad?',
+          'Tu compañero dice: "No te preocupes, yo me encargo de terminarlo". ¿Cómo puedes comprobar si quiere ayuda?',
       scenarioText: 'Su postura es de sobrecarga y cansancio.',
       options: [
         QuizOption(
@@ -840,7 +840,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_encargo_help',
           text:
-              'Siente sobrecarga o molestia; la cortesía neurotípica le impide pedir ayuda de forma directa y espera que insistas en colaborar.',
+              'Pregúntale: "¿Quieres que te ayude con una parte o prefieres seguir tú?" y respeta su respuesta.',
           isCorrect: true,
         ),
         QuizOption(
@@ -850,9 +850,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Suspiro + hombros caídos contradicen el texto amable de la frase.',
+          'Un suspiro o unos hombros caídos no permiten saber qué quiere la persona.',
       explanation:
-          'Insistir amablemente una vez: "De verdad, permíteme ayudarte con una parte para que salgamos a tiempo" desactiva el resentimiento y construye compañerismo.',
+          'Pregunta directamente y acepta un sí o un no. El gesto no confirma que la persona quiera ayuda.',
     ),
     QuizQuestion(
       id: 'q_cluster_cold_vs_defense',
@@ -979,13 +979,13 @@ class QuizDatabase {
       id: 'q_interview_hands_pocket',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          '¿Por qué los expertos en comunicación recomiendan no mantener las manos dentro de los bolsillos durante una entrevista de trabajo?',
-      scenarioText: 'Evolución psicológica y señales de apertura.',
+          'En una entrevista, una persona mantiene las manos en los bolsillos. ¿Qué puedes concluir?',
+      scenarioText: 'Describe lo que observas sin adivinar la intención.',
       options: [
         QuizOption(
           id: 'opt_hands_evol',
           text:
-              'El cerebro humano primitivo interpreta las manos ocultas como una posible amenaza o reserva de información; las manos visibles generan confianza instintiva.',
+              'Solo puedes decir que tiene las manos en los bolsillos. No sabes por qué ni qué piensa.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1000,21 +1000,21 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Las manos a la vista comunican transparencia, honestidad y calma.',
+          'La postura por sí sola no demuestra honestidad ni deshonestidad.',
       explanation:
-          'Tener las manos visibles sobre la mesa o reposabrazos aumenta la percepción de honestidad y reduce el nivel de alerta del interlocutor.',
+          'Las personas colocan las manos en distintas posiciones por muchos motivos. No hace falta corregir esa postura.',
     ),
     QuizQuestion(
       id: 'q_nervous_laughter_mistake',
       category: CategoryType.expresionesFaciales,
       prompt:
-          'Expones un dato erróneo en una reunión y tu compañero se ríe mostrando los dientes pero con el cuello rígido y mirando al suelo. ¿Qué tipo de risa es?',
-      scenarioText: 'Diferenciación entre diversión y alivio de tensión.',
+          'En una reunión, un compañero se ríe después de que das un dato equivocado. ¿Qué puedes saber con seguridad?',
+      scenarioText: 'Una risa puede tener muchos motivos.',
       options: [
         QuizOption(
           id: 'opt_laugh_nervous',
           text:
-              'Risa nerviosa o de apaciguamiento: su cerebro intenta suavizar el momento incómodo sin herir la armonía social.',
+              'Sabes que se rio, pero no el motivo. Si importa, puedes preguntarle con respeto.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1029,9 +1029,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'La ausencia de arrugas perioculares y la tensión del cuello delatan incomodidad.',
+          'La cara y la postura no confirman por qué se rio.',
       explanation:
-          'La risa pacífica es muy común en situaciones embarazosas. No la tomes como ofensa personal; corrige el dato con serenidad y continúa.',
+          'Puedes aclarar el dato y preguntar si hace falta. Evita asumir que se burla o que está incómodo.',
     ),
     QuizQuestion(
       id: 'q_poker_face_sarcasm',
