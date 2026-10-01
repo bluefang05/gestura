@@ -45,13 +45,24 @@ alternativas antes de atribuir una dificultad a falta de interés.
 
 ### Camuflaje social y contexto
 
-[@aspierd, testimonio personal sobre camuflaje y contexto](https://www.tiktok.com/@aspierd/video/7606046043490225424)
+[@aspierd, video sobre cuatro posturas ante el camuflaje](https://www.tiktok.com/@aspierd/video/7606046043490225424)
 
-Perspectiva en primera persona que motivó una lección sobre no inferir el
-camuflaje desde fuera, reconocer que su utilidad y costo dependen del contexto,
-y ofrecer opciones sin exigir que alguien revele información personal. Es un
-testimonio individual, no evidencia clínica ni una descripción de todas las
-personas autistas o neurodivergentes.
+Los subtítulos automáticos del video describen cuatro «facciones» en redes. Una
+postura que llama pragmática combina camuflaje en el trabajo con autenticidad en
+casa y nombra como costo una «doble vida mental». La lección atribuye esta
+clasificación al video; no la presenta como taxonomía clínica. Los subtítulos
+locales son automáticos y no se contrastaron con el audio original.
+
+[Zhuang et al., revisión de 58 estudios sobre camuflaje y bienestar](https://pubmed.ncbi.nlm.nih.gov/37741059/)
+
+La revisión identificó motivos ligados a normas sociales y aceptación, junto
+con efectos diversos: algunas personas describieron el camuflaje como una forma
+pragmática de ejercer control; otros hallazgos incluyeron agotamiento, cambios
+en las relaciones y efectos en identidad y autoestima. La mayoría de los
+estudios revisados incluyó personas blancas, mujeres y adultas diagnosticadas
+tarde, por lo que los autores señalan límites de representatividad. Esta
+evidencia respalda hablar de experiencias variadas; no permite inferir el motivo
+o el costo de una persona concreta por sus gestos.
 
 ## Reglas editoriales
 

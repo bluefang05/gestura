@@ -98,17 +98,18 @@ class CommunicationGuideScreen extends StatelessWidget {
     (
       title: '9. El camuflaje depende del contexto',
       body:
-          'En un testimonio personal, @aspierd describe el camuflaje social '
-          'como una estrategia que puede servir en ciertos entornos y sentirse '
-          'distinta en otros. Desde fuera no puedes saber si alguien está '
-          'camuflando, si le ayuda o cuánto esfuerzo le cuesta. No lo conviertas '
-          'en otra regla para interpretar una mirada, una postura o una expresión. '
-          'Reduce la presión, ofrece opciones de comunicación y deja que cada '
-          'persona decida qué quiere compartir.',
+          'Los subtítulos automáticos de un video de @aspierd organizan el debate '
+          'en cuatro «facciones». Una postura llamada pragmática combina '
+          '«camuflaje en el trabajo» con «autenticidad en casa» y nombra como costo '
+          'una «doble vida mental». Es el marco de ese video, no una categoría '
+          'clínica ni una experiencia universal. Una revisión de estudios también '
+          'encuentra motivos y efectos diversos. No deduzcas por una mirada si '
+          'alguien camufla, por qué lo hace ni qué efecto tiene. Reduce la presión, '
+          'ofrece opciones de comunicación y respeta si prefiere no hablar del tema.',
       exercise:
-          'Prueba: en vez de pedir «mírame cuando te hablo», ofrece una opción '
-          'concreta: «¿prefieres que te lo diga, te lo escriba o te dé un momento '
-          'para pensarlo?». Acepta la elección sin pedir una explicación personal.',
+          'Prueba: en vez de pedir «mírame cuando te hablo», ofrece opciones: '
+          '«¿prefieres que te lo escriba, te dé tiempo para pensarlo o sigamos '
+          'hablando?». Acepta la elección sin pedir una explicación personal.',
       illustration: 'context_movimiento_escucha',
     ),
   ];
@@ -129,8 +130,12 @@ class CommunicationGuideScreen extends StatelessWidget {
           'https://www.nidcd.nih.gov/about/nidcd-director-message/cloth-face-coverings-and-distancing-pose-communication-challenges-many'
     ),
     (
-      title: '@aspierd · Testimonio personal sobre camuflaje y contexto (2026)',
+      title: '@aspierd · Video sobre cuatro posturas ante el camuflaje (2026; subtítulos automáticos)',
       url: 'https://www.tiktok.com/@aspierd/video/7606046043490225424'
+    ),
+    (
+      title: 'Zhuang et al. · Revisión de 58 estudios sobre camuflaje (2023)',
+      url: 'https://pubmed.ncbi.nlm.nih.gov/37741059/'
     ),
   ];
 
