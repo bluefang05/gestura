@@ -11,7 +11,7 @@ se consultan localmente; los anuncios y algunas voces pueden requerir conexión.
 - Práctica personal de hasta cinco preguntas, con prioridad para los errores
   pendientes y explicaciones tras cada respuesta.
 - Entrenamiento visual, modo rápido, escenarios y herramientas de consulta.
-- Guía de ocho lecciones, casos sobre contexto y accesibilidad, y guiones
+- Guía de nueve lecciones, casos sobre contexto y accesibilidad, y guiones
   con tres niveles de firmeza. Consulta los [criterios y fuentes](CONTENT_SOURCES.md).
 - Ocho ilustraciones originales creadas para la guía, las fichas y las
   preguntas visuales; incluyen descripciones accesibles.

@@ -126,7 +126,18 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(CommunicationGuideScreen.lessons.first.exercise),
         findsOneWidget);
-    expect(CommunicationGuideScreen.lessons.length, 8);
+    expect(CommunicationGuideScreen.lessons.length, 9);
+    final livedExperienceLesson = CommunicationGuideScreen.lessons.last;
+    await tester.scrollUntilVisible(
+      find.text(livedExperienceLesson.title),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.ensureVisible(find.text(livedExperienceLesson.title));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text(livedExperienceLesson.title));
+    await tester.pumpAndSettle();
+    expect(find.text(livedExperienceLesson.body), findsOneWidget);
     expect(
         CommunicationGuideScreen.sources
             .every((s) => Uri.parse(s.url).scheme == 'https'),

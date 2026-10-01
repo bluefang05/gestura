@@ -1,6 +1,6 @@
 # Criterios y referencias del contenido
 
-Revisión: 29 de septiembre de 2026.
+Revisión: 1 de octubre de 2026.
 
 ## Ampliación
 
@@ -8,7 +8,7 @@ Revisión: 29 de septiembre de 2026.
 - 48 preguntas: interpretación y respuesta práctica para cada caso.
 - 12 escenarios ficticios con dos decisiones y consecuencias comentadas.
 - 12 guiones con versiones suave, asertiva y firme: 36 frases.
-- Ocho lecciones introductorias accesibles desde Manual y Práctica.
+- Nueve lecciones introductorias accesibles desde Manual y Práctica.
 - Ocho ilustraciones originales, en formato WebP optimizado (600 × 600),
   integradas en lecciones, fichas, preguntas y simulaciones.
 
@@ -42,6 +42,16 @@ preguntar preferencias y no exigir contacto visual como prueba de atención.
 Describe cómo iluminación, ruido y acceso a señales visuales influyen en la
 comunicación. Criterio aplicado: comprobar las condiciones del canal y ofrecer
 alternativas antes de atribuir una dificultad a falta de interés.
+
+### Camuflaje social y contexto
+
+[@aspierd, testimonio personal sobre camuflaje y contexto](https://www.tiktok.com/@aspierd/video/7606046043490225424)
+
+Perspectiva en primera persona que motivó una lección sobre no inferir el
+camuflaje desde fuera, reconocer que su utilidad y costo dependen del contexto,
+y ofrecer opciones sin exigir que alguien revele información personal. Es un
+testimonio individual, no evidencia clínica ni una descripción de todas las
+personas autistas o neurodivergentes.
 
 ## Reglas editoriales
 

@@ -95,6 +95,22 @@ class CommunicationGuideScreen extends StatelessWidget {
           'tu decisión. Eso muestra que puedes revisar tu interpretación.',
       illustration: 'context_tarea_compartida',
     ),
+    (
+      title: '9. El camuflaje depende del contexto',
+      body:
+          'En un testimonio personal, @aspierd describe el camuflaje social '
+          'como una estrategia que puede servir en ciertos entornos y sentirse '
+          'distinta en otros. Desde fuera no puedes saber si alguien está '
+          'camuflando, si le ayuda o cuánto esfuerzo le cuesta. No lo conviertas '
+          'en otra regla para interpretar una mirada, una postura o una expresión. '
+          'Reduce la presión, ofrece opciones de comunicación y deja que cada '
+          'persona decida qué quiere compartir.',
+      exercise:
+          'Prueba: en vez de pedir «mírame cuando te hablo», ofrece una opción '
+          'concreta: «¿prefieres que te lo diga, te lo escriba o te dé un momento '
+          'para pensarlo?». Acepta la elección sin pedir una explicación personal.',
+      illustration: 'context_movimiento_escucha',
+    ),
   ];
 
   static const sources = <({String title, String url})>[
@@ -112,6 +128,10 @@ class CommunicationGuideScreen extends StatelessWidget {
       url:
           'https://www.nidcd.nih.gov/about/nidcd-director-message/cloth-face-coverings-and-distancing-pose-communication-challenges-many'
     ),
+    (
+      title: '@aspierd · Testimonio personal sobre camuflaje y contexto (2026)',
+      url: 'https://www.tiktok.com/@aspierd/video/7606046043490225424'
+    ),
   ];
 
   @override
@@ -127,7 +147,7 @@ class CommunicationGuideScreen extends StatelessWidget {
               Text('Observa, pregunta y ajusta',
                   style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 8),
-              const Text('Ocho lecciones breves para llevar el aprendizaje a '
+              const Text('Nueve lecciones breves para llevar el aprendizaje a '
                   'conversaciones reales. Abre una lección y prueba su ejercicio.'),
               const SizedBox(height: 16),
               for (final lesson in lessons)
