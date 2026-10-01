@@ -17,6 +17,28 @@ fundamentan principios generales; no validan cada ejemplo ni aportan una regla
 para inferir una emoción a partir de un gesto. El catálogo preexistente conserva
 su contenido y no constituye una revisión científica completa.
 
+## Cómo pasar de una experiencia a una lección
+
+Una experiencia personal sirve para mostrar qué puede ocurrir en una situación;
+por sí sola no demuestra que sea frecuente ni que le pase a todo el mundo.
+Cuando Gestura use una experiencia publicada:
+
+1. Identificar si es un relato individual, un análisis cualitativo, una encuesta
+   o una revisión. No llamarlos a todos «estudios» como si probaran lo mismo.
+2. Anotar quiénes participaron, dónde se recogieron los relatos y qué método se
+   usó, cuando la fuente lo informe.
+3. Buscar el término que usan investigadores y participantes. Explicarlo en
+   palabras sencillas y aclarar si hay términos que se solapan o no tienen una
+   definición única.
+4. Separar el relato original, el concepto de investigación y la sugerencia
+   práctica de Gestura. Una sugerencia útil no queda validada por aparecer en un
+   testimonio.
+5. Explicar qué no permite concluir la fuente: por ejemplo, no representa a
+   todas las personas, no mide cuántas viven esa experiencia o no demuestra la
+   causa.
+6. Parafrasear testimonios salvo que exista una razón clara y permiso/licencia
+   para reproducir las palabras exactas. Atribuir siempre el trabajo y enlazarlo.
+
 ## Referencias consultadas
 
 ### Expresión y contexto
@@ -64,6 +86,29 @@ tarde, por lo que los autores señalan límites de representatividad. Esta
 evidencia respalda hablar de experiencias variadas; no permite inferir el motivo
 o el costo de una persona concreta por sus gestos.
 
+### Experiencias de comunicación no verbal
+
+[Radford et al., experiencias no verbales de adultos autistas (PLOS ONE, 2025)](https://pubmed.ncbi.nlm.nih.gov/40644444/)
+
+Análisis cualitativo de 27 conversaciones de un foro público sobre comunicación
+no verbal. Los temas incluyen esfuerzo y tiempo para manejar señales, malentendidos
+en ambas direcciones, estrategias diversas y diferencias entre personas. Es una
+fuente de experiencias y temas posibles, no una medida de frecuencia en todas las
+personas autistas. En el artículo, «no verbal» nombra gestos, expresiones, mirada
+y otras señales durante interacciones; no significa que sus participantes no
+hablen.
+
+[Shaw et al., barreras de adultos autistas al recibir atención médica (Autism, 2024)](https://pmc.ncbi.nlm.nih.gov/articles/PMC11191657/)
+
+Análisis temático de respuestas abiertas de 1.248 adultos autistas recogidas en
+una encuesta internacional sobre atención primaria. El equipo investigador
+incluía personas autistas. Los temas abarcaron barreras tempranas, diferencias
+de comunicación, dudas y temor, y evitación de la atención. La selección fue por
+conveniencia y los resultados cualitativos no se presentan como generalizables.
+El artículo propone explorar el término «triple empathy problem» para el contexto
+médico; no se debe convertir esa propuesta en una regla universal ni extenderla
+automáticamente a todos los ámbitos.
+
 ## Reglas editoriales
 
 1. Escribir para cualquier persona, con frases cortas y palabras de uso común.
@@ -79,3 +124,5 @@ o el costo de una persona concreta por sus gestos.
 11. Validar opciones, rutas, categorías e identificadores en pruebas automáticas.
 12. Describir cada ilustración para tecnologías de apoyo y vincularla a su
    situación, nunca como clave universal para interpretar emociones.
+13. Al usar experiencias publicadas, indicar el método y los límites; distinguir
+    un testimonio, un hallazgo cualitativo, un término teórico y una sugerencia.

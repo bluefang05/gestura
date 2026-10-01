@@ -126,7 +126,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(CommunicationGuideScreen.lessons.first.exercise),
         findsOneWidget);
-    expect(CommunicationGuideScreen.lessons.length, 9);
+    expect(CommunicationGuideScreen.lessons.length, 11);
     final livedExperienceLesson = CommunicationGuideScreen.lessons.last;
     await tester.scrollUntilVisible(
       find.text(livedExperienceLesson.title),

@@ -110,6 +110,46 @@ class CommunicationGuideScreen extends StatelessWidget {
           'escriba, te dé tiempo o sigamos hablando?». Acepta su elección.',
       illustration: 'context_movimiento_escucha',
     ),
+    (
+      title: '10. «No verbal» no significa «no habla»',
+      body:
+          'En Gestura, «comunicación no verbal» se refiere a señales como los '
+          'gestos, la mirada, la postura o el tono. No significa que la persona '
+          'no use palabras. Un estudio cualitativo de 2025 analizó 27 conversaciones '
+          'de un foro público de adultos autistas. Allí aparecieron experiencias distintas: '
+          'a algunas personas les cuesta más tiempo interpretar o usar estas '
+          'señales; los malentendidos pueden ocurrir en ambas direcciones; y las '
+          'personas usan estrategias diferentes. El estudio describe a quienes '
+          'participaron en ese foro: no representa a todas las personas autistas '
+          'ni demuestra que un gesto tenga un significado fijo. «Problema de la '
+          'doble empatía» es un término usado para hablar de malentendidos que '
+          'pueden surgir entre personas con experiencias o formas de comunicarse '
+          'distintas. Es un marco para explorar la situación, no una etiqueta '
+          'para asignar culpa.',
+      exercise:
+          'Prueba: si una señal no te queda clara, describe lo que observaste y '
+          'pregunta qué quiso comunicar. También puedes dar tiempo, escribir o '
+          'aclarar lo que tú querías decir.',
+      illustration: 'context_pausa_conversacion',
+    ),
+    (
+      title: '11. Una experiencia real puede mostrar una barrera',
+      body:
+          'En un estudio internacional de 1.248 adultos autistas sobre atención '
+          'médica, muchas respuestas describieron barreras de comunicación, '
+          'ambientes sensorialmente difíciles y problemas para saber qué iba a '
+          'pasar. El equipo investigador, que incluía personas autistas, agrupó '
+          'los relatos en temas. Estos resultados ayudan a ver problemas posibles; '
+          'no dicen que todas las personas tengan la misma experiencia. En una '
+          'consulta, una persona puede llevar sus preguntas por escrito, pedir '
+          'que expliquen el siguiente paso o consultar si hay un espacio más '
+          'tranquilo. Pregunta qué le sirve a esa persona.',
+      exercise:
+          'Prueba: antes de una reunión o consulta, ofrece opciones concretas: '
+          '«¿Te sirve que te envíe las preguntas antes, que hagamos una pausa o '
+          'que resumamos los acuerdos por escrito?»',
+      illustration: 'context_ruido_cafeteria',
+    ),
   ];
 
   static const sources = <({String title, String url})>[
@@ -135,6 +175,14 @@ class CommunicationGuideScreen extends StatelessWidget {
       title: 'Zhuang et al. · Revisión de 58 estudios sobre camuflaje (2023)',
       url: 'https://pubmed.ncbi.nlm.nih.gov/37741059/'
     ),
+    (
+      title: 'Radford et al. · Experiencias no verbales de adultos autistas (2025)',
+      url: 'https://pubmed.ncbi.nlm.nih.gov/40644444/'
+    ),
+    (
+      title: 'Shaw et al. · Relatos de adultos autistas sobre atención médica (2024)',
+      url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11191657/'
+    ),
   ];
 
   @override
@@ -150,7 +198,7 @@ class CommunicationGuideScreen extends StatelessWidget {
               Text('Observa, pregunta y ajusta',
                   style: Theme.of(context).textTheme.headlineSmall),
               const SizedBox(height: 8),
-              const Text('Nueve lecciones breves para llevar el aprendizaje a '
+              const Text('Once lecciones breves para llevar el aprendizaje a '
                   'conversaciones reales. Abre una lección y prueba su ejercicio.'),
               const SizedBox(height: 16),
               for (final lesson in lessons)
