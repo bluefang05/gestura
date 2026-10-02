@@ -248,10 +248,15 @@ void main() {
     expect(find.text('Manual'), findsOneWidget);
     expect(find.text('Práctica'), findsOneWidget);
     expect(find.text('Escenarios'), findsOneWidget);
+    expect(find.text('Comunicar ahora'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Gesto del Día'), 200,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('Gesto del Día'), findsOneWidget);
 
     // Scroll down to check tools
-    await tester.drag(find.byType(ListView).first, const Offset(0, -400));
+    await tester.scrollUntilVisible(
+        find.textContaining('Comparador Visual'), 200,
+        scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Comparador Visual'), findsWidgets);
@@ -391,26 +396,17 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: EmergencyModeScreen()));
     await tester.pumpAndSettle();
 
-    expect(find.text('Modo Emergencia / Campo'), findsOneWidget);
-    expect(find.text('Entrevista / Ventas'), findsOneWidget);
-    expect(find.text('Evento Social / Fiesta'), findsOneWidget);
-    expect(find.text('Neurobiología del Bloqueo'), findsOneWidget);
-
-    // Scroll horizontal chips if needed and tap Neurobiología del Bloqueo
-    await tester.ensureVisible(find.text('Neurobiología del Bloqueo'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Neurobiología del Bloqueo'));
+    expect(find.text('Ayuda rápida'), findsOneWidget);
+    expect(find.text('Trabajo'), findsOneWidget);
+    expect(find.text('Encuentros'), findsOneWidget);
+    await tester.tap(find.text('Pedir una pausa'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Neurobiología del Secuestro Emocional y Bloqueo'),
-        findsOneWidget);
-    expect(find.text('1. El Atajo Tálamo-Amígdala (12 ms)'), findsOneWidget);
-    expect(
-        find.text('2. El Secuestro de la Memoria de Trabajo'), findsOneWidget);
-    expect(find.text('3. La Regla de los 20 Minutos (Dolf Zillmann)'),
-        findsOneWidget);
-    expect(find.text('4. Protocolo SOCS / Semáforo de Regulación'),
-        findsOneWidget);
+    expect(find.text('Puedes pausar la conversación'), findsOneWidget);
+    await tester.scrollUntilVisible(
+        find.text('Elige cuánto tiempo necesitas'), 200);
+    expect(find.text('Elige cuánto tiempo necesitas'), findsOneWidget);
+    expect(tester.takeException(), isNull);
   });
 
   test('AppLocalizations maintains 100% key symmetry across all 5 languages',
@@ -901,11 +897,11 @@ void main() {
     await tester.pumpAndSettle();
 
     // Scroll down to Herramientas Prácticas
-    await tester.drag(find.byType(ListView).first, const Offset(0, -600));
-    await tester.pumpAndSettle();
-
-    // Verify the Límites card is present
     final limitesCard = find.text('Límites & Consentimiento');
+    await tester.scrollUntilVisible(limitesCard, 300,
+        scrollable: find.byType(Scrollable).first);
+    await tester.ensureVisible(limitesCard);
+    await tester.pumpAndSettle();
     expect(limitesCard, findsOneWidget);
 
     // Tap on the card
@@ -1105,8 +1101,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.8', () {
-    expect(AppConstants.appVersion, equals('1.0.8'));
+  test('AppConstants appVersion matches version 1.0.9', () {
+    expect(AppConstants.appVersion, equals('1.0.9'));
   });
 
   testWidgets(

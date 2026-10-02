@@ -8,7 +8,7 @@ Revisión: 1 de octubre de 2026.
 - 48 preguntas: interpretación y respuesta práctica para cada caso.
 - 12 escenarios ficticios con dos decisiones y consecuencias comentadas.
 - 12 guiones con versiones suave, asertiva y firme: 36 frases.
-- Nueve lecciones introductorias accesibles desde Manual y Práctica.
+- Once lecciones introductorias accesibles desde Manual y Práctica.
 - Ocho ilustraciones originales, en formato WebP optimizado (600 × 600),
   integradas en lecciones, fichas, preguntas y simulaciones.
 
@@ -16,6 +16,11 @@ Las escenas, preguntas y frases son ejercicios originales. Las referencias
 fundamentan principios generales; no validan cada ejemplo ni aportan una regla
 para inferir una emoción a partir de un gesto. El catálogo preexistente conserva
 su contenido y no constituye una revisión científica completa.
+
+La revisión de ayuda rápida sustituye las reglas sobre mirada fija, postura y
+tiempos universales de recuperación por opciones de comunicación. Las frases
+del tablero son propuestas originales que cada persona puede elegir o cambiar;
+no son un tratamiento ni prometen una reacción concreta de quien las recibe.
 
 ## Cómo pasar de una experiencia a una lección
 

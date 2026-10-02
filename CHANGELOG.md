@@ -2,9 +2,19 @@
 
 ## Pendiente de publicación
 
+- Versión 1.0.9 (11): anuncios con inicialización coordinada y reintentos,
+  opciones de quiz mezcladas en cada pregunta y avance de ruta al volver de una
+  lección abierta desde el plan de estudios.
+- Nuevo acceso «Comunicar ahora» con ocho frases, mensajes propios, pantalla
+  ampliada, copia y lectura en voz alta a petición.
+- Rediseñada ayuda rápida con cinco situaciones, pasos opcionales y frases
+  para mostrar. Eliminadas instrucciones de contacto visual obligatorio y
+  afirmaciones sobre tiempos universales de recuperación.
+- El texto leído en ayuda rápida sale del mismo contenido que se muestra.
+- Comprobados mensajes y ayuda rápida con letra al 280 % y tres temas.
 - Ampliado el catálogo a 90 señales, 93 preguntas y 27 escenarios.
 - Añadidos 12 guiones sociales con 36 frases en tres niveles de firmeza.
-- Incorporada una guía de ocho lecciones sobre interpretación, acuerdos y contexto.
+- Incorporada una guía de once lecciones sobre interpretación, acuerdos y contexto.
 - Documentadas las fuentes y criterios editoriales del contenido nuevo.
 - Creadas ocho ilustraciones originales integradas en lecciones, fichas,
   preguntas y escenarios; comprimidas en WebP (unos 450 KB en total).

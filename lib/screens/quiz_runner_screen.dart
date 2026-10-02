@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import '../models/quiz_question.dart';
 import '../widgets/quiz/image_option_card.dart';
 import '../widgets/quiz/quiz_feedback_sheet.dart';
-import '../widgets/illustrations/illustration_widget.dart';
 import '../widgets/common/ad_bottom_bar.dart';
+import '../widgets/illustrations/illustration_widget.dart';
 import '../widgets/common/app_card.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
@@ -32,17 +34,28 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   bool _isEvaluated = false;
   int _correctCount = 0;
   bool _isFinished = false;
+  late List<QuizOption> _displayedOptions;
+  final Random _random = Random();
 
   QuizQuestion get _currentQuestion => widget.questions[_currentIndex];
 
   @override
   void initState() {
     super.initState();
+    _shuffleCurrentOptions();
     if (StorageService.getAutoNarration()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _speakCurrentQuestion();
       });
     }
+  }
+
+  void _shuffleCurrentOptions() {
+    if (widget.questions.isEmpty) {
+      _displayedOptions = [];
+      return;
+    }
+    _displayedOptions = shuffledQuizOptions(_currentQuestion, _random);
   }
 
   @override
@@ -54,7 +67,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   void _speakCurrentQuestion() {
     if (!mounted || widget.questions.isEmpty || _isFinished) return;
     final q = _currentQuestion;
-    final optionsFormatted = q.options.map((opt) {
+    final optionsFormatted = _displayedOptions.map((opt) {
       if (opt.subtext != null && opt.subtext!.trim().isNotEmpty) {
         return '${opt.text}. Pista anatómica: ${opt.subtext}';
       }
@@ -131,6 +144,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         _currentIndex++;
         _selectedOptionId = null;
         _isEvaluated = false;
+        _shuffleCurrentOptions();
       });
       if (StorageService.getAutoNarration()) {
         Future.delayed(const Duration(milliseconds: 300), () {
@@ -294,9 +308,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                           crossAxisSpacing: 10,
                           childAspectRatio: 0.88,
                         ),
-                        itemCount: question.options.length,
+                        itemCount: _displayedOptions.length,
                         itemBuilder: (context, index) {
-                          final opt = question.options[index];
+                          final opt = _displayedOptions[index];
                           return ImageOptionCard(
                             option: opt,
                             isSelected: _selectedOptionId == opt.id,
@@ -306,10 +320,10 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                         },
                       )
                     : ListView.separated(
-                        itemCount: question.options.length,
+                        itemCount: _displayedOptions.length,
                         separatorBuilder: (_, __) => const SizedBox(height: 10),
                         itemBuilder: (context, index) {
-                          final opt = question.options[index];
+                          final opt = _displayedOptions[index];
                           return ImageOptionCard(
                             option: opt,
                             isSelected: _selectedOptionId == opt.id,

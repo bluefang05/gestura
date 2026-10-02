@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +7,8 @@ import 'package:gestura/core/services/storage_service.dart';
 import 'package:gestura/data/gesture_database.dart';
 import 'package:gestura/data/quiz_database.dart';
 import 'package:gestura/models/user_progress.dart';
+import 'package:gestura/models/quiz_question.dart';
+import 'package:gestura/data/roadmap_database.dart';
 import 'package:gestura/screens/dictionary_screen.dart';
 import 'package:gestura/screens/quiz_runner_screen.dart';
 import 'package:gestura/state/progress_provider.dart';
@@ -102,6 +106,35 @@ void main() {
     expect(
         UserProgress.initial().recordQuizResult('q', 120).averageQuizAccuracy,
         100);
+  });
+
+  test('Quiz options can move the correct answer from its source position', () {
+    final question = QuizDatabase.questions.first;
+    final sourceCorrectIndex =
+        question.options.indexWhere((option) => option.isCorrect);
+    final displayedCorrectIndices = List.generate(12, (seed) {
+      return shuffledQuizOptions(question, Random(seed))
+          .indexWhere((option) => option.isCorrect);
+    }).toSet();
+
+    expect(displayedCorrectIndices.length, greaterThan(1));
+    expect(displayedCorrectIndices, isNot({sourceCorrectIndex}));
+    for (var seed = 0; seed < 12; seed++) {
+      final options = shuffledQuizOptions(question, Random(seed));
+      expect(options.map((option) => option.id).toSet(),
+          question.options.map((option) => option.id).toSet());
+      expect(options.where((option) => option.isCorrect).length, 1);
+    }
+  });
+
+  test('Completing a roadmap lesson advances and survives saved progress', () {
+    final progress =
+        const UserProgress().markRoadmapStepCompleted('step_baseline');
+    final restored = UserProgress.fromJson(progress.toJson());
+
+    expect(restored.completedRoadmapStepIds, ['step_baseline']);
+    expect(
+        RoadmapDatabase.getCurrentActiveStep(restored).id, 'step_first_quiz');
   });
 
   test('Partially invalid stored progress preserves usable records', () {

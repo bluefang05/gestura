@@ -44,7 +44,7 @@ class RoadmapStep {
   });
 
   RoadmapStepStatus getStatus(UserProgress progress, bool isPreviousCompleted) {
-    if (isCompletedCheck(progress)) {
+    if (isCompleted(progress)) {
       return RoadmapStepStatus.completed;
     }
     if (isPreviousCompleted) {
@@ -52,6 +52,10 @@ class RoadmapStep {
     }
     return RoadmapStepStatus.locked;
   }
+
+  bool isCompleted(UserProgress progress) =>
+      progress.completedRoadmapStepIds.contains(id) ||
+      isCompletedCheck(progress);
 }
 
 class RoadmapLevel {
@@ -70,10 +74,10 @@ class RoadmapLevel {
   });
 
   bool isLevelCompleted(UserProgress progress) {
-    return steps.every((s) => s.isCompletedCheck(progress));
+    return steps.every((s) => s.isCompleted(progress));
   }
 
   int completedStepsCount(UserProgress progress) {
-    return steps.where((s) => s.isCompletedCheck(progress)).length;
+    return steps.where((s) => s.isCompleted(progress)).length;
   }
 }

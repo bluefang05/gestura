@@ -10,6 +10,7 @@ class UserProgress {
   final List<String> completedQuizIds;
   final Map<String, int> quizScores; // quizId -> score %
   final List<String> completedScenarioIds;
+  final List<String> completedRoadmapStepIds;
 
   const UserProgress({
     this.currentStreak = 0,
@@ -19,6 +20,7 @@ class UserProgress {
     this.completedQuizIds = const [],
     this.quizScores = const {},
     this.completedScenarioIds = const [],
+    this.completedRoadmapStepIds = const [],
   });
 
   factory UserProgress.initial() {
@@ -30,6 +32,7 @@ class UserProgress {
       completedQuizIds: [],
       quizScores: {},
       completedScenarioIds: [],
+      completedRoadmapStepIds: [],
     );
   }
 
@@ -93,6 +96,13 @@ class UserProgress {
       updated.add(scenarioId);
     }
     return copyWith(completedScenarioIds: updated).registerActiveDay();
+  }
+
+  UserProgress markRoadmapStepCompleted(String stepId) {
+    if (completedRoadmapStepIds.contains(stepId)) return this;
+    return copyWith(
+      completedRoadmapStepIds: [...completedRoadmapStepIds, stepId],
+    ).registerActiveDay();
   }
 
   int get totalPoints {
@@ -168,6 +178,7 @@ class UserProgress {
     List<String>? completedQuizIds,
     Map<String, int>? quizScores,
     List<String>? completedScenarioIds,
+    List<String>? completedRoadmapStepIds,
   }) {
     return UserProgress(
       currentStreak: currentStreak ?? this.currentStreak,
@@ -177,6 +188,8 @@ class UserProgress {
       completedQuizIds: completedQuizIds ?? this.completedQuizIds,
       quizScores: quizScores ?? this.quizScores,
       completedScenarioIds: completedScenarioIds ?? this.completedScenarioIds,
+      completedRoadmapStepIds:
+          completedRoadmapStepIds ?? this.completedRoadmapStepIds,
     );
   }
 
@@ -189,6 +202,7 @@ class UserProgress {
       'completedQuizIds': completedQuizIds,
       'quizScores': quizScores,
       'completedScenarioIds': completedScenarioIds,
+      'completedRoadmapStepIds': completedRoadmapStepIds,
     };
   }
 
@@ -226,6 +240,7 @@ class UserProgress {
       completedQuizIds: {...ids('completedQuizIds'), ...scores.keys}.toList(),
       quizScores: scores,
       completedScenarioIds: ids('completedScenarioIds'),
+      completedRoadmapStepIds: ids('completedRoadmapStepIds'),
     );
   }
 }

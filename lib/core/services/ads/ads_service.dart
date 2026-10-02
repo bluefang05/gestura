@@ -10,12 +10,17 @@ class AdsService {
   static final AdsService instance = AdsService._internal();
 
   bool _isInitialized = false;
+  Future<void>? _initialization;
   bool get isInitialized => _isInitialized;
 
   /// Initializes the Google Mobile Ads SDK safely.
   /// Designed to be called asynchronously in background without blocking app startup.
-  Future<void> initialize() async {
-    if (_isInitialized) return;
+  Future<void> initialize() {
+    if (_isInitialized) return Future<void>.value();
+    return _initialization ??= _initialize();
+  }
+
+  Future<void> _initialize() async {
     try {
       await MobileAds.instance.initialize();
       _isInitialized = true;
@@ -23,6 +28,7 @@ class AdsService {
         debugPrint('[AdsService] Google Mobile Ads initialized successfully.');
       }
     } catch (e) {
+      _initialization = null;
       if (kDebugMode) {
         debugPrint('[AdsService] Failed to initialize Google Mobile Ads: $e');
       }

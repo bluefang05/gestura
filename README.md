@@ -6,12 +6,16 @@ se consultan localmente; los anuncios y algunas voces pueden requerir conexión.
 
 ## Funciones
 
+- Comunicar ahora: ocho frases listas y mensajes propios para mostrar en grande,
+  copiar o leer en voz alta. Mostrar una frase no activa el sonido.
+- Ayuda rápida: pasos opcionales para trabajo, encuentros, quedarse en blanco,
+  ruido y pausas, con una frase para mostrar en cada situación.
 - Manual con búsqueda sin distinción de tildes y por varias palabras,
   categorías, partes del cuerpo, favoritos y señales por explorar.
 - Práctica personal de hasta cinco preguntas, con prioridad para los errores
   pendientes y explicaciones tras cada respuesta.
 - Entrenamiento visual, modo rápido, escenarios y herramientas de consulta.
-- Guía de nueve lecciones, casos sobre contexto y accesibilidad, y guiones
+- Guía de once lecciones, casos sobre contexto y accesibilidad, y guiones
   con tres niveles de firmeza. Consulta los [criterios y fuentes](CONTENT_SOURCES.md).
 - Ocho ilustraciones originales creadas para la guía, las fichas y las
   preguntas visuales; incluyen descripciones accesibles.
@@ -47,6 +51,9 @@ La distribución de producción requiere la configuración de firma de Android.
 - `test`: pruebas de datos, navegación, progreso, búsqueda y accesibilidad.
 
 ## Persistencia
+
+Los mensajes propios y las casillas de ayuda rápida se mantienen mientras su
+pantalla sigue abierta; no se guardan al cerrarla.
 
 Los ajustes, favoritos y el progreso usan SharedPreferences. Reiniciar el progreso
 conserva favoritos y preferencias. Los resultados nuevos se guardan por ID de

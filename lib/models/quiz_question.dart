@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'category.dart';
 
 class QuizOption {
@@ -42,3 +44,6 @@ class QuizQuestion {
 
   bool get isImageOptionGrid => options.any((opt) => opt.hasIllustration);
 }
+
+List<QuizOption> shuffledQuizOptions(QuizQuestion question, Random random) =>
+    List<QuizOption>.of(question.options)..shuffle(random);

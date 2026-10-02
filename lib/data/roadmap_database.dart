@@ -12,6 +12,7 @@ import '../data/quiz_database.dart';
 import '../models/social_script.dart';
 import '../models/category.dart';
 import '../screens/scenarios_screen.dart';
+import '../state/progress_provider.dart';
 
 class RoadmapDatabase {
   static final List<RoadmapLevel> levels = [
@@ -206,7 +207,7 @@ class RoadmapDatabase {
   static RoadmapStep getCurrentActiveStep(UserProgress progress) {
     for (final level in levels) {
       for (final step in level.steps) {
-        if (!step.isCompletedCheck(progress)) {
+        if (!step.isCompleted(progress)) {
           return step;
         }
       }
@@ -224,18 +225,21 @@ class RoadmapDatabase {
     return levels.last;
   }
 
-  static void navigateToDestination(
-      BuildContext context, RoadmapDestination destination) {
+  static Future<void> navigateToDestination(
+    BuildContext context,
+    RoadmapDestination destination, {
+    String? roadmapStepId,
+  }) async {
     switch (destination) {
       case RoadmapDestination.clusterBaseline:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const ClusterBaselineScreen()),
         );
         break;
       case RoadmapDestination.visualQuiz:
         final questions = QuizDatabase.getImageCardQuestions();
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => QuizRunnerScreen(
@@ -247,7 +251,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.dictionaryEyes:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const DictionaryScreen(
@@ -257,7 +261,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.dictionaryHands:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const DictionaryScreen(
@@ -267,7 +271,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.unwrittenSmallTalk:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const UnwrittenRulesScreen(initialTab: 0),
@@ -275,7 +279,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.unwrittenIndirects:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const UnwrittenRulesScreen(initialTab: 1),
@@ -283,7 +287,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.boundariesMethod:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const UnwrittenRulesScreen(
@@ -294,7 +298,7 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.boundariesConsent:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => const UnwrittenRulesScreen(
@@ -306,31 +310,32 @@ class RoadmapDatabase {
         );
         break;
       case RoadmapDestination.incongruenceDetector:
-        Navigator.push(
+        await Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (_) => const IncongruenceDetectorScreen()),
+          MaterialPageRoute(builder: (_) => const IncongruenceDetectorScreen()),
         );
         break;
       case RoadmapDestination.salesTrack:
-        Navigator.push(
+        await Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (_) => const BuyerTemperatureScreen()),
+          MaterialPageRoute(builder: (_) => const BuyerTemperatureScreen()),
         );
         break;
       case RoadmapDestination.emergencyMode:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const EmergencyModeScreen()),
         );
         break;
       case RoadmapDestination.scenarioRunner:
-        Navigator.push(
+        await Navigator.push(
           context,
           MaterialPageRoute(builder: (_) => const ScenariosScreen()),
         );
         break;
+    }
+    if (roadmapStepId != null) {
+      await ProgressProvider().markRoadmapStepCompleted(roadmapStepId);
     }
   }
 }

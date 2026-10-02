@@ -528,7 +528,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   } else {
                     FeedbackService.lightClick();
                     RoadmapDatabase.navigateToDestination(
-                        context, step.destination);
+                      context,
+                      step.destination,
+                      roadmapStepId: step.id,
+                    );
                   }
                 },
                 child: Container(
@@ -624,7 +627,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                               onTap: () {
                                 FeedbackService.lightClick();
                                 RoadmapDatabase.navigateToDestination(
-                                    context, step.destination);
+                                  context,
+                                  step.destination,
+                                  roadmapStepId: step.id,
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(

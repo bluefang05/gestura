@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/localization/app_localizations.dart';
+import 'core/navigation/app_route_observer.dart';
 import 'core/services/ads/ads_service.dart';
 import 'core/services/storage_service.dart';
 import 'core/theme/app_theme.dart';
@@ -57,6 +58,7 @@ class _GesturaAppState extends State<GesturaApp> {
 
         return MaterialApp(
           title: 'Gestura',
+          navigatorObservers: [appRouteObserver],
           debugShowCheckedModeBanner: false,
           themeMode: _settingsProvider.themeMode,
           theme: lightTheme,

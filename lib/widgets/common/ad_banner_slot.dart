@@ -1,8 +1,12 @@
+import 'dart:async';
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../core/services/ads/ads_service.dart';
+import '../../core/navigation/app_route_observer.dart';
 
 class AdBannerSlot extends StatefulWidget {
   final double height;
@@ -16,10 +20,14 @@ class AdBannerSlot extends StatefulWidget {
   State<AdBannerSlot> createState() => _AdBannerSlotState();
 }
 
-class _AdBannerSlotState extends State<AdBannerSlot> {
+class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
   BannerAd? _bannerAd;
+  PageRoute<dynamic>? _route;
   bool _isAdLoaded = false;
   bool _isLoadingAd = false;
+  int _retryAttempt = 0;
+  Timer? _retryTimer;
+  bool _isRouteVisible = true;
 
   @override
   void initState() {
@@ -27,25 +35,74 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
     _loadBannerAd();
   }
 
-  void _loadBannerAd() {
-    if (_bannerAd != null || _isLoadingAd) {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute<dynamic> && route != _route) {
+      if (_route != null) appRouteObserver.unsubscribe(this);
+      _route = route;
+      appRouteObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void didPush() => _isRouteVisible = true;
+
+  @override
+  void didPop() => _isRouteVisible = false;
+
+  @override
+  void didPushNext() {
+    _isRouteVisible = false;
+    _retryTimer?.cancel();
+    _retryTimer = null;
+    _disposeBanner();
+  }
+
+  @override
+  void didPopNext() {
+    _isRouteVisible = true;
+    _loadBannerAd();
+  }
+
+  void _disposeBanner() {
+    _bannerAd?.dispose();
+    _bannerAd = null;
+    _isAdLoaded = false;
+    _isLoadingAd = false;
+  }
+
+  Future<void> _loadBannerAd() async {
+    if (!_isRouteVisible || _bannerAd != null || _isLoadingAd) {
       return;
     }
 
     _isLoadingAd = true;
 
     try {
+      await AdsService.instance.initialize();
+      if (!mounted || !_isRouteVisible) {
+        _isLoadingAd = false;
+        return;
+      }
       _bannerAd = AdsService.instance.createBannerAd(
         onAdLoaded: (ad) {
+          if (!mounted || !_isRouteVisible || _bannerAd != ad) {
+            ad.dispose();
+            return;
+          }
           if (mounted) {
             setState(() {
               _isAdLoaded = true;
               _isLoadingAd = false;
+              _retryAttempt = 0;
             });
           }
         },
         onAdFailedToLoad: (ad, error) {
           ad.dispose();
+          if (_bannerAd != ad) return;
           if (mounted) {
             setState(() {
               _bannerAd = null;
@@ -53,6 +110,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
               _isLoadingAd = false;
             });
           }
+          _scheduleRetry();
           if (kDebugMode) {
             debugPrint('[AdBannerSlot] AdMob Banner failed to load: $error');
           }
@@ -60,15 +118,28 @@ class _AdBannerSlotState extends State<AdBannerSlot> {
       )..load();
     } catch (e) {
       _isLoadingAd = false;
+      _scheduleRetry();
       if (kDebugMode) {
         debugPrint('[AdBannerSlot] AdMob initialization error: $e');
       }
     }
   }
 
+  void _scheduleRetry() {
+    if (!mounted || _retryTimer?.isActive == true) return;
+    _retryAttempt++;
+    final seconds = math.min(60, 5 * (1 << math.min(_retryAttempt - 1, 4)));
+    _retryTimer = Timer(Duration(seconds: seconds), () {
+      _retryTimer = null;
+      _loadBannerAd();
+    });
+  }
+
   @override
   void dispose() {
-    _bannerAd?.dispose();
+    appRouteObserver.unsubscribe(this);
+    _retryTimer?.cancel();
+    _disposeBanner();
     super.dispose();
   }
 
@@ -149,7 +220,7 @@ class _AdPlaceholder extends StatelessWidget {
             const SizedBox(width: 8),
             Flexible(
               child: Text(
-                'Gestura • Espacio Publicitario',
+                'Anuncio • Gestura',
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,

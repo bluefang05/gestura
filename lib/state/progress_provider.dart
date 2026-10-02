@@ -47,6 +47,12 @@ class ProgressProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> markRoadmapStepCompleted(String stepId) async {
+    _progress = _progress.markRoadmapStepCompleted(stepId);
+    await StorageService.saveProgress(_progress);
+    notifyListeners();
+  }
+
   Future<void> toggleBookmark(String gestureId) async {
     await StorageService.toggleBookmark(gestureId);
     _bookmarks = StorageService.getBookmarks();

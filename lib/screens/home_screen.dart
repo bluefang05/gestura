@@ -21,6 +21,7 @@ import 'gesture_detail_screen.dart';
 import 'unwritten_rules_screen.dart';
 import 'cluster_baseline_screen.dart';
 import 'emergency_mode_screen.dart';
+import 'communication_board_screen.dart';
 import '../widgets/home/mastery_progress_card.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../core/services/tts_service.dart';
@@ -101,6 +102,31 @@ class HomeScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 children: [
+                  Card(
+                    color: theme.colorScheme.primaryContainer,
+                    margin: EdgeInsets.zero,
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16),
+                      leading: Icon(Icons.forum_outlined,
+                          color: theme.colorScheme.onPrimaryContainer),
+                      title: Text('Comunicar ahora',
+                          style: TextStyle(
+                            color: theme.colorScheme.onPrimaryContainer,
+                            fontWeight: FontWeight.w700,
+                          )),
+                      subtitle: Text('Muestra una frase o escribe un mensaje.',
+                          style: TextStyle(
+                              color: theme.colorScheme.onPrimaryContainer)),
+                      trailing: Icon(Icons.chevron_right,
+                          color: theme.colorScheme.onPrimaryContainer),
+                      onTap: () {
+                        TtsService.stop();
+                        Navigator.of(context).push(MaterialPageRoute<void>(
+                            builder: (_) => const CommunicationBoardScreen()));
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   // 1. Buscador Rápido y Limpio (Sustituye la tarjeta gigante saturada)
                   InkWell(
                     onTap: () {
@@ -182,8 +208,8 @@ class HomeScreen extends StatelessWidget {
                       final dayOfYear = DateTime.now()
                           .difference(DateTime(DateTime.now().year, 1, 1))
                           .inDays;
-                      final dailyGesture = GestureDatabase
-                          .items[dayOfYear.abs() % GestureDatabase.items.length];
+                      final dailyGesture = GestureDatabase.items[
+                          dayOfYear.abs() % GestureDatabase.items.length];
                       final catInfo =
                           CategoryInfo.getInfo(dailyGesture.category);
 
@@ -387,8 +413,8 @@ class HomeScreen extends StatelessWidget {
                                             style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w800,
-                                              color: dailyGesture
-                                                  .signalType.color,
+                                              color:
+                                                  dailyGesture.signalType.color,
                                             ),
                                           ),
                                         ],
@@ -593,8 +619,8 @@ class HomeScreen extends StatelessWidget {
                         isDark: isDark,
                         icon: Icons.flash_on_rounded,
                         accentColor: AppColors.coral,
-                        title: 'Modo Emergencia',
-                        description: 'Checklists en 30s de campo',
+                        title: 'Ayuda rápida',
+                        description: 'Pasos para una situación difícil',
                         onTap: () {
                           Navigator.push(
                             context,
