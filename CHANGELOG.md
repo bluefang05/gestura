@@ -2,6 +2,8 @@
 
 ## Pendiente de publicación
 
+- Versión 1.0.10 (12): preparación del paquete Android release para distribución.
+
 - Versión 1.0.9 (11): anuncios con inicialización coordinada y reintentos,
   opciones mezcladas en el quiz y el modo rápido, y avance de ruta al completar
   el cuestionario o confirmar la lectura. Volver atrás no completa un tema.
