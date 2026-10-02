@@ -17,11 +17,13 @@ import '../widgets/common/tts_app_bar_control.dart';
 class QuizRunnerScreen extends StatefulWidget {
   final String title;
   final List<QuizQuestion> questions;
+  final VoidCallback? onCompleted;
 
   const QuizRunnerScreen({
     super.key,
     required this.title,
     required this.questions,
+    this.onCompleted,
   });
 
   @override
@@ -160,6 +162,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       setState(() {
         _isFinished = true;
       });
+      widget.onCompleted?.call();
 
       if (StorageService.getAutoNarration()) {
         TtsService.speak(
@@ -479,7 +482,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   FeedbackService.lightClick();
                   Navigator.pop(context);
                 },
-                child: const Text('Volver a Práctica'),
+                child: Text(widget.onCompleted == null
+                    ? 'Volver a Práctica'
+                    : 'Continuar ruta'),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
@@ -491,7 +496,11 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                     _selectedOptionId = null;
                     _isEvaluated = false;
                     _isFinished = false;
+                    _shuffleCurrentOptions();
                   });
+                  if (StorageService.getAutoNarration()) {
+                    _speakCurrentQuestion();
+                  }
                 },
                 child: const Text('Reintentar Quiz'),
               ),

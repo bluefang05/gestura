@@ -778,13 +778,13 @@ void main() {
     expect(step2.getStatus(freshProgress, false),
         equals(RoadmapStepStatus.locked));
 
-    // Simulated progress: user explored 1 gesture
+    // Unrelated activity must not complete a roadmap lesson.
     final progressWith1Gesture =
         freshProgress.copyWith(exploredGestureIds: ['g_test_1']);
     expect(activeStep.getStatus(progressWith1Gesture, true),
-        equals(RoadmapStepStatus.completed));
-    final nextActive =
-        RoadmapDatabase.getCurrentActiveStep(progressWith1Gesture);
+        equals(RoadmapStepStatus.current));
+    final nextActive = RoadmapDatabase.getCurrentActiveStep(
+        progressWith1Gesture.markRoadmapStepCompleted(activeStep.id));
     expect(nextActive.id, equals('step_first_quiz'));
     expect(nextActive.stepNumber, equals(2));
   });

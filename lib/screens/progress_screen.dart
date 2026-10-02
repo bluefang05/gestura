@@ -395,11 +395,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     step.getStatus(_progress, isPreviousStepCompleted);
                 final isLastStepInLevel = idx == level.steps.length - 1;
 
-                if (status == RoadmapStepStatus.completed) {
-                  isPreviousStepCompleted = true;
-                } else {
-                  isPreviousStepCompleted = false;
-                }
+                isPreviousStepCompleted = isPreviousStepCompleted &&
+                    status == RoadmapStepStatus.completed;
 
                 return _buildStepTimelineTile(
                   step: step,

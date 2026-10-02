@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../core/constants/app_colors.dart';
 import '../core/services/feedback_service.dart';
@@ -24,6 +25,8 @@ class FlashQuizScreen extends StatefulWidget {
 class _FlashQuizScreenState extends State<FlashQuizScreen>
     with SingleTickerProviderStateMixin {
   late List<QuizQuestion> _questions;
+  late List<QuizOption> _displayedOptions;
+  final Random _random = Random();
   int _currentIndex = 0;
   int _score = 0;
   int _correctCount = 0;
@@ -58,6 +61,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   }
 
   void _startQuestionFlash() {
+    _displayedOptions = shuffledQuizOptions(_questions[_currentIndex], _random);
     setState(() {
       _isImageVisible = true;
       _isAnswered = false;
@@ -222,7 +226,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
               TtsService.speakQuizQuestion(
                 question: currentQ.prompt,
                 visualClue: currentQ.keyVisualClue,
-                options: currentQ.options.map((o) => o.text).toList(),
+                options: _displayedOptions.map((o) => o.text).toList(),
                 tag: 'flash_q_${currentQ.id}',
               );
             },
@@ -331,7 +335,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
 
           // Options Grid / List
           Column(
-            children: currentQ.options.map((option) {
+            children: _displayedOptions.map((option) {
               final isSelected = _selectedOption == option;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 10),

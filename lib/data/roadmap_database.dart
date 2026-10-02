@@ -13,6 +13,7 @@ import '../models/social_script.dart';
 import '../models/category.dart';
 import '../screens/scenarios_screen.dart';
 import '../state/progress_provider.dart';
+import '../screens/roadmap_lesson_screen.dart';
 
 class RoadmapDatabase {
   static final List<RoadmapLevel> levels = [
@@ -35,7 +36,6 @@ class RoadmapDatabase {
               'Nunca asumas un gesto aislado: busca el estado neutro y 3 señales coincidentes.',
           icon: Icons.hub_rounded,
           destination: RoadmapDestination.clusterBaseline,
-          isCompletedCheck: (p) => p.exploredGestureIds.isNotEmpty,
         ),
         RoadmapStep(
           id: 'step_first_quiz',
@@ -46,7 +46,6 @@ class RoadmapDatabase {
               'Distingue emociones básicas en tarjetas visuales de alto contraste.',
           icon: Icons.psychology_rounded,
           destination: RoadmapDestination.visualQuiz,
-          isCompletedCheck: (p) => p.totalQuizzesTaken >= 1,
         ),
       ],
     ),
@@ -70,7 +69,6 @@ class RoadmapDatabase {
               'Aprende a diferenciar el contacto visual de confort vs sobrecarga o desvío.',
           icon: Icons.remove_red_eye_rounded,
           destination: RoadmapDestination.dictionaryEyes,
-          isCompletedCheck: (p) => p.exploredGestureIds.length >= 5,
         ),
         RoadmapStep(
           id: 'step_hands_torso',
@@ -81,7 +79,6 @@ class RoadmapDatabase {
               'Postura abierta, manos visibles y barreras defensivas con objetos.',
           icon: Icons.pan_tool_rounded,
           destination: RoadmapDestination.dictionaryHands,
-          isCompletedCheck: (p) => p.exploredGestureIds.length >= 10,
         ),
       ],
     ),
@@ -105,7 +102,6 @@ class RoadmapDatabase {
               'El ping de red que comunica que el canal está en paz, no un examen.',
           icon: Icons.chat_bubble_outline_rounded,
           destination: RoadmapDestination.unwrittenSmallTalk,
-          isCompletedCheck: (p) => p.exploredGestureIds.length >= 15,
         ),
         RoadmapStep(
           id: 'step_indirects',
@@ -116,7 +112,6 @@ class RoadmapDatabase {
               'Traduce fórmulas de cortesía social a lo que la persona realmente necesita.',
           icon: Icons.transform_rounded,
           destination: RoadmapDestination.unwrittenIndirects,
-          isCompletedCheck: (p) => p.totalCompletedQuizzes >= 2,
         ),
       ],
     ),
@@ -140,7 +135,6 @@ class RoadmapDatabase {
               'Hecho observable, impacto y acción declarada sin sonrisas de disculpa.',
           icon: Icons.shield_outlined,
           destination: RoadmapDestination.boundariesMethod,
-          isCompletedCheck: (p) => p.masteryPercentage >= 15,
         ),
         RoadmapStep(
           id: 'step_consent',
@@ -151,7 +145,6 @@ class RoadmapDatabase {
               'Aprende a leer el apaciguamiento y a ofrecer siempre puertas de escape airosas.',
           icon: Icons.handshake_rounded,
           destination: RoadmapDestination.boundariesConsent,
-          isCompletedCheck: (p) => p.masteryPercentage >= 20,
         ),
       ],
     ),
@@ -175,8 +168,6 @@ class RoadmapDatabase {
               'Distingue cuando las palabras de la persona dicen una cosa pero el cuerpo otra.',
           icon: Icons.psychology_alt_rounded,
           destination: RoadmapDestination.incongruenceDetector,
-          isCompletedCheck: (p) =>
-              p.totalCompletedScenarios >= 1 || p.totalCompletedQuizzes >= 3,
         ),
         RoadmapStep(
           id: 'step_sales_negotiation',
@@ -187,7 +178,6 @@ class RoadmapDatabase {
               'Calibración en tiempo real, manejo de objeciones y la regla del silencio.',
           icon: Icons.trending_up_rounded,
           destination: RoadmapDestination.salesTrack,
-          isCompletedCheck: (p) => p.totalCompletedScenarios >= 2,
         ),
         RoadmapStep(
           id: 'step_emergency_sos',
@@ -198,7 +188,6 @@ class RoadmapDatabase {
               'Kit de supervivencia de 30 segundos antes de entrar por la puerta.',
           icon: Icons.flash_on_rounded,
           destination: RoadmapDestination.emergencyMode,
-          isCompletedCheck: (p) => p.totalCompletedScenarios >= 3,
         ),
       ],
     ),
@@ -230,112 +219,72 @@ class RoadmapDatabase {
     RoadmapDestination destination, {
     String? roadmapStepId,
   }) async {
+    final Widget screen;
     switch (destination) {
       case RoadmapDestination.clusterBaseline:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const ClusterBaselineScreen()),
-        );
+        screen = const ClusterBaselineScreen();
         break;
       case RoadmapDestination.visualQuiz:
         final questions = QuizDatabase.getImageCardQuestions();
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => QuizRunnerScreen(
-              title: 'Test Visual',
-              questions:
-                  questions.isNotEmpty ? questions : QuizDatabase.questions,
-            ),
-          ),
+        screen = QuizRunnerScreen(
+          title: 'Test Visual',
+          questions: questions.isNotEmpty ? questions : QuizDatabase.questions,
+          onCompleted: roadmapStepId == null
+              ? null
+              : () {
+                  ProgressProvider().markRoadmapStepCompleted(roadmapStepId);
+                },
         );
         break;
       case RoadmapDestination.dictionaryEyes:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const DictionaryScreen(
-              initialCategory: CategoryType.expresionesFaciales,
-            ),
-          ),
-        );
+        screen = const DictionaryScreen(
+            initialCategory: CategoryType.expresionesFaciales);
         break;
       case RoadmapDestination.dictionaryHands:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const DictionaryScreen(
-              initialCategory: CategoryType.lenguajeCorporal,
-            ),
-          ),
-        );
+        screen = const DictionaryScreen(
+            initialCategory: CategoryType.lenguajeCorporal);
         break;
       case RoadmapDestination.unwrittenSmallTalk:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const UnwrittenRulesScreen(initialTab: 0),
-          ),
-        );
+        screen = const UnwrittenRulesScreen(initialTab: 0);
         break;
       case RoadmapDestination.unwrittenIndirects:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const UnwrittenRulesScreen(initialTab: 1),
-          ),
-        );
+        screen = const UnwrittenRulesScreen(initialTab: 1);
         break;
       case RoadmapDestination.boundariesMethod:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const UnwrittenRulesScreen(
-              initialTab: 4,
-              initialSubView: 0,
-            ),
-          ),
-        );
+        screen = const UnwrittenRulesScreen(initialTab: 4, initialSubView: 0);
         break;
       case RoadmapDestination.boundariesConsent:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const UnwrittenRulesScreen(
-              initialTab: 4,
-              initialSubView: 1,
-              initialCategory: SocialScriptCategory.consent,
-            ),
-          ),
-        );
+        screen = const UnwrittenRulesScreen(
+            initialTab: 4,
+            initialSubView: 1,
+            initialCategory: SocialScriptCategory.consent);
         break;
       case RoadmapDestination.incongruenceDetector:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const IncongruenceDetectorScreen()),
-        );
+        screen = const IncongruenceDetectorScreen();
         break;
       case RoadmapDestination.salesTrack:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const BuyerTemperatureScreen()),
-        );
+        screen = const BuyerTemperatureScreen();
         break;
       case RoadmapDestination.emergencyMode:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const EmergencyModeScreen()),
-        );
+        screen = const EmergencyModeScreen();
         break;
       case RoadmapDestination.scenarioRunner:
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const ScenariosScreen()),
-        );
+        screen = const ScenariosScreen();
         break;
     }
-    if (roadmapStepId != null) {
-      await ProgressProvider().markRoadmapStepCompleted(roadmapStepId);
-    }
+    await Navigator.push<void>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => roadmapStepId != null &&
+                  destination != RoadmapDestination.visualQuiz
+              ? RoadmapLessonScreen(
+                  stepId: roadmapStepId,
+                  showAd: destination != RoadmapDestination.salesTrack &&
+                      destination != RoadmapDestination.incongruenceDetector &&
+                      destination != RoadmapDestination.emergencyMode,
+                  child: screen,
+                )
+              : screen,
+        ));
   }
 }

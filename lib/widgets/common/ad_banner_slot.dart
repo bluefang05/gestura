@@ -28,6 +28,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
   int _retryAttempt = 0;
   Timer? _retryTimer;
   bool _isRouteVisible = true;
+  int _generation = 0;
 
   @override
   void initState() {
@@ -50,14 +51,14 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
   void didPush() => _isRouteVisible = true;
 
   @override
-  void didPop() => _isRouteVisible = false;
+  void didPop() => didPushNext();
 
   @override
   void didPushNext() {
     _isRouteVisible = false;
     _retryTimer?.cancel();
     _retryTimer = null;
-    _disposeBanner();
+    setState(_disposeBanner);
   }
 
   @override
@@ -67,6 +68,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
   }
 
   void _disposeBanner() {
+    _generation++;
     _bannerAd?.dispose();
     _bannerAd = null;
     _isAdLoaded = false;
@@ -79,12 +81,15 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
     }
 
     _isLoadingAd = true;
+    final generation = _generation;
 
     try {
       await AdsService.instance.initialize();
-      if (!mounted || !_isRouteVisible) {
-        _isLoadingAd = false;
+      if (!mounted || !_isRouteVisible || generation != _generation) {
         return;
+      }
+      if (!AdsService.instance.isInitialized) {
+        throw StateError('AdMob initialization did not complete');
       }
       _bannerAd = AdsService.instance.createBannerAd(
         onAdLoaded: (ad) {
@@ -115,9 +120,11 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
             debugPrint('[AdBannerSlot] AdMob Banner failed to load: $error');
           }
         },
-      )..load();
+      );
+      await _bannerAd!.load();
     } catch (e) {
-      _isLoadingAd = false;
+      if (!mounted || generation != _generation) return;
+      setState(_disposeBanner);
       _scheduleRetry();
       if (kDebugMode) {
         debugPrint('[AdBannerSlot] AdMob initialization error: $e');
@@ -126,7 +133,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
   }
 
   void _scheduleRetry() {
-    if (!mounted || _retryTimer?.isActive == true) return;
+    if (!mounted || !_isRouteVisible || _retryTimer?.isActive == true) return;
     _retryAttempt++;
     final seconds = math.min(60, 5 * (1 << math.min(_retryAttempt - 1, 4)));
     _retryTimer = Timer(Duration(seconds: seconds), () {

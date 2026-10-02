@@ -30,7 +30,6 @@ class RoadmapStep {
   final String subtitle;
   final IconData icon;
   final RoadmapDestination destination;
-  final bool Function(UserProgress progress) isCompletedCheck;
 
   const RoadmapStep({
     required this.id,
@@ -40,7 +39,6 @@ class RoadmapStep {
     required this.subtitle,
     required this.icon,
     required this.destination,
-    required this.isCompletedCheck,
   });
 
   RoadmapStepStatus getStatus(UserProgress progress, bool isPreviousCompleted) {
@@ -54,8 +52,7 @@ class RoadmapStep {
   }
 
   bool isCompleted(UserProgress progress) =>
-      progress.completedRoadmapStepIds.contains(id) ||
-      isCompletedCheck(progress);
+      progress.completedRoadmapStepIds.contains(id);
 }
 
 class RoadmapLevel {

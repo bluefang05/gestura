@@ -3,8 +3,11 @@
 ## Pendiente de publicación
 
 - Versión 1.0.9 (11): anuncios con inicialización coordinada y reintentos,
-  opciones de quiz mezcladas en cada pregunta y avance de ruta al volver de una
-  lección abierta desde el plan de estudios.
+  opciones mezcladas en el quiz y el modo rápido, y avance de ruta al completar
+  el cuestionario o confirmar la lectura. Volver atrás no completa un tema.
+- Corregido el reinicio del quiz, que conservaba las opciones de la última
+  pregunta. Los cambios de pantalla cancelan las cargas antiguas de anuncios;
+  los fallos del canal nativo también permiten reintentar.
 - Nuevo acceso «Comunicar ahora» con ocho frases, mensajes propios, pantalla
   ampliada, copia y lectura en voz alta a petición.
 - Rediseñada ayuda rápida con cinco situaciones, pasos opcionales y frases
