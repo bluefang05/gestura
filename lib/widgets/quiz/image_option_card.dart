@@ -66,97 +66,94 @@ class ImageOptionCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: backgroundColor ?? Theme.of(context).cardTheme.color,
               borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isDark && borderColor == AppColors.lightBorder
-                  ? AppColors.darkBorder
-                  : borderColor,
-              width:
-                  isSelected || (isEvaluated && option.isCorrect) ? 2.5 : 1.2,
+              border: Border.all(
+                color: isDark && borderColor == AppColors.lightBorder
+                    ? AppColors.darkBorder
+                    : borderColor,
+                width:
+                    isSelected || (isEvaluated && option.isCorrect) ? 2.5 : 1.2,
+              ),
             ),
-          ),
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Visual Image Box if present
-              if (option.hasIllustration) ...[
-                Expanded(
-                  child: Center(
-                    child: ConoVeIllustration(
-                      illustrationKey: option.illustrationKey!,
-                      width: double.infinity,
-                      height: double.infinity,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 8),
-              ],
-
-              // Label and Selection Indicator
-              Row(
-                children: [
-                  Container(
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                          isSelected ? AppColors.primary : Colors.transparent,
-                      border: Border.all(
-                        color: isSelected
-                            ? AppColors.primary
-                            : AppColors.textMutedLight,
-                        width: 2.0,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Visual Image Box if present
+                if (option.hasIllustration) ...[
+                  SizedBox(
+                    height: 130,
+                    child: Center(
+                      child: ConoVeIllustration(
+                        illustrationKey: option.illustrationKey!,
+                        width: 130,
+                        height: 130,
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: isSelected
-                        ? const Icon(Icons.check_rounded,
-                            size: 18, color: Colors.white)
-                        : null,
                   ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          option.text,
-                          style: const TextStyle(
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        if (option.subtext != null) ...[
-                          const SizedBox(height: 2),
-                          Text(
-                            option.subtext!,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.color
-                                  ?.withValues(alpha: 0.75),
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                  if (stateBadge != null) stateBadge,
+                  const SizedBox(height: 8),
                 ],
-              ),
-            ],
+
+                // Label and Selection Indicator
+                Row(
+                  children: [
+                    Container(
+                      width: 26,
+                      height: 26,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color:
+                            isSelected ? AppColors.primary : Colors.transparent,
+                        border: Border.all(
+                          color: isSelected
+                              ? AppColors.primary
+                              : AppColors.textMutedLight,
+                          width: 2.0,
+                        ),
+                      ),
+                      child: isSelected
+                          ? const Icon(Icons.check_rounded,
+                              size: 18, color: Colors.white)
+                          : null,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            option.text,
+                            style: const TextStyle(
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          if (option.subtext != null) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                              option.subtext!,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.color
+                                    ?.withValues(alpha: 0.75),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                    if (stateBadge != null) stateBadge,
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

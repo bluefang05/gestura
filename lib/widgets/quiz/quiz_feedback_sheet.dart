@@ -56,127 +56,137 @@ class QuizFeedbackSheet extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: SafeArea(
-          child: Column(
+          child: SingleChildScrollView(
+              child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Status Header with TTS
-            Row(
-              children: [
-                Icon(
-                  isCorrect ? Icons.check_circle_rounded : Icons.info_rounded,
-                  color: iconColor,
-                  size: 28,
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    isCorrect
-                        ? '¡Excelente observación!'
-                        : '¡Buen intento! Aprende el detalle:',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w800,
-                      color: titleColor,
+            children: [
+              // Status Header with TTS
+              Row(
+                children: [
+                  Icon(
+                    isCorrect ? Icons.check_circle_rounded : Icons.info_rounded,
+                    color: iconColor,
+                    size: 28,
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      isCorrect
+                          ? '¡Excelente observación!'
+                          : '¡Buen intento! Aprende el detalle:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: titleColor,
+                      ),
                     ),
                   ),
-                ),
-                ValueListenableBuilder<bool>(
-                  valueListenable: TtsService.isSpeakingNotifier,
-                  builder: (context, isSpeaking, _) {
-                    return IconButton(
-                      icon: Icon(
-                        isSpeaking
-                            ? Icons.stop_circle_rounded
-                            : Icons.volume_up_rounded,
-                        color: isSpeaking
-                            ? (isDark
-                                ? const Color(0xFFFCA5A5)
-                                : const Color(0xFFDC2626))
-                            : titleColor,
-                      ),
-                      tooltip: isSpeaking
-                          ? 'Detener lectura'
-                          : 'Escuchar explicación',
-                      onPressed: () {
-                        FeedbackService.lightClick();
-                        if (isSpeaking) {
-                          TtsService.stop();
-                        } else {
-                          TtsService.speak(
-                              '${isCorrect ? "¡Excelente observación!" : "¡Buen intento!"}. Pista clave: $keyVisualClue. Explicación: $explanation');
-                        }
-                      },
-                    );
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Key Clue Box
-            AppCard(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              color: clueBoxBg,
-              borderRadius: 12,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Icon(Icons.visibility_rounded,
-                      size: 18,
-                      color: isDark ? AppColors.accentLight : AppColors.accent),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(fontSize: 13, color: clueTextColor),
-                        children: [
-                          const TextSpan(
-                            text: 'Pista anatómica clave: ',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(text: keyVisualClue),
-                        ],
-                      ),
-                    ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: TtsService.isSpeakingNotifier,
+                    builder: (context, isSpeaking, _) {
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          color: isSpeaking
+                              ? (isDark
+                                  ? const Color(0xFFFCA5A5)
+                                  : const Color(0xFFDC2626))
+                              : titleColor,
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speak(
+                                '${isCorrect ? "¡Excelente observación!" : "¡Buen intento!"}. Pista clave: $keyVisualClue. Explicación: $explanation');
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 10),
+              const SizedBox(height: 12),
 
-            // Detailed Explanation
-            Text(
-              explanation,
-              style: TextStyle(
-                fontSize: 13.5,
-                height: 1.4,
-                color: explanationColor,
+              if (!isCorrect)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: Text(
+                      'Esta pregunta volverá al final. Podrás intentarlo otra vez hasta acertar.'),
+                ),
+              // Key Clue Box
+              AppCard(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                color: clueBoxBg,
+                borderRadius: 12,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.visibility_rounded,
+                        size: 18,
+                        color:
+                            isDark ? AppColors.accentLight : AppColors.accent),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(fontSize: 13, color: clueTextColor),
+                          children: [
+                            const TextSpan(
+                              text: 'Qué observar: ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            TextSpan(text: keyVisualClue),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
-            // Continue button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: isCorrect
-                    ? const Color(0xFF059669)
-                    : const Color(0xFFDC2626),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14)),
+              // Detailed Explanation
+              Text(
+                explanation,
+                style: TextStyle(
+                  fontSize: 13.5,
+                  height: 1.4,
+                  color: explanationColor,
+                ),
               ),
-              onPressed: () {
-                FeedbackService.lightClick();
-                onContinue();
-              },
-              child: const Text('Continuar',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
-          ],
+              const SizedBox(height: 16),
+
+              // Continue button
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isCorrect
+                      ? const Color(0xFF059669)
+                      : const Color(0xFFDC2626),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14)),
+                ),
+                onPressed: () {
+                  FeedbackService.lightClick();
+                  onContinue();
+                },
+                child: const Text('Continuar',
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+            ],
+          )),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }

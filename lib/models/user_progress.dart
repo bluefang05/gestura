@@ -78,7 +78,7 @@ class UserProgress {
 
   UserProgress recordQuizResult(String quizId, int score) {
     final updatedCompleted = List<String>.from(completedQuizIds);
-    if (!updatedCompleted.contains(quizId)) {
+    if (score >= 100 && !updatedCompleted.contains(quizId)) {
       updatedCompleted.add(quizId);
     }
     final updatedScores = Map<String, int>.from(quizScores)

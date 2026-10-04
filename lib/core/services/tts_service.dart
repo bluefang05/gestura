@@ -5,6 +5,7 @@ import 'storage_service.dart';
 class TtsService {
   static final FlutterTts _tts = FlutterTts();
   static bool _isInitialized = false;
+  static int _speechRequest = 0;
   static final ValueNotifier<bool> isSpeakingNotifier =
       ValueNotifier<bool>(false);
   static String? _currentSpeakingId;
@@ -83,7 +84,9 @@ class TtsService {
   }
 
   static Future<void> speak(String text, {String? gestureId}) async {
+    final request = ++_speechRequest;
     await init();
+    if (request != _speechRequest) return;
     try {
       // If currently speaking this exact gesture, stop it (toggle)
       if (isSpeakingNotifier.value &&
@@ -93,7 +96,8 @@ class TtsService {
         return;
       }
 
-      await stop();
+      await _tts.stop();
+      if (request != _speechRequest) return;
       _currentSpeakingId = gestureId;
       currentSpeakingIdNotifier.value = gestureId;
       await _tts.speak(text);
@@ -105,11 +109,12 @@ class TtsService {
   }
 
   static Future<void> stop() async {
+    ++_speechRequest;
+    isSpeakingNotifier.value = false;
+    currentSpeakingIdNotifier.value = null;
+    _currentSpeakingId = null;
     try {
       await _tts.stop();
-      isSpeakingNotifier.value = false;
-      currentSpeakingIdNotifier.value = null;
-      _currentSpeakingId = null;
     } catch (_) {}
   }
 
@@ -172,8 +177,7 @@ class TtsService {
     }
     buffer.write('Opciones: ');
     for (int i = 0; i < options.length; i++) {
-      final letter = String.fromCharCode(65 + i);
-      buffer.write('Opción $letter: ${options[i]}. ');
+      buffer.write('${options[i]}. ');
     }
     await speak(buffer.toString(), gestureId: tag ?? 'quiz_question');
   }
@@ -224,7 +228,8 @@ class TtsService {
         ? 'Excelente decisión táctica.'
         : 'Acción con áreas de oportunidad.';
     final buffer = StringBuffer();
-    buffer.write('$quality $resultTitle. Explicación psicológica: $explanation. ');
+    buffer.write(
+        '$quality $resultTitle. Explicación psicológica: $explanation. ');
     if (learningTakeaway != null && learningTakeaway.trim().isNotEmpty) {
       buffer.write('Lección clave teórica: ${learningTakeaway.trim()}');
     }

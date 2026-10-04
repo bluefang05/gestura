@@ -44,6 +44,12 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
   }
 
   void _speakCurrentStep() {
+    if (!mounted ||
+        widget.scenario.steps.isEmpty ||
+        _isCompleted ||
+        ModalRoute.of(context)?.isCurrent != true) {
+      return;
+    }
     final step = _currentStep;
     TtsService.speakScenarioStep(
       narrative: step.narrative,
@@ -205,7 +211,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                     children: [
                       Icon(Icons.directions_walk_rounded,
                           size: 16,
-                          color: isDark ? AppColors.accentLight : AppColors.accent),
+                          color: isDark
+                              ? AppColors.accentLight
+                              : AppColors.accent),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
@@ -213,7 +221,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                           style: TextStyle(
                             fontSize: 12.5,
                             fontStyle: FontStyle.italic,
-                            color: isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
                           ),
                         ),
                       ),
@@ -402,7 +412,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                     children: [
                       Icon(Icons.lightbulb_rounded,
                           size: 18,
-                          color: isDark ? AppColors.accentLight : AppColors.accent),
+                          color: isDark
+                              ? AppColors.accentLight
+                              : AppColors.accent),
                       const SizedBox(width: 8),
                       Text(
                         'Lección Teórica Clave',

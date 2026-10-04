@@ -2,6 +2,16 @@
 
 ## Pendiente de publicación
 
+- Corregido el bloqueo al cerrar la explicación con Atrás y el recorte de respuestas.
+- Preguntas, explicaciones y resultados admiten desplazamiento y texto ampliado.
+- Fallar una pregunta ya no la registra como completada en las estadísticas.
+- Detener la voz cancela también una lectura pendiente de inicialización.
+- Protegida la narración de escenarios vacíos; el resumen muestra intentos reales.
+
+- Nueva sección Conceptos con definiciones sencillas y preparación antes del quiz.
+- Las preguntas falladas vuelven al final hasta acertar; la ruta se completa al resolverlas todas.
+- La voz lee las etiquetas visibles en su orden real, sin añadir letras que contradigan las tarjetas.
+
 - Versión 1.0.10 (12): preparación del paquete Android release para distribución.
 
 - Versión 1.0.9 (11): anuncios con inicialización coordinada y reintentos,

@@ -1,5 +1,6 @@
+import '../data/concepts_database.dart';
+import 'concepts_screen.dart';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import '../models/quiz_question.dart';
 import '../widgets/quiz/image_option_card.dart';
@@ -18,34 +19,35 @@ class QuizRunnerScreen extends StatefulWidget {
   final String title;
   final List<QuizQuestion> questions;
   final VoidCallback? onCompleted;
-
   const QuizRunnerScreen({
     super.key,
     required this.title,
     required this.questions,
     this.onCompleted,
   });
-
   @override
   State<QuizRunnerScreen> createState() => _QuizRunnerScreenState();
 }
 
 class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
+  bool _prepared = false;
   int _currentIndex = 0;
+  late List<QuizQuestion> _queue;
   String? _selectedOptionId;
   bool _isEvaluated = false;
   int _correctCount = 0;
   bool _isFinished = false;
   late List<QuizOption> _displayedOptions;
   final Random _random = Random();
-
-  QuizQuestion get _currentQuestion => widget.questions[_currentIndex];
-
+  final _scrollController = ScrollController();
+  QuizQuestion get _currentQuestion => _queue[_currentIndex];
   @override
   void initState() {
     super.initState();
+    _prepared = ConceptsDatabase.forQuestions(widget.questions).isEmpty;
+    _queue = List.of(widget.questions);
     _shuffleCurrentOptions();
-    if (StorageService.getAutoNarration()) {
+    if (_prepared && StorageService.getAutoNarration()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _speakCurrentQuestion();
       });
@@ -62,24 +64,28 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
 
   @override
   void dispose() {
+    _scrollController.dispose();
     TtsService.stop();
     super.dispose();
   }
 
   void _speakCurrentQuestion() {
-    if (!mounted || widget.questions.isEmpty || _isFinished) return;
+    if (!mounted ||
+        widget.questions.isEmpty ||
+        _isFinished ||
+        ModalRoute.of(context)?.isCurrent != true) {
+      return;
+    }
     final q = _currentQuestion;
     final optionsFormatted = _displayedOptions.map((opt) {
       if (opt.subtext != null && opt.subtext!.trim().isNotEmpty) {
-        return '${opt.text}. Pista anatómica: ${opt.subtext}';
+        return '${opt.text}. Descripción: ${opt.subtext}';
       }
       return opt.text;
     }).toList();
-
     TtsService.speakQuizQuestion(
       question: q.prompt,
       scenarioText: q.scenarioText,
-      visualClue: q.keyVisualClue,
       options: optionsFormatted,
       tag: 'quiz_${q.id}',
     );
@@ -94,23 +100,21 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
 
   void _onSubmitAnswer() {
     if (_selectedOptionId == null || _isEvaluated) return;
-
     final selected = _currentQuestion.options
         .firstWhere((opt) => opt.id == _selectedOptionId);
     final isCorrect = selected.isCorrect;
     ProgressProvider()
         .recordQuizResult(_currentQuestion.id, isCorrect ? 100 : 0);
-
     setState(() {
       _isEvaluated = true;
       if (isCorrect) {
         _correctCount++;
         FeedbackService.success();
       } else {
+        _queue.add(_currentQuestion);
         FeedbackService.error();
       }
     });
-
     if (StorageService.getAutoNarration()) {
       TtsService.speakQuizFeedback(
         isCorrect: isCorrect,
@@ -120,9 +124,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
     } else {
       TtsService.stop();
     }
-
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
       backgroundColor: Colors.transparent,
@@ -133,15 +137,17 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         onContinue: () {
           TtsService.stop();
           Navigator.pop(context);
-          _onNextStep();
         },
       ),
-    );
+    ).then((_) {
+      if (mounted) _onNextStep();
+    });
   }
 
   void _onNextStep() {
     TtsService.stop();
-    if (_currentIndex + 1 < widget.questions.length) {
+    if (_scrollController.hasClients) _scrollController.jumpTo(0);
+    if (_currentIndex + 1 < _queue.length) {
       setState(() {
         _currentIndex++;
         _selectedOptionId = null;
@@ -158,12 +164,10 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       FeedbackService.complete();
       final scorePercentage =
           ((_correctCount / widget.questions.length) * 100).round();
-
       setState(() {
         _isFinished = true;
       });
       widget.onCompleted?.call();
-
       if (StorageService.getAutoNarration()) {
         TtsService.speak(
             '¡Entrenamiento completado! Tu puntuación final es de $scorePercentage por ciento.');
@@ -182,21 +186,35 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         ),
       );
     }
-
+    if (!_prepared) {
+      return ConceptsScreen(
+          concepts: ConceptsDatabase.forQuestions(widget.questions),
+          onStart: () {
+            setState(() => _prepared = true);
+            if (StorageService.getAutoNarration()) {
+              WidgetsBinding.instance
+                  .addPostFrameCallback((_) => _speakCurrentQuestion());
+            }
+          });
+    }
     final isDark = Theme.of(context).brightness == Brightness.dark;
-
     if (_isFinished) {
       return _buildScoreSummary(isDark);
     }
-
     final question = _currentQuestion;
-    final progressVal = (_currentIndex + 1) / widget.questions.length;
-    final isGrid = question.isImageOptionGrid;
-
+    final progressVal = _correctCount / widget.questions.length;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
+          IconButton(
+              tooltip: 'Consultar conceptos',
+              icon: const Icon(Icons.menu_book_outlined),
+              onPressed: () {
+                TtsService.stop();
+                Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (_) => const ConceptsScreen()));
+              }),
           TtsAppBarControl(
             onPlay: _speakCurrentQuestion,
           ),
@@ -212,12 +230,45 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const AdBottomBar(),
+      bottomNavigationBar: SafeArea(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+        // Confirm/Submit Button
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 48),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _selectedOptionId != null
+                    ? AppColors.primary
+                    : (isDark
+                        ? AppColors.darkSurfaceAlt
+                        : AppColors.lightBorder),
+                foregroundColor: _selectedOptionId != null
+                    ? Colors.white
+                    : (isDark
+                        ? AppColors.textMutedDark
+                        : AppColors.textMutedLight),
+                elevation: _selectedOptionId != null ? 1 : 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              onPressed: _selectedOptionId != null && !_isEvaluated
+                  ? _onSubmitAnswer
+                  : null,
+              child: const Text('Comprobar Respuesta',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ),
+        const AdBottomBar(),
+      ])),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
+            controller: _scrollController,
             children: [
               // Question Progress Tag & Prompt Container
               Container(
@@ -235,7 +286,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    Wrap(
                       children: [
                         Container(
                           padding: const EdgeInsets.symmetric(
@@ -246,7 +297,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            'Pregunta ${_currentIndex + 1} de ${widget.questions.length}',
+                            _currentIndex < widget.questions.length
+                                ? 'Pregunta ${_currentIndex + 1} de ${widget.questions.length}'
+                                : 'Repaso · ${widget.questions.length - _correctCount} pendientes',
                             style: TextStyle(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w700,
@@ -285,7 +338,6 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   ],
                 ),
               ),
-
               // Header Illustration if available (single question illustration)
               if (question.questionIllustrationKey != null) ...[
                 const SizedBox(height: 10),
@@ -299,75 +351,16 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 ),
               ],
               const SizedBox(height: 12),
-
-              // Options: Grid if images, List if text
-              Expanded(
-                child: isGrid
-                    ? GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.88,
-                        ),
-                        itemCount: _displayedOptions.length,
-                        itemBuilder: (context, index) {
-                          final opt = _displayedOptions[index];
-                          return ImageOptionCard(
-                            option: opt,
-                            isSelected: _selectedOptionId == opt.id,
-                            isEvaluated: _isEvaluated,
-                            onSelect: () => _onSelectOption(opt.id),
-                          );
-                        },
-                      )
-                    : ListView.separated(
-                        itemCount: _displayedOptions.length,
-                        separatorBuilder: (_, __) => const SizedBox(height: 10),
-                        itemBuilder: (context, index) {
-                          final opt = _displayedOptions[index];
-                          return ImageOptionCard(
-                            option: opt,
-                            isSelected: _selectedOptionId == opt.id,
-                            isEvaluated: _isEvaluated,
-                            onSelect: () => _onSelectOption(opt.id),
-                          );
-                        },
-                      ),
-              ),
-
-              // Confirm/Submit Button
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: SizedBox(
-                  height: 48,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedOptionId != null
-                          ? AppColors.primary
-                          : (isDark
-                              ? AppColors.darkSurfaceAlt
-                              : AppColors.lightBorder),
-                      foregroundColor: _selectedOptionId != null
-                          ? Colors.white
-                          : (isDark
-                              ? AppColors.textMutedDark
-                              : AppColors.textMutedLight),
-                      elevation: _selectedOptionId != null ? 1 : 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                    onPressed: _selectedOptionId != null && !_isEvaluated
-                        ? _onSubmitAnswer
-                        : null,
-                    child: const Text('Comprobar Respuesta',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold)),
+              for (final opt in _displayedOptions)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: ImageOptionCard(
+                    option: opt,
+                    isSelected: _selectedOptionId == opt.id,
+                    isEvaluated: _isEvaluated,
+                    onSelect: () => _onSelectOption(opt.id),
                   ),
                 ),
-              ),
             ],
           ),
         ),
@@ -377,7 +370,6 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
 
   Widget _buildScoreSummary(bool isDark) {
     final score = ((_correctCount / widget.questions.length) * 100).round();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultados del Quiz'),
@@ -387,11 +379,9 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: [
-              const Spacer(),
+              const SizedBox(height: 20),
               Center(
                 child: Container(
                   width: 100,
@@ -432,8 +422,10 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               const SizedBox(height: 24),
               AppCard(
                 padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Wrap(
+                  alignment: WrapAlignment.spaceAround,
+                  spacing: 16,
+                  runSpacing: 16,
                   children: [
                     Column(
                       children: [
@@ -457,7 +449,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                     Column(
                       children: [
                         Text(
-                          'Puntos Ganados',
+                          'Intentos',
                           style: TextStyle(
                             fontSize: 12,
                             color: isDark
@@ -466,7 +458,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        Text('+${score * 2} pts',
+                        Text('${_currentIndex + 1}',
                             style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w800,
@@ -476,7 +468,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                   ],
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   FeedbackService.lightClick();
@@ -491,6 +483,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 onPressed: () {
                   FeedbackService.lightClick();
                   setState(() {
+                    _queue = List.of(widget.questions);
                     _currentIndex = 0;
                     _correctCount = 0;
                     _selectedOptionId = null;

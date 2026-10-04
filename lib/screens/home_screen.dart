@@ -1,3 +1,4 @@
+import 'concepts_screen.dart';
 import 'package:flutter/material.dart';
 import '../core/constants/app_colors.dart';
 import '../models/category.dart';
@@ -102,6 +103,18 @@ class HomeScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                 children: [
+                  Card(
+                      child: ListTile(
+                    leading: const Icon(Icons.menu_book_outlined),
+                    title: const Text('Conceptos'),
+                    subtitle: const Text(
+                        'Palabras sencillas para entender antes de practicar.'),
+                    onTap: () {
+                      TtsService.stop();
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+                          builder: (_) => const ConceptsScreen()));
+                    },
+                  )),
                   Card(
                     color: theme.colorScheme.primaryContainer,
                     margin: EdgeInsets.zero,

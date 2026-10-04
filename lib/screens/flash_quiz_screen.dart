@@ -1,3 +1,5 @@
+import '../data/concepts_database.dart';
+import 'concepts_screen.dart';
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
@@ -24,10 +26,12 @@ class FlashQuizScreen extends StatefulWidget {
 
 class _FlashQuizScreenState extends State<FlashQuizScreen>
     with SingleTickerProviderStateMixin {
+  bool _prepared = false;
   late List<QuizQuestion> _questions;
   late List<QuizOption> _displayedOptions;
   final Random _random = Random();
   int _currentIndex = 0;
+  late int _totalQuestions;
   int _score = 0;
   int _correctCount = 0;
   bool _isImageVisible = true;
@@ -36,6 +40,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
 
   late AnimationController _timerController;
   Timer? _countdownTimer;
+  final _scrollController = ScrollController();
 
   static const int flashSeconds = 3;
 
@@ -52,15 +57,15 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       _questions = _questions.sublist(0, 8);
     }
 
+    _totalQuestions = _questions.length;
     _timerController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: flashSeconds),
     );
-
-    _startQuestionFlash();
   }
 
   void _startQuestionFlash() {
+    if (_scrollController.hasClients) _scrollController.jumpTo(0);
     _displayedOptions = shuffledQuizOptions(_questions[_currentIndex], _random);
     setState(() {
       _isImageVisible = true;
@@ -107,6 +112,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
         _correctCount++;
         FeedbackService.success();
       } else {
+        _questions.add(_questions[_currentIndex]);
         FeedbackService.error();
       }
     });
@@ -127,6 +133,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
 
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       isDismissible: false,
       enableDrag: false,
       shape: const RoundedRectangleBorder(
@@ -139,10 +146,11 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
         onContinue: () {
           TtsService.stop();
           Navigator.pop(ctx);
-          _nextQuestion();
         },
       ),
-    );
+    ).then((_) {
+      if (mounted) _nextQuestion();
+    });
   }
 
   void _nextQuestion() {
@@ -176,7 +184,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                 color: isDark ? AppColors.accentLight : AppColors.accent,
                 size: 48),
             const SizedBox(height: 12),
-            Text('Aciertos: $_correctCount de ${_questions.length}',
+            Text('Aciertos: $_correctCount de $_totalQuestions',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 4),
@@ -203,6 +211,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   void dispose() {
     _countdownTimer?.cancel();
     _timerController.dispose();
+    _scrollController.dispose();
     TtsService.stop();
     super.dispose();
   }
@@ -210,6 +219,14 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    if (!_prepared) {
+      return ConceptsScreen(
+          concepts: ConceptsDatabase.forQuestions(_questions),
+          onStart: () {
+            setState(() => _prepared = true);
+            _startQuestionFlash();
+          });
+    }
     final currentQ = _questions[_currentIndex];
 
     // Determine the key illustration to show
@@ -221,12 +238,22 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       appBar: AppBar(
         title: const Text('Modo Flash Contrarreloj'),
         actions: [
+          IconButton(
+              tooltip: 'Consultar conceptos',
+              icon: const Icon(Icons.menu_book_outlined),
+              onPressed: () {
+                TtsService.stop();
+                Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (_) => const ConceptsScreen()));
+              }),
           TtsAppBarControl(
             onPlay: () {
               TtsService.speakQuizQuestion(
                 question: currentQ.prompt,
-                visualClue: currentQ.keyVisualClue,
-                options: _displayedOptions.map((o) => o.text).toList(),
+                scenarioText: currentQ.scenarioText,
+                options: _displayedOptions
+                    .map((o) => '${o.text}. ${o.subtext ?? ''}')
+                    .toList(),
                 tag: 'flash_q_${currentQ.id}',
               );
             },
@@ -252,14 +279,18 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       ),
       bottomNavigationBar: const AdBottomBar(),
       body: ListView(
+        controller: _scrollController,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         children: [
           // Header Stats
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
             children: [
               BadgePill(
-                text: 'Pregunta ${_currentIndex + 1} de ${_questions.length}',
+                text: _currentIndex < _totalQuestions
+                    ? 'Pregunta ${_currentIndex + 1} de $_totalQuestions'
+                    : 'Repaso · ${_totalQuestions - _correctCount} pendientes',
                 color: isDark ? AppColors.primaryLight : AppColors.primary,
               ),
               BadgePill(
@@ -278,6 +309,10 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
           ),
           const SizedBox(height: 14),
 
+          if (currentQ.scenarioText != null) ...[
+            Text(currentQ.scenarioText!),
+            const SizedBox(height: 14),
+          ],
           // Flash Image Display Container
           Center(
             child: AppCard(
