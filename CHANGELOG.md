@@ -2,6 +2,8 @@
 
 ## Pendiente de publicación
 
+- Versión 1.0.11 (13): conceptos sencillos antes de practicar, repaso de
+  preguntas falladas y correcciones de lectura, accesibilidad y avance.
 - Corregido el bloqueo al cerrar la explicación con Atrás y el recorte de respuestas.
 - Preguntas, explicaciones y resultados admiten desplazamiento y texto ampliado.
 - Fallar una pregunta ya no la registra como completada en las estadísticas.

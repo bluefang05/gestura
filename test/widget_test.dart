@@ -1101,8 +1101,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.10', () {
-    expect(AppConstants.appVersion, equals('1.0.10'));
+  test('AppConstants appVersion matches version 1.0.11', () {
+    expect(AppConstants.appVersion, equals('1.0.11'));
   });
 
   testWidgets(
