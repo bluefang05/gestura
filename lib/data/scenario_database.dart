@@ -6,7 +6,7 @@ class ScenarioDatabase {
     // --- ESCENARIO 1: VENTAS Y NEGOCIACIÓN ---
     Scenario(
       id: 'scenario_sales_closing',
-      title: 'El Cierre de Ventas: Decodificando al Prospecto',
+      title: 'Hablar del precio de un servicio',
       domain: 'Ventas & Negociación',
       description:
           'Aprende a leer el lenguaje corporal del cliente para saber cuándo callar, cuándo aclarar dudas y cuándo cerrar el trato.',
@@ -17,17 +17,16 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_1',
           narrative:
-              'Acabas de explicar las características de tu producto durante 10 minutos. Observas que el cliente cruza los brazos, aprieta los labios y mira hacia abajo.',
-          characterAction:
-              'Brazos fuertemente cruzados y labios en línea delgada.',
+              'Acabas de explicar tu producto durante 10 minutos. El cliente cruza los brazos, aprieta los labios y mira hacia abajo. No sabes por qué lo hace.',
+          characterAction: 'Brazos cruzados y labios apretados.',
           illustrationKey: 'closed_posture',
           visibleSignals: [
-            'Brazos cruzados (Barrera)',
-            'Labios comprimidos (Contención de objeción)',
+            'Brazos cruzados',
+            'Labios apretados',
             'Mirada baja'
           ],
           learningTakeaway:
-              'Los brazos cruzados + labios apretados indican que el cliente tiene una duda u objeción no resuelta.',
+              'Los gestos no revelan por sí solos lo que piensa. Haz una pausa y pregunta si tiene alguna duda.',
           choices: [
             ScenarioChoice(
               text:
@@ -43,7 +42,7 @@ class ScenarioDatabase {
               text:
                   'Hacer una pausa intencional y preguntar: "Noto que estás analizando este punto, ¿hay algún detalle que te genere dudas?"',
               analysis:
-                  'Excelente decisión: Validas su proceso mental sin confrontarlo y le das permiso seguro para expresar su objeción.',
+                  'Buena decisión: preguntas con respeto y le das espacio para expresar cualquier duda.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
@@ -217,7 +216,7 @@ class ScenarioDatabase {
           visibleSignals: [
             'Volumen bajo (Retracción)',
             'Hombros caídos (Desánimo)',
-            'Incongruencia entre "Todo bien" y su cuerpo'
+            'Dice «todo bien», pero parece incómodo'
           ],
           learningTakeaway:
               'En el contexto relacional cercano, las señales de retraimiento pesan más que las palabras de cortesía.',
@@ -339,7 +338,7 @@ class ScenarioDatabase {
       title: 'El Cliente Escéptico: "Ya tenemos proveedor"',
       domain: 'Ventas B2B',
       description:
-          'Descubre cómo detectar insatisfacción oculta y abrir oportunidades con prospectos difíciles.',
+          'Practica cómo preguntar si una persona está satisfecha con su servicio actual, sin dar por hecho lo que piensa.',
       contextOverview:
           'Estás en una primera llamada exploratoria con el Gerente de Logística de una empresa grande.',
       iconName: 'business',
@@ -363,7 +362,7 @@ class ScenarioDatabase {
               text:
                   'Preguntar de forma no invasiva: "Me alegra que tengan estabilidad. Si pudieras mejorar un solo detalle en los tiempos de respuesta o soporte de tu proveedor, ¿qué te gustaría que fuera más ágil?"',
               analysis:
-                  'La mejor táctica de prospección: No confrontas su afirmación, pero abres una puerta segura para que exprese su dolor operativo real.',
+                  'Puedes preguntar qué le funciona y qué cambiaría. Escucha su respuesta sin insistir.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -588,7 +587,7 @@ class ScenarioDatabase {
               text:
                   'Esperar tranquilamente unos segundos sin repetir la orden, entendiendo que el asentimiento confirmó la recepción.',
               analysis:
-                  'Respuesta ideal: Decodificaste correctamente la confirmación corporal y mantienes la interacción fluida y relajada.',
+                  'La persona asiente, pero eso por sí solo no confirma una decisión. Pregunta si quiere continuar.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -719,33 +718,32 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_1',
           narrative:
-              'Llevan 5 minutos hablando. Mientras explicas con detalle un proyecto personal, notas que tu interlocutor orienta uno de sus pies hacia la salida, da un par de asentimientos rápidos con la cabeza y echa una mirada veloz a su reloj de pulsera.',
+              'Llevan unos minutos hablando de tus pasatiempos. La otra persona mira la hora y tiene un pie orientado hacia la salida. No sabes si tiene prisa; puedes preguntarle.',
           characterAction:
-              'Pies orientados hacia la salida, asentimiento acelerado y vistazo discreto al reloj.',
+              'Mira la hora y tiene un pie orientado hacia la salida.',
           illustrationKey: 'scenario_exit_strategy',
           visibleSignals: [
-            'Orientación podal de fuga (el cuerpo se prepara para caminar)',
-            'Asentimiento acelerado (deseo de avanzar el ritmo)',
-            'Vistazo fugaz al reloj o smartphone (conciencia del tiempo)'
+            'Mira la hora',
+            'Tiene un pie orientado hacia la salida',
           ],
           learningTakeaway:
-              'Cuando los pies de una persona apuntan hacia la puerta aunque su torso aún te mire, su mente ya se está marchando. No significa que le caigas mal: simplemente tiene una tarea pendiente. Cerrar tú la conversación primero transmite alta madurez social.',
+              'Estos detalles no permiten saber por sí solos qué piensa. Puedes preguntar: "¿Tienes que irte o quieres que sigamos hablando?"',
           choices: [
             ScenarioChoice(
               text:
                   'Agradecer el momento y cerrar con calidez: "Bueno, no te quito más tiempo para que sigas con tus pendientes. ¡Me encantó platicar, que tengas buen día!"',
               analysis:
-                  'Respuesta ideal: Decodificaste la señal a tiempo, evitaste que la otra persona se sienta atrapada y dejaste la interacción con una sensación positiva y respetuosa.',
+                  'Notaste que quizá tiene prisa. Pregúntale si prefiere seguir hablando o dejarlo para otro momento.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
-                  'La persona sonríe aliviada, te agradece la charla con entusiasmo genuino y se marcha sin fricción. ¡Vínculo reforzado!',
+                  'La persona puede seguir hablando o despedirse. En ambos casos respetas su tiempo.',
             ),
             ScenarioChoice(
               text:
                   'Ignorar los pies y el reloj y continuar explicando los siguientes 10 minutos de tu anécdota.',
               analysis:
-                  'Error de lectura de salida: Forzar la conversación cuando hay señales claras de partida genera incomodidad y hace que la persona intente evitarte en futuros encuentros.',
+                  'Seguir hablando sin comprobar si tiene tiempo puede incomodarla. Pregunta o haz una pausa.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary:
@@ -832,7 +830,7 @@ class ScenarioDatabase {
               'Auricular retirado, mano descansando en el teclado, mirada directa y atenta.',
           illustrationKey: 'open_posture',
           visibleSignals: [
-            'Canal auditivo abierto (disponibilidad concedida)',
+            'Se quitó un auricular para escucharte',
             'Mano en reposo sobre el teclado (ventana de tiempo breve)'
           ],
           learningTakeaway:
@@ -966,7 +964,7 @@ class ScenarioDatabase {
       title: 'El Cliente que Dice: "Déjamelo pensar, yo te aviso"',
       domain: 'Ventas & Negociación',
       description:
-          'Aprende a decodificar la objeción de aplazamiento más común y cómo desarmarla con empatía consultiva sin presionar.',
+          'Practica cómo responder cuando alguien pide tiempo para pensarlo, sin presionarle.',
       contextOverview:
           'Llegas al final de una reunión con un cliente potencial tras presentarle una solución para su negocio.',
       iconName: 'psychology',
@@ -1036,7 +1034,7 @@ class ScenarioDatabase {
               text:
                   'Presentar una solución a su miedo específico: "Te entiendo al 100%. Justo por eso nuestro propio equipo técnico hace la configuración inicial en fines de semana sin tocar a tu personal. Si nos encargamos de esa carga, ¿tendría sentido avanzar?"',
               analysis:
-                  'Resolución de fricción de alto nivel: Atacas el dolor real del cliente con una alternativa que le da tranquilidad absoluta.',
+                  'Pregunta qué necesita revisar y ofrece una alternativa concreta. La otra persona decide si le sirve.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -1059,8 +1057,8 @@ class ScenarioDatabase {
     // --- ESCENARIO 14: LÍMITES ASERTIVOS EN EL TRABAJO ---
     Scenario(
       id: 'scenario_assertive_boundaries_work',
-      title: 'Límites Asertivos: La Presión del Colega en el Trabajo',
-      domain: 'Límites & Asertividad',
+      title: 'Poner límites ante la presión de un compañero',
+      domain: 'Límites',
       description:
           'Aprende a decir que no con la Fórmula E-I-A y sostener tu límite con el disco rayado sin sonreír por culpa.',
       contextOverview:
@@ -1167,10 +1165,10 @@ class ScenarioDatabase {
     // --- ESCENARIO 15: CONSENTIMIENTO REAL VS FALSO SÍ ---
     Scenario(
       id: 'scenario_consent_decoding_fawning',
-      title: 'Consentimiento Real: Decodificar el Falso Sí del Amigo',
+      title: 'Comprobar que un sí es libre',
       domain: 'Límites & Consentimiento',
       description:
-          'Aprende a leer el apaciguamiento (fawning) y a ofrecer siempre una puerta de escape airosa sin presionar por insistencia.',
+          'Aprende a preguntar sin presionar y a dejar claro que la otra persona puede decir que no.',
       contextOverview:
           'Estás planeando una salida con un amigo y le propones ir a un festival gastronómico concurrido y ruidoso.',
       iconName: 'handshake',
@@ -1178,23 +1176,23 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_1',
           narrative:
-              'Le dices a tu amigo con mucho entusiasmo: "¿Vamos al festival del centro esta tarde? ¡Habrá muchísima gente y música en vivo!". Notas que tu amigo suspira hondo, baja los hombros, sonríe solo con la boca (sus ojos no se arrugan) y sus pies apuntan hacia las escaleras de salida. Dice en tono pausado: "Eh... sí, bueno, supongo que podemos ir un rato...".',
+              'Le propones a tu amigo ir a un festival concurrido y con música. Suspira, mira hacia la salida y responde: "Eh... sí, bueno, supongo que podemos ir un rato...". No sabes por sus gestos qué prefiere.',
           characterAction:
-              'Suspiro imperceptible, sonrisa tensa solo con los labios, cuerpo ladeado hacia la salida.',
+              'Suspira, mira hacia la salida y responde con dudas.',
           illustrationKey: 'scenario_consent_decoding_fawning',
           visibleSignals: [
-            'Sonrisa con los labios, sin arrugas junto a los ojos',
-            'Suspiro de resignación',
-            'Pies orientados a la fuga'
+            'Suspira',
+            'Mira hacia la salida',
+            'Responde con dudas',
           ],
           learningTakeaway:
-              'Si las palabras dicen "sí" pero el cuerpo muestra señales de huida y resignación, estás ante un "falso sí" por apaciguamiento (fawning). Insistir en este punto no es obtener consentimiento, es coaccionar por desgaste social.',
+              'No puedes saber por los gestos si alguien quiere aceptar. Si tienes dudas, pregunta: "¿De verdad te apetece? Está bien decir que no". Respeta la respuesta.',
           choices: [
             ScenarioChoice(
               text:
                   'Festejar y decir: "¡Genial! ¡Sabía que te gustaría! Vamos a estar hasta las 11 de la noche recorriendo puestos".',
               analysis:
-                  'Ceguera de consentimiento: Tomas las palabras al pie de la letra ignorando 3 señales corporales claras de saturación y rechazo.',
+                  'Das por hecho que quiere ir sin comprobarlo. Los gestos no bastan para saberlo.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -1202,9 +1200,9 @@ class ScenarioDatabase {
             ),
             ScenarioChoice(
               text:
-                  'Abrir la Puerta de Escape Airosa: "Oye, noto que quizás tuviste una semana pesada y prefieres descansar. No te preocupes en lo más mínimo: si no te viene bien hoy, lo dejamos para otro momento y no pasa nada".',
+                  'Preguntar sin presionar: "¿De verdad te apetece ir? Está bien decir que no; podemos dejarlo para otro día".',
               analysis:
-                  'Inteligencia social y consentimiento real: Le quitas la presión de complacerte y normalizas que su descanso es prioritario.',
+                  'Le das espacio para decidir. No tienes que adivinar sus motivos; escucha y respeta su respuesta.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
@@ -1231,7 +1229,7 @@ class ScenarioDatabase {
           illustrationKey: 'duchenne_smile',
           visibleSignals: [
             'Sonrisa con arrugas junto a los ojos',
-            'Alivio somático visible',
+            'La persona parece más tranquila',
             'Conexión de confianza restaurada'
           ],
           learningTakeaway:

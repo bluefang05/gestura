@@ -70,11 +70,11 @@ class _CompareScreenState extends State<CompareScreen> {
           'Juntar las puntas de los dedos forma un tejado; frotarse las manos es un movimiento repetido. Son diferencias físicas observables, no pruebas de autoridad, expectativa o nerviosismo.',
     ),
     ComparePair(
-      title: 'Tono Asertivo vs. Inflexión Sarcástica',
+      title: 'Hablar con claridad y respeto o usar sarcasmo',
       gestureIdA: 'tono_asertivo',
       gestureIdB: 'tono_sarcastico',
       coreDifference:
-          'El tono asertivo mantiene cadencia estable y transparente; el sarcasmo modula con caída irónica que contradice las palabras.',
+          'Hablar con claridad y respeto no exige un tono específico. El sarcasmo puede decir lo contrario de las palabras, pero si no estás seguro, pregunta.',
     ),
     ComparePair(
       title: 'Mesa Redonda vs. Escritorio Barrera',

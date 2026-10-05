@@ -23,7 +23,7 @@ class BoundaryFrameworkDatabase {
           badge: 'Cuerpo',
         ),
         BoundaryConceptItem(
-          title: 'Límite Real vs. Demanda de Control',
+          title: 'Un límite habla de lo que tú harás',
           description:
               'Una demanda intenta cambiar la conducta del otro ("¡Deja de hablarme así!"). Un límite define tu propia conducta ("Si me alzas la voz, me retiro de la conversación hasta que podamos hablar con calma"). El límite depende 100% de ti.',
           icon: Icons.rule_rounded,
@@ -34,7 +34,7 @@ class BoundaryFrameworkDatabase {
           description:
               '🟢 Verde: Preferencias flexibles y negociables.\n🟡 Amarillo: Alto gasto de energía que requiere compensación.\n🔴 Rojo: Salud mental, física o sensorial no negociable bajo ninguna circunstancia.',
           icon: Icons.traffic_rounded,
-          badge: 'Calibración',
+          badge: 'Semáforo',
         ),
       ],
       practicalProtocol:
@@ -46,7 +46,7 @@ class BoundaryFrameworkDatabase {
     // ==========================================
     BoundaryPhase(
       phaseNumber: 2,
-      title: 'Hacerlos: La Ejecución Asertiva',
+      title: 'Decir lo que necesitas',
       subtitle:
           'Formas sencillas de expresar un límite. Puedes usar las palabras y la postura que te resulten cómodas.',
       icon: Icons.record_voice_over_rounded,
@@ -54,7 +54,7 @@ class BoundaryFrameworkDatabase {
           'Puedes expresar un límite con una frase clara. No hay una postura, expresión facial o tono que todas las personas deban usar.',
       conceptItems: [
         BoundaryConceptItem(
-          title: 'La Fórmula E-I-A (3 Pasos)',
+          title: 'Una frase en tres pasos',
           description:
               '1. Hecho Observable (E): "Son las 18:00..."\n2. Impacto Personal (I): "...y concluyó mi jornada laboral pactada..."\n3. Acción/Límite (A): "...por lo que retomaré este pendiente mañana."',
           icon: Icons.filter_3_rounded,
@@ -84,15 +84,14 @@ class BoundaryFrameworkDatabase {
     // ==========================================
     BoundaryPhase(
       phaseNumber: 3,
-      title: 'Sostenerlos: El Cortafuegos',
-      subtitle:
-          'Cómo neutralizar la insistencia, el victimismo y la resaca de culpa posterior.',
+      title: 'Mantener tu respuesta',
+      subtitle: 'Qué puedes hacer si alguien insiste y cómo cuidarte después.',
       icon: Icons.shield_rounded,
       corePrinciple:
           'El límite no termina cuando lo pronuncias; empieza cuando el otro intenta derribarlo. Sostenerlo no es egoísmo ni hostilidad, es coherencia y respeto a tu propia vida.',
       conceptItems: [
         BoundaryConceptItem(
-          title: 'Las 3 Formas de Resistencia (Pushback)',
+          title: 'Tres formas comunes de insistir',
           description:
               '• Victimismo: "Pensé que éramos amigos / Me dejas solo."\n• Debate lógico: "Pero si solo son 10 minutos, no seas exagerado."\n• Culpabilización: "Qué egoísta te has vuelto últimamente."',
           icon: Icons.warning_amber_rounded,
@@ -103,7 +102,7 @@ class BoundaryFrameworkDatabase {
           description:
               'Si alguien insiste, puedes repetir tu respuesta: "Entiendo, pero hoy no puedo". No hay una frase que garantice cómo reaccionará la otra persona.',
           icon: Icons.replay_rounded,
-          badge: 'Táctica',
+          badge: 'Idea práctica',
         ),
         BoundaryConceptItem(
           title: 'Cómo te puedes sentir después',
@@ -114,7 +113,7 @@ class BoundaryFrameworkDatabase {
         ),
       ],
       practicalProtocol:
-          'El Protocolo de Consecuencia Escalonada:\n1º Aviso: "Como te comenté, mi respuesta es no."\n2º Aviso: "Ya lo hemos hablado y no voy a debatir mi decisión."\n3º Acción: "Si insistes, voy a retirarme de la sala / colgar la llamada." (Y actuar de inmediato).',
+          'Puedes repetir tu respuesta una vez. Si siguen insistiendo, di qué harás: "Ya respondí. Si seguimos con esto, voy a terminar la llamada". Luego hazlo.',
     ),
 
     // ==========================================
@@ -122,7 +121,7 @@ class BoundaryFrameworkDatabase {
     // ==========================================
     BoundaryPhase(
       phaseNumber: 4,
-      title: 'Consentimiento Real: Decodificar el Límite Ajeno',
+      title: 'Pedir permiso y respetar la respuesta',
       subtitle:
           'Aprende a pedir permiso sin presionar y a respetar la respuesta.',
       icon: Icons.handshake_rounded,
@@ -130,25 +129,25 @@ class BoundaryFrameworkDatabase {
           'Un sí después de mucha insistencia puede no ser libre. Pregunta una vez, deja espacio para responder y acepta un no o una duda.',
       conceptItems: [
         BoundaryConceptItem(
-          title: 'El "Falso Sí" y la Trampa de la Insistencia',
+          title: 'Un sí debe ser libre',
           description:
               'En el mundo social, muchas personas temen el conflicto o la incomodidad y dicen "bueno, dale..." solo para que la presión cese. Insistir hasta derribar la resistencia de alguien no es convencer; es acorralar.',
           icon: Icons.warning_amber_rounded,
           badge: 'Ética',
         ),
         BoundaryConceptItem(
-          title: 'Microseñales No Verbales del Rechazo Disimulado',
+          title: 'Si no estás seguro, pregunta',
           description:
               'Una pausa, una sonrisa o un cambio de postura no confirman que alguien quiera algo. Si no está claro, pregunta y deja que responda con sus palabras.',
           icon: Icons.psychology_alt_rounded,
           badge: 'No Verbal',
         ),
         BoundaryConceptItem(
-          title: 'El Protocolo de la "Puerta de Escape"',
+          title: 'Deja claro que puede decir que no',
           description:
               'Al invitar o pedir algo, ofrece activamente permiso explícito para rechazar sin consecuencias: "Te lo planteo con total libertad: si prefieres descansar o no te apetece, dímelo con total tranquilidad y cero problema".',
           icon: Icons.door_front_door_outlined,
-          badge: 'Táctica',
+          badge: 'Frase útil',
         ),
       ],
       practicalProtocol:

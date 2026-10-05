@@ -84,8 +84,7 @@ class GestureDatabase {
       name: 'Entrecerrar los ojos',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos',
-      summary:
-          'Estrechamiento de los ojos mientras se fija la mirada en el interlocutor.',
+      summary: 'Entrecerrar los ojos mientras mira a la otra persona.',
       physiologicalDetails:
           'Se tensa un poco el párpado inferior, sin una sonrisa visible.',
       probableMeaning:
@@ -173,7 +172,7 @@ class GestureDatabase {
       probableMeaning:
           'Puede acompañar sorpresa, atención intensa, esfuerzo visual, una reacción aprendida o una condición del entorno.',
       alternativeMeanings: [
-        'Pausa de asimilación, sobreestimulación lumínica o procesamiento de datos'
+        'Puede estar pensando, descansando la vista o prestando atención a otra cosa.'
       ],
       contextGuidance:
           'Una expresión breve no confirma el impacto emocional. Da tiempo y pregunta qué necesita la persona.',
@@ -191,10 +190,9 @@ class GestureDatabase {
       bodyPart: 'Ojos',
       summary:
           'Evitar el contacto visual o mirar hacia abajo/lados repetidamente.',
-      physiologicalDetails:
-          'Desviación rápida del eje visual fuera de los ojos del interlocutor.',
+      physiologicalDetails: 'Apartar la mirada por un momento.',
       probableMeaning:
-          'Timidez, incomodidad, sobrecarga sensorial, inseguridad o evasión de un tema.',
+          'Timidez, incomodidad, demasiados estímulos, inseguridad o ganas de cambiar de tema.',
       alternativeMeanings: [
         'En personas autistas es una forma de procesar mejor la información auditiva.',
         'Respeto en ciertas culturas asiáticas/indígenas.'
@@ -251,7 +249,7 @@ class GestureDatabase {
       whatToDo:
           'Haz una pausa. Permite que la persona se exprese antes de continuar argumentando.',
       salesTip:
-          'El cliente podría tener una objeción o tensión acumulada. Pregunta con calma qué aspecto le preocupa.',
+          'La persona podría tener una duda o sentirse incómoda. Pregunta con calma si quiere aclarar algo.',
       illustrationKey: 'jaw_clenching',
       difficulty: 2,
     ),
@@ -311,18 +309,18 @@ class GestureDatabase {
       physiologicalDetails:
           'Las pupilas pueden cambiar por la luz, algunos medicamentos u otras causas. Mirarlas no permite saber qué piensa alguien.',
       probableMeaning:
-          'Interés elevado, atracción, sobrecarga mental o agrado genuino.',
+          'Interés, atracción, cansancio o muchas cosas en las que pensar.',
       alternativeMeanings: [
         'Efecto de medicamentos o gotas oftálmicas.',
         'Adaptación a sombras o cambio de luz.',
-        'Sobrecarga en el procesamiento de información.',
+        'Puede estar pensando mucho o prestando atención a varias cosas.',
       ],
       contextGuidance:
-          'Requiere comparar con la iluminación base y el estado previo de la persona.',
+          'La luz y algunas medicinas también pueden cambiar el tamaño de las pupilas.',
       whatToDo:
-          'Aprovecha el momento de alto interés para profundizar en el tema.',
+          'No adivines el interés por el tamaño de las pupilas. Pregunta si quiere seguir hablando del tema.',
       salesTip:
-          'Señal de alto involucramiento mental. Presenta tu propuesta más atractiva.',
+          'Este cambio no confirma interés. Pregunta qué le parece la propuesta.',
       illustrationKey: 'pupil_dilation',
       difficulty: 3,
     ),
@@ -416,7 +414,7 @@ class GestureDatabase {
       ],
       contextGuidance: 'Común en personas que temen ser interrumpidas.',
       whatToDo:
-          'Haz pausas conscientes para ayudar al interlocutor a calmar su ritmo respiratorio.',
+          'Haz pausas para que la otra persona pueda seguir la conversación a su ritmo.',
       salesTip:
           'Hablar demasiado rápido en ventas reduce la credibilidad percibida. Respira y desacelera.',
       illustrationKey: 'voice_speed_fast',
@@ -429,7 +427,7 @@ class GestureDatabase {
       bodyPart: 'Voz',
       summary: 'Hablar en un solo tono sin subidas ni bajadas de frecuencia.',
       physiologicalDetails:
-          'Carencia de modulación prosódica en las cuerdas vocales.',
+          'La voz cambia poco de tono. Puede ser una forma habitual de hablar.',
       probableMeaning:
           'Estilo de comunicación directo, agotamiento extremo o baja expresividad emocional.',
       alternativeMeanings: [
@@ -452,7 +450,7 @@ class GestureDatabase {
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
-          'Incongruencia entre palabras aparentemente positivas y un tono plano o descendente, habitualmente con rostro neutro.',
+          'Las palabras suenan positivas, pero la voz suena seria o apagada. Puede haber muchas razones; pregunta antes de sacar conclusiones.',
       physiologicalDetails:
           'En la vida cotidiana, la persona suele mantener cara inexpresiva o neutra (poker face). La señal clave está en la voz: alargamiento exagerado de sílabas ("Quéee bueeeno..."), caída tonal al final y contradicción con el contexto.',
       probableMeaning:
@@ -471,7 +469,7 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'tono_asertivo',
-      name: 'Tono Asertivo y Seguro',
+      name: 'Hablar con claridad y respeto',
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
@@ -566,8 +564,7 @@ class GestureDatabase {
       bodyPart: 'Brazos y Torso',
       summary:
           'Brazos cruzados firmemente sobre el pecho, a menudo con hombros encorvados.',
-      physiologicalDetails:
-          'Creación de una barrera física entre el pecho/corazón y el interlocutor.',
+      physiologicalDetails: 'Poner un objeto entre el pecho y la otra persona.',
       probableMeaning:
           'Puede ser comodidad, temperatura, apoyo físico, hábito, reserva o una reacción a la situación.',
       alternativeMeanings: [
@@ -613,7 +610,7 @@ class GestureDatabase {
       name: 'Inclinarse hacia Atrás (Leaning Back)',
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Cuerpo y Espina',
-      summary: 'Recostar el cuerpo hacia atrás alejándose del interlocutor.',
+      summary: 'Inclinar el cuerpo hacia atrás y alejarse un poco.',
       physiologicalDetails:
           'Extensión de columna contra el respaldo de la silla, aumentando la distancia física.',
       probableMeaning:
@@ -687,7 +684,7 @@ class GestureDatabase {
       summary:
           'Elevar ambos hombros hacia las orejas, a menudo mostrando palmas hacia arriba.',
       physiologicalDetails:
-          'Contracción del trapecio superior con supanación de antebrazos.',
+          'Se elevan los hombros y las palmas pueden girar hacia arriba.',
       probableMeaning:
           'Suele acompañar incertidumbre o la comunicación de “no lo sé”, pero también puede ser humor, hábito o una respuesta corporal breve.',
       alternativeMeanings: [
@@ -814,18 +811,18 @@ class GestureDatabase {
       physiologicalDetails:
           'La persona se toca o frota el cuello. Puede ser una costumbre, una molestia o una forma de autorregularse; el gesto no revela la causa.',
       probableMeaning:
-          'Puede ser autorregulación ante estrés, incomodidad momentánea, duda, necesidad de calmarse o alivio físico.',
+          'Puede ser una forma de sentirse más cómodo, una costumbre o una reacción a lo que ocurre.',
       alternativeMeanings: [
         'Molestia muscular o dolor cervical real.',
         'Ajuste por temperatura, calor o prenda ajustada.',
-        'Hábito motor de concentración o autorregulación sensorial.',
+        'Un movimiento repetido que puede ayudar a concentrarse o sentirse más cómodo.',
       ],
       contextGuidance:
           'Puede presentarse ante preguntas complejas o temas delicados, pero también por tensión muscular, frío/calor o costumbre corporal.',
       whatToDo:
           'Baja la presión de la conversación y formula preguntas suaves para devolver la tranquilidad, o simplemente permite una pausa natural.',
       salesTip:
-          'Podría indicar que surgió una duda o punto de fricción (presupuesto, condiciones). Pausa con amabilidad y pregunta qué aspecto le gustaría revisar juntos.',
+          'Puede tener una duda o querer revisar el precio o las condiciones. Haz una pausa y pregunta qué le gustaría aclarar.',
       illustrationKey: 'touching_neck',
       difficulty: 2,
     ),
@@ -966,7 +963,7 @@ class GestureDatabase {
       contextGuidance:
           'No equivale por sí sola a acuerdo, desacuerdo ni interés; observa qué ocurre antes y después.',
       whatToDo:
-          'Ofrece tiempo de procesamiento y una pregunta concreta, sin interpretar el gesto como una respuesta.',
+          'Dale tiempo para pensar y haz una pregunta sencilla. El gesto no es una respuesta.',
       salesTip:
           'Presenta un dato a la vez y pregunta qué información adicional ayudaría a evaluar la propuesta.',
       illustrationKey: 'hand_on_chin',
@@ -1045,7 +1042,7 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'sincronia_postural',
-      name: 'Sincronía Postural',
+      name: 'Posturas parecidas',
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Cuerpo y Espacio',
       summary:
@@ -1064,7 +1061,7 @@ class GestureDatabase {
       whatToDo:
           'Úsala sólo como invitación a seguir observando el contexto, no como prueba de conexión.',
       salesTip:
-          'Prioriza confirmar objetivos y objeciones con palabras en vez de interpretar la postura compartida.',
+          'Confirma los acuerdos y las dudas con palabras; no los deduzcas por la postura.',
       illustrationKey: 'postural_mirroring',
       difficulty: 3,
     ),
@@ -1194,7 +1191,7 @@ class GestureDatabase {
       whatToDo:
           'Si deseas sonar cálido, añade un emoji o un signo: "¡Ok, perfecto!" o "Entendido 👍".',
       salesTip:
-          'Si un prospecto responde "Ok.", dale seguimiento con una pregunta de confirmación amigable.',
+          'Si alguien responde "Ok", pregunta con amabilidad si entendió y si quiere seguir.',
       illustrationKey: 'digital_visto',
       difficulty: 2,
     ),
@@ -1299,7 +1296,7 @@ class GestureDatabase {
       summary:
           'Responder a un mensaje largo o emotivo con un único emoji, como 🫶, ❤️ o 👍.',
       physiologicalDetails:
-          'Un marcador gráfico compacto sustituye parte del tono, la expresión facial o una respuesta escrita extensa.',
+          'Un emoji puede ayudar a mostrar el tono de un mensaje, aunque su sentido depende de la persona y la conversación.',
       probableMeaning:
           'Puede confirmar recepción, expresar acompañamiento o reducir el esfuerzo de formular una respuesta completa.',
       alternativeMeanings: [
@@ -1312,7 +1309,7 @@ class GestureDatabase {
       whatToDo:
           'Puedes responder: “Gracias por reaccionar. Cuando tengas energía, me gustaría saber cómo lo ves”.',
       salesTip:
-          'En conversaciones profesionales, usa emojis con moderación y acuerda el nivel de formalidad con tu interlocutor.',
+          'En conversaciones de trabajo, usa pocos emojis y pregunta qué tono prefiere la otra persona.',
       illustrationKey: 'emoji_support',
       difficulty: 1,
     ),
@@ -1388,7 +1385,7 @@ class GestureDatabase {
       whatToDo:
           'Responde al contenido, no a una supuesta emoción: “Podemos ir más despacio o continuar por escrito si te sirve”.',
       salesTip:
-          'No la conviertas en una táctica de negociación. Mantén un ritmo cómodo y confirma las decisiones explícitamente.',
+          'No lo uses como una forma de negociar. Mantén un ritmo cómodo y confirma las decisiones con palabras.',
       illustrationKey: 'voice_tremor',
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
@@ -1509,7 +1506,7 @@ class GestureDatabase {
       summary:
           'Sentarse en la esquina de una mesa a 90 grados en lugar de frente a frente (180°).',
       physiologicalDetails:
-          'Orientación en "L" que permite mirar al interlocutor y al documento compartido sin confrontar.',
+          'Sentarse de lado para poder mirar a la persona y el documento compartido.',
       probableMeaning:
           'Cooperación, revisión conjunta de soluciones, reducción de la tensión competitiva.',
       alternativeMeanings: ['Mobiliario en L.'],

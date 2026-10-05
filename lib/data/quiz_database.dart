@@ -480,7 +480,7 @@ class QuizDatabase {
       keyVisualClue:
           'Combinación de barrera física (brazos cruzados) + contención verbal (labios apretados).',
       explanation:
-          'Cuando los brazos cruzados se combinan con labios apretados, la persona está reteniendo una objeción o desacuerdo. La mejor respuesta es pausar y preguntar: "¿Qué impresión te da esta cifra?" para permitirle desahogar la duda.',
+          'Los brazos cruzados y los labios apretados no dicen por sí solos qué piensa la persona. Haz una pausa y pregunta: "¿Qué te parece esta cifra?".',
     ),
     QuizQuestion(
       id: 'q_para_sarcasm',
@@ -509,7 +509,7 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Incongruencia entre la palabra positiva ("maravillosa") y el tono descendente/arrastrado, con rostro habitualmente neutro.',
+          'Dice «maravillosa», pero su voz suena apagada. Eso puede tener muchas causas; pregunta antes de asumir que habla con sarcasmo.',
       explanation:
           'En la vida cotidiana, las personas que usan sarcasmo no suelen hacer muecas exageradas ni sonreír; suelen mantener el rostro neutro (poker face). La contradicción está entre la palabra positiva y la melodía arrastrada o plana de la voz.',
     ),
@@ -765,7 +765,7 @@ class QuizDatabase {
       category: CategoryType.factoresParalinguisticos,
       prompt:
           'Tu compañero dice: "No te preocupes, yo me encargo de terminarlo". ¿Cómo puedes comprobar si quiere ayuda?',
-      scenarioText: 'Su postura es de sobrecarga y cansancio.',
+      scenarioText: 'Parece cansada o incómoda, pero no sabes por qué.',
       options: [
         QuizOption(
           id: 'opt_encargo_happy',
@@ -1032,7 +1032,8 @@ class QuizDatabase {
       category: CategoryType.entornoApariencia,
       prompt:
           'Estás en una cena concurrida y sientes que las luces, música y conversaciones cruzadas están colapsando tu batería sensorial. ¿Cómo retirarte con dignidad?',
-      scenarioText: 'Necesidad de autorregulación y autocuidado.',
+      scenarioText:
+          'La persona podría necesitar una pausa o un momento para sí.',
       options: [
         QuizOption(
           id: 'opt_escape_grace',
@@ -1063,7 +1064,7 @@ class QuizDatabase {
       category: CategoryType.entornoApariencia,
       prompt:
           'Llegas temprano a una junta corporativa donde tu rol es técnico y de apoyo. La cabecera de la mesa está libre. ¿Dónde te conviene sentarte?',
-      scenarioText: 'Espacio personal y jerarquía espacial en oficinas.',
+      scenarioText: 'Distancia cómoda en un espacio de trabajo.',
       options: [
         QuizOption(
           id: 'opt_table_side',
@@ -1439,7 +1440,7 @@ class QuizDatabase {
       keyVisualClue:
           'En el código digital, las mayúsculas equivalen al volumen alzado de voz.',
       explanation:
-          'Desescalar la urgencia con una respuesta ágil, serena y estructurada neutraliza la ansiedad del cliente de forma inmediata.',
+          'Responder con calma y en orden puede ayudar a aclarar la urgencia. No podemos saber por qué la persona escribió así; pregunta qué necesita y para cuándo.',
     ),
     ...QuizExpansion.questions,
   ];

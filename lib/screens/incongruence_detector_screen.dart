@@ -36,6 +36,7 @@ class _IncongruenceDetectorScreenState
     TtsService.stop();
     super.dispose();
   }
+
   int _score = 0;
   int _totalAnswered = 0;
 
@@ -203,7 +204,7 @@ class _IncongruenceDetectorScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detector de Incongruencias'),
+        title: const Text('Comparar palabras y gestos'),
         actions: [
           IconButton(
             icon: const Icon(Icons.volume_up_rounded),
@@ -211,7 +212,7 @@ class _IncongruenceDetectorScreenState
             onPressed: () {
               FeedbackService.lightClick();
               TtsService.speak(
-                  'Interlocutor (${item.speakerRole}): "${item.spokenPhrase}". Señales corporales observadas: ${item.physicalSignals.join(", ")}.');
+                  'La persona (${item.speakerRole}) dice: "${item.spokenPhrase}". Gestos observados: ${item.physicalSignals.join(", ")}.');
             },
           ),
         ],
@@ -389,7 +390,7 @@ class _IncongruenceDetectorScreenState
                                         TtsService.stop();
                                       } else {
                                         TtsService.speak(
-                                          'Interlocutor: ${item.speakerRole}. Dice la frase: "${item.spokenPhrase}". Señales corporales observadas: ${item.physicalSignals.join(", ")}. Pregunta: ¿Las señales corporales están alineadas o contradicen lo que dice?',
+                                          'La persona ${item.speakerRole} dice: "${item.spokenPhrase}". Gestos observados: ${item.physicalSignals.join(", ")}. Pregunta: ¿Las palabras y los gestos parecen coincidir o ser distintos?',
                                           gestureId: id,
                                         );
                                       }
@@ -594,7 +595,7 @@ class _IncongruenceDetectorScreenState
                                   child: Text(
                                     _userAnswer == item.isAligned
                                         ? '¡Observación Calibrada!'
-                                        : '¡Calibración en Proceso!',
+                                        : 'Sigue practicando',
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w900,
@@ -622,9 +623,8 @@ class _IncongruenceDetectorScreenState
                                     : const Color(0xFFF8FAFC),
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(
-                                  color: isDark
-                                      ? Colors.white12
-                                      : Colors.black12,
+                                  color:
+                                      isDark ? Colors.white12 : Colors.black12,
                                 ),
                               ),
                               child: Column(
@@ -639,7 +639,7 @@ class _IncongruenceDetectorScreenState
                                               : AppColors.accent),
                                       const SizedBox(width: 6),
                                       const Text(
-                                        'Hipótesis e interpretaciones posibles:',
+                                        'Algunas explicaciones posibles:',
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,
@@ -648,7 +648,8 @@ class _IncongruenceDetectorScreenState
                                     ],
                                   ),
                                   const SizedBox(height: 8),
-                                  for (final hyp in item.possibleInterpretations)
+                                  for (final hyp
+                                      in item.possibleInterpretations)
                                     Padding(
                                       padding:
                                           const EdgeInsets.only(bottom: 4.0),
@@ -672,7 +673,8 @@ class _IncongruenceDetectorScreenState
                                                 fontSize: 12.5,
                                                 color: isDark
                                                     ? AppColors.textPrimaryDark
-                                                    : AppColors.textPrimaryLight,
+                                                    : AppColors
+                                                        .textPrimaryLight,
                                                 height: 1.3,
                                               ),
                                             ),

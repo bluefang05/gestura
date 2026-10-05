@@ -135,7 +135,7 @@ void main() {
     final boundaryScenario =
         ScenarioDatabase.getById('scenario_assertive_boundaries_work');
     expect(boundaryScenario, isNotNull);
-    expect(boundaryScenario!.domain, equals('Límites & Asertividad'));
+    expect(boundaryScenario!.domain, equals('Límites'));
     expect(boundaryScenario.steps.length, equals(2));
     expect(boundaryScenario.steps.first.choices.any((c) => c.isBestAction),
         isTrue);
@@ -190,7 +190,7 @@ void main() {
       () {
     final initialProgress = UserProgress.initial();
     expect(initialProgress.masteryPercentage, equals(0));
-    expect(initialProgress.masteryLevelTitle, equals('Iniciando Calibración'));
+    expect(initialProgress.masteryLevelTitle, equals('Primeros pasos'));
 
     final halfwayProgress = initialProgress.copyWith(
       exploredGestureIds: GestureDatabase.items
@@ -207,7 +207,7 @@ void main() {
           .toList(),
     );
     expect(halfwayProgress.masteryPercentage, greaterThanOrEqualTo(50));
-    expect(halfwayProgress.masteryLevelTitle, equals('Analista de Campo'));
+    expect(halfwayProgress.masteryLevelTitle, equals('Vas por la mitad'));
 
     final completedProgress = initialProgress.copyWith(
       exploredGestureIds: GestureDatabase.items.map((g) => g.id).toList(),
@@ -216,8 +216,7 @@ void main() {
       completedQuizIds: QuizDatabase.questions.map((q) => q.id).toList(),
     );
     expect(completedProgress.masteryPercentage, equals(100));
-    expect(
-        completedProgress.masteryLevelTitle, equals('Maestro Decodificador'));
+    expect(completedProgress.masteryLevelTitle, equals('Recorrido completo'));
   });
 
   test('StorageService persists bookmarks and user progress correctly',
@@ -347,7 +346,7 @@ void main() {
     await tester.pumpWidget(const GesturaApp());
     await tester.pumpAndSettle();
 
-    final postureCard = find.text('Posturas y Lenguaje Corporal');
+    final postureCard = find.text('Posturas y movimientos');
     final scrollable =
         tester.state<ScrollableState>(find.byType(Scrollable).first);
     scrollable.position.jumpTo(1400);
@@ -368,9 +367,9 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: UnwrittenRulesScreen()));
     await tester.pumpAndSettle();
 
-    expect(find.text('El Manual de lo No Dicho'), findsOneWidget);
-    expect(find.text('El Mito del Small Talk'), findsOneWidget);
-    expect(find.text('Decodificador de Indirectas'), findsOneWidget);
+    expect(find.text('Situaciones sociales cotidianas'), findsOneWidget);
+    expect(find.text('Conversaciones breves'), findsOneWidget);
+    expect(find.text('Frases con doble sentido'), findsOneWidget);
   });
 
   testWidgets('Observation lesson renders plain-language tabs',
@@ -734,19 +733,19 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify Title
-    expect(find.text('Ruta de Negociación y Ventas'), findsOneWidget);
+    expect(find.text('Conversaciones de venta'), findsOneWidget);
 
     // Verify the 4 tabs
-    expect(find.text('Pipeline (4 Fases)'), findsOneWidget);
-    expect(find.text('Termómetro en Vivo'), findsOneWidget);
-    expect(find.text('Guiones y Objeciones'), findsOneWidget);
+    expect(find.text('Pasos de una venta'), findsOneWidget);
+    expect(find.text('Observar y preguntar'), findsOneWidget);
+    expect(find.text('Respuestas a dudas'), findsOneWidget);
     expect(find.text('Simulación y Práctica'), findsOneWidget);
 
     // Default tab 0 shows Phase 1
     expect(find.text('FASE 1'), findsOneWidget);
 
-    // Switch to Termómetro en Vivo
-    await tester.tap(find.text('Termómetro en Vivo'));
+    // Switch to the observation tab
+    await tester.tap(find.text('Observar y preguntar'));
     await tester.pumpAndSettle();
     expect(find.textContaining('señales observadas'), findsOneWidget);
   });
@@ -837,11 +836,11 @@ void main() {
 
     // Default tab 0 shows Roadmap
     expect(find.text('Tu recorrido de aprendizaje'), findsOneWidget);
-    expect(find.text('Nivel 1: La Regla Cero'), findsOneWidget);
-    expect(find.text('Nivel 2: El Alfabeto No Verbal'), findsOneWidget);
+    expect(find.text('Nivel 1: Observar con calma'), findsOneWidget);
+    expect(find.text('Nivel 2: Cara, brazos y manos'), findsOneWidget);
     expect(find.text('Nivel 3: El Código Oculto'), findsOneWidget);
-    expect(find.text('Nivel 4: Blindaje y Consentimiento'), findsOneWidget);
-    expect(find.text('Nivel 5: Mundo Real y Campo'), findsOneWidget);
+    expect(find.text('Nivel 4: Límites y consentimiento'), findsOneWidget);
+    expect(find.text('Nivel 5: Situaciones cotidianas'), findsOneWidget);
 
     // Switch to Tab 1: Métricas y Radar
     await tester.tap(find.text('Métricas y Radar'));
@@ -870,8 +869,7 @@ void main() {
         findsOneWidget);
     final boundaryCount = ScenarioDatabase.scenarios
         .where((s) =>
-            s.domain == 'Límites & Asertividad' ||
-            s.domain == 'Límites & Consentimiento')
+            s.domain == 'Límites' || s.domain == 'Límites & Consentimiento')
         .length;
     expect(
         find.text('Límites y Consentimiento ($boundaryCount)'), findsOneWidget);
@@ -884,10 +882,9 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify both boundary scenarios are displayed
-    expect(find.textContaining('Límites Asertivos: La Presión del Colega'),
+    expect(find.textContaining('Poner límites ante la presión de un compañero'),
         findsOneWidget);
-    expect(find.textContaining('Consentimiento Real: Decodificar el Falso Sí'),
-        findsOneWidget);
+    expect(find.textContaining('Comprobar que un sí es libre'), findsOneWidget);
   });
 
   testWidgets(
@@ -948,7 +945,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Siguiente Caso'), findsOneWidget);
-    expect(find.text('Hipótesis e interpretaciones posibles:'), findsOneWidget);
+    expect(find.text('Algunas explicaciones posibles:'), findsOneWidget);
   });
 
   test(
@@ -981,7 +978,7 @@ void main() {
     expect(find.text('3 Segundos'), findsOneWidget);
     expect(find.textContaining('Qué mirar:'), findsOneWidget);
     expect(find.textContaining('Significado:'), findsOneWidget);
-    expect(find.textContaining('Acción táctica:'), findsOneWidget);
+    expect(find.textContaining('Qué puedes hacer:'), findsOneWidget);
     expect(find.text('🎧 Escuchar sin leer (10s)'), findsOneWidget);
     expect(find.text('📖 Ver análisis profundo y contexto (Opcional)'),
         findsOneWidget);
@@ -1101,8 +1098,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.12', () {
-    expect(AppConstants.appVersion, equals('1.0.12'));
+  test('AppConstants appVersion matches version 1.0.13', () {
+    expect(AppConstants.appVersion, equals('1.0.13'));
   });
 
   testWidgets(

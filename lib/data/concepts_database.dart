@@ -42,7 +42,21 @@ class ConceptsDatabase {
     LearningConcept(
         'Sonrisa con arrugas junto a los ojos',
         'Es una sonrisa en la que se elevan las mejillas y aparecen arrugas junto a los ojos. En algunos libros se llama sonrisa de Duchenne. No garantiza que la emoción sea sincera: una imagen sola no permite saberlo.',
-        ['duchenne', 'orbicular', 'periocular', 'arrugas']),
+        ['duchenne', 'periocular', 'arrugas']),
+    LearningConcept(
+        'Nombres de músculos de la cara',
+        'El cigomático mayor es un músculo de la mejilla que ayuda a subir las esquinas de la boca al sonreír. El orbicular de los ojos rodea los ojos y ayuda a cerrarlos o apretarlos. Son nombres de partes del cuerpo: no hace falta memorizarlos ni sirven para saber qué siente alguien. Puedes fijarte en el movimiento descrito con palabras sencillas.',
+        [
+          'cigomático mayor',
+          'cigomatico mayor',
+          'cigomático',
+          'cigomatico',
+          'orbicular',
+          'orbicular de los ojos',
+          'músculos de la cara',
+          'músculo facial',
+          'anatomía facial',
+        ]),
     LearningConcept(
         'Distancia personal',
         'Cada persona tiene una distancia cómoda. Puede cambiar según la relación, el lugar y el momento. Puedes preguntar: «¿Prefieres que me aleje un poco?»',

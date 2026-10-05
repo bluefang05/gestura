@@ -7,7 +7,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_mirada_notas_interpret",
       category: CategoryType.expresionesFaciales,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
       questionIllustrationKey: "context_mirada_notas",
@@ -27,7 +27,7 @@ class QuizExpansion {
             isCorrect: false),
       ],
       keyVisualClue:
-          "La mirada pasa del interlocutor al papel; sigue tomando notas.",
+          "La mirada pasa de la otra persona al papel; sigue tomando notas.",
       explanation:
           "La calidad de la respuesta aporta más información que mantener la mirada de forma continua. Puede estar organizando información y prestando atención por otra vía. Pregunta si necesita unos segundos y permite consultar sus notas.",
     ),
@@ -55,14 +55,14 @@ class QuizExpansion {
             isCorrect: true),
       ],
       keyVisualClue:
-          "La mirada pasa del interlocutor al papel; sigue tomando notas.",
+          "La mirada pasa de la otra persona al papel; sigue tomando notas.",
       explanation:
           "La calidad de la respuesta aporta más información que mantener la mirada de forma continua. Puede estar organizando información y prestando atención por otra vía. Pregunta si necesita unos segundos y permite consultar sus notas.",
     ),
     QuizQuestion(
       id: "q_context_sonrisa_error_interpret",
       category: CategoryType.expresionesFaciales,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Un compañero sonríe justo después de enterarse de que envió un archivo equivocado.",
       questionIllustrationKey: "polite_smile",
@@ -116,7 +116,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_ceno_lectura_interpret",
       category: CategoryType.expresionesFaciales,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Durante una demostración, una clienta frunce el ceño al mirar una tabla pequeña.",
       questionIllustrationKey: "context_revisar_documento",
@@ -137,7 +137,7 @@ class QuizExpansion {
       keyVisualClue:
           "Las cejas se acercan cuando aparece la tabla y se relajan al cambiar de pantalla.",
       explanation:
-          "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones. Puede estar intentando leer o comprender los datos. Amplía la tabla y pregunta qué dato conviene aclarar.",
+          "No hace falta adivinar por qué mira los datos. Puede estar intentando leerlos. Amplía la tabla y pregunta qué parte quiere aclarar.",
     ),
     QuizQuestion(
       id: "q_context_ceno_lectura_act",
@@ -164,12 +164,12 @@ class QuizExpansion {
       keyVisualClue:
           "Las cejas se acercan cuando aparece la tabla y se relajan al cambiar de pantalla.",
       explanation:
-          "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones. Puede estar intentando leer o comprender los datos. Amplía la tabla y pregunta qué dato conviene aclarar.",
+          "No hace falta adivinar por qué mira los datos. Puede estar intentando leerlos. Amplía la tabla y pregunta qué parte quiere aclarar.",
     ),
     QuizQuestion(
       id: "q_context_rostro_neutro_interpret",
       category: CategoryType.expresionesFaciales,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Una participante mantiene una expresión poco cambiante y luego hace una pregunta precisa.",
       questionIllustrationKey: "closed_eyelids",
@@ -224,7 +224,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_pausa_traduccion_interpret",
       category: CategoryType.factoresParalinguisticos,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "En una reunión bilingüe, un proveedor tarda en responder una pregunta nueva.",
       questionIllustrationKey: "context_pausa_conversacion",
@@ -278,7 +278,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_volumen_ruido_interpret",
       category: CategoryType.factoresParalinguisticos,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "En una cafetería llena, una amiga eleva la voz para contar cómo le fue.",
       questionIllustrationKey: "context_ruido_cafeteria",
@@ -332,7 +332,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_solapamiento_video_interpret",
       category: CategoryType.factoresParalinguisticos,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Dos colegas comienzan a hablar al mismo tiempo y vuelven a detenerse.",
       questionIllustrationKey: "turn_taking",
@@ -386,7 +386,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_reparacion_verbal_interpret",
       category: CategoryType.factoresParalinguisticos,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Un colega dice una cifra, se detiene y corrige el dato consultando el informe.",
       questionIllustrationKey: "voice_prosody",
@@ -439,7 +439,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_movimiento_escucha_interpret",
       category: CategoryType.lenguajeCorporal,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Una persona mueve los dedos durante una explicación y responde sobre el tema.",
       questionIllustrationKey: "context_movimiento_escucha",
@@ -481,7 +481,8 @@ class QuizExpansion {
             isCorrect: false),
         QuizOption(
             id: "q_context_movimiento_escucha_act_2",
-            text: "Interpreta cada movimiento como una objeción.",
+            text:
+                "Da por hecho que cada movimiento significa que algo le molesta.",
             isCorrect: false),
       ],
       keyVisualClue: "Movimiento repetido de manos sin abandonar la actividad.",
@@ -491,7 +492,7 @@ class QuizExpansion {
     QuizQuestion(
       id: "q_context_postura_dolor_interpret",
       category: CategoryType.lenguajeCorporal,
-      prompt: "¿Qué interpretación permite la información disponible?",
+      prompt: "¿Qué puedes concluir con lo que observas?",
       scenarioText:
           "Durante una sesión larga, alguien se inclina, se recoloca y pide levantarse.",
       questionIllustrationKey: "weight_shift",
@@ -654,7 +655,7 @@ class QuizExpansion {
       category: CategoryType.proxemica,
       prompt: "¿Qué interpretación permite la información disponible?",
       scenarioText:
-          "Al iniciar una conversación en un pasillo, tu interlocutor da un paso atrás.",
+          "Al iniciar una conversación en un pasillo, la otra persona da un paso atrás.",
       questionIllustrationKey: "proxemics_personal",
       options: [
         QuizOption(
@@ -680,7 +681,7 @@ class QuizExpansion {
       prompt:
           "¿Qué respuesta ayuda a aclarar la situación sin asumir intenciones?",
       scenarioText:
-          "Al iniciar una conversación en un pasillo, tu interlocutor da un paso atrás.",
+          "Al iniciar una conversación en un pasillo, la otra persona da un paso atrás.",
       questionIllustrationKey: "proxemics_personal",
       options: [
         QuizOption(
@@ -725,7 +726,7 @@ class QuizExpansion {
       keyVisualClue:
           "Mantiene la mano a distancia y acompaña el saludo con palabras.",
       explanation:
-          "Aceptar una modalidad de saludo evita convertir una preferencia corporal en un conflicto. Está eligiendo una forma de saludo sin contacto. Devuelve el saludo sin tocar y continúa la presentación.",
+          "La persona eligió saludar sin contacto. Responde de la misma forma y continúa la presentación.",
     ),
     QuizQuestion(
       id: "q_context_saludo_sin_contacto_act",

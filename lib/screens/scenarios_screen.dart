@@ -46,8 +46,7 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
     } else if (_selectedCategory == 'boundaries') {
       return ScenarioDatabase.scenarios
           .where((s) =>
-              s.domain == 'Límites & Asertividad' ||
-              s.domain == 'Límites & Consentimiento')
+              s.domain == 'Límites' || s.domain == 'Límites & Consentimiento')
           .toList();
     }
     return ScenarioDatabase.scenarios;
@@ -67,8 +66,7 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
         .length;
     final boundaryCount = allScenarios
         .where((s) =>
-            s.domain == 'Límites & Asertividad' ||
-            s.domain == 'Límites & Consentimiento')
+            s.domain == 'Límites' || s.domain == 'Límites & Consentimiento')
         .length;
     final filtered = _filteredScenarios;
 

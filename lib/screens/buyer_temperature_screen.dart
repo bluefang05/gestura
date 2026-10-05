@@ -119,7 +119,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: -3,
       category: 'red',
       takeaway:
-          'Puede deberse a temperatura, comodidad, hábito o reserva. No identifica una objeción.',
+          'Puede deberse al frío, a la comodidad o a una costumbre. No sabemos si tiene una duda; pregúntale.',
       icon: Icons.cancel_rounded,
     ),
     BuyerSignal(
@@ -128,7 +128,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
       score: -2,
       category: 'red',
       takeaway:
-          'Puede acompañar concentración, dolor o emoción. No revela una objeción sin preguntarla.',
+          'Puede tener muchas causas. No sabemos si tiene una duda; pregúntale con calma.',
       icon: Icons.remove_circle_outline_rounded,
     ),
     BuyerSignal(
@@ -221,7 +221,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
     if (pct >= 0.40) {
       return 'El patrón sigue siendo ambiguo. Haz una pregunta abierta: “¿Qué aspecto te gustaría explorar o aclarar primero?” y escucha sin interrumpir.';
     }
-    return 'No supongas una objeción. Baja la presión y ofrece una opción: “Podemos pausar, revisar un punto concreto o retomarlo otro día; ¿qué te vendría mejor?”.';
+    return 'No supongas que algo le preocupa. Pregunta con calma: “¿Quieres que paremos, revisemos algo o lo dejamos para otro día?”.';
   }
 
   Color get _verdictColor {
@@ -253,8 +253,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
   void _speakCurrentTab() {
     FeedbackService.lightClick();
     if (_selectedSalesTab == 0) {
-      final buffer =
-          StringBuffer('Pipeline de una reunión de ventas en cuatro fases. ');
+      final buffer = StringBuffer('Pasos de una reunión de ventas. ');
       for (final p in SalesPipelineDatabase.phases) {
         buffer.write(
             'Fase ${p.phaseNumber}: ${p.title}. Momento: ${p.timing}. Objetivo: ${p.objective}. Pistas a vigilar: ${p.clientSignalsToWatch.join(", ")}. Tu lenguaje corporal: ${p.yourBodyLanguage.join(", ")}. Regla de oro: ${p.keyRule}. ');
@@ -262,19 +261,18 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
       TtsService.speak(buffer.toString(), gestureId: 'sales_tab_0');
     } else if (_selectedSalesTab == 1) {
       TtsService.speak(
-          'Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice',
+          'Lo que observaste: $_temperatureVerdict. Una forma de responder: $_tacticalAdvice',
           gestureId: 'sales_tab_1');
     } else if (_selectedSalesTab == 2) {
-      final buffer =
-          StringBuffer('Tácticas y Guiones de Objeciones en Negociación. ');
+      final buffer = StringBuffer('Respuestas a dudas durante una venta. ');
       for (final obj in SalesPipelineDatabase.objections) {
         buffer.write(
-            '${obj.title}. Objeción del cliente: "${obj.objectionPhrase}". Contexto: ${obj.context}. Respuesta asertiva recomendada: "${obj.assertiveResponse}". Lenguaje corporal: ${obj.bodyLanguage}. Trampa a evitar: ${obj.whatNotToDo}. ');
+            '${obj.title}. La persona dice: "${obj.objectionPhrase}". Situación: ${obj.context}. Una forma clara de responder: "${obj.assertiveResponse}". Puedes hablar con calma. Algo que conviene evitar: ${obj.whatNotToDo}. ');
       }
       TtsService.speak(buffer.toString(), gestureId: 'sales_tab_2');
     } else {
       TtsService.speak(
-          'Entrenamiento y Simulación de Negociación. Explora los escenarios interactivos y casos de incongruencia comercial seleccionando cada tarjeta.',
+          'Practica conversaciones de venta con ejemplos. Elige una tarjeta para ver cada situación.',
           gestureId: 'sales_tab_3');
     }
   }
@@ -286,7 +284,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ruta de Negociación y Ventas'),
+        title: const Text('Conversaciones de venta'),
         actions: [
           if (_selectedSalesTab == 1)
             IconButton(
@@ -375,21 +373,21 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                       children: [
                         _buildNavChip(
                           index: 0,
-                          label: 'Pipeline (4 Fases)',
+                          label: 'Pasos de una venta',
                           icon: Icons.timeline_rounded,
                           isDark: isDark,
                         ),
                         const SizedBox(width: 8),
                         _buildNavChip(
                           index: 1,
-                          label: 'Termómetro en Vivo',
+                          label: 'Observar y preguntar',
                           icon: Icons.thermostat_rounded,
                           isDark: isDark,
                         ),
                         const SizedBox(width: 8),
                         _buildNavChip(
                           index: 2,
-                          label: 'Guiones y Objeciones',
+                          label: 'Respuestas a dudas',
                           icon: Icons.forum_rounded,
                           isDark: isDark,
                         ),
@@ -946,7 +944,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
 
           // Selector de Firmeza
           const Text(
-            'Tu Respuesta Táctica:',
+            'Una forma de responder:',
             style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 6),
@@ -976,7 +974,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
               ),
               const SizedBox(width: 6),
               ChoiceChip(
-                label: const Text('Asertivo (Recomendado)'),
+                label: const Text('Claro y respetuoso'),
                 selected: currentFirmness == 'assertive',
                 selectedColor: AppColors.primary,
                 labelStyle: TextStyle(
@@ -1064,12 +1062,12 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         FeedbackService.lightClick();
                         final firmnessLabel = switch (currentFirmness) {
                           'soft' => 'Suave',
-                          'assertive' => 'Asertivo',
+                          'assertive' => 'Claro y respetuoso',
                           'firm' => 'Firme',
-                          _ => 'Asertivo',
+                          _ => 'Claro y respetuoso',
                         };
                         final text =
-                            '${obj.title}. Objeción planteada: "${obj.objectionPhrase}". Contexto: ${obj.context}. Tu respuesta en nivel $firmnessLabel: $currentResponse. Tu lenguaje corporal recomendado: ${obj.bodyLanguage}. Error a evitar: ${obj.whatNotToDo}';
+                            '${obj.title}. La persona dice: "${obj.objectionPhrase}". Situación: ${obj.context}. Una posible respuesta: $currentResponse. Puedes hablar con calma. Algo que conviene evitar: ${obj.whatNotToDo}';
                         TtsService.speak(text, gestureId: 'obj_${obj.id}');
                       },
                       icon: const Icon(Icons.volume_up_rounded, size: 15),
@@ -1265,8 +1263,9 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
         ],
         const SizedBox(height: 16),
         const SectionHeader(
-          title: 'Detector de Incongruencias Comerciales',
-          subtitle: 'Distingue cuando las palabras del comprador mienten',
+          title: 'Comparar palabras y gestos en una venta',
+          subtitle:
+              'Observa si palabras y gestos parecen distintos. Pregunta antes de asumir.',
         ),
         const SizedBox(height: 8),
         AppCard(
@@ -1299,7 +1298,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                           ),
                         ),
                         Text(
-                          'Objeción de precio encubierta, escudo presupuestario, etc.',
+                          'Dudas sobre el precio, el presupuesto y las condiciones.',
                           style: TextStyle(fontSize: 12),
                         ),
                       ],

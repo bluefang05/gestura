@@ -195,7 +195,7 @@ class HomeScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Text(
-                              'Decodificar',
+                              'Entender gestos',
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,
@@ -509,7 +509,7 @@ class HomeScreen extends StatelessWidget {
                         isDark: isDark,
                         icon: Icons.psychology_alt_rounded,
                         accentColor: AppColors.indigo,
-                        title: 'Incongruencias',
+                        title: 'Palabras y gestos',
                         description: 'Palabras vs cuerpo real',
                         onTap: () {
                           Navigator.push(
@@ -545,7 +545,7 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.handshake_rounded,
                         accentColor: AppColors.coral,
                         title: 'Ruta de Ventas',
-                        description: 'Pipeline, termómetro y objeciones',
+                        description: 'Pasos de una venta y respuestas a dudas',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -650,7 +650,8 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.shield_rounded,
                         accentColor: AppColors.coral,
                         title: 'Límites & Consentimiento',
-                        description: 'Asertividad, falso sí y guiones',
+                        description:
+                            'Poner límites y pedir permiso con claridad',
                         onTap: () {
                           Navigator.push(
                             context,

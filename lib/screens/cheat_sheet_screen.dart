@@ -248,7 +248,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           onPressed: () {
                                             FeedbackService.lightClick();
                                             TtsService.speak(
-                                                '${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
+                                                '${item.name}. Significado: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
                                           },
                                         ),
                                       ],
@@ -361,7 +361,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           onPressed: () {
                                             FeedbackService.lightClick();
                                             TtsService.speak(
-                                                '${item.name}. Significado: ${item.probableMeaning}. Acción táctica: ${item.whatToDo}');
+                                                '${item.name}. Significado: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
                                           },
                                         ),
                                       ],

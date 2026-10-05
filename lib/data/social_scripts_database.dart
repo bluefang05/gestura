@@ -126,7 +126,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Gesto de palma abierta hacia abajo o cubriendo levemente tu propio vaso. Mirada directa y tranquila.',
       whatNotToDo:
-          'No des explicaciones médicas ni dietéticas a menos que quieras; justificarse invita al interlocutor a intentar "solucionar" tu excusa.',
+          'No tienes que explicar motivos médicos o de alimentación si no quieres. Puedes repetir tu respuesta con calma.',
     ),
     SocialScript(
       id: 'social_unwanted_touch',
@@ -188,13 +188,13 @@ class SocialScriptsDatabase {
       title: 'Pedir una pausa por sobrecarga sensorial o mental',
       category: SocialScriptCategory.sensory,
       contextDescription:
-          'Llevas mucho tiempo en un entorno ruidoso o reunión intensa y notas que tu capacidad de procesamiento está llegando al límite.',
+          'Llevas mucho tiempo en un lugar ruidoso o en una reunión intensa y necesitas una pausa.',
       softPhrase:
           'Necesito tomar un poco de aire fresco durante 5 minutos para despejar la mente. Vuelvo enseguida.',
       assertivePhrase:
           'Estoy experimentando sobrecarga de estímulos en este momento. Voy a tomar una pausa de 10 minutos en silencio y regreso.',
       firmPhrase:
-          'Mi límite de procesamiento está agotado por ahora. No puedo continuar la conversación en este momento; retomaremos en [tiempo].',
+          'Necesito descansar un momento. Ahora no puedo seguir hablando; podemos retomarlo en [tiempo].',
       bodyLanguage:
           'Ponte de pie con serenidad, respira profundamente y sal con calma hacia un espacio tranquilo o exterior.',
       whatNotToDo:
@@ -290,7 +290,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Asiente con la cabeza en señal de aceptación serena, cierra el tema y cambia de conversación de inmediato.',
       whatNotToDo:
-          'No insistas con "pero solo será un momento". Una respuesta tibia es casi siempre un "no" cortés que no se atreven a verbalizar.',
+          'No insistas con "pero solo será un momento". Si la respuesta no es clara, pregunta una vez o deja la propuesta para otro momento.',
     ),
     SocialScript(
       id: 'consent_physical_boundary',
@@ -308,7 +308,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Mantén una distancia inicial de al menos 1 metro antes de avanzar. Espera la confirmación verbal antes de acortar el espacio.',
       whatNotToDo:
-          'No asumas que todas las personas toleran el contacto físico informal. En personas neurodivergentes o con sobrecarga, un toque no anunciado activa la respuesta de alarma.',
+          'No todas las personas se sienten cómodas con el contacto físico. Pregunta antes de tocar a alguien; puede preferir que no lo hagas por muchas razones.',
     ),
 
     // ==========================================
@@ -423,7 +423,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Haz una pausa completa de silencio. Abre las palmas hacia arriba invitando a la otra persona a tomar la palabra.',
       whatNotToDo:
-          'No te sientas avergonzado por tu pasión; chequear el estado del interlocutor es la señal más alta de inteligencia social y respeto mutuo.',
+          'No tienes que sentir vergüenza por hablar de lo que te gusta. Haz una pausa y pregunta si la otra persona quiere seguir con ese tema.',
     ),
     SocialScript(
       id: 'social_graceful_exit',

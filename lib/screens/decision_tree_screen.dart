@@ -15,7 +15,8 @@ import 'gesture_detail_screen.dart';
 class DecisionTreeScreen extends StatefulWidget {
   const DecisionTreeScreen({super.key});
 
-  static const List<Map<String, dynamic>> zones = _DecisionTreeScreenState.zones;
+  static const List<Map<String, dynamic>> zones =
+      _DecisionTreeScreenState.zones;
 
   @override
   State<DecisionTreeScreen> createState() => _DecisionTreeScreenState();
@@ -495,7 +496,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.check_circle_outline_rounded,
             iconColor: isDark ? const Color(0xFF34D399) : AppColors.success,
-            title: '🎯 Acción Táctica Recomendada',
+            title: '🎯 Qué puedes hacer ahora',
             highlight: g.quickAction,
             description: g.whatToDo,
           ),
@@ -505,7 +506,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.trending_up_rounded,
             iconColor: isDark ? AppColors.accentLight : AppColors.accent,
-            title: '💼 Táctica en Negociación',
+            title: '💼 Una forma de responder',
             description: g.salesTip,
           ),
           const SizedBox(height: 18),

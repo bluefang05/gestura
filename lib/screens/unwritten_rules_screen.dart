@@ -73,10 +73,11 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
     if (_selectedTab == 0) {
       textToSpeak = _smallTalkSpeech;
     } else if (_selectedTab == 1) {
-      final buffer = StringBuffer('Decodificador de indirectas cotidianas. ');
+      final buffer = StringBuffer(
+          'Frases cotidianas que pueden tener más de un sentido. ');
       for (final item in _indirectPhrases) {
         buffer.write(
-            'Frase: "${item['phrase']}". Literalmente: "${item['literal']}". En realidad: "${item['realMeaning']}". Pista corporal: "${item['signal']}". Respuesta: "${item['response']}". ');
+            'Frase: "${item['phrase']}". Sentido literal: "${item['literal']}". Un posible sentido, entre otros: "${item['realMeaning']}". Algo que podrías notar: "${item['signal']}". Una respuesta posible: "${item['response']}". ');
       }
       textToSpeak = buffer.toString();
     } else if (_selectedTab == 2) {
@@ -86,10 +87,10 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
     } else {
       if (_boundarySubView == 0) {
         textToSpeak =
-            'La Ruta de los Límites y Consentimiento en cuatro fases. Fase uno: Entender los tuyos mediante el radar somático. Fase dos: Comunicarlos con la fórmula observable, impacto y acción. Fase tres: Sostenerlos ante insistencia y culpa. Fase cuatro: Decodificar el consentimiento real y el falso sí por desgaste.';
+            'Guía para reconocer lo que necesitas, decirlo con claridad y respetar los límites de otras personas. Si una respuesta no está clara, pregunta sin presionar.';
       } else {
         textToSpeak =
-            'Biblioteca de Guiones Asertivos y Consentimiento. Frases prefabricadas y lenguaje corporal para marcar límites y ofrecer puertas de escape airosas sin presionar.';
+            'Frases sencillas para expresar tus límites y respetar los de otras personas.';
       }
     }
     TtsService.speak(textToSpeak, gestureId: 'unwritten_rules_$_selectedTab');
@@ -169,7 +170,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('El Manual de lo No Dicho'),
+        title: const Text('Situaciones sociales cotidianas'),
         actions: [
           TtsAppBarControl(
             onPlay: _speakCurrentSection,
@@ -212,7 +213,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Decodificación literal de las reglas no escritas, indirectas cotidianas y convenciones sociales que nadie enseña explícitamente.',
+                            'Ejemplos de frases y situaciones sociales que a veces confunden. Practica cómo pedir una aclaración sin tener que adivinar.',
                             style: TextStyle(
                               fontSize: 13,
                               height: 1.4,
@@ -234,19 +235,19 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       children: [
                         _buildNavChip(
                             index: 0,
-                            label: 'El Mito del Small Talk',
+                            label: 'Conversaciones breves',
                             icon: Icons.chat_bubble_outline_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
                         _buildNavChip(
                             index: 1,
-                            label: 'Decodificador de Indirectas',
+                            label: 'Frases con doble sentido',
                             icon: Icons.transform_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
                         _buildNavChip(
                             index: 2,
-                            label: 'Risa Incómoda vs Real',
+                            label: 'Risas en distintas situaciones',
                             icon: Icons.sentiment_satisfied_alt_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
@@ -459,7 +460,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Decodificador de Frases Cotidianas (${_indirectPhrases.length} Casos)',
+          'Frases cotidianas (${_indirectPhrases.length} ejemplos)',
           style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
         ),
         const SizedBox(height: 6),
@@ -508,7 +509,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           ),
                           tooltip: isSpeaking
                               ? 'Detener lectura'
-                              : 'Escuchar decodificación completa',
+                              : 'Escuchar la explicación',
                           onPressed: () {
                             FeedbackService.lightClick();
                             if (isSpeaking) {
@@ -1147,7 +1148,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         ),
                         SizedBox(height: 2),
                         Text(
-                          'Aprende a marcar tus propios límites sin culpa y a decodificar cuándo el otro cede por presión.',
+                          'Aprende a decir lo que necesitas. Si alguien acepta después de mucha insistencia, comprueba que de verdad quiera hacerlo.',
                           style: TextStyle(fontSize: 12.5),
                         ),
                       ],

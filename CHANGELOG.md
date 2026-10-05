@@ -1,17 +1,22 @@
 # Historial de cambios
 
-## Pendiente de publicación
+## Versión 1.0.13 (15) — pendiente de publicación
 
-- Versión 1.0.12 (14): lenguaje más claro en fichas, preguntas, escenarios y
-  categorías; nombres musculares sustituidos por descripciones cotidianas.
+- Se simplificó el lenguaje de fichas, preguntas, escenarios, categorías,
+  instrucciones, ventas y progreso para que sea más fácil de entender.
+- Los términos que conviene aprender, como los nombres de músculos, se explican
+  con palabras cotidianas y no hace falta memorizarlos.
+- Se reemplazaron conclusiones tajantes sobre gestos por explicaciones posibles
+  y preguntas sencillas para aclarar lo que la persona quiere decir.
+- Se aclararon los nombres de secciones y las frases que la app lee en voz alta.
 - Las preguntas visuales ya no dependen de etiquetas fijas como «Opción 1»,
   que dejaban de coincidir cuando se mezclaban las respuestas.
 - Las explicaciones muestran cuál era la respuesta correcta; el audio también
   la lee. El resultado separa los aciertos al primer intento del repaso.
 - El buscador de conceptos reconoce términos anteriores y búsquedas sin tilde,
   y permite borrar la búsqueda con un botón.
-- Se eliminaron varias interpretaciones que presentaban un gesto como prueba
-  de una emoción o intención. Se documentó el alcance de esta revisión.
+- Se añadieron conceptos antes de practicar y se mejoró el repaso de preguntas
+  falladas y el avance entre temas.
 
 ### Versión 1.0.11 (13)
 

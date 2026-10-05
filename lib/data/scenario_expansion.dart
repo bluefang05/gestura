@@ -18,10 +18,10 @@ class ScenarioExpansion {
           narrative:
               "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
           characterAction:
-              "La mirada pasa del interlocutor al papel; sigue tomando notas.",
+              "La mirada pasa de la otra persona al papel; sigue tomando notas.",
           illustrationKey: "averted_gaze",
           visibleSignals: [
-            "La mirada pasa del interlocutor al papel; sigue tomando notas."
+            "La mirada pasa de la otra persona al papel; sigue tomando notas."
           ],
           learningTakeaway:
               "La calidad de la respuesta aporta más información que mantener la mirada de forma continua.",
@@ -102,7 +102,7 @@ class ScenarioExpansion {
       title: "Una tabla difícil de leer",
       domain: "Ventas & Negociación",
       description:
-          "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+          "Haz una pregunta o un cambio sencillo y observa qué pasa, sin adivinar sus intenciones.",
       contextOverview:
           "Durante una demostración, una clienta frunce el ceño al mirar una tabla pequeña.",
       iconName: 'people',
@@ -118,13 +118,13 @@ class ScenarioExpansion {
             "Las cejas se acercan cuando aparece la tabla y se relajan al cambiar de pantalla."
           ],
           learningTakeaway:
-              "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+              "Haz una pregunta o un cambio sencillo y observa qué pasa, sin adivinar sus intenciones.",
           choices: [
             ScenarioChoice(
                 text:
                     "Ofrece un descuento inmediato para vencer su resistencia.",
                 analysis:
-                    "Esta opción añade una conclusión o una exigencia que la información disponible no justifica. Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+                    "Esta opción supone algo que no sabemos. Haz una pregunta sencilla y escucha la respuesta.",
                 isBestAction: false,
                 nextStepIndex: 1,
                 consequenceSummary:
@@ -132,7 +132,7 @@ class ScenarioExpansion {
             ScenarioChoice(
                 text: "Oculta la tabla para evitar preguntas.",
                 analysis:
-                    "Esta opción añade una conclusión o una exigencia que la información disponible no justifica. Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+                    "Esta opción supone algo que no sabemos. Haz una pregunta sencilla y escucha la respuesta.",
                 isBestAction: false,
                 nextStepIndex: 1,
                 consequenceSummary:
@@ -140,7 +140,7 @@ class ScenarioExpansion {
             ScenarioChoice(
                 text: "Amplía la tabla y pregunta qué dato conviene aclarar.",
                 analysis:
-                    "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+                    "Haz una pregunta o un cambio sencillo y observa qué pasa, sin adivinar sus intenciones.",
                 isBestAction: true,
                 nextStepIndex: 1,
                 consequenceSummary:
@@ -407,7 +407,8 @@ class ScenarioExpansion {
                 consequenceSummary:
                     "Puede añadir presión o dejar sin resolver la necesidad planteada. Puedes reconsiderar tu respuesta con la información del siguiente paso."),
             ScenarioChoice(
-                text: "Interpreta cada movimiento como una objeción.",
+                text:
+                    "Da por hecho que cada movimiento significa que algo le molesta.",
                 analysis:
                     "Esta opción añade una conclusión o una exigencia que la información disponible no justifica. Evalúa la comunicación por el intercambio y pregunta preferencias antes de corregir movimientos.",
                 isBestAction: false,
@@ -567,13 +568,13 @@ class ScenarioExpansion {
       description:
           "El espacio puede ajustarse sin convertirlo en una evaluación de la relación.",
       contextOverview:
-          "Al iniciar una conversación en un pasillo, tu interlocutor da un paso atrás.",
+          "Al iniciar una conversación en un pasillo, la otra persona da un paso atrás.",
       iconName: 'people',
       steps: [
         ScenarioStep(
           id: "paso_atras_0",
           narrative:
-              "Al iniciar una conversación en un pasillo, tu interlocutor da un paso atrás.",
+              "Al iniciar una conversación en un pasillo, la otra persona da un paso atrás.",
           characterAction: "Aumenta la separación manteniendo la conversación.",
           illustrationKey: "proxemics_personal",
           visibleSignals: [
@@ -1023,7 +1024,7 @@ class ScenarioExpansion {
     Scenario(
       id: "scenario_context_respuesta_diferida",
       title: "Un mensaje pendiente de respuesta",
-      domain: "Límites & Asertividad",
+      domain: "Límites",
       description:
           "Las expectativas de respuesta deben acordarse según la tarea y el horario.",
       contextOverview:

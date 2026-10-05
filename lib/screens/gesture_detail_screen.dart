@@ -862,7 +862,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
             icon: Icons.play_arrow_rounded,
             iconColor:
                 isDark ? const Color(0xFF34D399) : const Color(0xFF059669),
-            title: 'Acción táctica:',
+            title: 'Qué puedes hacer:',
             content: item.quickAction,
             isDark: isDark,
           ),
@@ -1005,7 +1005,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                         Text(
                           isSpeaking
                               ? 'Toca para pausar la lectura'
-                              : 'Qué mirar, significado y respuesta táctica al instante',
+                              : 'Qué observar, qué podría significar y cómo responder',
                           style: TextStyle(
                             fontSize: 11.5,
                             color: isSpeaking

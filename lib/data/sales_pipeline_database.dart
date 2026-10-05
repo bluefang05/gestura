@@ -8,10 +8,10 @@ class SalesPipelineDatabase {
     // ==========================================
     SalesPhaseItem(
       phaseNumber: 1,
-      title: 'Entrada, Espacio y Rapport Inicial',
+      title: 'Saludo y primera conversación',
       timing: 'Minutos 0 a 5',
       objective:
-          'Romper la tensión inicial, establecer estatus equitativo y generar seguridad mutua sin invadir el espacio personal.',
+          'Saluda con respeto, deja espacio personal y permite que ambas personas se sientan cómodas.',
       icon: Icons.handshake_rounded,
       clientSignalsToWatch: [
         'Orientación de los hombros hacia ti (apertura) vs orientados a la pantalla de su laptop (frialdad).',
@@ -24,7 +24,7 @@ class SalesPipelineDatabase {
         'Mantén la espalda recta pero apoyada, respirando hondo con el diafragma antes de cruzar la puerta.',
       ],
       keyRule:
-          'Nunca intentes vender ni hables de producto en los primeros 3 minutos. El cerebro reptiliano del comprador primero evalúa si eres una amenaza o un aliado.',
+          'No hay una regla de tiempo para todas las reuniones. Saluda, pregunta qué necesita la persona y escucha antes de presentar tu propuesta.',
     ),
 
     // ==========================================
@@ -32,23 +32,23 @@ class SalesPipelineDatabase {
     // ==========================================
     SalesPhaseItem(
       phaseNumber: 2,
-      title: 'Presentar y comprobar si hay preguntas',
+      title: 'Explicar la propuesta y escuchar',
       timing: 'Minutos 5 a 20',
       objective:
           'Explica la propuesta y pregunta si la persona quiere más detalles, necesita tiempo o prefiere parar.',
       icon: Icons.present_to_all_rounded,
       clientSignalsToWatch: [
-        '🟢 Interés activo: Inclinación del torso hacia adelante, cejas ligeramente elevadas y asentimientos lentos.',
-        '🟡 Evaluación interna: Mano en la barbilla o acariciando la mandíbula mientras analiza tus datos.',
-        '🔴 Desconexión o prisa: Tamborileo de dedos en la mesa, pies apuntando hacia la puerta o miradas al reloj/teléfono.',
+        'La persona hace preguntas o pide más detalles. Pregunta si quiere continuar.',
+        'La persona guarda silencio o mira a otro lado. Puede estar pensando o atendiendo otra cosa.',
+        'La persona mira la hora o dice que tiene prisa. Pregunta si prefiere seguir en otro momento.',
       ],
       yourBodyLanguage: [
         'Gesticula a la altura del pecho con palmas abiertas hacia arriba en los puntos de mayor valor.',
         'Haz una pausa después de explicar algo importante. Da tiempo para pensar y preguntar.',
-        'Adapta tu velocidad de habla y volumen al ritmo del cliente (ajuste respetuoso a las preferencias de la otra persona).',
+        'Habla a un ritmo cómodo y pregunta si quiere que repitas o aclares algo.',
       ],
       keyRule:
-          'Si notas señales de desconexión (pies hacia la puerta o reloj), jamás aceleres tu discurso. Detente en seco y haz una pregunta abierta: "¿Hasta este punto, cómo encaja esto con lo que tenían en mente?"',
+          'Si no sabes si la persona quiere continuar, pregúntale: "¿Quieres que siga o prefieres dejarlo para otro momento?"',
     ),
 
     // ==========================================
@@ -56,10 +56,10 @@ class SalesPipelineDatabase {
     // ==========================================
     SalesPhaseItem(
       phaseNumber: 3,
-      title: 'Revelación de Precio y Manejo de Objeciones',
+      title: 'Hablar del precio y responder dudas',
       timing: 'Minutos 20 a 35',
       objective:
-          'Presentar la inversión con serenidad inamovible, sostener las objeciones sin justificarse y desarmar la resistencia con preguntas.',
+          'Di el precio con claridad. Escucha las dudas y responde sin presionar.',
       icon: Icons.monetization_on_rounded,
       clientSignalsToWatch: [
         'Brazos cruzados a la altura del pecho y cuerpo reclinado hacia atrás (escudo presupuestario o cautela).',
@@ -72,7 +72,7 @@ class SalesPipelineDatabase {
         'Guarda silencio absoluto durante al menos 3 a 5 segundos inmediatamente después de decir el precio.',
       ],
       keyRule:
-          'El primero que habla después de revelar la cifra económica pierde margen de negociación. El silencio demuestra que no tienes miedo a tu propio precio.',
+          'Después de decir el precio, deja tiempo para pensar. El silencio no permite saber qué piensa la persona; puedes preguntarle si quiere aclarar algo.',
     ),
 
     // ==========================================
@@ -80,15 +80,15 @@ class SalesPipelineDatabase {
     // ==========================================
     SalesPhaseItem(
       phaseNumber: 4,
-      title: 'Señales de Cierre y Silencio Táctico',
+      title: 'Acordar los próximos pasos',
       timing: 'Minutos 35 a 45',
       objective:
-          'Detectar las microseñales de compra cuando ocurren, proponer el siguiente paso y dejar de vender para no sabotear el acuerdo.',
+          'Pregunta si la persona quiere avanzar, necesita más tiempo o prefiere dejarlo aquí.',
       icon: Icons.check_circle_outline_rounded,
       clientSignalsToWatch: [
-        '🟢 Señales de sintonía e interés: Inclinación hacia la propuesta escrita, atención sostenida, asentimiento y preguntas de detalle.',
-        '🟢 Preguntas de posesión psicológica: "¿En cuánto tiempo estaría implementado?" o "¿Cómo coordinaríamos el soporte técnico?".',
-        '🟢 Relajación de hombros tras la tensión de la negociación de costos.',
+        'Las preguntas pueden mostrar interés, pero no confirman una decisión.',
+        'Pregunta si quiere revisar algún detalle o recibir la propuesta por escrito.',
+        'Los gestos no permiten saber con seguridad si la persona aceptará.',
       ],
       yourBodyLanguage: [
         'Acerca con calma la propuesta o el contrato hacia el centro del espacio compartido.',
@@ -96,7 +96,7 @@ class SalesPipelineDatabase {
         'Cierra la libreta o deja el bolígrafo sobre la mesa para comunicar que la presentación terminó y estamos en fase de acuerdo.',
       ],
       keyRule:
-          'En cuanto el prospecto formule una pregunta de posesión o dé señales claras de compra, calla de inmediato. Muchos tratos se caen porque el vendedor sigue argumentando cuando el cliente ya estaba listo para firmar.',
+          'Una pregunta o un gesto no confirman una compra. Pregunta qué decisión quiere tomar la persona y respeta su respuesta.',
     ),
   ];
 
@@ -104,7 +104,7 @@ class SalesPipelineDatabase {
     // 1. OBJECIÓN DE PRECIO
     SalesObjectionScript(
       id: 'obj_price_too_high',
-      title: 'Objeción: "Su propuesta está por encima de nuestro presupuesto"',
+      title: 'Duda: "Su propuesta está por encima de nuestro presupuesto"',
       objectionPhrase:
           'Es demasiado costoso para nosotros / supera el presupuesto asignado.',
       context:
@@ -124,7 +124,7 @@ class SalesPipelineDatabase {
     // 2. OBJECIÓN DE LA COMPETENCIA
     SalesObjectionScript(
       id: 'obj_competitor_cheaper',
-      title: 'Objeción: "La competencia me ofrece lo mismo por la mitad"',
+      title: 'Duda: "La competencia me ofrece lo mismo por la mitad"',
       objectionPhrase:
           'Otras empresas me ofrecen exactamente lo mismo a un costo mucho menor.',
       context:
@@ -144,7 +144,7 @@ class SalesPipelineDatabase {
     // 3. OBJECIÓN DE POSTERGACIÓN
     SalesObjectionScript(
       id: 'obj_need_to_think',
-      title: 'Objeción: "Tenemos que pensarlo y consultarlo con los socios"',
+      title: 'Duda: "Tenemos que pensarlo y consultarlo con los socios"',
       objectionPhrase:
           'Lo vemos interesante, pero necesitamos revisarlo internamente y te avisamos.',
       context:
@@ -164,27 +164,27 @@ class SalesPipelineDatabase {
     // 4. EL SILENCIO INCÓMODO DEL COMPRADOR
     SalesObjectionScript(
       id: 'obj_awkward_silence',
-      title: 'Táctica: El Comprador guarda silencio sepulcral tras el precio',
+      title: 'La persona guarda silencio después del precio',
       objectionPhrase:
           '[Silencio total durante 10 segundos mirando tu propuesta sin hablar]',
       context:
-          'Técnica clásica de compras: usan el silencio para que el vendedor se sienta incómodo y empiece a regalar descuentos solo para romper la tensión.',
+          'El silencio puede tener muchas causas. Dale tiempo a la persona para pensar y luego pregunta si quiere aclarar algo.',
       softResponse:
-          '[Mantener el silencio con serenidad durante 8 segundos. Luego preguntar]: "¿Cómo resuena esa cifra con las expectativas del área?"',
+          '[Dale un momento y pregunta]: "¿Qué te parece el precio? ¿Quieres que aclare algo?"',
       assertiveResponse:
-          '[Sostener la mirada relajada, respirar hondo y NO decir una sola palabra hasta que el cliente hable primero].',
+          '[Espera con calma. No hace falta sostener la mirada; puedes preguntar si necesita tiempo].',
       firmResponse:
-          '[Esperar pacientemente con postura abierta. Cuando el cliente pregunte algo, responder con calma y brevedad].',
+          '[Dale tiempo para pensar. Responde sus preguntas y acepta si quiere decidir después].',
       bodyLanguage:
           'No toques tu rostro, no bebas agua apresuradamente ni consultes tu reloj. Espalda firme, manos quietas.',
       whatNotToDo:
-          '¡LA REGLA DE ORO! No rompas el silencio diciendo: "...pero si es mucho podemos arreglarlo". Quien cede ante el silencio regala su margen.',
+          'No supongas que el silencio es una táctica ni ofrezcas un descuento sin que te lo pidan. Pregunta qué necesita la persona.',
     ),
 
     // 5. PRESIÓN POR DESCUENTO DE ÚLTIMA HORA
     SalesObjectionScript(
       id: 'obj_discount_pressure',
-      title: 'Objeción: "Si me haces un 15% de descuento firmamos hoy mismo"',
+      title: 'Duda: "Si me haces un 15% de descuento, firmamos hoy mismo"',
       objectionPhrase:
           'Me gusta la propuesta, pero si quieres que cerremos ahora mismo tienes que bajar un 15%.',
       context:
@@ -204,7 +204,7 @@ class SalesPipelineDatabase {
     // 6. PROVEEDOR ACTUAL ESTABLECIDO
     SalesObjectionScript(
       id: 'obj_already_have_supplier',
-      title: 'Objeción: "Ya trabajamos con un proveedor y estamos satisfechos"',
+      title: 'Duda: "Ya trabajamos con un proveedor y estamos satisfechos"',
       objectionPhrase:
           'Ya tenemos a alguien que nos hace este servicio desde hace años.',
       context: 'Resistencia al cambio y lealtad con su proveedor vigente.',

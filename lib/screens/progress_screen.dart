@@ -83,7 +83,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   }
 
   String _getRankTitle(int points) {
-    if (points >= 500) return 'Maestro Decodificador';
+    if (points >= 500) return 'Recorrido completo';
     if (points >= 300) return 'Analista Experto';
     if (points >= 150) return 'Observador Atento';
     return 'Iniciado en Comunicación';
@@ -278,7 +278,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Avanza en orden secuencial: desde cómo observar sin sobrecarga (forma habitual de expresarse) hasta el descifrado de indirectas, límites asertivos y negociación en el mundo real.',
+              'Avanza paso a paso: aprende a observar sin adivinar, entender frases confusas, expresar tus límites y conversar en distintas situaciones.',
               style: TextStyle(
                 fontSize: 12,
                 height: 1.35,

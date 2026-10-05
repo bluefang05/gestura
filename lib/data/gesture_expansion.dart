@@ -12,7 +12,7 @@ class GestureExpansion {
       summary:
           "En una cafetería, una persona consulta sus notas mientras escucha una pregunta.",
       physiologicalDetails:
-          "La mirada pasa del interlocutor al papel; sigue tomando notas.",
+          "La mirada pasa de la otra persona al papel; sigue tomando notas.",
       probableMeaning:
           "Puede estar organizando información y prestando atención por otra vía.",
       alternativeMeanings: [
@@ -69,10 +69,10 @@ class GestureExpansion {
         "concentración en cifras"
       ],
       contextGuidance:
-          "Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+          "Prueba un cambio sencillo y observa qué pasa, sin adivinar las intenciones de la persona.",
       whatToDo: "Amplía la tabla y pregunta qué dato conviene aclarar.",
       salesTip:
-          "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Cambiar una condición observable ayuda a comprobar una hipótesis sin atribuir intenciones.",
+          "En una conversación de trabajo, confirma lo que la persona necesita antes de seguir. Observa qué pasa cuando haces un cambio sencillo, sin adivinar sus intenciones.",
       illustrationKey: "context_revisar_documento",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,
@@ -305,7 +305,7 @@ class GestureExpansion {
       category: CategoryType.proxemica,
       bodyPart: "Espacio",
       summary:
-          "Al iniciar una conversación en un pasillo, tu interlocutor da un paso atrás.",
+          "Al iniciar una conversación en un pasillo, la otra persona da un paso atrás.",
       physiologicalDetails:
           "Aumenta la separación manteniendo la conversación.",
       probableMeaning:
@@ -341,10 +341,10 @@ class GestureExpansion {
         "cuidado del espacio"
       ],
       contextGuidance:
-          "Aceptar una modalidad de saludo evita convertir una preferencia corporal en un conflicto.",
+          "Aceptar un saludo sin contacto respeta la preferencia de la otra persona.",
       whatToDo: "Devuelve el saludo sin tocar y continúa la presentación.",
       salesTip:
-          "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Aceptar una modalidad de saludo evita convertir una preferencia corporal en un conflicto.",
+          "En una conversación de trabajo, confirma lo que la persona necesita y acuerda los pasos siguientes. Respeta si prefiere saludar sin contacto.",
       illustrationKey: "proxemics_social",
       difficulty: 2,
       signalType: SignalTrafficLight.yellow,

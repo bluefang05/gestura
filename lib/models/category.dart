@@ -34,8 +34,8 @@ class CategoryInfo {
   static const List<CategoryInfo> allCategories = [
     CategoryInfo(
       type: CategoryType.expresionesFaciales,
-      title: 'Expresiones y Señales Faciales',
-      shortTitle: 'Facial',
+      title: 'Gestos de la cara',
+      shortTitle: 'Cara',
       description:
           'Tipos de sonrisa, ceño fruncido, distintas miradas y gestos breves.',
       icon: Icons.face_rounded,
@@ -47,8 +47,7 @@ class CategoryInfo {
       type: CategoryType.factoresParalinguisticos,
       title: 'Voz y forma de hablar',
       shortTitle: 'Voz y Tono',
-      description:
-          'El tono, ritmo, volumen, timbre de la voz y los silencios con sus significados.',
+      description: 'El tono, el volumen, el ritmo al hablar y las pausas.',
       icon: Icons.record_voice_over_rounded,
       primaryColor: AppColors.purple,
       containerColor: Color(0xFFEDE9FE),
@@ -56,10 +55,9 @@ class CategoryInfo {
     ),
     CategoryInfo(
       type: CategoryType.lenguajeCorporal,
-      title: 'Posturas y Lenguaje Corporal',
+      title: 'Posturas y movimientos',
       shortTitle: 'Posturas',
-      description:
-          'Posturas abiertas vs cerradas, orientación del cuerpo, inclinación frontal y manos.',
+      description: 'Posición de los brazos, las manos y el cuerpo.',
       icon: Icons.accessibility_new_rounded,
       primaryColor: AppColors.accent,
       containerColor: AppColors.accentLight,
@@ -67,10 +65,10 @@ class CategoryInfo {
     ),
     CategoryInfo(
       type: CategoryType.proxemica,
-      title: 'Proximidad y Espacio Personal',
+      title: 'Distancia y espacio personal',
       shortTitle: 'Espacio personal',
       description:
-          'Las 4 burbujas invisibles: Espacio Íntimo, Personal, Social y Público.',
+          'Cómo elegir una distancia cómoda según el lugar y la persona.',
       icon: Icons.radar_rounded,
       primaryColor: AppColors.indigo,
       containerColor: Color(0xFFE0E7FF),
@@ -89,10 +87,9 @@ class CategoryInfo {
     ),
     CategoryInfo(
       type: CategoryType.comunicacionDigital,
-      title: 'Comunicación No Verbal Digital',
+      title: 'Mensajes y comunicación digital',
       shortTitle: 'Digital',
-      description:
-          'Emojis, mayúsculas, respuestas secas ("ok"), visto y tiempos de respuesta.',
+      description: 'Emojis, mayúsculas, respuestas breves y mensajes leídos.',
       icon: Icons.chat_bubble_outline_rounded,
       primaryColor: AppColors.coral,
       containerColor: Color(0xFFFFE4E6),

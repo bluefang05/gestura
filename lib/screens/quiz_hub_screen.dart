@@ -155,7 +155,7 @@ class QuizHubScreen extends StatelessWidget {
                         isDark: isDark,
                         icon: Icons.psychology_alt_rounded,
                         accentColor: AppColors.indigo,
-                        title: 'Detector de Incongruencias',
+                        title: 'Comparar palabras y gestos',
                         description:
                             'Aprende cuándo las palabras dicen una cosa pero el cuerpo otra.',
                         onTap: () {
@@ -215,7 +215,7 @@ class QuizHubScreen extends StatelessWidget {
                         accentColor: AppColors.primary,
                         title: 'Ventas y Trabajo',
                         description:
-                            'Preguntas prácticas para reuniones de trabajo y objeciones.',
+                            'Preguntas prácticas para reuniones de trabajo y dudas comunes.',
                         onTap: () {
                           Navigator.push(
                             context,

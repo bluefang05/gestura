@@ -22,7 +22,7 @@ class RoadmapDatabase {
     // ==========================================
     RoadmapLevel(
       levelNumber: 1,
-      title: 'Nivel 1: La Regla Cero',
+      title: 'Nivel 1: Observar con calma',
       objective:
           'Aprende a observar sin juzgar: conoce cómo suele expresarse una persona y pregunta si algo no está claro.',
       icon: Icons.hub_rounded,
@@ -50,22 +50,22 @@ class RoadmapDatabase {
     ),
 
     // ==========================================
-    // NIVEL 2: EL ALFABETO NO VERBAL PRIMARIO
+    // NIVEL 2: GESTOS DE LA CARA, LOS BRAZOS Y LAS MANOS
     // ==========================================
     RoadmapLevel(
       levelNumber: 2,
-      title: 'Nivel 2: El Alfabeto No Verbal',
+      title: 'Nivel 2: Cara, brazos y manos',
       objective:
-          'Identifica las señales físicas involuntarias en ojos, rostro y extremidades.',
+          'Reconoce movimientos de los ojos, la cara, los brazos y las manos.',
       icon: Icons.accessibility_new_rounded,
       steps: [
         RoadmapStep(
           id: 'step_eyes',
           levelNumber: 2,
           stepNumber: 3,
-          title: 'El Canal Visual: Ojos y Cejas',
+          title: 'Miradas y cejas',
           subtitle:
-              'Aprende a diferenciar el contacto visual de confort vs sobrecarga o desvío.',
+              'Cada persona mira de una manera distinta. No hace falta exigir contacto visual.',
           icon: Icons.remove_red_eye_rounded,
           destination: RoadmapDestination.dictionaryEyes,
         ),
@@ -73,9 +73,9 @@ class RoadmapDatabase {
           id: 'step_hands_torso',
           levelNumber: 2,
           stepNumber: 4,
-          title: 'Brazos, Manos y Barreras Corporales',
+          title: 'Brazos y manos',
           subtitle:
-              'Postura abierta, manos visibles y barreras defensivas con objetos.',
+              'Observa cómo coloca los brazos y las manos. No adivines lo que piensa.',
           icon: Icons.pan_tool_rounded,
           destination: RoadmapDestination.dictionaryHands,
         ),
@@ -83,13 +83,13 @@ class RoadmapDatabase {
     ),
 
     // ==========================================
-    // NIVEL 3: EL CÓDIGO OCULTO (EL MUNDO NEUROTÍPICO)
+    // NIVEL 3: FRASES Y COSTUMBRES COTIDIANAS
     // ==========================================
     RoadmapLevel(
       levelNumber: 3,
       title: 'Nivel 3: El Código Oculto',
       objective:
-          'Decodifica las reglas no escritas donde las palabras no significan lo literal.',
+          'Practica cómo responder a frases y situaciones cotidianas. Si no entiendes, puedes preguntar.',
       icon: Icons.auto_stories_rounded,
       steps: [
         RoadmapStep(
@@ -106,9 +106,9 @@ class RoadmapDatabase {
           id: 'step_indirects',
           levelNumber: 3,
           stepNumber: 6,
-          title: 'Decodificador de Indirectas Cotidianas',
+          title: 'Frases que pueden tener más de un sentido',
           subtitle:
-              'Traduce fórmulas de cortesía social a lo que la persona realmente necesita.',
+              'Practica cómo pedir una aclaración. Una misma frase puede tener distintos sentidos.',
           icon: Icons.transform_rounded,
           destination: RoadmapDestination.unwrittenIndirects,
         ),
@@ -120,18 +120,18 @@ class RoadmapDatabase {
     // ==========================================
     RoadmapLevel(
       levelNumber: 4,
-      title: 'Nivel 4: Blindaje y Consentimiento',
+      title: 'Nivel 4: Límites y consentimiento',
       objective:
-          'Aprende a marcar tus límites sin culpa y a no presionar jamás por desgaste.',
+          'Practica cómo expresar tus límites y respetar la respuesta de otras personas.',
       icon: Icons.shield_rounded,
       steps: [
         RoadmapStep(
           id: 'step_boundaries',
           levelNumber: 4,
           stepNumber: 7,
-          title: 'El Arte de Marcar Límites (Fórmula E-I-A)',
+          title: 'Cómo expresar un límite',
           subtitle:
-              'Hecho observable, impacto y acción declarada sin sonrisas de disculpa.',
+              'Di qué ocurrió, cómo te afecta y qué necesitas que cambie.',
           icon: Icons.shield_outlined,
           destination: RoadmapDestination.boundariesMethod,
         ),
@@ -139,9 +139,9 @@ class RoadmapDatabase {
           id: 'step_consent',
           levelNumber: 4,
           stepNumber: 8,
-          title: 'Consentimiento Real: Decodificar el Falso Sí',
+          title: 'Aceptar algo por presión',
           subtitle:
-              'Aprende a leer el apaciguamiento y a ofrecer siempre puertas de escape airosas.',
+              'Una persona puede aceptar por presión. Pregunta con claridad y respeta si cambia de opinión.',
           icon: Icons.handshake_rounded,
           destination: RoadmapDestination.boundariesConsent,
         ),
@@ -153,18 +153,18 @@ class RoadmapDatabase {
     // ==========================================
     RoadmapLevel(
       levelNumber: 5,
-      title: 'Nivel 5: Mundo Real y Campo',
+      title: 'Nivel 5: Situaciones cotidianas',
       objective:
-          'Pon a prueba tus habilidades en situaciones de presión, ventas y emergencias.',
+          'Practica en situaciones de trabajo, ventas y momentos difíciles.',
       icon: Icons.flash_on_rounded,
       steps: [
         RoadmapStep(
           id: 'step_incongruences',
           levelNumber: 5,
           stepNumber: 9,
-          title: 'Detector de Incongruencias Reales',
+          title: 'Cuando palabras y gestos parecen distintos',
           subtitle:
-              'Distingue cuando las palabras de la persona dicen una cosa pero el cuerpo otra.',
+              'Describe lo que ves y pregunta si necesitas entender mejor.',
           icon: Icons.psychology_alt_rounded,
           destination: RoadmapDestination.incongruenceDetector,
         ),
@@ -172,9 +172,9 @@ class RoadmapDatabase {
           id: 'step_sales_negotiation',
           levelNumber: 5,
           stepNumber: 10,
-          title: 'Ruta de Negociación y Ventas (Pipeline 4 Fases)',
+          title: 'Una reunión de ventas, paso a paso',
           subtitle:
-              'Calibración en tiempo real, manejo de objeciones y la regla del silencio.',
+              'Escucha preguntas, responde con claridad y deja tiempo para decidir.',
           icon: Icons.trending_up_rounded,
           destination: RoadmapDestination.salesTrack,
         ),

@@ -142,12 +142,12 @@ class UserProgress {
 
   String get masteryLevelTitle {
     final pct = masteryPercentage;
-    if (pct >= 100) return 'Maestro Decodificador';
-    if (pct >= 75) return 'Negociador Avanzado';
-    if (pct >= 50) return 'Analista de Campo';
-    if (pct >= 25) return 'Calibrador Activo';
-    if (pct >= 10) return 'Observador Social';
-    return 'Iniciando Calibración';
+    if (pct >= 100) return 'Recorrido completo';
+    if (pct >= 75) return 'Casi al final';
+    if (pct >= 50) return 'Vas por la mitad';
+    if (pct >= 25) return 'Buen avance';
+    if (pct >= 10) return 'Ya empezaste';
+    return 'Primeros pasos';
   }
 
   String get motivationalMessage {
@@ -156,18 +156,18 @@ class UserProgress {
       return '¡Felicidades! Has completado el 100% de Gestura.';
     }
     if (pct >= 75) {
-      return '¡Casi lo logras! Estás a pocos pasos de la maestría total.';
+      return '¡Casi terminas! Te quedan pocos pasos.';
     }
     if (pct >= 50) {
-      return '¡Más de la mitad! Tu intuición social es cada día más precisa.';
+      return '¡Ya pasaste la mitad! Sigue a tu ritmo.';
     }
     if (pct >= 25) {
-      return '¡Excelente avance! Ya notas patrones que otros pasan por alto.';
+      return '¡Buen avance! Sigue practicando a tu ritmo.';
     }
     if (pct >= 10) {
       return '¡Buen despegue! Sigue practicando cada día para consolidar el hábito.';
     }
-    return '¡Bienvenido! Explora tu primera señal corporal para empezar.';
+    return '¡Bienvenido! Empieza por el tema que más te interese.';
   }
 
   UserProgress copyWith({

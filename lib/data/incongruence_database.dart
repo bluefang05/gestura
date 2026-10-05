@@ -116,7 +116,7 @@ class IncongruenceDatabase {
       ],
       relationship: SignalRelationship.contextDependent,
       possibleInterpretations: [
-        'Incomodidad o fricción no resuelta con el proveedor actual',
+        'Puede haber algo que no le convence de su proveedor actual',
         'Molestia o dolor cervical puramente físico',
         'Presión o incomodidad por tener que justificar una decisión ante terceros',
       ],
@@ -218,7 +218,7 @@ class IncongruenceDatabase {
         'Deseo genuino de colaborar a pesar del agotamiento',
       ],
       explanation:
-          'Los movimientos repetitivos suelen ser estrategias neurodivergentes de autorregulación; no prueban ansiedad ni deshonestidad por sí solos. Al combinarse con cansancio visible y orientación de salida, sugieren que una pausa resultaría muy beneficiosa.',
+          'Mover un objeto puede ser una costumbre o ayudar a concentrarse. Junto con el cansancio y el cuerpo orientado hacia la salida, puede ser buen momento para ofrecer una pausa, sin dar por hecho que la necesita.',
       recommendedAction:
           'Ofrece una opción concreta y sin presión: "Podemos cerrar aquí, tomar cinco minutos o enviarte el resumen para que lo revises después. ¿Qué te viene mejor?".',
       targetAudience: 'autism_focus',
@@ -238,7 +238,7 @@ class IncongruenceDatabase {
       relationship: SignalRelationship.contextDependent,
       possibleInterpretations: [
         'Batería social agotada y deseo de finalizar la interacción',
-        'Esfuerzo de cortesía para complacer al grupo (fawning)',
+        'Puede estar intentando agradar al grupo o evitar un desacuerdo',
         'Preocupación logística por el transporte o la hora de regreso',
       ],
       explanation:
