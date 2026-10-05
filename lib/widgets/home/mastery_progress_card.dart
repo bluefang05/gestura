@@ -65,7 +65,7 @@ class MasteryProgressCard extends StatelessWidget {
                           children: [
                             Flexible(
                               child: Text(
-                                'RUTA: HOW TO HUMAN',
+                                'RUTA DE APRENDIZAJE',
                                 style: TextStyle(
                                   fontSize: 10.5,
                                   fontWeight: FontWeight.w800,
@@ -141,7 +141,7 @@ class MasteryProgressCard extends StatelessWidget {
               ),
               const SizedBox(height: 12),
 
-              // Caja Destacada: "Tu Siguiente Paso" (Cero sobrecarga cognitiva)
+              // Caja Destacada: "Tu Siguiente Paso" (Cero sobrecarga mental)
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(12),

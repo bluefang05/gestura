@@ -54,7 +54,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
   void _toggleTts(GestureItem item) {
     final speech =
-        '${item.name}. ${item.difficultyLabel}. ${item.signalType.label}. ${item.summary}. Pistas anatómicas físicas: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Otras explicaciones a considerar: ${item.alternativeMeanings.join(", ")}. Guía según el contexto: ${item.contextGuidance}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
+        '${item.name}. ${item.difficultyLabel}. ${item.signalType.label}. ${item.summary}. Qué puedes observar: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Otras explicaciones a considerar: ${item.alternativeMeanings.join(", ")}. Guía según el contexto: ${item.contextGuidance}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
     TtsService.speak(speech, gestureId: item.id);
   }
 
@@ -103,7 +103,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
           final isTablet = constraints.maxWidth >= 720;
 
           final detailCards = [
-            // Card 1: Pistas Anatómicas Físicas
+            // Card 1: Qué puedes observar
             AppCard(
               color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
               borderSide: BorderSide(
@@ -123,7 +123,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                               : AppColors.primary),
                       const SizedBox(width: 8),
                       Text(
-                        'Pistas Anatómicas Físicas (Qué ver)',
+                        'Qué puedes observar',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w800,
@@ -467,7 +467,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 ],
               ),
             ),
-                      ];
+          ];
 
           if (isTablet) {
             return Center(
@@ -538,9 +538,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                           : AppColors.accent,
                                     ),
                                     label: Text(
-                                      isSpeaking
-                                          ? 'Detener'
-                                          : 'Audio Completo',
+                                      isSpeaking ? 'Detener' : 'Audio Completo',
                                       style: TextStyle(
                                           color:
                                               isSpeaking ? Colors.white : null,
@@ -710,8 +708,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                       text: item.signalType.label,
                       color: item.signalType.color),
                   BadgePill(
-                      text: item.difficultyLabel,
-                      color: item.difficultyColor),
+                      text: item.difficultyLabel, color: item.difficultyColor),
                   BadgePill(
                       text: catInfo.chapterReference,
                       color: isDark
@@ -996,7 +993,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                             fontSize: 14,
                             fontWeight: FontWeight.w800,
                             color: isSpeaking
-                                ? (isDark ? Colors.white : const Color(0xFF991B1B))
+                                ? (isDark
+                                    ? Colors.white
+                                    : const Color(0xFF991B1B))
                                 : (isDark
                                     ? AppColors.textPrimaryDark
                                     : AppColors.textPrimaryLight),
@@ -1010,7 +1009,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                           style: TextStyle(
                             fontSize: 11.5,
                             color: isSpeaking
-                                ? (isDark ? Colors.white70 : const Color(0xFFB91C1C))
+                                ? (isDark
+                                    ? Colors.white70
+                                    : const Color(0xFFB91C1C))
                                 : (isDark
                                     ? AppColors.textMutedDark
                                     : AppColors.textMutedLight),
@@ -1025,9 +1026,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                         : Icons.play_arrow_rounded,
                     color: isSpeaking
                         ? (isDark ? Colors.white : Colors.red)
-                        : (isDark
-                            ? AppColors.primaryLight
-                            : AppColors.primary),
+                        : (isDark ? AppColors.primaryLight : AppColors.primary),
                     size: 24,
                   ),
                 ],
@@ -1088,7 +1087,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                         ),
                       ),
                       Text(
-                        'Anatomía completa, variabilidad humana, venta y contexto',
+                        'Señales visibles, diferencias entre personas y contexto',
                         style: TextStyle(
                           fontSize: 11,
                           color: isDark
@@ -1119,4 +1118,3 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
     );
   }
 }
-

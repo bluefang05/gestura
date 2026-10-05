@@ -123,6 +123,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
 
     if (StorageService.getAutoNarration()) {
       TtsService.speakQuizFeedback(
+        correctAnswer:
+            currentQ.options.firstWhere((o) => o.isCorrect).readingText,
         isCorrect: option.isCorrect,
         keyVisualClue: currentQ.keyVisualClue,
         explanation: currentQ.explanation,
@@ -140,6 +142,8 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (ctx) => QuizFeedbackSheet(
+        correctAnswer:
+            currentQ.options.firstWhere((o) => o.isCorrect).readingText,
         isCorrect: option.isCorrect,
         keyVisualClue: currentQ.keyVisualClue,
         explanation: currentQ.explanation,

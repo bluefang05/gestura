@@ -19,6 +19,10 @@ class QuizOption {
 
   bool get hasIllustration =>
       illustrationKey != null && illustrationKey!.isNotEmpty;
+
+  String get readingText => subtext == null || subtext!.trim().isEmpty
+      ? text
+      : '$text. ${subtext!.trim()}';
 }
 
 class QuizQuestion {

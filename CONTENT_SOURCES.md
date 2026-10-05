@@ -2,6 +2,19 @@
 
 Revisión: 1 de octubre de 2026.
 
+## Revisión de claridad del 4 de octubre de 2026
+
+Se revisaron las preguntas visuales, las referencias a respuestas barajadas y
+varias contradicciones del cuestionario antiguo. Las explicaciones nombran la
+acción o postura, sin depender de letras o números que cambian de posición.
+Se sustituyeron nombres musculares y jerga por descripciones cotidianas.
+
+Para las expresiones faciales se consultó también la revisión de
+[Barrett et al. (2019)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6640856/).
+El criterio aplicado es describir el movimiento visible y evitar atribuirle una
+emoción con certeza. Las preguntas prácticas enseñan a pedir aclaraciones.
+Esta revisión parcial no valida científicamente todo el catálogo preexistente.
+
 ## Ampliación
 
 - 24 fichas contextuales: cuatro por cada una de las seis categorías.

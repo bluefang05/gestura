@@ -24,16 +24,16 @@ class RoadmapDatabase {
       levelNumber: 1,
       title: 'Nivel 1: La Regla Cero',
       objective:
-          'Aprende a observar sin juzgar: calibrar la línea base y la regla de las 3 señales.',
+          'Aprende a observar sin juzgar: conoce cómo suele expresarse una persona y pregunta si algo no está claro.',
       icon: Icons.hub_rounded,
       steps: [
         RoadmapStep(
           id: 'step_baseline',
           levelNumber: 1,
           stepNumber: 1,
-          title: 'Calibrar la Línea Base & Clusters',
+          title: 'Observar sin sacar conclusiones',
           subtitle:
-              'Nunca asumas un gesto aislado: busca el estado neutro y 3 señales coincidentes.',
+              'Observa la situación, escucha las palabras y pregunta si necesitas aclarar algo.',
           icon: Icons.hub_rounded,
           destination: RoadmapDestination.clusterBaseline,
         ),
@@ -41,9 +41,8 @@ class RoadmapDatabase {
           id: 'step_first_quiz',
           levelNumber: 1,
           stepNumber: 2,
-          title: 'Primer Test Visual de Microexpresiones',
-          subtitle:
-              'Distingue emociones básicas en tarjetas visuales de alto contraste.',
+          title: 'Primera práctica con imágenes',
+          subtitle: 'Reconoce posiciones de manos, brazos y cara en imágenes.',
           icon: Icons.psychology_rounded,
           destination: RoadmapDestination.visualQuiz,
         ),
@@ -97,9 +96,9 @@ class RoadmapDatabase {
           id: 'step_smalltalk',
           levelNumber: 3,
           stepNumber: 5,
-          title: 'El Mito del Small Talk',
+          title: 'Conversaciones breves y cotidianas',
           subtitle:
-              'El ping de red que comunica que el canal está en paz, no un examen.',
+              'Practica cómo empezar una charla breve o decir que prefieres hablar después.',
           icon: Icons.chat_bubble_outline_rounded,
           destination: RoadmapDestination.unwrittenSmallTalk,
         ),

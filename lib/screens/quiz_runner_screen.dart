@@ -36,6 +36,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
   String? _selectedOptionId;
   bool _isEvaluated = false;
   int _correctCount = 0;
+  int _firstTryCorrectCount = 0;
   bool _isFinished = false;
   late List<QuizOption> _displayedOptions;
   final Random _random = Random();
@@ -109,6 +110,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       _isEvaluated = true;
       if (isCorrect) {
         _correctCount++;
+        if (_currentIndex < widget.questions.length) _firstTryCorrectCount++;
         FeedbackService.success();
       } else {
         _queue.add(_currentQuestion);
@@ -117,6 +119,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
     });
     if (StorageService.getAutoNarration()) {
       TtsService.speakQuizFeedback(
+        correctAnswer:
+            _currentQuestion.options.firstWhere((o) => o.isCorrect).readingText,
         isCorrect: isCorrect,
         keyVisualClue: _currentQuestion.keyVisualClue,
         explanation: _currentQuestion.explanation,
@@ -131,6 +135,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       enableDrag: false,
       backgroundColor: Colors.transparent,
       builder: (_) => QuizFeedbackSheet(
+        correctAnswer:
+            _currentQuestion.options.firstWhere((o) => o.isCorrect).readingText,
         isCorrect: isCorrect,
         keyVisualClue: _currentQuestion.keyVisualClue,
         explanation: _currentQuestion.explanation,
@@ -170,7 +176,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       widget.onCompleted?.call();
       if (StorageService.getAutoNarration()) {
         TtsService.speak(
-            '¡Entrenamiento completado! Tu puntuación final es de $scorePercentage por ciento.');
+            'Práctica completada. Has resuelto el $scorePercentage por ciento de las preguntas, incluyendo el repaso. Acertaste $_firstTryCorrectCount de ${widget.questions.length} al primer intento.');
       }
     }
   }
@@ -403,14 +409,14 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               ),
               const SizedBox(height: 20),
               Text(
-                score >= 70 ? '¡Excelente Percepción!' : '¡Buen Entrenamiento!',
+                '¡Práctica completada!',
                 textAlign: TextAlign.center,
                 style:
                     const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 8),
               Text(
-                'Obtuviste $_correctCount de ${widget.questions.length} respuestas correctas ($score%).',
+                'Terminaste con $_correctCount de ${widget.questions.length} respuestas correctas ($score%), incluyendo el repaso.\nAcertaste $_firstTryCorrectCount al primer intento.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15,
@@ -486,6 +492,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                     _queue = List.of(widget.questions);
                     _currentIndex = 0;
                     _correctCount = 0;
+                    _firstTryCorrectCount = 0;
                     _selectedOptionId = null;
                     _isEvaluated = false;
                     _isFinished = false;

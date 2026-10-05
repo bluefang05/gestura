@@ -142,7 +142,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             child: _buildTabButton(
               index: 0,
               icon: Icons.alt_route_rounded,
-              label: 'Ruta "How to Human"',
+              label: 'Ruta de aprendizaje',
               isDark: isDark,
             ),
           ),
@@ -255,7 +255,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Currículum: How to Human',
+                        'Tu recorrido de aprendizaje',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w900,
@@ -263,7 +263,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                         ),
                       ),
                       Text(
-                        'Itinerario neuroafirmativo paso a paso para personas TEA',
+                        'Practica la comunicación paso a paso y a tu ritmo',
                         style: TextStyle(
                           fontSize: 11.5,
                           color: isDark
@@ -278,7 +278,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Avanza en orden secuencial: desde cómo observar sin sobrecarga (Línea Base) hasta el descifrado de indirectas, límites asertivos y negociación en el mundo real.',
+              'Avanza en orden secuencial: desde cómo observar sin sobrecarga (forma habitual de expresarse) hasta el descifrado de indirectas, límites asertivos y negociación en el mundo real.',
               style: TextStyle(
                 fontSize: 12,
                 height: 1.35,

@@ -9,77 +9,68 @@ class QuizDatabase {
       id: 'q_visual_duchenne',
       category: CategoryType.expresionesFaciales,
       prompt:
-          '¿Cuál de las siguientes imágenes corresponde a una Sonrisa Genuina (Duchenne)?',
-      scenarioText:
-          'Observa detenidamente la activación muscular alrededor de los ojos y las mejillas.',
+          '¿Cuál de las siguientes imágenes corresponde a una Sonrisa con arrugas junto a los ojos?',
+      scenarioText: 'Fíjate en las mejillas y en las arrugas junto a los ojos.',
       options: [
         QuizOption(
           id: 'opt_duchenne',
-          text: 'Sonrisa A',
-          subtext: 'Ojos con arrugas perioculares y mejillas elevadas',
+          text: 'Arrugas junto a los ojos y mejillas elevadas',
           illustrationKey: 'duchenne_smile',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_polite',
-          text: 'Sonrisa B',
-          subtext: 'Solo labios estirados, ojos estáticos',
+          text: 'Solo labios estirados, ojos estáticos',
           illustrationKey: 'polite_smile',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_averted',
-          text: 'Expresión C',
-          subtext: 'Mirada esquiva evitando conexión visual',
+          text: 'Mirada esquiva evitando conexión visual',
           illustrationKey: 'averted_gaze',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_tight',
-          text: 'Sonrisa D',
-          subtext: 'Labios comprimidos en línea recta',
+          text: 'Labios comprimidos en línea recta',
           illustrationKey: 'tight_lips',
           isCorrect: false,
         ),
       ],
       keyVisualClue:
-          'Contracción del músculo orbicular (arrugas "patas de gallo" y ojos achinados).',
+          'Las mejillas se elevan y aparecen arrugas junto a los ojos.',
       explanation:
-          'La Sonrisa de Duchenne (Sonrisa A) involucra el músculo orbicular de los ojos, generando arrugas en los laterales ("patas de gallo"). En la Sonrisa Social o de cortesía (B), suele activarse principalmente la boca como gesto habitual de bienvenida, amabilidad o cortesía contextual.',
+          'Busca la sonrisa con mejillas elevadas y arrugas junto a los ojos. Eso describe la imagen; no demuestra que la persona sienta alegría.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_open',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          '¿Cuál de estas siluetas muestra una Postura Corporal Receptiva (Relajada y sin barreras)?',
+          '¿Qué imagen muestra los brazos descansando a los lados del cuerpo?',
       scenarioText:
           'Observa la posición de los brazos respecto al pecho y torso.',
       options: [
         QuizOption(
           id: 'opt_closed',
-          text: 'Silueta A',
-          subtext: 'Brazos cruzados frente al pecho',
+          text: 'Brazos cruzados frente al pecho',
           illustrationKey: 'closed_posture',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_open',
-          text: 'Silueta B',
-          subtext: 'Brazos relajados a los lados, pecho despejado',
+          text: 'Brazos relajados a los lados, pecho despejado',
           illustrationKey: 'open_posture',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_self_hold',
-          text: 'Silueta C',
-          subtext: 'Sujeción de antebrazo (barrera defensiva parcial)',
+          text: 'Una mano sujeta el otro brazo',
           illustrationKey: 'self_hold_arm',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_shrug',
-          text: 'Silueta D',
-          subtext: 'Hombros elevados con palmas arriba',
+          text: 'Hombros elevados con palmas arriba',
           illustrationKey: 'shrug',
           isCorrect: false,
         ),
@@ -87,40 +78,36 @@ class QuizDatabase {
       keyVisualClue:
           'Brazos sueltos a los lados y torso despejado sin cruces ni bloqueos.',
       explanation:
-          'La Silueta B representa una postura abierta y receptiva: los brazos descansan a los costados sin bloquear el pecho, lo que en interacción cotidiana suele señalar disposición cómoda a conversar.',
+          'Los brazos descansan a los lados. A veces se llama postura abierta, pero no demuestra ganas de conversar.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_steeple',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          '¿Cuál de las siguientes imágenes muestra el gesto de "Manos en Ojiva o Pirámide"?',
+          '¿En cuál imagen se juntan las puntas de los dedos como un tejado?',
       scenarioText: 'Observa la forma y contacto de las manos.',
       options: [
         QuizOption(
           id: 'opt_steeple',
-          text: 'Opción 1',
-          subtext: 'Yemas de los dedos en pirámide',
+          text: 'Yemas de los dedos en pirámide',
           illustrationKey: 'steepling_hands',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_wring',
-          text: 'Opción 2',
-          subtext: 'Fricción o frotamiento de palmas',
+          text: 'Las palmas se frotan entre sí',
           illustrationKey: 'hand_wringing',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_chin',
-          text: 'Opción 3',
-          subtext: 'Mano en barbilla (evaluación crítica)',
+          text: 'Mano apoyada en la barbilla',
           illustrationKey: 'hand_on_chin',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_tapping',
-          text: 'Opción 4',
-          subtext: 'Tamborileo de dedos en la mesa',
+          text: 'Tamborileo de dedos en la mesa',
           illustrationKey: 'finger_tapping',
           isCorrect: false,
         ),
@@ -128,343 +115,295 @@ class QuizDatabase {
       keyVisualClue:
           'Puntas de los dedos opuestos en contacto formando una carpa o pirámide.',
       explanation:
-          'La postura de Ojiva o Pirámide (Opción 1) une exclusivamente las yemas de los dedos. A menudo acompaña momentos de calma, reflexión tranquila o precisión técnica al explicar una idea.',
+          'Las puntas de los dedos se tocan y las palmas quedan separadas. A esta forma a veces se le llama ojiva; no revela lo que piensa la persona.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_pacifying',
       category: CategoryType.lenguajeCorporal,
-      prompt:
-          '¿Cuál de estas posturas es un gesto de "Pacificación o Alivio de Estrés" (calmar la ansiedad)?',
+      prompt: '¿En qué imagen la persona se toca el cuello con una mano?',
       scenarioText:
-          'Los gestos pacificadores ocurren cuando el sistema nervioso busca reducir el ritmo cardíaco.',
+          'Algunas personas se frotan el cuello o las manos. No sabemos por qué solo por observar el gesto.',
       options: [
         QuizOption(
           id: 'opt_weight_shift',
-          text: 'Figura A',
-          subtext: 'Cambio de peso alternado entre ambos pies',
+          text: 'Cambio de peso alternado entre ambos pies',
           illustrationKey: 'weight_shift',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_neck_touch',
-          text: 'Figura B',
-          subtext: 'Mano tocando el hueco del cuello / nuca',
+          text: 'Mano tocando el hueco del cuello / nuca',
           illustrationKey: 'touching_neck',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_behind_head',
-          text: 'Figura C',
-          subtext: 'Manos entrelazadas en la nuca',
+          text: 'Manos entrelazadas en la nuca',
           illustrationKey: 'hands_behind_head',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_behind_back',
-          text: 'Figura D',
-          subtext: 'Manos tomadas a la espalda',
+          text: 'Manos tomadas a la espalda',
           illustrationKey: 'hands_behind_back',
           isCorrect: false,
         ),
       ],
-      keyVisualClue: 'Mano protegiendo la zona vulnerable del cuello/garganta.',
+      keyVisualClue: 'Una mano toca el cuello.',
       explanation:
-          'Tocarse el cuello o la fosa suprasternal (Figura B) es una de las respuestas automáticas más universales para mitigar la ansiedad o el estrés ante preguntas difíciles o momentos de tensión.',
+          'El gesto permite reconocer dónde está la mano. Puede tener muchas causas; no permite saber si la persona está nerviosa.',
     ),
     QuizQuestion(
       id: 'q_visual_posture_empathy',
       category: CategoryType.lenguajeCorporal,
-      prompt:
-          '¿Qué postura corporal comunica "Escucha Activa, Empatía y Conexión No Amenazante"?',
-      scenarioText:
-          'Fundamental para generar confianza en conversaciones personales o de ventas consultivas.',
+      prompt: '¿En qué imagen la persona inclina la cabeza hacia un lado?',
+      scenarioText: 'Fíjate en la posición de la cabeza.',
       options: [
         QuizOption(
           id: 'opt_headtilt_correct',
-          text: 'Opción 1',
-          subtext: 'Cabeza inclinada de lado con cuello expuesto',
+          text: 'Cabeza inclinada de lado con cuello expuesto',
           illustrationKey: 'head_tilt',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_mirroring',
-          text: 'Opción 2',
-          subtext: 'Sincronía postural en espejo',
+          text: 'Dos personas con posturas parecidas',
           illustrationKey: 'postural_mirroring',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_pockets_incorrect',
-          text: 'Opción 3',
-          subtext: 'Manos ocultas en los bolsillos',
+          text: 'Manos ocultas en los bolsillos',
           illustrationKey: 'hands_in_pockets',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_feet_exit',
-          text: 'Opción 4',
-          subtext: 'Pies orientados en dirección a la salida',
+          text: 'Pies orientados en dirección a la salida',
           illustrationKey: 'foot_orientation',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Inclinación lateral de la cabeza dejando expuesto el cuello de manera amistosa.',
+      keyVisualClue: 'La cabeza está inclinada hacia un lado.',
       explanation:
-          'Ladear la cabeza (Opción 1) es una señal biológica de sumisión amistosa y empatía: expone la zona sensible del cuello y demuestra atención completa a lo que la otra persona está diciendo.',
+          'La cabeza está inclinada hacia un lado. Esa postura no demuestra por sí sola atención ni acuerdo. Puedes preguntar si te está entendiendo.',
     ),
 
     QuizQuestion(
       id: 'q_visual_desden',
       category: CategoryType.expresionesFaciales,
-      prompt:
-          'Identifica la expresión comúnmente asociada a Desdén o Media Sonrisa Asimétrica:',
+      prompt: '¿En qué imagen se eleva solo un lado de la boca?',
       scenarioText:
-          'En el estudio de microexpresiones, la elevación unilateral de una comisura labial suele investigarse como señal de duda o escepticismo, debiendo siempre descartarse asimetrías faciales naturales o sonrisas tímidas.',
+          'Cuando se eleva un lado del labio, observa el resto de la situación. Puede ser una expresión habitual; no demuestra duda ni desprecio.',
       options: [
         QuizOption(
           id: 'opt_frown',
-          text: 'Expresión 1',
-          subtext: 'Ceño fruncido simétrico',
+          text: 'Ceño fruncido simétrico',
           illustrationKey: 'frowning_brow',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_desden',
-          text: 'Expresión 2',
-          subtext: 'Media sonrisa asimétrica',
+          text: 'Un lado de la boca más alto que el otro',
           illustrationKey: 'smirk_contempt',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_narrowed',
-          text: 'Expresión 3',
-          subtext: 'Ojos entrecerrados con sospecha',
+          text: 'Ojos entrecerrados',
           illustrationKey: 'narrowed_eyes',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_lip_biting',
-          text: 'Expresión 4',
-          subtext: 'Mordida de labio inferior (contención)',
+          text: 'Mordida de labio inferior (contención)',
           illustrationKey: 'lip_biting',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Asimetría labial: una sola comisura de los labios se eleva hacia un lado.',
+      keyVisualClue: 'Un lado de la boca está más alto que el otro.',
       explanation:
-          'La elevación asimétrica unilateral activa el buccinador de un solo lado. Aunque clásicamente se vincula a escepticismo o desdén, siempre requiere calibrar el contexto y la línea base de la persona.',
+          'Se eleva un lado del labio. Puede ser una expresión habitual y no demuestra por sí sola lo que siente la persona.',
     ),
     QuizQuestion(
       id: 'q_visual_proxemics',
       category: CategoryType.proxemica,
       prompt:
-          '¿Qué zona de distancia corresponde al Espacio Social (reuniones de negocios y clientes)?',
+          'Vas a hablar con alguien en una reunión. ¿Cómo puedes respetar su espacio?',
       scenarioText:
-          'La proxémica define los límites aceptables en el entorno laboral neurotípico.',
+          'Las imágenes muestran distintas distancias. La distancia cómoda depende de cada persona.',
       options: [
         QuizOption(
           id: 'opt_intima',
-          text: 'Zona Íntima',
-          subtext: '0 a 45 cm (abrazos y susurros)',
+          text: 'Acercarme todo lo posible sin preguntar.',
           illustrationKey: 'proxemics_intima',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_personal',
-          text: 'Zona Personal',
-          subtext: '45 cm a 1.2 m (amigos cercanos)',
+          text: 'Usar siempre la misma distancia que con mis amigos.',
           illustrationKey: 'proxemics_personal',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_social',
-          text: 'Zona Social',
-          subtext: '1.2 m a 3.6 m (trabajo y clientes)',
+          text: 'Dejar espacio y preguntar si la distancia le resulta cómoda.',
           illustrationKey: 'proxemics_social',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_publica',
-          text: 'Zona Pública',
-          subtext: '+3.6 m (discursos y auditorios)',
+          text: 'Alejarme siempre tanto que resulte difícil escucharnos.',
           illustrationKey: 'proxemics_publica',
           isCorrect: false,
         ),
       ],
       keyVisualClue:
-          'El tercer anillo concéntrico (1.2m a 3.6m), equivalente al ancho de una mesa de juntas.',
+          'Dejar espacio y preguntar permite acordar una distancia cómoda.',
       explanation:
-          'La Zona Social (1.2 a 3.6 metros) es el rango formal seguro para interacciones profesionales y comerciales. Permite interactuar cómodamente sin que ninguna de las partes se sienta invadida.',
+          'No hace falta memorizar medidas. Pregunta antes de acercarte, deja espacio para moverse y respeta lo que la persona pida.',
     ),
     QuizQuestion(
       id: 'q_visual_paralinguistics_sarcasm',
       category: CategoryType.factoresParalinguisticos,
-      prompt:
-          '¿Qué gráfico representa una Inflexión Sarcástica / Tono Irónico?',
+      prompt: '¿Qué gráfico muestra un tono que sube y después cae de golpe?',
       scenarioText:
-          'En el sarcasmo, la curva tonal se eleva exageradamente y cae de golpe en contradicción con el texto.',
+          'Aquí practicas reconocer un cambio en la voz. Un gráfico por sí solo no demuestra sarcasmo.',
       options: [
         QuizOption(
           id: 'opt_sarcasm_img',
-          text: 'Figura 1',
-          subtext: 'Curva tonal descendente irónica',
+          text: 'La línea sube y cae de golpe',
           illustrationKey: 'sarcastic_inflection',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_monotone_img',
-          text: 'Figura 2',
-          subtext: 'Frecuencia plana sin modulación',
+          text: 'La línea se mantiene plana',
           illustrationKey: 'voice_monotone',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_high_vol_img',
-          text: 'Figura 3',
-          subtext: 'Megáfono de volumen alto',
+          text: 'Megáfono de volumen alto',
           illustrationKey: 'voice_volume_high',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_assertive_img',
-          text: 'Figura 4',
-          subtext: 'Onda sinusoidal armónica',
+          text: 'La línea sube y baja suavemente',
           illustrationKey: 'assertive_voice',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Onda tonal con pico ascendente artificial que se desploma con un remate burlón.',
+      keyVisualClue: 'La línea sube y después cae de forma marcada.',
       explanation:
-          'La inflexión sarcástica (Figura 1) rompe la melodía natural del habla modulando en exceso para señalar que las palabras pronunciadas son una ironía.',
+          'Un cambio de tono puede acompañar distintos mensajes. Para saber si una frase es una broma, escucha las palabras y pregunta si hace falta.',
     ),
     QuizQuestion(
       id: 'q_visual_environment_round_table',
       category: CategoryType.entornoApariencia,
-      prompt:
-          '¿Cuál de las siguientes disposiciones del mobiliario fomenta la Colaboración Igualitaria sin jerarquías?',
-      scenarioText:
-          'La psicología del espacio demuestra que la forma de la mesa influye directamente en la toma de decisiones.',
+      prompt: '¿Qué imagen muestra una mesa redonda?',
+      scenarioText: 'Fíjate en la forma de la mesa.',
       options: [
         QuizOption(
           id: 'opt_round_table',
-          text: 'Opción A',
-          subtext: 'Mesa Redonda colaborativa',
+          text: 'Mesa Redonda colaborativa',
           illustrationKey: 'round_table',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_desk_barrier',
-          text: 'Opción B',
-          subtext: 'Escritorio como barrera de poder',
+          text: 'Escritorio como barrera de poder',
           illustrationKey: 'desk_barrier',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_lighting_env',
-          text: 'Opción C',
-          subtext: 'Iluminación y calidez ambiental',
+          text: 'Iluminación y calidez ambiental',
           illustrationKey: 'lighting_atmosphere',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_formal_suit',
-          text: 'Opción D',
-          subtext: 'Código de vestimenta formal',
+          text: 'Código de vestimenta formal',
           illustrationKey: 'dress_formal',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Distribución circular equidistante donde ninguna silla ocupa la cabecera dominante.',
+      keyVisualClue: 'La mesa tiene forma de círculo, sin cabecera.',
       explanation:
-          'La mesa redonda (Opción A) elimina la cabecera del jefe, haciendo que todos los participantes sientan que su opinión tiene el mismo peso y promoviendo la empatía.',
+          'Una mesa redonda no tiene cabecera. Que todos puedan participar también depende de cómo se organiza la conversación.',
     ),
     QuizQuestion(
       id: 'q_visual_environment_seating_angle',
       category: CategoryType.entornoApariencia,
       prompt:
-          '¿Qué posición en la mesa es la "Esquina Cooperativa a 90°" (ideal para cerrar ventas y evitar confrontación)?',
-      scenarioText:
-          'Sentarse frente a frente (180°) aumenta la resistencia; colocarse a 90° crea sensación de equipo.',
+          '¿Qué imagen muestra a dos personas sentadas en lados vecinos de una mesa, formando una L?',
+      scenarioText: 'Esta posición puede ayudar a mirar juntos un documento.',
       options: [
         QuizOption(
           id: 'opt_l_angle_img',
-          text: 'Disposición 1',
-          subtext: 'En L (90 grados) compartiendo mesa',
+          text: 'En L (90 grados) compartiendo mesa',
           illustrationKey: 'seating_angle',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_hands_table',
-          text: 'Disposición 2',
-          subtext: 'Manos entrelazadas en reposo sobre la mesa',
+          text: 'Manos entrelazadas en reposo sobre la mesa',
           illustrationKey: 'hands_clasped_front',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_handshake_stand',
-          text: 'Disposición 3',
-          subtext: 'Saludo formal de pie con apretón firme',
+          text: 'Saludo formal de pie con apretón firme',
           illustrationKey: 'handshake_firm',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_casual_dress_img',
-          text: 'Disposición 4',
-          subtext: 'Vestimenta informal y relajada',
+          text: 'Vestimenta informal y relajada',
           illustrationKey: 'dress_casual',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Dos sillas contiguas en el ángulo de una mesa mirando hacia el mismo documento.',
+      keyVisualClue: 'Las personas ocupan lados vecinos de la mesa.',
       explanation:
-          'El ángulo de 90° (Disposición 1) es el posicionamiento estratégico más efectivo: elimina el duelo visual cara a cara y permite que cliente y asesor miren juntos la solución.',
+          'Sentarse en forma de L puede facilitar mirar juntos un documento. Pregunta qué posición resulta cómoda.',
     ),
     QuizQuestion(
       id: 'q_visual_facial_jaw_clench',
       category: CategoryType.expresionesFaciales,
-      prompt:
-          '¿Cuál de estas expresiones refleja Mandíbula Apretada (Ira contenida / Frustración)?',
-      scenarioText:
-          'Señal que suele acompañar tensión muscular, contención o esfuerzo de autocontrol ante un momento de desacuerdo.',
+      prompt: '¿En qué imagen la persona aprieta la mandíbula?',
+      scenarioText: 'Observa la zona de la boca y los lados de la mandíbula.',
       options: [
         QuizOption(
           id: 'opt_jaw_img',
-          text: 'Expresión A',
-          subtext: 'Maseteros en tensión y labios firmes',
+          text: 'Mandíbula tensa y labios apretados',
           illustrationKey: 'jaw_clenching',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_nostril_img',
-          text: 'Expresión B',
-          subtext: 'Aleteo nasal de irritación',
+          text: 'Aleteo nasal de irritación',
           illustrationKey: 'nostril_flaring',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_eyebrow_img',
-          text: 'Expresión C',
-          subtext: 'Flash rápido de cejas',
+          text: 'Flash rápido de cejas',
           illustrationKey: 'eyebrow_flash',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_eyelids_img',
-          text: 'Expresión D',
-          subtext: 'Párpados cerrados prolongados de rechazo',
+          text: 'Párpados cerrados prolongados de rechazo',
           illustrationKey: 'closed_eyelids',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Borde mandibular endurecido y abultamiento en los ángulos de la mandíbula.',
+      keyVisualClue: 'Se nota tensión a los lados de la mandíbula.',
       explanation:
-          'Apretar la mandíbula (Expresión A) es un indicador clave de que el interlocutor está conteniendo un reclamo o una gran tensión interna.',
+          'Apretar la mandíbula no confirma enfado. Describe lo que ves y pregunta si necesitas saber cómo se siente la persona.',
     ),
     QuizQuestion(
       id: 'q_visual_digital_seen_ticks',
@@ -476,29 +415,25 @@ class QuizDatabase {
       options: [
         QuizOption(
           id: 'opt_visto_img',
-          text: 'Figura A',
-          subtext: 'Doble tilde azul con reloj de espera',
+          text: 'Doble tilde azul con reloj de espera',
           illustrationKey: 'digital_visto',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_caps_img',
-          text: 'Figura B',
-          subtext: 'Burbuja de texto con exclamaciones de grito',
+          text: 'Burbuja de texto con exclamaciones de grito',
           illustrationKey: 'digital_mayusculas',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_emoji_img',
-          text: 'Figura C',
-          subtext: 'Emoticono cálido en el chat',
+          text: 'Emoticono cálido en el chat',
           illustrationKey: 'digital_emojis',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_audio_img',
-          text: 'Figura D',
-          subtext: 'Nota de voz con barra de reproducción',
+          text: 'Nota de voz con barra de reproducción',
           illustrationKey: 'digital_audio',
           isCorrect: false,
         ),
@@ -506,7 +441,7 @@ class QuizDatabase {
       keyVisualClue:
           'Doble check de confirmación de lectura acompañado de un reloj de espera prolongado.',
       explanation:
-          'El doble check azul con reloj (Figura A) simboliza que el mensaje fue recibido y abierto, pero el destinatario eligió postergar o evitar responder.',
+          'La marca de lectura indica que el mensaje se abrió según la aplicación. No permite saber por qué no hay respuesta. Si es urgente, dilo con claridad.',
     ),
 
     // --- QUIZZES DE ANÁLISIS DE CASO Y VENTAS ---
@@ -798,7 +733,8 @@ class QuizDatabase {
       category: CategoryType.factoresParalinguisticos,
       prompt:
           'En el ascensor, alguien dice: "Parece que va a llover fuerte hoy". Si quieres conversar, ¿qué podrías responder?',
-      scenarioText: 'Una charla breve puede empezar con un comentario cotidiano.',
+      scenarioText:
+          'Una charla breve puede empezar con un comentario cotidiano.',
       options: [
         QuizOption(
           id: 'opt_weather_ping',
@@ -860,7 +796,7 @@ class QuizDatabase {
       prompt:
           'En una oficina a 17 °C con aire acondicionado directo, alguien cruza los brazos, se frota los bíceps y encoge el cuello. ¿Cómo se interpreta?',
       scenarioText:
-          'Aplica la regla de los conglomerados con contexto ambiental.',
+          'Observa varias señales y ten en cuenta el lugar y la situación.',
       options: [
         QuizOption(
           id: 'opt_cold_temp',
@@ -880,18 +816,16 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'El frotamiento activo de bíceps es incompatible con la postura de barrera desafiante.',
+      keyVisualClue: 'Se frota los brazos en una sala fría.',
       explanation:
-          'Nunca leas un gesto sin considerar el entorno. El frotamiento de extremidades busca generar fricción térmica, no defensa psicológica.',
+          'El frío es una posible explicación. Puedes preguntar si quiere ajustar la temperatura; no des por hecho que rechaza la conversación.',
     ),
     QuizQuestion(
       id: 'q_baseline_calm_vs_lying',
       category: CategoryType.expresionesFaciales,
       prompt:
           'Un candidato habla bajito y parpadea con alta frecuencia desde que entró y saludó en la entrevista. Al preguntarle por sus estudios, mantiene exactamente el mismo patrón. ¿Es señal de engaño?',
-      scenarioText:
-          'Compara su respuesta con su Línea Base observada desde el minuto 1.',
+      scenarioText: 'La persona sigue hablando y parpadeando como al llegar.',
       options: [
         QuizOption(
           id: 'opt_base_liar',
@@ -901,7 +835,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_base_norm',
           text:
-              'No. Es su Línea Base habitual de timidez o nerviosismo general; no hubo ninguna desviación súbita.',
+              'No se puede saber si miente por mirar o parpadear de cierta manera. Puede ser su forma habitual de expresarse.',
           isCorrect: true,
         ),
         QuizOption(
@@ -911,16 +845,17 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'La ausencia de cambio respecto al inicio descarta una reacción específica a la pregunta.',
+          'No hay una forma de mirar o parpadear que demuestre una mentira.',
       explanation:
-          'Las pistas no verbales de estrés solo son reveladoras si representan una alteración notable respecto a la conducta basal normal del individuo.',
+          'Mirar o parpadear de cierta manera no demuestra estrés ni mentira. Escucha lo que dice y comprueba los datos sin juzgar cómo se expresa.',
     ),
     QuizQuestion(
       id: 'q_sales_leaning_back_objection',
       category: CategoryType.lenguajeCorporal,
       prompt:
           'Tras mencionar el precio de tu servicio, el cliente recuesta el torso hacia atrás en su silla, aprieta los labios y baja la mirada. ¿Qué deberías hacer?',
-      scenarioText: 'Apareció un conglomerado de 3 señales de distanciamiento.',
+      scenarioText:
+          'Se observaron varios cambios, pero no sabemos por qué ocurrieron.',
       options: [
         QuizOption(
           id: 'opt_lean_push',
@@ -931,7 +866,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_lean_pause',
           text:
-              'Frenar la presentación y validar con empatía: "Noto que este punto te genera dudas, ¿cómo lo ves respecto a lo que tenían presupuestado?".',
+              'Hacer una pausa y preguntar: «¿Qué te parece el precio? ¿Quieres comentar algo?».',
           isCorrect: true,
         ),
         QuizOption(
@@ -941,9 +876,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Reclinación hacia atrás + labios apretados = freno mental y distanciamiento.',
+          'Se inclinó hacia atrás, apretó los labios y bajó la mirada.',
       explanation:
-          'El distanciamiento corporal indica que la mente del cliente se desconectó de la compra. Seguir vendiendo sin resolver la duda genera rechazo total.',
+          'Esas señales no confirman una duda sobre el precio. Haz una pausa y pregunta qué piensa.',
     ),
     QuizQuestion(
       id: 'q_group_horseshoe_u_entry',
@@ -1028,8 +963,7 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'La cara y la postura no confirman por qué se rio.',
+      keyVisualClue: 'La cara y la postura no confirman por qué se rio.',
       explanation:
           'Puedes aclarar el dato y preguntar si hace falta. Evita asumir que se burla o que está incómodo.',
     ),
@@ -1058,7 +992,7 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'El sarcasmo en adultos suele expresarse con cara plana y modulación paralingüística.',
+          'El tono de voz y lo absurdo de la frase ayudan a notar el sarcasmo; la cara seria por sí sola no lo confirma.',
       explanation:
           'No esperes que la gente sonría con malicia cuando es irónica. En adultos, el tono y la lógica interna de la frase son la clave.',
     ),
@@ -1067,7 +1001,7 @@ class QuizDatabase {
       category: CategoryType.factoresParalinguisticos,
       prompt:
           'En plena entrevista de trabajo te quedas en blanco al explicar un proyecto. ¿Cuál es la mejor respuesta física e inmediata?',
-      scenarioText: 'Bloqueo cognitivo momentáneo.',
+      scenarioText: 'Bloqueo mental momentáneo.',
       options: [
         QuizOption(
           id: 'opt_blank_pause',
@@ -1129,7 +1063,7 @@ class QuizDatabase {
       category: CategoryType.entornoApariencia,
       prompt:
           'Llegas temprano a una junta corporativa donde tu rol es técnico y de apoyo. La cabecera de la mesa está libre. ¿Dónde te conviene sentarte?',
-      scenarioText: 'Proxémica y jerarquía espacial en oficinas.',
+      scenarioText: 'Espacio personal y jerarquía espacial en oficinas.',
       options: [
         QuizOption(
           id: 'opt_table_side',
@@ -1152,49 +1086,49 @@ class QuizDatabase {
       keyVisualClue:
           'La cabecera comunica conducción de la reunión; los laterales equilibran participación.',
       explanation:
-          'Respetar la proxémica de liderazgo en salas de juntas evita fricciones políticas innecesarias y te posiciona como colaborador confiable.',
+          'Respetar la distancia que cada persona necesita ayuda a que la reunión sea más cómoda.',
     ),
     QuizQuestion(
       id: 'q_audio_voice_drawl_confidence',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          '¿Cómo afecta hablar con un tono excesivamente agudo y a velocidad acelerada al presentar los precios de tu servicio?',
-      scenarioText: 'Fisiología vocal y percepción de autoridad.',
+          'Al explicar un precio, hablas tan rápido que la otra persona te pide que repitas. ¿Qué puedes hacer?',
+      scenarioText:
+          'La persona ha dicho que necesita escuchar la explicación otra vez.',
       options: [
         QuizOption(
           id: 'opt_voice_insecure',
           text:
-              'Comunica inseguridad o miedo al rechazo; la voz tiende a agudizarse cuando las cuerdas vocales se tensan por estrés.',
+              'Hablar más despacio, hacer pausas y ofrecer el precio por escrito.',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_voice_pro',
-          text: 'Genera máxima confianza y parece una oferta irresistible.',
+          text: 'Repetir todavía más rápido.',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_voice_fun',
-          text: 'Hace que el cliente se sienta en una fiesta de cumpleaños.',
+          text: 'Cambiar de tema sin aclarar el precio.',
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'El descenso a un tono de voz grave y pausado proyecta solidez y certeza en el valor ofertado.',
+      keyVisualClue: 'Te ha pedido que repitas.',
       explanation:
-          'Modular la voz hacia el registro grave y hacer una pausa firme tras decir el precio transmite confianza absoluta en el valor de tu trabajo.',
+          'Da la información a un ritmo cómodo y ofrece escribirla. No hace falta forzar una voz más grave.',
     ),
     QuizQuestion(
       id: 'q_feet_towards_door_exit',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'Llevas 5 minutos hablando con un colega en el pasillo y notas que uno de sus pies apunta perpendicularmente hacia la puerta de salida. ¿Qué significa?',
+          'Mientras hablas con alguien, uno de sus pies apunta hacia la salida. ¿Qué puedes hacer?',
       questionIllustrationKey: 'foot_orientation',
       scenarioText: 'Su torso aún te mira, pero sus pies apuntan al pasillo.',
       options: [
         QuizOption(
           id: 'opt_feet_leave',
           text:
-              'Orientación podal de fuga: su cuerpo ya se prepara para marcharse porque tiene un pendiente urgente.',
+              'Preguntar si tiene tiempo para continuar o prefiere hablar después.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1208,10 +1142,9 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Los pies son la parte más sincera del cuerpo porque están más lejos del cerebro consciente.',
+      keyVisualClue: 'El pie apunta hacia la puerta. No sabes por qué.',
       explanation:
-          'Cerrar tú la conversación primero ("No te quito más tiempo, seguimos luego") transmite madurez social y alivia a la otra persona.',
+          'La posición del pie no confirma que quiera irse. Pregunta con calma si tiene tiempo para seguir.',
     ),
     QuizQuestion(
       id: 'q_phone_screen_barrier',
@@ -1223,7 +1156,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_phone_divided',
           text:
-              'Su atención cognitiva está fragmentada; su asentimiento es un automatismo social para no interrumpir su uso del teléfono.',
+              'Su atención mental está fragmentada; su asentimiento es un automatismo social para no interrumpir su uso del teléfono.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1277,19 +1210,19 @@ class QuizDatabase {
       id: 'q_backchannel_micro_nod',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'Pides un artículo en una tienda y la dependiente hace dos micro-asentimientos rápidos hacia abajo con la cabeza mientras teclea en su sistema sin hablar. ¿Qué significa?',
+          'Pides un artículo en una tienda. La persona que te atiende asiente mientras escribe. Si necesitas confirmar que te escuchó, ¿qué puedes hacer?',
       scenarioText: 'Interacción en servicios comerciales rápidos.',
       options: [
         QuizOption(
           id: 'opt_nod_ack',
           text:
-              'Confirmación no verbal de recepción (Backchanneling): "Te escuché y lo estoy registrando en el sistema", sin necesidad de hablar.',
+              'Esperar un momento y preguntar con calma si necesita algún dato más.',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_nod_ignore',
           text:
-              'Te está ignorando deliberadamente y debes gritarle la orden de nuevo.',
+              'Dar por hecho que ya entendió todos los detalles y marcharme sin confirmar.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1299,21 +1232,21 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'El micro-asentimiento sustituye a la palabra en entornos de trabajo continuo.',
+          'Asentir puede acompañar la escucha. Una pregunta breve permite confirmar el pedido.',
       explanation:
-          'Esperar tranquilamente unos segundos demuestra calibración social y evita generar tensiones innecesarias con el personal de servicio.',
+          'Espera unos segundos y pregunta con calma si necesitas confirmar que te escucharon.',
     ),
     QuizQuestion(
       id: 'q_touch_neck_supraspinal',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'En medio de una negociación, la contraparte lleva su mano hacia la fosa del cuello (el hoyuelo sobre la clavícula) y presiona suavemente. ¿Qué proceso fisiológico ocurre?',
-      scenarioText: 'Gesto de pacificación neurovegetativa.',
+          'Durante una conversación, alguien se toca el hueco de la base del cuello. ¿Qué puedes saber con seguridad?',
+      scenarioText: 'Señal observable: se toca el cuello.',
       options: [
         QuizOption(
           id: 'opt_neck_pacify',
           text:
-              'Es un gesto pacificador: al presionar el nervio vago y los bulbos carotídeos en el cuello, el cuerpo busca bajar el ritmo cardíaco ante un pico de estrés.',
+              'Solo puedes decir que se tocó el cuello. Puede tener varias causas; si es importante, pregunta si está bien o necesita algo.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1329,21 +1262,21 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Tocar o cubrir la fosa del cuello es uno de los pacificadores más potentes del cuerpo humano.',
+          'La persona se ha tocado el cuello. El gesto por sí solo no permite saber por qué.',
       explanation:
-          'Indica vulnerabilidad o preocupación aguda. Si ves este gesto, suaviza el tono y pregunta qué aspecto le genera incomodidad.',
+          'No sabemos qué significa para esa persona. Puedes preguntar: «¿Quieres hacer una pausa o necesitas algo?»',
     ),
     QuizQuestion(
       id: 'q_open_palms_truth',
       category: CategoryType.lenguajeCorporal,
-      prompt:
-          '¿Por qué mostrar las palmas abiertas hacia arriba a la altura de la cintura se asocia universalmente con sinceridad y cooperación?',
-      scenarioText: 'Historia evolutiva de los gestos manuales.',
+      prompt: '¿Qué significa mostrar las palmas abiertas?',
+      scenarioText:
+          'El significado de un gesto cambia según la persona y la situación.',
       options: [
         QuizOption(
           id: 'opt_palms_evol',
           text:
-              'Comunica que no hay armas ocultas ni secretos; expone zonas vulnerables de la mano transmitiendo transparencia total.',
+              'No tiene un significado seguro para todo el mundo. Observa la situación y escucha las palabras.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1359,21 +1292,22 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Las palmas abiertas invitan a la colaboración y bajan la resistencia del interlocutor.',
+          'Las palmas abiertas muestran la posición de las manos. No prueban sinceridad ni acuerdo.',
       explanation:
-          'Usar palmas abiertas en presentaciones y acuerdos fomenta acuerdos más rápidos y reduce la hostilidad de la contraparte.',
+          'Habla con claridad y pregunta si la otra persona está de acuerdo.',
     ),
     QuizQuestion(
       id: 'q_cluster_dating_interest',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'En una conversación casual, la persona se inclina hacia adelante, acomoda su cabello dejando el cuello al descubierto y sonríe con arrugas alrededor de los ojos. ¿Qué indica este conglomerado?',
-      scenarioText: 'Tres señales coincidentes de apertura y comodidad.',
+          'Alguien se inclina hacia delante, se acomoda el cabello y sonríe. ¿Eso confirma que siente atracción?',
+      scenarioText:
+          'Has observado varios gestos, pero la persona no ha dicho qué siente.',
       options: [
         QuizOption(
           id: 'opt_date_interest',
           text:
-              'Alto interés, comodidad y atracción en la interacción; las tres señales apuntan a apertura e involucramiento emocional.',
+              'No. Esos gestos pueden tener distintos motivos. Hay que escuchar lo que la persona expresa.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1388,21 +1322,21 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Inclinación frontal + exposición de zonas vulnerables + sonrisa Duchenne.',
+          'Se inclina, se acomoda el cabello y sonríe. Eso no confirma atracción.',
       explanation:
-          'El conglomerado confirma una actitud receptiva y conectada. Es un momento propicio para profundizar la charla.',
+          'Varias señales juntas tampoco confirman atracción. No sustituyen una conversación ni el consentimiento.',
     ),
     QuizQuestion(
       id: 'q_interview_foot_kick',
       category: CategoryType.lenguajeCorporal,
       prompt:
           'Un candidato en entrevista comienza a sacudir o balancear rápidamente un pie en el aire justo cuando le preguntas por qué renunció a su empleo anterior. ¿Qué indica?',
-      scenarioText: 'Desviación fisiológica en las extremidades inferiores.',
+      scenarioText: 'Movimiento repetido del pie.',
       options: [
         QuizOption(
           id: 'opt_foot_stress',
           text:
-              'Pico de ansiedad o tensión reprimida: el movimiento repetitivo del pie disipa el cortisol activado por la pregunta difícil.',
+              'Mover el pie puede ser una costumbre, una necesidad de movimiento o una reacción a la situación. No permite saber si alguien está ansioso ni por qué.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1416,22 +1350,21 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'El movimiento rítmico de pies y piernas es un pacificador inconsciente de estrés.',
+      keyVisualClue: 'La persona mueve un pie de forma repetida.',
       explanation:
-          'Las extremidades inferiores filtran la ansiedad que el rostro intenta ocultar. Mantén la calma y escucha su explicación sin juzgar de golpe.',
+          'Ese movimiento no explica cómo se siente ni por qué dejó su trabajo. Escucha su respuesta sin juzgar el movimiento.',
     ),
     QuizQuestion(
       id: 'q_sales_mirroring_empathy',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'En una reunión de negocios, notas que cuando apoyas el antebrazo sobre la mesa, tu cliente adopta una postura similar tras unos segundos. ¿Qué fenómeno ocurre?',
-      scenarioText: 'Sincronía postural inconsciente (Rapport).',
+          'Dos personas adoptan una postura parecida durante una reunión. ¿Qué puedes concluir?',
+      scenarioText: 'Ambas apoyan el antebrazo en la mesa.',
       options: [
         QuizOption(
           id: 'opt_mirror_rapport',
           text:
-              'Efecto camaleón o reflejo especular (Mirroring): el cerebro activa neuronas espejo para sincronizarse cuando hay empatía y acuerdo.',
+              'Solo puedes observar que sus posturas se parecen. Eso no demuestra acuerdo.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1446,22 +1379,21 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'El espejo postural espontáneo es un indicador biológico de sintonía interpersonal.',
+      keyVisualClue: 'Las posturas se parecen.',
       explanation:
-          'El mimetismo postural confirma que la comunicación fluye con confianza y menor resistencia cognitiva.',
+          'Una postura parecida puede tener muchas causas. Para saber si hay acuerdo, pregunta directamente.',
     ),
     QuizQuestion(
       id: 'q_audio_monotone_burnout',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          'Un integrante del equipo responde a todas las preguntas con voz completamente plana, sin altibajos, tono apagado y hombros caídos. ¿Qué sugiere?',
-      scenarioText: 'Pérdida de modulación y vitalidad paralingüística.',
+          'Un compañero habla con voz plana y tiene los hombros caídos. ¿Qué puedes saber?',
+      scenarioText: 'Describe lo que observas sin decidir qué siente.',
       options: [
         QuizOption(
           id: 'opt_burnout_fatigue',
           text:
-              'Fatiga crónica, sobrecarga mental o desmotivación (burnout); la depresión o agotamiento apagan la melodía vocal natural.',
+              'La voz y la postura no bastan para saber cómo se siente. Puedo preguntarle si necesita algo.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1476,15 +1408,15 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'La voz monótona y el ritmo ralentizado son marcas paralingüísticas de agotamiento.',
+          'Una voz más plana o lenta puede tener muchas causas y no demuestra agotamiento. Pregunta cómo se siente la persona.',
       explanation:
-          'La melodía vocal refleja el estado de ánimo. Un tono plano sostenido amerita un chequeo de apoyo o ajuste de carga de trabajo.',
+          'Si te preocupa, puedes preguntar cómo está o si necesita algo. Respeta su respuesta.',
     ),
     QuizQuestion(
       id: 'q_digital_caps_urgency',
       category: CategoryType.comunicacionDigital,
       prompt:
-          'Un cliente envía por WhatsApp: "HOLA, ¿TIENEN RESPUESTA DE MI PEDIDO?!". ¿Cómo debes calibrar tu respuesta?',
+          'Un cliente envía por WhatsApp: "HOLA, ¿TIENEN RESPUESTA DE MI PEDIDO?!". ¿Cómo debes ajustar tu respuesta?',
       scenarioText: 'Canal digital: mayúsculas sostenidas y signos combinados.',
       options: [
         QuizOption(

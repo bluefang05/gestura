@@ -44,7 +44,7 @@ class IncongruenceDatabase {
       possibleInterpretations: [
         'Prisa por un compromiso o reunión pendiente',
         'Sobrecarga sensorial o fatiga atencional acumulada',
-        'Inquietud motora involuntaria o hábito de autorregulación (stimming)',
+        'Movimiento repetido o una forma de regularse (a veces llamado «stimming»)',
       ],
       explanation:
           'El mensaje verbal otorga permiso cordial para continuar, pero el tamborileo y la orientación física hacia la salida sugieren que su capacidad de escucha está al límite o tiene un apremio temporal.',
@@ -61,7 +61,7 @@ class IncongruenceDatabase {
       illustrationKey: 'leaning_forward',
       physicalSignals: [
         'Inclinación del torso hacia adelante sobre la mesa',
-        'Sonrisa de Duchenne (mejillas elevadas y arrugas en los ojos)',
+        'Sonrisa con arrugas junto a los ojos (mejillas elevadas y arrugas en los ojos)',
         'Palmas de las manos abiertas y visibles',
       ],
       relationship: SignalRelationship.aligned,
@@ -158,7 +158,7 @@ class IncongruenceDatabase {
       spokenPhrase: 'Entiendo el alcance. Tomaremos la decisión hoy mismo.',
       illustrationKey: 'steepling_hands',
       physicalSignals: [
-        'Manos en ojiva (yemas de los dedos tocándose en forma de pirámide)',
+        'Junta las puntas de los dedos, como formando un tejado',
         'Contacto visual sereno y sostenido',
         'Respiración pausada y postura erguida',
       ],
@@ -169,7 +169,7 @@ class IncongruenceDatabase {
         'Hábito postural consolidado en entornos de dirección',
       ],
       explanation:
-          'Las manos en ojiva y la postura erguida acompañan habitualmente momentos de concentración, deliberación reflexiva y seguridad en el propio criterio.',
+          'Juntar las puntas de los dedos puede ser una costumbre o una posición cómoda. No demuestra seguridad ni acuerdo.',
       recommendedAction:
           'Mantén una postura formal y asertiva, sin sobreexplicar: "Quedo a su disposición para coordinar los contratos hoy mismo".',
       targetAudience: 'sales_focus',
@@ -213,8 +213,8 @@ class IncongruenceDatabase {
       ],
       relationship: SignalRelationship.contextDependent,
       possibleInterpretations: [
-        'Fatiga cognitiva o necesidad de una pausa tras reunión prolongada',
-        'Autorregulación motora natural mediante manipulación de objetos (fidgeting)',
+        'Cansancio o necesidad de una pausa después de una reunión larga',
+        'Mover un objeto puede ser una costumbre o ayudar a concentrarse',
         'Deseo genuino de colaborar a pesar del agotamiento',
       ],
       explanation:
@@ -255,14 +255,14 @@ class IncongruenceDatabase {
       spokenPhrase: 'No me pasa absolutamente nada. Estoy bien.',
       illustrationKey: 'jaw_clenching',
       physicalSignals: [
-        'Mandíbula fuertemente apretada con músculos maseteros marcados',
+        'Aprieta la mandíbula y los labios',
         'Suspiro hondo y prolongado con la mirada clavada en el suelo',
         'Hombros rígidos y elevados hacia las orejas',
       ],
       relationship: SignalRelationship.mixed,
       possibleInterpretations: [
         'Molestia o frustración que prefiere procesar en silencio',
-        'Tensión física real, bruxismo o cefalea',
+        'Dolor de cabeza, apretar los dientes o tensión física',
         'Deseo de calmarse antes de iniciar una conversación',
       ],
       explanation:

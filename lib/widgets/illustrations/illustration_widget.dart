@@ -158,7 +158,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'self_hold_arm': 'postures',
       'postural_mirroring': 'postures',
 
-      // Paralingüística
+      // voz y forma de hablar
       'voice_volume_high': 'paralinguistics',
       'volumen_alto': 'paralinguistics',
       'voice_volume_low': 'paralinguistics',
@@ -179,7 +179,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'voice_tremor': 'paralinguistics',
       'turn_taking': 'paralinguistics',
 
-      // Proxémica
+      // Espacio personal
       'proxemics_intima': 'proxemics',
       'proxemics_personal': 'proxemics',
       'proxemics_social': 'proxemics',
@@ -251,7 +251,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'tristeza': 'turned_down_lips',
       'guino': 'winking_face',
 
-      // Paralingüística
+      // voz y forma de hablar
       'silencio_incomodo': 'silence_tense',
       'silencio_reflexivo': 'silence_reflective',
       'tono_asertivo': 'assertive_voice',
@@ -280,7 +280,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
       'tocarse_cuello': 'touching_neck',
       'pensador': 'hand_on_chin',
 
-      // Proxémica
+      // Espacio personal
       'espacio': 'proxemica',
       'proxemics_all': 'proxemica',
       'proxemics_social': 'proxemica',

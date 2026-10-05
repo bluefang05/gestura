@@ -77,11 +77,19 @@ void main() {
       await tester.pump();
       await tester.tap(find.text('Comprobar Respuesta'));
       await tester.pumpAndSettle();
+      if (answer == 'Incorrecta a') {
+        expect(find.text('Respuesta: Correcta a'), findsOneWidget);
+        await tester.tap(find.byTooltip('Escuchar explicación'));
+        await tester.pumpAndSettle();
+        expect(spoken.last, contains('Respuesta: Correcta a'));
+      }
       await tester.tap(find.text('Continuar'));
       await tester.pumpAndSettle();
     }
     expect(completed, 1);
     expect(find.textContaining('2 de 2 respuestas correctas'), findsOneWidget);
+    expect(
+        find.textContaining('Acertaste 1 al primer intento'), findsOneWidget);
   });
 
   testWidgets('Flash repeats a failed question after the other seven',
@@ -163,6 +171,8 @@ void main() {
     expect(find.textContaining('2 de 2 respuestas correctas (100%)'),
         findsOneWidget);
     expect(ProgressProvider().progress.quizScores, {'a': 100, 'b': 100});
+    await tester.ensureVisible(find.text('Reintentar Quiz'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Reintentar Quiz'));
     await tester.pumpAndSettle();
     if (find.text('Empezar preguntas').evaluate().isNotEmpty) {

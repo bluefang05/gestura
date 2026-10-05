@@ -492,7 +492,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         final id = 'indirect_${item['phrase']}';
                         final isSpeaking = speakingId == id;
                         return IconButton(
-                          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
                           padding: EdgeInsets.zero,
                           icon: Icon(
                             isSpeaking
@@ -537,14 +538,17 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 if (item['literal'] != null) ...[
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: isDark
                           ? const Color(0xFF0F172A)
                           : const Color(0xFFF1F5F9),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                        color: isDark
+                            ? AppColors.darkBorder
+                            : AppColors.lightBorder,
                         width: 0.8,
                       ),
                     ),
@@ -574,7 +578,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                                 ),
                                 TextSpan(
                                   text: item['literal'] as String,
-                                  style: const TextStyle(fontStyle: FontStyle.italic),
+                                  style: const TextStyle(
+                                      fontStyle: FontStyle.italic),
                                 ),
                               ],
                             ),
@@ -791,7 +796,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '• Ojos entrecerrados con patas de gallo activas (músculo orbicular).\n• Hombros y mandíbula relajados.\n• Exhalación sonora espontánea.',
+                            '• Ojos entrecerrados con arrugas junto a los ojos.\n• Hombros y mandíbula relajados.\n• Exhalación sonora espontánea.',
                             style: TextStyle(
                               fontSize: 12.5,
                               height: 1.35,
@@ -1159,16 +1164,16 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       : const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
+                    color:
+                        isDark ? AppColors.darkBorder : AppColors.lightBorder,
                   ),
                 ),
                 child: Row(
                   children: [
                     Icon(Icons.lightbulb_outline_rounded,
                         size: 18,
-                        color: isDark
-                            ? AppColors.accentLight
-                            : AppColors.accent),
+                        color:
+                            isDark ? AppColors.accentLight : AppColors.accent),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -1327,8 +1332,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         color: AppColors.primary.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Icon(phase.icon,
-                          size: 22, color: AppColors.primary),
+                      child:
+                          Icon(phase.icon, size: 22, color: AppColors.primary),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -1380,9 +1385,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         : const Color(0xFFF1F5F9),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: isDark
-                          ? AppColors.darkBorder
-                          : AppColors.lightBorder,
+                      color:
+                          isDark ? AppColors.darkBorder : AppColors.lightBorder,
                     ),
                   ),
                   child: Row(
@@ -1439,8 +1443,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       children: [
                         Row(
                           children: [
-                            Icon(item.icon,
-                                size: 16, color: AppColors.primary),
+                            Icon(item.icon, size: 16, color: AppColors.primary),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
@@ -1525,7 +1528,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       FeedbackService.lightClick();
                       final conceptsBuffer = StringBuffer();
                       for (final concept in phase.conceptItems) {
-                        conceptsBuffer.write('${concept.title}: ${concept.description}. ');
+                        conceptsBuffer.write(
+                            '${concept.title}: ${concept.description}. ');
                       }
                       TtsService.speak(
                         '${phase.title}. ${phase.subtitle}. Principio rector: ${phase.corePrinciple}. Claves y mecanismos: $conceptsBuffer Protocolo práctico: ${phase.practicalProtocol}',
@@ -1567,9 +1571,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
               const SizedBox(height: 10),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isDark
-                      ? AppColors.primary
-                      : AppColors.primaryDark,
+                  backgroundColor:
+                      isDark ? AppColors.primary : AppColors.primaryDark,
                   foregroundColor: Colors.white,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -1791,9 +1794,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF0F172A)
-                  : const Color(0xFFF1F5F9),
+              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: currentFirmness == ScriptFirmness.firm
@@ -1814,9 +1815,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   children: [
                     Icon(Icons.format_quote_rounded,
                         size: 20,
-                        color: isDark
-                            ? AppColors.accentLight
-                            : AppColors.accent),
+                        color:
+                            isDark ? AppColors.accentLight : AppColors.accent),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -1864,9 +1864,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                             horizontal: 10, vertical: 6),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        backgroundColor: isDark
-                            ? AppColors.primary
-                            : AppColors.primaryDark,
+                        backgroundColor:
+                            isDark ? AppColors.primary : AppColors.primaryDark,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
@@ -1904,9 +1903,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
           Container(
             padding: const EdgeInsets.all(11),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF132035)
-                  : const Color(0xFFEFF6FF),
+              color: isDark ? const Color(0xFF132035) : const Color(0xFFEFF6FF),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: AppColors.primary.withValues(alpha: 0.25),
@@ -1953,9 +1950,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
           Container(
             padding: const EdgeInsets.all(11),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF2D1F1A)
-                  : const Color(0xFFFFF7ED),
+              color: isDark ? const Color(0xFF2D1F1A) : const Color(0xFFFFF7ED),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: AppColors.warning.withValues(alpha: 0.35),

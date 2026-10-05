@@ -32,10 +32,10 @@ class SalesPipelineDatabase {
     // ==========================================
     SalesPhaseItem(
       phaseNumber: 2,
-      title: 'Presentación y Calibración de Interés',
+      title: 'Presentar y comprobar si hay preguntas',
       timing: 'Minutos 5 a 20',
       objective:
-          'Exponer la solución calibrando en tiempo real si el prospecto sigue sintonizado, si reflexiona o si desconectó mentalmente.',
+          'Explica la propuesta y pregunta si la persona quiere más detalles, necesita tiempo o prefiere parar.',
       icon: Icons.present_to_all_rounded,
       clientSignalsToWatch: [
         '🟢 Interés activo: Inclinación del torso hacia adelante, cejas ligeramente elevadas y asentimientos lentos.',
@@ -44,8 +44,8 @@ class SalesPipelineDatabase {
       ],
       yourBodyLanguage: [
         'Gesticula a la altura del pecho con palmas abiertas hacia arriba en los puntos de mayor valor.',
-        'Haz pausas deliberadas de 2 segundos después de explicar una ventaja clave para permitir la digestión cognitiva.',
-        'Adapta tu velocidad de habla y volumen al ritmo del cliente (calibración neuroafín).',
+        'Haz una pausa después de explicar algo importante. Da tiempo para pensar y preguntar.',
+        'Adapta tu velocidad de habla y volumen al ritmo del cliente (ajuste respetuoso a las preferencias de la otra persona).',
       ],
       keyRule:
           'Si notas señales de desconexión (pies hacia la puerta o reloj), jamás aceleres tu discurso. Detente en seco y haz una pregunta abierta: "¿Hasta este punto, cómo encaja esto con lo que tenían en mente?"',
@@ -64,7 +64,7 @@ class SalesPipelineDatabase {
       clientSignalsToWatch: [
         'Brazos cruzados a la altura del pecho y cuerpo reclinado hacia atrás (escudo presupuestario o cautela).',
         'Labios comprimidos en línea delgada o frotarse la nuca / puente de la nariz (procesamiento de estrés).',
-        'Microexpresión de escepticismo (comisura de los labios asimétrica o ceño fruncido).',
+        'Gesto facial breve de escepticismo (comisura de los labios asimétrica o ceño fruncido).',
       ],
       yourBodyLanguage: [
         'Apoya la espalda en el respaldo de la silla, proyectando solidez y confianza en el valor de tu trabajo.',
@@ -207,8 +207,7 @@ class SalesPipelineDatabase {
       title: 'Objeción: "Ya trabajamos con un proveedor y estamos satisfechos"',
       objectionPhrase:
           'Ya tenemos a alguien que nos hace este servicio desde hace años.',
-      context:
-          'Resistencia al cambio y lealtad con su proveedor vigente.',
+      context: 'Resistencia al cambio y lealtad con su proveedor vigente.',
       softResponse:
           'Es excelente que cuenten con un proveedor confiable, eso demuestra que valoran la estabilidad en sus operaciones.',
       assertiveResponse:

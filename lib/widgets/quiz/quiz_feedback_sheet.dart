@@ -5,12 +5,14 @@ import '../../core/services/feedback_service.dart';
 import '../../core/services/tts_service.dart';
 
 class QuizFeedbackSheet extends StatelessWidget {
+  final String? correctAnswer;
   final bool isCorrect;
   final String keyVisualClue;
   final String explanation;
   final VoidCallback onContinue;
 
   const QuizFeedbackSheet({
+    this.correctAnswer,
     super.key,
     required this.isCorrect,
     required this.keyVisualClue,
@@ -104,8 +106,12 @@ class QuizFeedbackSheet extends StatelessWidget {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(
-                                '${isCorrect ? "¡Excelente observación!" : "¡Buen intento!"}. Pista clave: $keyVisualClue. Explicación: $explanation');
+                            TtsService.speakQuizFeedback(
+                              isCorrect: isCorrect,
+                              keyVisualClue: keyVisualClue,
+                              explanation: explanation,
+                              correctAnswer: correctAnswer,
+                            );
                           }
                         },
                       );
@@ -114,6 +120,15 @@ class QuizFeedbackSheet extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
+
+              if (correctAnswer != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text('Respuesta: $correctAnswer',
+                      style: TextStyle(
+                          color: explanationColor,
+                          fontWeight: FontWeight.w700)),
+                ),
 
               if (!isCorrect)
                 const Padding(

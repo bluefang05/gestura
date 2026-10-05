@@ -485,7 +485,7 @@ class HomeScreen extends StatelessWidget {
                         icon: Icons.psychology_rounded,
                         accentColor: AppColors.primary,
                         title: 'Test Visual',
-                        description: 'Diferencia microexpresiones',
+                        description: 'Diferencia gestos faciales breves',
                         onTap: () {
                           final imageQuestions =
                               QuizDatabase.getImageCardQuestions();
@@ -609,14 +609,14 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
 
-                      // Herramienta 8: Conglomerados y Línea Base
+                      // Herramienta 8: Gestos y forma habitual de expresarse
                       _buildToolCard(
                         context: context,
                         isDark: isDark,
                         icon: Icons.hub_rounded,
                         accentColor: AppColors.indigo,
-                        title: 'Clusters & Línea Base',
-                        description: 'Regla de las 3 señales',
+                        title: 'Observar señales y preguntar',
+                        description: 'Mira la situación completa',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -669,7 +669,7 @@ class HomeScreen extends StatelessWidget {
                   // 4. Explorar por Categoría
                   SectionHeader(
                     title: 'Manual de Canales',
-                    subtitle: 'Clasificación anatómica y contextual',
+                    subtitle: 'Señales visibles y situaciones cotidianas',
                     trailing: TextButton(
                       onPressed: () => onNavigateToTab(1),
                       child: const Text('Ver Todo'),

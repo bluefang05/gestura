@@ -64,13 +64,13 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_2',
           narrative:
-              'El cliente te explica su objeción sobre el costo. Tú respondes mostrándole cómo el ahorro en 3 meses cubre la inversión inicial. El cliente se inclina hacia adelante sobre la mesa, asiente lentamente y muestra una sonrisa Duchenne con ojos achinados.',
+              'El cliente te explica su objeción sobre el costo. Tú respondes mostrándole cómo el ahorro en 3 meses cubre la inversión inicial. El cliente se inclina hacia adelante sobre la mesa, asiente lentamente y sonríe; se le elevan las mejillas y se le arrugan los ojos.',
           characterAction:
               'Inclinación hacia adelante + sonrisa genuina con arrugas en los ojos.',
           illustrationKey: 'leaning_forward',
           visibleSignals: [
             'Inclinación frontal (Alto interés)',
-            'Sonrisa de Duchenne (Aprobación real)',
+            'Sonrisa con arrugas junto a los ojos (Aprobación real)',
             'Contacto visual directo'
           ],
           learningTakeaway:
@@ -107,7 +107,7 @@ class ScenarioDatabase {
       title: 'La Entrevista Laboral: Conexión con el Reclutador',
       domain: 'Ámbito Laboral',
       description:
-          'Descubre cómo calibrar el nivel de formalidad, proximidad y ritmo en una entrevista de trabajo.',
+          'Descubre cómo ajustar el nivel de formalidad, proximidad y ritmo en una entrevista de trabajo.',
       contextOverview:
           'Estás en una sala de juntas pequeña con la Jefa del Departamento para una posición senior.',
       iconName: 'people',
@@ -141,7 +141,7 @@ class ScenarioDatabase {
               text:
                   'Acercarte a darle dos besos en la mejilla como si fuera una amiga de fiesta.',
               analysis:
-                  'Violación grave de la proxémica profesional. Invadir el espacio íntimo en una primera entrevista genera incomodidad inmediata.',
+                  'Acercarse demasiado o tocar sin permiso puede incomodar. En una primera entrevista, mantén una distancia cómoda y pregunta antes de acercarte.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -252,7 +252,7 @@ class ScenarioDatabase {
       title: 'Negociación Salarial: Pidiendo un Aumento',
       domain: 'Negociación Profesional',
       description:
-          'Aprende a calibrar la reacción de tu supervisor ante una solicitud de aumento o presupuesto.',
+          'Aprende a observar y preguntar cuando solicites un aumento o presupuesto.',
       contextOverview:
           'Estás en la reunión anual de evaluación de desempeño con tu Gerente de Área.',
       iconName: 'briefcase',
@@ -262,7 +262,7 @@ class ScenarioDatabase {
           narrative:
               'Acabas de presentar los resultados del año y propones un ajuste salarial del 20%. Tu gerente aprieta la mandíbula, sostiene la mirada durante 3 segundos en silencio y apoya ambas manos planas sobre la mesa.',
           characterAction:
-              'Tensión en maseteros (mandíbula apretada) + manos planas firmes en la mesa.',
+              'Aprieta la mandíbula y apoya las manos firmemente en la mesa.',
           illustrationKey: 'jaw_clenching',
           visibleSignals: [
             'Mandíbula apretada (Tensión/Resistencia)',
@@ -582,7 +582,7 @@ class ScenarioDatabase {
             'Silencio funcional de trabajo'
           ],
           learningTakeaway:
-              'En interacciones de servicio rápido, los neurotípicos suelen asentir levemente para confirmar "te escuché y lo estoy registrando" sin necesidad de interrumpir su tarea con una frase hablada.',
+              'En una interacción breve, alguien puede asentir para mostrar que escuchó. Si no estás seguro, pregunta si entendió o necesita algo más.',
           choices: [
             ScenarioChoice(
               text:
@@ -615,7 +615,7 @@ class ScenarioDatabase {
       title: 'La Sala de Juntas: Dónde Sentarse y Posición Social',
       domain: 'Ámbito Laboral',
       description:
-          'Descubre las reglas no escritas de la proxémica de oficina: jerarquía, visibilidad y comodidad en la mesa.',
+          'Descubre cómo elegir un lugar cómodo y respetar el espacio de los demás en una reunión.',
       contextOverview:
           'Llegas a una reunión de proyecto con el Director del área y 6 colegas en una mesa rectangular grande.',
       iconName: 'table_restaurant',
@@ -772,7 +772,7 @@ class ScenarioDatabase {
       title: 'Pedir Ayuda a un Compañero Ocupado en la Oficina',
       domain: 'Ámbito Laboral',
       description:
-          'Domina la proxémica y los tiempos para consultar dudas sin generar sobresaltos ni molestar a colegas en foco profundo.',
+          'Aprende cuándo y cómo preguntar algo a un compañero ocupado, respetando su espacio y su tiempo.',
       contextOverview:
           'Necesitas con urgencia una clave de acceso que solo tiene tu compañero de mesa para terminar una entrega hoy.',
       iconName: 'headset',
@@ -796,7 +796,7 @@ class ScenarioDatabase {
               text:
                   'Colocarte en su campo de visión lateral a distancia prudencial (1.5 m) y hacer un leve gesto con la mano, o enviarle un chat: "¿Tienes 1 min para una clave urgente o te consulto en un rato?"',
               analysis:
-                  'Excelente calibración: Respetas su espacio auditivo y le permites a su cerebro guardar su progreso mental antes de responder.',
+                  'Bien: respetas su espacio y le das tiempo para pensar antes de responder.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
@@ -816,7 +816,7 @@ class ScenarioDatabase {
               text:
                   'Pararte inmóvil a 40 cm de él esperando en silencio a que se dé cuenta por sí mismo.',
               analysis:
-                  'Proxémica invasiva: La presencia inmóvil tan cerca en la visión periférica genera sensación de vigilancia y acoso.',
+                  'Esperar muy cerca puede incomodar. Deja espacio y pregunta cuándo le viene bien hablar.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -1183,7 +1183,7 @@ class ScenarioDatabase {
               'Suspiro imperceptible, sonrisa tensa solo con los labios, cuerpo ladeado hacia la salida.',
           illustrationKey: 'scenario_consent_decoding_fawning',
           visibleSignals: [
-            'Sonrisa social sin ojos (Duchenne ausente)',
+            'Sonrisa con los labios, sin arrugas junto a los ojos',
             'Suspiro de resignación',
             'Pies orientados a la fuga'
           ],
@@ -1230,7 +1230,7 @@ class ScenarioDatabase {
               'Hombros relajados, sonrisa sincera y postura frontal abierta.',
           illustrationKey: 'duchenne_smile',
           visibleSignals: [
-            'Sonrisa genuina (Duchenne con ojos activos)',
+            'Sonrisa con arrugas junto a los ojos',
             'Alivio somático visible',
             'Conexión de confianza restaurada'
           ],

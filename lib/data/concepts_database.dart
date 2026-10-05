@@ -1,10 +1,18 @@
 import '../models/quiz_question.dart';
+import '../core/utils/search_utils.dart';
 
 class LearningConcept {
   final String title;
   final String explanation;
   final List<String> terms;
   const LearningConcept(this.title, this.explanation, this.terms);
+
+  bool matchesSearch(String query) {
+    final words = normalizeSearchText(query).split(' ');
+    final content =
+        normalizeSearchText('$title $explanation ${terms.join(' ')}');
+    return words.every(content.contains);
+  }
 }
 
 class ConceptsDatabase {
@@ -12,13 +20,13 @@ class ConceptsDatabase {
   // Context reference: doi:10.3389/fpsyg.2021.606548.
   static const all = <LearningConcept>[
     LearningConcept(
-        'Línea base',
+        'Forma habitual de expresarse',
         'Es la forma habitual de expresarse de una persona en situaciones parecidas. Por ejemplo, alguien puede hablar poco incluso cuando está cómodo. Un cambio invita a preguntar; no demuestra que mienta ni que esté mal.',
-        ['línea base', 'baseline', 'calibrar']),
+        ['línea base', 'baseline', 'forma habitual']),
     LearningConcept(
-        'Manos en ojiva',
-        'Las puntas de los dedos de ambas manos se tocan y las palmas quedan separadas, como un pequeño tejado. También se llama steepling. Describe la forma de las manos; por sí sola no demuestra seguridad, poder ni superioridad.',
-        ['ojiva', 'steepling']),
+        'Puntas de los dedos juntas',
+        'Las puntas de los dedos de ambas manos se tocan y las palmas quedan separadas, como un pequeño tejado. En algunos libros se llama «ojiva». Describe la forma de las manos; por sí sola no demuestra seguridad, poder ni superioridad.',
+        ['ojiva', 'steepling', 'puntas de los dedos', 'yemas', 'tejado']),
     LearningConcept(
         'Contexto',
         'Es lo que ocurre alrededor: el lugar, el ruido, la actividad y lo que se ha dicho. Cruzar los brazos puede tener que ver con frío, comodidad u otras razones. Pregunta antes de decidir qué significa.',
@@ -32,24 +40,24 @@ class ConceptsDatabase {
         'Son descripciones de la posición corporal. Abierta suele describir brazos sin cruzar; cerrada, brazos cruzados o recogidos. Ninguna prueba por sí sola interés, rechazo o disposición a conversar.',
         ['postura', 'brazos cruzados', 'receptiva']),
     LearningConcept(
-        'Sonrisa de Duchenne',
-        'Es una sonrisa en la que se elevan las mejillas y se contrae la zona alrededor de los ojos. El nombre describe músculos que participan. No garantiza que la emoción sea sincera: una imagen sola no permite saberlo.',
-        ['duchenne', 'orbicular', 'periocular']),
+        'Sonrisa con arrugas junto a los ojos',
+        'Es una sonrisa en la que se elevan las mejillas y aparecen arrugas junto a los ojos. En algunos libros se llama sonrisa de Duchenne. No garantiza que la emoción sea sincera: una imagen sola no permite saberlo.',
+        ['duchenne', 'orbicular', 'periocular', 'arrugas']),
     LearningConcept(
-        'Distancia personal y proxémica',
-        'La proxémica estudia cómo usamos el espacio al comunicarnos. La distancia cómoda cambia según la persona, la relación y el lugar. Puedes preguntar: «¿Prefieres que me aleje un poco?»',
+        'Distancia personal',
+        'Cada persona tiene una distancia cómoda. Puede cambiar según la relación, el lugar y el momento. Puedes preguntar: «¿Prefieres que me aleje un poco?»',
         ['proxémica', 'distancia', 'espacio personal']),
     LearningConcept(
-        'Prosodia y tono de voz',
-        'La prosodia es el ritmo, las pausas y las subidas y bajadas de la voz. Una voz plana puede ser una forma habitual de hablar. Para entender un mensaje, escucha también las palabras.',
+        'Ritmo y tono de voz',
+        'El ritmo, las pausas y las subidas y bajadas de la voz acompañan las palabras. A esto a veces se le llama «prosodia». Una voz plana puede ser una forma habitual de hablar.',
         ['prosodia', 'entonación', 'tono', 'voz plana']),
     LearningConcept(
-        'Incongruencia',
-        'Es una diferencia aparente entre lo dicho y otra señal. Por ejemplo, decir «estoy bien» con voz temblorosa. Puede tener muchas causas. Puedes preguntar «¿Quieres contarme algo más?» sin dar por hecho una emoción.',
+        'Cuando las señales no parecen coincidir',
+        'Por ejemplo, alguien dice «estoy bien» con voz temblorosa. Puede tener muchas causas. Puedes preguntar «¿Quieres contarme algo más?» sin dar por hecho una emoción. A esta diferencia a veces se le llama «incongruencia».',
         ['incongruencia', 'incongruente', 'contradicción']),
     LearningConcept(
-        'Autorregulación',
-        'Son formas de ajustar cómo nos sentimos o cuánto estímulo recibimos. Mover las manos, balancearse o hacer una pausa puede ayudar. Esos movimientos no prueban nerviosismo ni mentira.',
+        'Formas de regularse',
+        'Mover las manos, balancearse o hacer una pausa puede ayudar a una persona a sentirse cómoda o manejar lo que ocurre a su alrededor. Esos movimientos no prueban nerviosismo ni mentira. A veces se llama «autorregulación».',
         ['autorregulación', 'autocalma', 'adaptador', 'stimming']),
     LearningConcept(
         'Contacto visual',
@@ -66,7 +74,7 @@ class ConceptsDatabase {
   ];
 
   static List<LearningConcept> forQuestions(List<QuizQuestion> questions) {
-    final text = questions
+    final text = normalizeSearchText(questions
         .map((q) => [
               q.prompt,
               q.scenarioText ?? '',
@@ -74,8 +82,10 @@ class ConceptsDatabase {
               q.keyVisualClue,
               ...q.options.map((o) => '${o.text} ${o.subtext ?? ""}')
             ].join(' '))
-        .join(' ')
-        .toLowerCase();
-    return all.where((c) => c.terms.any(text.contains)).toList();
+        .join(' '));
+    return all
+        .where((c) => [c.title, ...c.terms]
+            .any((term) => text.contains(normalizeSearchText(term))))
+        .toList();
   }
 }

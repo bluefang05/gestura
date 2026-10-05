@@ -186,10 +186,11 @@ class TtsService {
     required bool isCorrect,
     required String keyVisualClue,
     required String explanation,
+    String? correctAnswer,
   }) async {
     final status = isCorrect ? '¡Respuesta correcta!' : 'Respuesta incorrecta.';
     final text =
-        '$status Pista clave: $keyVisualClue. Explicación: $explanation';
+        '$status ${correctAnswer == null ? "" : "Respuesta: $correctAnswer. "}Qué observar: $keyVisualClue. Explicación: $explanation';
     await speak(text, gestureId: 'quiz_feedback');
   }
 

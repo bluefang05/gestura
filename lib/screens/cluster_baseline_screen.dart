@@ -15,7 +15,7 @@ class ClusterBaselineScreen extends StatefulWidget {
 
 class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
   int _selectedTab =
-      0; // 0: Regla de los Clusters, 1: Línea Base, 2: Casos Prácticos
+      0; // 0: Observar y preguntar, 1: Forma habitual, 2: Casos prácticos
   int? _selectedCaseAnswer;
   int _currentCaseIndex = 0;
   bool _showFeedback = false;
@@ -27,27 +27,20 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
   }
 
   static const String _clustersTheorySpeech =
-      'Por Qué un Gesto Aislado es una Trampa. '
-      'El error más destructivo en la lectura no verbal es sacar conclusiones por un solo detalle: "tocó su nariz, seguro miente" o "cruzó los brazos, está cerrado". Las palabras son como palabras sueltas en una frase: una sola palabra no hace una oración completa. '
-      'Paso 1: 1 Señal Aislada es una Hipótesis Suelta. Puede deberse a picazón física, temperatura de la sala, cansancio o un hábito individual sin carga emocional. '
-      'Paso 2: 2 Señales Coincidentes son Motivo de Atención. Ejemplo: Toca su cuello y baja el volumen de su voz. Tu radar debe activarse, pero todavía no emitas un juicio definitivo. '
-      'Paso 3: Mira la situación completa. Varias señales pueden tener distintas causas y no confirman lo que alguien siente. Describe lo que observas y, si hace falta, pregunta con respeto.';
+      'Un gesto no revela por sí solo lo que alguien piensa o siente. '
+      'Cruzar los brazos, mirar hacia otro lado o tocarse el cuello puede tener muchas causas. '
+      'Observa la situación completa, escucha las palabras y pregunta con respeto si necesitas saber algo.';
 
   static const String _baselineTheorySpeech =
-      'La Técnica de los Primeros 2 Minutos. '
-      'La Línea Base es el comportamiento normal, relajado y habitual de una persona cuando no está bajo presión. Sin conocer la línea base, es imposible saber si un gesto es significativo o si la persona simplemente es así de forma natural. '
-      'Los 4 Canales Basales a Calibrar: '
-      'Canal 1: Mirada y Pestañeo. ¿Te mira fijamente o suele mirar a los lados mientras piensa? ¿Pestañea lento, unas 15 veces por minuto, o es naturalmente rápido, unas 30 veces por minuto? '
-      'Canal 2: Velocidad y Tono de Voz. ¿Habla a ritmo acelerado o pausado? ¿Su volumen habitual es alto o tímido y suave? '
-      'Canal 3: Gesticulación Manual. ¿Mueve mucho las manos al hablar o las mantiene quietas sobre la mesa? '
-      'Canal 4: Postura de Reposo. ¿Se sienta encorvado por costumbre anatómica o mantiene la espalda recta en su postura base? '
-      'Regla de Oro: Solo cuando una persona cambia súbitamente su comportamiento basal justo después de una pregunta o propuesta, tienes una señal con verdadero significado.';
+      'Cada persona tiene su forma habitual de hablar, mirar y moverse. '
+      'Si observas un cambio, puede servir para hacer una pregunta amable. '
+      'El cambio no explica su causa ni demuestra que alguien mienta.';
 
   void _speakCurrentSection() {
     String textToSpeak = '';
     if (_selectedTab == 0) {
       textToSpeak =
-          'El principio maestro del análisis no verbal: nunca juzgues un gesto aislado. Aprende a buscar grupos de 3 señales y a medir la línea base. $_clustersTheorySpeech';
+          'Un gesto aislado no explica lo que alguien piensa. Describe lo que ves y escucha lo que dice. Si algo importa, pregunta en vez de adivinar. $_clustersTheorySpeech';
     } else if (_selectedTab == 1) {
       textToSpeak = _baselineTheorySpeech;
     } else {
@@ -59,7 +52,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
           .map((e) => 'Opción ${e.key + 1}: ${e.value}')
           .join('. ');
       textToSpeak =
-          'Entrenador de conglomerados. Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}. ${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
+          'Práctica para observar varias señales. Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}. ${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
     }
     TtsService.speak(textToSpeak, gestureId: 'cluster_baseline_$_selectedTab');
   }
@@ -74,18 +67,19 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
         'Frotamiento rápido de manos sobre los bíceps',
         'Hombros encogidos hacia adentro y pies pegados al piso',
       ],
-      'question': '¿Qué indica este conglomerado de señales corporales?',
+      'question':
+          'Hace frío en la sala. ¿Qué explicación conviene considerar? ',
       'options': [
         'Rechazo total y desacuerdo con tu propuesta de trabajo.',
-        'Frío ambiental físico. El frotamiento de brazos y encogimiento buscan calor corporal.',
+        'Puede tener frío. También podrías preguntarle si desea ajustar el aire.',
         'La persona es tímida y tiene miedo de hablar.',
       ],
       'correctOption': 1,
       'explanation':
-          '¡Correcto! Cruzar los brazos mientras se frotan los bíceps y se encoge el torso en una sala fría es un mecanismo puramente termorregulador. Asumir que está a la defensiva sería un error grave de lectura contextual.',
+          'El frío es una explicación posible en esa situación. Los brazos cruzados por sí solos no permiten saber qué piensa la persona.',
     },
     {
-      'title': 'Caso 2: ¿Deshonestidad o su Línea Base?',
+      'title': 'Caso 2: ¿Miente o así suele expresarse?',
       'context':
           'Entrevistas a un candidato técnico que desde que entró a la sala habla en tono muy bajo, pestañea rápido y mira al suelo al decir su nombre.',
       'signals': [
@@ -97,12 +91,12 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
           'Al preguntarle sobre su experiencia previa, responde con esas mismas señales. ¿Está mintiendo?',
       'options': [
         'Sí, la falta de contacto visual es prueba definitiva de engaño.',
-        'No necesariamente. Esas señales son su Línea Base natural desde el minuto 1; indican timidez o introversión, no mentira.',
+        'No se puede saber si miente por mirar al suelo o hablar bajito. Puede ser su forma habitual de expresarse.',
         'Significa que no tiene interés en el puesto.',
       ],
       'correctOption': 1,
       'explanation':
-          '¡Exacto! La mentira o la incomodidad se detectan por DESVIACIONES de la línea base. Si la persona se comporta así desde que dijo "hola", ese es su estado basal neutro. Buscar mentiras sin conocer la línea base genera falsos juicios.',
+          'No puedes identificar una mentira por estos gestos. Observa qué dijo y comprueba los datos sin juzgar cómo se expresa.',
     },
     {
       'title': 'Caso 3: La Desviación en Plena Negociación',
@@ -113,15 +107,15 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
         'Aprieta los labios formando una línea delgada y tensa',
         'Baja la cabeza y mira de reojo hacia la puerta',
       ],
-      'question': '¿Cómo debes interpretar este cambio repentino de 3 señales?',
+      'question': '¿Qué puedes concluir de este cambio?',
       'options': [
         'Es solo casualidad, sigue presentando las siguientes 10 diapositivas.',
-        'Un Conglomerado Crítico de Resistencia: 3 señales de rechazo que se desvían de su línea base inmediatamente tras el estímulo del precio.',
+        'Varias señales cambiaron después de hablar del precio. No sabemos por qué; pregunta qué piensa antes de continuar.',
         'El cliente tiene frío y cansancio visual.',
       ],
       'correctOption': 1,
       'explanation':
-          '¡Brillante! Se cumple la regla de oro: estímulo directo (precio) ➔ desviación abrupta de la línea base ➔ 3 señales en la misma dirección (brazos + labios + torso atrás). Debes frenar la presentación de inmediato y explorar su preocupación.',
+          'Varias señales cambiaron después de hablar del precio. No demuestran rechazo. Haz una pausa y pregunta si quiere comentar algo o escuchar más.',
     },
   ];
 
@@ -131,7 +125,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Conglomerados y Línea Base'),
+        title: const Text('Gestos y forma habitual de expresarse'),
         actions: [
           TtsAppBarControl(
             onPlay: _speakCurrentSection,
@@ -172,7 +166,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'El principio maestro del análisis no verbal: nunca juzgues un gesto aislado. Aprende a buscar grupos de 3 señales y a medir la línea base.',
+                            'Un gesto aislado no explica lo que alguien piensa. Describe lo que ves y escucha lo que dice. Si algo importa, pregunta en vez de adivinar.',
                             style: TextStyle(
                               fontSize: 13,
                               height: 1.4,
@@ -194,13 +188,13 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                       children: [
                         _buildNavChip(
                             index: 0,
-                            label: 'Regla de las 3 Señales',
+                            label: 'Observar y preguntar',
                             icon: Icons.filter_3_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
                         _buildNavChip(
                             index: 1,
-                            label: 'Calibrar la Línea Base',
+                            label: 'Forma habitual de expresarse',
                             icon: Icons.timeline_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
@@ -275,7 +269,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'Por Qué un Gesto Aislado es una Trampa',
+                      'Un gesto por sí solo no basta',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
@@ -315,7 +309,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'El error más destructivo en la lectura no verbal es sacar conclusiones por un solo detalle: "tocó su nariz, seguro miente" o "cruzó los brazos, está cerrado". Las palabras son como palabras sueltas en una frase: una sola palabra no hace una oración completa.',
+                'Cruzar los brazos, tocarse el cuello o mirar hacia otro lado no explica por sí solo lo que alguien piensa. Hay muchas razones posibles. Escucha las palabras y, si importa, pregunta.',
                 style: TextStyle(
                   fontSize: 13.5,
                   height: 1.45,
@@ -329,7 +323,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
               // La pirámide de la certeza
               _buildFormulaStep(
                 number: '1',
-                title: '1 Señal Aislada = Una Hipótesis Suelta',
+                title: 'Una señal: describe lo que ves',
                 description:
                     'Puede deberse a picazón física, temperatura de la sala, cansancio o un hábito individual sin carga emocional.',
                 color: AppColors.textMutedLight,
@@ -338,16 +332,16 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
               const SizedBox(height: 10),
               _buildFormulaStep(
                 number: '2',
-                title: '2 Señales Coincidentes = Motivo de Atención',
+                title: 'Varias señales: observa la situación',
                 description:
-                    'Ejemplo: Toca su cuello y baja el volumen de su voz. Tu radar debe activarse, pero todavía no emitas un juicio definitivo.',
+                    'Por ejemplo: se toca el cuello y baja la voz. Aun así, no sabemos por qué. Puedes preguntar si necesita algo.',
                 color: AppColors.warning,
                 isDark: isDark,
               ),
               const SizedBox(height: 10),
               _buildFormulaStep(
                 number: '3',
-                title: '3 o Más Señales en la Misma Dirección = CONGLOMERADO',
+                title: 'Varias señales no confirman una intención',
                 description:
                     'Por ejemplo, una persona puede tocarse el cuello y echarse hacia atrás. Eso describe lo que ves, pero no explica por qué. Considera el contexto y pregunta si necesitas saber más.',
                 color: AppColors.success,
@@ -377,7 +371,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'La Técnica de los Primeros 2 Minutos',
+                      'Cómo suele expresarse cada persona',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
@@ -417,7 +411,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'La Línea Base es el comportamiento normal, relajado y habitual de una persona cuando no está bajo presión. Sin conocer la línea base, es imposible saber si un gesto es significativo o si la persona simplemente es así de forma natural.',
+                'La forma habitual de hablar y moverse de cada persona es distinta. Observa cómo se expresa en situaciones parecidas; un cambio puede tener muchas causas y no prueba que mienta.',
                 style: TextStyle(
                   fontSize: 13.5,
                   height: 1.45,
@@ -428,7 +422,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
               ),
               const SizedBox(height: 16),
               const Text(
-                'Los 4 Canales Basales a Calibrar:',
+                'Puedes fijarte en cosas sencillas:',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 10),
@@ -436,7 +430,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 icon: Icons.remove_red_eye_rounded,
                 title: '1. Mirada y Pestañeo',
                 description:
-                    '¿Te mira fijamente o suele mirar a los lados mientras piensa? ¿Pestañea lento (15/min) o es naturalmente rápido (30/min)?',
+                    '¿Suele mirar a los ojos o a otros lugares? No necesita mirarte para escucharte.',
                 isDark: isDark,
               ),
               const SizedBox(height: 10),
@@ -444,7 +438,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 icon: Icons.record_voice_over_rounded,
                 title: '2. Velocidad y Tono de Voz',
                 description:
-                    '¿Habla a ritmo acelerado o pausado? ¿Su volumen habitual es alto o tímido y suave?',
+                    '¿Suele hablar rápido o despacio? ¿En voz alta o baja?',
                 isDark: isDark,
               ),
               const SizedBox(height: 10),
@@ -452,15 +446,14 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                 icon: Icons.front_hand_rounded,
                 title: '3. Gesticulación Manual',
                 description:
-                    '¿Mueve mucho las manos al hablar (expresivo) o las mantiene quietas sobre la mesa?',
+                    '¿Mueve las manos cuando habla o las mantiene quietas?',
                 isDark: isDark,
               ),
               const SizedBox(height: 10),
               _buildBaselineChannel(
                 icon: Icons.airline_seat_recline_normal_rounded,
                 title: '4. Postura de Reposo',
-                description:
-                    '¿Se sienta encorvado por costumbre anatómica o mantiene la espalda recta en su postura base?',
+                description: '¿Cómo suele sentarse cuando está cómodo?',
                 isDark: isDark,
               ),
               const SizedBox(height: 16),
@@ -485,7 +478,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: Text(
-                        'Regla de Oro: Solo cuando una persona cambia súbitamente su comportamiento basal justo después de una pregunta o propuesta, tienes una señal con verdadero significado.',
+                        'Una diferencia puede ser una razón para preguntar con amabilidad. No demuestra por sí sola cómo se siente la persona.',
                         style: TextStyle(
                           fontSize: 12.5,
                           height: 1.4,
@@ -560,8 +553,8 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                   Expanded(
                     child: Text(
                       item['title'] as String,
-                      style:
-                          const TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w800),
                     ),
                   ),
                   ValueListenableBuilder<String?>(
@@ -571,19 +564,26 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                       final isSpeaking = speakingId == id;
                       return IconButton(
                         icon: Icon(
-                          isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
                           size: 20,
                           color: isSpeaking
                               ? AppColors.coral
-                              : (isDark ? AppColors.accentLight : AppColors.accent),
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
                         ),
-                        tooltip: isSpeaking ? 'Detener lectura' : 'Escuchar caso interactivo',
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar caso interactivo',
                         onPressed: () {
                           FeedbackService.lightClick();
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            final signals = (item['signals'] as List<String>).join('. ');
+                            final signals =
+                                (item['signals'] as List<String>).join('. ');
                             final options = (item['options'] as List<String>)
                                 .asMap()
                                 .entries

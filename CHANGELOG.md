@@ -2,14 +2,26 @@
 
 ## Pendiente de publicación
 
-- Versión 1.0.11 (13): conceptos sencillos antes de practicar, repaso de
-  preguntas falladas y correcciones de lectura, accesibilidad y avance.
+- Versión 1.0.12 (14): lenguaje más claro en fichas, preguntas, escenarios y
+  categorías; nombres musculares sustituidos por descripciones cotidianas.
+- Las preguntas visuales ya no dependen de etiquetas fijas como «Opción 1»,
+  que dejaban de coincidir cuando se mezclaban las respuestas.
+- Las explicaciones muestran cuál era la respuesta correcta; el audio también
+  la lee. El resultado separa los aciertos al primer intento del repaso.
+- El buscador de conceptos reconoce términos anteriores y búsquedas sin tilde,
+  y permite borrar la búsqueda con un botón.
+- Se eliminaron varias interpretaciones que presentaban un gesto como prueba
+  de una emoción o intención. Se documentó el alcance de esta revisión.
+
+### Versión 1.0.11 (13)
+
+- Conceptos sencillos antes de practicar, repaso de preguntas falladas y
+  correcciones de lectura, accesibilidad y avance.
 - Corregido el bloqueo al cerrar la explicación con Atrás y el recorte de respuestas.
 - Preguntas, explicaciones y resultados admiten desplazamiento y texto ampliado.
 - Fallar una pregunta ya no la registra como completada en las estadísticas.
 - Detener la voz cancela también una lectura pendiente de inicialización.
 - Protegida la narración de escenarios vacíos; el resumen muestra intentos reales.
-
 - Nueva sección Conceptos con definiciones sencillas y preparación antes del quiz.
 - Las preguntas falladas vuelven al final hasta acertar; la ruta se completa al resolverlas todas.
 - La voz lee las etiquetas visibles en su orden real, sin añadir letras que contradigan las tarjetas.

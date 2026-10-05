@@ -63,11 +63,11 @@ class _CompareScreenState extends State<CompareScreen> {
           'Inclinarse hacia adelante reduce la distancia corporal; recostarse atrás la aumenta. Puede responder a atención, comodidad, audición, mobiliario o ritmo de la conversación.',
     ),
     ComparePair(
-      title: 'Manos en Ojiva vs. Frotarse las Manos',
+      title: 'Puntas de los dedos juntas o frotarse las manos',
       gestureIdA: 'manos_ojiva',
       gestureIdB: 'frotar_manos',
       coreDifference:
-          'La ojiva une las yemas de los dedos; frotarse las manos produce fricción repetida. Son diferencias físicas observables, no pruebas de autoridad, expectativa o nerviosismo.',
+          'Juntar las puntas de los dedos forma un tejado; frotarse las manos es un movimiento repetido. Son diferencias físicas observables, no pruebas de autoridad, expectativa o nerviosismo.',
     ),
     ComparePair(
       title: 'Tono Asertivo vs. Inflexión Sarcástica',

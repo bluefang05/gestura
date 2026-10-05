@@ -8,13 +8,13 @@ class GestureDatabase {
     // --- EXPRESIONES FACIALES ---
     GestureItem(
       id: 'sonrisa_genuina',
-      name: 'Sonrisa Genuina (Duchenne)',
+      name: 'Sonrisa con arrugas junto a los ojos',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos y Boca',
       summary:
-          'Sonrisa real de felicidad que involucra ojos y boca simultáneamente.',
+          'Sonrisa que mueve la boca y eleva las mejillas, con arrugas junto a los ojos. No permite saber por sí sola qué siente alguien.',
       physiologicalDetails:
-          'Contracción del músculo cigomático mayor (eleva comisuras labiales) y del músculo orbicular de los ojos (eleva mejillas y forma arrugas tipo "patas de gallo" alrededor de los ojos).',
+          'Se elevan las comisuras de los labios y las mejillas; pueden aparecer pequeñas arrugas junto a los ojos.',
       probableMeaning:
           'Puede acompañar alegría, cortesía, comodidad o una respuesta aprendida para la situación.',
       alternativeMeanings: [
@@ -38,7 +38,7 @@ class GestureDatabase {
       summary:
           'Sonrisa funcional donde solo se mueven los labios, mientras los ojos permanecen estáticos.',
       physiologicalDetails:
-          'Los labios se estiran hacia los lados, pero el músculo orbicular de los ojos no se activa. No hay arrugas en los ojos ni elevación de mejillas.',
+          'Los labios se estiran hacia los lados. Las mejillas pueden subir menos y quizá no aparezcan arrugas junto a los ojos.',
       probableMeaning:
           'Puede ser cortesía, amabilidad, nerviosismo, concentración o la forma habitual de sonreír.',
       alternativeMeanings: [
@@ -62,7 +62,7 @@ class GestureDatabase {
       summary:
           'Cejas juntas y hacia abajo, con líneas verticales en el entrecejo.',
       physiologicalDetails:
-          'Contracción del músculo corrugador superciliar que junta las cejas, a menudo con tensión en el músculo orbicular de la boca.',
+          'Las cejas se juntan o bajan; a veces también se aprietan los labios.',
       probableMeaning:
           'Concentración profunda, desacuerdo, confusión o preocupación.',
       alternativeMeanings: [
@@ -81,13 +81,13 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'ojos_entrecerrados',
-      name: 'Ojos Entrecerrados (Escrutinio)',
+      name: 'Entrecerrar los ojos',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos',
       summary:
           'Estrechamiento de los ojos mientras se fija la mirada en el interlocutor.',
       physiologicalDetails:
-          'Ligera contracción del párpado inferior y músculo orbicular sin sonreír.',
+          'Se tensa un poco el párpado inferior, sin una sonrisa visible.',
       probableMeaning:
           'Puede acompañar enfoque visual, cansancio ocular, luz intensa, dolor de cabeza o evaluación de la información.',
       alternativeMeanings: ['Esfuerzo visual', 'Cansancio ocular'],
@@ -106,8 +106,7 @@ class GestureDatabase {
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos',
       summary: 'Cierre deliberado y rápido de un solo ojo.',
-      physiologicalDetails:
-          'Cierre voluntario unilateral del párpado mediante el músculo orbicular.',
+      physiologicalDetails: 'Cierre breve de un solo ojo.',
       probableMeaning:
           'Complicidad, broma compartida, entendimiento mutuo o coquetería.',
       alternativeMeanings: [
@@ -125,15 +124,14 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'mirada_desden',
-      name: 'Mirada de Desdén / Desprecio',
+      name: 'Elevar un lado de la boca',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Boca y Ojos',
-      summary:
-          'Elevación asimétrica de una sola comisura labial (media sonrisa sutil).',
+      summary: 'Un lado de la boca se eleva más que el otro.',
       physiologicalDetails:
-          'Activación unilateral del músculo buccinador y elevador del labio superior. En caricaturas suele exagerarse, pero en humanos reales puede ser un microgesto apenas visible o una asimetría facial natural.',
+          'Se eleva un lado del labio. Puede ser una forma habitual de sonreír o una diferencia natural entre ambos lados de la cara.',
       probableMeaning:
-          'Sensación de superioridad o descalificación. (Nota: en la vida real, el sarcasmo cotidiano casi nunca usa esta cara, sino rostro neutro o serio con tono de voz incongruente).',
+          'Puede ser una sonrisa, una costumbre o una diferencia natural entre ambos lados de la cara. No demuestra desprecio.',
       alternativeMeanings: ['Asimetría facial natural al hablar o sonreír'],
       contextGuidance:
           'En discusiones puede coexistir con humor, tensión, timidez o asimetría habitual; no permite asegurar por sí sola qué piensa la persona.',
@@ -151,7 +149,7 @@ class GestureDatabase {
       bodyPart: 'Boca',
       summary: 'Labios apretados formando una línea delgada y recta.',
       physiologicalDetails:
-          'Contracción bilateral del músculo orbicular de los labios, metiendo el borde rosado hacia adentro.',
+          'Los labios se aprietan y se meten un poco hacia dentro.',
       probableMeaning:
           'Contención de opiniones, desacuerdo no verbalizado, frustración o rechazo silencioso.',
       alternativeMeanings: ['Concentración motriz intensa'],
@@ -171,7 +169,7 @@ class GestureDatabase {
       bodyPart: 'Cejas y Boca',
       summary: 'Cejas elevadas, ojos muy abiertos y boca ligeramente abierta.',
       physiologicalDetails:
-          'Contracción del músculo frontal (eleva cejas), apertura amplia de párpados y relajación mandibular.',
+          'Se elevan las cejas, se abren los ojos y puede abrirse un poco la boca.',
       probableMeaning:
           'Puede acompañar sorpresa, atención intensa, esfuerzo visual, una reacción aprendida o una condición del entorno.',
       alternativeMeanings: [
@@ -202,7 +200,7 @@ class GestureDatabase {
         'Respeto en ciertas culturas asiáticas/indígenas.'
       ],
       contextGuidance:
-          'En una entrevista neurotípica puede malinterpretarse como falta de confianza.',
+          'En una entrevista, algunas personas pueden interpretar que mirar a otro sitio significa falta de confianza. Pero no mirar a los ojos no demuestra desinterés.',
       whatToDo:
           'No presiones el contacto visual; crea un ambiente relajado y habla sin invadir su espacio.',
       salesTip:
@@ -225,7 +223,7 @@ class GestureDatabase {
         'Meditación, descanso ocular o fatiga.',
       ],
       contextGuidance:
-          'Puede acompañar reflexión profunda, saturación cognitiva o necesidad de procesar lo escuchado.',
+          'Puede acompañar reflexión profunda, demasiada información de una vez o necesidad de procesar lo escuchado.',
       whatToDo:
           'Permite un momento de silencio o resume tu punto con claridad.',
       salesTip:
@@ -235,17 +233,16 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'mandibula_apretada',
-      name: 'Mandíbula Apretada (Tensión Maseteros)',
+      name: 'Mandíbula apretada',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Boca',
       summary:
-          'Apretar los dientes posteriores haciendo que los músculos de la mandíbula se abulten.',
-      physiologicalDetails:
-          'Contracción isométrica del músculo masetero y temporal.',
+          'Apretar los dientes. Puede notarse tensión a los lados de la mandíbula.',
+      physiologicalDetails: 'La mandíbula se tensa al apretar los dientes.',
       probableMeaning:
           'Ira contenida, frustración reprimida, estrés agudo o determinación obstinada.',
       alternativeMeanings: [
-        'Bruxismo por fatiga dental o tensión muscular involuntaria.',
+        'Apretar o rechinar los dientes sin darse cuenta.',
         'Esfuerzo físico o concentración motriz intensa.',
         'Reacción pasajera a un estímulo o tensión corporal general.',
       ],
@@ -268,7 +265,7 @@ class GestureDatabase {
       physiologicalDetails:
           'Presión dental sobre el labio inferior con mirada fija o vacilante.',
       probableMeaning:
-          'Inseguridad, duda, contención emocional, nerviosismo o concentración.',
+          'Puede haber varias razones; observa la situación y pregunta si necesitas saberlo.',
       alternativeMeanings: [
         'Labios resecos o búsqueda de humectación.',
         'Hábito oral de concentración motriz.',
@@ -290,7 +287,7 @@ class GestureDatabase {
       bodyPart: 'Cejas',
       summary:
           'Elevación instantánea de ambas cejas (1/6 de segundo) al ver a alguien.',
-      physiologicalDetails: 'Micromovimiento del músculo frontal occipital.',
+      physiologicalDetails: 'Las cejas suben brevemente.',
       probableMeaning:
           'Saludo universal inconsciente, agrado, reconocimiento y apertura social.',
       alternativeMeanings: [
@@ -298,7 +295,7 @@ class GestureDatabase {
         'Ajuste de visión o iluminación ambiental.',
       ],
       contextGuidance:
-          'La señal neurotípica más común al encontrarse con amigos o conocidos.',
+          'Algunas personas levantan las cejas brevemente al saludar.',
       whatToDo: 'Devuelve una sonrisa y un saludo cálido.',
       salesTip:
           'Si el cliente te recibe con flash de cejas, te reconoce y está predispuesto a escucharte.',
@@ -307,15 +304,14 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'pupilas_dilatadas',
-      name: 'Dilatación Pupilar',
+      name: 'Pupilas más grandes',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos',
-      summary:
-          'Aumento del tamaño de las pupilas sin cambio en la iluminación ambiental.',
+      summary: 'Las pupilas se ven más grandes aunque la luz parezca igual.',
       physiologicalDetails:
-          'Respuesta del sistema simpático (midriasis) por interés cognitivo o emocional.',
+          'Las pupilas pueden cambiar por la luz, algunos medicamentos u otras causas. Mirarlas no permite saber qué piensa alguien.',
       probableMeaning:
-          'Interés elevado, atracción, sobrecarga cognitiva o agrado genuino.',
+          'Interés elevado, atracción, sobrecarga mental o agrado genuino.',
       alternativeMeanings: [
         'Efecto de medicamentos o gotas oftálmicas.',
         'Adaptación a sombras o cambio de luz.',
@@ -338,7 +334,7 @@ class GestureDatabase {
       summary:
           'Apertura y ensanchamiento de las aletas de la nariz mientras se respira.',
       physiologicalDetails:
-          'Contracción de los músculos alares de la nariz para aumentar la entrada de oxígeno.',
+          'Las aletas de la nariz se abren un poco al respirar.',
       probableMeaning:
           'Preparación para la acción física, indignación, agitación o necesidad de aire.',
       alternativeMeanings: [
@@ -368,7 +364,7 @@ class GestureDatabase {
       probableMeaning:
           'Dominancia, entusiasmo desbordante, búsqueda de atención o intensidad emocional.',
       alternativeMeanings: [
-        'Dificultades de audición (hipoacusia) o ruido de fondo elevado.',
+        'Dificultades de audición (dificultad para oír) o ruido de fondo elevado.',
         'Hábito cultural o familiar de conversación enérgica.',
         'Entusiasmo genuino por el tema tratado.',
       ],
@@ -377,7 +373,7 @@ class GestureDatabase {
       whatToDo:
           'Responde con volumen moderado y controlado para modular la energía del ambiente.',
       salesTip:
-          'En ventas, calibrar tu volumen al del cliente ayuda a generar sintonía sin gritar.',
+          'En ventas, ajustar tu volumen al del cliente ayuda a generar sintonía sin gritar.',
       illustrationKey: 'voice_volume_high',
       difficulty: 1,
     ),
@@ -388,7 +384,7 @@ class GestureDatabase {
       bodyPart: 'Voz',
       summary:
           'Hablar con decibeles muy tenues que requieren acercarse para escuchar.',
-      physiologicalDetails: 'Baja presión subglótica y escape de aire suave.',
+      physiologicalDetails: 'La voz sale suave y con poco volumen.',
       probableMeaning:
           'Timidez, confidencialidad, reserva o necesidad de discreción.',
       alternativeMeanings: [
@@ -410,13 +406,12 @@ class GestureDatabase {
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary: 'Pronunciar más de 180 palabras por minuto sin pausas claras.',
-      physiologicalDetails:
-          'Hiperactivación adrenérgica con respiración superficial rápida.',
+      physiologicalDetails: 'Se habla rápido y a veces se respira más deprisa.',
       probableMeaning:
           'Ansiedad, urgencia, nerviosismo, o pasión desbordante por el tema.',
       alternativeMeanings: [
         'Hábito cultural o dialecto de ritmo ágil.',
-        'Entusiasmo y sobreflujo de ideas (info-dumping común en neurodivergencia).',
+        'Entusiasmo o ganas de hablar en detalle sobre un tema que interesa.',
         'Urgencia temporal real o temor a ser interrumpido.',
       ],
       contextGuidance: 'Común en personas que temen ser interrumpidas.',
@@ -438,12 +433,12 @@ class GestureDatabase {
       probableMeaning:
           'Estilo de comunicación directo, agotamiento extremo o baja expresividad emocional.',
       alternativeMeanings: [
-        'Prosodia natural en personas autistas o neurodivergentes (no implica desinterés).',
+        'Algunas personas hablan con pocas subidas y bajadas en la voz. Eso no significa que estén desinteresadas.',
         'Agotamiento físico, estrés crónico o fatiga extrema.',
         'Foco analítico riguroso en datos objetivos sin florituras.',
       ],
       contextGuidance:
-          'En personas neurodivergentes o técnicas, el tono plano acompaña a menudo un compromiso profundo con la precisión.',
+          'Una voz con pocas variaciones es una forma válida de hablar y no permite saber cuánto interés tiene alguien.',
       whatToDo:
           'No asumas desinterés: juzga por el contenido de sus ideas y facilita la conversación.',
       salesTip:
@@ -643,12 +638,12 @@ class GestureDatabase {
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Manos',
       summary: 'Frotar palma contra palma con velocidad variable.',
-      physiologicalDetails: 'Fricción manual rápida o lenta.',
+      physiologicalDetails: 'Las manos se frotan rápido o despacio.',
       probableMeaning:
           'Puede aportar calor, regular tensión, acompañar anticipación o ser un movimiento habitual de las manos.',
       alternativeMeanings: [
         'Manos frías o baja temperatura ambiental.',
-        'Gesto motor de autorregulación sensorial o stimming.',
+        'Movimiento repetido que puede ayudar a regularse. Algunas personas lo llaman «stimming».',
         'Anticipación positiva o entusiasmo por una actividad.',
       ],
       contextGuidance: 'En negocios o comidas antes de un buen platillo.',
@@ -672,7 +667,7 @@ class GestureDatabase {
           'Puede regular energía, acompañar una melodía interna, ser un hábito motor o expresar prisa, tensión o espera.',
       alternativeMeanings: [
         'Seguir un compás o melodía musical en la mente.',
-        'Stimming o descarga motriz para sostener la concentración.',
+        'Movimiento repetido que puede ayudar a concentrarse o regularse.',
         'Inquietud temporal o necesidad de respetar un horario límite.',
       ],
       contextGuidance:
@@ -761,7 +756,7 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'manos_ojiva',
-      name: 'Manos en Ojiva / Campanario',
+      name: 'Yemas de los dedos juntas',
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Manos',
       summary:
@@ -769,16 +764,16 @@ class GestureDatabase {
       physiologicalDetails:
           'Alineación simétrica de las puntas de los dedos sin entrelazar las palmas.',
       probableMeaning:
-          'Puede ser hábito, una forma de concentrarse, un gesto aprendido al exponer o comodidad manual.',
+          'Puede ser una costumbre, una forma de concentrarse o una posición cómoda para las manos.',
       alternativeMeanings: [
-        'Hábito motor de concentración en oradores y analistas.',
-        'Posición de reposo simétrica y cómoda para los dedos.',
-        'Recurso aprendido en talleres de oratoria o debate.',
+        'Costumbre al concentrarse o hablar en público.',
+        'Una posición cómoda para las manos.',
+        'Una posición aprendida al hablar en público.',
       ],
       contextGuidance:
-          'Frecuente en personas dedicadas al análisis técnico o la docencia.',
+          'Algunas personas usan esta posición al explicar una idea.',
       whatToDo:
-          'Puedes emplear este gesto al exponer tus puntos clave para proyectar solvencia técnica.',
+          'Si te resulta cómoda, puedes usar esta posición al hablar. No hace que otras personas te crean más.',
       salesTip:
           'No supone interés técnico. Invita a compartir preguntas o criterios de evaluación, sin presuponerlos.',
       illustrationKey: 'steepling_hands',
@@ -792,7 +787,7 @@ class GestureDatabase {
       summary:
           'Inclinar la cabeza hacia un lado exponiendo el cuello mientras se escucha.',
       physiologicalDetails:
-          'Inclinación lateral del cuello (músculo esternocleidomastoideo) dejando al descubierto la arteria carótida.',
+          'La cabeza se inclina hacia un lado y deja parte del cuello más visible.',
       probableMeaning:
           'Puede acompañar escucha, curiosidad, una mejor audición por un lado, comodidad cervical o hábito postural.',
       alternativeMeanings: [
@@ -817,7 +812,7 @@ class GestureDatabase {
       summary:
           'Llevar la mano a la garganta, tocar el hueco del cuello o frotar la nuca.',
       physiologicalDetails:
-          'Gesto de pacificación neurovegetativo para estimular nervios que reducen el ritmo cardíaco bajo estrés.',
+          'La persona se toca o frota el cuello. Puede ser una costumbre, una molestia o una forma de autorregularse; el gesto no revela la causa.',
       probableMeaning:
           'Puede ser autorregulación ante estrés, incomodidad momentánea, duda, necesidad de calmarse o alivio físico.',
       alternativeMeanings: [
@@ -923,7 +918,7 @@ class GestureDatabase {
       whatToDo:
           'Ofrece la mano en posición vertical (ni arriba ni abajo) con firmeza serena mientras miras a los ojos y sonríes.',
       salesTip:
-          'La primera impresión física. Calibra la fuerza del cliente para igualarla sin competir.',
+          'Fíjate en la fuerza del apretón de manos y ofrece uno cómodo. También puedes saludar sin contacto.',
       illustrationKey: 'handshake_firm',
       difficulty: 1,
     ),
@@ -1227,13 +1222,13 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'digital_emojis',
-      name: 'Uso Calibrado de Emojis',
+      name: 'Uso de emojis según la conversación',
       category: CategoryType.comunicacionDigital,
       bodyPart: 'Digital',
       summary:
           'Incluir emoticonos para suavizar el tono o aclarar la intención emocional.',
       physiologicalDetails:
-          'Símbolos gráficos que sustituyen la entonación y las microexpresiones faciales en texto.',
+          'Símbolos gráficos que sustituyen la entonación y las gestos faciales breves faciales en texto.',
       probableMeaning:
           'Puede añadir tono, matizar una intención o reducir el esfuerzo de escribir; el significado cambia según el emoji y la relación.',
       alternativeMeanings: [
@@ -1255,7 +1250,7 @@ class GestureDatabase {
       summary:
           'Enviar notas de voz de duración breve vs audios extensos de más de 3 minutos.',
       physiologicalDetails:
-          'Grabación de audio asíncrona que transmite tono, volumen y ritmo paralingüístico.',
+          'Audio grabado que permite escuchar el tono, el volumen y el ritmo de la voz.',
       probableMeaning:
           'Puede ser una elección de accesibilidad, contexto, costumbre o disponibilidad; la duración por sí sola no define cercanía ni consideración.',
       alternativeMeanings: [
@@ -1535,7 +1530,7 @@ class GestureDatabase {
       summary:
           'Luz cálida e indirecta vs luz fría fluorescente de alta intensidad.',
       physiologicalDetails:
-          'Estímulo visual que modula la producción de melatonina y cortisol.',
+          'La luz del día puede influir en el sueño y en el nivel de alerta.',
       probableMeaning:
           'Luz cálida: relajación, confidencia y confort. Luz fría: alerta, actividad clínica o vigilancia.',
       alternativeMeanings: ['Requisitos técnicos de quirófanos o fábricas.'],

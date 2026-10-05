@@ -86,7 +86,7 @@ class QuizHubScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          'Diferencia microexpresiones, posturas y señales corporales reales entre 4 opciones visuales.',
+                          'Compara cuatro imágenes de expresiones faciales y posturas.',
                           style: TextStyle(
                             fontSize: 13,
                             color: isDark
@@ -118,7 +118,7 @@ class QuizHubScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => QuizRunnerScreen(
-                                    title: 'Test Visual de Microexpresiones',
+                                    title: 'Test visual de expresiones breves',
                                     questions: imageQuestions.isNotEmpty
                                         ? imageQuestions
                                         : QuizDatabase.questions,
@@ -137,7 +137,7 @@ class QuizHubScreen extends StatelessWidget {
                   const SectionHeader(
                     title: 'Entrenamientos Especializados',
                     subtitle:
-                        'Habilidades de calibración social y respuesta rápida',
+                        'Práctica de comunicación clara y respuesta rápida',
                   ),
                   const SizedBox(height: 8),
 
@@ -235,7 +235,7 @@ class QuizHubScreen extends StatelessWidget {
                   // Quizzes por Categoría
                   const SectionHeader(
                     title: 'Quizzes por Canal',
-                    subtitle: 'Entrena un área anatómica específica',
+                    subtitle: 'Practica un tema específico',
                   ),
                   const SizedBox(height: 8),
 

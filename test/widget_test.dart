@@ -373,7 +373,7 @@ void main() {
     expect(find.text('Decodificador de Indirectas'), findsOneWidget);
   });
 
-  testWidgets('ClusterBaselineScreen renders 3-signal rule and tabs',
+  testWidgets('Observation lesson renders plain-language tabs',
       (WidgetTester tester) async {
     tester.view.physicalSize = const Size(390, 844);
     tester.view.devicePixelRatio = 1.0;
@@ -382,9 +382,9 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: ClusterBaselineScreen()));
     await tester.pumpAndSettle();
 
-    expect(find.text('Conglomerados y Línea Base'), findsOneWidget);
-    expect(find.text('Regla de las 3 Señales'), findsOneWidget);
-    expect(find.text('Calibrar la Línea Base'), findsOneWidget);
+    expect(find.text('Gestos y forma habitual de expresarse'), findsOneWidget);
+    expect(find.text('Observar y preguntar'), findsOneWidget);
+    expect(find.text('Forma habitual de expresarse'), findsOneWidget);
   });
 
   testWidgets('EmergencyModeScreen renders checklists and protocols',
@@ -804,10 +804,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify Roadmap mission card indicators
-    expect(find.text('RUTA: HOW TO HUMAN'), findsOneWidget);
+    expect(find.text('RUTA DE APRENDIZAJE'), findsOneWidget);
     expect(find.textContaining('Nivel 1'), findsWidgets);
     expect(find.textContaining('PASO 1 DE 11'), findsOneWidget);
-    expect(find.text('Calibrar la Línea Base & Clusters'), findsOneWidget);
+    expect(find.text('Observar sin sacar conclusiones'), findsOneWidget);
 
     // Verify Action Buttons
     final continueBtn = find.text('Continuar Ruta');
@@ -818,7 +818,7 @@ void main() {
     // Tap Continuar Ruta -> navigates to Step 1 destination (ClusterBaselineScreen)
     await tester.tap(continueBtn);
     await tester.pumpAndSettle();
-    expect(find.text('Conglomerados y Línea Base'), findsOneWidget);
+    expect(find.text('Gestos y forma habitual de expresarse'), findsOneWidget);
   });
 
   testWidgets(
@@ -832,11 +832,11 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify Tab Selector
-    expect(find.text('Ruta "How to Human"'), findsOneWidget);
+    expect(find.text('Ruta de aprendizaje'), findsOneWidget);
     expect(find.text('Métricas y Radar'), findsOneWidget);
 
     // Default tab 0 shows Roadmap
-    expect(find.text('Currículum: How to Human'), findsOneWidget);
+    expect(find.text('Tu recorrido de aprendizaje'), findsOneWidget);
     expect(find.text('Nivel 1: La Regla Cero'), findsOneWidget);
     expect(find.text('Nivel 2: El Alfabeto No Verbal'), findsOneWidget);
     expect(find.text('Nivel 3: El Código Oculto'), findsOneWidget);
@@ -1101,8 +1101,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.11', () {
-    expect(AppConstants.appVersion, equals('1.0.11'));
+  test('AppConstants appVersion matches version 1.0.12', () {
+    expect(AppConstants.appVersion, equals('1.0.12'));
   });
 
   testWidgets(

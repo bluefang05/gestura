@@ -122,8 +122,7 @@ class SocialScriptsDatabase {
           'Se ve muy bien, muchas gracias, pero por ahora estoy perfecto solo con mi agua.',
       assertivePhrase:
           'No tomo alcohol / No deseo más, gracias. Estoy muy bien así.',
-      firmPhrase:
-          'No, gracias. Ya he dicho que no deseo tomar/comer más.',
+      firmPhrase: 'No, gracias. Ya he dicho que no deseo tomar/comer más.',
       bodyLanguage:
           'Gesto de palma abierta hacia abajo o cubriendo levemente tu propio vaso. Mirada directa y tranquila.',
       whatNotToDo:
@@ -232,8 +231,7 @@ class SocialScriptsDatabase {
           'Gracias por la información, pero no tengo interés en el servicio. Que tengas buen día.',
       assertivePhrase:
           'No me interesa en absoluto. Por favor no insistas y retira mi contacto de su base de datos.',
-      firmPhrase:
-          'He dicho no. No continúes con el diálogo. Adiós.',
+      firmPhrase: 'He dicho no. No continúes con el diálogo. Adiós.',
       bodyLanguage:
           'No detengas tu paso si estás caminando. Si es por teléfono, dilo con voz firme y cuelga de inmediato sin esperar réplica.',
       whatNotToDo:
@@ -296,7 +294,8 @@ class SocialScriptsDatabase {
     ),
     SocialScript(
       id: 'consent_physical_boundary',
-      title: 'Consultar antes de invadir espacio personal o realizar contacto físico',
+      title:
+          'Consultar antes de invadir espacio personal o realizar contacto físico',
       category: SocialScriptCategory.consent,
       contextDescription:
           'Quieres saludar a alguien, acercarte o tocar su hombro en una conversación y deseas asegurarte de que se sienta cómodo.',
@@ -334,10 +333,11 @@ class SocialScriptsDatabase {
     ),
     SocialScript(
       id: 'work_written_instructions',
-      title: 'Solicitar instrucciones por escrito para evitar sobrecarga auditiva',
+      title:
+          'Solicitar instrucciones por escrito para evitar sobrecarga auditiva',
       category: SocialScriptCategory.work,
       contextDescription:
-          'Tu jefe o colega te da una catarata verbal de instrucciones complejas y notas que tu memoria de trabajo auditiva está saturada.',
+          'Te dan muchas instrucciones seguidas y te cuesta recordarlas. Quieres pedirlas por escrito.',
       softPhrase:
           'Muchas gracias por el detalle. Para asegurarme de no pasar por alto ningún punto crítico, ¿te importaría enviarme esa lista en un correo breve o mensaje?',
       assertivePhrase:
@@ -372,7 +372,7 @@ class SocialScriptsDatabase {
     // ==========================================
     SocialScript(
       id: 'sensory_decompression_alone',
-      title: 'Pedir tiempo a solas para descompresión sensorial a la pareja o familia',
+      title: 'Pedir un rato a solas para descansar',
       category: SocialScriptCategory.sensory,
       contextDescription:
           'Llegas a casa tras un día agotador y tu pareja, padres o hijos te abordan con preguntas o demandas justo cuando tu batería está en cero.',
@@ -389,16 +389,16 @@ class SocialScriptsDatabase {
     ),
     SocialScript(
       id: 'sensory_medical_dentist_touch',
-      title: 'Avisar de hipersensibilidad táctil al médico, dentista o peluquero',
+      title: 'Pedir que te avisen antes de tocarte',
       category: SocialScriptCategory.sensory,
       contextDescription:
-          'Vas a recibir una consulta médica, dental o corte de cabello y los toques físicos imprevistos o ruidos agudos detonan tu sistema nervioso.',
+          'Vas a una consulta médica, dental o peluquería. Los ruidos fuertes o que te toquen sin avisar pueden resultarte muy molestos.',
       softPhrase:
-          'Soy una persona con hipersensibilidad sensorial al tacto imprevisto. Le agradecería mucho si me avisa verbalmente dos segundos antes de tocar mi cabeza o boca.',
+          'Me incomoda que me toquen sin avisar. ¿Puede decirme qué va a hacer y esperar un momento antes de tocarme?',
       assertivePhrase:
           'Tengo sensibilidad táctil y auditiva intensa. Necesito que me explique qué instrumento usará antes de aplicarlo y acordemos una señal para pausar si me saturo.',
       firmPhrase:
-          'Tengo una condición neurodivergente con reactividad física al tacto no anunciado. Por favor deténgase si levanto mi mano izquierda.',
+          'Necesito que me avise antes de tocarme. Si levanto la mano izquierda, por favor pare.',
       bodyLanguage:
           'Establece este acuerdo antes de que el profesional inicie cualquier maniobra, sentado derecho y hablando con tranquilidad.',
       whatNotToDo:

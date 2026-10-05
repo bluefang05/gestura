@@ -12,16 +12,18 @@ class ConceptsScreen extends StatefulWidget {
 
 class _ConceptsScreenState extends State<ConceptsScreen> {
   String _search = '';
+  final _searchController = TextEditingController();
   @override
   void dispose() {
+    _searchController.dispose();
     TtsService.stop();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final items = (widget.concepts ?? ConceptsDatabase.all).where(
-        (c) => '${c.title} ${c.explanation}'.toLowerCase().contains(_search));
+    final items = (widget.concepts ?? ConceptsDatabase.all)
+        .where((c) => c.matchesSearch(_search));
     return Scaffold(
       appBar: AppBar(
           title: Text(
@@ -43,13 +45,26 @@ class _ConceptsScreenState extends State<ConceptsScreen> {
             'Aprende qué significan las palabras. Puedes volver a consultarlas durante las preguntas.'),
         const SizedBox(height: 12),
         TextField(
-            decoration: const InputDecoration(
+            controller: _searchController,
+            decoration: InputDecoration(
                 labelText: 'Buscar un concepto',
-                prefixIcon: Icon(Icons.search)),
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon: _search.isEmpty
+                    ? null
+                    : IconButton(
+                        tooltip: 'Limpiar búsqueda',
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() => _search = '');
+                        },
+                      )),
             onChanged: (value) =>
                 setState(() => _search = value.trim().toLowerCase())),
         const SizedBox(height: 12),
-        if (items.isEmpty) const Text('No se encontraron conceptos.'),
+        if (items.isEmpty)
+          const Text(
+              'No encontramos ese concepto. Prueba con otra palabra o limpia la búsqueda.'),
         for (final concept in items)
           Card(
               child: Padding(

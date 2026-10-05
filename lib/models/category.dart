@@ -37,7 +37,7 @@ class CategoryInfo {
       title: 'Expresiones y Señales Faciales',
       shortTitle: 'Facial',
       description:
-          'Sonrisas Duchenne vs cortesía, ceño, mirada de desdén, ojos entrecerrados y microgestos.',
+          'Tipos de sonrisa, ceño fruncido, distintas miradas y gestos breves.',
       icon: Icons.face_rounded,
       primaryColor: AppColors.primary,
       containerColor: AppColors.primaryContainer,
@@ -45,7 +45,7 @@ class CategoryInfo {
     ),
     CategoryInfo(
       type: CategoryType.factoresParalinguisticos,
-      title: 'Factores Paralingüísticos',
+      title: 'Voz y forma de hablar',
       shortTitle: 'Voz y Tono',
       description:
           'El tono, ritmo, volumen, timbre de la voz y los silencios con sus significados.',
@@ -68,7 +68,7 @@ class CategoryInfo {
     CategoryInfo(
       type: CategoryType.proxemica,
       title: 'Proximidad y Espacio Personal',
-      shortTitle: 'Proxémica',
+      shortTitle: 'Espacio personal',
       description:
           'Las 4 burbujas invisibles: Espacio Íntimo, Personal, Social y Público.',
       icon: Icons.radar_rounded,
@@ -113,10 +113,10 @@ class CategoryInfo {
         if (langCode == 'de') return 'Gesichtsausdrücke';
         return title;
       case CategoryType.factoresParalinguisticos:
-        if (langCode == 'en') return 'Paralinguistic Factors';
-        if (langCode == 'fr') return 'Facteurs Paralinguistiques';
-        if (langCode == 'pt') return 'Fatores Paralinguísticos';
-        if (langCode == 'de') return 'Paralinguistische Faktoren';
+        if (langCode == 'en') return 'Voice and speaking style';
+        if (langCode == 'fr') return 'Voix et façon de parler';
+        if (langCode == 'pt') return 'Voz e modo de falar';
+        if (langCode == 'de') return 'Stimme und Sprechweise';
         return title;
       case CategoryType.lenguajeCorporal:
         if (langCode == 'en') return 'Body Postures & Language';
@@ -125,10 +125,10 @@ class CategoryInfo {
         if (langCode == 'de') return 'Körperhaltung & Gestik';
         return title;
       case CategoryType.proxemica:
-        if (langCode == 'en') return 'Proxemics & Space';
-        if (langCode == 'fr') return 'Proxémique et Espace';
-        if (langCode == 'pt') return 'Proxêmica e Espaço';
-        if (langCode == 'de') return 'Proxemik & Raum';
+        if (langCode == 'en') return 'Personal space';
+        if (langCode == 'fr') return 'Espace personnel';
+        if (langCode == 'pt') return 'Espaço pessoal';
+        if (langCode == 'de') return 'Persönlicher Raum';
         return title;
       case CategoryType.entornoApariencia:
         if (langCode == 'en') return 'Environment & Appearance';

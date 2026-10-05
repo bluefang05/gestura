@@ -62,7 +62,7 @@ class _IncongruenceDetectorScreenState
 
     final interpretationsText = item.possibleInterpretations.join('. ');
     TtsService.speak(
-      '${isCorrect ? "¡Observación calibrada!" : "¡Buen intento!"}. ${item.isAligned ? "Las señales corporales y el mensaje verbal están alineados." : "Existen señales mixtas que invitan a calibrar el contexto."} Hipótesis posibles: $interpretationsText. ${item.explanation}. Acción táctica recomendada: ${item.recommendedAction}',
+      '${isCorrect ? "Respuesta correcta." : "Vamos a repasarlo."} ${item.isAligned ? "Las palabras y los gestos parecen coincidir." : "Las palabras y los gestos pueden interpretarse de distintas formas."} Posibles explicaciones: $interpretationsText. ${item.explanation}. Qué puedes hacer: ${item.recommendedAction}',
     );
   }
 

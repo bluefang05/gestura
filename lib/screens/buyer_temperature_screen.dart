@@ -75,7 +75,7 @@ class BuyerTemperatureScreen extends StatefulWidget {
     ),
     BuyerSignal(
       id: 'steepling',
-      label: 'Manos en ojiva / campanario',
+      label: 'Puntas de los dedos juntas',
       score: 2,
       category: 'green',
       takeaway:
@@ -165,9 +165,11 @@ class BuyerTemperatureScreen extends StatefulWidget {
 }
 
 class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
-  int _selectedSalesTab = 0; // 0: Pipeline 4 Fases, 1: Termómetro en Vivo, 2: Guiones y Objeciones, 3: Simulación
+  int _selectedSalesTab =
+      0; // 0: Pipeline 4 Fases, 1: Termómetro en Vivo, 2: Guiones y Objeciones, 3: Simulación
   final Set<String> _selectedSignalIds = {};
-  final Map<String, String> _objectionFirmness = {}; // 'soft', 'assertive', 'firm'
+  final Map<String, String> _objectionFirmness =
+      {}; // 'soft', 'assertive', 'firm'
 
   @override
   void dispose() {
@@ -263,8 +265,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           'Temperatura del cliente: $_temperatureVerdict. Táctica recomendada: $_tacticalAdvice',
           gestureId: 'sales_tab_1');
     } else if (_selectedSalesTab == 2) {
-      final buffer = StringBuffer(
-          'Tácticas y Guiones de Objeciones en Negociación. ');
+      final buffer =
+          StringBuffer('Tácticas y Guiones de Objeciones en Negociación. ');
       for (final obj in SalesPipelineDatabase.objections) {
         buffer.write(
             '${obj.title}. Objeción del cliente: "${obj.objectionPhrase}". Contexto: ${obj.context}. Respuesta asertiva recomendada: "${obj.assertiveResponse}". Lenguaje corporal: ${obj.bodyLanguage}. Trampa a evitar: ${obj.whatNotToDo}. ');
@@ -350,7 +352,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Pipeline cronológico, calibración no verbal en vivo, manejo de objeciones y simulador de casos.',
+                                'Etapas de una conversación de ventas, respuestas a dudas y casos de práctica.',
                                 style: TextStyle(
                                   fontSize: 12.5,
                                   color: isDark
@@ -404,10 +406,13 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                   const SizedBox(height: 16),
 
                   // Contenido dinámico según pestaña activa
-                  if (_selectedSalesTab == 0) _buildPipelineTab(isDark, isTablet),
+                  if (_selectedSalesTab == 0)
+                    _buildPipelineTab(isDark, isTablet),
                   if (_selectedSalesTab == 1) _buildThermometerTab(isDark, pct),
-                  if (_selectedSalesTab == 2) _buildObjectionsTab(isDark, isTablet),
-                  if (_selectedSalesTab == 3) _buildPracticeTab(isDark, isTablet),
+                  if (_selectedSalesTab == 2)
+                    _buildObjectionsTab(isDark, isTablet),
+                  if (_selectedSalesTab == 3)
+                    _buildPracticeTab(isDark, isTablet),
 
                   const SizedBox(height: 28),
                 ],
@@ -475,7 +480,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         color: AppColors.primary.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Icon(phase.icon, size: 22, color: AppColors.primary),
+                      child:
+                          Icon(phase.icon, size: 22, color: AppColors.primary),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -543,7 +549,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
 
                 // Señales a observar en el cliente
                 const Text(
-                  'Pistas No Verbales a Calibrar en el Cliente:',
+                  'Gestos que puedes observar. Pregunta antes de sacar conclusiones:',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 6),
@@ -649,7 +655,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                       final isSpeaking = speakingId == id;
                       return OutlinedButton.icon(
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
@@ -658,15 +665,18 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            final signals = phase.clientSignalsToWatch.join('. ');
+                            final signals =
+                                phase.clientSignalsToWatch.join('. ');
                             final posture = phase.yourBodyLanguage.join('. ');
                             final speech =
-                                'Fase ${phase.phaseNumber}: ${phase.title}. Momento: ${phase.timing}. Objetivo: ${phase.objective}. Pistas del cliente a calibrar: $signals. Tu lenguaje corporal recomendado: $posture. Regla de oro: ${phase.keyRule}';
+                                'Fase ${phase.phaseNumber}: ${phase.title}. Momento: ${phase.timing}. Objetivo: ${phase.objective}. Pistas del cliente a ajustar: $signals. Tu lenguaje corporal recomendado: $posture. Regla de oro: ${phase.keyRule}';
                             TtsService.speak(speech, gestureId: id);
                           }
                         },
                         icon: Icon(
-                          isSpeaking ? Icons.stop_circle_rounded : Icons.volume_up_rounded,
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
                           size: 15,
                           color: isSpeaking ? AppColors.coral : null,
                         ),
@@ -730,8 +740,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                     decoration: BoxDecoration(
                       color: _verdictColor.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
@@ -758,8 +768,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                   backgroundColor: isDark
                       ? const Color(0xFF0F172A)
                       : const Color(0xFFE2E8F0),
-                  valueColor:
-                      AlwaysStoppedAnimation<Color>(_verdictColor),
+                  valueColor: AlwaysStoppedAnimation<Color>(_verdictColor),
                 ),
               ),
               const SizedBox(height: 14),
@@ -774,9 +783,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                       : const Color(0xFFF8FAFC),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isDark
-                        ? AppColors.darkBorder
-                        : AppColors.lightBorder,
+                    color:
+                        isDark ? AppColors.darkBorder : AppColors.lightBorder,
                     width: 1.0,
                   ),
                 ),
@@ -785,9 +793,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                   children: [
                     Icon(Icons.bolt_rounded,
                         size: 20,
-                        color: isDark
-                            ? AppColors.accentLight
-                            : AppColors.accent),
+                        color:
+                            isDark ? AppColors.accentLight : AppColors.accent),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
@@ -908,9 +915,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF2B1C1C)
-                  : const Color(0xFFFEF2F2),
+              color: isDark ? const Color(0xFF2B1C1C) : const Color(0xFFFEF2F2),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: AppColors.error.withValues(alpha: 0.3),
@@ -1024,9 +1029,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
             width: double.infinity,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF0F172A)
-                  : const Color(0xFFF1F5F9),
+              color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9),
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
                 color: isDark ? AppColors.darkBorder : AppColors.lightBorder,
@@ -1067,8 +1070,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         };
                         final text =
                             '${obj.title}. Objeción planteada: "${obj.objectionPhrase}". Contexto: ${obj.context}. Tu respuesta en nivel $firmnessLabel: $currentResponse. Tu lenguaje corporal recomendado: ${obj.bodyLanguage}. Error a evitar: ${obj.whatNotToDo}';
-                        TtsService.speak(text,
-                            gestureId: 'obj_${obj.id}');
+                        TtsService.speak(text, gestureId: 'obj_${obj.id}');
                       },
                       icon: const Icon(Icons.volume_up_rounded, size: 15),
                       label: const Text('Escuchar',
@@ -1081,9 +1083,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                             horizontal: 10, vertical: 4),
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        backgroundColor: isDark
-                            ? AppColors.primary
-                            : AppColors.primaryDark,
+                        backgroundColor:
+                            isDark ? AppColors.primary : AppColors.primaryDark,
                         foregroundColor: Colors.white,
                       ),
                       onPressed: () {
@@ -1097,8 +1098,8 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
                         );
                       },
                       icon: const Icon(Icons.copy_rounded, size: 15),
-                      label: const Text('Copiar',
-                          style: TextStyle(fontSize: 11)),
+                      label:
+                          const Text('Copiar', style: TextStyle(fontSize: 11)),
                     ),
                   ],
                 ),
@@ -1111,9 +1112,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF132035)
-                  : const Color(0xFFEFF6FF),
+              color: isDark ? const Color(0xFF132035) : const Color(0xFFEFF6FF),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1143,9 +1142,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: isDark
-                  ? const Color(0xFF2D1F1A)
-                  : const Color(0xFFFFF7ED),
+              color: isDark ? const Color(0xFF2D1F1A) : const Color(0xFFFFF7ED),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -1191,7 +1188,6 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           subtitle: 'Decisiones paso a paso con consecuencias inmediatas',
         ),
         const SizedBox(height: 8),
-
         for (final scenario in salesScenarios) ...[
           AppCard(
             color: isDark ? const Color(0xFF1E293B) : Colors.white,
@@ -1268,13 +1264,11 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           const SizedBox(height: 12),
         ],
         const SizedBox(height: 16),
-
         const SectionHeader(
           title: 'Detector de Incongruencias Comerciales',
           subtitle: 'Distingue cuando las palabras del comprador mienten',
         ),
         const SizedBox(height: 8),
-
         AppCard(
           color: isDark ? const Color(0xFF1E293B) : Colors.white,
           padding: const EdgeInsets.all(16),
@@ -1342,13 +1336,11 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
           ),
         ),
         const SizedBox(height: 16),
-
         const SectionHeader(
           title: 'Checklist de 30 Segundos Antes de Entrar',
-          subtitle: 'Reseteo mental y diafragma para la reunión',
+          subtitle: 'Una pausa para respirar antes de la reunión',
         ),
         const SizedBox(height: 8),
-
         AppCard(
           color: isDark ? const Color(0xFF1E293B) : Colors.white,
           padding: const EdgeInsets.all(16),
