@@ -1,5 +1,18 @@
 # Historial de cambios
 
+## Versión 1.0.18 (20) — 8 de octubre de 2026
+
+- Revisadas fichas, ejercicios y escenarios para distinguir observaciones de
+  interpretaciones y evitar atribuir intenciones a un gesto aislado.
+- Añadidas fuentes y sus límites; se explica qué respalda cada estudio, revisión
+  o guía profesional.
+- Añadidas lecciones y prácticas para aclarar mensajes, comprobar próximos pasos
+  y usar gestos para señalar información compartida.
+- Sustituidas puntuaciones y reglas de compra sin validación por preguntas sobre
+  necesidades, presupuesto y próximos pasos acordados.
+- Actualizada la guía visual y el texto de presentación para describir la app
+  como herramienta de comunicación, no como detector de estados internos.
+
 ## Versión 1.0.17 (19) — 7 de octubre de 2026
 
 - Separadas las opciones de español de España y español de Latinoamérica.
