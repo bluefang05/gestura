@@ -1,14 +1,13 @@
 # Historial de cambios
 
-## Próxima versión — pendiente de compilación
+## Versión 1.0.19 (21) — 9 de octubre de 2026
 
 - Tarjetas de Inicio y Práctica con altura según su contenido, para evitar
-  espacios vacíos y mostrar nombres y descripciones completos.
+  espacios vacíos y mantener nombres y descripciones legibles en pantallas pequeñas.
 - Filtros de comparación adaptados al tamaño de texto.
 - Listas compactas en teléfonos horizontales en el manual, el buscador,
   la guía de bolsillo y la selección de gestos.
-- Comprobados diseños móviles verticales y horizontales con texto normal
-  y ampliado; añadidas comprobaciones de texto completo en tarjetas estrechas.
+- Comprobados diseños móviles verticales y horizontales, incluido texto ampliado.
 
 ## Versión 1.0.18 (20) — 8 de octubre de 2026
 

@@ -1118,8 +1118,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.18', () {
-    expect(AppConstants.appVersion, equals('1.0.18'));
+  test('AppConstants appVersion matches version 1.0.19', () {
+    expect(AppConstants.appVersion, equals('1.0.19'));
   });
 
   testWidgets(

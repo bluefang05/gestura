@@ -1,7 +1,7 @@
 name: gestura
 description: "Gestura - Herramientas y aprendizaje de comunicación no verbal para la vida cotidiana."
 publish_to: 'none'
-version: 1.0.18+20
+version: 1.0.19+21
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
