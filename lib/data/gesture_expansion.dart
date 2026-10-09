@@ -27,7 +27,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La calidad de la respuesta aporta más información que mantener la mirada de forma continua.",
       illustrationKey: "context_mirada_notas",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_sonrisa_error",
@@ -51,7 +51,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. No necesitas decidir qué emoción expresa para acordar una reparación verificable.",
       illustrationKey: "polite_smile",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_ceno_lectura",
@@ -75,7 +75,7 @@ class GestureExpansion {
           "En una conversación de trabajo, confirma lo que la persona necesita antes de seguir. Observa qué pasa cuando haces un cambio sencillo, sin adivinar sus intenciones.",
       illustrationKey: "context_revisar_documento",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_rostro_neutro",
@@ -101,7 +101,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La participación puede aparecer en preguntas, decisiones o aportes escritos, además de gestos.",
       illustrationKey: "closed_eyelids",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_pausa_traduccion",
@@ -125,7 +125,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Una pausa no es un turno libre para decidir por otra persona.",
       illustrationKey: "context_pausa_conversacion",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_volumen_ruido",
@@ -149,7 +149,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Compara la voz en distintos entornos antes de atribuirle una intención interpersonal.",
       illustrationKey: "context_ruido_cafeteria",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_solapamiento_video",
@@ -175,7 +175,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Un acuerdo explícito de turnos reduce la ambigüedad del canal.",
       illustrationKey: "turn_taking",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_reparacion_verbal",
@@ -200,7 +200,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Verificar el dato es más útil que juzgar la fluidez de quien lo comunica.",
       illustrationKey: "voice_prosody",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_movimiento_escucha",
@@ -221,7 +221,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Evalúa la comunicación por el intercambio y pregunta preferencias antes de corregir movimientos.",
       illustrationKey: "context_movimiento_escucha",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_postura_dolor",
@@ -246,7 +246,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Puedes facilitar comodidad sin conocer ni divulgar información personal.",
       illustrationKey: "weight_shift",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_asentir_seguimiento",
@@ -272,7 +272,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Seguir una explicación, comprenderla y aceptar una propuesta son cosas distintas.",
       illustrationKey: "head_tilt",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_orientacion_material",
@@ -297,7 +297,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. En tareas conjuntas, la atención puede dirigirse al mismo objeto y no al rostro.",
       illustrationKey: "context_tarea_compartida",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_paso_atras",
@@ -323,7 +323,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. El espacio puede ajustarse sin convertirlo en una evaluación de la relación.",
       illustrationKey: "proxemics_personal",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_saludo_sin_contacto",
@@ -347,7 +347,7 @@ class GestureExpansion {
           "En una conversación de trabajo, confirma lo que la persona necesita y acuerda los pasos siguientes. Respeta si prefiere saludar sin contacto.",
       illustrationKey: "proxemics_social",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_espacio_movilidad",
@@ -372,7 +372,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Facilitar el acceso no autoriza a manipular objetos personales ni a decidir por otra persona.",
       illustrationKey: "proxemics_social",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_privacidad_distancia",
@@ -396,7 +396,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La privacidad se acuerda; no necesitas anticipar el contenido para ofrecerla.",
       illustrationKey: "proxemics_personal",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_contraluz",
@@ -422,7 +422,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La calidad de la imagen modifica tu información, no demuestra una actitud.",
       illustrationKey: "lighting_atmosphere",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_mesa_accesible",
@@ -447,7 +447,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Revisar quién puede ver, oír y acceder al material forma parte de preparar la conversación.",
       illustrationKey: "context_acceso_espacio",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_ruido_fondo",
@@ -472,7 +472,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Ajusta el canal antes de atribuir el problema a la motivación de la persona.",
       illustrationKey: "desk_barrier",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_ropa_contexto",
@@ -496,7 +496,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Distingue una norma explícita del contexto de una impresión personal sobre la apariencia.",
       illustrationKey: "dress_casual",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_camara_apagada",
@@ -522,7 +522,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. La participación se puede comprobar por sus aportes y acuerdos, no por vigilar el entorno privado.",
       illustrationKey: "context_chat_remoto",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_reaccion_no_acuerdo",
@@ -547,7 +547,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Cuando una decisión tiene consecuencias, solicita la información que falta de forma explícita.",
       illustrationKey: "digital_emojis",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_respuesta_diferida",
@@ -572,7 +572,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Las expectativas de respuesta deben acordarse según la tarea y el horario.",
       illustrationKey: "digital_visto",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: "context_mensaje_breve",
@@ -597,7 +597,7 @@ class GestureExpansion {
           "En una conversación profesional, verifica necesidades y acuerdos antes de avanzar. Aclara la tarea pendiente antes de atribuir emociones a la puntuación o longitud del mensaje.",
       illustrationKey: "digital_visto",
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
   ];
 }

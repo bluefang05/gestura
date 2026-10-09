@@ -17,8 +17,25 @@ class LearningConcept {
 
 class ConceptsDatabase {
   // Definitions describe observable features, not a diagnosis or a fixed meaning.
-  // Context reference: doi:10.3389/fpsyg.2021.606548.
+  // Editorial definitions. Methodological context on observation vs inference:
+  // doi:10.3389/fpsyg.2021.606548; it does not validate every catalog entry.
   static const all = <LearningConcept>[
+    LearningConcept(
+        'Aclarar un mensaje',
+        'Puedes pedir que repitan, preguntar por el dato que falta o confirmar lo que entendiste. Por ejemplo: «¿Dijiste jueves o viernes?». Es una forma de coordinar la conversación; también puedes escribir o pedir tiempo.',
+        ['aclaración', 'repetir', 'dato que falta', 'fecha']),
+    LearningConcept(
+        'Comprobar comprensión',
+        'Consiste en comparar lo explicado con lo entendido. Puedes ofrecer revisar el siguiente paso con palabras propias, notas o una demostración. Si difieren, ajusta la explicación. No es un examen de inteligencia ni una medida de obediencia.',
+        ['comprensión', 'teach-back', 'plan', 'pasos']),
+    LearningConcept(
+        'Gestos que aportan información',
+        'Señalar un objeto o representar un tamaño puede complementar las palabras. Algunos gestos tienen un significado aprendido en una comunidad. Comprueba que ambos entienden el referente y ofrece otro modo de explicarlo si hace falta.',
+        ['señalar', 'referente', 'gesto convencional', 'emblema']),
+    LearningConcept(
+        'Asertividad',
+        'Es expresar opiniones, necesidades o límites con claridad y respeto. Puedes hacerlo hablando, por escrito o con apoyo. No depende de mantener la mirada, controlar todos los movimientos ni tener una voz determinada.',
+        ['asertividad', 'asertivo', 'límite', 'límites']),
     LearningConcept(
         'Forma habitual de expresarse',
         'Es la forma habitual de expresarse de una persona en situaciones parecidas. Por ejemplo, alguien puede hablar poco incluso cuando está cómodo. Un cambio invita a preguntar; no demuestra que mienta ni que esté mal.',

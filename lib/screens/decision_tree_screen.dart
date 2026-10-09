@@ -165,7 +165,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Regla: Si veo X ➔ Significa Y ➔ Hago Z',
+                                'Observo ➔ Considero el contexto ➔ Pregunto',
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w800,
@@ -176,7 +176,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Descifra qué hacer en 3 toques sin memorizar teoría.',
+                                'Explora posibles lecturas y formas de responder.',
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: isDark
@@ -243,11 +243,12 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                     const SizedBox(height: 24),
                   ],
 
-                  // Paso 3: Diagnóstico y Acción Directa
+                  // Paso 3: Posibles lecturas y respuestas
                   if (_selectedGesture != null) ...[
                     const SectionHeader(
-                      title: 'Paso 3: Diagnóstico y Acción Inmediata',
-                      subtitle: 'Qué significa y cómo reaccionar paso a paso',
+                      title: 'Paso 3: Posibles lecturas y respuestas',
+                      subtitle:
+                          'Considera otras explicaciones antes de responder',
                     ),
                     _buildDiagnosisCard(_selectedGesture!, isDark),
                     const SizedBox(height: 20),
@@ -332,8 +333,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   ),
                 ),
                 Icon(
-                  gesture.signalType.icon,
-                  color: gesture.signalType.color,
+                  gesture.reading.icon,
+                  color: gesture.reading.color,
                   size: 18,
                 ),
               ],
@@ -359,8 +360,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
               setState(() => _selectedGesture = gesture);
               if (StorageService.getAutoNarration()) {
                 final textToSpeak =
-                    '${gesture.name}. Semáforo ${gesture.signalType.label}. Significado: ${gesture.probableMeaning}. Qué debes hacer: ${gesture.whatToDo}. En ventas: ${gesture.salesTip}';
-                TtsService.speak(textToSpeak, gestureId: gesture.id);
+                    '${gesture.name}. Lectura orientativa: ${gesture.reading.label}. Posible significado: ${gesture.probableMeaning}. Qué debes hacer: ${gesture.whatToDo}. En ventas: ${gesture.salesTip}';
+                TtsService.speakSpanish(textToSpeak, gestureId: gesture.id);
               }
             },
             padding: const EdgeInsets.all(10),
@@ -398,8 +399,8 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   ),
                 ),
                 Icon(
-                  gesture.signalType.icon,
-                  color: gesture.signalType.color,
+                  gesture.reading.icon,
+                  color: gesture.reading.color,
                   size: 20,
                 ),
               ],
@@ -431,11 +432,12 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                   children: [
                     Row(
                       children: [
-                        BadgePill(
-                          text: g.signalType.label,
-                          color: g.signalType.color,
+                        Expanded(
+                          child: BadgePill(
+                            text: g.reading.label,
+                            color: g.reading.color,
+                          ),
                         ),
-                        const Spacer(),
                         ValueListenableBuilder<String?>(
                           valueListenable: TtsService.currentSpeakingIdNotifier,
                           builder: (context, speakingId, _) {
@@ -456,10 +458,10 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
                               ),
                               tooltip: isSpeaking
                                   ? 'Detener audio'
-                                  : 'Escuchar síntesis express (10s)',
+                                  : 'Escuchar resumen',
                               onPressed: () {
                                 FeedbackService.lightClick();
-                                TtsService.speak(
+                                TtsService.speakSpanish(
                                   g.expressAudioSummary,
                                   gestureId: 'tree_${g.id}',
                                 );
@@ -486,7 +488,7 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
           _buildActionItem(
             icon: Icons.psychology_rounded,
             iconColor: isDark ? const Color(0xFFA78BFA) : AppColors.purple,
-            title: '💡 Significado Clave',
+            title: '💡 Posibles significados',
             highlight: g.quickMeaning,
             description: g.probableMeaning,
           ),

@@ -121,272 +121,273 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // Search & Filters Header
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
-            child: Column(
-              children: [
-                // Search Field
-                TextField(
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: (_) => FocusScope.of(context).unfocus(),
-                  controller: _searchController,
-                  onChanged: (_) => setState(() {}),
-                  decoration: InputDecoration(
-                    hintText: 'Buscar gesto, emoción o situación...',
-                    prefixIcon: const Icon(Icons.search_rounded, size: 20),
-                    suffixIcon: _searchController.text.isNotEmpty
-                        ? IconButton(
-                            tooltip: 'Limpiar búsqueda',
-                            icon: const Icon(Icons.clear_rounded, size: 18),
-                            onPressed: () {
-                              _searchController.clear();
-                              setState(() {});
-                            },
-                          )
-                        : null,
-                    filled: true,
-                    fillColor:
-                        isDark ? AppColors.darkSurface : AppColors.lightSurface,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(
-                          color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(
-                          color: isDark
-                              ? AppColors.darkBorder
-                              : AppColors.lightBorder),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-
-                // Body Part Chips
-                BodyPartFilterBar(
-                  selectedPart: _selectedBodyPart,
-                  onSelected: (part) {
-                    setState(() {
-                      _selectedBodyPart = part;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-
-          // Categories horizontal list
-          SizedBox(
-            height: 32 + MediaQuery.textScalerOf(context).scale(18),
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              scrollDirection: Axis.horizontal,
-              itemCount: CategoryInfo.allCategories.length + 1,
-              separatorBuilder: (_, __) => const SizedBox(width: 8),
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  final isSelected = _selectedCategory == null;
-                  return FilterChip(
-                    label: const Text('Todas las categorías'),
-                    selected: isSelected,
-                    onSelected: (_) {
-                      FeedbackService.tabPop();
-                      setState(() => _selectedCategory = null);
-                    },
-                    selectedColor: AppColors.primary,
-                    labelStyle: TextStyle(
-                      color: isSelected ? Colors.white : null,
-                      fontWeight:
-                          isSelected ? FontWeight.w800 : FontWeight.w600,
-                    ),
-                    showCheckmark: false,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                  );
-                }
-
-                final cat = CategoryInfo.allCategories[index - 1];
-                final isSelected = _selectedCategory == cat.type;
-
-                return FilterChip(
-                  label: Text(
-                    cat.shortTitle,
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : null,
-                      fontWeight:
-                          isSelected ? FontWeight.w800 : FontWeight.w600,
-                    ),
-                  ),
-                  selected: isSelected,
-                  onSelected: (_) {
-                    FeedbackService.tabPop();
-                    setState(
-                        () => _selectedCategory = isSelected ? null : cat.type);
-                  },
-                  selectedColor: AppColors.primary,
-                  showCheckmark: false,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Wrap(
-              spacing: 12,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                Text('${filteredList.length} señales',
-                    style: Theme.of(context).textTheme.labelLarge),
-                FilterChip(
-                  label: const Text('Por explorar'),
-                  selected: _onlyUnexplored,
-                  onSelected: (value) =>
-                      setState(() => _onlyUnexplored = value),
-                ),
-                if (_onlyBookmarks ||
-                    _onlyUnexplored ||
-                    query.isNotEmpty ||
-                    _selectedCategory != null ||
-                    _selectedBodyPart.isNotEmpty)
-                  TextButton.icon(
-                    onPressed: _clearFilters,
-                    icon: const Icon(Icons.filter_alt_off_outlined, size: 18),
-                    label: const Text('Limpiar filtros'),
-                  ),
-              ],
-            ),
-          ),
-
-          // List of Gestures
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isTablet = constraints.maxWidth >= 640 &&
-                    MediaQuery.textScalerOf(context).scale(16) <= 20;
-                final isWide = constraints.maxWidth >= 960;
-                final columns = isWide ? 3 : (isTablet ? 2 : 1);
-
-                if (filteredList.isEmpty) {
-                  return SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(32.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.search_off_rounded,
-                              size: 54,
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverToBoxAdapter(
+              child: Column(
+            children: [
+              // Search & Filters Header
+              Container(
+                padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+                child: Column(
+                  children: [
+                    // Search Field
+                    TextField(
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (_) => FocusScope.of(context).unfocus(),
+                      controller: _searchController,
+                      onChanged: (_) => setState(() {}),
+                      decoration: InputDecoration(
+                        hintText: 'Buscar gesto, emoción o situación...',
+                        prefixIcon: const Icon(Icons.search_rounded, size: 20),
+                        suffixIcon: _searchController.text.isNotEmpty
+                            ? IconButton(
+                                tooltip: 'Limpiar búsqueda',
+                                icon: const Icon(Icons.clear_rounded, size: 18),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  setState(() {});
+                                },
+                              )
+                            : null,
+                        filled: true,
+                        fillColor: isDark
+                            ? AppColors.darkSurface
+                            : AppColors.lightSurface,
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide(
                               color: isDark
-                                  ? AppColors.textMutedDark
-                                  : AppColors.textMutedLight),
-                          const SizedBox(height: 12),
-                          Text(
-                            _onlyBookmarks && _bookmarkedIds.isEmpty
-                                ? 'Tus señales favoritas, a mano'
-                                : 'No se encontraron señales',
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _onlyBookmarks && _bookmarkedIds.isEmpty
-                                ? 'Guarda una señal con el icono de marcador para consultarla aquí.'
-                                : 'Prueba otra búsqueda o limpia los filtros para seguir explorando.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 13,
-                                color: isDark
-                                    ? AppColors.textMutedDark
-                                    : AppColors.textMutedLight),
-                          ),
-                          const SizedBox(height: 16),
-                          FilledButton.tonal(
-                            onPressed: _clearFilters,
-                            child: const Text('Ver todas las señales'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
-
-                if (isTablet) {
-                  return Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1200),
-                      child: GridView.builder(
-                        padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: columns,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: isWide ? 1.55 : 1.4,
+                                  ? AppColors.darkBorder
+                                  : AppColors.lightBorder),
                         ),
-                        itemCount: filteredList.length,
-                        itemBuilder: (context, index) {
-                          final item = filteredList[index];
-                          final isBookmarked = _bookmarkedIds.contains(item.id);
-
-                          return GestureCard(
-                            item: item,
-                            isBookmarked: isBookmarked,
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      GestureDetailScreen(gestureId: item.id),
-                                ),
-                              ).then((_) => _loadBookmarks());
-                            },
-                            onBookmarkToggle: () => _toggleBookmark(item.id),
-                          );
-                        },
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: BorderSide(
+                              color: isDark
+                                  ? AppColors.darkBorder
+                                  : AppColors.lightBorder),
+                        ),
                       ),
                     ),
-                  );
-                }
+                    const SizedBox(height: 10),
 
-                // Mobile 1-Column List
-                return ListView.builder(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-                  itemCount: filteredList.length,
-                  itemBuilder: (context, index) {
-                    final item = filteredList[index];
-                    final isBookmarked = _bookmarkedIds.contains(item.id);
-
-                    return GestureCard(
-                      item: item,
-                      isBookmarked: isBookmarked,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                GestureDetailScreen(gestureId: item.id),
-                          ),
-                        ).then((_) => _loadBookmarks());
+                    // Body Part Chips
+                    BodyPartFilterBar(
+                      selectedPart: _selectedBodyPart,
+                      onSelected: (part) {
+                        setState(() {
+                          _selectedBodyPart = part;
+                        });
                       },
-                      onBookmarkToggle: () => _toggleBookmark(item.id),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Categories horizontal list
+              SizedBox(
+                height: 32 + MediaQuery.textScalerOf(context).scale(18),
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: CategoryInfo.allCategories.length + 1,
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      final isSelected = _selectedCategory == null;
+                      return FilterChip(
+                        label: const Text('Todas las categorías'),
+                        selected: isSelected,
+                        onSelected: (_) {
+                          FeedbackService.tabPop();
+                          setState(() => _selectedCategory = null);
+                        },
+                        selectedColor: AppColors.primary,
+                        labelStyle: TextStyle(
+                          color: isSelected ? Colors.white : null,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w600,
+                        ),
+                        showCheckmark: false,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      );
+                    }
+
+                    final cat = CategoryInfo.allCategories[index - 1];
+                    final isSelected = _selectedCategory == cat.type;
+
+                    return FilterChip(
+                      label: Text(
+                        cat.shortTitle,
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : null,
+                          fontWeight:
+                              isSelected ? FontWeight.w800 : FontWeight.w600,
+                        ),
+                      ),
+                      selected: isSelected,
+                      onSelected: (_) {
+                        FeedbackService.tabPop();
+                        setState(() =>
+                            _selectedCategory = isSelected ? null : cat.type);
+                      },
+                      selectedColor: AppColors.primary,
+                      showCheckmark: false,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     );
                   },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  spacing: 12,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text('${filteredList.length} señales',
+                        style: Theme.of(context).textTheme.labelLarge),
+                    FilterChip(
+                      label: const Text('Por explorar'),
+                      selected: _onlyUnexplored,
+                      onSelected: (value) =>
+                          setState(() => _onlyUnexplored = value),
+                    ),
+                    if (_onlyBookmarks ||
+                        _onlyUnexplored ||
+                        query.isNotEmpty ||
+                        _selectedCategory != null ||
+                        _selectedBodyPart.isNotEmpty)
+                      TextButton.icon(
+                        onPressed: _clearFilters,
+                        icon:
+                            const Icon(Icons.filter_alt_off_outlined, size: 18),
+                        label: const Text('Limpiar filtros'),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          )),
+        ],
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final isTablet = constraints.maxWidth >= 640 &&
+                MediaQuery.textScalerOf(context).scale(16) <= 20;
+            final isWide = constraints.maxWidth >= 960;
+            final columns = isWide ? 3 : (isTablet ? 2 : 1);
+
+            if (filteredList.isEmpty) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.search_off_rounded,
+                          size: 54,
+                          color: isDark
+                              ? AppColors.textMutedDark
+                              : AppColors.textMutedLight),
+                      const SizedBox(height: 12),
+                      Text(
+                        _onlyBookmarks && _bookmarkedIds.isEmpty
+                            ? 'Tus señales favoritas, a mano'
+                            : 'No se encontraron señales',
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _onlyBookmarks && _bookmarkedIds.isEmpty
+                            ? 'Guarda una señal con el icono de marcador para consultarla aquí.'
+                            : 'Prueba otra búsqueda o limpia los filtros para seguir explorando.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: isDark
+                                ? AppColors.textMutedDark
+                                : AppColors.textMutedLight),
+                      ),
+                      const SizedBox(height: 16),
+                      FilledButton.tonal(
+                        onPressed: _clearFilters,
+                        child: const Text('Ver todas las señales'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+
+            if (isTablet) {
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1200),
+                  child: GridView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: columns,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: isWide ? 1.55 : 1.4,
+                    ),
+                    itemCount: filteredList.length,
+                    itemBuilder: (context, index) {
+                      final item = filteredList[index];
+                      final isBookmarked = _bookmarkedIds.contains(item.id);
+
+                      return GestureCard(
+                        item: item,
+                        isBookmarked: isBookmarked,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  GestureDetailScreen(gestureId: item.id),
+                            ),
+                          ).then((_) => _loadBookmarks());
+                        },
+                        onBookmarkToggle: () => _toggleBookmark(item.id),
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+
+            // Mobile 1-Column List
+            return ListView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+              itemCount: filteredList.length,
+              itemBuilder: (context, index) {
+                final item = filteredList[index];
+                final isBookmarked = _bookmarkedIds.contains(item.id);
+
+                return GestureCard(
+                  item: item,
+                  isBookmarked: isBookmarked,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => GestureDetailScreen(gestureId: item.id),
+                      ),
+                    ).then((_) => _loadBookmarks());
+                  },
+                  onBookmarkToggle: () => _toggleBookmark(item.id),
                 );
               },
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }

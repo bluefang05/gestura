@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import '../core/constants/app_colors.dart';
 import 'category.dart';
 
-enum SignalTrafficLight {
-  green(
-    'Luz Verde (Receptividad)',
-    AppColors.success,
-    Icons.check_circle_rounded,
-    'Receptivo',
-    'Avanza con confianza',
+enum GestureReading {
+  possibleOpenness(
+    'Posible apertura',
+    AppColors.primary,
+    Icons.chat_bubble_outline_rounded,
+    'Posible apertura',
+    'Puede indicar disposición a interactuar; no confirma acuerdo.',
   ),
-  yellow(
-    'Luz Amarilla (Precaución / Duda)',
-    AppColors.warning,
-    Icons.warning_rounded,
-    'Precaución',
-    'Pausa y sondea',
+  ambiguous(
+    'Lectura ambigua',
+    AppColors.primary,
+    Icons.help_outline_rounded,
+    'Lectura ambigua',
+    'Puede tener varias explicaciones. Pregunta si necesitas claridad.',
   ),
-  red(
-    'Luz Roja (Objeción / Barrera)',
-    AppColors.error,
-    Icons.cancel_rounded,
-    'Barrera',
-    'Baja la presión',
+  possibleTension(
+    'Posible tensión o incomodidad',
+    AppColors.primary,
+    Icons.info_outline_rounded,
+    'Posible tensión',
+    'Puede acompañar tensión; no demuestra rechazo.',
   );
 
   final String label;
@@ -31,7 +31,7 @@ enum SignalTrafficLight {
   final String shortState;
   final String actionAdvice;
 
-  const SignalTrafficLight(
+  const GestureReading(
     this.label,
     this.color,
     this.icon,
@@ -55,7 +55,7 @@ class GestureItem {
   final String salesTip;
   final String illustrationKey;
   final int difficulty; // 1: Fácil, 2: Intermedio, 3: Sutil
-  final SignalTrafficLight signalType;
+  final GestureReading reading;
 
   const GestureItem({
     required this.id,
@@ -71,8 +71,12 @@ class GestureItem {
     required this.salesTip,
     required this.illustrationKey,
     this.difficulty = 1,
-    this.signalType = SignalTrafficLight.green,
+    this.reading = GestureReading.ambiguous,
   });
+
+  /// Backwards-compatible alias for older callers.
+  @Deprecated('Use reading instead.')
+  GestureReading get signalType => reading;
 
   /// Pista visual física concisa para decodificación en 1 segundo (sin párrafos).
   String get quickVisualClue {
@@ -121,12 +125,7 @@ class GestureItem {
 
   /// Síntesis de voz express (8-10 segundos) para escuchar sin necesidad de leer.
   String get expressAudioSummary {
-    final lightName = switch (signalType) {
-      SignalTrafficLight.green => 'Señal verde, receptividad.',
-      SignalTrafficLight.yellow => 'Señal amarilla, evaluación o cautela.',
-      SignalTrafficLight.red => 'Señal roja, barrera o tensión.',
-    };
-    return '$name. $lightName En lo físico: $quickVisualClue. Suele reflejar: $quickMeaning. Tu mejor jugada: $quickAction.';
+    return '$name. Lectura orientativa: ${reading.label}. En lo físico: $quickVisualClue. Puede significar: $quickMeaning. Una respuesta posible: $quickAction.';
   }
 
   /// Etiqueta legible del nivel de dificultad / sutileza del gesto.

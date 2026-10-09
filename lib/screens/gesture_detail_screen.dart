@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/category.dart';
 import '../data/gesture_database.dart';
+import '../data/communication_evidence_database.dart';
+import '../widgets/common/communication_evidence_card.dart';
 import '../widgets/common/ad_bottom_bar.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
@@ -54,13 +56,16 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
 
   void _toggleTts(GestureItem item) {
     final speech =
-        '${item.name}. ${item.difficultyLabel}. ${item.signalType.label}. ${item.summary}. Qué puedes observar: ${item.physiologicalDetails}. Significado principal: ${item.probableMeaning}. Otras explicaciones a considerar: ${item.alternativeMeanings.join(", ")}. Guía según el contexto: ${item.contextGuidance}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
-    TtsService.speak(speech, gestureId: item.id);
+        '${item.name}. ${item.difficultyLabel}. ${item.reading.label}. ${item.summary}. Qué puedes observar: ${item.physiologicalDetails}. Posibles significados: ${item.probableMeaning}. Otras explicaciones a considerar: ${item.alternativeMeanings.join(", ")}. Guía según el contexto: ${item.contextGuidance}. Qué debes hacer o responder: ${item.whatToDo}. Consejo para ventas y negociación: ${item.salesTip}';
+    final evidence = CommunicationEvidenceDatabase.byGesture[item.id];
+    TtsService.speakSpanish('$speech ${evidence?.spokenSummary ?? ""}',
+        gestureId: item.id);
   }
 
   void _toggleExpressTts(GestureItem item) {
     FeedbackService.lightClick();
-    TtsService.speak(item.expressAudioSummary, gestureId: 'express_${item.id}');
+    TtsService.speakSpanish(item.expressAudioSummary,
+        gestureId: 'express_${item.id}');
   }
 
   @override
@@ -467,6 +472,9 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 ],
               ),
             ),
+            if (CommunicationEvidenceDatabase.byGesture[item.id]
+                case final evidence?)
+              CommunicationEvidenceCard(evidence: evidence),
           ];
 
           if (isTablet) {
@@ -570,8 +578,8 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                                   text: item.bodyPart,
                                   color: catInfo.primaryColor),
                               BadgePill(
-                                  text: item.signalType.label,
-                                  color: item.signalType.color),
+                                  text: item.reading.label,
+                                  color: item.reading.color),
                               BadgePill(
                                   text: item.difficultyLabel,
                                   color: item.difficultyColor),
@@ -705,8 +713,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                 children: [
                   BadgePill(text: item.bodyPart, color: catInfo.primaryColor),
                   BadgePill(
-                      text: item.signalType.label,
-                      color: item.signalType.color),
+                      text: item.reading.label, color: item.reading.color),
                   BadgePill(
                       text: item.difficultyLabel, color: item.difficultyColor),
                   BadgePill(
@@ -752,7 +759,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
   }
 
   Widget _buildAtAGlanceCard(GestureItem item, bool isDark) {
-    final lightColor = item.signalType.color;
+    final lightColor = item.reading.color;
     final lightBg = isDark
         ? lightColor.withValues(alpha: 0.16)
         : lightColor.withValues(alpha: 0.08);
@@ -765,7 +772,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Semáforo Header Bar
+          // Lectura orientativa
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -775,7 +782,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                   color: lightColor.withValues(alpha: 0.22),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(item.signalType.icon, color: lightColor, size: 24),
+                child: Icon(item.reading.icon, color: lightColor, size: 24),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -783,7 +790,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.signalType.label.toUpperCase(),
+                      item.reading.label.toUpperCase(),
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w900,
@@ -793,7 +800,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      item.signalType.actionAdvice,
+                      item.reading.actionAdvice,
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w700,
@@ -819,7 +826,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                     Icon(Icons.bolt_rounded, size: 14, color: lightColor),
                     const SizedBox(width: 3),
                     Text(
-                      '3 Segundos',
+                      'Vista rápida',
                       style: TextStyle(
                         fontSize: 10.5,
                         fontWeight: FontWeight.w800,
@@ -853,7 +860,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
             icon: Icons.lightbulb_rounded,
             iconColor:
                 isDark ? const Color(0xFFFBBF24) : const Color(0xFFD97706),
-            title: 'Significado:',
+            title: 'Posibles significados:',
             content: item.quickMeaning,
             isDark: isDark,
           ),
@@ -988,7 +995,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                         Text(
                           isSpeaking
                               ? 'Reproduciendo síntesis express...'
-                              : '🎧 Escuchar sin leer (10s)',
+                              : '🎧 Escuchar resumen',
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w800,

@@ -25,7 +25,7 @@ class BoundaryFrameworkDatabase {
         BoundaryConceptItem(
           title: 'Un límite habla de lo que tú harás',
           description:
-              'Una demanda intenta cambiar la conducta del otro ("¡Deja de hablarme así!"). Un límite define tu propia conducta ("Si me alzas la voz, me retiro de la conversación hasta que podamos hablar con calma"). El límite depende 100% de ti.',
+              'Puedes pedir que cambie una conducta y expresar qué aceptas: "No quiero que me grites". También puedes indicar lo que harás si continúa. No siempre puedes retirarte sin ayuda; busca apoyo o una opción viable para tu situación.',
           icon: Icons.rule_rounded,
           badge: 'Definición',
         ),

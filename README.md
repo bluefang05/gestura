@@ -22,8 +22,12 @@ se consultan localmente; los anuncios y algunas voces pueden requerir conexión.
 - Progreso por pregunta y métricas por categoría. Leer una señal, responder una
   pregunta o completar un escenario registra un día de actividad.
 - Temas claro, oscuro y de alto contraste; tamaño de texto, movimiento reducido,
-  narración y ajustes de sonido. La navegación admite cinco idiomas; parte del
-  contenido educativo y de las pantallas permanece en español.
+  narración y ajustes de sonido. La navegación admite español de Latinoamérica,
+  español de España, inglés, francés, portugués de Brasil y alemán. Al abrir por
+  primera vez sigue el idioma del teléfono; la elección manual se conserva.
+  Parte del contenido educativo y de las pantallas permanece en español y se
+  lee con una voz española. La voz requiere un idioma compatible instalado en
+  el motor de lectura del dispositivo; si falta, se muestra un aviso.
 
 ## Ejecutar y validar
 

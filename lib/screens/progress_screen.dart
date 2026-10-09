@@ -554,7 +554,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 6,
                         children: [
                           Text(
                             'PASO ${step.stepNumber}',
@@ -567,7 +569,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                   : AppColors.textMutedLight,
                             ),
                           ),
-                          const Spacer(),
                           Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 6, vertical: 2),
@@ -642,7 +643,8 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                           isDark ? Colors.black : Colors.white,
                                     ),
                                     const SizedBox(width: 6),
-                                    Text(
+                                    Flexible(
+                                        child: Text(
                                       'Abrir Práctica',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -651,7 +653,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                                             ? Colors.black
                                             : Colors.white,
                                       ),
-                                    ),
+                                    )),
                                   ],
                                 ),
                               ),

@@ -9,19 +9,19 @@ class SalesPipelineDatabase {
     SalesPhaseItem(
       phaseNumber: 1,
       title: 'Saludo y primera conversación',
-      timing: 'Minutos 0 a 5',
+      timing: 'Inicio de la conversación',
       objective:
           'Saluda con respeto, deja espacio personal y permite que ambas personas se sientan cómodas.',
       icon: Icons.handshake_rounded,
       clientSignalsToWatch: [
-        'Orientación de los hombros hacia ti (apertura) vs orientados a la pantalla de su laptop (frialdad).',
-        'Saludo de manos firme y seco con contacto visual de 2 segundos vs mano blanda o mirada evasiva.',
-        'Espacio personal despejado: retiran objetos entre ambos o colocan carpetas como barrera física defensiva.',
+        'La persona mira hacia ti o hacia su pantalla. Pregunta si es buen momento para conversar.',
+        'Pregunta cómo prefiere saludar; no evalúes confianza por la presión de la mano ni por la mirada.',
+        'Comprueba si los objetos permiten ver el material y conversar con comodidad.',
       ],
       yourBodyLanguage: [
-        'Adopta una posición en la mesa en ángulo de 90° (esquina cooperativa) si es posible, evitando el enfrentamiento frontal de poder.',
-        'Coloca ambas manos visibles y relajadas sobre la superficie de la mesa.',
-        'Mantén la espalda recta pero apoyada, respirando hondo con el diafragma antes de cruzar la puerta.',
+        'Acuerden dónde sentarse para ver el material y respetar el espacio de ambos.',
+        'Coloca las manos donde te resulte cómodo y deja espacio para el material compartido.',
+        'Elige una postura cómoda; puedes pedir tiempo para prepararte antes de empezar.',
       ],
       keyRule:
           'No hay una regla de tiempo para todas las reuniones. Saluda, pregunta qué necesita la persona y escucha antes de presentar tu propuesta.',
@@ -33,7 +33,7 @@ class SalesPipelineDatabase {
     SalesPhaseItem(
       phaseNumber: 2,
       title: 'Explicar la propuesta y escuchar',
-      timing: 'Minutos 5 a 20',
+      timing: 'Cuando acuerden revisar la propuesta',
       objective:
           'Explica la propuesta y pregunta si la persona quiere más detalles, necesita tiempo o prefiere parar.',
       icon: Icons.present_to_all_rounded,
@@ -43,7 +43,7 @@ class SalesPipelineDatabase {
         'La persona mira la hora o dice que tiene prisa. Pregunta si prefiere seguir en otro momento.',
       ],
       yourBodyLanguage: [
-        'Gesticula a la altura del pecho con palmas abiertas hacia arriba en los puntos de mayor valor.',
+        'Puedes usar gestos, texto o ejemplos si ayudan a explicar, sin una postura obligatoria.',
         'Haz una pausa después de explicar algo importante. Da tiempo para pensar y preguntar.',
         'Habla a un ritmo cómodo y pregunta si quiere que repitas o aclares algo.',
       ],
@@ -57,19 +57,19 @@ class SalesPipelineDatabase {
     SalesPhaseItem(
       phaseNumber: 3,
       title: 'Hablar del precio y responder dudas',
-      timing: 'Minutos 20 a 35',
+      timing: 'Cuando corresponda hablar del precio',
       objective:
           'Di el precio con claridad. Escucha las dudas y responde sin presionar.',
       icon: Icons.monetization_on_rounded,
       clientSignalsToWatch: [
-        'Brazos cruzados a la altura del pecho y cuerpo reclinado hacia atrás (escudo presupuestario o cautela).',
-        'Labios comprimidos en línea delgada o frotarse la nuca / puente de la nariz (procesamiento de estrés).',
-        'Gesto facial breve de escepticismo (comisura de los labios asimétrica o ceño fruncido).',
+        'Los brazos cruzados o reclinarse pueden tener muchas causas. Pregunta qué piensa del precio.',
+        'La persona aprieta los labios o se toca el cuello. Describe el movimiento sin atribuir estrés.',
+        'Un cambio de expresión no identifica una objeción. Deja espacio para que la persona la comunique.',
       ],
       yourBodyLanguage: [
-        'Apoya la espalda en el respaldo de la silla, proyectando solidez y confianza en el valor de tu trabajo.',
-        'Da la cifra económica exacta con entonación descendente (tono de afirmación, nunca interrogativo).',
-        'Guarda silencio absoluto durante al menos 3 a 5 segundos inmediatamente después de decir el precio.',
+        'Si te resulta cómodo, usa el respaldo. Explica el alcance y las condiciones; la postura no acredita el valor del trabajo.',
+        'Explica el precio y qué incluye con un tono que te resulte cómodo; ofrece la información por escrito.',
+        'Da tiempo para pensar y pregunta si necesita aclaraciones; el tiempo de pausa se adapta a la conversación.',
       ],
       keyRule:
           'Después de decir el precio, deja tiempo para pensar. El silencio no permite saber qué piensa la persona; puedes preguntarle si quiere aclarar algo.',
@@ -81,7 +81,7 @@ class SalesPipelineDatabase {
     SalesPhaseItem(
       phaseNumber: 4,
       title: 'Acordar los próximos pasos',
-      timing: 'Minutos 35 a 45',
+      timing: 'Al acordar el siguiente paso',
       objective:
           'Pregunta si la persona quiere avanzar, necesita más tiempo o prefiere dejarlo aquí.',
       icon: Icons.check_circle_outline_rounded,
@@ -92,8 +92,8 @@ class SalesPipelineDatabase {
       ],
       yourBodyLanguage: [
         'Acerca con calma la propuesta o el contrato hacia el centro del espacio compartido.',
-        'Asiente suavemente con una sonrisa sobria y cálida.',
-        'Cierra la libreta o deja el bolígrafo sobre la mesa para comunicar que la presentación terminó y estamos en fase de acuerdo.',
+        'Escucha la respuesta sin exigir ni forzar sonrisa, mirada o asentimiento.',
+        'Pregunta qué decisión desea tomar y confirma el siguiente paso con palabras.',
       ],
       keyRule:
           'Una pregunta o un gesto no confirman una compra. Pregunta qué decisión quiere tomar la persona y respeta su respuesta.',
@@ -108,17 +108,17 @@ class SalesPipelineDatabase {
       objectionPhrase:
           'Es demasiado costoso para nosotros / supera el presupuesto asignado.',
       context:
-          'El cliente busca medir tu seguridad para forzar un descuento inmediato.',
+          'La persona comunica un límite de presupuesto o considera alto el precio. Pregunta qué puede revisar; no presupongas una estrategia de presión.',
       softResponse:
-          'Comprendo perfectamente que el presupuesto sea un criterio clave. Si comparamos esta inversión con el costo del problema que resolveremos, ¿qué aspecto siente que no termina de amortizarse?',
+          "Entiendo que el presupuesto sea un límite. ¿Quieres revisar qué incluye la propuesta, valorar un alcance menor o dejarlo para otro momento?",
       assertiveResponse:
-          'Entiendo la cautela presupuestaria. Nuestra tarifa refleja la garantía del resultado. Si necesitamos llegar a esa cifra exacta, tendríamos que reducir el alcance o las fases entregables.',
+          'Entiendo la cautela presupuestaria. Nuestra tarifa corresponde al alcance y a las condiciones de la propuesta. Si necesitamos llegar a esa cifra exacta, tendríamos que reducir el alcance o las fases entregables.',
       firmResponse:
           'Ese es el costo establecido para asegurar este nivel de entrega. Si el presupuesto actual es rígido e inamovible, podemos posponer el proyecto o evaluar una versión básica reducida.',
       bodyLanguage:
-          'No asientas con la cabeza mientras te quejan del precio. Mantén la mirada directa y relajada sin tragar saliva bruscamente.',
+          'Escucha la respuesta y adopta una postura cómoda. No necesitas controlar la mirada, la sonrisa ni movimientos involuntarios para explicar tu precio.',
       whatNotToDo:
-          'Nunca digas "¿cuánto tienes?" ni te disculpes por tu precio; bajar la tarifa de inmediato sin reducir el alcance destruye tu credibilidad técnica.',
+          "Evita presionar para que la persona revele su presupuesto o cuestione su propio límite. Explica qué puedes ofrecer y con qué condiciones.",
     ),
 
     // 2. OBJECIÓN DE LA COMPETENCIA
@@ -128,17 +128,17 @@ class SalesPipelineDatabase {
       objectionPhrase:
           'Otras empresas me ofrecen exactamente lo mismo a un costo mucho menor.',
       context:
-          'Comparación artificial para presionar o evaluar si conoces tu valor diferencial.',
+          'La persona compara precios. Verifica si las propuestas tienen el mismo alcance antes de valorar la diferencia.',
       softResponse:
-          'Es comprensible que existan opciones con diferentes tarifas en el mercado. En nuestra experiencia, la diferencia suele estar en la cobertura del soporte y la confiabilidad operativa final.',
+          "Si te sirve, podemos comparar lo que incluye cada propuesta. No sabemos si la diferencia corresponde al alcance, al soporte o a otros factores.",
       assertiveResponse:
-          'Conocemos el mercado y respetamos a otros colegas. Si la alternativa más económica cubriera el estándar que su operación exige, probablemente ya la habrían contratado. ¿Qué dudas les hicieron venir a consultarnos a nosotros?',
+          'Conocemos el mercado y respetamos a otros colegas. Podemos comparar el alcance, las condiciones y el soporte de ambas propuestas. ¿Qué criterios les interesa revisar?',
       firmResponse:
           'No competimos en precio sino en resultados y estabilidad. Si su criterio determinante exclusivo es el menor costo unitario, nuestra propuesta no es la opción adecuada para ustedes.',
       bodyLanguage:
-          'Sonrisa tranquila y leve. Manos abiertas sobre la mesa. Postura corporal sin signos de molestia o defensa.',
+          "Usa una postura y un tono cómodos. No necesitas forzar una sonrisa, mostrar las palmas ni ocultar movimientos para explicar una diferencia.",
       whatNotToDo:
-          'No descalifiques ni hables mal de la competencia; hacerlo te hace lucir inseguro y poco profesional.',
+          "No atribuyas mala calidad a otra propuesta por su precio. Compara información comprobable y respeta la decisión.",
     ),
 
     // 3. OBJECIÓN DE POSTERGACIÓN
@@ -148,17 +148,17 @@ class SalesPipelineDatabase {
       objectionPhrase:
           'Lo vemos interesante, pero necesitamos revisarlo internamente y te avisamos.',
       context:
-          'Descarte educado o falta de claridad para tomar una decisión en la reunión.',
+          'La persona pide tiempo para revisar la propuesta. No sabemos si aceptará ni por qué necesita esperar.',
       softResponse:
           'Me parece muy prudente que lo revisen en equipo. Para asegurar que tengan todo lo necesario, ¿qué dudas o riesgos anticipas que podrían plantear tus socios?',
       assertiveResponse:
-          'Totalmente de acuerdo. Generalmente cuando alguien necesita pensarlo suele haber una inquietud con el plazo o la inversión. Con total franqueza, ¿cuál de los dos aspectos genera más reservas?',
+          "Claro. ¿Hay información que les ayudaría a revisarlo? También podemos dejarles tiempo y acordar si quieren seguimiento.",
       firmResponse:
-          'Por supuesto. Agendemos ahora mismo una llamada de 10 minutos para el próximo [día] a las [hora] para conocer su resolución definitiva y no enviar correos innecesarios.',
+          "De acuerdo. ¿Prefieren contactarme cuando hayan decidido o quieren acordar una llamada? Pueden necesitar más tiempo sin dar una resolución definitiva en una fecha impuesta.",
       bodyLanguage:
           'Abre tu agenda o libreta con tranquilidad, sin prisa pero con formalidad ejecutiva.',
       whatNotToDo:
-          'No te despidas con un "está bien, quedo a la espera de que me escriban". El 80% de los "te avisamos" terminan en el olvido.',
+          'Evita fijar seguimientos sin acordarlos. Pregunta si quiere que le escribas, por qué canal y cuándo; respeta si prefiere contactarte por su cuenta.',
     ),
 
     // 4. EL SILENCIO INCÓMODO DEL COMPRADOR
@@ -176,7 +176,7 @@ class SalesPipelineDatabase {
       firmResponse:
           '[Dale tiempo para pensar. Responde sus preguntas y acepta si quiere decidir después].',
       bodyLanguage:
-          'No toques tu rostro, no bebas agua apresuradamente ni consultes tu reloj. Espalda firme, manos quietas.',
+          'Puedes hacer una pausa, beber agua o moverte si lo necesitas. Mantén disponible la información y permite que la persona piense.',
       whatNotToDo:
           'No supongas que el silencio es una táctica ni ofrezcas un descuento sin que te lo pidan. Pregunta qué necesita la persona.',
     ),
@@ -188,7 +188,7 @@ class SalesPipelineDatabase {
       objectionPhrase:
           'Me gusta la propuesta, pero si quieres que cerremos ahora mismo tienes que bajar un 15%.',
       context:
-          'Intento de cierre condicionado por poder o hábito de compra agresivo.',
+          'La persona condiciona la compra a un descuento. Puedes explicar tus condiciones y decidir si puedes ofrecerlo.',
       softResponse:
           'Agradezco la intención de cerrar hoy. Para ajustar un 15%, ¿qué funcionalidad o módulo de la entrega sugerirías que retiremos del alcance?',
       assertiveResponse:
@@ -196,9 +196,9 @@ class SalesPipelineDatabase {
       firmResponse:
           'El valor de la solución es el presentado. Si la decisión de trabajar juntos depende de reducir un 15% los honorarios, no podremos avanzar.',
       bodyLanguage:
-          'Inclinación hacia adelante manteniendo contacto visual neutro, negando suavemente con la cabeza una sola vez.',
+          "Explica con palabras si puedes ofrecer el descuento y en qué condiciones. No necesitas sostener la mirada ni hacer un gesto particular para marcar ese límite.",
       whatNotToDo:
-          'Nunca aceptes un descuento a cambio de nada. Toda concesión económica debe ir acompañada de una retirada de alcance o de una contraprestación equivalente.',
+          "No prometas un descuento que no puedas sostener. Puedes mantener el precio, ofrecer otras condiciones o aceptar una rebaja si encaja con tus criterios; no existe una única regla de negociación.",
     ),
 
     // 6. PROVEEDOR ACTUAL ESTABLECIDO
@@ -207,17 +207,18 @@ class SalesPipelineDatabase {
       title: 'Duda: "Ya trabajamos con un proveedor y estamos satisfechos"',
       objectionPhrase:
           'Ya tenemos a alguien que nos hace este servicio desde hace años.',
-      context: 'Resistencia al cambio y lealtad con su proveedor vigente.',
+      context:
+          'La persona dice que tiene proveedor. Pregunta si desea revisar alternativas y respeta si no le interesa.',
       softResponse:
-          'Es excelente que cuenten con un proveedor confiable, eso demuestra que valoran la estabilidad en sus operaciones.',
+          "Gracias por aclararlo. Si están satisfechos, lo respeto. ¿Quieren conocer una alternativa o prefieren que dejemos la conversación aquí?",
       assertiveResponse:
-          'No pretendemos que sustituyan a su proveedor actual. Muchas empresas trabajan con nosotros como respaldo para proyectos críticos o de segunda opinión. ¿Habría espacio para hacer una prueba piloto pequeña?',
+          "Si necesitan una alternativa para un proyecto concreto, podemos revisar si nuestra propuesta encaja. ¿Les interesa hacerlo?",
       firmResponse:
           'Comprendo. Si en algún momento ese proveedor no tiene capacidad o necesitan una alternativa ágil para un requerimiento urgente, aquí tienen mi tarjeta directa.',
       bodyLanguage:
           'Asentimiento de reconocimiento profesional. No invasivo, guardando respeto al canal existente.',
       whatNotToDo:
-          'No intentes convencerlo de que su proveedor actual es malo. La gente defiende a sus proveedores porque cambiarlos implica riesgo personal de equivocarse.',
+          "No supongas por qué mantiene a su proveedor ni intentes crear dudas sin información. Respeta si no desea explorar alternativas.",
     ),
   ];
 }

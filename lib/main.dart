@@ -1,16 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/localization/app_localizations.dart';
+import 'core/localization/app_language.dart';
 import 'core/navigation/app_route_observer.dart';
 import 'core/services/ads/ads_service.dart';
 import 'core/services/storage_service.dart';
+import 'core/services/tts_service.dart';
 import 'core/theme/app_theme.dart';
 import 'state/settings_provider.dart';
 import 'screens/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  }
 
   // Set preferred orientations (support portrait and landscape for tablets & foldables)
   try {
@@ -42,6 +49,28 @@ class GesturaApp extends StatefulWidget {
 
 class _GesturaAppState extends State<GesturaApp> {
   final SettingsProvider _settingsProvider = SettingsProvider();
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+
+  @override
+  void initState() {
+    super.initState();
+    TtsService.errorNotifier.addListener(_showSpeechError);
+  }
+
+  void _showSpeechError() {
+    final error = TtsService.errorNotifier.value;
+    final context = _messengerKey.currentContext;
+    if (error == null || context == null) return;
+    _messengerKey.currentState?.showSnackBar(SnackBar(
+      content: Text(AppLocalizations.of(context).translate(error)),
+    ));
+  }
+
+  @override
+  void dispose() {
+    TtsService.errorNotifier.removeListener(_showSpeechError);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +86,7 @@ class _GesturaAppState extends State<GesturaApp> {
         }
 
         return MaterialApp(
+          scaffoldMessengerKey: _messengerKey,
           title: 'Gestura',
           navigatorObservers: [appRouteObserver],
           debugShowCheckedModeBanner: false,
@@ -65,6 +95,8 @@ class _GesturaAppState extends State<GesturaApp> {
           darkTheme: darkTheme,
           locale: _settingsProvider.locale,
           supportedLocales: AppLocalizations.supportedLocales,
+          localeListResolutionCallback: (locales, supported) =>
+              AppLanguage.resolve(locales),
           localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
@@ -97,7 +129,7 @@ class _GesturaAppState extends State<GesturaApp> {
                 disableAnimations: MediaQuery.of(context).disableAnimations ||
                     _settingsProvider.isReduceMotion,
               ),
-              child: content,
+              child: SafeArea(top: false, bottom: false, child: content),
             );
           },
           home: const MainNavigationScreen(),

@@ -45,7 +45,8 @@ void main() {
     await StorageService.init();
   });
 
-  test('AppLocalizations provides complete dictionary in all 5 languages', () {
+  test('AppLocalizations provides interface dictionaries for all 6 variants',
+      () {
     for (final locale in AppLocalizations.supportedLocales) {
       final loc = AppLocalizations(locale);
       expect(loc.appName, equals('Gestura'));
@@ -173,16 +174,22 @@ void main() {
     }
   });
 
-  test('BuyerTemperature signals contain green, yellow, and red categories',
-      () {
-    final greenSignals = BuyerTemperatureScreen.signals
-        .where((s) => s.category == 'green')
-        .toList();
-    final redSignals = BuyerTemperatureScreen.signals
-        .where((s) => s.category == 'red')
-        .toList();
-    expect(greenSignals.isNotEmpty, isTrue);
-    expect(redSignals.isNotEmpty, isTrue);
+  test('Sales observations use descriptive categories', () {
+    final categories =
+        BuyerTemperatureScreen.signals.map((s) => s.category).toSet();
+    expect(categories, equals({'openness', 'ambiguous', 'tension'}));
+    for (final id in [
+      'steepling',
+      'crossed_arms',
+      'neck_touch',
+      'finger_tap',
+      'lean_back_distance'
+    ]) {
+      expect(
+          BuyerTemperatureScreen.signals.firstWhere((s) => s.id == id).category,
+          'ambiguous',
+          reason: id);
+    }
   });
 
   test(
@@ -347,14 +354,13 @@ void main() {
     await tester.pumpAndSettle();
 
     final postureCard = find.text('Posturas y movimientos');
-    final scrollable =
-        tester.state<ScrollableState>(find.byType(Scrollable).first);
-    scrollable.position.jumpTo(1400);
+    await tester.scrollUntilVisible(postureCard, 300,
+        scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
     await tester.tap(postureCard);
     await tester.pumpAndSettle();
 
-    expect(find.text('Postura Abierta y Receptiva'), findsOneWidget);
+    expect(find.text('Postura con brazos y torso despejados'), findsOneWidget);
     expect(find.text('Sonrisa Genuina (Duchenne)'), findsNothing);
   });
 
@@ -748,6 +754,17 @@ void main() {
     await tester.tap(find.text('Observar y preguntar'));
     await tester.pumpAndSettle();
     expect(find.textContaining('señales observadas'), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsNothing);
+    expect(find.textContaining(RegExp(r'\d+%')), findsNothing);
+    await tester.scrollUntilVisible(
+        find.text('Inclinación frontal hacia la mesa'), 200,
+        scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('Inclinación frontal hacia la mesa'));
+    await tester.pumpAndSettle();
+    expect(find.text('Observaciones para conversar'), findsOneWidget);
+    expect(find.textContaining('no permiten calcular interés'), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsNothing);
+    expect(find.textContaining(RegExp(r'\d+%')), findsNothing);
   });
 
   test(
@@ -838,7 +855,7 @@ void main() {
     expect(find.text('Tu recorrido de aprendizaje'), findsOneWidget);
     expect(find.text('Nivel 1: Observar con calma'), findsOneWidget);
     expect(find.text('Nivel 2: Cara, brazos y manos'), findsOneWidget);
-    expect(find.text('Nivel 3: El Código Oculto'), findsOneWidget);
+    expect(find.text('Nivel 3: Frases y contexto'), findsOneWidget);
     expect(find.text('Nivel 4: Límites y consentimiento'), findsOneWidget);
     expect(find.text('Nivel 5: Situaciones cotidianas'), findsOneWidget);
 
@@ -938,13 +955,17 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Señales Alineadas'), findsOneWidget);
-    expect(find.text('Señales Mixtas'), findsOneWidget);
+    expect(find.text('Explorar explicaciones'), findsOneWidget);
+    expect(find.text('Señales Alineadas'), findsNothing);
+    expect(find.textContaining('Aciertos:'), findsNothing);
 
-    await tester.tap(find.text('Señales Alineadas'));
+    await tester.tap(find.text('Explorar explicaciones'));
     await tester.pumpAndSettle();
 
     expect(find.text('Siguiente Caso'), findsOneWidget);
+    await tester.scrollUntilVisible(
+        find.text('Algunas explicaciones posibles:'), 200,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('Algunas explicaciones posibles:'), findsOneWidget);
   });
 
@@ -960,13 +981,12 @@ void main() {
           reason: '${item.id} should have non-empty quickAction');
       expect(item.expressAudioSummary.contains(item.name), isTrue,
           reason: '${item.id} expressAudioSummary should contain gesture name');
-      expect(item.signalType.shortState.isNotEmpty, isTrue);
-      expect(item.signalType.actionAdvice.isNotEmpty, isTrue);
+      expect(item.reading.shortState.isNotEmpty, isTrue);
+      expect(item.reading.actionAdvice.isNotEmpty, isTrue);
     }
   });
 
-  testWidgets(
-      'GestureDetailScreen renders 3-second card and express audio hero',
+  testWidgets('GestureDetailScreen renders quick view and audio summary',
       (tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -975,16 +995,16 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('3 Segundos'), findsOneWidget);
+    expect(find.text('Vista rápida'), findsOneWidget);
     expect(find.textContaining('Qué mirar:'), findsOneWidget);
-    expect(find.textContaining('Significado:'), findsOneWidget);
+    expect(find.textContaining('Posibles significados:'), findsOneWidget);
     expect(find.textContaining('Qué puedes hacer:'), findsOneWidget);
-    expect(find.text('🎧 Escuchar sin leer (10s)'), findsOneWidget);
+    expect(find.text('🎧 Escuchar resumen'), findsOneWidget);
     expect(find.text('📖 Ver análisis profundo y contexto (Opcional)'),
         findsOneWidget);
   });
 
-  testWidgets('GestureCard displays traffic light pill and visual-first clues',
+  testWidgets('GestureCard displays tentative reading and visual clues',
       (tester) async {
     final item = GestureDatabase.getById('sonrisa_genuina')!;
     await tester.pumpWidget(
@@ -1001,7 +1021,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Receptivo'), findsOneWidget);
+    expect(find.text(item.reading.shortState), findsOneWidget);
     expect(find.textContaining('💡'), findsOneWidget);
     expect(find.textContaining('👁️'), findsOneWidget);
     expect(find.text(item.difficultyLabel), findsOneWidget);
@@ -1098,8 +1118,8 @@ void main() {
     expect(progress.bestStreak, equals(2));
   });
 
-  test('AppConstants appVersion matches version 1.0.13', () {
-    expect(AppConstants.appVersion, equals('1.0.13'));
+  test('AppConstants appVersion matches version 1.0.17', () {
+    expect(AppConstants.appVersion, equals('1.0.17'));
   });
 
   testWidgets(

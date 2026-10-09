@@ -54,7 +54,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
       textToSpeak =
           'Práctica para observar varias señales. Caso ${_currentCaseIndex + 1} de ${_interactiveCases.length}. ${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
     }
-    TtsService.speak(textToSpeak, gestureId: 'cluster_baseline_$_selectedTab');
+    TtsService.speakSpanish(textToSpeak, gestureId: 'cluster_baseline_$_selectedTab');
   }
 
   final List<Map<String, dynamic>> _interactiveCases = [
@@ -298,7 +298,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(_clustersTheorySpeech,
+                            TtsService.speakSpanish(_clustersTheorySpeech,
                                 gestureId: 'cluster_rule_3');
                           }
                         },
@@ -400,7 +400,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(_baselineTheorySpeech,
+                            TtsService.speakSpanish(_baselineTheorySpeech,
                                 gestureId: 'baseline_2min');
                           }
                         },
@@ -591,7 +591,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                                 .join('. ');
                             final speech =
                                 '${item['title']}. Contexto: ${item['context']}. Señales observadas: $signals. Pregunta: ${item['question']}. $options';
-                            TtsService.speak(speech, gestureId: id);
+                            TtsService.speakSpanish(speech, gestureId: id);
                           }
                         },
                       );
@@ -678,7 +678,7 @@ class _ClusterBaselineScreenState extends State<ClusterBaselineScreen> {
                               _selectedCaseAnswer = i;
                               _showFeedback = true;
                             });
-                            TtsService.speak(
+                            TtsService.speakSpanish(
                               '${isCorrect ? "¡Correcto!" : "Opción incorrecta."} ${item['explanation']}',
                               gestureId: 'case_fb_${item['title']}',
                             );

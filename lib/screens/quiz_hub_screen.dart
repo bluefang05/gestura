@@ -61,13 +61,14 @@ class QuizHubScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            BadgePill(
+                            Flexible(
+                                child: BadgePill(
                               text: 'Entrenamiento Principal',
                               icon: Icons.auto_awesome_rounded,
                               color: isDark
                                   ? AppColors.primaryLight
                                   : AppColors.primary,
-                            ),
+                            )),
                             const Spacer(),
                             Icon(Icons.grid_view_rounded,
                                 color: isDark
@@ -147,7 +148,8 @@ class QuizHubScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: isTablet ? 2.3 : 2.7,
+                    mainAxisExtent: 68 +
+                        65 * (MediaQuery.textScalerOf(context).scale(14) / 14),
                     children: [
                       // Modo: Detector de Incongruencias
                       _buildPracticeModeCard(
@@ -177,7 +179,7 @@ class QuizHubScreen extends StatelessWidget {
                         accentColor: AppColors.coral,
                         title: 'Termómetro de Receptividad',
                         description:
-                            'Mide el nivel de apertura y detecta el momento de acuerdo.',
+                            'Organiza lo que observaste y prepara preguntas para aclarar dudas.',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -246,7 +248,9 @@ class QuizHubScreen extends StatelessWidget {
                       crossAxisCount: catColumns,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      childAspectRatio: isTablet ? 2.6 : 2.5,
+                      mainAxisExtent: 60 +
+                          65 *
+                              (MediaQuery.textScalerOf(context).scale(14) / 14),
                     ),
                     itemCount: CategoryInfo.allCategories.length,
                     itemBuilder: (context, index) {

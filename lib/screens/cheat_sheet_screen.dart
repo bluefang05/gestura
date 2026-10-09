@@ -20,7 +20,7 @@ class CheatSheetScreen extends StatefulWidget {
 }
 
 class _CheatSheetScreenState extends State<CheatSheetScreen> {
-  SignalTrafficLight? _filterLight;
+  GestureReading? _filterReading;
 
   static const List<String> priorityIds = [
     'sonrisa_genuina',
@@ -60,8 +60,8 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
         .whereType<GestureItem>()
         .toList();
 
-    if (_filterLight != null) {
-      items = items.where((i) => i.signalType == _filterLight).toList();
+    if (_filterReading != null) {
+      items = items.where((i) => i.reading == _filterReading).toList();
     }
 
     return Scaffold(
@@ -99,16 +99,17 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                     : AppColors.accent,
                                 size: 24),
                             const SizedBox(width: 8),
-                            const Text(
+                            const Expanded(
+                                child: Text(
                               'Referencia Rápida de Campo',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w900),
-                            ),
+                            )),
                           ],
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          '20 señales corporales de mayor impacto en ventas, entrevistas y negociaciones para consultar en 30 segundos.',
+                          '20 observaciones y preguntas útiles para ventas, entrevistas y negociaciones. Úsalas como guía, no como diagnóstico de lo que otra persona piensa.',
                           style: TextStyle(
                             fontSize: 12.5,
                             color: isDark
@@ -121,56 +122,58 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Semáforo filter chips
+                  // Filtros por lectura orientativa
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: [
                         FilterChip(
                           label: const Text('Todos'),
-                          selected: _filterLight == null,
+                          selected: _filterReading == null,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(() => _filterLight = null);
+                            setState(() => _filterReading = null);
                           },
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.success, size: 18),
-                          label: const Text('Verde (Avanzar)'),
-                          selected: _filterLight == SignalTrafficLight.green,
-                          selectedColor: AppColors.successContainer,
+                              color: AppColors.primary, size: 18),
+                          label: const Text('Posible apertura'),
+                          selected:
+                              _filterReading == GestureReading.possibleOpenness,
+                          selectedColor: AppColors.primaryContainer,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(
-                                () => _filterLight = SignalTrafficLight.green);
+                            setState(() => _filterReading =
+                                GestureReading.possibleOpenness);
                           },
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.warning, size: 18),
-                          label: const Text('Amarillo (Precaución)'),
-                          selected: _filterLight == SignalTrafficLight.yellow,
-                          selectedColor: AppColors.warningContainer,
+                              color: AppColors.primary, size: 18),
+                          label: const Text('Lectura ambigua'),
+                          selected: _filterReading == GestureReading.ambiguous,
+                          selectedColor: AppColors.primaryContainer,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(
-                                () => _filterLight = SignalTrafficLight.yellow);
+                            setState(() =>
+                                _filterReading = GestureReading.ambiguous);
                           },
                         ),
                         const SizedBox(width: 8),
                         FilterChip(
                           avatar: const Icon(Icons.circle,
-                              color: AppColors.error, size: 18),
-                          label: const Text('Rojo (Peligro)'),
-                          selected: _filterLight == SignalTrafficLight.red,
-                          selectedColor: const Color(0xFFFFE4E6),
+                              color: AppColors.primary, size: 18),
+                          label: const Text('Posible tensión'),
+                          selected:
+                              _filterReading == GestureReading.possibleTension,
+                          selectedColor: AppColors.primaryContainer,
                           onSelected: (_) {
                             FeedbackService.lightClick();
-                            setState(
-                                () => _filterLight = SignalTrafficLight.red);
+                            setState(() => _filterReading =
+                                GestureReading.possibleTension);
                           },
                         ),
                       ],
@@ -217,15 +220,13 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    BadgePill(
+                                      text: item.reading.shortState,
+                                      color: item.reading.color,
+                                    ),
+                                    const SizedBox(height: 4),
                                     Row(
                                       children: [
-                                        BadgePill(
-                                          text: item.signalType.label
-                                              .split(' ')
-                                              .first,
-                                          color: item.signalType.color,
-                                        ),
-                                        const SizedBox(width: 6),
                                         Expanded(
                                           child: Text(
                                             item.name,
@@ -247,8 +248,8 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           tooltip: 'Escuchar en voz alta',
                                           onPressed: () {
                                             FeedbackService.lightClick();
-                                            TtsService.speak(
-                                                '${item.name}. Significado: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
+                                            TtsService.speakSpanish(
+                                                '${item.name}. Posibles significados: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
                                           },
                                         ),
                                       ],
@@ -265,7 +266,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                         ),
                                         children: [
                                           const TextSpan(
-                                              text: 'Significado: ',
+                                              text: 'Posibles significados: ',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.probableMeaning),
@@ -330,15 +331,13 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    BadgePill(
+                                      text: item.reading.shortState,
+                                      color: item.reading.color,
+                                    ),
+                                    const SizedBox(height: 4),
                                     Row(
                                       children: [
-                                        BadgePill(
-                                          text: item.signalType.label
-                                              .split(' ')
-                                              .first,
-                                          color: item.signalType.color,
-                                        ),
-                                        const SizedBox(width: 6),
                                         Expanded(
                                           child: Text(
                                             item.name,
@@ -360,8 +359,8 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                           tooltip: 'Escuchar en voz alta',
                                           onPressed: () {
                                             FeedbackService.lightClick();
-                                            TtsService.speak(
-                                                '${item.name}. Significado: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
+                                            TtsService.speakSpanish(
+                                                '${item.name}. Posibles significados: ${item.probableMeaning}. Qué puedes hacer: ${item.whatToDo}');
                                           },
                                         ),
                                       ],
@@ -378,7 +377,7 @@ class _CheatSheetScreenState extends State<CheatSheetScreen> {
                                         ),
                                         children: [
                                           const TextSpan(
-                                              text: 'Significado: ',
+                                              text: 'Posibles significados: ',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold)),
                                           TextSpan(text: item.probableMeaning),

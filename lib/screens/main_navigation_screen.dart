@@ -65,7 +65,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isTablet = constraints.maxWidth >= 640;
+        final isTablet = constraints.maxWidth >= 640 &&
+            constraints.maxHeight >= 600 &&
+            MediaQuery.textScalerOf(context).scale(14) <= 21;
 
         if (isTablet) {
           return Scaffold(
@@ -169,6 +171,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             ],
           ),
           bottomNavigationBar: NavigationBar(
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             selectedIndex: _currentIndex,
             onDestinationSelected: _onTabTapped,
             destinations: [

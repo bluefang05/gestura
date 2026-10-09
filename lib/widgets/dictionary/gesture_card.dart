@@ -93,13 +93,13 @@ class GestureCard extends StatelessWidget {
                             ),
                             tooltip: isSpeaking
                                 ? 'Detener síntesis'
-                                : 'Escuchar síntesis express (10s)',
+                                : 'Escuchar resumen',
                             onPressed: () {
                               FeedbackService.lightClick();
                               if (isSpeaking) {
                                 TtsService.stop();
                               } else {
-                                TtsService.speak(
+                                TtsService.speakSpanish(
                                   item.expressAudioSummary,
                                   gestureId: 'card_${item.id}',
                                 );
@@ -189,11 +189,11 @@ class GestureCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 7, vertical: 2.5),
                         decoration: BoxDecoration(
-                          color: item.signalType.color
+                          color: item.reading.color
                               .withValues(alpha: isDark ? 0.2 : 0.12),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: item.signalType.color
+                            color: item.reading.color
                                 .withValues(alpha: isDark ? 0.45 : 0.3),
                             width: 1.0,
                           ),
@@ -202,19 +202,20 @@ class GestureCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Icon(
-                              item.signalType.icon,
+                              item.reading.icon,
                               size: 13,
-                              color: item.signalType.color,
+                              color: item.reading.color,
                             ),
                             const SizedBox(width: 4),
-                            Text(
-                              item.signalType.shortState,
+                            Flexible(
+                                child: Text(
+                              item.reading.shortState,
                               style: TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w800,
-                                color: item.signalType.color,
+                                color: item.reading.color,
                               ),
-                            ),
+                            )),
                           ],
                         ),
                       ),

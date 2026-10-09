@@ -76,7 +76,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final isTablet = constraints.maxWidth >= 640;
+          final isTablet = constraints.maxWidth >= 640 &&
+              constraints.maxHeight >= 600 &&
+              MediaQuery.textScalerOf(context).scale(14) <= 21;
           final columns = isTablet ? 2 : 1;
 
           return Center(
@@ -235,7 +237,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
                                 children: [
                                   BadgePill(
                                     text: scenario.domain,
@@ -243,7 +247,6 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                         ? AppColors.coral
                                         : AppColors.indigo,
                                   ),
-                                  const Spacer(),
                                   if (_completedIds.contains(scenario.id))
                                     const BadgePill(
                                       text: 'Completado',
@@ -277,7 +280,10 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                 ),
                               ),
                               const SizedBox(height: 8),
-                              Row(
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
                                   Icon(Icons.format_list_numbered_rounded,
                                       size: 18,
@@ -293,7 +299,6 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                             ? AppColors.textMutedDark
                                             : AppColors.textMutedLight),
                                   ),
-                                  const Spacer(),
                                   Text(
                                     'Comenzar',
                                     style: TextStyle(
@@ -336,7 +341,9 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
                                 children: [
                                   BadgePill(
                                     text: scenario.domain,
@@ -344,7 +351,6 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                         ? AppColors.coral
                                         : AppColors.indigo,
                                   ),
-                                  const Spacer(),
                                   if (_completedIds.contains(scenario.id))
                                     const BadgePill(
                                       text: 'Completado',
@@ -374,7 +380,10 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              Row(
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
                                   Icon(Icons.format_list_numbered_rounded,
                                       size: 18,
@@ -390,7 +399,6 @@ class _ScenariosScreenState extends State<ScenariosScreen> {
                                             ? AppColors.textMutedDark
                                             : AppColors.textMutedLight),
                                   ),
-                                  const Spacer(),
                                   Text(
                                     'Comenzar',
                                     style: TextStyle(

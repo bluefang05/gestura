@@ -9,6 +9,8 @@ import '../core/services/tts_service.dart';
 import '../models/social_script.dart';
 import '../data/social_scripts_database.dart';
 import '../data/boundary_framework_database.dart';
+import '../data/communication_evidence_database.dart';
+import '../widgets/common/communication_evidence_card.dart';
 
 class UnwrittenRulesScreen extends StatefulWidget {
   final int initialTab;
@@ -56,7 +58,9 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       'voy a seguir con lo mío. Que tengas buen día".';
 
   static const String _nervousLaughSpeech =
-      'Una risa puede tener muchos motivos. La cara y el cuerpo no bastan para '
+      'La investigación distingue risa espontánea y risa voluntaria; reír a '
+      'propósito no significa mentir. Una risa puede tener muchos motivos. '
+      'La cara y el cuerpo no bastan para '
       'saber si alguien está contento, nervioso o incómodo. Si te preocupa cómo '
       'cayó algo que dijiste, puedes preguntar: "¿Te hizo gracia o te incomodó?". '
       'También puedes aclarar lo que querías decir.';
@@ -77,7 +81,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
           'Frases cotidianas que pueden tener más de un sentido. ');
       for (final item in _indirectPhrases) {
         buffer.write(
-            'Frase: "${item['phrase']}". Sentido literal: "${item['literal']}". Un posible sentido, entre otros: "${item['realMeaning']}". Algo que podrías notar: "${item['signal']}". Una respuesta posible: "${item['response']}". ');
+            'Frase: "${item['phrase']}". Sentido literal: "${item['literal']}". Algunas explicaciones posibles: "${item['possibleMeanings']}". Algo que podrías notar: "${item['signal']}". Una respuesta posible: "${item['response']}". ');
       }
       textToSpeak = buffer.toString();
     } else if (_selectedTab == 2) {
@@ -93,73 +97,75 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
             'Frases sencillas para expresar tus límites y respetar los de otras personas.';
       }
     }
-    TtsService.speak(textToSpeak, gestureId: 'unwritten_rules_$_selectedTab');
+    TtsService.speakSpanish(textToSpeak,
+        gestureId: 'unwritten_rules_$_selectedTab');
   }
 
   final List<Map<String, dynamic>> _indirectPhrases = [
     {
       'phrase': 'No te preocupes, yo me encargo de hacerlo...',
-      'literal': 'No tienes que hacer nada, yo lo resolveré con gusto.',
-      'realMeaning':
-          'Estoy abrumado/a o molesto/a por tener que hacerlo solo/a. Esperaba que te ofrecieras o que insistieras en ayudarme.',
+      'literal': 'La persona dice que se encargará de la tarea.',
+      'possibleMeanings':
+          'Puede querer hacerlo por su cuenta, ofrecer ayuda o tener dificultades para pedir apoyo. La frase no permite elegir un motivo.',
       'signal': 'Suspiro breve, postura rígida o tono de voz plano/apagado.',
       'response':
-          'Insiste amablemente una vez: "De verdad, permíteme ayudarte con una parte. Dime qué te aligera más la carga y lo hacemos juntos".',
+          'Puedes preguntar: "¿Quieres que te ayude con alguna parte o prefieres hacerlo tú?". Acepta si no quiere ayuda.',
       'category': 'Colaboración',
     },
     {
       'phrase': 'Haz lo que a ti te parezca mejor...',
-      'literal': 'Tienes total libertad para elegir la opción que desees.',
-      'realMeaning':
-          'Tengo una preferencia clara en mente y no me gusta tu opción. Si haces lo que quieres sin consultarme, generará resentimiento.',
+      'literal': 'La persona deja la elección en tus manos.',
+      'possibleMeanings':
+          'Puede confiar en tu elección, no tener preferencia o querer hablar más del asunto. No sabemos si está en desacuerdo.',
       'signal':
           'Contacto visual cortado rápidamente, labios comprimidos en línea fina.',
       'response':
-          'Pausa y pregunta abiertamente: "Noto que no estás del todo convencido/a con esta alternativa. ¿Cuál sería tu opción ideal para que los dos estemos tranquilos?".',
+          'Si la decisión afecta a ambos, pregunta: "¿Hay alguna preferencia tuya que debamos considerar?".',
       'category': 'Decisiones',
     },
     {
       'phrase': 'A ver si nos vemos pronto para tomar un café...',
-      'literal': 'Vamos a agendar una fecha próxima para vernos.',
-      'realMeaning':
-          'Fórmula de cortesía social de despedida. Expresa simpatía momentánea, pero no implica un compromiso real de reunión.',
-      'signal':
-          'Se dice siempre al momento de despedirse mientras el cuerpo ya se aleja.',
+      'literal':
+          'La persona menciona la posibilidad de verse; no fija una fecha.',
+      'possibleMeanings':
+          'Puede ser una invitación que aún necesita concretarse o una despedida cordial. Pregunta si quieres aclararlo.',
+      'signal': 'La frase puede aparecer al despedirse o en otros momentos.',
       'response':
-          'Responde en el mismo nivel de cortesía: "¡Claro que sí, un gusto verte!". No saques la agenda de inmediato a menos que la persona proponga un día exacto.',
+          'Si te interesa, puedes preguntar: "¿Quieres que busquemos un día?". Deja espacio para que acepte, posponga o rechace.',
       'category': 'Social',
     },
     {
       'phrase': 'Está interesante tu propuesta...',
-      'literal': 'Tu idea es fascinante y despierta curiosidad.',
-      'realMeaning':
-          'Descarte educado o escepticismo velado. No les convence, pero no quieren herir tus sentimientos con un "no" directo.',
+      'literal': 'La persona describe la propuesta como interesante.',
+      'possibleMeanings':
+          'Puede expresar curiosidad, una valoración inicial o cortesía. No equivale a aceptación ni permite deducir rechazo.',
       'signal':
           'Ceño ligeramente ladeado, pausa antes de contestar y mirada vaga.',
       'response':
-          'Desarma la cortesía: "Gracias. Con total sinceridad, ¿qué aspecto sientes que no termina de encajar con lo que necesitas?".',
+          'Puedes preguntar: "¿Qué te parece útil y qué te gustaría revisar?". Escucha la respuesta sin atribuirle una duda oculta.',
       'category': 'Laboral / Ventas',
     },
     {
       'phrase': 'No me pasa nada, estoy bien.',
-      'literal': 'Mi estado emocional es de tranquilidad y bienestar.',
-      'realMeaning':
-          'Estoy conteniendo molestia, tristeza o sobrecarga y no quiero o no puedo explicarlo ahora mismo.',
+      'literal': 'La persona dice que está bien.',
+      'possibleMeanings':
+          'Puede sentirse bien o preferir no hablar de algo. Los gestos no permiten invalidar su respuesta.',
       'signal':
           'Mandíbula apretada, hombros levantados y suspiro prolongado al terminar la frase.',
       'response':
-          'No interrogues ni presiones: "Entiendo. Te noto un poco cansado/a. Si quieres que lo hablemos después o si prefieres espacio y silencio, aquí estoy".',
+          'Respeta lo que dice: "Entiendo. Si te apetece hablar o necesitas espacio, dímelo". Evita insistir.',
       'category': 'Relaciones',
     },
     {
       'phrase': 'Si tú crees que es lo más adecuado...',
-      'literal': 'Confío plenamente en tu criterio.',
-      'realMeaning':
-          'Tengo serias dudas y no estoy de acuerdo, pero no quiero asumir la responsabilidad del resultado si algo sale mal.',
+      'literal':
+          'La persona deja la valoración en tus manos, sin explicar todas sus preferencias.',
+      'possibleMeanings':
+          'Puede confiar en tu criterio, no tener preferencia o sentir dudas. Si hace falta un acuerdo, compruébalo con palabras.',
       'signal':
           'Encogimiento asimétrico de un solo hombro o balanceo de cabeza.',
       'response':
-          'Valida su opinión: "¿Qué riesgos ves tú que quizás yo no estoy considerando? Me interesa mucho tu punto de vista antes de decidir".',
+          'Puedes preguntar: "¿Estás de acuerdo con esta opción o quieres revisar algo antes de decidir?".',
       'category': 'Liderazgo',
     },
   ];
@@ -253,7 +259,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         const SizedBox(width: 8),
                         _buildNavChip(
                             index: 3,
-                            label: 'Sarcasmo con Cara de Póker',
+                            label: 'Ironía y contexto',
                             icon: Icons.record_voice_over_rounded,
                             isDark: isDark),
                         const SizedBox(width: 8),
@@ -364,7 +370,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(_smallTalkSpeech,
+                            TtsService.speakSpanish(_smallTalkSpeech,
                                 gestureId: 'rules_smalltalk');
                           }
                         },
@@ -465,7 +471,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
         ),
         const SizedBox(height: 6),
         Text(
-          'Toca cada tarjeta para entender qué dicen las palabras, qué significa en realidad y cómo responder con precisión.',
+          'Toca cada tarjeta para ver el sentido literal, otras posibilidades y una opción para responder. No permite conocer una intención oculta.',
           style: TextStyle(
             fontSize: 13,
             color: isDark
@@ -516,8 +522,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                               TtsService.stop();
                             } else {
                               final text =
-                                  'Frase indirecta: "${item['phrase']}". Lo que las palabras dicen literalmente: ${item['literal']}. Lo que en realidad significa: ${item['realMeaning']}. Pista corporal observable: ${item['signal']}. Respuesta asertiva recomendada: ${item['response']}.';
-                              TtsService.speak(text, gestureId: id);
+                                  'Frase indirecta: "${item['phrase']}". Lo que las palabras dicen literalmente: ${item['literal']}. Algunas explicaciones posibles: ${item['possibleMeanings']}. Pista corporal observable: ${item['signal']}. Respuesta asertiva recomendada: ${item['response']}.';
+                              TtsService.speakSpanish(text, gestureId: id);
                             }
                           },
                         );
@@ -595,7 +601,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 const Divider(height: 1),
                 const SizedBox(height: 10),
 
-                // Significado real
+                // Posibles sentidos
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -614,10 +620,10 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           ),
                           children: [
                             const TextSpan(
-                              text: 'Subtexto o intención habitual: ',
+                              text: 'Posibles sentidos: ',
                               style: TextStyle(fontWeight: FontWeight.w800),
                             ),
-                            TextSpan(text: item['realMeaning'] as String),
+                            TextSpan(text: item['possibleMeanings'] as String),
                           ],
                         ),
                       ),
@@ -721,7 +727,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'La Risa como Alivio de Tensión Social',
+                      'Risa espontánea y risa voluntaria',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
@@ -750,7 +756,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(_nervousLaughSpeech,
+                            TtsService.speakSpanish(_nervousLaughSpeech,
                                 gestureId: 'rules_nervous_laugh');
                           }
                         },
@@ -761,7 +767,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'Una risa puede tener muchos motivos. La cara y el cuerpo no bastan para saber si alguien está contento, nervioso o incómodo. Si te preocupa cómo cayó algo que dijiste, puedes preguntar o aclarar lo que querías decir.',
+                'La investigación distingue risa espontánea, que surge sin planearla, y risa voluntaria, que se produce a propósito y también puede participar en una conversación. Eso no equivale a alegre frente a nerviosa, ni a sincera frente a falsa. Las categorías de abajo describen cómo se produce la risa; no son una lista para clasificar a alguien por su cara.',
                 style: TextStyle(
                   fontSize: 13.5,
                   height: 1.45,
@@ -781,29 +787,29 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: isDark
-                            ? const Color(0xFF064E3B).withValues(alpha: 0.3)
-                            : AppColors.successContainer,
+                            ? AppColors.primary.withValues(alpha: 0.2)
+                            : AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            '😄 Risa Genuina',
+                            'Risa espontánea',
                             style: TextStyle(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.success),
+                                color: AppColors.primary),
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '• Ojos entrecerrados con arrugas junto a los ojos.\n• Hombros y mandíbula relajados.\n• Exhalación sonora espontánea.',
+                            '• Surge sin decidir producirla.\n• Se estudia mediante grabaciones y medidas de producción vocal.\n• No permite por sí sola saber cómo se recibió un comentario.',
                             style: TextStyle(
                               fontSize: 12.5,
                               height: 1.35,
                               color: isDark
-                                  ? const Color(0xFFECFDF5)
-                                  : const Color(0xFF064E3B),
+                                  ? AppColors.textPrimaryDark
+                                  : AppColors.textPrimaryLight,
                             ),
                           ),
                         ],
@@ -816,29 +822,29 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: isDark
-                            ? const Color(0xFF78350F).withValues(alpha: 0.3)
-                            : AppColors.warningContainer,
+                            ? AppColors.primary.withValues(alpha: 0.2)
+                            : AppColors.primary.withValues(alpha: 0.08),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            '😬 Risa Nerviosa / Tensa',
+                            'Risa voluntaria',
                             style: TextStyle(
                                 fontSize: 13.5,
                                 fontWeight: FontWeight.w800,
-                                color: AppColors.warning),
+                                color: AppColors.primary),
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '• Boca abierta mostrando dientes pero ojos inmóviles.\n• Cuello rígido con tendones marcados.\n• Mirada que busca a terceros buscando auxilio social.',
+                            '• Se produce a propósito.\n• Puede participar en el intercambio social.\n• Voluntaria no equivale a falsa ni prueba una intención oculta.',
                             style: TextStyle(
                               fontSize: 12.5,
                               height: 1.35,
                               color: isDark
-                                  ? const Color(0xFFFEF3C7)
-                                  : const Color(0xFF78350F),
+                                  ? AppColors.textPrimaryDark
+                                  : AppColors.textPrimaryLight,
                             ),
                           ),
                         ],
@@ -854,7 +860,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
               ),
               const SizedBox(height: 6),
               Text(
-                'Si cometes un error social y la otra persona se ríe nerviosamente, no te burles ni asumas que le divirtió. Normaliza el momento con tranquilidad: "Disculpa si sonó raro o fuera de lugar, lo que quería decir es..." y continúa sin dramatismo.',
+                'Si no sabes cómo se recibió tu comentario, puedes aclarar lo que querías decir o preguntar: "¿Cómo te cayó lo que dije?". Si sabes que fue ofensivo, puedes disculparte sin usar la risa para decidir si causó daño.',
                 style: TextStyle(
                   fontSize: 13,
                   height: 1.4,
@@ -865,6 +871,10 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
               ),
             ],
           ),
+        ),
+        const SizedBox(height: 12),
+        const CommunicationEvidenceCard(
+          evidence: CommunicationEvidenceDatabase.laughter,
         ),
       ],
     );
@@ -887,7 +897,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   const SizedBox(width: 8),
                   const Expanded(
                     child: Text(
-                      'Sarcasmo Real: La Voz Manda, la Cara Engaña',
+                      'Sarcasmo: palabras, tono y contexto',
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
                     ),
@@ -916,7 +926,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                           if (isSpeaking) {
                             TtsService.stop();
                           } else {
-                            TtsService.speak(_pokerSarcasmSpeech,
+                            TtsService.speakSpanish(_pokerSarcasmSpeech,
                                 gestureId: 'rules_poker_sarcasm');
                           }
                         },
@@ -927,7 +937,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
               ),
               const SizedBox(height: 10),
               Text(
-                'En los cómics y caricaturas, los personajes sonríen con malicia cuando son irónicos. En la vida real, los adultos suelen usar una "cara de póker" completamente seria mientras dicen una ironía. Por eso para personas literales o autistas resulta tan confuso.',
+                'La ironía puede expresarse con una cara seria, una sonrisa o distintas entonaciones. Ninguna apariencia es obligatoria. Reconocerla depende del contexto y de lo que comparten las personas; no presupongas cómo la interpreta alguien por ser autista.',
                 style: TextStyle(
                   fontSize: 13.5,
                   height: 1.45,
@@ -946,7 +956,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                 icon: Icons.graphic_eq_rounded,
                 title: 'La voz cambia',
                 description:
-                    'A veces alguien alarga una palabra al bromear. También puede hacerlo por otros motivos; por sí sola, esta pista no confirma sarcasmo.',
+                    'En algunas grabaciones de sarcasmo se han medido frases más lentas y cambios de tono. Es una pista posible junto con las palabras y el contexto; también aparece por otros motivos.',
                 isDark: isDark,
               ),
               const SizedBox(height: 10),
@@ -1178,7 +1188,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'Regla de oro: Si tuviste que insistir para que dijeran que sí, te dijeron que no antes. El consentimiento debe ser libre y espontáneo; la insistencia genera complacencia forzada.',
+                        'El consentimiento debe ser libre: acepta un no y no presiones para conseguir un sí. Si la respuesta no es clara o la persona cambia de opinión, pausa y comprueba qué quiere. Puede necesitar tiempo o elegir otro modo de responder.',
                         style: TextStyle(
                           fontSize: 12,
                           color: isDark
@@ -1532,7 +1542,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         conceptsBuffer.write(
                             '${concept.title}: ${concept.description}. ');
                       }
-                      TtsService.speak(
+                      TtsService.speakSpanish(
                         '${phase.title}. ${phase.subtitle}. Principio rector: ${phase.corePrinciple}. Claves y mecanismos: $conceptsBuffer Protocolo práctico: ${phase.practicalProtocol}',
                         gestureId: 'boundary_phase_${phase.phaseNumber}',
                       );
@@ -1555,12 +1565,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
           child: Column(
             children: [
               const Text(
-                '¿Listo para poner en práctica la teoría?',
+                '¿Quieres practicar con ejemplos?',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 4),
               Text(
-                'Consulta los 14 guiones reales clasificados con selector de firmeza.',
+                'Consulta las frases de ejemplo y elige cómo expresar tu respuesta.',
                 style: TextStyle(
                   fontSize: 12,
                   color: isDark
@@ -1851,7 +1861,7 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                         FeedbackService.lightClick();
                         final text =
                             '${script.title}. Situación: ${script.contextDescription}. Frase en nivel ${currentFirmness.label}: $currentPhrase. Lenguaje corporal recomendado: ${script.bodyLanguage}. Trampa o error a evitar: ${script.whatNotToDo}';
-                        TtsService.speak(text,
+                        TtsService.speakSpanish(text,
                             gestureId: 'script_${script.id}');
                       },
                       icon: const Icon(Icons.volume_up_rounded, size: 16),

@@ -133,6 +133,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       child: DropdownButton<String?>(
                         value: _settings.languageCode,
                         isExpanded: true,
+                        itemHeight: null,
                         icon: const Icon(Icons.language_rounded,
                             color: AppColors.primary),
                         items: [
@@ -152,16 +153,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                           ),
                           const DropdownMenuItem(
-                            value: 'es',
+                            value: 'es-ES',
                             child: Row(
                               children: [
                                 Text('🇪🇸', style: TextStyle(fontSize: 18)),
                                 SizedBox(width: 10),
-                                Text('Español',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
+                                Expanded(
+                                    child: Text('Español (España)',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600))),
                               ],
                             ),
+                          ),
+                          const DropdownMenuItem(
+                            value: 'es-419',
+                            child: Text('Español (Latinoamérica)'),
                           ),
                           const DropdownMenuItem(
                             value: 'en',
@@ -169,9 +175,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               children: [
                                 Text('🇺🇸', style: TextStyle(fontSize: 18)),
                                 SizedBox(width: 10),
-                                Text('English',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
+                                Expanded(
+                                  child: Text('English',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
                               ],
                             ),
                           ),
@@ -181,9 +189,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               children: [
                                 Text('🇫🇷', style: TextStyle(fontSize: 18)),
                                 SizedBox(width: 10),
-                                Text('Français',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
+                                Expanded(
+                                  child: Text('Français',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
                               ],
                             ),
                           ),
@@ -193,9 +203,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               children: [
                                 Text('🇧🇷', style: TextStyle(fontSize: 18)),
                                 SizedBox(width: 10),
-                                Text('Português',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
+                                Expanded(
+                                  child: Text('Português (Brasil)',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
                               ],
                             ),
                           ),
@@ -205,17 +217,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               children: [
                                 Text('🇩🇪', style: TextStyle(fontSize: 18)),
                                 SizedBox(width: 10),
-                                Text('Deutsch',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
+                                Expanded(
+                                  child: Text('Deutsch',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
                               ],
                             ),
                           ),
                         ],
-                        onChanged: (newLang) {
+                        onChanged: (newLang) async {
                           FeedbackService.lightClick();
-                          _settings.setLanguageCode(newLang);
-                          TtsService.updateLanguage(newLang ?? 'es');
+                          await _settings.setLanguageCode(newLang);
+                          await TtsService.updateLanguage(newLang);
                         },
                       ),
                     ),
@@ -323,10 +337,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(loc.ttsSpeedTitle,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 13.5)),
+                                  Expanded(
+                                      child: Text(loc.ttsSpeedTitle,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13.5))),
                                   Text(
                                     '${(_settings.speechRate * 200).round()}%',
                                     style: const TextStyle(

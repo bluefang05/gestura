@@ -111,7 +111,7 @@ class _CompareScreenState extends State<CompareScreen> {
       final itemA = GestureDatabase.getById(pair.gestureIdA);
       final itemB = GestureDatabase.getById(pair.gestureIdB);
       if (itemA != null && itemB != null) {
-        TtsService.speak(
+        TtsService.speakSpanish(
             'Comparando ${itemA.name} con ${itemB.name}. Diferencia central: ${pair.coreDifference}');
       }
     }
@@ -137,7 +137,7 @@ class _CompareScreenState extends State<CompareScreen> {
             tooltip: 'Escuchar Comparación',
             onPressed: () {
               FeedbackService.lightClick();
-              TtsService.speak(
+              TtsService.speakSpanish(
                   'Comparando ${itemA.name} contra ${itemB.name}. Diferencias clave: En ${itemA.name}, ${itemA.physiologicalDetails}. Su significado es: ${itemA.probableMeaning}. En ${itemB.name}, ${itemB.physiologicalDetails}. Su significado es: ${itemB.probableMeaning}.');
             },
           ),
@@ -239,8 +239,8 @@ class _CompareScreenState extends State<CompareScreen> {
                               ),
                               const SizedBox(height: 6),
                               BadgePill(
-                                text: itemA.signalType.label.split(' ').first,
-                                color: itemA.signalType.color,
+                                text: itemA.reading.label,
+                                color: itemA.reading.color,
                               ),
                             ],
                           ),
@@ -292,8 +292,8 @@ class _CompareScreenState extends State<CompareScreen> {
                               ),
                               const SizedBox(height: 6),
                               BadgePill(
-                                text: itemB.signalType.label.split(' ').first,
-                                color: itemB.signalType.color,
+                                text: itemB.reading.label,
+                                color: itemB.reading.color,
                               ),
                             ],
                           ),
@@ -322,7 +322,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         ),
                         const Divider(height: 24),
                         _buildComparisonRow(
-                          label: 'Significado Principal',
+                          label: 'Posibles significados',
                           textA: itemA.probableMeaning,
                           textB: itemB.probableMeaning,
                           colorA: catA.primaryColor,

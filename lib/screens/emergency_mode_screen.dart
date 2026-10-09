@@ -1,3 +1,5 @@
+import '../data/communication_evidence_database.dart';
+import '../widgets/common/communication_evidence_card.dart';
 import 'package:flutter/material.dart';
 import '../core/services/tts_service.dart';
 import 'communication_board_screen.dart';
@@ -185,7 +187,7 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                     return OutlinedButton.icon(
                       onPressed: () => speaking
                           ? TtsService.stop()
-                          : TtsService.speak(
+                          : TtsService.speakSpanish(
                               '${section.title}. ${section.steps.map((step) => '${step.title}. ${step.body}').join(' ')}',
                               gestureId: speechId),
                       icon: Icon(
@@ -218,6 +220,12 @@ class _EmergencyModeScreenState extends State<EmergencyModeScreen> {
                       }),
                     ),
                   ),
+                if (_selectedTab == 2) ...[
+                  const SizedBox(height: 12),
+                  const CommunicationEvidenceCard(
+                    evidence: CommunicationEvidenceDatabase.breathing,
+                  ),
+                ],
                 if (_checkedItems
                     .any((key) => key.startsWith('${_selectedTab}_')))
                   TextButton(

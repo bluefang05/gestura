@@ -4,7 +4,6 @@ import '../data/incongruence_database.dart';
 import '../models/incongruence_item.dart';
 import '../widgets/common/app_card.dart';
 import '../widgets/common/ad_banner_slot.dart';
-import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/tts_service.dart';
@@ -22,7 +21,6 @@ class _IncongruenceDetectorScreenState
     extends State<IncongruenceDetectorScreen> {
   late String _selectedAudience;
   int _currentIndex = 0;
-  bool? _userAnswer; // true: congruent, false: incongruent
   bool _showFeedback = false;
 
   @override
@@ -37,33 +35,16 @@ class _IncongruenceDetectorScreenState
     super.dispose();
   }
 
-  int _score = 0;
-  int _totalAnswered = 0;
-
   List<IncongruenceItem> get _items =>
       IncongruenceDatabase.getByAudience(_selectedAudience);
 
-  void _onAnswer(bool answer) {
+  void _exploreCase() {
     if (_showFeedback) return;
+    FeedbackService.lightClick();
+    setState(() => _showFeedback = true);
     final item = _items[_currentIndex];
-    final isCorrect = answer == item.isAligned;
-
-    if (isCorrect) {
-      FeedbackService.success();
-      _score++;
-    } else {
-      FeedbackService.lightClick();
-    }
-    _totalAnswered++;
-
-    setState(() {
-      _userAnswer = answer;
-      _showFeedback = true;
-    });
-
-    final interpretationsText = item.possibleInterpretations.join('. ');
-    TtsService.speak(
-      '${isCorrect ? "Respuesta correcta." : "Vamos a repasarlo."} ${item.isAligned ? "Las palabras y los gestos parecen coincidir." : "Las palabras y los gestos pueden interpretarse de distintas formas."} Posibles explicaciones: $interpretationsText. ${item.explanation}. Qué puedes hacer: ${item.recommendedAction}',
+    TtsService.speakSpanish(
+      'Caso ficticio. Posibles explicaciones: ${item.possibleInterpretations.join(". ")}. ${item.explanation}. Una opción para responder: ${item.recommendedAction}',
     );
   }
 
@@ -71,7 +52,6 @@ class _IncongruenceDetectorScreenState
     FeedbackService.lightClick();
     setState(() {
       _showFeedback = false;
-      _userAnswer = null;
       if (_currentIndex < _items.length - 1) {
         _currentIndex++;
       } else {
@@ -80,17 +60,12 @@ class _IncongruenceDetectorScreenState
     });
   }
 
-  Widget _buildBottomActionBar(
-    BuildContext context,
-    bool isDark,
-  ) {
-    final backgroundColor = isDark ? const Color(0xFF0F172A) : Colors.white;
-    final borderColor = isDark ? Colors.white12 : Colors.black12;
-
+  Widget _buildBottomActionBar(BuildContext context, bool isDark) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border(top: BorderSide(color: borderColor, width: 0.8)),
+        color: isDark ? const Color(0xFF0F172A) : Colors.white,
+        border: Border(
+            top: BorderSide(color: isDark ? Colors.white12 : Colors.black12)),
       ),
       child: SafeArea(
         top: false,
@@ -100,95 +75,18 @@ class _IncongruenceDetectorScreenState
             const AdBannerSlot(),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 10, 16, 12),
-              child: _showFeedback
-                  ? SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 13),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        icon: const Icon(Icons.arrow_forward_rounded),
-                        label: const Text(
-                          'Siguiente Caso',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 14,
-                          ),
-                        ),
-                        onPressed: _nextItem,
-                      ),
-                    )
-                  : Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '¿Cómo se relacionan las palabras con las señales corporales?',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w900,
-                            color: isDark
-                                ? AppColors.textPrimaryDark
-                                : AppColors.textPrimaryLight,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF059669),
-                                  foregroundColor: Colors.white,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 13),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                ),
-                                icon: const Icon(Icons.check_circle_rounded),
-                                label: const Text(
-                                  'Señales Alineadas',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                onPressed: () => _onAnswer(true),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFD97706),
-                                  foregroundColor: Colors.white,
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 13),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                ),
-                                icon: const Icon(Icons.call_split_rounded),
-                                label: const Text(
-                                  'Señales Mixtas',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                onPressed: () => _onAnswer(false),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  icon: Icon(_showFeedback
+                      ? Icons.arrow_forward_rounded
+                      : Icons.help_outline_rounded),
+                  label: Text(_showFeedback
+                      ? 'Siguiente Caso'
+                      : 'Explorar explicaciones'),
+                  onPressed: _showFeedback ? _nextItem : _exploreCase,
+                ),
+              ),
             ),
           ],
         ),
@@ -211,7 +109,7 @@ class _IncongruenceDetectorScreenState
             tooltip: 'Escuchar frase y señales',
             onPressed: () {
               FeedbackService.lightClick();
-              TtsService.speak(
+              TtsService.speakSpanish(
                   'La persona (${item.speakerRole}) dice: "${item.spokenPhrase}". Gestos observados: ${item.physicalSignals.join(", ")}.');
             },
           ),
@@ -252,7 +150,6 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'all';
                                 _currentIndex = 0;
-                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },
@@ -276,7 +173,6 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'autism_focus';
                                 _currentIndex = 0;
-                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },
@@ -300,7 +196,6 @@ class _IncongruenceDetectorScreenState
                               setState(() {
                                 _selectedAudience = 'sales_focus';
                                 _currentIndex = 0;
-                                _userAnswer = null;
                                 _showFeedback = false;
                               });
                             },
@@ -310,9 +205,10 @@ class _IncongruenceDetectorScreenState
                     ),
                     const SizedBox(height: 14),
 
-                    // Progress & Score Bar
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // Progreso por los casos
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 8,
                       children: [
                         Text(
                           'Caso ${_currentIndex + 1} de ${items.length}',
@@ -323,11 +219,6 @@ class _IncongruenceDetectorScreenState
                                 ? AppColors.textSecondaryDark
                                 : AppColors.textSecondaryLight,
                           ),
-                        ),
-                        BadgePill(
-                          text: 'Aciertos: $_score / $_totalAnswered',
-                          color: AppColors.primary,
-                          icon: Icons.star_rounded,
                         ),
                       ],
                     ),
@@ -389,7 +280,7 @@ class _IncongruenceDetectorScreenState
                                       if (isSpeaking) {
                                         TtsService.stop();
                                       } else {
-                                        TtsService.speak(
+                                        TtsService.speakSpanish(
                                           'La persona ${item.speakerRole} dice: "${item.spokenPhrase}". Gestos observados: ${item.physicalSignals.join(", ")}. Pregunta: ¿Las palabras y los gestos parecen coincidir o ser distintos?',
                                           gestureId: id,
                                         );
@@ -570,47 +461,21 @@ class _IncongruenceDetectorScreenState
                       AppCard(
                         color: isDark ? const Color(0xFF1E293B) : Colors.white,
                         borderSide: BorderSide(
-                          color: _userAnswer == item.isAligned
-                              ? AppColors.success
-                              : AppColors.error,
+                          color: AppColors.primary,
                           width: 2.0,
                         ),
                         padding: const EdgeInsets.all(18),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  _userAnswer == item.isAligned
-                                      ? Icons.check_circle_rounded
-                                      : Icons.info_rounded,
-                                  color: _userAnswer == item.isAligned
-                                      ? AppColors.success
-                                      : AppColors.error,
-                                  size: 24,
-                                ),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: Text(
-                                    _userAnswer == item.isAligned
-                                        ? '¡Observación Calibrada!'
-                                        : 'Sigue practicando',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w900,
-                                      color: _userAnswer == item.isAligned
-                                          ? (isDark
-                                              ? const Color(0xFF6EE7B7)
-                                              : const Color(0xFF065F46))
-                                          : (isDark
-                                              ? const Color(0xFFFCA5A5)
-                                              : const Color(0xFF991B1B)),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            const Text(
+                              'Distintas explicaciones son posibles',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w900),
                             ),
+                            const SizedBox(height: 8),
+                            const Text(
+                                'Este caso ficticio ayuda a preparar preguntas. No permite comprobar emociones ni decidir que las palabras de alguien son falsas.'),
                             const SizedBox(height: 12),
 
                             // Multi-Hypothesis Interpretation Card
@@ -727,7 +592,7 @@ class _IncongruenceDetectorScreenState
                                           color: AppColors.indigo),
                                       const SizedBox(width: 6),
                                       Text(
-                                        'Regla de Acción Recomendada:',
+                                        'Una opción para responder:',
                                         style: TextStyle(
                                           fontSize: 12.5,
                                           fontWeight: FontWeight.w800,

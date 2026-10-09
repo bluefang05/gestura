@@ -112,7 +112,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
       });
 
       if (StorageService.getAutoNarration()) {
-        TtsService.speak(
+        TtsService.speakSpanish(
             '¡Entrenamiento superado! Has completado exitosamente ${widget.scenario.title}. Ganaste 50 puntos de maestría.');
       }
     }
@@ -434,7 +434,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                         tooltip: 'Escuchar lección clave',
                         onPressed: () {
                           FeedbackService.lightClick();
-                          TtsService.speak(
+                          TtsService.speakSpanish(
                             'Lección clave teórica: ${step.learningTakeaway}',
                             gestureId: 'takeaway_${step.id}',
                           );

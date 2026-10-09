@@ -22,21 +22,22 @@ class GestureDatabase {
         'Sonreír mientras se procesa información'
       ],
       contextGuidance:
-          'La activación alrededor de los ojos no confirma una emoción concreta. Observa el intercambio completo y, si importa, pregúntalo.',
+          "La constricción alrededor de los ojos se ha asociado con emoción positiva y con la impresión de alegría en estudios. La relación depende del contexto y no basta para certificar una emoción o la sinceridad.",
       whatToDo:
           'Corresponde con calidez, sin asumir acuerdo ni bienestar; deja espacio para que la persona matice con palabras.',
       salesTip:
           'No la uses como señal de compra. Confirma necesidades, dudas y próximos pasos de forma explícita.',
+      reading: GestureReading.possibleOpenness,
       illustrationKey: 'duchenne_smile',
       difficulty: 1,
     ),
     GestureItem(
       id: 'sonrisa_social',
-      name: 'Sonrisa de Cortesía / Social',
+      name: "Sonrisa con poco movimiento alrededor de los ojos",
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Boca',
       summary:
-          'Sonrisa funcional donde solo se mueven los labios, mientras los ojos permanecen estáticos.',
+          "Los labios se mueven al sonreír y se observa poco cambio alrededor de los ojos.",
       physiologicalDetails:
           'Los labios se estiran hacia los lados. Las mejillas pueden subir menos y quizá no aparezcan arrugas junto a los ojos.',
       probableMeaning:
@@ -46,7 +47,7 @@ class GestureDatabase {
         'Una sonrisa breve o contenida'
       ],
       contextGuidance:
-          'Muy común en atención al cliente, recepciones o cuando alguien no quiere parecer descortés.',
+          "El movimiento de los ojos, la intensidad y la duración influyen en cómo se percibe una sonrisa. Sin arrugas visibles también puede haber alegría; «social» no significa falsa.",
       whatToDo:
           'No uses la sonrisa para decidir si hay acuerdo. Si necesitas saberlo, formula una pregunta clara y opcional.',
       salesTip:
@@ -150,14 +151,18 @@ class GestureDatabase {
       physiologicalDetails:
           'Los labios se aprietan y se meten un poco hacia dentro.',
       probableMeaning:
-          'Contención de opiniones, desacuerdo no verbalizado, frustración o rechazo silencioso.',
-      alternativeMeanings: ['Concentración motriz intensa'],
+          "Puede acompañar concentración, molestias físicas, una costumbre o tensión. No permite deducir una opinión oculta.",
+      alternativeMeanings: [
+        "Hábito al concentrarse",
+        "Molestia o sequedad en los labios"
+      ],
       contextGuidance:
-          'Ocurre cuando la persona no quiere hablar para no empeorar una situación o generar conflicto.',
+          "El movimiento puede aparecer en distintas situaciones; no indica por sí solo que la persona evite hablar o esté en desacuerdo.",
       whatToDo:
-          'Da espacio: "Me gustaría conocer tu opinión sincera antes de continuar."',
+          "Si necesitas una respuesta, pregunta qué piensa y deja tiempo para responder, sin cuestionar su sinceridad.",
       salesTip:
-          'Puede sugerir reserva, duda no expresada o necesidad de procesar. Haz una pausa amable y pregunta: "¿Hay algún aspecto sobre esto que quieras que revisemos en detalle?".',
+          "Pregunta si quiere revisar algo de la propuesta; apretar los labios no identifica una objeción.",
+      reading: GestureReading.possibleTension,
       illustrationKey: 'tight_lips',
       difficulty: 2,
     ),
@@ -208,24 +213,25 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'parpados_cerrados',
-      name: 'Párpados Cerrados Prolongados',
+      name: 'Cierre breve de los ojos',
       category: CategoryType.expresionesFaciales,
       bodyPart: 'Ojos',
-      summary: 'Cerrar los ojos durante 1 a 3 segundos mientras el otro habla.',
+      summary: 'La persona cierra los ojos brevemente durante una conversación.',
       physiologicalDetails:
-          'Cierre voluntario prolongado del párpado superior sin dormirse.',
+          'Es una observación del movimiento; por sí sola no permite saber si fue voluntario ni por qué ocurrió.',
       probableMeaning:
-          'Desconexión emocional momentánea, fatiga mental, frustración ("no puedo con esto") o intento de autocontrol.',
+          'No tiene un significado único. Puede coincidir con un parpadeo, descanso ocular, concentración u otras circunstancias.',
       alternativeMeanings: [
-        'Concentración interna para visualizar algo mentalmente.',
-        'Meditación, descanso ocular o fatiga.',
+        'Parpadeo o hábito individual.',
+        'Descanso ocular, concentración o cansancio.',
       ],
       contextGuidance:
-          'Puede acompañar reflexión profunda, demasiada información de una vez o necesidad de procesar lo escuchado.',
+          'El momento y la situación ayudan a decidir si hace falta aclarar algo; el gesto no demuestra desconexión ni frustración.',
       whatToDo:
-          'Permite un momento de silencio o resume tu punto con claridad.',
+          'Continúa con naturalidad. Si la conversación se detuvo o algo quedó poco claro, pregunta si desea una pausa o una aclaración.',
       salesTip:
-          'Pausa tu explicación. Permite que la persona asimile el argumento antes de continuar.',
+          'No concluyas que la explicación fue excesiva por este gesto. Puedes preguntar si quiere revisar algún punto.',
+      reading: GestureReading.possibleTension,
       illustrationKey: 'closed_eyelids',
       difficulty: 3,
     ),
@@ -238,18 +244,19 @@ class GestureDatabase {
           'Apretar los dientes. Puede notarse tensión a los lados de la mandíbula.',
       physiologicalDetails: 'La mandíbula se tensa al apretar los dientes.',
       probableMeaning:
-          'Ira contenida, frustración reprimida, estrés agudo o determinación obstinada.',
+          'Puede acompañar tensión, concentración, esfuerzo físico o el hábito de apretar los dientes. No permite saber por sí sola qué siente la persona.',
       alternativeMeanings: [
         'Apretar o rechinar los dientes sin darse cuenta.',
         'Esfuerzo físico o concentración motriz intensa.',
         'Reacción pasajera a un estímulo o tensión corporal general.',
       ],
       contextGuidance:
-          'Común cuando se escucha una crítica injusta o se recibe una mala noticia.',
+          'Observa si la tensión aparece también en otras situaciones. Si necesitas saber cómo se siente la persona, pregúntalo sin atribuirle enfado.',
       whatToDo:
           'Haz una pausa. Permite que la persona se exprese antes de continuar argumentando.',
       salesTip:
           'La persona podría tener una duda o sentirse incómoda. Pregunta con calma si quiere aclarar algo.',
+      reading: GestureReading.possibleTension,
       illustrationKey: 'jaw_clenching',
       difficulty: 2,
     ),
@@ -270,11 +277,11 @@ class GestureDatabase {
         'Inseguridad o duda momentánea.',
       ],
       contextGuidance:
-          'Frecuente en situaciones de toma de decisiones arriesgadas.',
+          "Puede aparecer al concentrarse o por comodidad, sequedad o hábito. No identifica una decisión arriesgada.",
       whatToDo:
-          'Transmite seguridad y valida que no hay prisa para tomar una decisión.',
+          "Si hay una decisión pendiente, ofrece tiempo e información sin atribuir indecisión al gesto.",
       salesTip:
-          'El cliente está indeciso en el filo del cierre. Brinda una garantía de tranquilidad.',
+          'Si necesitas aclarar una decisión, pregunta qué información falta. El movimiento de los labios no permite deducir indecisión.',
       illustrationKey: 'lip_biting',
       difficulty: 2,
     ),
@@ -287,7 +294,7 @@ class GestureDatabase {
           'Elevación instantánea de ambas cejas (1/6 de segundo) al ver a alguien.',
       physiologicalDetails: 'Las cejas suben brevemente.',
       probableMeaning:
-          'Saludo universal inconsciente, agrado, reconocimiento y apertura social.',
+          'Puede acompañar reconocimiento, saludo o sorpresa. Su significado cambia según la persona y la situación.',
       alternativeMeanings: [
         'Sorpresa fugaz ante un estímulo repentino.',
         'Ajuste de visión o iluminación ambiental.',
@@ -296,7 +303,8 @@ class GestureDatabase {
           'Algunas personas levantan las cejas brevemente al saludar.',
       whatToDo: 'Devuelve una sonrisa y un saludo cálido.',
       salesTip:
-          'Si el cliente te recibe con flash de cejas, te reconoce y está predispuesto a escucharte.',
+          'Puede ser un saludo o reconocimiento. Pregunta si es buen momento para conversar; el gesto no confirma disponibilidad.',
+      reading: GestureReading.possibleOpenness,
       illustrationKey: 'eyebrow_flash',
       difficulty: 1,
     ),
@@ -334,7 +342,7 @@ class GestureDatabase {
       physiologicalDetails:
           'Las aletas de la nariz se abren un poco al respirar.',
       probableMeaning:
-          'Preparación para la acción física, indignación, agitación o necesidad de aire.',
+          "Puede acompañar cambios en la respiración, esfuerzo físico o molestias nasales. No identifica una emoción.",
       alternativeMeanings: [
         'Falta de aire, congestión nasal o esfuerzo físico previo.',
         'Respiración profunda voluntaria para oxigenarse o relajarse.',
@@ -343,8 +351,10 @@ class GestureDatabase {
       contextGuidance:
           'Puede acompañar emociones intensas o respuestas fisiológicas respiratorias.',
       whatToDo:
-          'Mantén un tono de voz bajo y pausado para desacelerar la agitación del otro.',
-      salesTip: 'No presiones más en este momento. Desescala la tensión.',
+          "No atribuyas agitación emocional al movimiento. Si necesitas saber si la persona quiere una pausa, pregúntalo.",
+      salesTip:
+          "Comprueba si es buen momento para continuar; el movimiento nasal no confirma tensión comercial.",
+      reading: GestureReading.possibleTension,
       illustrationKey: 'nostril_flaring',
       difficulty: 2,
     ),
@@ -360,7 +370,7 @@ class GestureDatabase {
       physiologicalDetails:
           'Mayor presión del aire pulmonar a través de las cuerdas vocales.',
       probableMeaning:
-          'Dominancia, entusiasmo desbordante, búsqueda de atención o intensidad emocional.',
+          "Puede relacionarse con ruido ambiental, audición, hábito al hablar o entusiasmo. No identifica dominancia.",
       alternativeMeanings: [
         'Dificultades de audición (dificultad para oír) o ruido de fondo elevado.',
         'Hábito cultural o familiar de conversación enérgica.',
@@ -369,9 +379,10 @@ class GestureDatabase {
       contextGuidance:
           'En oficinas abiertas puede resultar invasivo o abrumador.',
       whatToDo:
-          'Responde con volumen moderado y controlado para modular la energía del ambiente.',
+          "Usa un volumen cómodo para ambos y pregunta si se oye bien o si conviene cambiar de lugar.",
       salesTip:
-          'En ventas, ajustar tu volumen al del cliente ayuda a generar sintonía sin gritar.',
+          "Acuerden un volumen y un canal que permitan entenderse; imitar la intensidad de la voz no garantiza sintonía.",
+      reading: GestureReading.ambiguous,
       illustrationKey: 'voice_volume_high',
       difficulty: 1,
     ),
@@ -381,7 +392,7 @@ class GestureDatabase {
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
-          'Hablar con decibeles muy tenues que requieren acercarse para escuchar.',
+          "La voz se oye con poca intensidad en ese entorno. Hablar bajo y susurrar no son lo mismo.",
       physiologicalDetails: 'La voz sale suave y con poco volumen.',
       probableMeaning:
           'Timidez, confidencialidad, reserva o necesidad de discreción.',
@@ -392,9 +403,9 @@ class GestureDatabase {
       ],
       contextGuidance: 'En confidencias o cuando se tocan temas íntimos.',
       whatToDo:
-          'Acércate ligeramente y responde con suavidad respetando su espacio.',
+          "Puedes pedir que repita, cambiar de lugar o proponer otro canal. Pregunta antes de acercarte.",
       salesTip:
-          'Bajar el volumen al decir un dato clave genera expectación y sensación de exclusividad.',
+          "Presenta los datos con un volumen audible; hablar bajo no garantiza expectación ni exclusividad.",
       illustrationKey: 'voice_volume_low',
       difficulty: 1,
     ),
@@ -403,8 +414,10 @@ class GestureDatabase {
       name: 'Velocidad de Habla Acelerada',
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
-      summary: 'Pronunciar más de 180 palabras por minuto sin pausas claras.',
-      physiologicalDetails: 'Se habla rápido y a veces se respira más deprisa.',
+      summary:
+          "Hablar a un ritmo que resulta rápido para quien escucha. No hay un umbral único de palabras por minuto para todas las situaciones.",
+      physiologicalDetails:
+          "El ritmo se puede describir contando palabras por minuto o comparando la duración de una misma frase. El valor depende del idioma, las pausas y la tarea.",
       probableMeaning:
           'Ansiedad, urgencia, nerviosismo, o pasión desbordante por el tema.',
       alternativeMeanings: [
@@ -412,11 +425,12 @@ class GestureDatabase {
         'Entusiasmo o ganas de hablar en detalle sobre un tema que interesa.',
         'Urgencia temporal real o temor a ser interrumpido.',
       ],
-      contextGuidance: 'Común en personas que temen ser interrumpidas.',
+      contextGuidance:
+          "El ritmo cambia entre personas, idiomas y situaciones. No permite inferir temor a ser interrumpido.",
       whatToDo:
           'Haz pausas para que la otra persona pueda seguir la conversación a su ritmo.',
       salesTip:
-          'Hablar demasiado rápido en ventas reduce la credibilidad percibida. Respira y desacelera.',
+          "Adaptar el ritmo puede reducir el esfuerzo de escucha en algunas condiciones. Ofrece pausas o un resumen escrito y comprueba qué ayuda; no hay una velocidad que garantice credibilidad.",
       illustrationKey: 'voice_speed_fast',
       difficulty: 2,
     ),
@@ -446,24 +460,27 @@ class GestureDatabase {
     ),
     GestureItem(
       id: 'tono_sarcastico',
-      name: 'Tono Sarcástico o Irónico',
+      name: "Palabras y tono que pueden parecer irónicos",
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
           'Las palabras suenan positivas, pero la voz suena seria o apagada. Puede haber muchas razones; pregunta antes de sacar conclusiones.',
       physiologicalDetails:
-          'En la vida cotidiana, la persona suele mantener cara inexpresiva o neutra (poker face). La señal clave está en la voz: alargamiento exagerado de sílabas ("Quéee bueeeno..."), caída tonal al final y contradicción con el contexto.',
+          "Puede haber sílabas alargadas, una voz plana o cambios de entonación. Esas características también aparecen al hablar sin ironía.",
       probableMeaning:
-          'Ironía o desacuerdo velado. La persona comunica lo opuesto al sentido literal de las palabras.',
+          "En estudios de sarcasmo en inglés aparecen pistas vocales como un tono más grave o menor variación tonal. En una conversación también pueden tener otras causas; combina voz, palabras y contexto.",
       alternativeMeanings: [
-        'Humor seco habitual entre personas de mucha confianza.'
+        "Valoración literal con voz poco expresiva",
+        "Humor compartido",
+        "Cansancio o hábito vocal"
       ],
       contextGuidance:
-          'Si alguien dice "¡Qué gran idea!" con cara seria y tono arrastrado tras un problema, significa: "Es una mala idea".',
+          "Escucha si el tono cambia respecto a otras frases y cómo encajan las palabras con lo ocurrido. La frase «qué gran idea» podría ser literal o irónica; el contexto compartido ayuda a interpretarla.",
       whatToDo:
-          'No te quedes con las palabras literales ni esperes ver una cara burlona. Pregunta de forma directa y calmada: "¿Prefieres que busquemos otra opción?"',
+          "Si importa entender el sentido, pregunta: «¿Lo dices en serio o con ironía?». También puedes aclarar tu propia propuesta.",
       salesTip:
-          'Si notas sarcasmo en un cliente, aclara los puntos dudosos de forma transparente y sin ironía.',
+          "Aclara qué parte de la propuesta quiere revisar, sin etiquetar a la persona como sarcástica.",
+      reading: GestureReading.ambiguous,
       illustrationKey: 'sarcastic_inflection',
       difficulty: 2,
     ),
@@ -473,61 +490,65 @@ class GestureDatabase {
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz',
       summary:
-          'Voz firme, velocidad constante y volumen medio sin vacilaciones.',
+          "Expresar una petición, una opinión o un límite de forma comprensible y respetuosa.",
       physiologicalDetails:
-          'Respiración diafragmática, cadencia rítmica clara y final de frase con tono neutro (no hacia arriba como pregunta).',
+          "El volumen, el ritmo y la entonación pueden variar. Una voz temblorosa, una pausa o hablar por escrito también permiten expresar un límite.",
       probableMeaning:
-          'Claridad en las ideas, convicción, autoridad serena y límites sanos.',
-      alternativeMeanings: ['Puede sonar seco si no se acompaña de calidez.'],
+          "La asertividad se aprecia en lo que se comunica y en el respeto de las decisiones, no en una frecuencia de voz ni en una postura fija.",
+      alternativeMeanings: [
+        "Un tono firme puede acompañar mensajes respetuosos o irrespetuosos; importa el contenido."
+      ],
       contextGuidance:
-          'Indispensable en liderazgo, acuerdos profesionales y resolución de conflictos.',
+          "Por ejemplo: «No puedo hacerlo hoy. Puedo revisarlo mañana». Es una opción de comunicación, no una técnica que garantice obediencia.",
       whatToDo:
-          'Escucha activamente y responde con la misma claridad y profesionalismo.',
+          "Aclara qué se solicita, qué puedes ofrecer y qué se ha acordado. Respeta un no y permite preguntas.",
       salesTip:
-          'Inspira confianza inmediata. Transmite certeza en la solución que ofreces.',
+          'Explica lo que puedes ofrecer y sus límites con claridad. Pregunta si la información responde a sus necesidades.',
       illustrationKey: 'assertive_voice',
       difficulty: 1,
     ),
     GestureItem(
       id: 'silencio_incomodo',
-      name: 'Silencio Incómodo (Tensión)',
+      name: 'Pausa con cambios de postura',
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz y Silencio',
       summary:
-          'Pausa repentina y pesada en la conversación acompañada de miradas esquivas o rigidez.',
+          'La conversación se detiene mientras la persona cambia la mirada o la postura.',
       physiologicalDetails:
           'Ausencia total de respuesta verbal mientras la respiración se contiene o se tensan hombros y labios.',
       probableMeaning:
-          'Se dijo algo inapropiado, ofensivo, o se tocó un tema tabú que nadie sabe cómo manejar.',
+          'Puede acompañar incomodidad, reflexión, cansancio o dificultad para encontrar una respuesta. El silencio no identifica su causa.',
       alternativeMeanings: [
         'La persona está procesando una noticia impactante.'
       ],
       contextGuidance:
-          'Ocurre tras un chiste desafortunado, una confesión repentina o una pregunta indiscreta.',
+          'Puede aparecer después de distintos comentarios o preguntas. El momento de la pausa no identifica su causa.',
       whatToDo:
-          'Rompe la tensión con naturalidad: "Disculpa si sonó imprudente, quise decir..." o cambia de tema suavemente.',
+          'Puedes dar tiempo o preguntar si prefiere seguir, hacer una pausa o cambiar de tema. Si sabes que tu comentario fue ofensivo, puedes disculparte sin interpretar el silencio.',
       salesTip:
-          'Si lanzaste el precio final, ¡guarda silencio! El primero que habla después del precio pierde poder de negociación.',
+          'Da tiempo para pensar después de presentar el precio. Pregunta si necesita aclaraciones o una pausa, sin usar el silencio para presionar.',
+      reading: GestureReading.possibleTension,
       illustrationKey: 'silence_tense',
       difficulty: 2,
     ),
     GestureItem(
       id: 'silencio_reflexivo',
-      name: 'Silencio Reflexivo',
+      name: "Pausa sin respuesta verbal",
       category: CategoryType.factoresParalinguisticos,
       bodyPart: 'Voz y Silencio',
       summary:
-          'Pausa con mirada hacia arriba o al infinito para pensar antes de responder.',
+          "La persona hace una pausa antes de responder. Mirar arriba o a otro sitio no permite saber si está pensando.",
       physiologicalDetails:
           'Rostro relajado, mirada desenfocada o arriba, ceño pensativo sin rigidez.',
       probableMeaning:
-          'La persona valora la conversación y está estructurando una respuesta madura y honesta.',
+          'Puede estar preparando una respuesta, recordando información o pensando en cómo continuar. El silencio no permite evaluar honestidad ni interés.',
       alternativeMeanings: ['Búsqueda de memoria.'],
-      contextGuidance: 'Muy positivo en entrevistas y debates profundos.',
+      contextGuidance:
+          "Puede aparecer en cualquier conversación, por distintas razones. No es una medida de calidad de la respuesta.",
       whatToDo:
-          'NO interrumpas el silencio. Espera pacientemente a que termine de formular su pensamiento.',
+          "Da tiempo para responder. Si necesitas coordinar la conversación, pregunta si quiere más tiempo, otra explicación o cambiar de tema.",
       salesTip:
-          'El cliente está haciendo cálculos mentales o visualizando el impacto. Déjalo pensar.',
+          'Deja tiempo para responder. Si la pausa se alarga, pregunta si quiere más tiempo o alguna aclaración.',
       illustrationKey: 'silence_reflective',
       difficulty: 1,
     ),
@@ -535,7 +556,7 @@ class GestureDatabase {
     // --- POSTURAS Y LENGUAJE CORPORAL ---
     GestureItem(
       id: 'postura_abierta',
-      name: 'Postura Abierta y Receptiva',
+      name: 'Postura con brazos y torso despejados',
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Torso y Brazos',
       summary:
@@ -553,7 +574,8 @@ class GestureDatabase {
       whatToDo:
           'Comparte tus ideas sin aumentar la presión y comprueba con palabras si la persona quiere continuar.',
       salesTip:
-          'No es una luz verde de compra. Confirma prioridades y consentimiento antes de avanzar.',
+          "Los gestos pueden aportar información mientras explicas: señalar un gráfico o representar un tamaño es una opción. Comprueba comprensión y próximos pasos con palabras; la postura sola no confirma una compra.",
+      reading: GestureReading.ambiguous,
       illustrationKey: 'open_posture',
       difficulty: 1,
     ),
@@ -602,6 +624,7 @@ class GestureDatabase {
           'Ofrece la información a un ritmo acordado y pregunta si la persona quiere seguir o necesita que repitas algo.',
       salesTip:
           'No aceleres hacia un cierre por la postura. Pregunta qué le resulta útil y si desea revisar opciones.',
+      reading: GestureReading.ambiguous,
       illustrationKey: 'leaning_forward',
       difficulty: 1,
     ),
@@ -745,7 +768,7 @@ class GestureDatabase {
       contextGuidance:
           'Común en personas que buscan comodidad física en su espacio.',
       whatToDo:
-          'No te sientas intimidado. Mantén contacto visual equilibrado y presenta tu propuesta con profesionalismo.',
+          "Presenta tu información con claridad y permite una postura cómoda, sin exigir contacto visual.",
       salesTip:
           'No deduzcas jerarquía ni intención. Presenta la información con claridad y pregunta qué desea explorar.',
       illustrationKey: 'hands_behind_head',
@@ -795,7 +818,7 @@ class GestureDatabase {
       contextGuidance:
           'El significado depende de la conversación, la relación, la audición y la comodidad física; no identifica por sí solo afinidad.',
       whatToDo:
-          'No la tomes como luz verde. Antes de entrar en más detalle, pregunta si la persona quiere continuar o necesita una pausa.',
+          'No lo tomes como confirmación. Antes de entrar en más detalle, pregunta si la persona quiere continuar o necesita una pausa.',
       salesTip:
           'No infieras afinidad. Construye confianza mediante opciones claras, escucha y acuerdos explícitos.',
       illustrationKey: 'head_tilt',
@@ -834,20 +857,20 @@ class GestureDatabase {
       summary:
           'Caminar o estar de pie con las manos entrelazadas detrás de la espalda y pecho erguido.',
       physiologicalDetails:
-          'Pecho expuesto y brazos fuera de la línea de defensa frontal.',
+          "Las manos se sitúan detrás de la espalda; el torso puede mantenerse erguido.",
       probableMeaning:
-          'Autoridad, confianza, observación tranquila o autocontrol.',
+          "Puede ser descanso, comodidad, hábito o una postura de espera. No identifica autoridad ni autocontrol.",
       alternativeMeanings: [
         'Contención de tensión si una mano sujeta fuertemente la muñeca contraria.',
         'Postura cómoda para descansar los brazos caminando.',
         'Hábito ergonómico para mantener la espalda erguida.',
       ],
       contextGuidance:
-          'Común en profesores, supervisores o personas en paseos reflexivos.',
+          "Puede aparecer al caminar, esperar o conversar, en personas con distintos roles.",
       whatToDo:
-          'Muestra respeto por su rol y responde con claridad cuando se dirija a ti.',
+          "Responde a lo que la persona dice y no deduzcas su rol por la postura.",
       salesTip:
-          'Postura de evaluador observador. Permítele examinar las opciones sin atosigarlo.',
+          "Pregunta qué información necesita para revisar la propuesta, sin asignarle un papel de evaluador por sus manos.",
       illustrationKey: 'hands_behind_back',
       difficulty: 2,
     ),
@@ -856,10 +879,9 @@ class GestureDatabase {
       name: 'Manos en los Bolsillos',
       category: CategoryType.lenguajeCorporal,
       bodyPart: 'Manos y Brazos',
-      summary:
-          'Ocultar las manos completamente dentro de los bolsillos del pantalón o saco.',
+      summary: "La persona coloca las manos dentro de los bolsillos.",
       physiologicalDetails:
-          'Retracción de las extremidades superiores y ocultamiento de las palmas.',
+          "Las manos descansan en los bolsillos y pueden quedar parcial o totalmente fuera de la vista.",
       probableMeaning:
           'Reserva, timidez, búsqueda de comodidad informal o descanso postural.',
       alternativeMeanings: [
@@ -872,7 +894,7 @@ class GestureDatabase {
       whatToDo:
           'Invita a la persona a participar haciéndole una pregunta sencilla para que se integre.',
       salesTip:
-          'No expongas con las manos en los bolsillos; mantener las palmas visibles genera un 40% más de confianza percibida.',
+          "Si te sirve para explicar, puedes usar una mano para señalar un paso de un diagrama o representar un tamaño. Los gestos que acompañan información pueden ayudar a comprenderla; no hace falta mostrar las palmas como prueba de confianza.",
       illustrationKey: 'hands_in_pockets',
       difficulty: 1,
     ),
@@ -883,16 +905,16 @@ class GestureDatabase {
       bodyPart: 'Piernas y Torso',
       summary: 'Cruzar una pierna sobre la otra mientras se está sentado.',
       physiologicalDetails:
-          'Colocación del tobillo sobre la rodilla (en 4) o rodilla sobre rodilla.',
+          "Una pierna se coloca sobre la otra. Este cambio puede modificar la inclinación del tronco y la pelvis; se han medido diferencias en estudios de postura sentada.",
       probableMeaning:
-          'En 4: competitividad, comodidad informal o dominio. Rodilla sobre rodilla: contención, elegancia o barrera según la orientación del cuerpo.',
+          "Puede ser una posición cómoda, un hábito o una forma de descansar. La forma del cruce no identifica dominio ni competitividad.",
       alternativeMeanings: ['Hábito ergonómico de descanso.'],
       contextGuidance:
-          'Si la rodilla cruzada apunta HACIA ti, indica conexión. Si apunta LEJOS de ti, es barrera.',
+          "La dirección de una rodilla puede depender del asiento y del espacio. No confirma conexión ni rechazo.",
       whatToDo:
-          'Observa la orientación general del torso y los pies hacia dónde apuntan.',
+          "Respeta la postura y pregunta si el espacio permite conversar con comodidad.",
       salesTip:
-          'Si el cliente cruza las piernas en 4 y se toma el tobillo, está en postura de negociación dura.',
+          "Valora las condiciones de negociación expresadas con palabras; cruzar las piernas o sostener un tobillo no define una negociación dura.",
       illustrationKey: 'legs_crossed',
       difficulty: 2,
     ),
@@ -906,16 +928,17 @@ class GestureDatabase {
       physiologicalDetails:
           'Unión del espacio interdigital entre pulgar e índice con presión simétrica y contacto visual directo.',
       probableMeaning:
-          'Respeto mutuo, acuerdo de igualdad, saludo formal y profesionalismo.',
+          'Puede ser un saludo acordado o una costumbre del entorno. La fuerza del apretón no permite inferir confianza, inseguridad ni intención de intimidar.',
       alternativeMeanings: [
-        'Si es débil ("pescado muerto"): inseguridad. Si es triturador: deseo de intimidar.'
+        'La presión puede variar por comodidad, dolor, fuerza física, hábito o preferencia personal.'
       ],
       contextGuidance:
-          'El saludo universal estándar en el mundo profesional y de negocios.',
+          'Saludo frecuente en algunos entornos profesionales. Las preferencias personales y culturales sobre el contacto varían.',
       whatToDo:
-          'Ofrece la mano en posición vertical (ni arriba ni abajo) con firmeza serena mientras miras a los ojos y sonríes.',
+          'Ofrece un saludo sin imponer contacto, presión, sonrisa ni mirada. Respeta si la persona prefiere otra forma de saludar.',
       salesTip:
           'Fíjate en la fuerza del apretón de manos y ofrece uno cómodo. También puedes saludar sin contacto.',
+      reading: GestureReading.possibleOpenness,
       illustrationKey: 'handshake_firm',
       difficulty: 1,
     ),
@@ -1069,80 +1092,84 @@ class GestureDatabase {
     // --- PROXÉMICA Y ESPACIO ---
     GestureItem(
       id: 'espacio_intimo',
-      name: 'Espacio Íntimo (0 a 45 cm)',
+      name: 'Distancia muy cercana',
       category: CategoryType.proxemica,
       bodyPart: 'Espacio',
-      summary:
-          'Burbuja inmediata alrededor del cuerpo reservada para afecto cercano.',
+      summary: 'Poca separación física entre dos personas.',
       physiologicalDetails: 'Distancia menor a la longitud de un antebrazo.',
       probableMeaning:
-          'Intimidad, romance, protección familiar o confrontación física extrema.',
+          'Puede responder a la relación, al espacio disponible, a una tarea compartida o a una preferencia de distancia. La cercanía no confirma intimidad ni permiso para tocar.',
       alternativeMeanings: [
         'Ascensores o transporte público abarrotado (donde se tolera neutralizando la mirada).'
       ],
       contextGuidance:
-          'Invadir este espacio con conocidos casuales o en el trabajo se percibe como amenaza o acoso.',
+          'La comodidad depende de la persona, la cultura, el entorno y la accesibilidad. Pregunta antes de acercarte, también con familiares o pareja.',
       whatToDo:
-          'Respeta esta burbuja rigurosamente excepto con pareja, hijos o familiares muy cercanos.',
+          'Respeta el espacio que la persona pide o busca. Si necesitas acercarte o tocarla, pregunta y espera su respuesta.',
       salesTip:
-          'Nunca te acerques a menos de 50 cm de un cliente a menos que te invite explícitamente a ver algo.',
+          'Pregunta si quiere revisar el material contigo y permite que elija la distancia.',
       illustrationKey: 'proxemics_intima',
       difficulty: 1,
     ),
     GestureItem(
       id: 'espacio_personal',
-      name: 'Espacio Personal (45 cm a 1.2 m)',
+      name: 'Distancia de conversación cercana',
       category: CategoryType.proxemica,
       bodyPart: 'Espacio',
-      summary: 'Distancia de un brazo extendido para amigos y familiares.',
+      summary:
+          'Separación que permite conversar de cerca, según las preferencias y el entorno.',
       physiologicalDetails:
           'Longitud de un brazo extendido entre dos personas.',
       probableMeaning:
-          'Amistad, confianza mutua, conversación cómoda y relajada.',
+          'Puede facilitar una conversación o responder al mobiliario y al espacio disponible. No demuestra amistad ni confianza.',
       alternativeMeanings: ['Interacción casual.'],
       contextGuidance:
-          'Ideal para charlar en un café, reuniones de amigos o caminatas compartidas.',
+          'Las distancias descritas son referencias aproximadas. Acuerden una separación cómoda para ambos.',
       whatToDo:
-          'Colócate a esta distancia con personas con las que ya existe simpatía o trato previo.',
-      salesTip: 'Distancia ideal en reuniones 1 a 1 en mesas pequeñas.',
+          'Permite que la otra persona ajuste la distancia. Puedes preguntar si desde ahí oye y se siente cómoda.',
+      salesTip:
+          'Organiza la mesa para que ambos puedan ver el material y elegir dónde sentarse.',
       illustrationKey: 'proxemics_personal',
       difficulty: 1,
     ),
     GestureItem(
       id: 'espacio_social',
-      name: 'Espacio Social (1.2 m a 3.6 m)',
+      name: 'Distancia de interacción en un espacio amplio',
       category: CategoryType.proxemica,
       bodyPart: 'Espacio',
-      summary:
-          'Distancia profesional para reuniones de trabajo, clientes y conocidos.',
+      summary: 'Separación de varios pasos o de un mueble entre las personas.',
       physiologicalDetails:
           'Distancia equivalente a una mesa de juntas o un mostrador de atención.',
-      probableMeaning: 'Trato profesional, respeto formal y neutralidad.',
+      probableMeaning:
+          'Puede responder al tamaño del lugar, a una actividad o a preferencias de espacio. La distancia no permite deducir formalidad ni rechazo.',
       alternativeMeanings: ['Espacio seguro para interacción formal.'],
       contextGuidance:
-          'Entrevistas de trabajo, consultas médicas, trato comercial.',
+          'Las necesidades de audición, movilidad, privacidad y comodidad pueden requerir otra distribución.',
       whatToDo:
-          'Es la distancia base recomendada para interactuar con personas que acabas de conocer.',
-      salesTip: 'Mantén esta distancia en salas de juntas para no incomodar.',
+          'Pregunta si desde ahí puede seguir la conversación y ajusten el lugar cuando haga falta.',
+      salesTip:
+          'Acuerden una ubicación que permita conversar y consultar el material con comodidad.',
       illustrationKey: 'proxemics_social',
       difficulty: 1,
     ),
     GestureItem(
       id: 'espacio_publico',
-      name: 'Espacio Público (+3.6 m)',
+      name: 'Distancia para hablar a un grupo',
       category: CategoryType.proxemica,
       bodyPart: 'Espacio',
       summary:
           'Distancia para dirigirse a grupos grandes o cruzar por la calle.',
-      physiologicalDetails: 'Más allá de 3.6 metros.',
-      probableMeaning: 'Anonimato, discurso público o interacción comunitaria.',
+      physiologicalDetails:
+          'Separación de varios metros, variable según el tamaño y la disposición del lugar.',
+      probableMeaning:
+          'Puede corresponder a una presentación o a la distribución del lugar. No describe por sí sola la relación entre las personas.',
       alternativeMeanings: ['Transeúntes.'],
       contextGuidance:
-          'Conferencias, presentaciones en auditorios, clases magistrales.',
+          'El tamaño del grupo, la acústica y la accesibilidad importan más que un umbral fijo de metros.',
       whatToDo:
-          'Proyecta la voz y amplifica los gestos para que se entiendan a distancia.',
+          'Comprueba que se pueda ver y escuchar; ofrece micrófono, texto u otro apoyo si es útil.',
       salesTip:
-          'En presentaciones grupales ante comités de compras, ubícate en el espacio público para abarcar visualmente a todos.',
+          'Elige una ubicación donde el grupo pueda ver el material y participar.',
       illustrationKey: 'proxemics_publica',
       difficulty: 1,
     ),
@@ -1286,7 +1313,7 @@ class GestureDatabase {
           'En una conversación comercial, una pausa puede señalar evaluación. Evita llenar el silencio con presión; ofrece claridad y tiempo.',
       illustrationKey: 'pause_before_reply',
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: 'single_emoji_support',
@@ -1337,7 +1364,7 @@ class GestureDatabase {
           'En reuniones, puedes dar estructura sin corregir: anota el tema nuevo y acuerda cuándo abordarlo.',
       illustrationKey: 'abrupt_topic_change',
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: 'prosodia_variable',
@@ -1388,7 +1415,7 @@ class GestureDatabase {
           'No lo uses como una forma de negociar. Mantén un ritmo cómodo y confirma las decisiones con palabras.',
       illustrationKey: 'voice_tremor',
       difficulty: 2,
-      signalType: SignalTrafficLight.yellow,
+      reading: GestureReading.ambiguous,
     ),
     GestureItem(
       id: 'turnos_conversacion',
@@ -1426,81 +1453,89 @@ class GestureDatabase {
       physiologicalDetails:
           'Prendas con cortes limpios y colores sobrios (azul marino, gris, negro).',
       probableMeaning:
-          'Autoridad, respeto institucional, solemnidad y rigor profesional.',
-      alternativeMeanings: ['Requisito obligatorio de código corporativo.'],
+          "La ropa puede influir en impresiones de profesionalidad y confianza. Su efecto depende también de la postura, del tipo de prenda y de quien observa; una impresión no acredita competencia real.",
+      alternativeMeanings: [
+        "Preferencia personal",
+        "Requisito de la organización"
+      ],
       contextGuidance:
           'Reuniones de directorio, juntas de accionistas y eventos formales.',
       whatToDo:
-          'Utilízala cuando desees proyectar la máxima solvencia y seriedad.',
+          "Consulta si existe un código de vestimenta y elige ropa adecuada a tus necesidades y al evento.",
       salesTip:
-          'En ventas corporativas B2B de alto valor, vestir formal transmite respaldo y solidez.',
+          "La apariencia puede influir en la primera impresión. Consulta las expectativas del entorno y acompaña la presentación con experiencia, alcance y condiciones comprobables.",
       illustrationKey: 'dress_formal',
       difficulty: 1,
     ),
     GestureItem(
       id: 'vestimenta_casual',
-      name: 'Vestimenta Casual / Creativa',
+      name: "Vestimenta informal",
       category: CategoryType.entornoApariencia,
       bodyPart: 'Espacio y Apariencia',
-      summary: 'Ropa cómoda, polo o camisa sin corbata en entornos modernos.',
+      summary:
+          "Prendas consideradas informales en un entorno concreto; esa valoración cambia entre lugares y ocasiones.",
       physiologicalDetails:
           'Prendas relajadas, tejidos flexibles y calzado cómodo.',
       probableMeaning:
-          'Accesibilidad, horizontalidad, innovación y cercanía interpersonal.',
-      alternativeMeanings: ['Cultura relajada de startups o viernes casual.'],
+          "La ropa informal puede modificar cómo se perciben accesibilidad y competencia, con resultados que varían según la prenda y la persona. No permite deducir creatividad ni capacidad real.",
+      alternativeMeanings: [
+        "Preferencia personal",
+        "Necesidades de comodidad o movimiento"
+      ],
       contextGuidance:
-          'Empresas de tecnología, agencias de diseño y reuniones entre pares.',
+          "Las normas varían incluso entre empresas del mismo sector; consulta las del lugar concreto.",
       whatToDo:
-          'Viste acorde al entorno para no parecer inaccesible o demasiado rígido.',
+          "Si hay dudas, pregunta qué ropa se espera sin juzgar a otras personas por cómo se visten.",
       salesTip:
-          'Si visitas una empresa tecnológica, vestir de traje estricto puede crear una barrera psicológica.',
+          "Considera las expectativas del encuentro: la ropa y la postura pueden influir juntas en las impresiones. Comprueba con información el trabajo ofrecido y no deduzcas cercanía por el atuendo.",
       illustrationKey: 'dress_casual',
       difficulty: 1,
     ),
     GestureItem(
       id: 'mesa_barrera',
-      name: 'El Escritorio como Barrera de Poder',
+      name: 'Escritorio entre dos personas',
       category: CategoryType.entornoApariencia,
       bodyPart: 'Espacio y Entorno',
       summary:
-          'Colocarse detrás de un escritorio ancho y macizo separando físicamente a las personas.',
+          'Un escritorio separa físicamente a las personas durante una conversación.',
       physiologicalDetails:
           'Interposición de un objeto físico masivo entre los dos torsos.',
       probableMeaning:
-          'Jerarquía marcada, control, distancia emocional y dominio del territorio.',
+          'Puede responder al mobiliario, al trabajo que se realiza o a necesidades de espacio. No revela por sí solo jerarquía, control ni distancia emocional.',
       alternativeMeanings: ['Espacio de trabajo habitual del despacho.'],
       contextGuidance:
-          'Típica en jefes tradicionales o entrevistas de evaluación severa.',
+          'Puede ser la distribución habitual del despacho. La forma de conversar y los acuerdos aportan más información que el tamaño del escritorio.',
       whatToDo:
-          'Mantén una postura erguida sin encogerte ni recostarte sobre la mesa del otro.',
+          'Si cuesta ver el material o escucharse, pregunta si conviene cambiar de ubicación.',
       salesTip:
-          'Si puedes, invita al cliente a sentarse en una mesa lateral o retira objetos que obstruyan la vista.',
+          'Propón una distribución cómoda para revisar la propuesta y deja que la persona elija.',
       illustrationKey: 'desk_barrier',
       difficulty: 2,
     ),
     GestureItem(
       id: 'mesa_redonda',
-      name: 'Mesa Redonda (Disposición Igualitaria)',
+      name: 'Mesa redonda',
       category: CategoryType.entornoApariencia,
       bodyPart: 'Espacio y Entorno',
-      summary: 'Mesa circular donde nadie ocupa una cabecera dominante.',
+      summary: 'Las sillas se distribuyen alrededor de una mesa circular.',
       physiologicalDetails:
           'Distribución radial equidistante de todas las sillas respecto al centro.',
       probableMeaning:
-          'Igualdad de voces, colaboración abierta, trabajo en equipo y ausencia de jerarquía dominante.',
+          'Puede facilitar que varias personas vean el mismo material. La forma de la mesa no garantiza igualdad ni colaboración.',
       alternativeMeanings: ['Diseño estético del mobiliario.'],
       contextGuidance:
           'Sesiones de lluvia de ideas, acuerdos colaborativos y resolución de quejas.',
       whatToDo:
           'Aprovecha este formato para fomentar la participación de todos.',
       salesTip:
-          'La mejor configuración para vender proyectos consultivos en equipo.',
+          'Acuerden turnos y formas de participar; la organización de la reunión importa además del mobiliario.',
+      reading: GestureReading.ambiguous,
       illustrationKey: 'round_table',
       difficulty: 1,
     ),
     GestureItem(
       id: 'angulo_noventa',
-      name: 'Ubicación en Ángulo de 90° (Esquina Cooperativa)',
+      name: 'Asientos en ángulo',
       category: CategoryType.entornoApariencia,
       bodyPart: 'Espacio y Entorno',
       summary:
@@ -1508,35 +1543,40 @@ class GestureDatabase {
       physiologicalDetails:
           'Sentarse de lado para poder mirar a la persona y el documento compartido.',
       probableMeaning:
-          'Cooperación, revisión conjunta de soluciones, reducción de la tensión competitiva.',
+          'Puede facilitar mirar un documento juntos o responder a la disposición del lugar. No prueba cooperación ni garantiza reducir tensión.',
       alternativeMeanings: ['Mobiliario en L.'],
       contextGuidance:
           'Excelente para explicar cotizaciones, resolver problemas o enseñar un tema.',
       whatToDo:
-          'Adopta esta posición cuando desees que ambos se sientan aliados frente al problema.',
+          'Pregunta dónde prefiere sentarse y comprueba que ambos puedan ver el material.',
       salesTip:
-          'La posición reina para cerrar ventas: ambos miran juntos la propuesta.',
+          'Elige con la otra persona una ubicación cómoda para revisar la propuesta.',
+      reading: GestureReading.ambiguous,
       illustrationKey: 'seating_angle',
       difficulty: 2,
     ),
     GestureItem(
       id: 'iluminacion_ambiente',
-      name: 'Iluminación y Calidez del Entorno',
+      name: "Iluminación del entorno",
       category: CategoryType.entornoApariencia,
       bodyPart: 'Espacio y Entorno',
       summary:
-          'Luz cálida e indirecta vs luz fría fluorescente de alta intensidad.',
+          "La intensidad, el color y la dirección de la luz cambian entre espacios.",
       physiologicalDetails:
-          'La luz del día puede influir en el sueño y en el nivel de alerta.',
+          "Puede haber reflejos, sombras, parpadeo o luz directa que dificulten ver con comodidad.",
       probableMeaning:
-          'Luz cálida: relajación, confidencia y confort. Luz fría: alerta, actividad clínica o vigilancia.',
-      alternativeMeanings: ['Requisitos técnicos de quirófanos o fábricas.'],
+          "La luz influye en las condiciones para ver documentos, pantallas y rostros. La comodidad depende de reflejos, intensidad, tarea y necesidades personales.",
+      alternativeMeanings: [
+        "Necesidades de visibilidad de una tarea",
+        "Preferencias personales",
+        "Características de las instalaciones"
+      ],
       contextGuidance:
-          'En cafeterías y salas de estar se usa luz cálida; en auditorios de examen, luz fría.',
+          "La comodidad depende de la persona y de la tarea; pregunta si la luz permite ver bien.",
       whatToDo:
-          'Adapta la iluminación según el objetivo emocional de la reunión.',
+          "Si es posible, ajusta reflejos e intensidad según lo que las personas necesiten.",
       salesTip:
-          'Una luz cálida y acogedora invita a quedarse más tiempo y facilita acuerdos amigables.',
+          "Revisa reflejos y legibilidad para facilitar el acceso a la información. Ajustar la luz puede mejorar las condiciones de trabajo; no garantiza un acuerdo.",
       illustrationKey: 'lighting_atmosphere',
       difficulty: 1,
     ),

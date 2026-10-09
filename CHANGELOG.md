@@ -1,6 +1,43 @@
 # Historial de cambios
 
-## Versión 1.0.13 (15) — pendiente de publicación
+## Versión 1.0.17 (19) — 7 de octubre de 2026
+
+- Separadas las opciones de español de España y español de Latinoamérica.
+- Unificada la detección automática del idioma en la interfaz y la lectura;
+  se conserva la selección manual y la antigua preferencia de español de España.
+- La lectura de material educativo en español utiliza una voz española incluso
+  con menús en otro idioma. Los mensajes propios siguen el idioma elegido.
+- Canceladas las lecturas anteriores al cambiar de idioma o iniciar otra lectura.
+- Búsqueda de voces alternativas del mismo idioma y aviso si no hay una compatible.
+- Comprobadas la primera apertura, las preferencias, el selector móvil y la lectura.
+
+## Versión 1.0.16 (18) — preparada para envío
+
+- Corregidos desbordamientos de filas y etiquetas en pantallas móviles y con letra ampliada.
+- Tarjetas de inicio y práctica adaptadas al ancho y al tamaño de texto.
+- El móvil en horizontal conserva la navegación inferior.
+- Filtros del manual y del buscador integrados en el desplazamiento para liberar espacio.
+- Ajustados escenarios, ventas, referencia rápida, progreso y comparación de señales.
+- Añadidas 50 comprobaciones de diseño móvil en las pantallas principales y herramientas.
+
+## Versión 1.0.15 (17)
+
+- Activado explícitamente el modo de extremo a extremo en Android.
+- Protegidos los laterales del contenido frente a recortes y barras del sistema.
+- Las ilustraciones se decodifican según el espacio real disponible, incluidos
+  los avances ampliados, conservando sus proporciones y evitando ampliación al decodificar.
+- Los avisos de Play Console originados en Flutter o SDK de terceros pueden persistir;
+  aún falta consultar el motivo concreto del rechazo.
+
+## Versión 1.0.14 (16)
+
+- Actualizada la versión de Android y la versión visible en la aplicación.
+- Eliminada una variable sin uso en la lectura de respuestas de ventas.
+- Conservadas las mejoras de contenido, accesibilidad y aprendizaje de 1.0.13.
+- Esta preparación no confirma la resolución del rechazo de Google Play;
+  falta consultar el detalle de la política incumplida.
+
+## Versión 1.0.13 (15)
 
 - Se simplificó el lenguaje de fichas, preguntas, escenarios, categorías,
   instrucciones, ventas y progreso para que sea más fácil de entender.

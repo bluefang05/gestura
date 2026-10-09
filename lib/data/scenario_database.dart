@@ -32,7 +32,7 @@ class ScenarioDatabase {
               text:
                   'Seguir hablando más rápido para terminar toda la presentación antes de que pregunte.',
               analysis:
-                  'Pésima opción: Si sigues hablando cuando el cliente ya se cerró mentalmente, sentirá que lo estás arrollando y aumentará su rechazo.',
+                  'Aceleras la explicación para impedir preguntas. Conviene dejar un turno para que comunique lo que necesita; no conocemos su estado por los gestos.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -40,7 +40,7 @@ class ScenarioDatabase {
             ),
             ScenarioChoice(
               text:
-                  'Hacer una pausa intencional y preguntar: "Noto que estás analizando este punto, ¿hay algún detalle que te genere dudas?"',
+                  'Hacer una pausa y preguntar: "¿Quieres revisar algún detalle o prefieres que continúe?"',
               analysis:
                   'Buena decisión: preguntas con respeto y le das espacio para expresar cualquier duda.',
               isBestAction: true,
@@ -65,11 +65,11 @@ class ScenarioDatabase {
           narrative:
               'El cliente te explica su objeción sobre el costo. Tú respondes mostrándole cómo el ahorro en 3 meses cubre la inversión inicial. El cliente se inclina hacia adelante sobre la mesa, asiente lentamente y sonríe; se le elevan las mejillas y se le arrugan los ojos.',
           characterAction:
-              'Inclinación hacia adelante + sonrisa genuina con arrugas en los ojos.',
+              'Se inclina hacia adelante y sonríe con las mejillas elevadas.',
           illustrationKey: 'leaning_forward',
           visibleSignals: [
-            'Inclinación frontal (Alto interés)',
-            'Sonrisa con arrugas junto a los ojos (Aprobación real)',
+            'Inclina el torso hacia adelante',
+            'Sonríe y aparecen arrugas junto a los ojos',
             'Contacto visual directo'
           ],
           learningTakeaway:
@@ -79,7 +79,7 @@ class ScenarioDatabase {
               text:
                   'Pedir el cierre: "¿Te parece si empezamos la implementación el próximo lunes para asegurar el cronograma?"',
               analysis:
-                  'Acierto: Notaste las señales de apertura y sintonía, y propusiste avanzar de forma estructurada con una pregunta de confirmación.',
+                  'Propones un paso concreto y preguntas si desea aceptarlo. Puede pedir más información, otro plazo o no avanzar.',
               isBestAction: true,
               nextStepIndex: null, // Fin con éxito
               consequenceSummary:
@@ -89,7 +89,7 @@ class ScenarioDatabase {
               text:
                   'Seguir explicando 20 diapositivas más sobre la historia de la empresa.',
               analysis:
-                  'Error común: Hablar de más después de que el cliente ya tomó la decisión puede reabrir dudas innecesarias.',
+                  'Añades información sin comprobar qué necesita. Sonreír y asentir no permiten afirmar que ya tomó una decisión.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary:
@@ -165,8 +165,8 @@ class ScenarioDatabase {
               'Párpados cerrados prolongados + tamborileo de dedos.',
           illustrationKey: 'finger_tapping',
           visibleSignals: [
-            'Párpados cerrados (Sobrecarga de información)',
-            'Tamborileo (Impaciencia con el tiempo)'
+            'Cierra los ojos brevemente',
+            'Golpea suavemente la mesa con los dedos'
           ],
           learningTakeaway:
               'El tamborileo y los ojos cerrados pueden coincidir con cansancio, ritmo personal, concentración o necesidad de una pausa. Comprueba si un resumen ayudaría.',
@@ -175,7 +175,7 @@ class ScenarioDatabase {
               text:
                   'Concluir con el resultado clave en 1 frase: "En resumen, logramos reducir los costos un 30% en 4 meses. ¿Te gustaría profundizar en algún aspecto?"',
               analysis:
-                  'Brillante: Detectaste la señal de saturación y adaptaste tu comunicación al instante, demostrando síntesis y empatía.',
+                  'Resumes la información y ofreces elegir qué ampliar. Esa opción no requiere decidir si está cansada o impaciente.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -184,7 +184,8 @@ class ScenarioDatabase {
             ScenarioChoice(
               text:
                   'Hablar durante 10 minutos más detallando cada una de las líneas de código.',
-              analysis: 'Ignora por completo las señales de impaciencia.',
+              analysis:
+                  'Añades diez minutos de detalle sin comprobar qué información necesita ni cuánto tiempo hay disponible.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary:
@@ -198,10 +199,10 @@ class ScenarioDatabase {
     // --- ESCENARIO 3: SOCIAL & AMISTADES ---
     Scenario(
       id: 'scenario_friend_coffee',
-      title: 'En el Café con un Amigo: Cuando algo anda mal',
+      title: 'En el café: ofrecer apoyo y respetar la respuesta',
       domain: 'Social & Amigos',
       description:
-          'Aprende a distinguir cuando un "Todo bien" en realidad oculta tristeza o preocupación.',
+          'Practica cómo ofrecer compañía sin invalidar lo que dice una amistad.',
       contextOverview:
           'Quedaste en una cafetería con un buen amigo que suele ser muy bromista.',
       iconName: 'heart',
@@ -214,12 +215,12 @@ class ScenarioDatabase {
               'Voz monótona baja + hombros caídos + mirada esquiva.',
           illustrationKey: 'turned_down_lips',
           visibleSignals: [
-            'Volumen bajo (Retracción)',
-            'Hombros caídos (Desánimo)',
-            'Dice «todo bien», pero parece incómodo'
+            'Habla con volumen bajo',
+            'Mantiene los hombros bajos',
+            'Dice «todo bien» y mira su taza'
           ],
           learningTakeaway:
-              'En el contexto relacional cercano, las señales de retraimiento pesan más que las palabras de cortesía.',
+              'La cercanía puede ayudarte a notar un cambio, pero no confirma su causa. Respeta «todo bien» y ofrece compañía o espacio si te parece oportuno.',
           choices: [
             ScenarioChoice(
               text:
@@ -229,13 +230,13 @@ class ScenarioDatabase {
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
-                  'Tu amigo suspira aliviado y te cuenta el problema que lo tenía angustiado.',
+                  'En este ejemplo tu amigo decide hablar de una preocupación. También podría decir que está bien o que prefiere no conversar; las tres respuestas merecen respeto.',
             ),
             ScenarioChoice(
               text:
                   'Decir: "Ah, perfecto, qué bueno que estés bien", y hablar durante una hora de tus propias cosas.',
               analysis:
-                  'Toma el mensaje puramente literal e ignora la petición de ayuda no verbal.',
+                  'Aceptar que está bien es válido. Hablar durante una hora sin darle espacio para participar puede dificultar la conversación; sus gestos no prueban una petición de ayuda.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary: 'Tu amigo se siente invisible y distante.',
@@ -264,22 +265,22 @@ class ScenarioDatabase {
               'Aprieta la mandíbula y apoya las manos firmemente en la mesa.',
           illustrationKey: 'jaw_clenching',
           visibleSignals: [
-            'Mandíbula apretada (Tensión/Resistencia)',
-            'Manos planas (Fijación de postura de poder)',
-            'Silencio tenso'
+            'Aprieta la mandíbula',
+            'Apoya las manos sobre la mesa',
+            'Hace una pausa sin responder'
           ],
           learningTakeaway:
               'La mandíbula tensa y el silencio pueden aparecer mientras alguien procesa una cifra o regula su respuesta. Deja espacio y pregunta si desea revisar algún aspecto.',
           choices: [
             ScenarioChoice(
               text:
-                  'Mantener la calma, sostener el contacto visual con postura abierta y esperar a que él hable primero.',
+                  'Dar tiempo para revisar la propuesta y preguntar si desea comentar la cifra o necesita más información, sin exigir contacto visual.',
               analysis:
-                  'Estrategia maestra: Quien habla primero tras la propuesta suele ceder terreno. El silencio permite que procese los argumentos presentados.',
+                  'Dar tiempo y preguntar ayuda a coordinar la negociación. Hablar primero no determina quién cede; revisa condiciones y decisiones explícitas.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
-                  'El gerente relaja la mandíbula y dice: "El 20% es alto para el presupuesto actual, pero revisemos qué porcentaje podemos estructurar con bonos".',
+                  'En este ejemplo, el gerente responde: "El 20% es alto para el presupuesto actual, pero revisemos qué porcentaje podemos estructurar con bonos".',
             ),
             ScenarioChoice(
               text:
@@ -301,8 +302,8 @@ class ScenarioDatabase {
               'Mano en barbilla + asentimiento lento + ceja elevada.',
           illustrationKey: 'hand_on_chin',
           visibleSignals: [
-            'Mano en barbilla (Evaluación activa de opciones)',
-            'Asentimiento (Disposición al acuerdo)'
+            'Se toca la barbilla',
+            'Asiente mientras revisa el documento'
           ],
           learningTakeaway:
               'Una mano en la barbilla y un asentimiento pueden coincidir con reflexión, escucha o un hábito. Pide confirmación clara antes de interpretar una decisión.',
@@ -335,7 +336,7 @@ class ScenarioDatabase {
     // --- ESCENARIO 5: MANEJO DEL CLIENTE ESCÉPTICO ---
     Scenario(
       id: 'scenario_skeptical_client',
-      title: 'El Cliente Escéptico: "Ya tenemos proveedor"',
+      title: 'Cuando el cliente dice: "Ya tenemos proveedor"',
       domain: 'Ventas B2B',
       description:
           'Practica cómo preguntar si una persona está satisfecha con su servicio actual, sin dar por hecho lo que piensa.',
@@ -347,26 +348,25 @@ class ScenarioDatabase {
           id: 'step_1',
           narrative:
               'Le preguntas sobre sus procesos logísticos. Él responde en tono tajante "Todo nos funciona perfecto con nuestro proveedor actual", pero mientras lo dice se toca la nuca con la mano y desvía la mirada hacia el suelo.',
-          characterAction:
-              'Gesto apaciguador en el cuello + mirada esquiva baja.',
+          characterAction: 'Se toca el cuello y mira hacia abajo.',
           illustrationKey: 'touching_neck',
           visibleSignals: [
-            'Mano en nuca (Estrés/Punto de dolor no resuelto)',
-            'Mirada baja (Inseguridad en su afirmación)',
-            'Incongruencia evidente'
+            'Se toca la nuca',
+            'Mira hacia abajo',
+            'Dice que está satisfecho con el proveedor'
           ],
           learningTakeaway:
-              'Frotarse el cuello al decir "todo está perfecto" es una señal biológica clara de estrés o insatisfacción que intenta ocultar.',
+              'La persona ha dicho que está satisfecha. Tocarse el cuello admite causas físicas o habituales. Puedes preguntar si quiere revisar alternativas y respetar su elección.',
           choices: [
             ScenarioChoice(
               text:
-                  'Preguntar de forma no invasiva: "Me alegra que tengan estabilidad. Si pudieras mejorar un solo detalle en los tiempos de respuesta o soporte de tu proveedor, ¿qué te gustaría que fuera más ágil?"',
+                  'Preguntar: "Gracias por aclararlo. ¿Quieren conocer otra opción o prefieren dejarlo aquí?"',
               analysis:
                   'Puedes preguntar qué le funciona y qué cambiaría. Escucha su respuesta sin insistir.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
-                  'El cliente suspira y dice: "Bueno, la verdad es que los fines de semana tardan demasiado en responder incidencias...". ¡Oportunidad abierta!',
+                  'En este caso, el cliente acepta revisar otra opción y comenta los plazos. En otra conversación podría preferir terminar sin dar más detalles.',
             ),
             ScenarioChoice(
               text:
@@ -563,7 +563,7 @@ class ScenarioDatabase {
       title: 'En el Mostrador de la Tienda: El Micro-asentimiento',
       domain: 'Vida Diaria',
       description:
-          'Aprende a reconocer cuándo un cajero o dependiente te está escuchando con micro-gestos aunque no hable.',
+          'Practica cómo coordinar un pedido mientras alguien consulta la pantalla.',
       contextOverview:
           'Llegas a la caja de una farmacia o comercio a pedir dos productos específicos.',
       iconName: 'shopping_bag',
@@ -576,7 +576,7 @@ class ScenarioDatabase {
               'Micro-asentimiento repetido de cabeza hacia abajo mientras la mirada está en el sistema.',
           illustrationKey: 'scenario_shopping_backchannel',
           visibleSignals: [
-            'Micro-asentimiento rítmico (Confirmación de escucha)',
+            'Hace pequeños movimientos de cabeza hacia abajo',
             'Atención dividida hacia la pantalla de cobro',
             'Silencio funcional de trabajo'
           ],
@@ -585,9 +585,9 @@ class ScenarioDatabase {
           choices: [
             ScenarioChoice(
               text:
-                  'Esperar tranquilamente unos segundos sin repetir la orden, entendiendo que el asentimiento confirmó la recepción.',
+                  'Dar un momento para que consulte el sistema y, si hace falta, preguntar: "¿Quieres que repita algún producto?"',
               analysis:
-                  'La persona asiente, pero eso por sí solo no confirma una decisión. Pregunta si quiere continuar.',
+                  'Dar tiempo y aclarar el pedido permite coordinarse. Un asentimiento puede acompañar la escucha, pero no confirma qué productos entendió.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -627,17 +627,17 @@ class ScenarioDatabase {
               'Mesa rectangular con cabecera libre y sillas en los laterales intermedios.',
           illustrationKey: 'scenario_meeting_seating',
           visibleSignals: [
-            'Cabecera libre (Espacio de moderación/liderazgo)',
-            'Laterales intermedios (Espacio de participación equilibrada)',
-            'Extremos opuestos (Distancia comunicativa)'
+            'Hay un asiento libre en el extremo de la mesa',
+            'Hay asientos libres a los lados',
+            'Las distancias a la pantalla varían entre asientos'
           ],
           learningTakeaway:
-              'En mesas rectangulares de trabajo, la cabecera comunica conducción de la reunión. Los puestos laterales intermedios ofrecen excelente contacto visual con todos sin asumir un rol jerárquico no asignado.',
+              'La ubicación puede afectar qué ves y oyes. Comprueba si hay asientos reservados y elige uno adecuado a tus necesidades; la forma de la mesa no asigna autoridad por sí sola.',
           choices: [
             ScenarioChoice(
               text: 'Sentarte en la cabecera principal de la mesa.',
               analysis:
-                  'Error de posición social: Ocupar la cabecera cuando no diriges la reunión puede percibirse como prepotencia o desconocimiento de la dinámica del equipo.',
+                  'Elegir sin comprobar si ese lugar está reservado puede requerir cambiar de asiento. Estar en un extremo no prueba prepotencia.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -645,7 +645,7 @@ class ScenarioDatabase {
             ),
             ScenarioChoice(
               text:
-                  'Elegir un asiento en el lateral intermedio, con buena visibilidad de la pantalla y de los demás.',
+                  'Preguntar si hay asientos reservados y elegir uno desde el que puedas ver el material y escuchar cómodamente.',
               analysis:
                   'La elección perfecta: Facilita escuchar, ver la presentación y participar de forma natural sin sobreexponerte ni aislarte.',
               isBestAction: true,
@@ -657,7 +657,7 @@ class ScenarioDatabase {
               text:
                   'Sentarte en una silla pegada a la pared al fondo, fuera de la mesa.',
               analysis:
-                  'Autoexclusión: Sentarse fuera de la mesa cuando hay sillas disponibles transmite inseguridad o que no deseas formar parte del equipo.',
+                  'Un asiento apartado puede dificultar ver el material o escucharse. La ubicación no permite deducir inseguridad ni ganas de participar.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -670,18 +670,18 @@ class ScenarioDatabase {
           narrative:
               'Durante la reunión, notas que el moderador mira con frecuencia hacia el centro de la mesa al hacer preguntas abiertas.',
           characterAction:
-              'Mirada triangular barriendo los asientos intermedios.',
+              'Mira hacia distintos lugares de la mesa mientras pregunta.',
           illustrationKey: 'proxemics_social',
           visibleSignals: [
-            'Contacto visual incluyente hacia los laterales',
-            'Invitación no verbal a intervenir'
+            'Mira hacia los asientos laterales',
+            'Hace una pregunta abierta al grupo'
           ],
           learningTakeaway:
               'Estar en el lateral intermedio te coloca en el campo de visión natural del moderador para aportar cuando sea oportuno.',
           choices: [
             ScenarioChoice(
               text:
-                  'Hacer un leve contacto visual y levantar ligeramente el bolígrafo o la mano cuando quieras aportar.',
+                  'Pedir un turno mediante el canal acordado: levantar la mano, decir "¿puedo aportar algo?" o usar el chat, según la reunión.',
               analysis:
                   'Excelente señalización de turno conversacional: Te permite pedir la palabra con elegancia y sin interrumpir bruscamente.',
               isBestAction: true,
@@ -788,7 +788,7 @@ class ScenarioDatabase {
             'Ritmo de tecleo ininterrumpido (flujo mental activo)'
           ],
           learningTakeaway:
-              'Los auriculares en una oficina moderna son un semáforo rojo no verbal. Una interrupción física brusca (tocar el hombro o hablar fuerte por detrás) activa un sobresalto defensivo que bloquea la colaboración.',
+              'Los auriculares en una oficina moderna pueden indicar que la persona prefiere no ser interrumpida. Tocar el hombro o hablar fuerte por detrás puede sobresaltar. Busca una forma de llamar su atención que respete su espacio.',
           choices: [
             ScenarioChoice(
               text:
@@ -804,7 +804,7 @@ class ScenarioDatabase {
               text:
                   'Llegar por detrás silenciosamente y tocarle el hombro con firmeza para llamar su atención.',
               analysis:
-                  'Invasión física por sorpresa: Tocar a alguien concentrado activa un reflejo de sobresalto y descarga de adrenalina.',
+                  'Tocar por sorpresa puede resultar incómodo o sobresaltar. Prefiere una forma de llamar la atención acordada y respetuosa.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -834,23 +834,23 @@ class ScenarioDatabase {
             'Mano en reposo sobre el teclado (ventana de tiempo breve)'
           ],
           learningTakeaway:
-              'Cuando alguien hace una pausa en su trabajo para atenderte, ve directo al grano en menos de 20 segundos sin rodeos innecesarios.',
+              'Como la otra persona hizo una pausa para escucharte, resume tu necesidad en una frase y pregunta si puede revisarla ahora o conviene acordar otro momento.',
           choices: [
             ScenarioChoice(
               text:
-                  'Ir al punto con precisión quirúrgica: "Solo necesito la contraseña del servidor de desarrollo para subir la entrega de hoy, ¿me la pasas por Slack?".',
+                  'Ir al punto: "Necesito subir la entrega de hoy. ¿Me indicas el procedimiento aprobado para obtener acceso?".',
               analysis:
-                  'Precisión ejecutiva: Resuelves la necesidad en 10 segundos, no desgastas su energía mental y facilitas que vuelva a su ritmo.',
+                  'La petición concreta permite responder con el procedimiento adecuado. No compartan contraseñas por chat; acuerden cuándo revisar el acceso si hace falta.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
-                  'Tu compañero te la envía al instante por chat y dice: "¡Listo, cualquier cosa me avisas!". Misión cumplida con alta eficiencia.',
+                  'Tu compañero te indica el canal aprobado para solicitar acceso y acuerdan el siguiente paso.',
             ),
             ScenarioChoice(
               text:
                   'Aprovechar que te miró para quejarte del jefe, del clima y contarle lo difícil que fue tu fin de semana antes de pedir la clave.',
               analysis:
-                  'Falta de empatía con el tiempo ajeno: Dilatar una pausa laboral con charla trivial cuando el otro está en entregas genera resentimiento.',
+                  'La persona ha comunicado una entrega pendiente. Acuerda un momento para hablar en vez de dar por hecho que puede prolongar la pausa.',
               isBestAction: false,
               nextStepIndex: null,
               consequenceSummary:
@@ -882,16 +882,16 @@ class ScenarioDatabase {
           visibleSignals: [
             'Disposición en forma de U (Círculo abierto)',
             'Pies apuntando parcialmente hacia afuera',
-            'Miradas periódicas hacia el salón (Receptividad social)'
+            'La mirada pasa por distintos puntos del salón'
           ],
           learningTakeaway:
-              'Un grupo cuyos cuerpos forman una "U" abierta invita subconscientemente a que otros se acerquen. Por el contrario, un grupo cerrado en "O" (hombro con hombro, completamente enfrentados) está en una conversación íntima o confidencial donde no se debe entrar.',
+              'La disposición del grupo muestra dónde hay espacio físico. No permite saber si la conversación es privada ni si desean compañía. Pregunta antes de unirte.',
           choices: [
             ScenarioChoice(
               text:
-                  'Aproximarte con paso tranquilo al espacio abierto de la "U", colocarte a distancia social (1.5 m) y hacer un leve contacto visual con una sonrisa tranquila.',
+                  'Dejar espacio y preguntar: "¿Les viene bien que me una?". Esperar la respuesta antes de entrar en el grupo.',
               analysis:
-                  'Entrada impecable: Te colocas en el espacio visible de invitación sin invadir bruscamente el círculo íntimo.',
+                  'Preguntas por la disponibilidad del grupo y respetas su respuesta; no das por hecho que el hueco es una invitación.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
@@ -911,7 +911,7 @@ class ScenarioDatabase {
               text:
                   'Quedarte a 5 metros de espaldas con los brazos cruzados pensando que nadie quiere hablar contigo.',
               analysis:
-                  'Lectura errónea de rechazo: El grupo tenía el círculo abierto esperando interacción.',
+                  'La forma del grupo no confirma invitación ni rechazo. Si deseas participar, puedes preguntar; también puedes decidir no unirte.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -982,17 +982,17 @@ class ScenarioDatabase {
             'Tono plano y protocolar (Cierre cortés para evitar confrontación)'
           ],
           learningTakeaway:
-              '"Déjamelo pensar" casi nunca significa que van a reflexionar sobre la propuesta; suele ser una salida elegante para terminar la reunión sin decir "no". Presionar agresivamente arruina la venta, pero marcharse sin explorar la duda oculta garantiza que no vuelvan a contestarte.',
+              'La persona ha pedido tiempo para pensar. No conocemos su motivo ni qué decidirá. Puedes ofrecer información y acordar si desea un seguimiento, sin presionar ni suponer una objeción oculta.',
           choices: [
             ScenarioChoice(
               text:
-                  'Desarmar la presión con empatía y formular una pregunta consultiva: "Por supuesto, es una decisión importante. Con total sinceridad, cuando alguien me pide pensarlo suele ser o por el presupuesto o porque falta resolver algún detalle operativo. ¿En cuál de los dos casos estamos?"',
+                  'Respetar la pausa: "Por supuesto. ¿Quieres algún dato adicional para revisarlo? ¿Prefieres contactarme tú o acordamos un seguimiento?".',
               analysis:
-                  'Técnica de aislamiento de objeciones consultiva: Quitas la presión de compra inmediata y das permiso seguro para que confiese su verdadero obstáculo.',
+                  'Ofreces opciones sin limitar los motivos de la persona a presupuesto o dificultades operativas.',
               isBestAction: true,
               nextStepIndex: 1,
               consequenceSummary:
-                  'El cliente suspira aliviado por tu franqueza, relaja la postura y se abre a compartir el obstáculo real.',
+                  'En este ejemplo, el cliente decide explicar una dificultad. En otra conversación podría pedir tiempo o preferir no dar más detalles.',
             ),
             ScenarioChoice(
               text:
@@ -1008,7 +1008,7 @@ class ScenarioDatabase {
               text:
                   'Aceptar la frase literalmente: "¡Perfecto, te llamo el lunes sin falta para saber qué decidieron!" y marcharte.',
               analysis:
-                  'Error de literalidad: Asumir que la frase era una promesa real. El 90% de estos clientes no atienden el teléfono el lunes.',
+                  'Decides llamar sin haber acordado el seguimiento. Conviene preguntar qué canal y momento prefiere la persona.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -1019,20 +1019,20 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_2',
           narrative:
-              'Al darle permiso de ser honesto, el cliente apoya los codos en la mesa, baja la guardia y confiesa: "Siendo sincero, el producto nos encanta, pero nuestro equipo técnico está saturado con otra migración y tememos que implementar esto ahora nos colapse el mes".',
+              'En este ejemplo ficticio, el cliente explica una dificultad de su equipo: "Siendo sincero, el producto nos encanta, pero nuestro equipo técnico está saturado con otra migración y tememos que implementar esto ahora nos colapse el mes".',
           characterAction:
               'Codos en la mesa, hombros relajados y tono de voz confidencial.',
           illustrationKey: 'open_posture',
           visibleSignals: [
-            'Acercamiento corporal hacia la mesa (Reconexión de interés)',
-            'Revelación de la objeción raíz (Problema de tiempos/capacidad, no de precio)'
+            'Apoya los codos en la mesa',
+            'Comunica con palabras una dificultad de capacidad y plazos'
           ],
           learningTakeaway:
-              'Una vez descubierta la verdadera objeción (tiempos del equipo, no desinterés), tu labor no es vender más, sino resolver el miedo específico que bloqueaba el avance.',
+              'La persona ha explicado una dificultad de capacidad del equipo. Revisa qué puedes ofrecer realmente y permite que decida si necesita más tiempo.',
           choices: [
             ScenarioChoice(
               text:
-                  'Presentar una solución a su miedo específico: "Te entiendo al 100%. Justo por eso nuestro propio equipo técnico hace la configuración inicial en fines de semana sin tocar a tu personal. Si nos encargamos de esa carga, ¿tendría sentido avanzar?"',
+                  'Ofrecer una alternativa que realmente puedas cumplir: "Podemos revisar qué tareas asumiría nuestro equipo y cuándo. ¿Quieres evaluar si eso encaja o prefieres posponerlo?"',
               analysis:
                   'Pregunta qué necesita revisar y ofrece una alternativa concreta. La otra persona decide si le sirve.',
               isBestAction: true,
@@ -1084,7 +1084,7 @@ class ScenarioDatabase {
               text:
                   'Sonreír con nerviosismo y decir: "Eh... bueno, es que tengo un poco de prisa hoy, pero déjamelo a ver si me da tiempo".',
               analysis:
-                  'Error de apaciguamiento: Tu sonrisa y ambigüedad le dan a entender que sí lo harás. Te quedarás trabajando hasta tarde con resentimiento.',
+                  'La frase no aclara si aceptarás el informe. Puedes decir que necesitas tiempo para decidir o expresar tu decisión. La sonrisa no equivale a aceptar.',
               isBestAction: false,
               nextStepIndex: 1,
               consequenceSummary:
@@ -1117,21 +1117,21 @@ class ScenarioDatabase {
           narrative:
               'Tu colega frunce el ceño, cambia a tono de víctima y dice: "¡Vaya, qué frío! Pensé que éramos un equipo. Si no me ayudas me van a llamar la atención el lunes. ¿De verdad me vas a dejar tirado?".',
           characterAction:
-              'Brazos cruzados, cabeza ladeada con expresión de decepción fingida (pushback emocional).',
+              'Cruza los brazos, inclina la cabeza y cuestiona tu decisión con palabras.',
           illustrationKey: 'frown_eyebrows',
           visibleSignals: [
-            'Manipulación por culpabilización',
+            'Dice que lo dejarías tirado si no aceptas',
             'Postura de reproche',
-            'Mirada fija esperando que cedas por culpa'
+            'Mira hacia ti mientras insiste'
           ],
           learningTakeaway:
-              'El pushback emocional busca que la culpa te haga ceder. La Técnica del Disco Rayado desactiva el debate sin agresividad: repites la misma decisión con calma neutra.',
+              'El comentario sigue presionando después de tu respuesta. Puedes repetir el límite con palabras claras o cerrar la conversación. Eso no garantiza que la otra persona acepte ni identifica su intención interna.',
           choices: [
             ScenarioChoice(
               text:
-                  'Aplicar la Técnica del Disco Rayado con voz neutra y monocorde: "Entiendo que estés preocupado por el lunes, pero como te mencioné, no voy a asumir este informe. Mucho éxito con tu entrega".',
+                  'Reiterar tu decisión con palabras claras y un tono que te resulte cómodo: "Entiendo que estés preocupado por el lunes, pero como te mencioné, no voy a asumir este informe. Mucho éxito con tu entrega".',
               analysis:
-                  'Maestría en límites: No muerdes el anzuelo de la culpa ni te justificas. El disco rayado cierra el debate limpiamente.',
+                  'Reiteras tu decisión. Puedes explicar lo que quieras, pero no necesitas convencerlo para mantener el límite. Si insiste, puedes terminar el intercambio.',
               isBestAction: true,
               nextStepIndex: null,
               consequenceSummary:
@@ -1223,9 +1223,9 @@ class ScenarioDatabase {
         ScenarioStep(
           id: 'step_2',
           narrative:
-              'Tu amigo suelta el aire, su postura se relaja visiblemente, te mira a los ojos con una sonrisa genuina y te dice: "¡Uff, gracias por entenderlo! De verdad estoy exhausto y me daba mucha vergüenza decirte que no después de tu entusiasmo".',
+              'En este desenlace ficticio, tu amigo responde: "¡Uff, gracias por entenderlo! De verdad estoy exhausto y me daba mucha vergüenza decirte que no después de tu entusiasmo".',
           characterAction:
-              'Hombros relajados, sonrisa sincera y postura frontal abierta.',
+              'Hombros bajos, sonrisa y torso orientado hacia la otra persona.',
           illustrationKey: 'duchenne_smile',
           visibleSignals: [
             'Sonrisa con arrugas junto a los ojos',

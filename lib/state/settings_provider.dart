@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/services/storage_service.dart';
+import '../core/localization/app_language.dart';
 
 class SettingsProvider extends ChangeNotifier {
   static final SettingsProvider _instance = SettingsProvider._internal();
@@ -38,7 +39,8 @@ class SettingsProvider extends ChangeNotifier {
   bool get isAutoNarration => _autoNarration;
   double get speechRate => _speechRate;
   String? get languageCode => _languageCode;
-  Locale? get locale => _languageCode != null ? Locale(_languageCode!) : null;
+  Locale? get locale =>
+      _languageCode != null ? AppLanguage.fromPreference(_languageCode!) : null;
 
   void loadSettings() {
     final modeStr = StorageService.getThemeMode();
@@ -59,6 +61,7 @@ class SettingsProvider extends ChangeNotifier {
     _autoNarration = StorageService.getAutoNarration();
     _speechRate = StorageService.getSpeechRate();
     _languageCode = StorageService.getLanguage();
+    if (_languageCode == 'es') _languageCode = 'es-ES';
     notifyListeners();
   }
 
@@ -122,8 +125,8 @@ class SettingsProvider extends ChangeNotifier {
   }
 
   Future<void> setLanguageCode(String? code) async {
-    _languageCode = code;
-    await StorageService.setLanguage(code);
+    _languageCode = code == 'es' ? 'es-ES' : code;
+    await StorageService.setLanguage(_languageCode);
     notifyListeners();
   }
 }

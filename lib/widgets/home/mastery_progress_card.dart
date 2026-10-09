@@ -78,7 +78,8 @@ class MasteryProgressCard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 6),
-                            Container(
+                            Flexible(
+                                child: Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 6, vertical: 1.5),
                               decoration: BoxDecoration(
@@ -97,7 +98,7 @@ class MasteryProgressCard extends StatelessWidget {
                                       : const Color(0xFF0F766E),
                                 ),
                               ),
-                            ),
+                            )),
                           ],
                         ),
                         const SizedBox(height: 1),
@@ -273,7 +274,8 @@ class MasteryProgressCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Material(
+                        Flexible(
+                            child: Material(
                           color: Colors.transparent,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -311,21 +313,21 @@ class MasteryProgressCard extends StatelessWidget {
                                         : AppColors.textPrimaryLight,
                                   ),
                                   const SizedBox(width: 6),
-                                  Text(
-                                    'Itinerario',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      color: isDark
-                                          ? AppColors.textSecondaryDark
-                                          : AppColors.textPrimaryLight,
-                                    ),
+                                  Flexible(
+                                    child: Text('Itinerario',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: isDark
+                                              ? AppColors.textSecondaryDark
+                                              : AppColors.textPrimaryLight,
+                                        )),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        ),
+                        )),
                       ],
                     ),
                   ],

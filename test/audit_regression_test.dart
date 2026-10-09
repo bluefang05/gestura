@@ -84,6 +84,7 @@ void main() {
     await tester.pumpAndSettle();
     // Framework reports uncaught rendering errors.
     await tester.scrollUntilVisible(find.text('Correcta'), 250);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Correcta'));
     await tester.pump();
     await tester.tap(find.text('Comprobar Respuesta'));

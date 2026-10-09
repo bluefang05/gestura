@@ -1,4 +1,5 @@
 import 'quiz_expansion.dart';
+import 'communication_practice_database.dart';
 import '../models/quiz_question.dart';
 import '../models/category.dart';
 
@@ -478,7 +479,7 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Combinación de barrera física (brazos cruzados) + contención verbal (labios apretados).',
+          'Brazos cruzados y labios apretados. Estos movimientos no permiten saber qué piensa de la cifra.',
       explanation:
           'Los brazos cruzados y los labios apretados no dicen por sí solos qué piensa la persona. Haz una pausa y pregunta: "¿Qué te parece esta cifra?".',
     ),
@@ -499,7 +500,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_sarcastico',
           text:
-              'Es sarcasmo: el tono plano e incongruente indica que piensa que es mala idea.',
+              'Podría ser ironía o una valoración literal. Preguntar qué le parece trabajar el sábado permite aclararlo.',
           isCorrect: true,
         ),
         QuizOption(
@@ -511,13 +512,13 @@ class QuizDatabase {
       keyVisualClue:
           'Dice «maravillosa», pero su voz suena apagada. Eso puede tener muchas causas; pregunta antes de asumir que habla con sarcasmo.',
       explanation:
-          'En la vida cotidiana, las personas que usan sarcasmo no suelen hacer muecas exageradas ni sonreír; suelen mantener el rostro neutro (poker face). La contradicción está entre la palabra positiva y la melodía arrastrada o plana de la voz.',
+          'El sarcasmo puede apoyarse en las palabras, el tono y el contexto. No tiene una expresión facial ni una entonación obligatoria. Si importa entender la intención, pregunta.',
     ),
     QuizQuestion(
       id: 'q_digital_caps',
       category: CategoryType.comunicacionDigital,
       prompt:
-          'Un cliente te envía por WhatsApp: "NECESITO EL REPORTE AHORA MISMO". ¿Qué tono transmite?',
+          'Un cliente escribe: "NECESITO EL REPORTE AHORA MISMO". ¿Cómo aclarar lo que necesita?',
       questionIllustrationKey: 'digital_mayusculas',
       scenarioText: 'Mensajería instantánea en horario laboral.',
       options: [
@@ -529,7 +530,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_grito',
           text:
-              'Transmite urgencia extrema, enojo o exigencia imperativa (equivalente a gritar).',
+              'El texto pide rapidez. Pregunta el plazo y las prioridades sin dar por hecho enfado por las mayúsculas.',
           isCorrect: true,
         ),
         QuizOption(
@@ -541,13 +542,13 @@ class QuizDatabase {
       keyVisualClue:
           'Todas las palabras en MAYÚSCULAS sostenidas en comunicación digital.',
       explanation:
-          'En el código no escrito de internet, escribir todo en mayúsculas se interpreta casi unánimemente como levantar la voz o gritar con frustración o extrema urgencia.',
+          'Las mayúsculas pueden leerse como énfasis, pero sus usos varían. Las palabras piden rapidez; conviene concretar el plazo en vez de atribuir una emoción.',
     ),
     QuizQuestion(
       id: 'q_leaning_forward_meaning',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'En una entrevista de trabajo, el entrevistador se inclina hacia adelante sobre la mesa y asiente. ¿Qué indica?',
+          'En una entrevista, el entrevistador se inclina hacia adelante y asiente. ¿Qué puedes concluir?',
       questionIllustrationKey: 'leaning_forward',
       scenarioText:
           'Estás describiendo cómo resolviste un problema técnico complejo.',
@@ -555,7 +556,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_a',
           text:
-              'Alto interés, enganche positivo y deseo de escuchar más detalles.',
+              'Puede estar escuchando, buscando comodidad o tratando de oír mejor. Si necesitas saber si quiere más detalles, pregúntalo.',
           isCorrect: true,
         ),
         QuizOption(
@@ -572,7 +573,7 @@ class QuizDatabase {
       keyVisualClue:
           'Inclinación del torso hacia adelante + asentimiento rítmico.',
       explanation:
-          'Inclinarse hacia adelante (*leaning in*) reduce la distancia psicológica y demuestra que la persona está genuinamente interesada en lo que estás diciendo.',
+          'La inclinación y el asentimiento son observables; no demuestran interés ni acuerdo. La respuesta verbal permite aclarar qué necesita.',
     ),
     QuizQuestion(
       id: 'q_reflective_vs_tense_silence',
@@ -683,7 +684,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_zoom_probe',
           text:
-              'Pausa estratégica y chequeo amable: "Veo que pausaste la cámara, ¿se sigue viendo bien la pantalla o prefieres que revisemos este número en detalle?".',
+              'Pregunta si el audio y el material compartido le funcionan, y permite continuar sin cámara o por otro canal.',
           isCorrect: true,
         ),
         QuizOption(
@@ -692,10 +693,9 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Apagar la cámara tras un estímulo de alto impacto suele ocultar una reacción facial negativa o consulta privada con un colega.',
+      keyVisualClue: 'La cámara se apagó; el micrófono sigue activo.',
       explanation:
-          'El apagado súbito de cámara en Zoom es el equivalente digital a retirarse hacia atrás. Hacer una pausa respetuosa permite averiguar si hubo un problema técnico o un impacto presupuestario.',
+          'Apagar la cámara puede responder a privacidad, conexión, comodidad u otros motivos. El momento en que ocurre no identifica la causa ni demuestra una reacción al precio.',
     ),
     QuizQuestion(
       id: 'q_chat_dry_period',
@@ -726,7 +726,7 @@ class QuizDatabase {
       keyVisualClue:
           'La brevedad digital carece de tono de voz; atribuir malicia sin confirmar es un sesgo común.',
       explanation:
-          'La comunicación por texto tiene un sesgo de negatividad inherente. Una respuesta corta puede ser simple eficiencia de tiempo, no desagrado.',
+          'El punto final y la brevedad pueden tener distintos usos. Si una decisión sigue pendiente, pregunta lo que necesitas aclarar por un canal que ambos puedan usar.',
     ),
     QuizQuestion(
       id: 'q_elevator_small_talk_weather',
@@ -884,13 +884,13 @@ class QuizDatabase {
       id: 'q_group_horseshoe_u_entry',
       category: CategoryType.proxemica,
       prompt:
-          'En un evento de networking, ves a tres personas de pie cuyos cuerpos forman un ángulo hacia afuera en forma de "herradura" o "U". ¿Qué significa?',
+          'Ves un grupo dispuesto en forma de U. Si quieres unirte, ¿qué puedes hacer?',
       scenarioText: 'Observa la apertura geométrica del grupo.',
       options: [
         QuizOption(
           id: 'opt_u_open',
           text:
-              'Círculo abierto: la disposición geométrica del grupo invita subconscientemente a que otros se unan a la conversación.',
+              'Dejar espacio y preguntar si puedes unirte. La disposición del grupo no confirma que quiera compañía.',
           isCorrect: true,
         ),
         QuizOption(
@@ -906,9 +906,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'El espacio libre en la herradura deja una puerta de entrada social visible.',
+          'Hay un espacio libre entre las personas, sin una invitación explícita.',
       explanation:
-          'Los grupos abiertos en "U" son los más accesibles para integrarse. Acércate a distancia social (1.5 m) con contacto visual cordial.',
+          'Un hueco físico no equivale a una invitación. Puedes preguntar si puedes unirte y respetar la respuesta.',
     ),
     QuizQuestion(
       id: 'q_interview_hands_pocket',
@@ -971,7 +971,7 @@ class QuizDatabase {
       id: 'q_poker_face_sarcasm',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          'Un colega dice con cara seria e inexpresiva: "Sí, seguro que el servidor se arregla solo mágicamente...". ¿Qué elemento confirma el sarcasmo?',
+          'Un colega dice con cara seria: "Sí, seguro que el servidor se arregla solo mágicamente...". ¿Qué puede ayudar a interpretar la frase?',
       scenarioText: 'La expresión facial es neutra (deadpan).',
       options: [
         QuizOption(
@@ -994,19 +994,19 @@ class QuizDatabase {
       keyVisualClue:
           'El tono de voz y lo absurdo de la frase ayudan a notar el sarcasmo; la cara seria por sí sola no lo confirma.',
       explanation:
-          'No esperes que la gente sonría con malicia cuando es irónica. En adultos, el tono y la lógica interna de la frase son la clave.',
+          'El contenido y la situación pueden sugerir ironía. La cara seria no la confirma, y puedes preguntar si lo dice en serio o en broma.',
     ),
     QuizQuestion(
       id: 'q_blank_mind_power_pause',
       category: CategoryType.factoresParalinguisticos,
       prompt:
-          'En plena entrevista de trabajo te quedas en blanco al explicar un proyecto. ¿Cuál es la mejor respuesta física e inmediata?',
+          'Te quedas en blanco durante una entrevista. ¿Qué opción puede ayudarte a continuar?',
       scenarioText: 'Bloqueo mental momentáneo.',
       options: [
         QuizOption(
           id: 'opt_blank_pause',
           text:
-              'Hacer una "Pausa de Poder": inhalar hondo con calma, asentir lentamente 2 segundos y ordenar la idea sin decir muletillas de pánico ("ehhh...").',
+              'Pedir un momento para ordenar la idea. Puedes respirar a tu ritmo, consultar una nota o pedir que repitan la pregunta.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1022,16 +1022,15 @@ class QuizDatabase {
           isCorrect: false,
         ),
       ],
-      keyVisualClue:
-          'Una pausa ejecutada con compostura se percibe como reflexión profunda, no como error.',
+      keyVisualClue: 'La persona necesita tiempo para preparar su respuesta.',
       explanation:
-          'Los evaluadores respetan a quienes controlan el silencio con seguridad. Un respiro profundo de 2 segundos te devuelve el control mental.',
+          'Pedir tiempo es una opción de comunicación. Una pausa o una respiración de duración fija no garantiza recuperar la idea ni causar una impresión determinada.',
     ),
     QuizQuestion(
       id: 'q_sensory_overload_escape',
       category: CategoryType.entornoApariencia,
       prompt:
-          'Estás en una cena concurrida y sientes que las luces, música y conversaciones cruzadas están colapsando tu batería sensorial. ¿Cómo retirarte con dignidad?',
+          'Estás en una cena concurrida y las luces, la música y las conversaciones te resultan difíciles de tolerar. Quieres retirarte. ¿Qué opción comunica esa necesidad?',
       scenarioText:
           'La persona podría necesitar una pausa o un momento para sí.',
       options: [
@@ -1057,7 +1056,7 @@ class QuizDatabase {
       keyVisualClue:
           'Cuidar tus límites no requiere disculpas excesivas ni confrontación.',
       explanation:
-          'Tu salud mental es prioritaria. Una frase sencilla y cordial te permite retirarte con elegancia y sin culpa.',
+          'Puedes pedir una pausa o retirarte según lo que necesitas. Una frase breve puede comunicarlo si te resulta posible; no tienes que esperar a sentirte al límite ni garantizar que desaparezca la culpa.',
     ),
     QuizQuestion(
       id: 'q_meeting_head_of_table',
@@ -1151,49 +1150,49 @@ class QuizDatabase {
       id: 'q_phone_screen_barrier',
       category: CategoryType.lenguajeCorporal,
       prompt:
-          'Hablas con alguien y te dice: "Te escucho, te escucho", pero mantiene los ojos fijos en la pantalla del teléfono tecleando. ¿Qué sucede con su escucha activa?',
-      scenarioText: 'Atención secuestrada por el dispositivo digital.',
+          'Alguien dice que te escucha mientras escribe en su teléfono. ¿Cómo puedes coordinar la conversación?',
+      scenarioText: 'La persona escribe en el teléfono mientras tú hablas.',
       options: [
         QuizOption(
           id: 'opt_phone_divided',
           text:
-              'Su atención mental está fragmentada; su asentimiento es un automatismo social para no interrumpir su uso del teléfono.',
+              'Pregunta si es buen momento para continuar o si prefiere terminar con el teléfono primero.',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_phone_genius',
           text:
-              'Tiene capacidad cerebral sobrehumana y procesa todo al 100% sin esfuerzo.',
+              'Dar por hecho que entendió todos los detalles sin comprobarlos.',
           isCorrect: false,
         ),
         QuizOption(
           id: 'opt_phone_blind',
-          text: 'Está ciego y usa el teléfono con ecolocalización.',
+          text: 'Concluir que usa el teléfono para despreciarte.',
           isCorrect: false,
         ),
       ],
       keyVisualClue:
-          'Sin contacto visual ni orientación del torso, la escucha profunda es inexistente.',
+          'La persona escribe en el teléfono. No conoces cuánto escuchó ni por qué lo usa.',
       explanation:
-          'Hacer una pausa en silencio amable sin enfadarte logra que la persona levante la mirada y decida conscientemente si atenderte o pedir un minuto.',
+          'El uso del teléfono no permite medir la atención. Pregunta si conviene continuar y confirma los detalles importantes sin exigir contacto visual.',
     ),
     QuizQuestion(
       id: 'q_boss_open_door_closed_desk',
       category: CategoryType.entornoApariencia,
       prompt:
-          'Un jefe dice promover una "política de puertas abiertas", pero en su oficina mantiene un escritorio macizo de 2 metros interpuesto entre él y los visitantes. ¿Qué efecto tiene?',
+          'Un jefe dice que está disponible para conversar y tiene un escritorio grande entre ambos. ¿Qué puedes concluir?',
       questionIllustrationKey: 'desk_barrier',
       scenarioText: 'Barrera física en el entorno laboral.',
       options: [
         QuizOption(
           id: 'opt_desk_barrier',
           text:
-              'Crea una barrera psicológica de poder y distancia que desmiente en los hechos la supuesta apertura verbal.',
+              'El escritorio puede afectar la distribución del espacio, pero no desmiente su disponibilidad. Pregunta si pueden conversar.',
           isCorrect: true,
         ),
         QuizOption(
           id: 'opt_desk_inviting',
-          text: 'Invita a que los empleados se sienten en su regazo.',
+          text: 'El tamaño del escritorio demuestra que quiere excluirte.',
           isCorrect: false,
         ),
         QuizOption(
@@ -1203,9 +1202,9 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'Los objetos voluminosos intermedios actúan como escudos de territorio y estatus.',
+          'Hay un escritorio entre dos personas; no conoces el motivo de esa distribución.',
       explanation:
-          'Los líderes accesibles suelen salir de detrás del escritorio y sentarse en una mesa redonda o sillones a la misma altura.',
+          'El mobiliario puede facilitar o dificultar ver materiales y escucharse. No permite deducir accesibilidad personal, poder ni honestidad.',
     ),
     QuizQuestion(
       id: 'q_backchannel_micro_nod',
@@ -1423,7 +1422,7 @@ class QuizDatabase {
         QuizOption(
           id: 'opt_caps_calm',
           text:
-              'Responder con rapidez, tono calmado y datos concretos sin responder en mayúsculas; las mayúsculas denotan urgencia o frustración que requiere contención rápida.',
+              'Responder con datos sobre el pedido y preguntar si necesita una respuesta para un plazo concreto. Las mayúsculas no identifican su emoción.',
           isCorrect: true,
         ),
         QuizOption(
@@ -1438,11 +1437,12 @@ class QuizDatabase {
         ),
       ],
       keyVisualClue:
-          'En el código digital, las mayúsculas equivalen al volumen alzado de voz.',
+          'Observa la pregunta sobre el pedido; el formato de las letras puede tener distintos motivos.',
       explanation:
           'Responder con calma y en orden puede ayudar a aclarar la urgencia. No podemos saber por qué la persona escribió así; pregunta qué necesita y para cuándo.',
     ),
     ...QuizExpansion.questions,
+    ...CommunicationPracticeDatabase.questions,
   ];
 
   static List<QuizQuestion> getByCategory(CategoryType category) {

@@ -79,7 +79,7 @@ class _ConceptsScreenState extends State<ConceptsScreen> {
                                       Theme.of(context).textTheme.titleLarge)),
                           IconButton(
                               tooltip: 'Escuchar: ${concept.title}',
-                              onPressed: () => TtsService.speak(
+                              onPressed: () => TtsService.speakSpanish(
                                   '${concept.title}. ${concept.explanation}',
                                   gestureId: concept.title),
                               icon: const Icon(Icons.volume_up_outlined)),

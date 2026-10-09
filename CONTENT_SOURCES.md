@@ -2,6 +2,136 @@
 
 Revisión: 1 de octubre de 2026.
 
+## Revisión de claridad del 8 de octubre de 2026
+
+Las categorías de gestos describen lecturas tentativas. Una postura cómoda,
+una pausa o un movimiento habitual se presenta como ambiguo cuando no permite
+deducir una intención. Se retiró el porcentaje de apertura comercial y los
+puntos asignados a gestos: eran una suma de valores internos, sin una medida
+validada de interés o acuerdo.
+
+La guía de observación invita a considerar explicaciones y pedir aclaraciones.
+Los ejemplos respetan las afirmaciones de bienestar y los límites de presupuesto;
+los gestos no justifican invalidarlos. Las distancias interpersonales se describen
+como referencias variables y la cercanía familiar no sustituye la elección de la
+persona. Esta revisión de claridad no constituye una validación científica del
+catálogo completo.
+
+En una segunda revisión se corrigieron también respuestas antiguas del quiz,
+escenarios y guiones que afirmaban interés por la inclinación corporal, poder
+por el mobiliario o falta de escucha por mirar un teléfono. Se retiraron las
+tasas de ventas del 80 % y 90 %, que carecían de fuente, y las promesas de
+recuperar el control mental con una respiración de dos segundos. Los ejemplos
+de frases indirectas incluyen ahora más de una explicación y respetan la
+respuesta literal; no funcionan como un diccionario de intenciones ocultas.
+
+La comparación de palabras y gestos permite explorar explicaciones y preguntas,
+sin calificar una lectura emocional como verdadera o falsa. Las fuentes apoyan
+criterios metodológicos generales, no cada gesto ni cada sugerencia práctica:
+
+- [Barrett et al. (2019), revisión sobre movimientos faciales](https://pubmed.ncbi.nlm.nih.gov/31313636/):
+  variación entre personas, situaciones y culturas; una configuración facial no
+  identifica por sí sola una emoción.
+- [Renier et al. (2021), revisión sobre análisis no verbal desde vídeo](https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.606548/full):
+  distinguir movimientos observados de inferencias; considerar contexto y sesgos.
+- [Milton (2012), propuesta de doble empatía](https://kar.kent.ac.uk/62639/):
+  marco teórico sobre reciprocidad y comprensión mutua en la comunicación autista
+  y no autista. Se atribuye al autor y no se presenta como explicación universal,
+  diagnóstico o prueba de quién tiene razón en una interacción.
+
+### Revisión adicional: coherencia entre avisos, tarjetas y guiones
+
+Se revisaron las explicaciones concretas, además de los avisos generales. Se
+retiró la clasificación visual de «risa genuina» frente a «risa nerviosa», la
+regla de «cara de póker» para identificar sarcasmo, el 40 % de confianza por
+mostrar las palmas y el umbral de 180 palabras por minuto como definición
+universal de habla rápida. Tampoco se atribuyen negociación dura a piernas
+cruzadas, solvencia a ropa formal o acuerdos a iluminación cálida.
+
+Las posibilidades de los casos incluyen ahora lo que la persona ha dicho,
+hábitos y comodidad; no concentran todas las alternativas en una emoción
+oculta. Se corrigió un caso sobre satisfacción con un proveedor cuya respuesta
+preguntaba por plazos nunca mencionados. Los guiones no reducen «necesito
+pensarlo» a dos motivos ni convierten una respuesta libre en obligación de
+sonreír, mantener la mirada o aceptar un seguimiento.
+
+Fuentes consultadas para estos criterios:
+
+- [Girard et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34337430/):
+  dos estudios examinan hipótesis sobre constricción ocular y emoción positiva;
+  sus resultados no permiten usar los ojos como certificado individual de
+  sinceridad. No es una validación de una clasificación de risas.
+- [Bryant y Fox Tree (2005)](https://journals.sagepub.com/doi/10.1177/00238309050480030101):
+  análisis acústicos y experimentos con habla irónica en inglés cuestionan un
+  tono único de ironía. No se generaliza cada patrón a todos los idiomas ni se
+  niega que la prosodia pueda aportar pistas junto con el contexto.
+
+### Reemplazos con hallazgos positivos y alcance explícito
+
+A petición del usuario, la revisión conserva los fenómenos que sí tienen
+respaldo. Las tarjetas correspondientes incorporan «Qué aporta la fuente», «Alcance del resultado» y «Una aplicación posible», con una
+fuente consultable. La aplicación práctica se presenta como una propuesta
+editorial, no como un resultado experimental añadido.
+
+| Afirmación revisada | Contenido conservado o reemplazo | Fuente y alcance |
+| --- | --- | --- |
+| Ojos que certifican alegría o sinceridad | La constricción ocular aportó información sobre emoción positiva y, especialmente, sobre la percepción de alegría; el contexto importa. | [Girard et al., 2021](https://pubmed.ncbi.nlm.nih.gov/34337430/). 751 sonrisas de 136 participantes, dos análisis de esa base. No son dos muestras independientes. |
+| Tono único o cara obligatoria de sarcasmo | Algunas grabaciones sarcásticas en inglés presentaron tono más grave y otros cambios acústicos. | [Cheang y Pell, 2008](https://www.mcgill.ca/pell_lab/files/pell_lab/cheang__pell_2008.pdf). Producción preparada y validada por oyentes; patrones dependientes de lengua y contenido. Complementa el estudio de habla espontánea de Bryant y Fox Tree. |
+| Mostrar las palmas produce 40 % más confianza | Los gestos que acompañan el habla pueden contribuir a comprender información. | [Dargue et al., 2019](https://pubmed.ncbi.nlm.nih.gov/31219263/). Metaanálisis de 83 muestras independientes; beneficio promedio moderado, variable según gesto, tarea y medición. No estudia ese porcentaje de confianza. |
+| Ropa formal demuestra solvencia e informal demuestra creatividad | Ropa y postura influyen juntas en impresiones de profesionalidad, confianza, accesibilidad y salario probable. | [Gurney et al., 2017](https://pubmed.ncbi.nlm.nih.gov/27381170/). Juicios sobre fotografías; interacciones según género del modelo y tipo de prenda. No se mide competencia real ni compras. |
+| Piernas cruzadas indican dominio o negociación dura | Cruzar las piernas modifica posiciones del tronco y la pelvis bajo condiciones de laboratorio. | [Jung et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32605016/). 30 participantes con dolor lumbar y 30 sin él, sentados en silla. Es evidencia biomecánica, sin resultado sobre intenciones ni prescripción postural individual. |
+| 180 palabras/minuto define rapidez y reduce credibilidad | Adaptar el ritmo puede disminuir esfuerzo de escucha en una población y una tarea concretas. | [Winn y Teece, 2021](https://pubmed.ncbi.nlm.nih.gov/33002968/). 21 usuarios de implante coclear y frases alargadas a 1,4 veces su duración; no velocidad ideal universal ni credibilidad. |
+| Luz cálida facilita acuerdos | La iluminación influye en las condiciones visuales para trabajar: legibilidad, reflejos y deslumbramiento. | [Summers, 1989](https://www.sciencedirect.com/science/article/pii/S0004951414604955). Revisión sobre oficinas y pantallas; necesidades según tarea y persona. No demuestra acuerdos por color de luz. |
+| Risa genuina/nerviosa identificable por ojos o cuello | Se estudian risa espontánea y risa producida voluntariamente, con diferencias de producción vocal. | [Belyk y McGettigan, 2022](https://pubmed.ncbi.nlm.nih.gov/36126659/). Resonancia de cinco adultos; muestra pequeña, sin detector facial de nerviosismo ni equivalencia entre voluntaria y deshonesta. |
+| Dos segundos de respiración recuperan el control mental | Algunas prácticas repetidas de respiración tienen resultados sobre ánimo y activación; el efecto depende de técnica y condiciones. | [Balban et al., 2023](https://pubmed.ncbi.nlm.nih.gov/36630953/), ensayo de cinco minutos diarios durante un mes; [revisión de 2024](https://pubmed.ncbi.nlm.nih.gov/38933581/), resultados variables para técnicas respiratorias breves. No demuestra recuperación instantánea de una idea. |
+
+Las métricas comerciales retiradas no se sustituyen por una puntuación nueva:
+los estudios anteriores no validan un termómetro de intención de compra. Se
+conserva la información comprobable en la conversación: qué quiere revisar,
+qué necesita, qué presupuesto comunica y qué siguiente paso acepta.
+
+### Revisión de utilidad y coherencia de los ejercicios
+
+Se revisaron también opciones correctas, títulos, descripciones y textos
+alternativos de imágenes. Había contradicciones entre una explicación prudente
+y una respuesta correcta que afirmaba sarcasmo o frustración, y entre un
+escenario de amistad y la regla de que los gestos «pesan más» que «estoy bien».
+Se corrigieron esas contradicciones conservando práctica sobre tono y contexto,
+acompañamiento, coordinación del pedido y confirmación de próximos pasos.
+
+La asertividad se enseña mediante contenido y respeto de decisiones, sin exigir
+voz firme, ausencia de vacilaciones ni entonación final determinada. Reiterar un
+límite es una opción; no se promete que «desactive» a otra persona. Se revisó
+además la afirmación de que retirarse depende 100 % de quien expresa el límite:
+las opciones prácticas deben contemplar ayuda y condiciones reales.
+
+La guía incorpora tres lecciones y tres preguntas nuevas, con ejemplos
+originales, para llenar huecos de aprendizaje:
+
+- **Aclarar el dato que falta.** La investigación de
+  [Dingemanse et al. (2015)](https://pubmed.ncbi.nlm.nih.gov/26375483/)
+  compara conversaciones en 12 idiomas e identifica peticiones de repetición,
+  preguntas sobre una parte y propuestas de interpretación para confirmar.
+  Las preguntas de Gestura adaptan esas funciones; no son un protocolo universal.
+- **Revisar el siguiente paso con palabras propias.**
+  [AHRQ, Teach-Back](https://www.ahrq.gov/teamstepps-program/curriculum/communication/tools/teachback.html)
+  es una guía profesional para comunicación sanitaria. La aplicación a un plan
+  de trabajo es una adaptación editorial y no se presenta como ensayo de
+  eficacia en ventas ni prueba de inteligencia.
+- **Gestos que aportan información.** La revisión de
+  [Abner, Cooperrider y Goldin-Meadow (2015)](https://pubmed.ncbi.nlm.nih.gov/26807141/)
+  describe funciones y variación de gestos. La práctica usa señalar y describir
+  un referente compartido, contempla acceso visual y distingue las lenguas de
+  señas de un catálogo de movimientos corporales.
+
+Las tarjetas identifican ahora el tipo de fuente: estudio empírico, revisión,
+metaanálisis o guía profesional. Se incluyen definiciones sencillas en el
+glosario. La imagen `context_aclarar_fecha.png` es una ilustración generada de
+un calendario señalado y notas compartidas. Se usa para enseñar referencia y
+coordinación, sin fecha real, escala de emociones ni significados por color.
+Los desenlaces de escenarios son ficticios y no estiman probabilidades de
+compra, bienestar o respuesta de otras personas.
+
 ## Revisión de claridad del 4 de octubre de 2026
 
 Se revisaron las preguntas visuales, las referencias a respuestas barajadas y

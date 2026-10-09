@@ -175,7 +175,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
       });
       widget.onCompleted?.call();
       if (StorageService.getAutoNarration()) {
-        TtsService.speak(
+        TtsService.speakSpanish(
             'Práctica completada. Has resuelto el $scorePercentage por ciento de las preguntas, incluyendo el repaso. Acertaste $_firstTryCorrectCount de ${widget.questions.length} al primer intento.');
       }
     }

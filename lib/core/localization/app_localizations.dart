@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'app_language.dart';
 
 class AppLocalizations {
   final Locale locale;
 
   AppLocalizations(this.locale);
 
-  static const List<Locale> supportedLocales = [
-    Locale('es'),
-    Locale('en'),
-    Locale('fr'),
-    Locale('pt'),
-    Locale('de'),
-  ];
+  static const List<Locale> supportedLocales = AppLanguage.supportedLocales;
 
   static AppLocalizations of(BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations) ??
@@ -32,7 +27,7 @@ class AppLocalizations {
     'es': {
       'appName': 'Gestura',
       'appSubtitle':
-          'Decodificador de Lenguaje Corporal y Comunicación No Verbal',
+          'Herramientas para observar y mejorar la comunicación',
       'home': 'Inicio',
       'manual': 'Manual',
       'practice': 'Práctica',
@@ -41,21 +36,20 @@ class AppLocalizations {
       'search': 'Buscar',
       'searchHint': 'Buscar señal, microgesto o palabra clave...',
       'all': 'Todos',
-      'quickDecoder': 'Decodificador Rápido',
+      'quickDecoder': 'Explorar gestos',
       'quickDecoderDesc':
-          'Filtra por parte del cuerpo (ojos, boca, brazos, silencios) y descifra la intención oculta en segundos.',
+          'Busca por parte del cuerpo y considera distintas explicaciones según el contexto.',
       'openDecoder': 'Abrir Diccionario de Gestos',
       'dailyQuiz': 'Quiz Visual del Día',
       'dailyQuizDesc':
           'Pon a prueba tu capacidad de reconocimiento de gestos faciales breves y posturas.',
       'startQuiz': 'Comenzar Práctica Diaria',
-      'socialTree': 'Árbol de Decisión Social',
+      'socialTree': 'Guía de observación',
       'socialTreeDesc':
-          '¿Ves un gesto difícil? Sigue el árbol: Si veo X ➔ Significa Y ➔ Hago Z.',
-      'openTree': 'Abrir Árbol de Diagnóstico',
+          'Observa el gesto, considera el contexto y elige cómo pedir aclaraciones.',
+      'openTree': 'Abrir guía de observación',
       'compareAB': 'Comparador Visual A/B',
-      'compareABDesc':
-          'Compara lado a lado gestos que se parecen.',
+      'compareABDesc': 'Compara lado a lado gestos que se parecen.',
       'openCompare': 'Abrir Comparador',
       'cheatSheet': 'Guía de Bolsillo (Cheat Sheet)',
       'cheatSheetDesc':
@@ -71,13 +65,13 @@ class AppLocalizations {
       'proxemicsCat': 'Espacio personal',
       'envCat': 'Entorno y Apariencia',
       'digitalCat': 'Señales Digitales',
-      'signalReceptive': 'Luz Verde (Receptividad)',
-      'signalCaution': 'Luz Amarilla (Precaución)',
-      'signalObjection': 'Luz Roja (Objeción / Barrera)',
+      'signalReceptive': 'Posible apertura',
+      'signalCaution': 'Lectura ambigua',
+      'signalObjection': 'Posible tensión o incomodidad',
       'listenAloud': 'Escuchar Ficha',
       'stopAudio': 'Detener Audio',
       'anatomyClues': 'Señales que puedes observar',
-      'probableMeaning': 'Significado Probable',
+      'probableMeaning': 'Posibles significados',
       'whatToDo': '¿Qué debes hacer / responder tú?',
       'salesTip': 'Táctica de Ventas y Negociación',
       'language': 'Idioma de la Aplicación',
@@ -161,18 +155,18 @@ class AppLocalizations {
       'search': 'Search',
       'searchHint': 'Search gesture or word...',
       'all': 'All',
-      'quickDecoder': 'Quick Decoder',
+      'quickDecoder': 'Explore gestures',
       'quickDecoderDesc':
-          'Filter by body part (eyes, mouth, arms, pauses) and decode hidden intention in seconds.',
+          'Browse by body part and consider different explanations in context.',
       'openDecoder': 'Open Live Decoder',
       'dailyQuiz': 'Daily Visual Quiz',
       'dailyQuizDesc':
           'Practice recognizing brief facial expressions and body postures.',
       'startQuiz': 'Start Daily Practice',
-      'socialTree': 'Social Decision Tree',
+      'socialTree': 'Observation guide',
       'socialTreeDesc':
-          'See a confusing gesture? Follow the tree: If I see X ➔ Means Y ➔ I do Z.',
-      'openTree': 'Open Diagnostic Tree',
+          'Observe the gesture, consider the context and choose how to ask for clarification.',
+      'openTree': 'Open observation guide',
       'compareAB': 'Visual A/B Comparator',
       'compareABDesc': 'Compare pairs of similar gestures side by side.',
       'openCompare': 'Open Comparator',
@@ -190,13 +184,13 @@ class AppLocalizations {
       'proxemicsCat': 'Personal space',
       'envCat': 'Environment & Appearance',
       'digitalCat': 'Digital Signals',
-      'signalReceptive': 'Green Light (Receptivity)',
-      'signalCaution': 'Yellow Light (Caution / Hesitation)',
-      'signalObjection': 'Red Light (Objection / Barrier)',
+      'signalReceptive': 'Possible openness',
+      'signalCaution': 'Ambiguous reading',
+      'signalObjection': 'Possible tension or discomfort',
       'listenAloud': 'Listen to Card',
       'stopAudio': 'Stop Audio',
       'anatomyClues': 'What you can observe',
-      'probableMeaning': 'Probable Meaning',
+      'probableMeaning': 'Possible meanings',
       'whatToDo': 'What should you do / say?',
       'salesTip': 'Sales & Negotiation Tactic',
       'language': 'App Language',
@@ -279,18 +273,18 @@ class AppLocalizations {
       'search': 'Rechercher',
       'searchHint': 'Rechercher un geste, micro-expression ou mot-clé...',
       'all': 'Tous',
-      'quickDecoder': 'Décodeur Rapide',
+      'quickDecoder': 'Explorer les gestes',
       'quickDecoderDesc':
-          'Filtrez par partie du corps (yeux, bouche, bras, silences) et décodez l\'intention cachée en quelques secondes.',
+          'Recherchez par partie du corps et examinez différentes explications selon le contexte.',
       'openDecoder': 'Ouvrir le Décodeur',
       'dailyQuiz': 'Quiz Visuel du Jour',
       'dailyQuizDesc':
           'Testez votre reconnaissance des micro-expressions et des postures.',
       'startQuiz': 'Commencer la Pratique',
-      'socialTree': 'Arbre de Décision Sociale',
+      'socialTree': 'Guide d’observation',
       'socialTreeDesc':
-          'Vous voyez un geste difficile ? Suivez l\'arbre : Si je vois X ➔ Signifie Y ➔ Je fais Z.',
-      'openTree': 'Ouvrir l\'Arbre de Diagnostic',
+          'Observez le geste, considérez le contexte et choisissez comment demander des précisions.',
+      'openTree': 'Ouvrir le guide d’observation',
       'compareAB': 'Comparateur Visuel A/B',
       'compareABDesc': 'Comparez côte à côte des gestes similaires.',
       'openCompare': 'Ouvrir le Comparateur',
@@ -308,13 +302,13 @@ class AppLocalizations {
       'proxemicsCat': 'Espace personnel',
       'envCat': 'Environnement et Apparence',
       'digitalCat': 'Signaux Numériques',
-      'signalReceptive': 'Feu Vert (Réceptivité)',
-      'signalCaution': 'Feu Jaune (Prudence / Hésitation)',
-      'signalObjection': 'Feu Rouge (Objection / Barrière)',
+      'signalReceptive': 'Ouverture possible',
+      'signalCaution': 'Interprétation ambiguë',
+      'signalObjection': 'Tension ou malaise possible',
       'listenAloud': 'Écouter la Fiche',
       'stopAudio': 'Arrêter l\'Audio',
       'anatomyClues': 'Ce que vous pouvez observer',
-      'probableMeaning': 'Signification Probable',
+      'probableMeaning': 'Significations possibles',
       'whatToDo': 'Que devez-vous faire / répondre ?',
       'salesTip': 'Tactique de Vente et Négociation',
       'language': 'Langue de l\'Application',
@@ -395,7 +389,7 @@ class AppLocalizations {
     'pt': {
       'appName': 'Gestura',
       'appSubtitle':
-          'Decodificador de Linguagem Corporal e Comunicação Não Verbal',
+          'Ferramentas para observar e melhorar a comunicação',
       'home': 'Início',
       'manual': 'Manual',
       'practice': 'Prática',
@@ -404,18 +398,18 @@ class AppLocalizations {
       'search': 'Buscar',
       'searchHint': 'Buscar gesto ou palavra-chave...',
       'all': 'Todos',
-      'quickDecoder': 'Decodificador Rápido',
+      'quickDecoder': 'Explorar gestos',
       'quickDecoderDesc':
-          'Filtre por parte do corpo (olhos, boca, braços, silêncios) e decifre a intenção oculta em segundos.',
+          'Busque por parte do corpo e considere diferentes explicações conforme o contexto.',
       'openDecoder': 'Abrir Decodificador',
       'dailyQuiz': 'Quiz Visual Diário',
       'dailyQuizDesc':
           'Pratique reconhecer expressões faciais breves e posturas.',
       'startQuiz': 'Começar Prática Diária',
-      'socialTree': 'Árvore de Decisão Social',
+      'socialTree': 'Guia de observação',
       'socialTreeDesc':
-          'Viu um gesto confuso? Siga a árvore: Se vejo X ➔ Significa Y ➔ Faço Z.',
-      'openTree': 'Abrir Árvore Diagnóstica',
+          'Observe o gesto, considere o contexto e escolha como pedir esclarecimentos.',
+      'openTree': 'Abrir guia de observação',
       'compareAB': 'Comparador Visual A/B',
       'compareABDesc':
           'Contraste pares de gestos lado a lado com tabela de diferenças anatômicas.',
@@ -434,13 +428,13 @@ class AppLocalizations {
       'proxemicsCat': 'Espaço pessoal',
       'envCat': 'Ambiente e Aparência',
       'digitalCat': 'Sinais Digitais',
-      'signalReceptive': 'Sinal Verde (Receptividade)',
-      'signalCaution': 'Sinal Amarelo (Atenção / Dúvida)',
-      'signalObjection': 'Sinal Vermelho (Objeção / Barreira)',
+      'signalReceptive': 'Possível abertura',
+      'signalCaution': 'Leitura ambígua',
+      'signalObjection': 'Possível tensão ou desconforto',
       'listenAloud': 'Ouvir Ficha',
       'stopAudio': 'Parar Áudio',
       'anatomyClues': 'O que você pode observar',
-      'probableMeaning': 'Significado Provável',
+      'probableMeaning': 'Possíveis significados',
       'whatToDo': 'O que você deve fazer / responder?',
       'salesTip': 'Tática de Vendas e Negociação',
       'language': 'Idioma do Aplicativo',
@@ -525,18 +519,18 @@ class AppLocalizations {
       'search': 'Suchen',
       'searchHint': 'Geste, Mikromimik oder Stichwort suchen...',
       'all': 'Alle',
-      'quickDecoder': 'Schnell-Decoder',
+      'quickDecoder': 'Gesten erkunden',
       'quickDecoderDesc':
-          'Nach Körperteil filtern (Augen, Mund, Arme, Stille) und verborgene Absichten in Sekunden entschlüsseln.',
+          'Nach Körperteil suchen und verschiedene Erklärungen im Kontext betrachten.',
       'openDecoder': 'Live-Decoder öffnen',
       'dailyQuiz': 'Tägliches Bild-Quiz',
       'dailyQuizDesc':
           'Testen Sie Ihre Erkennung von Mikroausdrücken und Körperhaltungen.',
       'startQuiz': 'Tägliche Übung starten',
-      'socialTree': 'Sozialer Entscheidungsbaum',
+      'socialTree': 'Beobachtungsleitfaden',
       'socialTreeDesc':
-          'Schwierige Geste? Folgen Sie dem Baum: Sehe ich X ➔ Bedeutet Y ➔ Tue ich Z.',
-      'openTree': 'Diagnosebaum öffnen',
+          'Die Geste beobachten, den Kontext betrachten und nachfragen.',
+      'openTree': 'Beobachtungsleitfaden öffnen',
       'compareAB': 'Visueller A/B-Vergleich',
       'compareABDesc': 'Vergleichen Sie ähnliche Gesten nebeneinander.',
       'openCompare': 'Vergleich öffnen',
@@ -554,13 +548,13 @@ class AppLocalizations {
       'proxemicsCat': 'Persönlicher Raum',
       'envCat': 'Umgebung & Erscheinung',
       'digitalCat': 'Digitale Signale',
-      'signalReceptive': 'Grünes Licht (Aufgeschlossenheit)',
-      'signalCaution': 'Gelbes Licht (Vorsicht / Zögern)',
-      'signalObjection': 'Rotes Licht (Einwand / Barriere)',
+      'signalReceptive': 'Mögliche Offenheit',
+      'signalCaution': 'Mehrdeutige Lesart',
+      'signalObjection': 'Mögliche Anspannung oder Unbehagen',
       'listenAloud': 'Karte anhören',
       'stopAudio': 'Audio stoppen',
       'anatomyClues': 'Was Sie beobachten können',
-      'probableMeaning': 'Wahrscheinliche Bedeutung',
+      'probableMeaning': 'Mögliche Bedeutungen',
       'whatToDo': 'Was sollten Sie tun / antworten?',
       'salesTip': 'Verkaufs- & Verhandlungstaktik',
       'language': 'App-Sprache',
@@ -638,6 +632,51 @@ class AppLocalizations {
   };
 
   String translate(String key) {
+    const voiceMessages = {
+      'es': {
+        'voiceUnavailable':
+            'No hay una voz disponible para este idioma. Instálala en los ajustes de texto a voz del dispositivo.',
+        'voiceFailed':
+            'No se pudo iniciar la lectura. Revisa el motor de voz del dispositivo.'
+      },
+      'en': {
+        'voiceUnavailable':
+            'No voice is available for this language. Install one in your device text-to-speech settings.',
+        'voiceFailed':
+            'Reading could not start. Check your device speech engine.'
+      },
+      'fr': {
+        'voiceUnavailable':
+            'Aucune voix disponible pour cette langue. Installez-en une dans les paramètres de synthèse vocale.',
+        'voiceFailed':
+            'La lecture n’a pas pu démarrer. Vérifiez le moteur vocal de votre appareil.'
+      },
+      'pt': {
+        'voiceUnavailable':
+            'Não há voz disponível para este idioma. Instale uma nas configurações de texto para fala do dispositivo.',
+        'voiceFailed':
+            'Não foi possível iniciar a leitura. Verifique o mecanismo de voz do dispositivo.'
+      },
+      'de': {
+        'voiceUnavailable':
+            'Für diese Sprache ist keine Stimme verfügbar. Installieren Sie eine in den Sprachausgabe-Einstellungen.',
+        'voiceFailed':
+            'Die Sprachausgabe konnte nicht starten. Prüfen Sie die Sprachausgabe Ihres Geräts.'
+      },
+    };
+    final voiceMessage = voiceMessages[langCode]?[key];
+    if (voiceMessage != null) return voiceMessage;
+    if (locale.languageCode == 'es' && locale.countryCode == '419') {
+      const regional = {
+        'settings': 'Configuración',
+        'appearance': 'Apariencia y tema',
+        'language': 'Idioma de la aplicación',
+        'appearanceSubtitle': 'Elige la apariencia que te resulte más cómoda',
+        'testVoiceSample':
+            'Hola, soy la voz de Gestura. Puedes ajustar la velocidad de lectura para escuchar con comodidad.',
+      };
+      if (regional.containsKey(key)) return regional[key]!;
+    }
     final lang = _values.containsKey(langCode) ? langCode : 'es';
     return _values[lang]?[key] ?? _values['es']?[key] ?? key;
   }

@@ -93,8 +93,11 @@ class HomeScreen extends StatelessWidget {
         builder: (context, constraints) {
           final isTablet = constraints.maxWidth >= 640;
           final isWide = constraints.maxWidth >= 960;
-          final categoryColumns = isWide ? 4 : (isTablet ? 3 : 2);
-          final toolColumns = isTablet ? 3 : 2;
+          final textScale = MediaQuery.textScalerOf(context).scale(14) / 14;
+          final compact = constraints.maxWidth < 380 || textScale > 1.3;
+          final categoryColumns =
+              compact ? 1 : (isWide ? 4 : (isTablet ? 3 : 2));
+          final toolColumns = compact ? 1 : (isTablet ? 3 : 2);
 
           return Center(
             child: ConstrainedBox(
@@ -184,27 +187,28 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 9, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: isDark
-                                  ? AppColors.primary.withValues(alpha: 0.2)
-                                  : AppColors.primaryContainer
-                                      .withValues(alpha: 0.35),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Text(
-                              'Entender gestos',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
+                          if (!compact)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 9, vertical: 4),
+                              decoration: BoxDecoration(
                                 color: isDark
-                                    ? AppColors.primaryLight
-                                    : AppColors.primaryDark,
+                                    ? AppColors.primary.withValues(alpha: 0.2)
+                                    : AppColors.primaryContainer
+                                        .withValues(alpha: 0.35),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                'Entender gestos',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: isDark
+                                      ? AppColors.primaryLight
+                                      : AppColors.primaryDark,
+                                ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                     ),
@@ -233,7 +237,8 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Container(
+                                Flexible(
+                                    child: Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 9, vertical: 3),
                                   decoration: BoxDecoration(
@@ -252,7 +257,8 @@ class HomeScreen extends StatelessWidget {
                                               : AppColors.accent,
                                           size: 18),
                                       const SizedBox(width: 6),
-                                      Text(
+                                      Flexible(
+                                          child: Text(
                                         'Gesto del Día',
                                         style: TextStyle(
                                           fontSize: 12.5,
@@ -261,10 +267,10 @@ class HomeScreen extends StatelessWidget {
                                               ? AppColors.accentLight
                                               : AppColors.accent,
                                         ),
-                                      ),
+                                      )),
                                     ],
                                   ),
-                                ),
+                                )),
                                 const Spacer(),
                                 ValueListenableBuilder<String?>(
                                   valueListenable:
@@ -291,13 +297,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       tooltip: isSpeaking
                                           ? 'Detener audio'
-                                          : 'Escuchar síntesis express (10s)',
+                                          : 'Escuchar resumen',
                                       onPressed: () {
                                         FeedbackService.lightClick();
                                         if (isSpeaking) {
                                           TtsService.stop();
                                         } else {
-                                          TtsService.speak(
+                                          TtsService.speakSpanish(
                                             dailyGesture.expressAudioSummary,
                                             gestureId:
                                                 'daily_${dailyGesture.id}',
@@ -400,12 +406,12 @@ class HomeScreen extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 7, vertical: 2.5),
                                       decoration: BoxDecoration(
-                                        color: dailyGesture.signalType.color
+                                        color: dailyGesture.reading.color
                                             .withValues(
                                                 alpha: isDark ? 0.2 : 0.12),
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(
-                                          color: dailyGesture.signalType.color
+                                          color: dailyGesture.reading.color
                                               .withValues(
                                                   alpha: isDark ? 0.45 : 0.3),
                                           width: 1.0,
@@ -415,21 +421,20 @@ class HomeScreen extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Icon(
-                                            dailyGesture.signalType.icon,
+                                            dailyGesture.reading.icon,
                                             size: 13,
-                                            color:
-                                                dailyGesture.signalType.color,
+                                            color: dailyGesture.reading.color,
                                           ),
                                           const SizedBox(width: 4),
-                                          Text(
-                                            dailyGesture.signalType.shortState,
+                                          Flexible(
+                                              child: Text(
+                                            dailyGesture.reading.shortState,
                                             style: TextStyle(
                                               fontSize: 11,
                                               fontWeight: FontWeight.w800,
-                                              color:
-                                                  dailyGesture.signalType.color,
+                                              color: dailyGesture.reading.color,
                                             ),
-                                          ),
+                                          )),
                                         ],
                                       ),
                                     ),
@@ -476,7 +481,7 @@ class HomeScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: isTablet ? 2.4 : 1.95,
+                    mainAxisExtent: 64 + 60 * textScale,
                     children: [
                       // Herramienta 1: Test Visual
                       _buildToolCard(
@@ -685,7 +690,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: categoryColumns,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      childAspectRatio: isTablet ? 1.4 : 1.25,
+                      mainAxisExtent: 75 + 70 * textScale,
                     ),
                     itemCount: CategoryInfo.allCategories.length,
                     itemBuilder: (context, index) {

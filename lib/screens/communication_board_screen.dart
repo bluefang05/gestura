@@ -40,11 +40,12 @@ class _CommunicationBoardScreenState extends State<CommunicationBoardScreen> {
     super.dispose();
   }
 
-  void _showMessage(String text) {
+  void _showMessage(String text, {bool isSpanish = false}) {
     FocusManager.instance.primaryFocus?.unfocus();
     TtsService.stop();
     Navigator.of(context).push(MaterialPageRoute<void>(
-      builder: (_) => CommunicationMessageScreen(message: text.trim()),
+      builder: (_) => CommunicationMessageScreen(
+          message: text.trim(), isSpanish: isSpanish),
     ));
   }
 
@@ -85,7 +86,8 @@ class _CommunicationBoardScreenState extends State<CommunicationBoardScreen> {
                               padding: const EdgeInsets.all(16),
                               alignment: Alignment.centerLeft,
                             ),
-                            onPressed: () => _showMessage(phrase.text),
+                            onPressed: () =>
+                                _showMessage(phrase.text, isSpanish: true),
                             child: Row(children: [
                               ExcludeSemantics(child: Icon(phrase.icon)),
                               const SizedBox(width: 12),
@@ -136,8 +138,10 @@ class _CommunicationBoardScreenState extends State<CommunicationBoardScreen> {
 
 class CommunicationMessageScreen extends StatefulWidget {
   final String message;
+  final bool isSpanish;
 
-  const CommunicationMessageScreen({super.key, required this.message});
+  const CommunicationMessageScreen(
+      {super.key, required this.message, this.isSpanish = false});
 
   @override
   State<CommunicationMessageScreen> createState() =>
@@ -209,8 +213,11 @@ class _CommunicationMessageScreenState
                           return FilledButton.icon(
                             onPressed: () => speaking
                                 ? TtsService.stop()
-                                : TtsService.speak(widget.message,
-                                    gestureId: _speechId),
+                                : widget.isSpanish
+                                    ? TtsService.speakSpanish(widget.message,
+                                        gestureId: _speechId)
+                                    : TtsService.speak(widget.message,
+                                        gestureId: _speechId),
                             icon: Icon(speaking
                                 ? Icons.stop
                                 : Icons.volume_up_outlined),

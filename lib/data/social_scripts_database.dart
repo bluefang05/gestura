@@ -72,7 +72,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Manos visibles apoyadas en la mesa, cabeza erguida, voz pausada y neutra sin elevar el volumen ni mostrar agitación.',
       whatNotToDo:
-          'No sonrías nerviosamente ni adoptes una postura encogida, ya que el cerebro humano asocia la sumisión física con culpa.',
+          'Puedes poner un límite aunque sonrías por nervios o adoptes una postura recogida. Expresa lo que necesitas con palabras; la postura no determina culpa ni invalida tu límite.',
     ),
 
     // ==========================================
@@ -93,14 +93,14 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Sonrisa amable y breve, cabeza ligeramente ladeada en señal de calidez, sin titubeos en el final de la frase.',
       whatNotToDo:
-          'No digas "tengo que ver si puedo" ni inventes enfermedades o citas falsas; la ambigüedad genera insistencias posteriores.',
+          'Puedes decir que no o pedir tiempo si aún no has decidido. No necesitas inventar una justificación; una respuesta ambigua no autoriza a que te presionen.',
     ),
     SocialScript(
       id: 'social_leave_early',
       title: 'Marcharse temprano de una reunión o fiesta',
       category: SocialScriptCategory.social,
       contextDescription:
-          'Tu batería social se ha agotado o simplemente deseas marcharte a tu casa sin dar explicaciones innecesarias.',
+          'Te sientes cansado de conversar o simplemente deseas marcharte a casa sin dar más explicaciones.',
       softPhrase:
           'Ha sido un placer verlos a todos. Ya es hora de retirarme a descansar. ¡Nos vemos pronto!',
       assertivePhrase:
@@ -306,7 +306,7 @@ class SocialScriptsDatabase {
       firmPhrase:
           'Dime con total confianza si en cualquier momento necesitas más espacio físico o distancia, sin ninguna pena.',
       bodyLanguage:
-          'Mantén una distancia inicial de al menos 1 metro antes de avanzar. Espera la confirmación verbal antes de acortar el espacio.',
+          'Deja una distancia cómoda y pregunta antes de acercarte o tocar. La preferencia de espacio y el modo de comunicarla varían entre personas.',
       whatNotToDo:
           'No todas las personas se sienten cómodas con el contacto físico. Pregunta antes de tocar a alguien; puede preferir que no lo hagas por muchas razones.',
     ),
@@ -375,9 +375,9 @@ class SocialScriptsDatabase {
       title: 'Pedir un rato a solas para descansar',
       category: SocialScriptCategory.sensory,
       contextDescription:
-          'Llegas a casa tras un día agotador y tu pareja, padres o hijos te abordan con preguntas o demandas justo cuando tu batería está en cero.',
+          'Llegas a casa tras un día agotador y necesitas descansar antes de atender preguntas o peticiones.',
       softPhrase:
-          'Te quiero mucho y me alegra verte. Mi batería sensorial está en rojo ahora mismo; necesito 30 minutos a solas en silencio para regularme y luego charlamos con calma.',
+          'Te quiero mucho y me alegra verte. Ahora me cuesta atender preguntas; necesito un rato a solas y en silencio. Después podemos ver si me viene bien conversar.',
       assertivePhrase:
           'Estoy saturado/a sensorialmente y necesito recargarme. Voy a estar en la habitación a solas media hora; por favor no entres a menos que sea una emergencia.',
       firmPhrase:
@@ -385,7 +385,7 @@ class SocialScriptsDatabase {
       bodyLanguage:
           'Voz suave pero firme, manos a los costados sin tensión combativa, mirada afectuosa antes de retirarte al espacio seguro.',
       whatNotToDo:
-          'No respondas con gritos o irritación defensiva; la irritabilidad es síntoma de sobrecarga no comunicada a tiempo.',
+          'Si te cuesta continuar, puedes pedir una pausa. La irritabilidad puede tener distintas causas y no permite atribuir culpa por no haber comunicado una necesidad antes.',
     ),
     SocialScript(
       id: 'sensory_medical_dentist_touch',

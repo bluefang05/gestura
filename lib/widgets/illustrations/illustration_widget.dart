@@ -35,6 +35,8 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
   OverlayEntry? _previewOverlay;
 
   static const Map<String, String> _semanticDescriptions = {
+    'context_aclarar_fecha':
+        'Dos colegas revisan un calendario. Uno señala una casilla y la otra persona toma notas. La imagen representa un referente compartido; no indica una fecha real ni el estado emocional de quienes participan.',
     'context_mirada_notas':
         'En una conversación en una cafetería, una persona consulta sus notas mientras la otra escucha; la imagen no permite deducir por qué mira el papel.',
     'context_ruido_cafeteria':
@@ -58,7 +60,7 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     'social_fatigue':
         'Persona en una reunión social que podría necesitar una pausa o más espacio.',
     'pause_before_reply':
-        'Persona haciendo una pausa para procesar una pregunta antes de responder.',
+        'Persona en una conversación sin hablar en ese momento; la imagen no permite saber por qué hace una pausa.',
     'emoji_support':
         'Persona recibe un emoji como señal breve de acompañamiento o confirmación.',
     'abrupt_topic_change':
@@ -66,9 +68,9 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     'reflective_vs_tense_silence':
         'Comparación entre una pausa reflexiva y una situación con tensión corporal y ambiental.',
     'scenario_assertive_boundaries_work':
-        'Colega apoyado en el escritorio pidiendo un favor de último momento mientras la persona mantiene una postura asertiva y serena.',
+        'Una persona se acerca a un escritorio mientras otra está sentada. Sus posturas no permiten saber cuál es su petición ni si existe un acuerdo.',
     'scenario_consent_decoding_fawning':
-        'Dos amigos conversando en un café; uno invita con entusiasmo mientras la otra persona muestra apaciguamiento con sonrisa forzada y orientación corporal de escape.',
+        'Dos personas conversan en un café; una gesticula y la otra mira hacia abajo con las manos juntas. La imagen no permite saber si desea aceptar la invitación.',
   };
 
   String get _semanticDescription =>
@@ -308,10 +310,6 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
     final assetPath = _resolveAssetPath(widget.illustrationKey, isLarge);
     if (assetPath != null && !isHighContrast) {
       final dpr = MediaQuery.devicePixelRatioOf(context);
-      final targetWidth = widget.width.isFinite ? widget.width : 512.0;
-      final targetHeight = widget.height.isFinite ? widget.height : 512.0;
-      final cacheW = (targetWidth * dpr).round().clamp(100, 1024);
-      final cacheH = (targetHeight * dpr).round().clamp(100, 1024);
 
       return _withHoldPreview(
         Semantics(
@@ -327,15 +325,28 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
               height: widget.height,
               color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
               padding: const EdgeInsets.all(4),
-              child: Image.asset(
-                assetPath,
-                width: widget.width,
-                height: widget.height,
-                fit: BoxFit.contain,
-                cacheWidth: cacheW,
-                cacheHeight: cacheH,
-                errorBuilder: (_, __, ___) =>
-                    _buildFallbackPainter(isDark, isHighContrast),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // Decode for the actual padded display area, including previews
+                  // whose requested size is infinite but whose layout is bounded.
+                  final displayWidth = constraints.hasBoundedWidth
+                      ? constraints.maxWidth
+                      : 512.0;
+                  final displayHeight = constraints.hasBoundedHeight
+                      ? constraints.maxHeight
+                      : 512.0;
+                  return Image(
+                    image: ResizeImage(
+                      AssetImage(assetPath),
+                      width: (displayWidth * dpr).ceil().clamp(1, 1024),
+                      height: (displayHeight * dpr).ceil().clamp(1, 1024),
+                      policy: ResizeImagePolicy.fit,
+                    ),
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, __, ___) =>
+                        _buildFallbackPainter(isDark, isHighContrast),
+                  );
+                },
               ),
             ),
           ),
@@ -642,6 +653,8 @@ class _ConoVeIllustrationState extends State<ConoVeIllustration> {
 }
 
 const Map<String, String> _expandedIllustrationPaths = {
+  'context_aclarar_fecha':
+      'assets/images/communication/context_aclarar_fecha.png',
   'context_mirada_notas':
       'assets/images/communication/context_mirada_notas.webp',
   'context_ruido_cafeteria':
