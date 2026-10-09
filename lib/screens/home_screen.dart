@@ -690,7 +690,8 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: categoryColumns,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      mainAxisExtent: 75 + 70 * textScale,
+                      mainAxisExtent:
+                          compact ? 64 + 28 * textScale : 75 + 70 * textScale,
                     ),
                     itemCount: CategoryInfo.allCategories.length,
                     itemBuilder: (context, index) {
@@ -699,46 +700,82 @@ class HomeScreen extends StatelessWidget {
                           GestureDatabase.getByCategory(cat.type).length;
 
                       return AppCard(
-                        padding: const EdgeInsets.all(12),
+                        padding: EdgeInsets.all(compact ? 10 : 12),
                         onTap: () {
                           FeedbackService.lightClick();
                           onOpenCategory(cat.type);
                         },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                color: cat.primaryColor.withValues(alpha: 0.14),
-                                borderRadius: BorderRadius.circular(10),
+                        child: compact
+                            ? Row(
+                                children: [
+                                  _buildCategoryIcon(cat),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cat.title,
+                                          style: const TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700,
+                                            height: 1.2,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          '$count señales',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: isDark
+                                                ? AppColors.textMutedDark
+                                                : AppColors.textMutedLight,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right_rounded,
+                                    size: 20,
+                                    color: isDark
+                                        ? AppColors.textMutedDark
+                                        : AppColors.textMutedLight,
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildCategoryIcon(cat),
+                                  const Spacer(),
+                                  Text(
+                                    cat.title,
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                      height: 1.2,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 3),
+                                  Text(
+                                    '$count señales',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: isDark
+                                          ? AppColors.textMutedDark
+                                          : AppColors.textMutedLight,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              child: Icon(cat.icon,
-                                  color: cat.primaryColor, size: 20),
-                            ),
-                            const Spacer(),
-                            Text(
-                              cat.title,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 3),
-                            Text(
-                              '$count señales',
-                              style: TextStyle(
-                                fontSize: 11,
-                                color: isDark
-                                    ? AppColors.textMutedDark
-                                    : AppColors.textMutedLight,
-                              ),
-                            ),
-                          ],
-                        ),
                       );
                     },
                   ),
@@ -749,6 +786,17 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  static Widget _buildCategoryIcon(CategoryInfo category) {
+    return Container(
+      padding: const EdgeInsets.all(7),
+      decoration: BoxDecoration(
+        color: category.primaryColor.withValues(alpha: 0.14),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Icon(category.icon, color: category.primaryColor, size: 20),
     );
   }
 
