@@ -3,6 +3,7 @@ import '../core/constants/app_colors.dart';
 import '../models/category.dart';
 import '../data/quiz_database.dart';
 import '../widgets/common/app_card.dart';
+import '../widgets/common/adaptive_card_grid.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/section_header.dart';
 import '../core/services/feedback_service.dart';
@@ -36,7 +37,8 @@ class QuizHubScreen extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final isTablet = constraints.maxWidth >= 640;
+          final isTablet = constraints.maxWidth >= 640 &&
+              MediaQuery.textScalerOf(context).scale(14) <= 21;
           final isWide = constraints.maxWidth >= 960;
           final catColumns = isWide ? 3 : (isTablet ? 2 : 1);
 
@@ -142,14 +144,8 @@ class QuizHubScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  GridView.count(
-                    crossAxisCount: isTablet ? 2 : 1,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 68 +
-                        65 * (MediaQuery.textScalerOf(context).scale(14) / 14),
+                  AdaptiveCardGrid(
+                    columns: isTablet ? 2 : 1,
                     children: [
                       // Modo: Detector de Incongruencias
                       _buildPracticeModeCard(
@@ -241,19 +237,10 @@ class QuizHubScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: catColumns,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      mainAxisExtent: 60 +
-                          65 *
-                              (MediaQuery.textScalerOf(context).scale(14) / 14),
-                    ),
-                    itemCount: CategoryInfo.allCategories.length,
-                    itemBuilder: (context, index) {
+                  AdaptiveCardGrid(
+                    columns: catColumns,
+                    children: List.generate(CategoryInfo.allCategories.length,
+                        (index) {
                       final cat = CategoryInfo.allCategories[index];
                       return AppCard(
                         padding: const EdgeInsets.all(12),
@@ -295,8 +282,6 @@ class QuizHubScreen extends StatelessWidget {
                                     style: const TextStyle(
                                         fontSize: 13.5,
                                         fontWeight: FontWeight.w700),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
@@ -307,8 +292,6 @@ class QuizHubScreen extends StatelessWidget {
                                           ? AppColors.textMutedDark
                                           : AppColors.textMutedLight,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
                               ),
@@ -323,7 +306,7 @@ class QuizHubScreen extends StatelessWidget {
                           ],
                         ),
                       );
-                    },
+                    }),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -373,8 +356,6 @@ class QuizHubScreen extends StatelessWidget {
                     fontSize: 13.5,
                     fontWeight: FontWeight.w800,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -385,8 +366,6 @@ class QuizHubScreen extends StatelessWidget {
                         ? AppColors.textSecondaryDark
                         : AppColors.textSecondaryLight,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

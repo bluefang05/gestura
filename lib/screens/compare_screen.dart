@@ -162,7 +162,7 @@ class _CompareScreenState extends State<CompareScreen> {
                         'Selecciona una pareja de gestos para comparar sus diferencias físicas',
                   ),
                   SizedBox(
-                    height: 46,
+                    height: 30 + MediaQuery.textScalerOf(context).scale(20),
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: presetPairs.length,

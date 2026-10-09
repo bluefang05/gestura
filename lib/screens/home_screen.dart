@@ -5,6 +5,7 @@ import '../models/category.dart';
 import '../data/gesture_database.dart';
 import '../data/quiz_database.dart';
 import '../widgets/common/app_card.dart';
+import '../widgets/common/adaptive_card_grid.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/common/section_header.dart';
 import '../widgets/illustrations/gestura_logo_painter.dart';
@@ -475,13 +476,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  GridView.count(
-                    crossAxisCount: toolColumns,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    mainAxisExtent: 64 + 60 * textScale,
+                  AdaptiveCardGrid(
+                    columns: toolColumns,
                     children: [
                       // Herramienta 1: Test Visual
                       _buildToolCard(
@@ -683,18 +679,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: categoryColumns,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      mainAxisExtent:
-                          compact ? 64 + 28 * textScale : 75 + 70 * textScale,
-                    ),
-                    itemCount: CategoryInfo.allCategories.length,
-                    itemBuilder: (context, index) {
+                  AdaptiveCardGrid(
+                    columns: categoryColumns,
+                    children: List.generate(CategoryInfo.allCategories.length,
+                        (index) {
                       final cat = CategoryInfo.allCategories[index];
                       final count =
                           GestureDatabase.getByCategory(cat.type).length;
@@ -724,8 +712,6 @@ class HomeScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             height: 1.2,
                                           ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 2),
                                         Text(
@@ -753,7 +739,7 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   _buildCategoryIcon(cat),
-                                  const Spacer(),
+                                  const SizedBox(height: 12),
                                   Text(
                                     cat.title,
                                     style: const TextStyle(
@@ -761,8 +747,6 @@ class HomeScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w700,
                                       height: 1.2,
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 3),
                                   Text(
@@ -777,7 +761,7 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                       );
-                    },
+                    }),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -839,8 +823,6 @@ class HomeScreen extends StatelessWidget {
                     fontSize: 13.5,
                     fontWeight: FontWeight.w800,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -851,8 +833,6 @@ class HomeScreen extends StatelessWidget {
                         ? AppColors.textSecondaryDark
                         : AppColors.textSecondaryLight,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

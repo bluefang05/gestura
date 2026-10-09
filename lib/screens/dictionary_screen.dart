@@ -278,6 +278,7 @@ class _DictionaryScreenState extends State<DictionaryScreen> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             final isTablet = constraints.maxWidth >= 640 &&
+                constraints.maxHeight >= 600 &&
                 MediaQuery.textScalerOf(context).scale(16) <= 20;
             final isWide = constraints.maxWidth >= 960;
             final columns = isWide ? 3 : (isTablet ? 2 : 1);

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:gestura/core/services/storage_service.dart';
 import 'package:gestura/core/theme/app_theme.dart';
 import 'package:gestura/screens/main_navigation_screen.dart';
+import 'package:gestura/screens/home_screen.dart';
+import 'package:gestura/screens/quiz_hub_screen.dart';
 import 'package:gestura/screens/buyer_temperature_screen.dart';
 import 'package:gestura/screens/compare_screen.dart';
 import 'package:gestura/screens/cheat_sheet_screen.dart';
 import 'package:gestura/screens/cluster_baseline_screen.dart';
 import 'package:gestura/screens/concepts_screen.dart';
 import 'package:gestura/screens/decoder_screen.dart';
+import 'package:gestura/screens/dictionary_screen.dart';
 import 'package:gestura/screens/decision_tree_screen.dart';
 import 'package:gestura/screens/incongruence_detector_screen.dart';
 import 'package:gestura/screens/unwritten_rules_screen.dart';
@@ -27,6 +31,46 @@ void main() {
         .setMockMethodCallHandler(
             const MethodChannel('flutter_tts'), (_) async => 1);
   });
+  final readableCards = <Widget, List<String>>{
+    HomeScreen(onNavigateToTab: (_) {}, onOpenCategory: (_) {}): [
+      'Límites & Consentimiento',
+      'Poner límites y pedir permiso con claridad',
+      'Distancia y espacio personal',
+    ],
+    const QuizHubScreen(): [
+      'Comparar palabras y gestos',
+      'Aprende cuándo las palabras dicen una cosa pero el cuerpo otra.',
+      'Distancia y espacio personal',
+    ],
+  };
+  for (final entry in readableCards.entries) {
+    testWidgets('${entry.key.runtimeType} cards keep full text at narrow width',
+        (tester) async {
+      tester.view.physicalSize = const Size(320, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      await tester.pumpWidget(MaterialApp(
+        theme: AppTheme.lightTheme,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: const TextScaler.linear(2)),
+          child: child!,
+        ),
+        home: entry.key,
+      ));
+      await tester.pumpAndSettle();
+      for (final label in entry.value) {
+        final target = find.text(label);
+        await tester.scrollUntilVisible(target, 200,
+            scrollable: find.byType(Scrollable).first);
+        await tester.pumpAndSettle();
+        final paragraph = tester.renderObject<RenderParagraph>(target);
+        expect(paragraph.didExceedMaxLines, isFalse, reason: label);
+        expect(tester.takeException(), isNull);
+      }
+    });
+  }
   for (final scale in [1.0, 2.0]) {
     testWidgets('Selected gesture reading stays readable on mobile text $scale',
         (tester) async {
@@ -105,6 +149,54 @@ void main() {
             await tester.pumpAndSettle();
             expect(tester.takeException(), isNull);
           }
+        }
+      });
+    }
+  }
+  for (final screen in <Widget>[
+    const DictionaryScreen(),
+    const DecoderScreen(),
+    const CheatSheetScreen(),
+    const DecisionTreeScreen(),
+  ]) {
+    for (final scale in [1.0, 2.0]) {
+      testWidgets('Landscape tool ${screen.runtimeType} text $scale',
+          (tester) async {
+        tester.view.physicalSize = const Size(844, 390);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        await tester.pumpWidget(MaterialApp(
+          theme: AppTheme.lightTheme,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(scale)),
+            child: child!,
+          ),
+          home: screen,
+        ));
+        await tester.pumpAndSettle();
+        final vertical = find.byWidgetPredicate((widget) =>
+            widget is Scrollable && widget.axisDirection == AxisDirection.down);
+        if (screen is DecisionTreeScreen) {
+          await tester.scrollUntilVisible(find.text('Boca y Labios'), 150,
+              scrollable: vertical.first);
+          final zone = find.text('Boca y Labios').hitTestable();
+          for (var attempt = 0;
+              attempt < 5 && zone.evaluate().isEmpty;
+              attempt++) {
+            await tester.drag(vertical.first, const Offset(0, -80));
+            await tester.pumpAndSettle();
+          }
+          expect(zone, findsOneWidget);
+          await tester.tap(zone);
+          await tester.pumpAndSettle();
+        }
+        expect(tester.takeException(), isNull);
+        for (var step = 0; step < 10; step++) {
+          await tester.drag(vertical.first, const Offset(0, -250));
+          await tester.pumpAndSettle();
+          expect(tester.takeException(), isNull);
         }
       });
     }

@@ -139,7 +139,9 @@ class _DecisionTreeScreenState extends State<DecisionTreeScreen> {
       bottomNavigationBar: const AdBottomBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final isTablet = constraints.maxWidth >= 640;
+          final isTablet = constraints.maxWidth >= 640 &&
+              constraints.maxHeight >= 600 &&
+              MediaQuery.textScalerOf(context).scale(14) <= 21;
           final isWide = constraints.maxWidth >= 960;
 
           return Center(

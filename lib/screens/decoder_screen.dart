@@ -104,6 +104,7 @@ class _DecoderScreenState extends State<DecoderScreen> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             final isTablet = constraints.maxWidth >= 640 &&
+                constraints.maxHeight >= 600 &&
                 MediaQuery.textScalerOf(context).scale(14) <= 21;
             final isWide = constraints.maxWidth >= 960;
             final columns = isWide ? 3 : (isTablet ? 2 : 1);
