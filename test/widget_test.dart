@@ -254,12 +254,22 @@ void main() {
     expect(find.text('Manual'), findsOneWidget);
     expect(find.text('Práctica'), findsOneWidget);
     expect(find.text('Escenarios'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Comunicar ahora'), 180,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('Comunicar ahora'), findsOneWidget);
+    await tester.scrollUntilVisible(find.text('Explorar'), 200,
+        scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('Explorar'));
+    await tester.pumpAndSettle();
     await tester.scrollUntilVisible(find.text('Gesto del Día'), 200,
         scrollable: find.byType(Scrollable).first);
     expect(find.text('Gesto del Día'), findsOneWidget);
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
 
-    // Scroll down to check tools
+    await tester.tap(find.byTooltip('Herramientas'));
+    await tester.pumpAndSettle();
+    // Open the tools catalog from the persistent top bar.
     await tester.scrollUntilVisible(
         find.textContaining('Comparador Visual'), 200,
         scrollable: find.byType(Scrollable).first);
@@ -351,6 +361,12 @@ void main() {
     addTearDown(() => tester.view.resetPhysicalSize());
 
     await tester.pumpWidget(const GesturaApp());
+    await tester.pumpAndSettle();
+
+    await tester.scrollUntilVisible(find.text('Explorar'), 200,
+        scrollable: find.byType(Scrollable).first);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Explorar'));
     await tester.pumpAndSettle();
 
     final postureCard = find.text('Posturas y movimientos');
@@ -820,14 +836,14 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify Roadmap mission card indicators
-    expect(find.text('RUTA DE APRENDIZAJE'), findsOneWidget);
-    expect(find.textContaining('Nivel 1'), findsWidgets);
-    expect(find.textContaining('PASO 1 DE 11'), findsOneWidget);
+    expect(find.text('Ruta de aprendizaje'), findsOneWidget);
+    expect(find.textContaining('0 de 11 pasos completados'), findsWidgets);
+    expect(find.text('Siguiente · Paso 1'), findsOneWidget);
     expect(find.text('Observar sin sacar conclusiones'), findsOneWidget);
 
     // Verify Action Buttons
-    final continueBtn = find.text('Continuar Ruta');
-    final itineraryBtn = find.text('Itinerario');
+    final continueBtn = find.text('Empezar ruta');
+    final itineraryBtn = find.text('Ver todos los pasos');
     expect(continueBtn, findsOneWidget);
     expect(itineraryBtn, findsOneWidget);
 
@@ -848,19 +864,24 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify Tab Selector
-    expect(find.text('Ruta de aprendizaje'), findsOneWidget);
-    expect(find.text('Métricas y Radar'), findsOneWidget);
+    expect(find.text('Ruta de aprendizaje'), findsNWidgets(2));
+    expect(find.text('Actividad y práctica'), findsOneWidget);
 
     // Default tab 0 shows Roadmap
-    expect(find.text('Tu recorrido de aprendizaje'), findsOneWidget);
+    expect(find.text('0% · 0 de 11 pasos completados'), findsOneWidget);
     expect(find.text('Nivel 1: Observar con calma'), findsOneWidget);
     expect(find.text('Nivel 2: Cara, brazos y manos'), findsOneWidget);
     expect(find.text('Nivel 3: Frases y contexto'), findsOneWidget);
     expect(find.text('Nivel 4: Límites y consentimiento'), findsOneWidget);
+    await tester.scrollUntilVisible(
+        find.text('Nivel 5: Situaciones cotidianas'), 300,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('Nivel 5: Situaciones cotidianas'), findsOneWidget);
 
     // Switch to Tab 1: Métricas y Radar
-    await tester.tap(find.text('Métricas y Radar'));
+    await tester.scrollUntilVisible(find.text('Actividad y práctica'), -500,
+        scrollable: find.byType(Scrollable).first);
+    await tester.tap(find.text('Actividad y práctica'));
     await tester.pumpAndSettle();
 
     // Verify metrics widgets
@@ -910,8 +931,8 @@ void main() {
     await tester.pumpWidget(const GesturaApp());
     await tester.pumpAndSettle();
 
-    // Scroll down to Herramientas Prácticas
-    final limitesCard = find.text('Límites & Consentimiento');
+    // The direct boundary shortcut is near the start of Home.
+    final limitesCard = find.text('Límites y consentimiento');
     await tester.scrollUntilVisible(limitesCard, 300,
         scrollable: find.byType(Scrollable).first);
     await tester.ensureVisible(limitesCard);

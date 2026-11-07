@@ -40,9 +40,10 @@ class AdsService {
     required void Function(Ad ad) onAdLoaded,
     required void Function(Ad ad, LoadAdError error) onAdFailedToLoad,
     AdSize size = AdSize.banner,
+    String? adUnitId,
   }) {
     return BannerAd(
-      adUnitId: AdIds.bannerAdUnitId,
+      adUnitId: adUnitId ?? AdIds.bannerAdUnitId,
       size: size,
       request: const AdRequest(),
       listener: BannerAdListener(

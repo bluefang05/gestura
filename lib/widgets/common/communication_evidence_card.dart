@@ -36,10 +36,13 @@ class CommunicationEvidenceCard extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall),
           const SizedBox(height: 4),
           SelectableText(evidence.sourceUrl,
+              key: PageStorageKey('evidence_url_${evidence.sourceUrl}'),
               style: Theme.of(context).textTheme.bodySmall),
           for (final url in evidence.additionalSourceUrls) ...[
             const SizedBox(height: 4),
-            SelectableText(url, style: Theme.of(context).textTheme.bodySmall),
+            SelectableText(url,
+                key: PageStorageKey('additional_evidence_url_$url'),
+                style: Theme.of(context).textTheme.bodySmall),
           ],
           const SizedBox(height: 8),
           OutlinedButton.icon(

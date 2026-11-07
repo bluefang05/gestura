@@ -14,16 +14,20 @@ import '../core/services/storage_service.dart';
 import '../core/services/tts_service.dart';
 import '../state/progress_provider.dart';
 import '../widgets/common/tts_app_bar_control.dart';
+import '../data/quiz_database.dart';
+import 'scenarios_screen.dart';
 
 class QuizRunnerScreen extends StatefulWidget {
   final String title;
   final List<QuizQuestion> questions;
   final VoidCallback? onCompleted;
+  final bool continueRoadmap;
   const QuizRunnerScreen({
     super.key,
     required this.title,
     required this.questions,
     this.onCompleted,
+    this.continueRoadmap = false,
   });
   @override
   State<QuizRunnerScreen> createState() => _QuizRunnerScreenState();
@@ -117,17 +121,8 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
         FeedbackService.error();
       }
     });
-    if (StorageService.getAutoNarration()) {
-      TtsService.speakQuizFeedback(
-        correctAnswer:
-            _currentQuestion.options.firstWhere((o) => o.isCorrect).readingText,
-        isCorrect: isCorrect,
-        keyVisualClue: _currentQuestion.keyVisualClue,
-        explanation: _currentQuestion.explanation,
-      );
-    } else {
-      TtsService.stop();
-    }
+    // The feedback route starts narration after it has opened.
+    TtsService.stop();
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -350,6 +345,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 Center(
                   child: ConoVeIllustration(
                     illustrationKey: question.questionIllustrationKey!,
+                    animateGesture: true,
                     width: 130,
                     height: 130,
                     borderRadius: BorderRadius.circular(16),
@@ -478,7 +474,7 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
               ElevatedButton(
                 onPressed: () {
                   FeedbackService.lightClick();
-                  Navigator.pop(context);
+                  Navigator.pop(context, widget.continueRoadmap);
                 },
                 child: Text(widget.onCompleted == null
                     ? 'Volver a Práctica'
@@ -504,6 +500,116 @@ class _QuizRunnerScreenState extends State<QuizRunnerScreen> {
                 },
                 child: const Text('Reintentar Quiz'),
               ),
+              if (widget.onCompleted == null) ...[
+                const SizedBox(height: 20),
+                AppCard(
+                  padding: const EdgeInsets.all(16),
+                  borderSide: BorderSide(
+                    color: isDark ? AppColors.primaryLight : AppColors.primary,
+                    width: 1.5,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.stars_rounded,
+                              color: AppColors.accent, size: 24),
+                          const SizedBox(width: 8),
+                          const Expanded(
+                            child: Text(
+                              '¿Qué quieres hacer ahora?',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Continúa con otra ronda rápida o pon a prueba tus habilidades en una historia interactiva.',
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                          height: 1.35,
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      () {
+                        final provider = ProgressProvider();
+                        final scores = provider.progress.quizScores;
+                        final nextBatch = QuizDatabase.questions
+                            .where((q) => !scores.containsKey(q.id))
+                            .take(5)
+                            .toList();
+
+                        return Column(
+                          children: [
+                            if (nextBatch.isNotEmpty) ...[
+                              SizedBox(
+                                width: double.infinity,
+                                height: 46,
+                                child: FilledButton.icon(
+                                  onPressed: () {
+                                    FeedbackService.lightClick();
+                                    setState(() {
+                                      _queue = nextBatch;
+                                      _currentIndex = 0;
+                                      _correctCount = 0;
+                                      _firstTryCorrectCount = 0;
+                                      _selectedOptionId = null;
+                                      _isEvaluated = false;
+                                      _isFinished = false;
+                                      _shuffleCurrentOptions();
+                                    });
+                                    if (StorageService.getAutoNarration()) {
+                                      _speakCurrentQuestion();
+                                    }
+                                  },
+                                  icon: const Icon(Icons.arrow_forward_rounded),
+                                  label: Text(
+                                      'Siguiente bloque (${nextBatch.length} preguntas nuevas)'),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                            ],
+                            SizedBox(
+                              width: double.infinity,
+                              height: 46,
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: isDark
+                                      ? const Color(0xFF1E293B)
+                                      : const Color(0xFFEEF2F6),
+                                  foregroundColor: isDark
+                                      ? Colors.white
+                                      : const Color(0xFF0F172A),
+                                ),
+                                onPressed: () {
+                                  FeedbackService.lightClick();
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const ScenariosScreen(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.theater_comedy_rounded),
+                                label: const Text(
+                                    '🎭 Probar un Escenario Interactivo'),
+                              ),
+                            ),
+                          ],
+                        );
+                      }(),
+                    ],
+                  ),
+                ),
+              ],
             ],
           ),
         ),

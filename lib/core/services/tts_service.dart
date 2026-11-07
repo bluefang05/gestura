@@ -1,29 +1,74 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../localization/app_language.dart';
 import 'storage_service.dart';
+
+/// Screens stop speech during disposal; notify controls after that frame ends.
+class _SpeechNotifier<T> extends ValueNotifier<T> {
+  _SpeechNotifier(super.value);
+  bool _queued = false;
+
+  @override
+  void notifyListeners() {
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      if (_queued) return;
+      _queued = true;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _queued = false;
+        super.notifyListeners();
+      });
+    } else {
+      super.notifyListeners();
+    }
+  }
+}
 
 class TtsService {
   static final FlutterTts _tts = FlutterTts();
   static bool _isInitialized = false;
   static int _speechRequest = 0;
   static final ValueNotifier<bool> isSpeakingNotifier =
-      ValueNotifier<bool>(false);
+      _SpeechNotifier<bool>(false);
   static String? _currentSpeakingId;
 
   static ValueNotifier<String?> currentSpeakingIdNotifier =
-      ValueNotifier<String?>(null);
+      _SpeechNotifier<String?>(null);
 
   static String _currentLanguage = 'es-MX';
   static double _currentRate = 0.48;
   static bool _voiceReady = false;
   static Future<void>? _configuration;
-  static final ValueNotifier<String?> errorNotifier = ValueNotifier(null);
+  static final ValueNotifier<String?> errorNotifier = _SpeechNotifier(null);
 
   static String get currentLanguage => _currentLanguage;
   static double get currentRate => _currentRate;
+
+  /// Stay below native engine input limits without dropping long lesson text.
+  static List<String> splitForSpeech(String text, {int maxLength = 1800}) {
+    assert(maxLength >= 2);
+    final chunks = <String>[];
+    var start = 0;
+    while (start < text.length) {
+      var end = (start + maxLength).clamp(0, text.length);
+      if (end < text.length) {
+        final part = text.substring(start, end);
+        final breaks = RegExp(r'[.!?]\s|\n|\s').allMatches(part);
+        if (breaks.isNotEmpty && breaks.last.end > maxLength ~/ 2) {
+          end = start + breaks.last.end;
+        }
+        // Never split a UTF-16 surrogate pair (for example an emoji).
+        final unit = text.codeUnitAt(end - 1);
+        if (unit >= 0xD800 && unit <= 0xDBFF) end--;
+      }
+      chunks.add(text.substring(start, end));
+      start = end;
+    }
+    return chunks;
+  }
 
   static Future<void> init({String? langCode, double? speechRate}) async {
     final preferred = langCode ?? StorageService.getLanguage();
@@ -147,19 +192,37 @@ class TtsService {
       await _tts.stop();
     } catch (_) {}
     if (request != _speechRequest) return;
+    // Announce a pending reading too, so timed activities can pause while the
+    // engine selects or initializes its voice.
+    _currentSpeakingId = gestureId;
+    currentSpeakingIdNotifier.value = gestureId;
     await init(langCode: langCode);
-    if (request != _speechRequest || !_voiceReady) return;
+    if (request != _speechRequest) return;
+    if (!_voiceReady) {
+      _currentSpeakingId = null;
+      currentSpeakingIdNotifier.value = null;
+      return;
+    }
     try {
-      _currentSpeakingId = gestureId;
-      currentSpeakingIdNotifier.value = gestureId;
-      final result = await _tts.speak(text);
-      if (result == false || result == 0) {
-        isSpeakingNotifier.value = false;
-        currentSpeakingIdNotifier.value = null;
-        _currentSpeakingId = null;
-        errorNotifier.value = 'voiceFailed';
+      final chunks = splitForSpeech(text);
+      await _tts.awaitSpeakCompletion(chunks.length > 1);
+      for (final chunk in chunks) {
+        if (request != _speechRequest) return;
+        _currentSpeakingId = gestureId;
+        currentSpeakingIdNotifier.value = gestureId;
+        isSpeakingNotifier.value = true;
+        final result = await _tts.speak(chunk);
+        if (request != _speechRequest) return;
+        if (result == false || result == 0) {
+          isSpeakingNotifier.value = false;
+          currentSpeakingIdNotifier.value = null;
+          _currentSpeakingId = null;
+          errorNotifier.value = 'voiceFailed';
+          return;
+        }
       }
     } catch (e) {
+      if (request != _speechRequest) return;
       isSpeakingNotifier.value = false;
       currentSpeakingIdNotifier.value = null;
       _currentSpeakingId = null;

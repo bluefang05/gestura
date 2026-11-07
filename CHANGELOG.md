@@ -1,5 +1,34 @@
 # Historial de cambios
 
+## Versión 1.0.20 (22) — 17 de octubre de 2026
+
+- Inicio reorganizado alrededor de la ruta de aprendizaje y la comunicación;
+  búsqueda y exploración siguen disponibles en un lugar secundario.
+- Lectura en voz alta para los textos de la aplicación, selección de texto,
+  controles para detener la voz y lectura de textos largos sin recortes.
+- Ruta guiada con porcentaje, paso siguiente y botón para continuar.
+- Mejoras de accesibilidad y legibilidad en ejercicios, resultados, explicaciones
+  y pantallas con letra ampliada.
+- Resultados de práctica más claros y progreso restaurado de forma correcta.
+- Comparaciones y ejemplos revisados para separar señales observables de suposiciones.
+
+## En desarrollo — 16 de octubre de 2026
+
+- Lector TTS común para todo el texto visible, diálogos, controles y resultados,
+  con selección de texto sin activar la acción y detención permanente. Describe
+  imágenes y datos del radar. Lecturas largas divididas sin perder contenido.
+
+- Ruta al inicio con porcentaje de sus once pasos, siguiente tema visible y
+  continuación directa entre lecciones. Estado de finalización con opción de repaso.
+- Herramientas en un catálogo propio, ayuda rápida y límites cerca del inicio,
+  y etiquetas visibles en todas las pestañas de navegación.
+- Textos más directos, títulos completos y métricas del catálogo separadas
+  de la ruta. Eliminadas etiquetas de experto basadas solo en puntos.
+- Lectura ampliada de conceptos, ejercicios, límites y guiones; acceso superior
+  para detener el audio. Voz y tamaño de texto al principio de Ajustes.
+- Corregidos un desbordamiento con letra ampliada y un conflicto al mostrar
+  enlaces de fuentes dentro de lecciones desplegables.
+
 ## Versión 1.0.19 (21) — 9 de octubre de 2026
 
 - Tarjetas de Inicio y Práctica con altura según su contenido, para evitar

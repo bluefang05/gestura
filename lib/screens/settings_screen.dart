@@ -83,6 +83,123 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 children: [
+                  // TTS Voice & Auto-Narration Section
+                  SectionHeader(
+                    title: loc.ttsSectionTitle,
+                    subtitle: loc.ttsSectionSubtitle,
+                  ),
+                  AppCard(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        SwitchListTile(
+                          title: Text(loc.autoNarrationTitle,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Text(loc.autoNarrationSubtitle),
+                          value: _settings.isAutoNarration,
+                          onChanged: (val) {
+                            FeedbackService.lightClick();
+                            _settings.setAutoNarration(val);
+                            if (val) {
+                              TtsService.speak(loc.autoNarrationSubtitle);
+                            } else {
+                              TtsService.stop();
+                            }
+                          },
+                        ),
+                        const Divider(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 4.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      child: Text(loc.ttsSpeedTitle,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13.5))),
+                                  Text(
+                                    '${(_settings.speechRate * 200).round()}%',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.primary),
+                                  ),
+                                ],
+                              ),
+                              Slider(
+                                value: _settings.speechRate,
+                                min: 0.35,
+                                max: 0.65,
+                                divisions: 6,
+                                label:
+                                    '${(_settings.speechRate * 200).round()}%',
+                                onChanged: (val) {
+                                  _settings.setSpeechRate(val);
+                                  TtsService.setSpeechRate(val);
+                                },
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton.icon(
+                                  onPressed: () {
+                                    FeedbackService.lightClick();
+                                    TtsService.speak(loc.testVoiceSample);
+                                  },
+                                  icon: const Icon(Icons.volume_up_rounded,
+                                      size: 18),
+                                  label: Text(loc.testVoiceButton),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Font Scaling
+                  SectionHeader(
+                    title: loc.fontSizeSectionTitle,
+                    subtitle: loc.fontSizeSectionSubtitle,
+                  ),
+                  AppCard(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(child: Text(loc.fontScaleLabel,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold))),
+                            Text('${(_settings.fontScale * 100).round()}%',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primary)),
+                          ],
+                        ),
+                        Slider(
+                          value: _settings.fontScale,
+                          min: 0.85,
+                          max: 1.35,
+                          divisions: 5,
+                          label: '${(_settings.fontScale * 100).round()}%',
+                          onChanged: (val) {
+                            _settings.setFontScale(val);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
                   // Visual Theme Section
                   SectionHeader(
                     title: loc.appearance,
@@ -294,123 +411,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             if (val) {
                               FeedbackService.neutral();
                             }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // TTS Voice & Auto-Narration Section
-                  SectionHeader(
-                    title: loc.ttsSectionTitle,
-                    subtitle: loc.ttsSectionSubtitle,
-                  ),
-                  AppCard(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      children: [
-                        SwitchListTile(
-                          title: Text(loc.autoNarrationTitle,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text(loc.autoNarrationSubtitle),
-                          value: _settings.isAutoNarration,
-                          onChanged: (val) {
-                            FeedbackService.lightClick();
-                            _settings.setAutoNarration(val);
-                            if (val) {
-                              TtsService.speak(loc.autoNarrationSubtitle);
-                            } else {
-                              TtsService.stop();
-                            }
-                          },
-                        ),
-                        const Divider(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 4.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      child: Text(loc.ttsSpeedTitle,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13.5))),
-                                  Text(
-                                    '${(_settings.speechRate * 200).round()}%',
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.primary),
-                                  ),
-                                ],
-                              ),
-                              Slider(
-                                value: _settings.speechRate,
-                                min: 0.35,
-                                max: 0.65,
-                                divisions: 6,
-                                label:
-                                    '${(_settings.speechRate * 200).round()}%',
-                                onChanged: (val) {
-                                  _settings.setSpeechRate(val);
-                                  TtsService.setSpeechRate(val);
-                                },
-                              ),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: TextButton.icon(
-                                  onPressed: () {
-                                    FeedbackService.lightClick();
-                                    TtsService.speak(loc.testVoiceSample);
-                                  },
-                                  icon: const Icon(Icons.volume_up_rounded,
-                                      size: 18),
-                                  label: Text(loc.testVoiceButton),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Font Scaling
-                  SectionHeader(
-                    title: loc.fontSizeSectionTitle,
-                    subtitle: loc.fontSizeSectionSubtitle,
-                  ),
-                  AppCard(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(loc.fontScaleLabel,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
-                            Text('${(_settings.fontScale * 100).round()}%',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.primary)),
-                          ],
-                        ),
-                        Slider(
-                          value: _settings.fontScale,
-                          min: 0.85,
-                          max: 1.35,
-                          divisions: 5,
-                          label: '${(_settings.fontScale * 100).round()}%',
-                          onChanged: (val) {
-                            _settings.setFontScale(val);
                           },
                         ),
                       ],

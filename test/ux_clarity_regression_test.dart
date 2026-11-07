@@ -31,6 +31,8 @@ void main() {
     await tester.pump();
     expect(tester.widget<TextField>(find.byType(TextField)).controller!.text,
         isEmpty);
+    await tester.scrollUntilVisible(find.text('Forma habitual de expresarse'), 150,
+        scrollable: find.byType(Scrollable).first);
     expect(find.text('Forma habitual de expresarse'), findsOneWidget);
     await tester.scrollUntilVisible(find.text('Sarcasmo e ironía'), 250,
         scrollable: find.byType(Scrollable).first);

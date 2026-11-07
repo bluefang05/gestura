@@ -1441,6 +1441,68 @@ class QuizDatabase {
       explanation:
           'Responder con calma y en orden puede ayudar a aclarar la urgencia. No podemos saber por qué la persona escribió así; pregunta qué necesita y para cuándo.',
     ),
+    QuizQuestion(
+      id: 'q_silence_processing_time',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'Le haces una pregunta a un compañero y se queda callado mirando hacia arriba durante 5 segundos. ¿Cuál es la interpretación más cuidadosa?',
+      scenarioText: 'Están conversando en el recreo o en una sala de trabajo.',
+      options: [
+        QuizOption(
+          id: 'opt_proc_1',
+          text:
+              'Es probable que esté pensando y buscando las palabras adecuadas para responder; conviene darle unos segundos de espacio sin apresurarlo.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_proc_2',
+          text:
+              'Significa que se enojó contigo por hacer esa pregunta y debes disculparte rápido.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_proc_3',
+          text:
+              'Significa que no tiene interés y debes cambiar de tema inmediatamente.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Una mirada hacia un lado o hacia arriba y la boca relajada suelen acompañar la búsqueda de recuerdos o formulación de respuestas.',
+      explanation:
+          'Las pausas antes de hablar suelen ser tiempos de reflexión y procesamiento cognitivo. No indican enojo ni falta de educación.',
+    ),
+    QuizQuestion(
+      id: 'q_comfortable_silence',
+      category: CategoryType.factoresParalinguisticos,
+      prompt:
+          'Estás con un amigo armando un rompecabezas, dibujando o descansando, y pasan varios minutos sin que nadie hable. ¿Qué es lo más recomendable?',
+      scenarioText: 'Comparten una actividad tranquila en la misma habitación.',
+      options: [
+        QuizOption(
+          id: 'opt_comf_1',
+          text:
+              'Disfrutar del momento compartido con calma; no todas las interacciones requieren hablar constantemente.',
+          isCorrect: true,
+        ),
+        QuizOption(
+          id: 'opt_comf_2',
+          text:
+              'Empezar a hablar rápido y de cualquier cosa para no dejar ni un segundo en silencio.',
+          isCorrect: false,
+        ),
+        QuizOption(
+          id: 'opt_comf_3',
+          text:
+              'Asumir que se aburrió de ti e irte inmediatamente.',
+          isCorrect: false,
+        ),
+      ],
+      keyVisualClue:
+          'Posturas corporales relajadas y concentración en la actividad compartida sin tensión.',
+      explanation:
+          'El silencio cómodo es una forma válida y agradable de compartir tiempo. Estar juntos sin hablar no significa que algo ande mal.',
+    ),
     ...QuizExpansion.questions,
     ...CommunicationPracticeDatabase.questions,
   ];

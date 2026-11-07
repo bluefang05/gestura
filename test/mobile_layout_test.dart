@@ -7,6 +7,8 @@ import 'package:gestura/core/services/storage_service.dart';
 import 'package:gestura/core/theme/app_theme.dart';
 import 'package:gestura/screens/main_navigation_screen.dart';
 import 'package:gestura/screens/home_screen.dart';
+import 'package:gestura/screens/explore_screen.dart';
+import 'package:gestura/screens/tools_screen.dart';
 import 'package:gestura/screens/quiz_hub_screen.dart';
 import 'package:gestura/screens/buyer_temperature_screen.dart';
 import 'package:gestura/screens/compare_screen.dart';
@@ -33,9 +35,17 @@ void main() {
   });
   final readableCards = <Widget, List<String>>{
     HomeScreen(onNavigateToTab: (_) {}, onOpenCategory: (_) {}): [
+      'Límites y consentimiento',
+      'Buscar',
+      'Explorar',
+    ],
+    ExploreScreen(onNavigateToTab: (_) {}, onOpenCategory: (_) {}): [
+      'Conceptos',
+      'Distancia y espacio personal',
+    ],
+    const ToolsScreen(): [
       'Límites & Consentimiento',
       'Poner límites y pedir permiso con claridad',
-      'Distancia y espacio personal',
     ],
     const QuizHubScreen(): [
       'Comparar palabras y gestos',

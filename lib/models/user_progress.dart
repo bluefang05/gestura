@@ -237,7 +237,12 @@ class UserProgress {
           ? json['lastActiveDate'] as String
           : '',
       exploredGestureIds: ids('exploredGestureIds'),
-      completedQuizIds: {...ids('completedQuizIds'), ...scores.keys}.toList(),
+      completedQuizIds: {
+        ...ids('completedQuizIds'),
+        ...scores.entries
+            .where((entry) => entry.value >= 100)
+            .map((entry) => entry.key),
+      }.toList(),
       quizScores: scores,
       completedScenarioIds: ids('completedScenarioIds'),
       completedRoadmapStepIds: ids('completedRoadmapStepIds'),

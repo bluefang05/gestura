@@ -13,6 +13,8 @@ import 'incongruence_detector_screen.dart';
 import 'buyer_temperature_screen.dart';
 import 'communication_guide_screen.dart';
 import '../widgets/quiz/personal_practice_card.dart';
+import 'scenarios_screen.dart';
+import 'unwritten_rules_screen.dart';
 
 class QuizHubScreen extends StatelessWidget {
   const QuizHubScreen({super.key});
@@ -134,6 +136,84 @@ class QuizHubScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 14),
+
+                  // Modo Destacado: Escenarios Interactivos de Rol
+                  AppCard(
+                    padding: const EdgeInsets.all(16),
+                    borderSide: BorderSide(
+                      color:
+                          isDark ? AppColors.accentLight : AppColors.accent,
+                      width: 1.5,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Flexible(
+                              child: BadgePill(
+                                text: 'Historias con Decisiones',
+                                icon: Icons.theater_comedy_rounded,
+                                color: isDark
+                                    ? AppColors.accentLight
+                                    : AppColors.accent,
+                              ),
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.auto_stories_rounded,
+                                color: AppColors.accent),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Escenarios de la Vida Real',
+                          style: TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: -0.3,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Vive situaciones con amigos, en la escuela o en casa. Toma decisiones y descubre la reacción del personaje en tiempo real.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
+                            height: 1.35,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                        SizedBox(
+                          height: 44,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(Icons.play_arrow_rounded,
+                                size: 22),
+                            label: const Text('Explorar Escenarios',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.accent,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            onPressed: () {
+                              FeedbackService.lightClick();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ScenariosScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 18),
 
                   // Modos Especializados
@@ -147,6 +227,26 @@ class QuizHubScreen extends StatelessWidget {
                   AdaptiveCardGrid(
                     columns: isTablet ? 2 : 1,
                     children: [
+                      // Modo: Pausas y Silencios en la Conversación
+                      _buildPracticeModeCard(
+                        context: context,
+                        isDark: isDark,
+                        icon: Icons.hourglass_empty_rounded,
+                        accentColor: AppColors.primary,
+                        title: 'Pausas y Silencios',
+                        description:
+                            'Aprende qué significa el silencio sin angustia y la regla de los 3 a 5 segundos.',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  const UnwrittenRulesScreen(initialTab: 5),
+                            ),
+                          );
+                        },
+                      ),
+
                       // Modo: Detector de Incongruencias
                       _buildPracticeModeCard(
                         context: context,
@@ -194,7 +294,7 @@ class QuizHubScreen extends StatelessWidget {
                         accentColor: AppColors.accent,
                         title: 'Modo Flash Contrarreloj',
                         description:
-                            'Entrena reflejos rápidos: la imagen desaparece en 3 segundos.',
+                            'Observa una imagen durante 3 segundos y responde a tu ritmo. Puedes pausar o volver a verla.',
                         onTap: () {
                           Navigator.push(
                             context,

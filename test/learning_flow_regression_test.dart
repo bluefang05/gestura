@@ -118,7 +118,9 @@ void main() {
       await tester.pumpAndSettle();
     }
     expect(find.text('¡Sesión Completada!'), findsOneWidget);
-    expect(find.text('Aciertos: 8 de 8'), findsOneWidget);
+    expect(find.text('Resueltas: 8 de 8'), findsOneWidget);
+    expect(find.text('Al primer intento: 7 de 8'), findsOneWidget);
+    expect(find.text('Intentos totales: 9'), findsOneWidget);
     await tester.pumpWidget(const SizedBox.shrink());
   });
 
@@ -235,7 +237,12 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(optionFinder);
       await tester.pump();
-      await tester.tap(find.text('Comprobar Respuesta'));
+      final checkButtonFinder = find.text('Comprobar Respuesta');
+      await tester.scrollUntilVisible(checkButtonFinder, 180,
+          scrollable: find.byType(Scrollable).first);
+      await tester.ensureVisible(checkButtonFinder);
+      await tester.pumpAndSettle();
+      await tester.tap(checkButtonFinder);
       await tester.pumpAndSettle();
       if (find.text('Empezar preguntas').evaluate().isNotEmpty) {
         await tester.ensureVisible(find.text('Empezar preguntas'));
@@ -261,7 +268,7 @@ void main() {
     ProgressProvider().loadProgress();
     expect(RoadmapDatabase.getCurrentActiveStep(ProgressProvider().progress).id,
         'step_eyes');
-    expect(find.text('Empezar'), findsOneWidget);
+    expect(find.text('Manual de Señales'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -321,7 +328,7 @@ void main() {
       await tester.tap(find.text('Empezar preguntas'));
       await tester.pumpAndSettle();
     }
-    await tester.tap(find.text('Completar tema y volver a la ruta'));
+    await tester.tap(find.text('Completar y continuar'));
     await tester.pumpAndSettle();
     if (find.text('Empezar preguntas').evaluate().isNotEmpty) {
       await tester.ensureVisible(find.text('Empezar preguntas'));

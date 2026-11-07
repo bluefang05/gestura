@@ -68,6 +68,25 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
         gestureId: 'express_${item.id}');
   }
 
+  Widget _buildGestureIllustration(GestureItem item, double size) {
+    final illustration = ConoVeIllustration(
+      illustrationKey: item.illustrationKey,
+      animateGesture: true,
+      width: size,
+      height: size,
+      highlightAnatomy: _highlightAnatomy,
+      borderRadius: BorderRadius.circular(24),
+    );
+
+    if (ConoVeIllustration.hasAnimation(item.illustrationKey)) {
+      return illustration;
+    }
+    return Hero(
+      tag: 'gesture_illustration_${item.id}',
+      child: illustration,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final item = GestureDatabase.getById(widget.gestureId);
@@ -491,16 +510,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
                         padding: const EdgeInsets.all(16),
                         children: [
                           Center(
-                            child: Hero(
-                              tag: 'gesture_illustration_${item.id}',
-                              child: ConoVeIllustration(
-                                illustrationKey: item.illustrationKey,
-                                width: 260,
-                                height: 260,
-                                highlightAnatomy: _highlightAnatomy,
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                            ),
+                            child: _buildGestureIllustration(item, 260),
                           ),
                           const SizedBox(height: 14),
                           Wrap(
@@ -635,16 +645,7 @@ class _GestureDetailScreenState extends State<GestureDetailScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               Center(
-                child: Hero(
-                  tag: 'gesture_illustration_${item.id}',
-                  child: ConoVeIllustration(
-                    illustrationKey: item.illustrationKey,
-                    width: 220,
-                    height: 220,
-                    highlightAnatomy: _highlightAnatomy,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                ),
+                child: _buildGestureIllustration(item, 220),
               ),
               const SizedBox(height: 12),
               Wrap(

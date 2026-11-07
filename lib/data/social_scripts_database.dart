@@ -443,6 +443,24 @@ class SocialScriptsDatabase {
           'No te quedes atrapado en silencios incómodos esperando a que el otro adivine que quieres marcharte; los cierres claros son liberadores para ambas partes.',
     ),
 
+    SocialScript(
+      id: 'social_handle_silence_calmly',
+      title: 'Acompañar un silencio o pausa sin presionar ni angustiarse',
+      category: SocialScriptCategory.social,
+      contextDescription:
+          'Estás charlando con un amigo o familiar y surge una pausa prolongada donde nadie habla.',
+      softPhrase:
+          'Tómate tu tiempo para pensarlo con calma, no hay ninguna prisa.',
+      assertivePhrase:
+          '¿Quieres un momento para pensar o prefieres que cambiemos de tema?',
+      firmPhrase:
+          'Podemos quedarnos un rato tranquilos sin hablar si prefieres un descanso.',
+      bodyLanguage:
+          'Mantén una postura relajada con los hombros bajos y respiración tranquila. No muevas las manos con impaciencia.',
+      whatNotToDo:
+          'No llenes el silencio con frases apresuradas ni asumas de inmediato que la otra persona está enojada.',
+    ),
+
     // ==========================================
     // PRESIÓN FAMILIAR
     // ==========================================

@@ -11,6 +11,7 @@ import 'core/services/tts_service.dart';
 import 'core/theme/app_theme.dart';
 import 'state/settings_provider.dart';
 import 'screens/main_navigation_screen.dart';
+import 'widgets/common/screen_speech_reader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,7 @@ class GesturaApp extends StatefulWidget {
 class _GesturaAppState extends State<GesturaApp> {
   final SettingsProvider _settingsProvider = SettingsProvider();
   final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+  final _speechRouteObserver = SpeechRouteObserver();
 
   @override
   void initState() {
@@ -88,7 +90,7 @@ class _GesturaAppState extends State<GesturaApp> {
         return MaterialApp(
           scaffoldMessengerKey: _messengerKey,
           title: 'Gestura',
-          navigatorObservers: [appRouteObserver],
+          navigatorObservers: [appRouteObserver, _speechRouteObserver],
           debugShowCheckedModeBanner: false,
           themeMode: _settingsProvider.themeMode,
           theme: lightTheme,
@@ -129,7 +131,10 @@ class _GesturaAppState extends State<GesturaApp> {
                 disableAnimations: MediaQuery.of(context).disableAnimations ||
                     _settingsProvider.isReduceMotion,
               ),
-              child: SafeArea(top: false, bottom: false, child: content),
+              child: ScreenSpeechReader(
+                navigationChanges: _speechRouteObserver.changes,
+                child: SafeArea(top: false, bottom: false, child: content),
+              ),
             );
           },
           home: const MainNavigationScreen(),

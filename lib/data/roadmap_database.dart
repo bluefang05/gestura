@@ -14,8 +14,18 @@ import '../models/category.dart';
 import '../screens/scenarios_screen.dart';
 import '../state/progress_provider.dart';
 import '../screens/roadmap_lesson_screen.dart';
+import '../core/services/tts_service.dart';
 
 class RoadmapDatabase {
+  static List<RoadmapStep> get steps =>
+      levels.expand((level) => level.steps).toList(growable: false);
+
+  static int completedStepsCount(UserProgress progress) =>
+      steps.where((step) => step.isCompleted(progress)).length;
+
+  static double completionRatio(UserProgress progress) =>
+      steps.isEmpty ? 0 : completedStepsCount(progress) / steps.length;
+
   static final List<RoadmapLevel> levels = [
     // ==========================================
     // NIVEL 1: LA REGLA CERO (OBSERVAR SIN SESGO)
@@ -75,7 +85,7 @@ class RoadmapDatabase {
           stepNumber: 4,
           title: 'Brazos y manos',
           subtitle:
-              'Observa cómo coloca los brazos y las manos. No adivines lo que piensa.',
+              'Explora posiciones de brazos y manos y sus posibles significados según el contexto.',
           icon: Icons.pan_tool_rounded,
           destination: RoadmapDestination.dictionaryHands,
         ),
@@ -182,9 +192,9 @@ class RoadmapDatabase {
           id: 'step_emergency_sos',
           levelNumber: 5,
           stepNumber: 11,
-          title: 'Modo Emergencia / Campo',
+          title: 'Ayuda rápida en situaciones difíciles',
           subtitle:
-              'Kit de supervivencia de 30 segundos antes de entrar por la puerta.',
+              'Elige una situación y prepara una frase o una pausa que te sirva.',
           icon: Icons.flash_on_rounded,
           destination: RoadmapDestination.emergencyMode,
         ),
@@ -218,6 +228,29 @@ class RoadmapDatabase {
     RoadmapDestination destination, {
     String? roadmapStepId,
   }) async {
+    var nextDestination = destination;
+    var nextStepId = roadmapStepId;
+    // Each completed screen is removed before opening the next lesson.
+    while (true) {
+      if (!context.mounted) return;
+      TtsService.stop();
+      final completed = await _openDestination(context, nextDestination,
+          roadmapStepId: nextStepId);
+      if (!context.mounted || completed != true || nextStepId == null) return;
+      await ProgressProvider().markRoadmapStepCompleted(nextStepId);
+      final progress = ProgressProvider().progress;
+      if (completedStepsCount(progress) == steps.length) return;
+      final next = getCurrentActiveStep(progress);
+      nextDestination = next.destination;
+      nextStepId = next.id;
+    }
+  }
+
+  static Future<bool?> _openDestination(
+    BuildContext context,
+    RoadmapDestination destination, {
+    String? roadmapStepId,
+  }) async {
     final Widget screen;
     switch (destination) {
       case RoadmapDestination.clusterBaseline:
@@ -228,6 +261,7 @@ class RoadmapDatabase {
         screen = QuizRunnerScreen(
           title: 'Test Visual',
           questions: questions.isNotEmpty ? questions : QuizDatabase.questions,
+          continueRoadmap: roadmapStepId != null,
           onCompleted: roadmapStepId == null
               ? null
               : () {
@@ -271,11 +305,9 @@ class RoadmapDatabase {
         screen = const ScenariosScreen();
         break;
     }
-    await Navigator.push<void>(
-        context,
-        MaterialPageRoute(
-          builder: (_) => roadmapStepId != null &&
-                  destination != RoadmapDestination.visualQuiz
+    final route = MaterialPageRoute<bool>(
+      builder: (_) =>
+          roadmapStepId != null && destination != RoadmapDestination.visualQuiz
               ? RoadmapLessonScreen(
                   stepId: roadmapStepId,
                   showAd: destination != RoadmapDestination.salesTrack &&
@@ -284,6 +316,10 @@ class RoadmapDatabase {
                   child: screen,
                 )
               : screen,
-        ));
+    );
+    final result = await Navigator.push(context, route);
+    // Dispose the previous lesson before the next one can start narration.
+    await route.completed;
+    return result;
   }
 }

@@ -42,11 +42,11 @@ class CompareScreen extends StatefulWidget {
 class _CompareScreenState extends State<CompareScreen> {
   static const List<ComparePair> presetPairs = [
     ComparePair(
-      title: 'Sonrisa Genuina vs. Sonrisa Social',
+      title: 'Sonrisas con y sin arrugas junto a los ojos',
       gestureIdA: 'duchenne_smile',
       gestureIdB: 'sonrisa_social',
       coreDifference:
-          'En la sonrisa genuina se contraen los ojos ("patas de gallo"); en la social los ojos quedan inmóviles.',
+          'Compara si aparecen arrugas junto a los ojos y se elevan las mejillas. La imagen permite describir esos movimientos, pero no confirmar si una sonrisa es sincera.',
     ),
     ComparePair(
       title: 'Postura Abierta vs. Brazos Cruzados',
@@ -223,6 +223,7 @@ class _CompareScreenState extends State<CompareScreen> {
                               const SizedBox(height: 8),
                               ConoVeIllustration(
                                 illustrationKey: itemA.illustrationKey,
+                                animateGesture: true,
                                 width: illustrationSize,
                                 height: illustrationSize,
                                 borderRadius: BorderRadius.circular(16),
@@ -276,6 +277,7 @@ class _CompareScreenState extends State<CompareScreen> {
                               const SizedBox(height: 8),
                               ConoVeIllustration(
                                 illustrationKey: itemB.illustrationKey,
+                                animateGesture: true,
                                 width: illustrationSize,
                                 height: illustrationSize,
                                 borderRadius: BorderRadius.circular(16),

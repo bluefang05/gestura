@@ -45,6 +45,7 @@ class GestureCard extends StatelessWidget {
               tag: 'gesture_illustration_${item.id}',
               child: ConoVeIllustration(
                 illustrationKey: item.illustrationKey,
+                animatePreview: true,
                 width: 76,
                 height: 76,
                 borderRadius: BorderRadius.circular(12),

@@ -1118,7 +1118,7 @@ class ScenarioDatabase {
               'Tu colega frunce el ceño, cambia a tono de víctima y dice: "¡Vaya, qué frío! Pensé que éramos un equipo. Si no me ayudas me van a llamar la atención el lunes. ¿De verdad me vas a dejar tirado?".',
           characterAction:
               'Cruza los brazos, inclina la cabeza y cuestiona tu decisión con palabras.',
-          illustrationKey: 'frown_eyebrows',
+          illustrationKey: 'frowning_brow',
           visibleSignals: [
             'Dice que lo dejarías tirado si no aceptas',
             'Postura de reproche',
@@ -1264,6 +1264,103 @@ class ScenarioDatabase {
               nextStepIndex: null,
               consequenceSummary:
                   'Tu amigo se siente culpable y se aísla emocionalmente.',
+            ),
+          ],
+        ),
+      ],
+    ),
+    // --- ESCENARIO DE SILENCIOS Y PAUSAS SOCIALES ---
+    Scenario(
+      id: 'scenario_conversacion_silencio',
+      title: 'Una pausa en la conversación',
+      domain: 'Relaciones Sociales',
+      description:
+          'Aprende a responder con serenidad ante los silencios y dar espacio para pensar sin angustia.',
+      contextOverview:
+          'Estás en el recreo o descansando con un compañero y surge un silencio prolongado tras una pregunta.',
+      iconName: 'chat',
+      steps: [
+        ScenarioStep(
+          id: 'step_silence_1',
+          narrative:
+              'Le preguntas a tu compañero: "¿Qué película o juego te gustaría probar este fin de semana?". Él mira hacia una ventana y se queda callado durante varios segundos sin responder.',
+          characterAction:
+              'Mirada reflexiva hacia la ventana y postura relajada.',
+          illustrationKey: 'scenario_conversacion_silencio',
+          visibleSignals: [
+            'Mirada hacia un lado',
+            'Boca relajada',
+            'Postura sin tensión',
+          ],
+          learningTakeaway:
+              'Una pausa de silencio suele significar que la persona está pensando y organizando su respuesta.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Asumir que se molestó y pedir disculpas rápido diciendo: "¡Perdón si dije una tontería!".',
+              analysis:
+                  'Asumir culpa inmediata eleva la ansiedad innecesariamente; varios segundos es un tiempo normal de reflexión.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu compañero se confunde y aclara que solo estaba pensando.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Esperar con calma unos segundos y decir suavemente: "Tómate tu tiempo, avísame cuando se te ocurra".',
+              analysis:
+                  'Excelente: le das espacio cognitivo sin presionar y demuestras que el silencio no es una amenaza.',
+              isBestAction: true,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu compañero sonríe aliviado al no sentirse apurado.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Repetirle la pregunta en voz más alta pensando que no escuchó.',
+              analysis:
+                  'Repetir de inmediato interrumpe su concentración y puede sonar exigente.',
+              isBestAction: false,
+              nextStepIndex: 1,
+              consequenceSummary:
+                  'Tu compañero pierde el hilo de lo que estaba recordando.',
+            ),
+          ],
+        ),
+        ScenarioStep(
+          id: 'step_silence_2',
+          narrative:
+              'Luego de la pausa, tu compañero sonríe y te dice: "Estaba recordando que el sábado tengo un compromiso familiar, pero el domingo por la tarde tengo tiempo libre".',
+          characterAction:
+              'Sonrisa tranquila y postura abierta hacia ti.',
+          illustrationKey: 'open_posture',
+          visibleSignals: [
+            'Sonrisa genuina',
+            'Contacto visual cómodo',
+            'Respuesta clara',
+          ],
+          learningTakeaway:
+              'Dar tiempo y normalizar el silencio crea conversaciones más tranquilas y de confianza.',
+          choices: [
+            ScenarioChoice(
+              text:
+                  'Responder con entusiasmo: "¡Genial! El domingo nos organizamos con calma".',
+              analysis:
+                  'Cierre perfecto: confirmas el plan respetando los tiempos de ambos.',
+              isBestAction: true,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Ambos disfrutan de una conversación sin presiones.',
+            ),
+            ScenarioChoice(
+              text:
+                  'Decirle: "Qué alivio, pensé que te habías enojado por quedarte callado".',
+              analysis:
+                  'Aunque es sincero, proyecta que el silencio es negativo cuando en realidad solo era reflexión.',
+              isBestAction: false,
+              nextStepIndex: null,
+              consequenceSummary:
+                  'Tu compañero comprende tu preocupación, pero se siente algo cohibido para la próxima vez.',
             ),
           ],
         ),

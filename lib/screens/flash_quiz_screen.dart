@@ -1,6 +1,5 @@
 import '../data/concepts_database.dart';
 import 'concepts_screen.dart';
-import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import '../core/constants/app_colors.dart';
@@ -16,6 +15,7 @@ import '../widgets/common/app_card.dart';
 import '../widgets/common/badge_pill.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../widgets/quiz/quiz_feedback_sheet.dart';
+import '../core/navigation/app_route_observer.dart';
 
 class FlashQuizScreen extends StatefulWidget {
   const FlashQuizScreen({super.key});
@@ -25,21 +25,27 @@ class FlashQuizScreen extends StatefulWidget {
 }
 
 class _FlashQuizScreenState extends State<FlashQuizScreen>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver, RouteAware {
   bool _prepared = false;
   late List<QuizQuestion> _questions;
   late List<QuizOption> _displayedOptions;
   final Random _random = Random();
   int _currentIndex = 0;
   late int _totalQuestions;
-  int _score = 0;
+  int _firstTryCorrectCount = 0;
+  int _attempts = 0;
+  final _attemptedIds = <String>{};
   int _correctCount = 0;
   bool _isImageVisible = true;
   bool _isAnswered = false;
   QuizOption? _selectedOption;
 
   late AnimationController _timerController;
-  Timer? _countdownTimer;
+  PageRoute<dynamic>? _route;
+  bool _routeVisible = true;
+  bool _appActive = true;
+  bool _paused = false;
+  bool _narrationPending = false;
   final _scrollController = ScrollController();
 
   static const int flashSeconds = 3;
@@ -48,11 +54,9 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   void initState() {
     super.initState();
     final allVisual = QuizDatabase.questions
-        .where((q) => q.questionIllustrationKey != null || q.isImageOptionGrid)
+        .where((q) => q.questionIllustrationKey != null && !q.isImageOptionGrid)
         .toList();
-    _questions = (allVisual.isNotEmpty ? allVisual : QuizDatabase.questions)
-        .toList()
-      ..shuffle();
+    _questions = allVisual..shuffle();
     if (_questions.length > 8) {
       _questions = _questions.sublist(0, 8);
     }
@@ -62,6 +66,91 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       vsync: this,
       duration: const Duration(seconds: flashSeconds),
     );
+    _timerController.addStatusListener((status) {
+      if (status == AnimationStatus.completed && mounted && !_isAnswered) {
+        setState(() => _isImageVisible = false);
+      }
+    });
+    WidgetsBinding.instance.addObserver(this);
+    TtsService.currentSpeakingIdNotifier.addListener(_onSpeechChanged);
+  }
+
+  bool get _speechActive =>
+      _narrationPending || TtsService.currentSpeakingIdNotifier.value != null;
+
+  void _updateClock() {
+    if (!_prepared ||
+        !_isImageVisible ||
+        _isAnswered ||
+        _paused ||
+        !_routeVisible ||
+        !_appActive ||
+        _speechActive) {
+      _timerController.stop();
+    } else if (!_timerController.isCompleted) {
+      _timerController.forward();
+    }
+  }
+
+  void _onSpeechChanged() {
+    if (!mounted) return;
+    _updateClock();
+    setState(() {});
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route is PageRoute<dynamic> && route != _route) {
+      appRouteObserver.unsubscribe(this);
+      _route = route;
+      appRouteObserver.subscribe(this, route);
+    }
+  }
+
+  @override
+  void didPushNext() {
+    _routeVisible = false;
+    _updateClock();
+  }
+
+  @override
+  void didPopNext() {
+    _routeVisible = true;
+    _updateClock();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _appActive = state == AppLifecycleState.resumed;
+    _updateClock();
+  }
+
+  Future<void> _readQuestion() async {
+    if (!mounted ||
+        !_prepared ||
+        _questions.isEmpty ||
+        _isAnswered ||
+        ModalRoute.of(context)?.isCurrent != true) {
+      return;
+    }
+    final question = _questions[_currentIndex];
+    setState(() => _narrationPending = true);
+    _updateClock();
+    try {
+      await TtsService.speakQuizQuestion(
+        question: question.prompt,
+        scenarioText: question.scenarioText,
+        options: _displayedOptions.map((option) => option.readingText).toList(),
+        tag: 'flash_q_${question.id}',
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _narrationPending = false);
+        _updateClock();
+      }
+    }
   }
 
   void _startQuestionFlash() {
@@ -74,41 +163,25 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
     });
 
     _timerController.reset();
-    _timerController.forward();
+    _narrationPending = StorageService.getAutoNarration();
+    _updateClock();
     FeedbackService.tick();
-
-    _countdownTimer?.cancel();
-    int ticksLeft = flashSeconds - 1;
-    _countdownTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (!mounted || _isAnswered) {
-        timer.cancel();
-        return;
-      }
-      if (ticksLeft > 0) {
-        FeedbackService.tick();
-        ticksLeft--;
-      } else {
-        timer.cancel();
-        if (mounted) {
-          setState(() {
-            _isImageVisible = false;
-          });
-          FeedbackService.lightClick();
-        }
-      }
-    });
+    if (_narrationPending) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _readQuestion());
+    }
   }
 
   void _submitAnswer(QuizOption option) {
     if (_isAnswered) return;
-    _countdownTimer?.cancel();
     _timerController.stop();
+    final firstAttempt = _attemptedIds.add(_questions[_currentIndex].id);
 
     setState(() {
       _isAnswered = true;
       _selectedOption = option;
+      _attempts++;
       if (option.isCorrect) {
-        _score += 15;
+        if (firstAttempt) _firstTryCorrectCount++;
         _correctCount++;
         FeedbackService.success();
       } else {
@@ -121,17 +194,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
     ProgressProvider()
         .recordQuizResult(currentQ.id, option.isCorrect ? 100 : 0);
 
-    if (StorageService.getAutoNarration()) {
-      TtsService.speakQuizFeedback(
-        correctAnswer:
-            currentQ.options.firstWhere((o) => o.isCorrect).readingText,
-        isCorrect: option.isCorrect,
-        keyVisualClue: currentQ.keyVisualClue,
-        explanation: currentQ.explanation,
-      );
-    } else {
-      TtsService.stop();
-    }
+    TtsService.stop();
 
     showModalBottomSheet(
       context: context,
@@ -180,6 +243,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
+        scrollable: true,
         title: const Text('¡Sesión Completada!'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -188,14 +252,17 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                 color: isDark ? AppColors.accentLight : AppColors.accent,
                 size: 48),
             const SizedBox(height: 12),
-            Text('Aciertos: $_correctCount de $_totalQuestions',
+            Text('Resueltas: $_correctCount de $_totalQuestions',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             const SizedBox(height: 4),
-            Text('Puntos ganados: +$_score XP',
+            Text(
+                'Al primer intento: $_firstTryCorrectCount de $_totalQuestions',
                 style: TextStyle(
                     color: isDark ? AppColors.primaryLight : AppColors.primary,
                     fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text('Intentos totales: $_attempts'),
           ],
         ),
         actions: [
@@ -213,7 +280,9 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
 
   @override
   void dispose() {
-    _countdownTimer?.cancel();
+    appRouteObserver.unsubscribe(this);
+    WidgetsBinding.instance.removeObserver(this);
+    TtsService.currentSpeakingIdNotifier.removeListener(_onSpeechChanged);
     _timerController.dispose();
     _scrollController.dispose();
     TtsService.stop();
@@ -223,6 +292,13 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    if (_questions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Modo Flash')),
+        body:
+            const Center(child: Text('No hay preguntas visuales disponibles.')),
+      );
+    }
     if (!_prepared) {
       return ConceptsScreen(
           concepts: ConceptsDatabase.forQuestions(_questions),
@@ -234,9 +310,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
     final currentQ = _questions[_currentIndex];
 
     // Determine the key illustration to show
-    String illustrationToShow = currentQ.questionIllustrationKey ??
-        currentQ.options.firstWhere((o) => o.isCorrect).illustrationKey ??
-        'duchenne_smile';
+    final illustrationToShow = currentQ.questionIllustrationKey!;
 
     return Scaffold(
       appBar: AppBar(
@@ -251,16 +325,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                     builder: (_) => const ConceptsScreen()));
               }),
           TtsAppBarControl(
-            onPlay: () {
-              TtsService.speakQuizQuestion(
-                question: currentQ.prompt,
-                scenarioText: currentQ.scenarioText,
-                options: _displayedOptions
-                    .map((o) => '${o.text}. ${o.subtext ?? ''}')
-                    .toList(),
-                tag: 'flash_q_${currentQ.id}',
-              );
-            },
+            onPlay: _readQuestion,
           ),
         ],
         bottom: PreferredSize(
@@ -298,7 +363,7 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
                 color: isDark ? AppColors.primaryLight : AppColors.primary,
               ),
               BadgePill(
-                text: '$_score XP',
+                text: '$_correctCount de $_totalQuestions resueltas',
                 color: isDark ? AppColors.accentLight : AppColors.accent,
                 icon: Icons.bolt_rounded,
               ),
@@ -317,6 +382,37 @@ class _FlashQuizScreenState extends State<FlashQuizScreen>
             Text(currentQ.scenarioText!),
             const SizedBox(height: 14),
           ],
+          Align(
+            alignment: Alignment.centerLeft,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                setState(() {
+                  if (!_isImageVisible) {
+                    _isImageVisible = true;
+                    _paused = false;
+                    _timerController.reset();
+                  } else {
+                    _paused = !_paused;
+                  }
+                });
+                _updateClock();
+              },
+              icon: Icon(!_isImageVisible
+                  ? Icons.replay_rounded
+                  : _paused
+                      ? Icons.play_arrow_rounded
+                      : Icons.pause_rounded),
+              label: Text(!_isImageVisible
+                  ? 'Ver imagen otra vez'
+                  : _paused
+                      ? 'Reanudar imagen'
+                      : 'Pausar imagen'),
+            ),
+          ),
+          Text(_speechActive
+              ? 'Tiempo pausado mientras escuchas.'
+              : 'La imagen se oculta tras 3 segundos. Puedes pausar o volver a verla. Responde a tu ritmo.'),
+          const SizedBox(height: 12),
           // Flash Image Display Container
           Center(
             child: AppCard(

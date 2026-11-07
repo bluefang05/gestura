@@ -13,6 +13,7 @@ import '../core/services/feedback_service.dart';
 import '../state/progress_provider.dart';
 import '../widgets/illustrations/competence_radar_painter.dart';
 import 'gesture_detail_screen.dart';
+import '../widgets/home/mastery_progress_card.dart';
 
 class ProgressScreen extends StatefulWidget {
   final int initialTabIndex;
@@ -82,13 +83,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
     };
   }
 
-  String _getRankTitle(int points) {
-    if (points >= 500) return 'Recorrido completo';
-    if (points >= 300) return 'Analista Experto';
-    if (points >= 150) return 'Observador Atento';
-    return 'Iniciado en Comunicación';
-  }
-
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -100,7 +94,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mi Progreso y Maestría'),
+        title: const Text('Mi progreso'),
       ),
       bottomNavigationBar: const AdBottomBar(),
       body: Center(
@@ -151,7 +145,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
             child: _buildTabButton(
               index: 1,
               icon: Icons.insights_rounded,
-              label: 'Métricas y Radar',
+              label: 'Actividad y práctica',
               isDark: isDark,
             ),
           ),
@@ -229,68 +223,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
     bool isPreviousStepCompleted = true;
     final widgets = <Widget>[];
 
-    // Banner de Presentación
-    widgets.add(
-      AppCard(
-        padding: const EdgeInsets.all(16),
-        color: isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
-        borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: const BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.school_rounded,
-                      color: Colors.white, size: 22),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Tu recorrido de aprendizaje',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                          color: isDark ? Colors.white : AppColors.primaryDark,
-                        ),
-                      ),
-                      Text(
-                        'Practica la comunicación paso a paso y a tu ritmo',
-                        style: TextStyle(
-                          fontSize: 11.5,
-                          color: isDark
-                              ? AppColors.textSecondaryDark
-                              : AppColors.textSecondaryLight,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Avanza paso a paso: aprende a observar sin adivinar, entender frases confusas, expresar tus límites y conversar en distintas situaciones.',
-              style: TextStyle(
-                fontSize: 12,
-                height: 1.35,
-                color: isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textPrimaryLight,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    widgets.add(const MasteryProgressCard(showRouteButton: false));
     widgets.add(const SizedBox(height: 16));
 
     // Recorrido de los 5 niveles
@@ -371,7 +304,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       ),
                     ),
                     child: Text(
-                      '$completedInLevel/${level.steps.length}',
+                      '${(completedInLevel / level.steps.length * 100).round()}% · $completedInLevel/${level.steps.length}',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
@@ -447,7 +380,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
         nodeBorderColor = AppColors.primary;
         nodeIcon = step.icon;
         nodeIconColor = isDark ? AppColors.accentLight : AppColors.primary;
-        statusLabel = 'Misión Actual';
+        statusLabel = 'Siguiente paso';
         statusBgColor =
             isDark ? const Color(0xFF134E4A) : const Color(0xFFCCFBF1);
         statusTextColor =
@@ -517,7 +450,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text(
-                          'Completa los pasos anteriores para desbloquear esta estación.',
+                          'Este paso viene después. Pulsa Continuar ruta para retomar el siguiente.',
                         ),
                         duration: Duration(seconds: 2),
                       ),
@@ -684,9 +617,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
         color: isDark ? const Color(0xFF134E4A) : AppColors.primaryContainer,
         borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
         padding: const EdgeInsets.all(18),
-        onTap: () {
-          FeedbackService.levelUp();
-        },
         child: Row(
           children: [
             Container(
@@ -705,7 +635,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _getRankTitle(_progress.totalPoints),
+                    'Exploración del catálogo',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w900,
@@ -714,23 +644,19 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    '${_progress.totalPoints} pts • ${_progress.motivationalMessage}',
+                    'Señales, preguntas y escenarios completados.',
                     style: TextStyle(
                       fontSize: 12,
                       color: isDark
                           ? AppColors.textSecondaryDark
                           : AppColors.textSecondaryLight,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(6),
                     child: LinearProgressIndicator(
-                      value: _progress.masteryRatio == 0.0
-                          ? 0.02
-                          : _progress.masteryRatio,
+                      value: _progress.masteryRatio,
                       minHeight: 6,
                       backgroundColor: isDark
                           ? const Color(0xFF334155)
@@ -908,10 +834,15 @@ class _ProgressScreenState extends State<ProgressScreen> {
           child: SizedBox(
             width: 280,
             height: 260,
-            child: CustomPaint(
-              painter: CompetenceRadarPainter(
-                scores: _calculateCategoryScores(),
-                isDark: isDark,
+            child: Semantics(
+              image: true,
+              label:
+                  'Progreso por categoría. ${_calculateCategoryScores().entries.map((entry) => '${entry.key}: ${(entry.value * 100).round()} por ciento').join('. ')}',
+              child: CustomPaint(
+                painter: CompetenceRadarPainter(
+                  scores: _calculateCategoryScores(),
+                  isDark: isDark,
+                ),
               ),
             ),
           ),

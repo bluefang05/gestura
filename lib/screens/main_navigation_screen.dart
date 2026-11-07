@@ -9,6 +9,7 @@ import '../core/services/feedback_service.dart';
 import '../core/localization/app_localizations.dart';
 import '../models/category.dart';
 import '../widgets/common/ad_banner_slot.dart';
+import '../core/services/tts_service.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   final int initialTab;
@@ -30,6 +31,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onTabTapped(int index) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    TtsService.stop();
     FeedbackService.tabPop();
     setState(() {
       _currentIndex = index;
@@ -47,6 +50,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           _onTabTapped(index);
         },
         onOpenCategory: (category) {
+          FocusManager.instance.primaryFocus?.unfocus();
+          TtsService.stop();
           setState(() {
             _dictionaryCategory = category;
             _currentIndex = 1;
@@ -63,10 +68,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       const SettingsScreen(),
     ];
 
-    return LayoutBuilder(
+    return PopScope<void>(
+      canPop: _currentIndex == 0,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop && _currentIndex != 0) _onTabTapped(0);
+      },
+      child: LayoutBuilder(
       builder: (context, constraints) {
         final isTablet = constraints.maxWidth >= 640 &&
-            constraints.maxHeight >= 600 &&
+            constraints.maxHeight >= 520 &&
             MediaQuery.textScalerOf(context).scale(14) <= 21;
 
         if (isTablet) {
@@ -171,7 +181,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             ],
           ),
           bottomNavigationBar: NavigationBar(
-            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
             selectedIndex: _currentIndex,
             onDestinationSelected: _onTabTapped,
             destinations: [
@@ -204,6 +214,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
         );
       },
-    );
+    ));
   }
 }

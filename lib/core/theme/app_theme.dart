@@ -40,11 +40,18 @@ class AppTheme {
           letterSpacing: -0.3,
         ),
         iconTheme: IconThemeData(color: AppColors.textPrimaryLight),
+        actionsIconTheme: IconThemeData(color: AppColors.textPrimaryLight),
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.lightSurface,
         elevation: 2,
         indicatorColor: AppColors.primaryContainer,
+        iconTheme: WidgetStateProperty.resolveWith((states) => IconThemeData(
+              color: states.contains(WidgetState.selected)
+                  ? AppColors.primaryDark
+                  : AppColors.textMutedLight,
+              size: 24,
+            )),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
             return const TextStyle(

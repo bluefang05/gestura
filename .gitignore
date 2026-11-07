@@ -60,3 +60,15 @@ app.*.map.json
 *.apk
 
 
+
+# Media generation temp files
+*.mp4
+*.mp3
+video_temp/
+video_temp_*/
+generate_*.py
+test_synth.ps1
+test_input.txt
+animation_progress.png
+entregas/
+gestura_promo_*

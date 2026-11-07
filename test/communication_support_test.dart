@@ -29,6 +29,8 @@ void main() {
   testWidgets('Home opens the communication board directly', (tester) async {
     await tester.pumpWidget(const GesturaApp());
     await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('Comunicar ahora'), 180,
+        scrollable: find.byType(Scrollable).first);
     await tester.tap(find.text('Comunicar ahora'));
     await tester.pumpAndSettle();
     expect(find.byType(CommunicationBoardScreen), findsOneWidget);

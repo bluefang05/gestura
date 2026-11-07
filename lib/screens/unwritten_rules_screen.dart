@@ -72,6 +72,15 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       'pregunta: "¿Lo dices en broma o en serio?". La otra persona puede '
       'aclararlo o no querer explicarlo.';
 
+  static const String _silenceSpeech =
+      'El silencio es una parte natural y necesaria de las conversaciones. '
+      'No significa automáticamente que la otra persona esté enojada, aburrida o desinteresada. '
+      'Muchas veces indica que está procesando lo que escuchó, buscando las palabras adecuadas para responder, '
+      'o simplemente descansando su mente si el ambiente es ruidoso. '
+      'También existe el silencio cómodo, donde dos personas disfrutan de estar juntas sin necesidad de hablar todo el tiempo. '
+      'Si una pausa te genera incertidumbre, espera de 3 a 5 segundos con calma o pregunta con amabilidad: '
+      '"¿Quieres un momento para pensarlo o prefieres que cambiemos de tema?".';
+
   void _speakCurrentSection() {
     String textToSpeak = '';
     if (_selectedTab == 0) {
@@ -88,14 +97,26 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
       textToSpeak = _nervousLaughSpeech;
     } else if (_selectedTab == 3) {
       textToSpeak = _pokerSarcasmSpeech;
-    } else {
+    } else if (_selectedTab == 4) {
       if (_boundarySubView == 0) {
-        textToSpeak =
-            'Guía para reconocer lo que necesitas, decirlo con claridad y respetar los límites de otras personas. Si una respuesta no está clara, pregunta sin presionar.';
+        textToSpeak = BoundaryFrameworkDatabase.phases
+            .map((phase) =>
+                '${phase.title}. ${phase.subtitle}. ${phase.corePrinciple}. '
+                '${phase.conceptItems.map((item) => '${item.title}. ${item.description}').join('. ')}. '
+                '${phase.practicalProtocol}')
+            .join('\n\n');
       } else {
-        textToSpeak =
-            'Frases sencillas para expresar tus límites y respetar los de otras personas.';
+        final scripts = _selectedScriptCategory == null
+            ? SocialScriptsDatabase.scripts
+            : SocialScriptsDatabase.getByCategory(_selectedScriptCategory!);
+        textToSpeak = scripts
+            .map((script) => '${script.title}. ${script.contextDescription}. '
+                '${script.getPhraseByFirmness(_scriptFirmnessMap[script.id] ?? ScriptFirmness.assertive)}. '
+                '${script.bodyLanguage}. ${script.whatNotToDo}')
+            .join('\n\n');
       }
+    } else if (_selectedTab == 5) {
+      textToSpeak = _silenceSpeech;
     }
     TtsService.speakSpanish(textToSpeak,
         gestureId: 'unwritten_rules_$_selectedTab');
@@ -268,6 +289,12 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                             label: 'Límites y Consentimiento',
                             icon: Icons.shield_outlined,
                             isDark: isDark),
+                        const SizedBox(width: 8),
+                        _buildNavChip(
+                            index: 5,
+                            label: 'Pausas y Silencios',
+                            icon: Icons.hourglass_empty_rounded,
+                            isDark: isDark),
                       ],
                     ),
                   ),
@@ -281,6 +308,8 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   if (_selectedTab == 3) _buildPokerSarcasmContent(isDark),
                   if (_selectedTab == 4)
                     _buildSocialScriptsContent(isDark, isTablet),
+                  if (_selectedTab == 5)
+                    _buildSilenceContent(isDark, isTablet),
 
                   const SizedBox(height: 32),
                 ],
@@ -2000,6 +2029,266 @@ class _UnwrittenRulesScreenState extends State<UnwrittenRulesScreen> {
                   ),
                 ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // --- SECCIÓN 6: PAUSAS Y SILENCIOS EN LA CONVERSACIÓN ---
+  Widget _buildSilenceContent(bool isDark, bool isTablet) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppCard(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.hourglass_empty_rounded,
+                      size: 22,
+                      color: isDark ? AppColors.primary : AppColors.primary),
+                  const SizedBox(width: 8),
+                  const Expanded(
+                    child: Text(
+                      'El valor de las pausas y los silencios',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  ValueListenableBuilder<String?>(
+                    valueListenable: TtsService.currentSpeakingIdNotifier,
+                    builder: (context, speakingId, _) {
+                      final isSpeaking = speakingId == 'rules_silence';
+                      return IconButton(
+                        icon: Icon(
+                          isSpeaking
+                              ? Icons.stop_circle_rounded
+                              : Icons.volume_up_rounded,
+                          size: 22,
+                          color: isSpeaking
+                              ? AppColors.coral
+                              : (isDark
+                                  ? AppColors.accentLight
+                                  : AppColors.accent),
+                        ),
+                        tooltip: isSpeaking
+                            ? 'Detener lectura'
+                            : 'Escuchar explicación sobre el silencio',
+                        onPressed: () {
+                          FeedbackService.lightClick();
+                          if (isSpeaking) {
+                            TtsService.stop();
+                          } else {
+                            TtsService.speakSpanish(_silenceSpeech,
+                                gestureId: 'rules_silence');
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'El silencio no es un error ni una amenaza. Es una pausa natural que las personas usan para pensar, descansar o compartir un momento en calma.',
+                style: TextStyle(
+                  fontSize: 13.5,
+                  height: 1.45,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        const Text(
+          '¿Por qué se produce un silencio? (4 motivos comunes)',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
+        ),
+        const SizedBox(height: 10),
+
+        _buildSilenceReasonCard(
+          isDark: isDark,
+          icon: Icons.psychology_rounded,
+          color: AppColors.primary,
+          title: '1. Tiempo para pensar y procesar',
+          description:
+              'La persona está buscando las palabras para responder o recordando información. No hay prisa; dale unos segundos sin interrumpir.',
+        ),
+        const SizedBox(height: 10),
+
+        _buildSilenceReasonCard(
+          isDark: isDark,
+          icon: Icons.spa_rounded,
+          color: AppColors.primary,
+          title: '2. Silencio cómodo (compañía tranquila)',
+          description:
+              'Estar juntos haciendo una actividad (dibujar, jugar, caminar) sin hablar. Compartir el espacio en calma es una forma valiosa de conectar.',
+        ),
+        const SizedBox(height: 10),
+
+        _buildSilenceReasonCard(
+          isDark: isDark,
+          icon: Icons.battery_charging_full_rounded,
+          color: AppColors.warning,
+          title: '3. Sobrecarga sensorial o fatiga',
+          description:
+              'Si el lugar es ruidoso o la persona está cansada, hablar cuesta mucha energía. El silencio es su forma de recargar su batería social.',
+        ),
+        const SizedBox(height: 10),
+
+        _buildSilenceReasonCard(
+          isDark: isDark,
+          icon: Icons.help_outline_rounded,
+          color: AppColors.indigo,
+          title: '4. Duda o confusión',
+          description:
+              'Puede ocurrir si un comentario no se entendió o causó duda. En vez de asumir que se enojó, una pregunta amable aclara la situación.',
+        ),
+        const SizedBox(height: 16),
+
+        // Regla práctica
+        AppCard(
+          padding: const EdgeInsets.all(16),
+          borderSide: BorderSide(
+            color: isDark ? AppColors.accentLight : AppColors.accent,
+            width: 1.2,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.timer_outlined,
+                      size: 20, color: AppColors.accent),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'La regla de los 3 a 5 segundos',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Cuando hagas una pregunta, respira y espera de 3 a 5 segundos antes de volver a hablar. Si notas duda o incomodidad, puedes decir con calma:',
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.4,
+                  color: isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildPhraseBubble(
+                isDark: isDark,
+                phrase: '“Tómate tu tiempo, no hay prisa.”',
+                context: 'Para dar espacio cognitivo sin presión.',
+              ),
+              const SizedBox(height: 6),
+              _buildPhraseBubble(
+                isDark: isDark,
+                phrase: '“¿Quieres un momento para pensarlo o cambiamos de tema?”',
+                context: 'Para ofrecer una alternativa respetuosa.',
+              ),
+              const SizedBox(height: 6),
+              _buildPhraseBubble(
+                isDark: isDark,
+                phrase: '“Podemos estar un rato tranquilos sin hablar si lo prefieres.”',
+                context: 'Para validar el descanso sensorial.',
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSilenceReasonCard({
+    required bool isDark,
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String description,
+  }) {
+    return AppCard(
+      padding: const EdgeInsets.all(14),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Icon(icon, size: 22, color: color),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w800),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    height: 1.35,
+                    color: isDark
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPhraseBubble({
+    required bool isDark,
+    required String phrase,
+    required String context,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF1F5F9),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            phrase,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            context,
+            style: TextStyle(
+              fontSize: 11,
+              color: isDark ? AppColors.textMutedDark : AppColors.textMutedLight,
             ),
           ),
         ],

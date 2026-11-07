@@ -9,7 +9,7 @@ class AdIds {
   AdIds._();
 
   /// Official Gestura AdMob production banner ID.
-  static const String realBannerId = 'ca-app-pub-3322493998376707/2486589736';
+  static const String realBannerId = 'ca-app-pub-3322493998376707/9452834591';
 
   /// Official Google Mobile Ads test banner ID.
   static const String testBannerId = 'ca-app-pub-3940256099942544/6300978111';

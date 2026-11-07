@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gestura/core/services/storage_service.dart';
 import 'package:gestura/data/gesture_database.dart';
 import 'package:gestura/data/gesture_expansion.dart';
 import 'package:gestura/data/quiz_database.dart';
@@ -14,11 +16,16 @@ import 'package:gestura/models/user_progress.dart';
 import 'package:gestura/screens/communication_guide_screen.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  setUp(() async {
+    SharedPreferences.setMockInitialValues({});
+    await StorageService.init();
+  });
   test('Expanded catalog includes every new record with unique identifiers',
       () {
     expect(GestureDatabase.items.length, 90);
-    expect(QuizDatabase.questions.length, 93);
-    expect(ScenarioDatabase.scenarios.length, 27);
+    expect(QuizDatabase.questions.length, 98);
+    expect(ScenarioDatabase.scenarios.length, 28);
     for (final ids in [
       GestureDatabase.items.map((g) => g.id),
       QuizDatabase.questions.map((q) => q.id),
@@ -103,7 +110,7 @@ void main() {
 
   test('Expanded mastery uses the entire catalog and preserves stored records',
       () {
-    expect(UserProgress.totalPossibleMilestones, 210);
+    expect(UserProgress.totalPossibleMilestones, 216);
     final complete = UserProgress(
       exploredGestureIds: GestureDatabase.items.map((g) => g.id).toList(),
       completedQuizIds: QuizDatabase.questions.map((q) => q.id).toList(),
@@ -126,7 +133,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(CommunicationGuideScreen.lessons.first.exercise),
         findsOneWidget);
-    expect(CommunicationGuideScreen.lessons.length, 11);
+    expect(CommunicationGuideScreen.lessons.length, 14);
     final livedExperienceLesson = CommunicationGuideScreen.lessons.last;
     await tester.scrollUntilVisible(
       find.text(livedExperienceLesson.title),

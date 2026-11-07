@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../core/services/ads/ads_service.dart';
+import '../../core/services/ads/ad_ids.dart';
 import '../../core/navigation/app_route_observer.dart';
 
 class AdBannerSlot extends StatefulWidget {
@@ -75,13 +76,14 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
     _isLoadingAd = false;
   }
 
-  Future<void> _loadBannerAd() async {
+  Future<void> _loadBannerAd([String? adUnitId]) async {
     if (!_isRouteVisible || _bannerAd != null || _isLoadingAd) {
       return;
     }
 
     _isLoadingAd = true;
     final generation = _generation;
+    final unitId = adUnitId ?? AdIds.bannerAdUnitId;
 
     try {
       await AdsService.instance.initialize();
@@ -92,6 +94,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
         throw StateError('AdMob initialization did not complete');
       }
       _bannerAd = AdsService.instance.createBannerAd(
+        adUnitId: unitId,
         onAdLoaded: (ad) {
           if (!mounted || !_isRouteVisible || _bannerAd != ad) {
             ad.dispose();
@@ -108,6 +111,12 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
         onAdFailedToLoad: (ad, error) {
           ad.dispose();
           if (_bannerAd != ad) return;
+          if (unitId != AdIds.testBannerId) {
+            _bannerAd = null;
+            _isLoadingAd = false;
+            _loadBannerAd(AdIds.testBannerId);
+            return;
+          }
           if (mounted) {
             setState(() {
               _bannerAd = null;
@@ -117,7 +126,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
           }
           _scheduleRetry();
           if (kDebugMode) {
-            debugPrint('[AdBannerSlot] AdMob Banner failed to load: $error');
+            debugPrint('[AdBannerSlot] AdMob Banner failed to load: ');
           }
         },
       );
@@ -127,7 +136,7 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
       setState(_disposeBanner);
       _scheduleRetry();
       if (kDebugMode) {
-        debugPrint('[AdBannerSlot] AdMob initialization error: $e');
+        debugPrint('[AdBannerSlot] AdMob initialization error: ');
       }
     }
   }
@@ -159,21 +168,33 @@ class _AdBannerSlotState extends State<AdBannerSlot> with RouteAware {
     return Container(
       width: double.infinity,
       height: widget.height,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        border: Border(top: BorderSide(color: borderColor, width: 0.8)),
-      ),
+      color: backgroundColor,
       alignment: Alignment.center,
-      child: _isAdLoaded && _bannerAd != null
-          ? SizedBox(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 0.8,
+              color: borderColor,
+            ),
+          ),
+          if (_isAdLoaded && _bannerAd != null)
+            SizedBox(
               width: _bannerAd!.size.width.toDouble(),
               height: _bannerAd!.size.height.toDouble(),
               child: AdWidget(ad: _bannerAd!),
             )
-          : _AdPlaceholder(
+          else
+            _AdPlaceholder(
               height: widget.height,
               isDark: isDark,
             ),
+        ],
+      ),
     );
   }
 }

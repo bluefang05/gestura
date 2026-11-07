@@ -113,7 +113,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
 
       if (StorageService.getAutoNarration()) {
         TtsService.speakSpanish(
-            '¡Entrenamiento superado! Has completado exitosamente ${widget.scenario.title}. Ganaste 50 puntos de maestría.');
+            'Escenario completado: ${widget.scenario.title}. El progreso está guardado.');
       }
     }
   }
@@ -173,6 +173,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
             Center(
               child: ConoVeIllustration(
                 illustrationKey: step.illustrationKey!,
+                animateGesture: true,
                 width: 135,
                 height: 135,
                 borderRadius: BorderRadius.circular(16),
@@ -192,11 +193,12 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                     Icon(Icons.visibility_rounded,
                         size: 18, color: AppColors.primary),
                     SizedBox(width: 6),
-                    Text(
+                    Expanded(
+                        child: Text(
                       'Lo que sucede en la sala:',
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    ),
+                    )),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -416,7 +418,8 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                               ? AppColors.accentLight
                               : AppColors.accent),
                       const SizedBox(width: 8),
-                      Text(
+                      Expanded(
+                          child: Text(
                         'Lección Teórica Clave',
                         style: TextStyle(
                           fontSize: 13.5,
@@ -425,12 +428,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                               ? AppColors.textPrimaryDark
                               : AppColors.textPrimaryLight,
                         ),
-                      ),
-                      const Spacer(),
+                      )),
                       IconButton(
                         icon: const Icon(Icons.volume_up_rounded, size: 18),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
                         tooltip: 'Escuchar lección clave',
                         onPressed: () {
                           FeedbackService.lightClick();
@@ -493,11 +493,9 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: ListView(
             children: [
-              const Spacer(),
+              const SizedBox(height: 20),
               Center(
                 child: Container(
                   width: 90,
@@ -512,13 +510,13 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
               ),
               const SizedBox(height: 20),
               const Text(
-                '¡Entrenamiento Superado!',
+                'Escenario completado',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 8),
               Text(
-                'Has completado exitosamente "${widget.scenario.title}".',
+                'Completaste "${widget.scenario.title}".',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 14.5,
@@ -535,7 +533,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    Text('Recompensa',
+                    Text('Progreso guardado',
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -543,7 +541,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                                 ? AppColors.primaryLight
                                 : AppColors.primaryDark)),
                     const SizedBox(height: 4),
-                    Text('+50 Puntos de Maestría',
+                    Text('Escenario completado',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w900,
@@ -552,7 +550,7 @@ class _ScenarioRunnerScreenState extends State<ScenarioRunnerScreen> {
                   ],
                 ),
               ),
-              const Spacer(),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   FeedbackService.lightClick();

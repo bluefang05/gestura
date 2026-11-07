@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import '../widgets/illustrations/illustration_widget.dart';
 import '../data/communication_evidence_database.dart';
 import '../widgets/common/communication_evidence_card.dart';
+import '../core/services/tts_service.dart';
+import '../core/services/storage_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 
 /// Short original lessons that introduce the catalog's interpretation method.
-class CommunicationGuideScreen extends StatelessWidget {
+class CommunicationGuideScreen extends StatefulWidget {
   const CommunicationGuideScreen({super.key});
+
+  @override
+  State<CommunicationGuideScreen> createState() =>
+      _CommunicationGuideScreenState();
 
   static const lessons = <({
     String title,
@@ -301,11 +308,44 @@ class CommunicationGuideScreen extends StatelessWidget {
       url: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC11191657/'
     ),
   ];
+}
+
+class _CommunicationGuideScreenState extends State<CommunicationGuideScreen> {
+  static const lessons = CommunicationGuideScreen.lessons;
+  static const sources = CommunicationGuideScreen.sources;
+  static const lessonEvidence = CommunicationGuideScreen.lessonEvidence;
+
+  void _readGuide() => TtsService.speakSpanish(
+      lessons
+          .map((lesson) => '${lesson.title}. ${lesson.body} ${lesson.exercise}')
+          .join('\n\n'),
+      gestureId: 'communication_guide');
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted &&
+          StorageService.getAutoNarration() &&
+          ModalRoute.of(context)?.isCurrent == true) {
+        _readGuide();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    TtsService.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cómo interpretar señales')),
+      appBar: AppBar(
+        title: const Text('Cómo interpretar señales'),
+        actions: [TtsAppBarControl(onPlay: _readGuide)],
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 850),
@@ -327,6 +367,14 @@ class CommunicationGuideScreen extends StatelessWidget {
                     expandedCrossAxisAlignment: CrossAxisAlignment.start,
                     childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
                     children: [
+                      TextButton.icon(
+                        onPressed: () => TtsService.speakSpanish(
+                          '${lesson.title}. ${lesson.body} ${lesson.exercise}',
+                          gestureId: lesson.title,
+                        ),
+                        icon: const Icon(Icons.volume_up_outlined),
+                        label: const Text('Escuchar lección y ejercicio'),
+                      ),
                       Text(lesson.body),
                       const SizedBox(height: 14),
                       ConoVeIllustration(

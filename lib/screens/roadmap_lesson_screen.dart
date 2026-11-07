@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../state/progress_provider.dart';
 import '../widgets/common/ad_banner_slot.dart';
+import '../data/roadmap_database.dart';
+import '../core/services/tts_service.dart';
 
 /// Reading lessons need an explicit completion action; Back never completes one.
 class RoadmapLessonScreen extends StatefulWidget {
@@ -26,7 +28,10 @@ class _RoadmapLessonScreenState extends State<RoadmapLessonScreen> {
     setState(() => _saving = true);
     try {
       await ProgressProvider().markRoadmapStepCompleted(widget.stepId);
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        TtsService.stop();
+        Navigator.pop(context, true);
+      }
     } catch (_) {
       if (!mounted) return;
       setState(() => _saving = false);
@@ -46,12 +51,34 @@ class _RoadmapLessonScreenState extends State<RoadmapLessonScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
+                padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                child: ListenableBuilder(
+                  listenable: ProgressProvider(),
+                  builder: (context, _) {
+                    final steps = RoadmapDatabase.steps;
+                    final index =
+                        steps.indexWhere((step) => step.id == widget.stepId);
+                    final percent = (RoadmapDatabase.completionRatio(
+                                ProgressProvider().progress) *
+                            100)
+                        .round();
+                    return Text(
+                        'Paso ${index + 1} de ${steps.length} · $percent% completado');
+                  },
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.all(12),
-                child: FilledButton(
-                  onPressed: _saving ? null : _complete,
-                  child: Text(_saving
-                      ? 'Guardando…'
-                      : 'Completar tema y volver a la ruta'),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    onPressed: _saving ? null : _complete,
+                    child: Text(_saving
+                        ? 'Guardando…'
+                        : RoadmapDatabase.steps.last.id == widget.stepId
+                            ? 'Completar ruta'
+                            : 'Completar y continuar'),
+                  ),
                 ),
               ),
               if (widget.showAd) const AdBannerSlot(),

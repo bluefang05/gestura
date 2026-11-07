@@ -88,6 +88,7 @@ class ImageOptionCard extends StatelessWidget {
                         width: 130,
                         height: 130,
                         borderRadius: BorderRadius.circular(10),
+                        enableHoldPreview: false,
                       ),
                     ),
                   ),

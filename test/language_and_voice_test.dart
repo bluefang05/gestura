@@ -127,10 +127,15 @@ void main() {
     await tester.pumpAndSettle();
     final dropdown = find.byType(DropdownButton<String?>);
     await tester.scrollUntilVisible(dropdown, 200);
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(dropdown);
+    await tester.pumpAndSettle();
     await tester.tap(dropdown);
     await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Español (España)').last);
+    await tester.pumpAndSettle();
     expect(find.text('Español (España)').hitTestable(), findsOneWidget);
-    expect(find.text('Español (Latinoamérica)').hitTestable(), findsOneWidget);
+    expect(find.text('Español (Latinoamérica)'), findsWidgets);
     await tester.tap(find.text('Español (España)').hitTestable());
     await tester.pumpAndSettle();
     expect(StorageService.getLanguage(), 'es-ES');

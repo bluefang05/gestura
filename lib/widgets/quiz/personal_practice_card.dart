@@ -28,12 +28,19 @@ class PersonalPracticeCard extends StatelessWidget {
                     : unseen)
             .take(5)
             .toList();
+
+        final total = QuizDatabase.questions.length;
+        final completedCount = scores.length;
+        final progressRatio =
+            total > 0 ? (completedCount / total).clamp(0.0, 1.0) : 0.0;
+
         final title = reviewing
-            ? 'Repasa a tu ritmo'
+            ? 'Repasa tus dudas'
             : completed
-                ? 'Mantén lo aprendido'
+                ? '¡Maestría alcanzada!'
                 : 'Tu siguiente paso';
         final colors = Theme.of(context).colorScheme;
+
         return Card.filled(
           margin: const EdgeInsets.only(bottom: 20),
           color: colors.primaryContainer,
@@ -42,21 +49,62 @@ class PersonalPracticeCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(reviewing ? Icons.refresh_rounded : Icons.explore_outlined,
-                    color: colors.onPrimaryContainer),
-                const SizedBox(height: 12),
-                Text(title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: colors.onPrimaryContainer,
-                        fontWeight: FontWeight.bold)),
+                Row(
+                  children: [
+                    Icon(
+                      reviewing
+                          ? Icons.refresh_rounded
+                          : completed
+                              ? Icons.emoji_events_rounded
+                              : Icons.explore_outlined,
+                      color: colors.onPrimaryContainer,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              color: colors.onPrimaryContainer,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 8),
                 Text(
-                    reviewing
-                        ? '${mistakes.length} preguntas para reforzar. Practica sin cronómetro y con una explicación en cada respuesta.'
-                        : completed
-                            ? 'Ya exploraste todas las preguntas. Una sesión breve te ayudará a recordarlas.'
-                            : '${unseen.length} preguntas por descubrir. Avanza con una sesión de hasta 5 preguntas.',
-                    style: TextStyle(color: colors.onPrimaryContainer)),
+                  '$completedCount de $total preguntas exploradas',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: colors.onPrimaryContainer.withValues(alpha: 0.85),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: progressRatio,
+                    minHeight: 5,
+                    backgroundColor:
+                        colors.onPrimaryContainer.withValues(alpha: 0.15),
+                    color: colors.onPrimaryContainer,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  reviewing
+                      ? '${mistakes.length} preguntas para reforzar. Practica sin cronómetro y con una explicación en cada respuesta.'
+                      : completed
+                          ? 'Ya exploraste todas las preguntas. Una sesión breve te ayudará a recordarlas.'
+                          : '${unseen.length} preguntas por descubrir. Avanza con una sesión de hasta 5 preguntas.',
+                  style: TextStyle(
+                    color: colors.onPrimaryContainer,
+                    fontSize: 13.5,
+                    height: 1.35,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 FilledButton.icon(
                   onPressed: questions.isEmpty
@@ -64,16 +112,18 @@ class PersonalPracticeCard extends StatelessWidget {
                       : () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => QuizRunnerScreen(
-                                      title: reviewing
-                                          ? 'Repaso personal'
-                                          : 'Práctica personal',
-                                      questions: questions,
-                                    )),
+                              builder: (_) => QuizRunnerScreen(
+                                title: reviewing
+                                    ? 'Repaso personal'
+                                    : 'Práctica personal',
+                                questions: questions,
+                              ),
+                            ),
                           ),
                   icon: const Icon(Icons.play_arrow_rounded),
                   label: Text(
-                      reviewing ? 'Repasar errores' : 'Practicar 5 preguntas'),
+                    reviewing ? 'Repasar errores' : 'Practicar 5 preguntas',
+                  ),
                 ),
               ],
             ),

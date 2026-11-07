@@ -7,6 +7,7 @@ import '../widgets/common/section_header.dart';
 import '../widgets/common/badge_pill.dart';
 import '../core/services/feedback_service.dart';
 import '../core/services/tts_service.dart';
+import '../widgets/common/tts_app_bar_control.dart';
 import '../models/sales_phase_item.dart';
 import '../data/sales_pipeline_database.dart';
 import '../data/scenario_database.dart';
@@ -231,11 +232,7 @@ class _BuyerTemperatureScreenState extends State<BuyerTemperatureScreen> {
               tooltip: 'Reiniciar Señales',
               onPressed: _reset,
             ),
-          IconButton(
-            icon: const Icon(Icons.volume_up_rounded),
-            tooltip: 'Escuchar Sección',
-            onPressed: _speakCurrentTab,
-          ),
+          TtsAppBarControl(onPlay: _speakCurrentTab),
         ],
       ),
       bottomNavigationBar: const AdBottomBar(),
