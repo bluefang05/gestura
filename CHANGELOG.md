@@ -1,5 +1,12 @@
 # Historial de cambios
 
+## Versión 1.0.23 (25) — 7 de noviembre de 2026
+
+- Ampliadas y afinadas las animaciones del Manual; los recursos animados se
+  optimizaron para reducir el tamaño de descarga.
+- Ajustado el espacio que ocupan los anuncios y el comportamiento cuando un
+  anuncio no está disponible.
+
 ## Versión 1.0.20 (22) — 17 de octubre de 2026
 
 - Inicio reorganizado alrededor de la ruta de aprendizaje y la comunicación;

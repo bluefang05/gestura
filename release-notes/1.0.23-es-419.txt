@@ -1,0 +1,1 @@
+Explora más señales del Manual con animaciones optimizadas para ocupar menos espacio. Mejoramos la visualización de anuncios y su comportamiento cuando no hay uno disponible.
